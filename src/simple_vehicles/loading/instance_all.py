@@ -84,13 +84,15 @@ def instance_vehicle(id_vehicle):
         type_dynamics = entry['dynamics']
         dynamics = instance_dynamics(type_dynamics)
         sensors = entry['sensors']
-        vehicle = Vehicle(dynamics=dynamics)
+        vehicle = Vehicle()
+        vehicle.add_dynamics(type_dynamics, dynamics)
         for sensor in sensors:
             sensor_type = sensor['type']
             pose = sensor['pose']
             joint = sensor.get('joint', 0)
             sensor_instance = instance_sensor(sensor_type)
-            vehicle.add_sensor(sensor=sensor_instance, pose=pose, joint=joint)
+            vehicle.add_sensor(id_sensor=sensor_type,
+                               sensor=sensor_instance, pose=pose, joint=joint)
         return vehicle
     except:
         logger.error('Error while trying to instantiate vehicle %r. Entry:\n%s' 
