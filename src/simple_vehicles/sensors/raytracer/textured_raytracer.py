@@ -16,8 +16,12 @@ import numpy as np
 
 class Raytracer:
     
-    @contract(directions='seq(number)')
-    def __init__(self, directions, raytracer='raytracer2'):
+    @contract(directions='None|seq(number)')
+    def __init__(self, directions=None, raytracer='raytracer2'):
+        ''' 
+            directions are needed to call raytrace; 
+            not necessary to call query_circle. 
+        '''
         self.raytracer = raytracer
         self.p = None
         self.directions = directions
@@ -33,11 +37,12 @@ class Raytracer:
                 raise BVException(msg)
             raise e
         
-        sensor_setup = { 
-            "class": "sensor",
-            "directions": list(self.directions)
-        }
-        self.write_to_connection(sensor_setup)
+        if self.directions is not None:
+            sensor_setup = { 
+                "class": "sensor",
+                "directions": list(self.directions)
+            }
+            self.write_to_connection(sensor_setup)
         
     def write_to_connection(self, object):
         if self.p is None:

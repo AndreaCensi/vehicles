@@ -1,0 +1,6 @@
+- id: box10
+  desc: A 10m by 10m empty box.
+  code: 
+      - simple_vehicles.worlds.Box
+      - width: 10
+        length: 10

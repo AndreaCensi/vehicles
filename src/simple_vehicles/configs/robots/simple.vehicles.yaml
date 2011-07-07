@@ -1,0 +1,9 @@
+- id: d_SE2_car_v-cam360
+  desc: A simple car with an omnidirectional camera.
+  dynamics: d_SE2_car_v
+  sensors:
+      - type: cam360
+        pose: [0,0,0]
+  body:
+      - type: sphere0.2
+        pose: [0,0,0]

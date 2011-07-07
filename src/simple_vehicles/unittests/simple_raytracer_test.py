@@ -1,9 +1,9 @@
 
-from simple_vehicles.worlds.box import Box, BoxAndCircle
+from simple_vehicles.worlds import Box, BoxAndCircle
 import numpy as np
 from simple_vehicles.sensors import TexturedRaytracer, \
     Raytracer
-from geometry.poses import SE2_from_translation_angle
+from geometry import SE2_from_translation_angle
 
 
 def test_raytracer_box():

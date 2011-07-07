@@ -1,9 +1,0 @@
-- id: d_SE2_car_v-cam360
-  desc: something with omnidirectional
-  dynamics: d_SE2_car_v
-  sensors:
-      - sensor_id: cam360
-        pose: [0,0,0]
-      - sensor_id: sphere0.2
-        pose: [0,0,0]
-        collision: True

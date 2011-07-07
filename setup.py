@@ -12,11 +12,12 @@ description = """"""
     
 long_description = description  
 
-setup(name='BootstrappingOlympics',
+setup(name='PyVehicles',
       url='',
       
       description=description,
       long_description=long_description,
+      package_data={'':['*.*']},
       keywords="",
       license="",
       
@@ -34,12 +35,12 @@ setup(name='BootstrappingOlympics',
       
       package_dir={'':'src'},
       packages=find_packages('src'),
-      install_requires=[ 'PyVehiclesDynamics', 'PyYAML'],
+      install_requires=[ 'PyVehicles', 'PyYAML', 'simplejson', 'jsonstream'],
       tests_require=['nose'],
       entry_points={
          'console_scripts': [
-           'boot_olympics_test_load_dynamics = '
-                'bootstrapping_olympics.loading.dynamics:load_config_dynamics_demo',
+           'vehicles_print_configuration = '
+                'simple_vehicles.loading.print_configuration:main',
         ]
       }          
 )
