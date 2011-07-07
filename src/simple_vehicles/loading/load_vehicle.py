@@ -66,13 +66,3 @@ def load_configuration(directory=None,
     logger.debug('Found %5d dynamics.' % len(Configuration.dynamics))
     logger.debug('Found %5d sensors.' % len(Configuration.sensors))
                                
-def load_vehicle_from_id(id_robot):
-    if not Configuration.loaded():
-        load_configuration()
-        
-    pass
-
-def load_world_from_id(id_world):
-    if not Configuration.loaded():
-        load_configuration()
-        

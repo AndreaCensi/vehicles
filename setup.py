@@ -39,8 +39,8 @@ setup(name='PyVehicles',
       tests_require=['nose'],
       entry_points={
          'console_scripts': [
-           'vehicles_print_configuration = '
-                'simple_vehicles.loading.print_configuration:main',
+           'vehicles_print_config = '
+                'simple_vehicles.loading.print_config:main',
         ]
       }          
 )

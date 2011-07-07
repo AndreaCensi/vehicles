@@ -1,4 +1,5 @@
-from simple_vehicles.loading.load_vehicle import Configuration
+from simple_vehicles.loading.load_vehicle import Configuration, \
+    load_configuration
 from bootstrapping_olympics.loading.utils import instantiate_spec
 from vehicles_dynamics.interface import Dynamics
 from contracts.interface import describe_value
@@ -37,6 +38,9 @@ def check_type(entry, type, obtained):
         raise Exception(msg)
 
 def instance_dynamics(id_dynamics):
+    if not Configuration.loaded:
+        load_configuration()
+        
     if not id_dynamics in Configuration.dynamics:
         raise Exception('No dynamics %r known.' % id_dynamics)
     entry = Configuration.dynamics[id_dynamics]
@@ -50,6 +54,9 @@ def instance_dynamics(id_dynamics):
     return instance
 
 def instance_sensor(id_sensor):
+    if not Configuration.loaded:
+        load_configuration()
+
     if not id_sensor in Configuration.sensors:
         raise Exception('No sensor %r known.' % id_sensor)
     entry = Configuration.sensors[id_sensor]
@@ -63,6 +70,9 @@ def instance_sensor(id_sensor):
     return instance
     
 def instance_world(id_world):
+    if not Configuration.loaded:
+        load_configuration()
+
     if not id_world in Configuration.worlds:
         raise Exception('No world %r known.' % id_world)
     entry = Configuration.worlds[id_world]
@@ -76,7 +86,10 @@ def instance_world(id_world):
     return instance
 
 def instance_vehicle(id_vehicle):
-    ''' Instances a vehicle given a YAML configuration. '''
+    if not Configuration.loaded:
+        load_configuration()
+
+    
     if not id_vehicle in Configuration.vehicles:
         raise Exception('No vehicle %r known.' % id_vehicle)
     entry = Configuration.vehicles[id_vehicle]

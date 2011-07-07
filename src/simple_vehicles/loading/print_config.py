@@ -4,6 +4,7 @@ from simple_vehicles.loading import load_configuration, \
     Configuration
 import os
 import logging
+from simple_vehicles.loading.natsort import natsorted
 
 logging.basicConfig();
 logger = logging.getLogger("print_config")
@@ -15,7 +16,7 @@ usage = """
 
     This program writes a simple summary of all the configuration available.
 
-    vehicles_print_configuration [-d <config directory>] -o outputdir
+    vehicles_print_config [-d <config directory>] -o outputdir
 """ 
 
 
@@ -34,7 +35,7 @@ def main():
     
     print_configuration(options.directory, options.outdir)
     
-def print_configuration(directory, outdir):
+def print_config(directory, outdir):
     load_configuration(directory)
      
     def write_report(r):
@@ -65,7 +66,7 @@ def print_configuration(directory, outdir):
     
 
 def create_generic_table(r, nid, name2entry, cols, caption=None):
-    names = list(name2entry.keys())
+    names = natsorted(name2entry.keys())
     if names:
         table = []
         for name in names:

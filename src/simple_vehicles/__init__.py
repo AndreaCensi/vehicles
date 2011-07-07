@@ -6,3 +6,4 @@ logger.setLevel(logging.DEBUG)
 
 
 from .loading import *
+from .olympics import *
