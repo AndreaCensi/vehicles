@@ -10,37 +10,30 @@ class Rangefinder(VehicleSensor, Raytracer):
         VehicleSensor.__init__(self, len(directions))
         Raytracer.__init__(self, directions)
     
-    def compute_observations(self, pose, dt):
+    def _compute_observations(self, pose):
         data = self.raytracing(pose)
-        data['sensels'] = data['readings']
+        # TODO: nans?
+        data[VehicleSensor.SENSELS] = data['readings']
         return data
 
-
-class Nearnessfinder(VehicleSensor, Raytracer):
-    """ Same as Rangefinder, but we return the nearness 
-        instead of ranges as sensels. """
-
-    @contract(directions='seq[>0](number)')
-    def __init__(self, directions):
-        VehicleSensor.__init__(self, len(directions))
-        Raytracer.__init__(self, directions)
+    def set_world(self, world, updated):
+        Raytracer.set_world(self, world, updated)
     
-    def compute_observations(self, pose, dt):
-        data = self.raytracing(pose)
-        data['sensels'] = 1.0 / data['readings']
-        return data
-
 class Photoreceptors(VehicleSensor, TexturedRaytracer):
     """ This is a very shallow wrap around ImageRangeSensor """
     @contract(directions='seq[>0](number)')
     def __init__(self, directions):
         VehicleSensor.__init__(self, len(directions))
-        Raytracer.__init__(self, directions)
+        TexturedRaytracer.__init__(self, directions)
         
-    def compute_observations(self, sensor_pose):
-        data = self.render(sensor_pose)
-        data['sensels'] = data['luminance']
+    def _compute_observations(self, sensor_pose):
+        data = self.raytracing(sensor_pose)
+        data[VehicleSensor.SENSELS] = data['luminance']
         return data
+
+    def set_world(self, world, updated):
+        TexturedRaytracer.set_world(self, world, updated)
+    
     
 class RangefinderUniform(Rangefinder):
     @contract(fov_deg='>0,<=360', num_sensels='int,>0')

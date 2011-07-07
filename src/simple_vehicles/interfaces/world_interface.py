@@ -1,5 +1,6 @@
-from abc import abstractmethod
+from abc import abstractmethod, ABCMeta
 from contracts.main import contract
+from collections import namedtuple
 
 
 # The kind of objects in our simulation
@@ -32,18 +33,30 @@ class Source(Primitive):
         pass    
 
 class World:
-
+    __metaclass__ = ABCMeta
+    
     @abstractmethod
     def get_primitives(self):
         pass
     
+    @contract(dt='>0', returns='list(int)')
     def simulate(self, dt):
         ''' 
             Simulates the world for dt. 
         
             Returns a list of the updated ids.
         '''
+        updated = self._simulate(dt)
+        return updated
     
-    def geometry(self):
-        ''' R2 or R3. '''
+    @abstractmethod
+    def _simulate(self, dt):
+        pass
         
+        
+    Episode = namedtuple('Episode', 'id_episode vehicle_state')
+
+    @abstractmethod
+    def new_episode(self):
+        ''' Returns an episode tuple. '''
+         

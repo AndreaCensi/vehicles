@@ -1,9 +1,9 @@
 from collections import namedtuple
-
+import numpy as np
 
 class Vehicle:
     
-    def __init__(self, dynamics):
+    def __init__(self):
         self.num_sensels = 0
         self.sensors = []
         self.id_sensors = None
@@ -15,9 +15,12 @@ class Vehicle:
         self.dynamics = dynamics
         self.commands_spec = dynamics.commands_spec
         self.id_dynamics = id_dynamics
+        # XXX: this is fishy
+        self.state = self.dynamics.state_space().sample_uniform()
     
     AttachedSensor = namedtuple('AttachedSensor', 'sensor pose joint')
     def add_sensor(self, id_sensor, sensor, pose, joint):
+        pose = self.dynamics.pose_space().from_yaml(pose) # XXX
         attached = Vehicle.AttachedSensor(sensor, pose, joint)
         self.sensors.append(attached)
         self.num_sensels += attached.sensor.num_sensels
@@ -25,3 +28,33 @@ class Vehicle:
             self.id_sensors = id_sensor
         else:
             self.id_sensors += '+%s' % id_sensor
+
+    def set_world(self, world):
+        self.world = world
+        for attached in self.sensors:
+            attached.sensor.set_world(world, updated=None)
+            
+    def set_state(self, state):
+        # TODO: check compatibility
+        self.dynamics.state_space().belongs(state)
+        
+    def simulate(self, commands, dt):
+        # TODO: collisions
+        self.state = self.dynamics.integrate(self.state, commands, dt)
+        
+        updated = self.world.simulate(dt)
+        if len(updated) > 0: 
+            for attached in self.sensors:
+                attached.sensor.set_world(self.world, updated=updated)
+        
+    def compute_observations(self):
+        # TODO: add dynamics observations
+        sensel_values = []
+        for attached in self.sensors:
+            world_pose = self.dynamics.compute_relative_pose(
+                            self.state, attached.pose, attached.joint)
+            observations = attached.sensor.compute_observations(world_pose)
+            sensels = observations['sensels']
+            sensel_values.extend(sensels.tolist())
+        return np.array(sensel_values)
+        

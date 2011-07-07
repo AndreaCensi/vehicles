@@ -52,7 +52,7 @@
         max_steering_angle: *MAX_STEERING_ANGLE
         L: *CAR_LENGTH
 - id: d_SE2_reeds_sheep
-  desc: 'Dubins car'
+  desc: 'Reeds-Sheep car'
   code: 
       - vehicles_dynamics.ReedsSheepCar
       - max_linear_velocity: *MAX_LINEAR_VEL

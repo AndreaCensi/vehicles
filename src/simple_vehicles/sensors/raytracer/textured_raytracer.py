@@ -144,6 +144,7 @@ class TexturedRaytracer(Raytracer):
         self.surface2texture = {}
 
     def set_world(self, world, updated=None):
+        # XXX: inefficient
         for x in world.get_primitives():
             surface = x.id_object
             if isinstance(x, PolyLine):
@@ -152,12 +153,16 @@ class TexturedRaytracer(Raytracer):
                 self.surface2texture[surface] = instantiate_spec(x.texture)
         Raytracer.set_world(self, world, updated)
          
+    @contract(pose='SE2')
     def raytracing(self, pose):
         answer = Raytracer.raytracing(self, pose)
         n = len(answer['surface'])
         luminance = np.zeros(n)
         for i, surface_id in enumerate(answer['surface']):
             if answer['valid'][i]:
+                if not surface_id in self.surface2texture:
+                    raise Exception("Unknown surface %r; I know %r." % 
+                                    (surface_id, self.surface2texture.keys()))
                 texture = self.surface2texture[surface_id]
                 coord = answer['curvilinear_coordinate'][i]
                 luminance[i] = texture(coord)
