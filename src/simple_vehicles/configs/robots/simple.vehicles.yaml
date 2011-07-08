@@ -7,3 +7,14 @@
   body:
       - type: sphere0.2
         pose: [0,0,0]
+
+
+- id: d_SE2_rb_v-rf360
+  desc: An omnidirectional robot with a 360deg range finder.
+  dynamics: d_SE2_rb_v
+  sensors:
+      - type: rf360
+        pose: [0,0,0]
+  body:
+      - type: sphere0.2
+        pose: [0,0,0]

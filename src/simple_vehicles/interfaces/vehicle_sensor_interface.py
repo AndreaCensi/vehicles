@@ -1,5 +1,7 @@
 from abc import abstractmethod, ABCMeta
 import numpy as np
+from pprint import pformat
+from contracts.main import check
 
 class VehicleSensor:
     __metaclass__ = ABCMeta
@@ -35,8 +37,21 @@ class VehicleSensor:
                             (VehicleSensor.SENSELS, observations.keys()))
         sensels = observations[VehicleSensor.SENSELS ]
         sensels = np.array(sensels)
-        if not np.isfinite(sensels).all():
-            msg = 'Not all are valid:\n%s' % sensels
+        check("array[K]", sensels, desc='I expect a unidimenional array/list for sensels.')
+        try:
+            notfinite = not np.isfinite(sensels).all()
+        except  Exception as e:
+            print('Error is: %s' % e)
+            print('Data is: %s' % sensels.dtype)
+            print((observations))
+            notfinite = False
+            
+        if notfinite:
+            msg = 'Not all are valid:\n%s\n%s' % (sensels, pformat(observations))
+            print(msg)
+            print('pose: %s' % pose)
+            # XXX: - we will solve this later.
+            sensels[np.logical_not(np.isfinite(sensels))] = 0.5
             raise ValueError(msg)
         
         if sensels.size != self.num_sensels:

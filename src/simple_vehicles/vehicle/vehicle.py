@@ -1,5 +1,7 @@
 from collections import namedtuple
 import numpy as np
+from contracts.main import contract
+from geometry.poses import SE3_from_SE2
 
 class Vehicle:
     
@@ -34,9 +36,21 @@ class Vehicle:
         for attached in self.sensors:
             attached.sensor.set_world(world, updated=None)
             
+    @contract(returns='SE3')
+    def get_pose(self):
+        ''' 
+            Returns the pose of the robot in SE(3). 
+            This is regardless of the state space.
+            The idea is that all robot spaces are subgroups of SE(3)
+            so this is the most general representation.
+        '''
+        # FIXME: make conversions 
+        return SE3_from_SE2(self.state)
+        
     def set_state(self, state):
         # TODO: check compatibility
         self.dynamics.state_space().belongs(state)
+        self.state = state
         
     def simulate(self, commands, dt):
         # TODO: collisions

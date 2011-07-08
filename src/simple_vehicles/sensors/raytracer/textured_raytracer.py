@@ -115,6 +115,16 @@ class Raytracer:
         }
         self.write_to_connection(query_object)
         answer = self.read_answer("query_sensor_response")
+        
+        # We have null -> None; make sure that None -> nan
+        for field in list(answer.keys()):
+            value = answer[field]
+            if isinstance(value, list):
+                value = [ x if x is not None else np.nan for x in value]
+                value = np.array(value)
+                answer[field] = value
+        
+        
         return answer
         
     @contract(center='seq[2](number)', radius='>0')

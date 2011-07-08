@@ -5,15 +5,21 @@ import numpy as np
 
 class Rangefinder(VehicleSensor, Raytracer):
 
-    @contract(directions='seq[>0](number)')
-    def __init__(self, directions):
+    @contract(directions='seq[>0](number)', invalid='number')
+    def __init__(self, directions, invalid=0):
+        ''' directions: array of orientations
+            invalid: value for invalid data (infinity) 
+        '''
+        self.invalid = invalid
         VehicleSensor.__init__(self, len(directions))
         Raytracer.__init__(self, directions)
     
     def _compute_observations(self, pose):
         data = self.raytracing(pose)
-        # TODO: nans?
-        data[VehicleSensor.SENSELS] = data['readings']
+        readings = data['readings']
+        invalid = np.logical_not(data['valid'])
+        readings[invalid] = self.invalid
+        data[VehicleSensor.SENSELS] = readings
         return data
 
     def set_world(self, world, updated):
@@ -28,7 +34,10 @@ class Photoreceptors(VehicleSensor, TexturedRaytracer):
         
     def _compute_observations(self, sensor_pose):
         data = self.raytracing(sensor_pose)
-        data[VehicleSensor.SENSELS] = data['luminance']
+        luminance = data['luminance']
+        invalid = np.logical_not(data['valid'])
+        luminance[invalid] = self.invalid
+        data[VehicleSensor.SENSELS] = luminance
         return data
 
     def set_world(self, world, updated):
