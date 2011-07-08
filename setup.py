@@ -1,7 +1,7 @@
 import os
 from setuptools import setup, find_packages
 
-version = "0.1"
+version = "0.5"
 
 description = """""" 
 
@@ -35,12 +35,13 @@ setup(name='PyVehicles',
       
       package_dir={'':'src'},
       packages=find_packages('src'),
-      install_requires=[ 'PyVehicles', 'PyYAML', 'simplejson', 'jsonstream'],
+      install_requires=[ 'PyVehiclesDynamics', 'PyYAML',
+                        'simplejson', 'jsonstream', 'PyContracts>=1.1'],
       tests_require=['nose'],
       entry_points={
          'console_scripts': [
            'vehicles_print_config = '
-                'simple_vehicles.loading.print_config:main',
+                'vehicles.loading.print_config:main',
         ]
       }          
 )

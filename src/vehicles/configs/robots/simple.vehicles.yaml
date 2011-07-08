@@ -1,0 +1,24 @@
+- id: d_SE2_car_v-cam360
+  desc: A simple car with an omnidirectional camera.
+  dynamics: d_SE2_car_v
+  sensors:
+      - type: cam360
+        pose: [0,0,0]
+  radius: 0.5
+
+- id: d_SE2_rb_v-rf360
+  desc: An omnidirectional robot with a 360deg range finder.
+  dynamics: d_SE2_rb_v
+  sensors:
+      - type: rf360
+        pose: [0,0,0]
+  radius: 0.5
+
+- id: d_SE2_rb_v-random_5
+  desc: An omnidirectional robot with a 5-sensels random sensor.
+  dynamics: d_SE2_rb_v
+  sensors:
+      - type: random_5
+        pose: [0,0,0]
+  radius: 0.5
+  

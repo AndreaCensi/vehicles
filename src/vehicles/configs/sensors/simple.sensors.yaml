@@ -1,0 +1,41 @@
+# This file describes the available sensors
+- id: sphere0.2
+  desc: A collision sensor.
+  code: 
+      - vehicles.sensors.SphereCollision
+      - radius: 0.2
+
+- id: cam360
+  desc: An omnidirectional camera.
+  code: 
+      - vehicles.sensors.PhotoreceptorsUniform
+      - num_sensels: 180
+        fov_deg:     360
+        
+- id: cam180
+  desc: A camera with 180fov.
+  code: 
+      - vehicles.sensors.PhotoreceptorsUniform
+      - num_sensels: 180
+        fov_deg:     180
+        
+- id: rf360
+  desc: An omnidirectional range-finder.
+  code: 
+      - vehicles.sensors.RangefinderUniform
+      - num_sensels: 180
+        fov_deg:     360
+        
+- id: rf180
+  desc: A range finder with 180fov.
+  code: 
+      - vehicles.sensors.RangefinderUniform
+      - num_sensels: 180
+        fov_deg:     180
+
+- id: random_5
+  desc: A random sensor with 5 sensels.
+  code: 
+      - vehicles.sensors.RandomSensor
+      - num_sensels: 5
+        
