@@ -2,9 +2,9 @@ from .ros_utils import ROS_quaternion_order, numpy_to_imgmsg
 from bootstrapping_olympics import RobotSimulationInterface
 from contracts import contract
 from geometry import quaternion_from_rotation, rotation_translation_from_pose
-from vehicles import PolyLine, Circle, instance_vehicle, instance_world
+from vehicles import (PolyLine, Circle, instance_vehicle, instance_world,
+    VehicleSimulation)
 import numpy as np
-from vehicles import VehicleSimulation
 
 try:
     import rospy #@UnresolvedImport
@@ -21,7 +21,7 @@ class ROSVehicleSimulation(RobotSimulationInterface, VehicleSimulation):
         vehicle = instance_vehicle(id_vehicle)
         world = instance_world(id_world)
         
-        VehicleSimulation.__init__(vehicle, world)
+        VehicleSimulation.__init__(self, vehicle, world)
         
         commands_spec = self.vehicle.commands_spec
         observations_shape = self.vehicle.num_sensels
@@ -51,19 +51,14 @@ class ROSVehicleSimulation(RobotSimulationInterface, VehicleSimulation):
             self.publish_ros_markers()
             
     def compute_observations(self):
-        observations = VehicleSimulation.compute_observations()
+        observations = VehicleSimulation.compute_observations(self)
         if visualization:
             self.publish_ros_sensels(observations)
     
         return observations
         
     def new_episode(self):
-        return VehicleSimulation.new_episode()
-#        episode = self.world.new_episode()
-#        self.id_episode = episode.id_episode
-#        self.vehicle.set_state(episode.vehicle_state)
-#        self.vehicle.set_world(self.world)
-#        return episode
+        return VehicleSimulation.new_episode(self) 
     
     def publish_ros_markers(self): 
         from visualization_msgs.msg import Marker #@UnresolvedImport
