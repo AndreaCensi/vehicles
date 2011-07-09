@@ -3,6 +3,7 @@ from ..interfaces import Circle, World, PolyLine
 from contracts import contract
 from geometry import SE2_from_xytheta
 import numpy as np
+from geometry.poses import SE3_from_SE2
 
 
 SIN_TEXTURE = 'vehicles.sensors.SinTexture'
@@ -30,7 +31,8 @@ class Box(World):
         x = np.random.uniform(-self.width, self.width)
         y = np.random.uniform(-self.length, self.length)
         th = np.random.uniform(0, np.pi * 2)
-        vehicle_state = SE2_from_xytheta([x, y, th])
+#        vehicle_state = SE2_from_xytheta([x, y, th])
+        vehicle_state = SE3_from_SE2(SE2_from_xytheta([x, y, th]))
         id_episode = 'unknown'
         return World.Episode(id_episode, vehicle_state)
 
@@ -61,6 +63,6 @@ class BoxAndCircle(World):
         x = np.random.uniform(-self.width, self.width)
         y = np.random.uniform(-self.length, self.length)
         th = np.random.uniform(0, np.pi * 2)
-        vehicle_state = SE2_from_xytheta([x, y, th])
+        vehicle_state = SE3_from_SE2(SE2_from_xytheta([x, y, th]))
         id_episode = 'unknown'
         return World.Episode(id_episode, vehicle_state)

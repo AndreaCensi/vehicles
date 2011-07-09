@@ -1,5 +1,6 @@
 from ..interfaces import World
 from . import Vehicle
+from geometry.manifolds import SE3
 
 class VehicleSimulation():
     
@@ -27,10 +28,12 @@ class VehicleSimulation():
         for i in range(max_tries):
             episode = self.world.new_episode()
             self.id_episode = episode.id_episode
+            pose = episode.vehicle_state # TODO: change name
+            SE3.belongs(pose)
             self.vehicle.set_world(self.world)
-            collision = self.vehicle.colliding_state(episode.vehicle_state) 
+            collision = self.vehicle.colliding_pose(pose) 
             if not collision.collided:
-                self.vehicle.set_state(episode.vehicle_state)
+                self.vehicle.set_pose(pose)
                 return episode
         else:
             raise Exception('Cannot find a non-colliding state.')

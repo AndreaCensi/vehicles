@@ -60,7 +60,7 @@ def load_configuration_entries(directory, pattern='*.yaml',
         try: 
             check_entry(x)
             name = x['id']
-            if name in all_entries and x['filename'] != filename:
+            if name in all_entries and all_entries[name]['filename'] != filename:
                 raise Exception('Already know %r from %r' % 
                                 (name, all_entries[name]['filename']))
             x['filename'] = filename

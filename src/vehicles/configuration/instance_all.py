@@ -2,6 +2,8 @@ from . import Configuration, load_configuration, instantiate_spec
 from .. import logger
 from contracts.interface import describe_value
 from pprint import pformat
+from geometry.manifolds import SE3, SE2
+from geometry.poses import SE3_from_SE2
 
 
 def instance_all():
@@ -102,7 +104,7 @@ def instance_vehicle(id_vehicle):
         vehicle.add_dynamics(type_dynamics, dynamics)
         for sensor in sensors:
             sensor_type = sensor['type']
-            pose = sensor['pose']
+            pose = SE3_from_SE2(SE2.from_yaml(sensor['pose']))
             joint = sensor.get('joint', 0)
             sensor_instance = instance_sensor(sensor_type)
             vehicle.add_sensor(id_sensor=sensor_type,

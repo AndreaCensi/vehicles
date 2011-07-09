@@ -1,8 +1,8 @@
-from geometry import SE2_from_xytheta, SE2_from_SE3, translation_from_SE2
+from geometry import SE2_from_SE3, translation_from_SE2, SE3
+from nose.plugins.attrib import attr
 from vehicles import Box, instance_vehicle
 import numpy as np
 
-from nose.plugins.attrib import attr
 
 @attr('simulation')
 def test_collisions():
@@ -13,7 +13,7 @@ def test_collisions():
     
     vehicle = instance_vehicle(id_vehicle)
     vehicle.set_world(world)
-    vehicle.set_state(SE2_from_xytheta([0, 0, 0]))
+    vehicle.set_pose(SE3.identity())
     
 
     commands = np.array([1, 0, 0])

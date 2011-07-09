@@ -1,5 +1,6 @@
 from . import TexturedRaytracer, contract, np
 from ..interfaces import VehicleSensor
+from geometry.poses_embedding import SE2_project_from_SE3
 
 class Photoreceptors(VehicleSensor, TexturedRaytracer):
     """ This is a very shallow wrap around ImageRangeSensor """
@@ -9,8 +10,9 @@ class Photoreceptors(VehicleSensor, TexturedRaytracer):
         VehicleSensor.__init__(self, len(directions))
         TexturedRaytracer.__init__(self, directions)
         
-    def _compute_observations(self, sensor_pose):
-        data = self.raytracing(sensor_pose)
+    def _compute_observations(self, pose):
+        pose = SE2_project_from_SE3(pose)
+        data = self.raytracing(pose)
         luminance = data['luminance']
         invalid = np.logical_not(data['valid'])
         luminance[invalid] = self.invalid

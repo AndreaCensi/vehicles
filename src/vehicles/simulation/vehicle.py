@@ -1,9 +1,8 @@
-from . import compute_collision
+from . import collides_with, np, compute_collision, contract
 from collections import namedtuple
-from contracts import contract
 from geometry import SE2_identity, translation_from_SE2, SE3_from_SE2
-import numpy as np
-from vehicles.simulation.collision import collides_with
+from geometry.poses_embedding import SE2_project_from_SE3
+
 
 class Vehicle:
     
@@ -17,6 +16,9 @@ class Vehicle:
         
         self.world = None
         
+    def __repr__(self):
+        return 'V(%s;%s)' % (self.id_dynamics, self.id_sensors)
+        
     def add_dynamics(self, id_dynamics, dynamics):
         assert self.dynamics is None, 'not sure if this will be implemented'
         self.dynamics = dynamics
@@ -26,8 +28,8 @@ class Vehicle:
         self.state = self.dynamics.state_space().sample_uniform()
     
     AttachedSensor = namedtuple('AttachedSensor', 'sensor pose joint')
+    @contract(id_sensor='str', pose='SE3', joint='int,>=0')
     def add_sensor(self, id_sensor, sensor, pose, joint):
-        pose = self.dynamics.pose_space().from_yaml(pose) # XXX
         attached = Vehicle.AttachedSensor(sensor, pose, joint)
         self.sensors.append(attached)
         self.num_sensels += attached.sensor.num_sensels
@@ -49,30 +51,30 @@ class Vehicle:
             The idea is that all robot spaces are subgroups of SE(3)
             so this is the most general representation.
         '''
-        # FIXME: make conversions 
-        return SE3_from_SE2(self.state)
+        j_pose, j_vel = self.dynamics.joint_state(self.state, 0) #@UnusedVariable
+        return j_pose
         
-    def set_state(self, state):
+    @contract(pose='SE3')
+    def set_pose(self, pose):
         if self.world is None:
             raise ValueError('Please call set_world() before set_state().')
         # TODO: check compatibility
-        self.dynamics.state_space().belongs(state)
-        self.state = state
+        state = self.dynamics.pose2state(pose)
         
-        collision = self.colliding_state(state)
+        collision = self.colliding_pose(pose) # XXX
         if collision.collided:
             raise ValueError('Cannot put the robot in a collding state')
+        
+        self.state = state
         
     def simulate(self, commands, dt):
         # TODO: collisions
         primitives = self.world.get_primitives()
         def dynamics_function(t):
-            s = self.dynamics.integrate(self.state, commands, t)
+            state = self.dynamics.integrate(self.state, commands, t)
             # compute center of robot
-            where = SE2_identity()
-            pose = self.dynamics.compute_relative_pose(s, where)
-            center = translation_from_SE2(pose)
-            
+            j_pose, j_vel = self.dynamics.joint_state(state, 0) #@UnusedVariable
+            center = translation_from_SE2(SE2_project_from_SE3(j_pose))
             #print('t=%f, center=%s' % (t, center))
             return center
         
@@ -90,20 +92,25 @@ class Vehicle:
         # TODO: add dynamics observations
         sensel_values = []
         for attached in self.sensors:
-            world_pose = self.dynamics.compute_relative_pose(
-                            self.state, attached.pose, attached.joint)
+            j_pose, j_vel = self.dynamics.joint_state(self.state, attached.joint)
+            world_pose = np.dot(j_pose, attached.pose)
+            world_vel = None # XXX
+#            world_pose = self.dynamics.compute_relative_pose(
+#                            self.state, attached.pose, attached.joint)
             observations = attached.sensor.compute_observations(world_pose)
             sensels = observations['sensels']
             sensel_values.extend(sensels.tolist())
         return np.array(sensel_values)
         
-    def colliding_state(self, state):
+    @contract(pose='SE3')
+    def colliding_pose(self, pose):
         ''' 
-            Checks that the given state does not give collisions. 
+            Checks that the given pose does not give collisions. 
             Returns None or a CollisionInfo structure. 
         '''
-        pose = self.dynamics.compute_relative_pose(state, SE2_identity())
-        center = translation_from_SE2(pose)
+        state = self.dynamics.pose2state(pose)
+        j_pose, j_vel = self.dynamics.joint_state(state, 0)
+        center = translation_from_SE2(SE2_project_from_SE3(j_pose))
             
         collision = collides_with(self.world.get_primitives(),
                                   center, self.radius)

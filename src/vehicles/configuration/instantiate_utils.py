@@ -1,4 +1,5 @@
 from contracts import contract, check
+from . import logger
 
 @contract(code_spec='seq[2]')
 def instantiate_spec(code_spec):
@@ -16,9 +17,10 @@ def instantiate(function_name, parameters):
     try:
         return function(**parameters)
     except TypeError as e:
-        msg = ('Could not instantiate [%r, %s]:\n\t%s' % 
+        msg = ('Exception while instantiating [%r, %s]:\n\t%s' % 
                (function_name, parameters, e))
-        raise Exception(msg) 
+        logger.error(msg)
+        raise
     
 
 @contract(name='str')

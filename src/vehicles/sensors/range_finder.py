@@ -1,5 +1,6 @@
 from . import Raytracer, contract, np
 from ..interfaces import VehicleSensor
+from geometry.poses_embedding import SE2_project_from_SE3
 
 class Rangefinder(VehicleSensor, Raytracer):
 
@@ -13,6 +14,7 @@ class Rangefinder(VehicleSensor, Raytracer):
         Raytracer.__init__(self, directions)
     
     def _compute_observations(self, pose):
+        pose = SE2_project_from_SE3(pose)
         data = self.raytracing(pose)
         readings = data['readings']
         invalid = np.logical_not(data['valid'])
