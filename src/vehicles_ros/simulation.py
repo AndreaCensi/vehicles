@@ -5,21 +5,35 @@ from geometry import quaternion_from_rotation, rotation_translation_from_pose
 from vehicles import (PolyLine, Circle, instance_vehicle, instance_world,
     VehicleSimulation)
 import numpy as np
+from vehicles.configuration.checks import check_valid_simulation_config
+from vehicles.configuration.instance_all import instance_vehicle_spec, \
+    instance_world_spec
+from pprint import pformat
 
-try:
-    import rospy #@UnresolvedImport
-    visualization = True
-except:
-    visualization = False
+import rospy #@UnresolvedImport
+import contracts
+visualization = True
     
 class ROSVehicleSimulation(RobotSimulationInterface, VehicleSimulation):
     
-    def __init__(self, id_vehicle, id_world):
-        self.id_vehicle = id_vehicle
-        self.id_world = id_world
+    def __init__(self, **params):
+        contracts.disable_all()
+        rospy.loginfo('Received configuration:\n%s' % pformat(params))
+        check_valid_simulation_config(params)
         
-        vehicle = instance_vehicle(id_vehicle)
-        world = instance_world(id_world)
+        if 'vehicle' in params:
+            id_vehicle = params['vehicle']['id']
+            vehicle = instance_vehicle_spec(params['vehicle'])
+        else:
+            id_vehicle = params['id_vehicle']
+            vehicle = instance_vehicle(id_vehicle)
+            
+        if 'world' in params:
+            id_world = params['world']['id']
+            world = instance_world_spec(params['world'])
+        else:
+            id_world = params['id_vehicle']
+            world = instance_world(id_world)
         
         VehicleSimulation.__init__(self, vehicle, world)
         
@@ -49,6 +63,10 @@ class ROSVehicleSimulation(RobotSimulationInterface, VehicleSimulation):
         if visualization:
             self.publish_ros_commands(commands)
             self.publish_ros_markers()
+            
+        if self.vehicle.collision.collided:
+            rospy.loginfo('Restarting new episode due to collision.')
+            self.new_episode()
             
     def compute_observations(self):
         observations = VehicleSimulation.compute_observations(self)

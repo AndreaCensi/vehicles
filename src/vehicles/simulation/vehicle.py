@@ -87,6 +87,7 @@ class Vehicle:
         else:
             self.state = self.dynamics.integrate(self.state, commands, dt)
         
+        self.collision = collision
         
     def compute_observations(self):
         # TODO: add dynamics observations

@@ -140,3 +140,17 @@ def instance_vehicle_spec(entry):
         logger.error('Error while trying to instantiate vehicle. Entry:\n%s' 
                      % (pformat(entry)))
         raise
+
+def dereference_vehicle_spec(x):
+    ''' substitutes all references; modifies x. '''
+    check_valid_vehicle_config(x)
+    if 'id_dynamics' in x:
+        id_dynamics = x.pop('id_dynamics')
+        x['dynamics'] = Configuration.dynamics[id_dynamics]
+    for s in x['sensors']:
+        if 'id_sensor' in s:
+            id_sensor = s.pop('id_sensor')
+            s['sensor'] = Configuration.sensors[id_sensor]
+    check_valid_vehicle_config(x)
+
+

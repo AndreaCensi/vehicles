@@ -1,2 +1,2 @@
 from .boxes import *
-from .empty import *
+from .empty_world import *
