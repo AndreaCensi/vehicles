@@ -1,7 +1,7 @@
 from . import collides_with, np, compute_collision, contract
 from collections import namedtuple
-from geometry import SE2_identity, translation_from_SE2, SE3_from_SE2
-from geometry.poses_embedding import SE2_project_from_SE3
+from geometry import  translation_from_SE2
+from geometry import SE2_project_from_SE3
 
 
 class Vehicle:
@@ -92,11 +92,9 @@ class Vehicle:
         # TODO: add dynamics observations
         sensel_values = []
         for attached in self.sensors:
-            j_pose, j_vel = self.dynamics.joint_state(self.state, attached.joint)
+            j_pose, j_vel = self.dynamics.joint_state(self.state, attached.joint) #@UnusedVariable
             world_pose = np.dot(j_pose, attached.pose)
-            world_vel = None # XXX
-#            world_pose = self.dynamics.compute_relative_pose(
-#                            self.state, attached.pose, attached.joint)
+#            world_vel = None # XXX
             observations = attached.sensor.compute_observations(world_pose)
             sensels = observations['sensels']
             sensel_values.extend(sensels.tolist())
@@ -109,7 +107,7 @@ class Vehicle:
             Returns None or a CollisionInfo structure. 
         '''
         state = self.dynamics.pose2state(pose)
-        j_pose, j_vel = self.dynamics.joint_state(state, 0)
+        j_pose = self.dynamics.joint_state(state, 0)[0]
         center = translation_from_SE2(SE2_project_from_SE3(j_pose))
             
         collision = collides_with(self.world.get_primitives(),

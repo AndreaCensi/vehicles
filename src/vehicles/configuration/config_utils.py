@@ -14,13 +14,8 @@ def locate_files(directory, pattern):
 
 
 @contract(directory='str',
-          pattern='str',
-          required_fields='list(str)',
-          optional_fields='list(str)')
-def load_configuration_entries(directory, pattern='*.yaml',
-                               required_fields=[],
-                               optional_fields=[],
-                               check_not_allowed=True):
+          pattern='str')
+def load_configuration_entries(directory, pattern, check_entry):
     ''' 
         Loads all .dynamics.yaml files recursively in the directory. 
         It is assumed that each file contains a list of dictionaries.
@@ -42,23 +37,24 @@ def load_configuration_entries(directory, pattern='*.yaml',
                     raise Exception('Empty file %r.' % filename) 
                 for entry in parsed: 
                     yield filename, entry 
-    
-    allowed_fields = set(['id'] + required_fields + optional_fields)
-    required_fields = set(['id'] + required_fields)
-    def check_entry(x):
-        for field in required_fields:
-            if not field in x:
-                raise Exception('Entry does not have field %r.' % (field))
-        if check_not_allowed:
-            for found in x:
-                if not found in allowed_fields:
-                    msg = 'Field %r not allowed in entry.' % (found)
-                    raise Exception(msg)        
+#    
+#    allowed_fields = set(['id'] + required_fields + optional_fields)
+#    required_fields = set(['id'] + required_fields)
+#    def check_entry(x):
+#        for field in required_fields:
+#            if not field in x:
+#                raise Exception('Entry does not have field %r.' % (field))
+#        if check_not_allowed:
+#            for found in x:
+#                if not found in allowed_fields:
+#                    msg = 'Field %r not allowed in entry.' % (found)
+#                    raise Exception(msg)        
         
     all_entries = {}
     for filename, x in enumerate_entries():
         try: 
             check_entry(x)
+            # Warn about this?
             name = x['id']
             if name in all_entries and all_entries[name]['filename'] != filename:
                 raise Exception('Already know %r from %r' % 

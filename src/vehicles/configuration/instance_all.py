@@ -1,9 +1,10 @@
 from . import Configuration, load_configuration, instantiate_spec
 from .. import logger
 from contracts.interface import describe_value
+from geometry import SE2, SE3_from_SE2
 from pprint import pformat
-from geometry.manifolds import SE3, SE2
-from geometry.poses import SE3_from_SE2
+from vehicles.configuration.checks import check_valid_vehicle_config
+
 
 
 def instance_all():
@@ -35,24 +36,26 @@ def check_type(entry, type, obtained):
         raise Exception(msg)
 
 def instance_dynamics(id_dynamics):
-    from vehicles_dynamics import Dynamics
     if not Configuration.loaded:
         load_configuration()
         
     if not id_dynamics in Configuration.dynamics:
         raise Exception('No dynamics %r known.' % id_dynamics)
-    entry = Configuration.dynamics[id_dynamics]
+    entry = Configuration.dynamics[id_dynamics]    
+    return instance_dynamics_spec(entry)
+
+def instance_dynamics_spec(entry):
+    from vehicles_dynamics import Dynamics
     try:
         instance = instantiate_spec(entry['code'])
     except:
-        logger.error('Error while trying to instantiate dynamics %r. Entry:\n%s' 
-                     % (id_dynamics, pformat(entry)))
+        logger.error('Error while trying to instantiate dynamics. Entry:\n%s' 
+                     % (pformat(entry)))
         raise
     check_type(entry, Dynamics, instance)
     return instance
 
 def instance_sensor(id_sensor):
-    from ..interfaces import VehicleSensor
     
     if not Configuration.loaded:
         load_configuration()
@@ -60,57 +63,80 @@ def instance_sensor(id_sensor):
     if not id_sensor in Configuration.sensors:
         raise Exception('No sensor %r known.' % id_sensor)
     entry = Configuration.sensors[id_sensor]
+    return instance_sensor_spec(entry)
+
+def instance_sensor_spec(entry):
+    from ..interfaces import VehicleSensor
+    
     try:
         instance = instantiate_spec(entry['code'])
         check_type(entry, VehicleSensor, instance)
     except:
-        logger.error('Error while trying to instantiate sensor %r. Entry:\n%s' 
-                     % (id_sensor, pformat(entry)))
+        logger.error('Error while trying to instantiate sensor. Entry:\n%s' 
+                     % (pformat(entry)))
         raise
     return instance
     
 def instance_world(id_world):
-    from ..interfaces import World
+    
     if not Configuration.loaded:
         load_configuration()
 
     if not id_world in Configuration.worlds:
         raise Exception('No world %r known.' % id_world)
     entry = Configuration.worlds[id_world]
+    return instance_world_spec(entry)
+
+def instance_world_spec(entry):
+    from ..interfaces import World
     try:
         instance = instantiate_spec(entry['code'])
         check_type(entry, World, instance)
     except:
-        logger.error('Error while trying to instantiate world %r. Entry:\n%s' 
-                     % (id_world, pformat(entry)))
+        logger.error('Error while trying to instantiate world. Entry:\n%s' 
+                     % (pformat(entry)))
         raise
     return instance
 
-def instance_vehicle(id_vehicle):
-    from ..simulation import Vehicle
-    
+def instance_vehicle(id_vehicle):    
     if not Configuration.loaded:
         load_configuration()
 
-    
     if not id_vehicle in Configuration.vehicles:
         raise Exception('No vehicle %r known.' % id_vehicle)
     entry = Configuration.vehicles[id_vehicle]
+    return instance_vehicle_spec(entry)
+
+    
+def instance_vehicle_spec(entry):
+    from ..simulation import Vehicle
+
+    check_valid_vehicle_config(entry)
     try:
-        type_dynamics = entry['dynamics']
-        dynamics = instance_dynamics(type_dynamics)
+        if 'id_dynamics' in entry:
+            id_dynamics = entry['id_dynamics']
+            dynamics = instance_dynamics(id_dynamics)
+        else:
+            id_dynamics = entry['dynamics']['id']
+            dynamics = instance_dynamics_spec(entry['dynamics'])
+            
         sensors = entry['sensors']
         vehicle = Vehicle()
-        vehicle.add_dynamics(type_dynamics, dynamics)
+        vehicle.add_dynamics(id_dynamics, dynamics)
         for sensor in sensors:
-            sensor_type = sensor['type']
+            if 'id_sensor' in sensor:
+                id_sensor = sensor['id_sensor'] 
+                sensor_instance = instance_sensor(id_sensor)
+            else:
+                id_sensor = sensor['sensor']['id'] 
+                sensor_instance = instance_sensor_spec(sensor['sensor'])
+                
             pose = SE3_from_SE2(SE2.from_yaml(sensor['pose']))
             joint = sensor.get('joint', 0)
-            sensor_instance = instance_sensor(sensor_type)
-            vehicle.add_sensor(id_sensor=sensor_type,
+            vehicle.add_sensor(id_sensor=id_sensor,
                                sensor=sensor_instance, pose=pose, joint=joint)
         return vehicle
     except:
-        logger.error('Error while trying to instantiate vehicle %r. Entry:\n%s' 
-                     % (id_vehicle, pformat(entry)))
+        logger.error('Error while trying to instantiate vehicle. Entry:\n%s' 
+                     % (pformat(entry)))
         raise

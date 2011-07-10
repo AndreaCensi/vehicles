@@ -1,6 +1,6 @@
-from ..interfaces import World
 from . import Vehicle
-from geometry.manifolds import SE3
+from ..interfaces import World
+from geometry import SE3
 
 class VehicleSimulation():
     
@@ -25,7 +25,7 @@ class VehicleSimulation():
         
     def new_episode(self):
         max_tries = 100
-        for i in range(max_tries):
+        for i in range(max_tries): #@UnusedVariable
             episode = self.world.new_episode()
             self.id_episode = episode.id_episode
             pose = episode.vehicle_state # TODO: change name
