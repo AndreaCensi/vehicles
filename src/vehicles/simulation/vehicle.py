@@ -27,10 +27,19 @@ class Vehicle:
         # XXX: this is fishy
         self.state = self.dynamics.state_space().sample_uniform()
     
-    AttachedSensor = namedtuple('AttachedSensor', 'sensor pose joint')
+    class Attached:
+        @contract(pose='SE3', joint='int')
+        def __init__(self, sensor, pose, joint):
+            self.sensor = sensor
+            self.pose = pose
+            self.joint = joint
+            self.current_observations = None
+            self.current_pose = None
+            
+    
     @contract(id_sensor='str', pose='SE3', joint='int,>=0')
     def add_sensor(self, id_sensor, sensor, pose, joint):
-        attached = Vehicle.AttachedSensor(sensor, pose, joint)
+        attached = Vehicle.Attached(sensor, pose, joint)
         self.sensors.append(attached)
         self.num_sensels += attached.sensor.num_sensels
         if not self.id_sensors:
@@ -94,10 +103,10 @@ class Vehicle:
         sensel_values = []
         for attached in self.sensors:
             j_pose, j_vel = self.dynamics.joint_state(self.state, attached.joint) #@UnusedVariable
-            world_pose = np.dot(j_pose, attached.pose)
-#            world_vel = None # XXX
-            observations = attached.sensor.compute_observations(world_pose)
-            sensels = observations['sensels']
+            attached.current_pose = np.dot(j_pose, attached.pose)
+            attached.current_observations = \
+                attached.sensor.compute_observations(attached.current_pose)
+            sensels = attached.current_observations['sensels']
             sensel_values.extend(sensels.tolist())
         return np.array(sensel_values)
         

@@ -4,6 +4,7 @@ from contracts.interface import describe_value
 from geometry import SE2, SE3_from_SE2
 from pprint import pformat
 from vehicles.configuration.checks import check_valid_vehicle_config
+from copy import deepcopy
 
 
 
@@ -146,11 +147,11 @@ def dereference_vehicle_spec(x):
     check_valid_vehicle_config(x)
     if 'id_dynamics' in x:
         id_dynamics = x.pop('id_dynamics')
-        x['dynamics'] = Configuration.dynamics[id_dynamics]
+        x['dynamics'] = deepcopy(Configuration.dynamics[id_dynamics])
     for s in x['sensors']:
         if 'id_sensor' in s:
             id_sensor = s.pop('id_sensor')
-            s['sensor'] = Configuration.sensors[id_sensor]
+            s['sensor'] = deepcopy(Configuration.sensors[id_sensor])
     check_valid_vehicle_config(x)
 
 
