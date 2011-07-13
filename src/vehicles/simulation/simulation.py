@@ -10,6 +10,9 @@ class VehicleSimulation():
         
         self.vehicle = vehicle
         self.world = world
+        
+    def __repr__(self):
+        return 'VSim(%s;%s)' % (self.vehicle, self.world)
             
     def simulate(self, commands, dt):
         self.vehicle.simulate(commands, dt)

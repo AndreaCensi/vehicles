@@ -30,11 +30,11 @@ class Raytracer:
             self.p = Popen(raytracer, stdout=PIPE, stdin=PIPE)
             self.child_stream = JSONStream(self.p.stdout)
         except OSError as e:
-            if e.errno == errno.ENOENT:
+            #if e.errno == errno.ENOENT:
                 msg = ('Could not open connection to raytracer %r: %s.' % 
                        (raytracer, e.strerror))
                 raise BVException(msg)
-            raise e
+            #raise e
         
         if self.directions is not None:
             sensor_setup = { 

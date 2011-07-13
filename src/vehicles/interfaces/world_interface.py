@@ -5,6 +5,9 @@ from collections import namedtuple
 class World:
     __metaclass__ = ABCMeta
     
+    def __repr__(self):
+        return '%s' % self.__class__.__name__
+    
     @abstractmethod
     def get_primitives(self):
         pass

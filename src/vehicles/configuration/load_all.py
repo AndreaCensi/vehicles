@@ -1,20 +1,19 @@
-from .. import logger
 from . import load_configuration_entries
-from vehicles.configuration.checks import check_valid_vehicle_config, \
-    check_valid_sensor_config, check_valid_dynamics_config, \
-    check_valid_world_config
+from .. import logger
+from .checks import (check_valid_vehicle_config, check_valid_sensor_config,
+    check_valid_dynamics_config, check_valid_world_config)
 
-class Configuration:
+class VehiclesConfig:
     loaded = False
     dynamics = {}
     sensors = {}
     vehicles = {}
     worlds = {}
 
+Configuration = VehiclesConfig # TODO: rename
 
 
-
-def load_configuration(directory=None,
+def load_vehicles_config(directory=None,
                        pattern_dynamics='*.dynamics.yaml',
                        pattern_sensors='*.sensors.yaml',
                        pattern_vehicles='*.vehicles.yaml',
@@ -66,6 +65,8 @@ def load_configuration(directory=None,
                                
 
     add_blind_vehicles()
+   
+load_configuration = load_vehicles_config # TODO: rename
     
 def add_blind_vehicles():
     for id_dynamics in Configuration.dynamics:

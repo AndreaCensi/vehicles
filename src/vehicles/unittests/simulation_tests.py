@@ -5,7 +5,7 @@ from nose.plugins.attrib import attr
 import itertools
 from vehicles.simulation.vehicle import Vehicle
 from vehicles.configuration.instance_all import instance_dynamics
-from vehicles.worlds.empty import Empty
+from vehicles.worlds import Empty
 
 # TODO: remove
 def random_command(command_spec):
