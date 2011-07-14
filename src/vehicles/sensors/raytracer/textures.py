@@ -17,3 +17,15 @@ class SinTexture:
         
     def __call__(self, t):
         return self.c + self.A * np.sin(self.omega * t)
+
+
+class RandomCheckerboard:
+    def __init__(self, cell_width=1, num=100):
+        self.values = np.random.rand(num)
+        self.cell_width = cell_width
+        
+    def __call__(self, t):
+        s = int(np.floor(t / self.cell_width))
+        s = s % self.values.size
+        return self.values[s]
+        

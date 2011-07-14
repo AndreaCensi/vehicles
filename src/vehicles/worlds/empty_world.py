@@ -4,10 +4,6 @@ from geometry import pose_from_rotation_translation, random_rotation
 
 class Empty(World):
     
-    @contract(bounds='seq[3](seq[2](number))')
-    def __init__(self, bounds):
-        self.bounds = bounds
-        
     def get_primitives(self):
         return []
     

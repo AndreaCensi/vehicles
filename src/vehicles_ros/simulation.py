@@ -14,6 +14,8 @@ import rospy #@UnresolvedImport
 import warnings
 from vehicles_ros.ros_utils import ROS_Pose_from_SE3
 from vehicles.sensors.raytracer.textured_raytracer import Raytracer
+from geometry.poses import SE3_from_rotation_translation
+from vehicles_ros.ros_plot import get_marker_for_world_extent
 
 try:
     from ros import visualization_msgs
@@ -34,7 +36,8 @@ Error: %s
     warnings.warn(msg)
     visualization = False
     
-    
+visualization = False
+
 class ROSVehicleSimulation(RobotSimulationInterface, VehicleSimulation):
     
     def __init__(self, **params):
@@ -116,40 +119,68 @@ class ROSVehicleSimulation(RobotSimulationInterface, VehicleSimulation):
                              "vehicle_pose",
                              "world")
     
+        z0 = 0.0
+        z1 = 1.0
+        z_sensor = 0.5
+        z_sensor_width = 1.0
+        robot_height = 1.0
+        points_width = 0.03
+
+        frame_id = '/world'
+        stamp = rospy.get_rostime() # TODO: sim time
+        
+        
         marker = Marker()
-        marker.header.frame_id = '/world'
-        marker.header.stamp = rospy.get_rostime()
+        marker.header.frame_id = frame_id
+        marker.header.stamp = stamp
         marker.ns = "vehicle"
         marker.id = 0
         marker.type = Marker.CUBE
         marker.action = Marker.ADD
-        marker.pose = ROS_Pose_from_SE3(vehicle_pose)
+        
+        pose_marker = SE3_from_rotation_translation(
+                                np.eye(3),
+                                np.array([0, 0, robot_height / 2]))
+        marker.pose = ROS_Pose_from_SE3(np.dot(vehicle_pose, pose_marker))
         marker.scale.x = 1.0
         marker.scale.y = 1.0
-        marker.scale.z = 1.0
-        marker.color = ColorRGBA(0.0, 1.0, 0.0, 1.0)
+        marker.scale.z = robot_height
+        marker.color = ColorRGBA(1.0, 0.3, 0.3, 1.0)
         self.publisher.publish(marker)
         
         if self.first_time:
             self.first_time = False
         
+        marker = get_marker_for_world_extent(self.world.bounds, frame_id, stamp)
+        self.publisher.publish(marker)
+        
+            
         # TODO: only updated
         for x in self.world.get_primitives():
             surface = x.id_object
             if isinstance(x, PolyLine):
                 marker = Marker()
-                marker.header.frame_id = '/world'
-                marker.header.stamp = rospy.get_rostime()
+                marker.header.frame_id = frame_id
+                marker.header.stamp = stamp
                 marker.ns = "world"
                 marker.id = surface
-                marker.type = Marker.LINE_STRIP
+                marker.type = Marker.TRIANGLE_LIST
                 marker.action = Marker.ADD
-                points_list = [
-                               Point(x[0], x[1], 0) for
-                               x in x.points]
-                marker.points = points_list
-                marker.scale.x = 0.5
-                marker.color = ColorRGBA(1.0, 0, 0, 1)
+                vertices = []
+                for i in range(len(x.points) - 1):
+                    p1 = x.points[i]
+                    p2 = x.points[i + 1]
+                    a = Point(p1[0], p1[1], z0) 
+                    b = Point(p1[0], p1[1], z1)
+                    c = Point(p2[0], p2[1], z0)
+                    d = Point(p2[0], p2[1], z1)
+                    vertices.extend([a, b, d])
+                    vertices.extend([d, c, a])
+                marker.points = vertices
+                marker.scale.x = 1
+                marker.scale.y = 1
+                marker.scale.z = 1
+                marker.color = ColorRGBA(.5, .5, .2, 1)
                 self.publisher.publish(marker)
         
             elif isinstance(x, Circle):
@@ -166,29 +197,26 @@ class ROSVehicleSimulation(RobotSimulationInterface, VehicleSimulation):
                 readings = observations['readings']
                 luminance = observations.get('luminance', None)
                 
-                epsilon = 0.02
+                epsilon = points_width * 1.1
                 points_list = []
                 for theta, reading in zip(directions, readings):
                     x = np.cos(theta) * (reading - epsilon)
                     y = np.sin(theta) * (reading - epsilon)
-                    points_list.append(Point(0, 0, 0))
-                    points_list.append(Point(x, y, 0))
+                    points_list.append(Point(0, 0, z_sensor))
+                    points_list.append(Point(x, y, z_sensor))
                 
                 points = []
                 for theta, reading in zip(directions, readings):
                     x = np.cos(theta) * (reading - epsilon)
                     y = np.sin(theta) * (reading - epsilon)
-                    points.append(Point(x, y, 0))
+                    points.append(Point(x, y, z_sensor))
                 points_circle = []
                 points_circle_radius = 1
                 for theta in directions:
                     x = np.cos(theta) * points_circle_radius
                     y = np.sin(theta) * points_circle_radius
-                    points_circle.append(Point(x, y, 0))
+                    points_circle.append(Point(x, y, z_sensor))
                     
-                frame_id = '/world'
-                stamp = rospy.get_rostime() # TODO: sim time
-                
                 marker = Marker()
                 marker.header.frame_id = frame_id
                 marker.header.stamp = stamp
@@ -214,8 +242,8 @@ class ROSVehicleSimulation(RobotSimulationInterface, VehicleSimulation):
                     marker.type = Marker.POINTS
                     marker.action = Marker.ADD
                     marker.points = points
-                    marker.scale.x = 0.03    
-                    marker.scale.y = 1
+                    marker.scale.x = points_width    
+                    marker.scale.y = z_sensor_width
                     marker.color = ColorRGBA(0, 0, 1, 1)
                     marker.colors = colors
                     self.publisher.publish(marker)
@@ -228,8 +256,8 @@ class ROSVehicleSimulation(RobotSimulationInterface, VehicleSimulation):
                     marker.type = Marker.POINTS
                     marker.action = Marker.ADD
                     marker.points = points_circle
-                    marker.scale.x = 0.03
-                    marker.scale.y = 1
+                    marker.scale.x = points_width
+                    marker.scale.y = z_sensor_width
                     marker.color = ColorRGBA(0, 0, 1, 1)
                     marker.colors = colors
                     self.publisher.publish(marker)

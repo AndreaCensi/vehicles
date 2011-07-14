@@ -5,6 +5,12 @@ from collections import namedtuple
 class World:
     __metaclass__ = ABCMeta
     
+    
+    @contract(bounds='seq[3](seq[2](number))')
+    def __init__(self, bounds):
+        self.bounds = bounds
+        
+        
     def __repr__(self):
         return '%s' % self.__class__.__name__
     
