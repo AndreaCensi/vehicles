@@ -103,7 +103,7 @@
   dynamics: 
       id: example_custom_dynamics
       desc: 'Particle on S1 controlled in force.'
-      code: [vehicles_dynamics.CircleForce, {max_force: 1, mass: 1} ]
+      code: [vehicles_dynamics.CircleForce, {max_force: 1, mass: 1, damping: 2} ]
   sensors:
       - pose: [0,0,0]
         sensor:         

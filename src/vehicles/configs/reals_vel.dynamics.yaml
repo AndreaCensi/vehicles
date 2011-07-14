@@ -31,12 +31,12 @@
   desc: 'Rigid body on R2, controlled in force.'
   code: [vehicles_dynamics.EuclideanForce, {ndim: 3, max_force: [*MF,*MF,*MF], mass: *MASS,  damping: *DAMPING} ]
 
-- id:   d_SO3_rb_v
-  desc: 'Rigid body in SO3, controlled in velocity.'
+- id:   d_SO3_rb_f
+  desc: 'Rigid body in SO3, controlled in force.'
   code: [vehicles_dynamics.SO3Force, { max_force: [*MF,*MF,*MF], mass: *MASS,  damping: *DAMPING } ]
 
-- id  : d_SO3_rb_f
-  desc: 'Rigid body on SO3, controlled in force.'
+- id  : d_SO3_rb_v
+  desc: 'Rigid body on SO3, controlled in velocity.'
   code: [vehicles_dynamics.SO3Vel, { max_angular_velocity: [*MA,*MA,*MA]} ]
 
 # Now things on S1
