@@ -35,8 +35,8 @@ def load_configuration_entries(directory, pattern, check_entry):
                 check('list(dict)', parsed)
                 if not parsed:
                     raise Exception('Empty file %r.' % filename) 
-                for entry in parsed: 
-                    yield filename, entry 
+                for num_entry, entry in enumerate(parsed): 
+                    yield (filename, num_entry), entry 
 #    
 #    allowed_fields = set(['id'] + required_fields + optional_fields)
 #    required_fields = set(['id'] + required_fields)
@@ -49,21 +49,24 @@ def load_configuration_entries(directory, pattern, check_entry):
 #                if not found in allowed_fields:
 #                    msg = 'Field %r not allowed in entry.' % (found)
 #                    raise Exception(msg)        
-        
+    name2where = {}
     all_entries = {}
-    for filename, x in enumerate_entries():
+    for where, x in enumerate_entries():
         try: 
             check_entry(x)
             # Warn about this?
             name = x['id']
-            if name in all_entries and all_entries[name]['filename'] != filename:
-                raise Exception('Already know %r from %r' % 
-                                (name, all_entries[name]['filename']))
-            x['filename'] = filename
+            if name in all_entries and name2where[name] != where:
+                msg = ('While loading %r from:\n %s (entry #%d),\n'
+                       'already know from:\n %s (entry #%d)' % 
+                                (name, where[0], where[1],
+                                  name2where[name][0], name2where[name][1]))
+                raise Exception(msg)
+            name2where[name] = where
             all_entries[name] = x
         except Exception as e:
-            msg = ('Error while loading entry from file %r.\n%s\nError: %s' % 
-                   (filename, pformat(x), e))
+            msg = ('Error while loading entry from file %r #%d.\n%s\nError: %s' % 
+                   (where[0], where[1], pformat(x), e))
             logger.error(msg) # XXX
             raise    
     return all_entries

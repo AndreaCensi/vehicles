@@ -51,6 +51,53 @@
         pose: [0,0,0]
   radius: 0.5
   
+- id: landroid-hokuyo
+  desc: "Model for the landroid; only Hokuyo."
+  id_dynamics: d_SE2_car_v
+  sensors:
+      - id_sensor: rf_f270_n180
+        pose: [0,0,0]
+  radius: 0.2
+  
+- id: landroid-hokuyo-4cam
+  desc: "Model for the landroid; Hokuyo + cams"
+  id_dynamics: d_SE2_car_v
+  sensors:
+      - id_sensor: rf_f270_n180
+        pose: [0.1,0,0]
+      - id_sensor: cam_f60_n45
+        pose: [0,0,0]
+      - id_sensor: cam_f60_n45
+        pose: [0,0,+90]
+      - id_sensor: cam_f60_n45
+        pose: [0,0,-90]
+      - id_sensor: cam_f60_n45
+        pose: [0,0,180]
+  radius: 0.2
+  
+- id: landroid-4cam
+  desc: "Model for the landroid; only cam"
+  id_dynamics: d_SE2_car_v
+  sensors:
+      - id_sensor: cam_f60_n45
+        pose: [0,0,0]
+      - id_sensor: cam_f60_n45
+        pose: [0,0,+90]
+      - id_sensor: cam_f60_n45
+        pose: [0,0,-90]
+      - id_sensor: cam_f60_n45
+        pose: [0,0,180]
+  radius: 0.2
+
+- id: orb-1d
+  desc: "An orb controlled in velocity"
+  id_dynamics: d_S1_rb_v
+  sensors:
+      - id_sensor: cam_f60_n45
+        pose: [0,0,0]
+  radius: 0.2
+
+  
 - id: example_custom_vehicle
   desc: Specifies everything explicitly
   dynamics: 

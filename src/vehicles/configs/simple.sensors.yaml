@@ -26,6 +26,19 @@
       - num_sensels: 90
         fov_deg:     180
 
+- id: cam_f90_n45
+  desc: "A camera with 90deg fov, 45 sensels."
+  code: 
+      - vehicles.sensors.PhotoreceptorsUniform
+      - num_sensels: 45
+        fov_deg:     90
+
+- id: cam_f60_n45
+  desc: "A camera with 60deg fov, 45 sensels."
+  code: 
+      - vehicles.sensors.PhotoreceptorsUniform
+      - num_sensels: 45
+        fov_deg:     60
 
         
 - id: rf360
@@ -41,6 +54,14 @@
       - vehicles.sensors.RangefinderUniform
       - num_sensels: 180
         fov_deg:     180
+
+- id: rf_f270_n180
+  desc: "A range finder with 270deg fov, 180 sensels."
+  code: 
+      - vehicles.sensors.RangefinderUniform
+      - num_sensels: 180
+        fov_deg:     270
+
 
 - id: random_5
   desc: A random sensor with 5 sensels.

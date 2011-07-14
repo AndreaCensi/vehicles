@@ -5,7 +5,8 @@ from geometry import SE2, SE3_from_SE2
 from pprint import pformat
 from vehicles.configuration.checks import check_valid_vehicle_config
 from copy import deepcopy
-
+import numpy as np
+from geometry.poses import SE2_from_translation_angle
 
 
 def instance_all():
@@ -131,8 +132,10 @@ def instance_vehicle_spec(entry):
             else:
                 id_sensor = sensor['sensor']['id'] 
                 sensor_instance = instance_sensor_spec(sensor['sensor'])
-                
-            pose = SE3_from_SE2(SE2.from_yaml(sensor['pose']))
+            x, y, theta_deg = sensor['pose']
+            theta = np.radians(theta_deg)
+            pose = SE2_from_translation_angle([x, y], theta)
+            pose = SE3_from_SE2(pose)
             joint = sensor.get('joint', 0)
             vehicle.add_sensor(id_sensor=id_sensor,
                                sensor=sensor_instance, pose=pose, joint=joint)

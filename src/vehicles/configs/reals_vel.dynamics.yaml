@@ -5,6 +5,7 @@
   MF: &MF 2  # max force
   MASS: &MASS 1  # robot mass  
   CAR_LENGTH: &CAR_LENGTH 0.5
+  DAMPING: &DAMPING 1
   MAX_STEERING_ANGLE: &MAX_STEERING_ANGLE 0.52359877 # 30deg
   id:   d_R1_rb_v
   desc: 'Rigid body on R1, controlled in velocity.'
@@ -20,19 +21,19 @@
 
 - id:   d_R1_rb_f
   desc: 'Rigid body on R1, controlled in force.'
-  code: [vehicles_dynamics.EuclideanForce, {ndim: 1, max_force: [*MF], mass: *MASS} ]
+  code: [vehicles_dynamics.EuclideanForce, {ndim: 1, max_force: [*MF], mass: *MASS,  damping: *DAMPING} ]
 
 - id: d_R2_rb_f
   desc: 'Rigid body on R2, controlled in force.'
-  code: [vehicles_dynamics.EuclideanForce, {ndim: 2, max_force: [*MF,*MF], mass: *MASS} ]
+  code: [vehicles_dynamics.EuclideanForce, {ndim: 2, max_force: [*MF,*MF], mass: *MASS,  damping: *DAMPING} ]
 
 - id  : d_R3_rb_f
   desc: 'Rigid body on R2, controlled in force.'
-  code: [vehicles_dynamics.EuclideanForce, {ndim: 3, max_force: [*MF,*MF,*MF], mass: *MASS} ]
+  code: [vehicles_dynamics.EuclideanForce, {ndim: 3, max_force: [*MF,*MF,*MF], mass: *MASS,  damping: *DAMPING} ]
 
-- id:   d_SO3_rb_f
+- id:   d_SO3_rb_v
   desc: 'Rigid body in SO3, controlled in velocity.'
-  code: [vehicles_dynamics.SO3Force, { max_force: [*MF,*MF,*MF], mass: *MASS } ]
+  code: [vehicles_dynamics.SO3Force, { max_force: [*MF,*MF,*MF], mass: *MASS,  damping: *DAMPING } ]
 
 - id  : d_SO3_rb_f
   desc: 'Rigid body on SO3, controlled in force.'
@@ -45,7 +46,7 @@
   
 - id: d_S1_rb_f
   desc: 'Particle on S1 controlled in force.'
-  code: [vehicles_dynamics.CircleForce, {max_force: *MF, mass: *MASS} ]
+  code: [vehicles_dynamics.CircleForce, {max_force: *MF, mass: *MASS,  damping: *DAMPING} ]
 
 # Now things on SE2
 - id: d_SE2_rb_v
