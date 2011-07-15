@@ -4,8 +4,17 @@
       - vehicles.worlds.Box
       - width: 10
         length: 10
+
 - id: empty
   desc: The void.
   code: 
       - vehicles.worlds.Empty
       - bounds: [[-10,10],[-10,10],[-10,10]]
+      
+      
+- id: test_dynamic
+  desc: A test of a world with moving objects.
+  code: 
+      - vehicles.worlds.DynamicTest
+      - width: 10
+        length: 10

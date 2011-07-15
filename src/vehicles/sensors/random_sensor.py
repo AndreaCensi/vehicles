@@ -15,5 +15,5 @@ class RandomSensor(VehicleSensor):
         data[VehicleSensor.SENSELS] = values
         return data
 
-    def set_world(self, world, updated):
+    def set_world_primitives(self, primitives):
         pass

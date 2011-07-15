@@ -11,7 +11,6 @@ import numpy as np
 import rospy #@UnresolvedImport
 
 
-
 class ROSVehicleSimulation(RobotInterface, VehicleSimulation):
     
     def __init__(self, **params):
@@ -55,18 +54,20 @@ class ROSVehicleSimulation(RobotInterface, VehicleSimulation):
             self.pub_commands_image = rospy.Publisher('~commands_image', Image)
             self.first_time = True
             
-            
+    def info(self, s):
+        rospy.loginfo(s)
+           
     def __repr__(self):
         return 'VehicleSimulation(%s,%s)' % (self.id_vehicle, self.id_world)
 
     def set_commands(self, commands):
-        dt = 0.1
+        dt = 0.1 # XXX
         VehicleSimulation.simulate(self, commands, dt)
         if self.visualization:
             self.publish_ros_commands(commands)
             self.publish_ros_markers()
             
-        if self.vehicle.collision.collided:
+        if self.vehicle_collided:
             rospy.loginfo('Restarting new episode due to collision.')
             self.new_episode()
             

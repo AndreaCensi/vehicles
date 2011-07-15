@@ -36,19 +36,7 @@ def load_configuration_entries(directory, pattern, check_entry):
                 if not parsed:
                     raise Exception('Empty file %r.' % filename) 
                 for num_entry, entry in enumerate(parsed): 
-                    yield (filename, num_entry), entry 
-#    
-#    allowed_fields = set(['id'] + required_fields + optional_fields)
-#    required_fields = set(['id'] + required_fields)
-#    def check_entry(x):
-#        for field in required_fields:
-#            if not field in x:
-#                raise Exception('Entry does not have field %r.' % (field))
-#        if check_not_allowed:
-#            for found in x:
-#                if not found in allowed_fields:
-#                    msg = 'Field %r not allowed in entry.' % (found)
-#                    raise Exception(msg)        
+                    yield (filename, num_entry), entry   
     name2where = {}
     all_entries = {}
     for where, x in enumerate_entries():

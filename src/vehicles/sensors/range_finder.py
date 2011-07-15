@@ -5,7 +5,7 @@ from geometry.poses_embedding import SE2_project_from_SE3
 class Rangefinder(VehicleSensor, Raytracer):
 
     @contract(directions='seq[>0](number)', invalid='number')
-    def __init__(self, directions, invalid=0, min_range=0.2, max_range=20):
+    def __init__(self, directions, invalid=10, min_range=0.2, max_range=10):
         ''' directions: array of orientations
             invalid: value for invalid data (infinity) 
         '''
@@ -19,17 +19,17 @@ class Rangefinder(VehicleSensor, Raytracer):
         pose = SE2_project_from_SE3(pose)
         data = self.raytracing(pose)
         readings = data['readings']
-        sensels = readings
-        sensels = np.minimum(sensels, self.max_range)
-        sensels = np.maximum(sensels, self.min_range)
-        sensels = (readings - self.min_range) / (self.max_range - self.min_range)
         invalid = np.logical_not(data['valid'])
+        readings[:] = np.minimum(readings, self.max_range)
+        readings[:] = np.maximum(readings, self.min_range)
         readings[invalid] = self.invalid
-        data[VehicleSensor.SENSELS] = readings
+        
+        sensels = (readings - self.min_range) / (self.max_range - self.min_range)
+        data[VehicleSensor.SENSELS] = sensels
         return data
 
-    def set_world(self, world, updated):
-        Raytracer.set_world(self, world, updated)
+    def set_world_primitives(self, primitives):
+        Raytracer.set_world_primitives(self, primitives)
 
     
 class RangefinderUniform(Rangefinder):

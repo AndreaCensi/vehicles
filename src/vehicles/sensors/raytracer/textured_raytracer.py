@@ -85,9 +85,9 @@ class Raytracer:
             pass
         #print " Closed pipe %s, %s" % (self.p.stdin,self.p.stdout)
 
-    def set_world(self, world, updated=None):
-        # TODO: use updated
-        for x in world.get_primitives():
+    def set_world_primitives(self, primitives):
+        # TODO: make add_circle() add_polyline()
+        for x in primitives:
             surface = x.id_object
             if isinstance(x, PolyLine):
                 msg = { 
@@ -158,15 +158,15 @@ class TexturedRaytracer(Raytracer):
         Raytracer.__init__(self, directions, raytracer)
         self.surface2texture = {}
 
-    def set_world(self, world, updated=None):
+    def set_world_primitives(self, primitives):
         # XXX: inefficient
-        for x in world.get_primitives():
+        for x in primitives:
             surface = x.id_object
             if isinstance(x, PolyLine):
                 self.surface2texture[surface] = instantiate_spec(x.texture)
             if isinstance(x, Circle):
                 self.surface2texture[surface] = instantiate_spec(x.texture)
-        Raytracer.set_world(self, world, updated)
+        Raytracer.set_world_primitives(self, primitives)
          
     @contract(pose='SE2')
     def raytracing(self, pose):
@@ -181,6 +181,7 @@ class TexturedRaytracer(Raytracer):
                                     (surface_id, self.surface2texture.keys()))
                 texture = self.surface2texture[surface_id]
                 coord = answer['curvilinear_coordinate'][i]
+                # TODO: make this more efficient
                 luminance[i] = texture(coord)
             else:
                 luminance[i] = float('nan')

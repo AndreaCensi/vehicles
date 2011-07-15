@@ -10,7 +10,7 @@ class VehicleSensor:
         self.num_sensels = num_sensels
            
     @abstractmethod
-    def set_world(self, world, updated=None):
+    def set_world_primitives(self, primitives):
         pass
 
     SENSELS = 'sensels'

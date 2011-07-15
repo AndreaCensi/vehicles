@@ -14,7 +14,7 @@ class Vehicle:
         self.id_dynamics = None # XXX
         self.dynamics = None
         
-        self.world = None
+        self.primitives = set()
         
     def __repr__(self):
         return 'V(%s;%s)' % (self.id_dynamics, self.id_sensors)
@@ -47,10 +47,11 @@ class Vehicle:
         else:
             self.id_sensors += '+%s' % id_sensor
 
-    def set_world(self, world, updated=None):
-        self.world = world
+    def set_world_primitives(self, primitives):
+        # These are used for collision checking
+        self.primitives.update(primitives)
         for attached in self.sensors:
-            attached.sensor.set_world(world, updated=updated)
+            attached.sensor.set_world_primitives(primitives)
             
     @contract(returns='SE3')
     def get_pose(self):
@@ -65,8 +66,8 @@ class Vehicle:
         
     @contract(pose='SE3')
     def set_pose(self, pose):
-        if self.world is None:
-            raise ValueError('Please call set_world() before set_state().')
+        if self.primitives is None:
+            raise ValueError('Please call set_world_primitives() before set_state().')
         # TODO: check compatibility
         state = self.dynamics.pose2state(pose)
         
@@ -78,7 +79,6 @@ class Vehicle:
         
     def simulate(self, commands, dt):
         # TODO: collisions
-        primitives = self.world.get_primitives()
         def dynamics_function(t):
             state = self.dynamics.integrate(self.state, commands, t)
             # compute center of robot
@@ -89,7 +89,7 @@ class Vehicle:
         
         collision = compute_collision(dynamics_function=dynamics_function,
                                       max_dt=dt,
-                                      primitives=primitives, radius=self.radius)
+                                      primitives=self.primitives, radius=self.radius)
         if collision.collided:
             #print('Collision at time %s' % collision.time)
             self.state = self.dynamics.integrate(self.state, commands, collision.time)
@@ -120,6 +120,6 @@ class Vehicle:
         j_pose = self.dynamics.joint_state(state, 0)[0]
         center = translation_from_SE2(SE2_project_from_SE3(j_pose))
             
-        collision = collides_with(self.world.get_primitives(),
+        collision = collides_with(self.primitives,
                                   center, self.radius)
         return collision

@@ -1,5 +1,9 @@
 from . import Marker, ColorRGBA, Point
 from vehicles import Circle, PolyLine
+import numpy as np
+from geometry.poses import SE2_from_xytheta, SE3_from_SE2, \
+    SE3_from_rotation_translation
+from vehicles_ros.ros_conversions import ROS_Pose_from_SE3
 
 def publish_world(publisher, params, world):
     frame_id = params['world_frame']
@@ -39,7 +43,23 @@ def publish_world(publisher, params, world):
             publisher.publish(marker)
     
         elif isinstance(x, Circle):
-            pass
+            marker = Marker()
+            marker.header.frame_id = frame_id
+            marker.header.stamp = stamp
+            marker.ns = "world"
+            marker.id = surface
+            marker.type = Marker.CYLINDER #@UndefinedVariable
+            marker.action = Marker.ADD #@UndefinedVariable
+#            marker.points = [Point(x.center[0], x.center[1], 0.5 * z0 + 0.5 * z1)]
+            marker.scale.x = x.radius * 2
+            marker.scale.y = x.radius * 2
+            z = 0.5 * z0 + 0.5 * z1
+            translation = np.array([x.center[0], x.center[1], z])
+            pose = SE3_from_rotation_translation(np.eye(3), translation)
+            marker.pose = ROS_Pose_from_SE3(pose)
+            marker.scale.z = (z1 - z0)
+            marker.color = ColorRGBA(.5, .5, .2, 1)
+            publisher.publish(marker)
         else: 
             raise Exception('Unexpected object %s' % x) 
 

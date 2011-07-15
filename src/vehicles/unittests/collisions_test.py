@@ -12,7 +12,7 @@ def test_collisions():
     id_vehicle = 'd_SE2_rb_v-random_5'
     
     vehicle = instance_vehicle(id_vehicle)
-    vehicle.set_world(world)
+    vehicle.set_world_primitives(world.get_primitives())
     vehicle.set_pose(SE3.identity())
     
 

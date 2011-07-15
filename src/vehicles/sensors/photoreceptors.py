@@ -19,8 +19,8 @@ class Photoreceptors(VehicleSensor, TexturedRaytracer):
         data[VehicleSensor.SENSELS] = luminance
         return data
 
-    def set_world(self, world, updated):
-        TexturedRaytracer.set_world(self, world, updated)
+    def set_world_primitives(self, primitives):
+        TexturedRaytracer.set_world_primitives(self, primitives)
 
 
 class PhotoreceptorsUniform(Photoreceptors):

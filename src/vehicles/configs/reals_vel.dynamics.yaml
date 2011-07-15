@@ -78,6 +78,12 @@
       - max_linear_velocity: *MAX_LINEAR_VEL
         max_steering_angle: *MAX_STEERING_ANGLE
         L: *CAR_LENGTH
+# Now things on SE2
+- id: d_fixed
+  desc: 'A robot that is out of battery.'
+  code: [vehicles_dynamics.SE2Dynamics, 
+            {max_linear_velocity: [0,0], 
+             max_angular_velocity: 0} ]
 
 # 
 # 
