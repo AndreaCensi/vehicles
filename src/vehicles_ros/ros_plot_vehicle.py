@@ -39,7 +39,7 @@ def visualize_raytracer(publisher, params, i, attached):
     stamp = params['stamp']
     frame_id = params['world_frame']
     z_sensor = params['z_sensor']
-    epsilon = params['points_width'] * 1.1
+    epsilon = params['points_width'] * 1.5
     
     sensor = attached.sensor
     observations = attached.current_observations
