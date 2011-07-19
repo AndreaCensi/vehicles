@@ -45,7 +45,7 @@ class VehicleSimulation():
             collision = self.vehicle.colliding_pose(pose) 
             if not collision.collided:
                 self.vehicle.set_pose(pose)
-                print('Setting pose %s' % pose)
+                #print('Setting pose %s' % pose)
                 self.id_episode = episode.id_episode    
                 return episode
         else:

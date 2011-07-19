@@ -25,7 +25,9 @@ class JSONStream(object):
             # Try to get a json object from the data stream
             try:
                 obj, index = self.decoder.raw_decode(self.sbuffer)
-            except Exception:
+                print('Decode got %d (len %d)' % (index, len(self.sbuffer)))
+            except Exception as e:
+                print('Warning: %s' % e)
                 self.parsing = False
             # If we got an object, put it in the object buffer
             if self.parsing:
@@ -41,10 +43,12 @@ class JSONStream(object):
             if line == '': 
                 # .. and there is trailing data in the buffer
                 if len(self.sbuffer.strip()) > 0:
-                    raise Exception, \
-                        "JSONStream: Trailing data '%s'" % self.sbuffer
+                    raise Exception("JSONStream: Trailing data %r" % self.sbuffer)
                 else:
                     return None
+            #print('After reading %d "%r"' % (len(self.object_buffer), line))
+            # chop off '\n'
+            line = line[:-1]
             self.process_read(line)
 
         # return first object from buffer

@@ -1,7 +1,7 @@
 from . import Configuration, load_configuration, instantiate_spec
 from .. import logger
 from contracts.interface import describe_value
-from geometry import SE2, SE3_from_SE2
+from geometry import  SE3_from_SE2
 from pprint import pformat
 from vehicles.configuration.checks import check_valid_vehicle_config
 from copy import deepcopy

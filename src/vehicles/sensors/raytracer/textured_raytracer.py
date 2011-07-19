@@ -3,13 +3,30 @@ from ...interfaces import PolyLine, Circle
 from StringIO import StringIO
 from contracts import contract
 from geometry import translation_angle_from_SE2
-from json_stream import JSONStream
+from .my_json_stream import JSONStream
 from subprocess import Popen, PIPE
 import errno
 import numpy as np
 import simplejson #@UnresolvedImport
-
-
+import sys
+    # 
+    # class CheatDecoder:
+    #     def __init__():
+    #         self.decoder = simplejson.JSONDecoder()
+    #         
+    #     def raw_decode(self, buffer):
+    #         raise Exception('Unimplemented')
+    #         
+    #         sys.stderr.write('Parsing buffer of len %d \n' % (len(buffer)))
+    #         return Decoder.decoder.raw_decode(buffer)
+    #         try: 
+    #             obj = cjson.decode(buffer)
+    #             print('Succesfully parsed')
+    #             return obj, len(buffer)
+    #         except Exception as e:
+    #             print('not succesfully: %s' % e)
+    #             obj, index = Decoder.decoder.raw_decode(buffer)
+    #             return obj, index
 
 BVException = Exception
 
@@ -28,7 +45,9 @@ class Raytracer:
     def init_connection(self, raytracer):
         try:
             self.p = Popen(raytracer, stdout=PIPE, stdin=PIPE)
-            self.child_stream = JSONStream(self.p.stdout)
+            # self.child_stream = JSONStream(self.p.stdout)
+            from .cjson_stream import CJSONStream
+            self.child_stream = CJSONStream(self.p.stdout)
         except OSError as e:
             #if e.errno == errno.ENOENT:
                 msg = ('Could not open connection to raytracer %r: %s.' % 

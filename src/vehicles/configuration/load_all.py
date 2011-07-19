@@ -31,12 +31,6 @@ def load_vehicles_config(directory=None,
     logger.info('Loading configuration from %r' % directory)
 
     def merge(original, new):
-        # We can do without, right?
-#        for x in new:
-#            if x in original and new[x]['filename'] != original[x]['filename']:
-#                msg = ('Entry %r (%r) already present in %r.' % 
-#                       (x, new[x]['filename'], original[x]['filename'])) 
-#                raise Exception(msg)
         original.update(new)
     
     worlds = load_configuration_entries(directory,
@@ -65,10 +59,11 @@ def load_vehicles_config(directory=None,
     logger.debug('Found %5d sensors.' % len(Configuration.sensors))
                                
 
-    add_blind_vehicles()
+    # add_blind_vehicles()
    
 load_configuration = load_vehicles_config # TODO: rename
     
+# TODO: add sensors
 def add_blind_vehicles():
     for id_dynamics in Configuration.dynamics:
         id_vehicle = '_blind-%s' % id_dynamics

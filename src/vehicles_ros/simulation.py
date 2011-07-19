@@ -10,8 +10,16 @@ import contracts
 import numpy as np
 import rospy #@UnresolvedImport
 
-
+class VizLevel:
+    # Visualization levels
+    Nothing = 0
+    Geometry = 1
+    Sensels = 2
+    SensorData = 3
+    Everything = 3
+    
 class ROSVehicleSimulation(RobotInterface, VehicleSimulation):
+
     
     def __init__(self, **params):
         contracts.disable_all()
@@ -43,11 +51,11 @@ class ROSVehicleSimulation(RobotInterface, VehicleSimulation):
                  id_sensors=self.vehicle.id_sensors,
                  id_actuators=self.vehicle.id_dynamics)
         
-        self.visualization = visualization_possible
+        self.viz_level = params.get('viz_level', VizLevel.Everything)
         
         # TODO: make parameter
 
-        if self.visualization:
+        if self.viz_level > VizLevel.Nothing:
             from . import Marker, Image
             self.publisher = rospy.Publisher('~markers', Marker)
             self.pub_sensels_image = rospy.Publisher('~sensels_image', Image)
@@ -63,8 +71,9 @@ class ROSVehicleSimulation(RobotInterface, VehicleSimulation):
     def set_commands(self, commands):
         dt = 0.1 # XXX
         VehicleSimulation.simulate(self, commands, dt)
-        if self.visualization:
+        if self.viz_level >= VizLevel.Sensels:
             self.publish_ros_commands(commands)
+        if self.viz_level >= VizLevel.Geometry:
             self.publish_ros_markers()
             
         if self.vehicle_collided:
@@ -73,7 +82,7 @@ class ROSVehicleSimulation(RobotInterface, VehicleSimulation):
             
     def get_observations(self):
         observations = VehicleSimulation.compute_observations(self)
-        if self.visualization:
+        if self.viz_level >= VizLevel.Sensels:
             self.publish_ros_sensels(observations)
     
         return observations
@@ -103,7 +112,7 @@ class ROSVehicleSimulation(RobotInterface, VehicleSimulation):
             z_sensor=0.5,
             world_frame='/world',
             stamp=rospy.get_rostime(),
-            visualize_sensors=True,
+            visualize_sensors=self.viz_level > VizLevel.SensorData,
             z0=0.0,
             z1=1.0,
             z_sensor_width=1.0,

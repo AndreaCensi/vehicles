@@ -1,3 +1,5 @@
 *.egg*
 *.pyc
 data
+*_prof
+build

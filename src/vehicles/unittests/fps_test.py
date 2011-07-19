@@ -1,3 +1,5 @@
+import contracts
+contracts.disable_all()
 from vehicles.unittests.simulation_tests import random_commands
 from vehicles.configuration.load_all import load_vehicles_config, VehiclesConfig
 import itertools
@@ -5,8 +7,7 @@ from vehicles.configuration.instance_all import instance_world, instance_vehicle
 from vehicles.simulation.simulation import VehicleSimulation
 import time
 import sys
-import contracts
-
+from collections import namedtuple
 
 def check_simulation(sim, num_instants, dt):
     sim.new_episode()
@@ -26,29 +27,39 @@ def check_simulation(sim, num_instants, dt):
     return fps
     
 def main():
-    contracts.disable_all()
     load_vehicles_config()
         
-    world = instance_world('empty')
+    id_world = 'box10'
+    world = instance_world(id_world)
     stats = []
-    for  id_vehicle in VehiclesConfig.vehicles:
+    Stat = namedtuple('Stat','id_vehicle id_world fps')
+    def stat2str(s): return "v: %-25s w: %-25s %5dfps" % (s.id_vehicle, s.id_world, s.fps)
+    
+    vehicles = list(VehiclesConfig.vehicles.keys())
+    print vehicles
+    vehicles = ['d_SE2_rb_v-rf180', 'd_SE2_rb_v-cam180']
+    vehicles = ['d_SE2_rb_v-rf180']
+    T = 200
+    dt = 0.05
+    for id_vehicle in vehicles:
         vehicle = instance_vehicle(id_vehicle)
+        print('vehicle: %s' % vehicle)
         sim = VehicleSimulation(vehicle, world) 
-        fps = check_simulation(sim, num_instants=200, dt=0.05)
-        stats.append((sim, fps))
-        s = stats[-1]
-        print('%5dfps %30s' % (s[1], s[0]))
+        fps = check_simulation(sim, num_instants=T, dt=dt)
+        stats.append(Stat(id_vehicle=id_vehicle,id_world=id_world,fps=fps))
+        print(stat2str(stats[-1]))
 
     print('---- Sorted:')    
-    stats.sort(key=lambda x:-x[1])
+    stats.sort(key=lambda x:-x.fps)
     for s in stats:
-        print('%5dfps %30s' % (s[1], s[0]))
-    
+        print(stat2str(s))    
                     
     pass
     
 if __name__ == '__main__':
-    if True:
+    profile = True
+    profile = False
+    if not profile:
         main()
     else:
         import cProfile

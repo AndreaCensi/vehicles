@@ -1,4 +1,5 @@
 from contracts.interface import describe_type
+from contracts import contract
 from pprint import pformat
 
 class BadConfig(Exception):
@@ -24,6 +25,7 @@ def wrap_check(x, what, function, *arg, **args):
         e.context('- While %s for structure:\n%s' % (what, pformat(x))) 
         raise e
     
+@contract(necessary='list(tuple(str,*))')
 def check_necessary(x, necessary):
     for f, types in necessary:
         if not f in x:
@@ -56,6 +58,19 @@ def check_valid_pose_spec(s):
     pass
     # XXX
     
+def check_generic_code_desc(x, what):
+    """ Checks that it has fields id,desc,code and code is a code spec. """
+    if not isinstance(x, dict):
+        raise BadConfig(x, 'A valid %s config must be a dictionary.' % what)
+    necessary = [ 
+                 ('id', str),
+                  ('desc', str),
+                  ('code', list),
+                  ]
+    check_necessary(x, necessary)
+    wrap_check(x, 'checking "code" entry', check_valid_code_spec, x['code'])
+
+    
 def check_valid_code_spec(x):
     if not isinstance(x, list):
         raise BadConfig(x, 'A code spec must be a list.')
@@ -71,38 +86,14 @@ def check_valid_code_spec(x):
         raise BadConfig(x, 'The code params be given as a dictionary.')
 
 def check_valid_sensor_config(x):
-    if not isinstance(x, dict):
-        raise BadConfig(x, 'A sensor config must be a dictionary.')
-    necessary = [ 
-                 ('id', str),
-                  ('desc', str),
-                  ('code', list),
-                  ]
-    check_necessary(x, necessary)
-    wrap_check(x, 'checking "code" entry', check_valid_code_spec, x['code'])
-
+    return check_generic_code_desc(x, 'sensor')
 
 def check_valid_world_config(x):
-    if not isinstance(x, dict):
-        raise BadConfig(x, 'A valid world config must be a dictionary.')
-    necessary = [ 
-                 ('id', str),
-                  ('desc', str),
-                  ('code', list),
-                  ]
-    check_necessary(x, necessary)
-    wrap_check(x, 'checking "code" entry', check_valid_code_spec, x['code'])
-    
+    return check_generic_code_desc(x, 'world')
+
 def check_valid_dynamics_config(x):
-    if not isinstance(x, dict):
-        raise  BadConfig(x, 'A valid Dynamics config must be a dictionary.')
-    necessary = [ 
-                 ('id', str),
-                  ('desc', str),
-                  ('code', list),
-                  ]
-    check_necessary(x, necessary)
-    wrap_check(x, 'checking "code" entry', check_valid_code_spec, x['code'])
+    return check_generic_code_desc(x, 'dynamics')
+
 
 def check_valid_vehicle_config(x):
     if not isinstance(x, dict):
