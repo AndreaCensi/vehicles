@@ -1,7 +1,5 @@
 from . import collides_with, np, compute_collision, contract
-from collections import namedtuple
-from geometry import  translation_from_SE2
-from geometry import SE2_project_from_SE3
+from geometry import translation_from_SE2, SE2_project_from_SE3
 
 
 class Vehicle:

@@ -124,7 +124,7 @@ class ROSVehicleSimulation(RobotInterface, VehicleSimulation):
     
    
     def publish_ros_commands(self, commands):
-        from reprep.graphics.posneg import posneg
+        from reprep import posneg
         #commands = commands.reshape((1, commands.size))
         z = 4
         commands = np.kron(commands, np.ones((z, z)))
@@ -133,7 +133,7 @@ class ROSVehicleSimulation(RobotInterface, VehicleSimulation):
         self.pub_commands_image.publish(ros_image)
         
     def publish_ros_sensels(self, obs):
-        from reprep.graphics.scale import scale
+        from reprep import scale
         obs2d = reshape_smart(obs)
         obs2d_image = scale(obs2d)
         ros_image = numpy_to_imgmsg(obs2d_image, stamp=None)

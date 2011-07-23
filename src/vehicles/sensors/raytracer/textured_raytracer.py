@@ -3,12 +3,10 @@ from ...interfaces import PolyLine, Circle
 from StringIO import StringIO
 from contracts import contract
 from geometry import translation_angle_from_SE2
-from .my_json_stream import JSONStream
 from subprocess import Popen, PIPE
-import errno
 import numpy as np
 import simplejson #@UnresolvedImport
-import sys
+
     # 
     # class CheatDecoder:
     #     def __init__():
