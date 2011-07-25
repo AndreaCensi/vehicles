@@ -54,6 +54,14 @@
   code: [vehicles_dynamics.SE2Dynamics, 
             {max_linear_velocity: [*MAX_LINEAR_VEL,*MAX_LINEAR_VEL], 
              max_angular_velocity: *MA} ]
+
+# Now things on SE2
+- id: d_SE2_dd_v
+  desc: 'Differentail drive robot on SE2'
+  code: [vehicles_dynamics.DifferentialDrive, 
+            {max_linear_velocity: *MAX_LINEAR_VEL, 
+             max_angular_velocity: *MA} ]
+
 # TODO: d_SE2_rb_f
 # TODO: d_SE3_rb_v
 # TODO: d_SE3_rb_f

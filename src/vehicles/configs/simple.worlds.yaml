@@ -18,3 +18,10 @@
       - vehicles.worlds.DynamicTest
       - width: 10
         length: 10
+        
+- id: stochastic_box_10
+  desc: A box with stochastic content
+  code: 
+      - vehicles.worlds.StochasticBox
+      - width: 10
+        length: 10

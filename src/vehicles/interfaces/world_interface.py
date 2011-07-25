@@ -3,6 +3,7 @@ from contracts import contract
 from collections import namedtuple
 import numpy as np
 from geometry import SE2_from_xytheta, SE3_from_SE2
+import datetime
  
 class World:
     __metaclass__ = ABCMeta
@@ -38,7 +39,13 @@ class World:
         y = np.random.uniform(self.bounds[1][0], self.bounds[1][1])
         th = np.random.uniform(0, np.pi * 2)
         vehicle_state = SE3_from_SE2(SE2_from_xytheta([x, y, th]))
-        id_episode = 'unknown'
+        id_episode = isodate()
         return World.Episode(id_episode, vehicle_state)
+
+def isodate():
+    now = datetime.datetime.now()
+    date = now.isoformat('-')[:16]
+    return date
+
 
          

@@ -24,6 +24,34 @@
         pose: [0,0,0]
   radius: 0.5
 
+- id: d_SE2_car_v-rf360
+  desc: A simple car with an omnidirectional range-finder.
+  id_dynamics: d_SE2_car_v
+  sensors:
+      - id_sensor: rf360
+        pose: [0,0,0]
+  radius: 0.5
+
+
+- id: d_SE2_dd_v-cam360
+  desc: Differential drive with omnidirectional camera
+  id_dynamics: d_SE2_dd_v
+  sensors:
+      - id_sensor: cam_f360_n180
+        pose: [0,0,0]
+  radius: 0.5
+
+
+- id: d_SE2_dd_v-rf360
+  desc: Differential drive with omnidirectional range-finder.
+  id_dynamics: d_SE2_dd_v
+  sensors:
+      - id_sensor: rf360
+        pose: [0,0,0]
+  radius: 0.5
+
+
+
 - id: d_SE2_rb_v-rf360
   desc: An omnidirectional robot with a 360deg range finder.
   id_dynamics: d_SE2_rb_v

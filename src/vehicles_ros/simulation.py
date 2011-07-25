@@ -108,10 +108,10 @@ class ROSVehicleSimulation(RobotInterface, VehicleSimulation):
 #                             "world")
         plot_params = dict(
             points_width=0.03,
-            z_sensor=0.5,
+            z_sensor=0.75,
             world_frame='/world',
             stamp=rospy.get_rostime(),
-            visualize_sensors=self.viz_level > VizLevel.SensorData,
+            visualize_sensors=self.viz_level >= VizLevel.SensorData,
             z0=0.0,
             z1=1.0,
             z_sensor_width=1.0,

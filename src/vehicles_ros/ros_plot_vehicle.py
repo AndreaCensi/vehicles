@@ -50,9 +50,12 @@ def visualize_raytracer(publisher, params, i, attached):
 
     points_list = []
     for theta, reading in zip(directions, readings):
+        r0 = 0.5
+        x0 = np.cos(theta) * r0
+        y0 = np.sin(theta) * r0
+        points_list.append(Point(x0, y0, z_sensor))
         x = np.cos(theta) * (reading - epsilon)
         y = np.sin(theta) * (reading - epsilon)
-        points_list.append(Point(0, 0, z_sensor))
         points_list.append(Point(x, y, params['z_sensor']))
     
     points = []
@@ -75,7 +78,7 @@ def visualize_raytracer(publisher, params, i, attached):
     marker.type = Marker.LINE_LIST #@UndefinedVariable
     marker.action = Marker.ADD #@UndefinedVariable
     marker.points = points_list
-    marker.scale.x = 0.1    
+    marker.scale.x = 0.03
     marker.color = ColorRGBA(0, 0, 1, 1)
     publisher.publish(marker)
     
