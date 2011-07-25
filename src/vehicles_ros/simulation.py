@@ -1,5 +1,4 @@
-from . import (publish_world, publish_vehicle, numpy_to_imgmsg,
-    visualization_possible)
+from . import (publish_world, publish_vehicle, numpy_to_imgmsg,)
 from bootstrapping_olympics import RobotInterface
 from contracts import contract
 from pprint import pformat
