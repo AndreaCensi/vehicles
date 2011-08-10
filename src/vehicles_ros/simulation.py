@@ -18,12 +18,13 @@ class VizLevel:
     Everything = 3
     
 class ROSVehicleSimulation(RobotInterface, VehicleSimulation):
-
     
     def __init__(self, **params):
         contracts.disable_all()
         rospy.loginfo('Received configuration:\n%s' % pformat(params))
         check_valid_simulation_config(params)
+        
+        self.dt = params.get('dt', 0.1)
         
         if 'vehicle' in params:
             id_vehicle = params['vehicle']['id']
@@ -68,8 +69,7 @@ class ROSVehicleSimulation(RobotInterface, VehicleSimulation):
         return 'VehicleSimulation(%s,%s)' % (self.id_vehicle, self.id_world)
 
     def set_commands(self, commands):
-        dt = 0.1 # XXX
-        VehicleSimulation.simulate(self, commands, dt)
+        VehicleSimulation.simulate(self, commands, self.dt)
         if self.viz_level >= VizLevel.Sensels:
             self.publish_ros_commands(commands)
         if self.viz_level >= VizLevel.Geometry:
@@ -84,7 +84,7 @@ class ROSVehicleSimulation(RobotInterface, VehicleSimulation):
         if self.viz_level >= VizLevel.Sensels:
             self.publish_ros_sensels(observations)
     
-        return observations
+        return self.timestamp, observations
         
     def new_episode(self):
         return VehicleSimulation.new_episode(self) 

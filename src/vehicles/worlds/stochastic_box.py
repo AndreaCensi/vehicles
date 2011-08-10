@@ -1,7 +1,7 @@
-from ..interfaces import Circle, World, PolyLine
+from ..interfaces import Circle, World
 from contracts import contract
 import numpy as np
-from vehicles.worlds.dynamic import random_checkerboard, box
+from . import random_checkerboard, box
 
 class StochasticBox(World):
     

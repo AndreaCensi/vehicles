@@ -2,11 +2,9 @@ import contracts
 contracts.disable_all()
 from vehicles.unittests.simulation_tests import random_commands
 from vehicles.configuration.load_all import load_vehicles_config, VehiclesConfig
-import itertools
 from vehicles.configuration.instance_all import instance_world, instance_vehicle
 from vehicles.simulation.simulation import VehicleSimulation
 import time
-import sys
 from collections import namedtuple
 
 def check_simulation(sim, num_instants, dt):
@@ -32,7 +30,7 @@ def main():
     id_world = 'box10'
     world = instance_world(id_world)
     stats = []
-    Stat = namedtuple('Stat','id_vehicle id_world fps')
+    Stat = namedtuple('Stat', 'id_vehicle id_world fps')
     def stat2str(s): return "v: %-25s w: %-25s %5dfps" % (s.id_vehicle, s.id_world, s.fps)
     
     vehicles = list(VehiclesConfig.vehicles.keys())
@@ -46,7 +44,7 @@ def main():
         print('vehicle: %s' % vehicle)
         sim = VehicleSimulation(vehicle, world) 
         fps = check_simulation(sim, num_instants=T, dt=dt)
-        stats.append(Stat(id_vehicle=id_vehicle,id_world=id_world,fps=fps))
+        stats.append(Stat(id_vehicle=id_vehicle, id_world=id_world, fps=fps))
         print(stat2str(stats[-1]))
 
     print('---- Sorted:')    

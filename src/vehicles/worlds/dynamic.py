@@ -1,6 +1,6 @@
-from contracts import contract
 from . import World, np
-from . import PolyLine, Circle
+from ..interfaces import Circle, PolyLine
+from contracts import contract
 
 @contract(cell_width='>0')
 def random_checkerboard(cell_width):

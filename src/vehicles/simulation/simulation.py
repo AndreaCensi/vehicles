@@ -10,6 +10,7 @@ class VehicleSimulation():
         
         self.vehicle = vehicle
         self.world = world
+        self.timestamp = 0.0
         
     def __repr__(self):
         return 'VSim(%s;%s)' % (self.vehicle, self.world)
@@ -19,6 +20,8 @@ class VehicleSimulation():
     
     def simulate(self, commands, dt):
         updated = self.world.simulate(dt, self.vehicle)
+        self.timestamp += dt
+        
         self.vehicle.set_world_primitives(updated)
         if self.vehicle.colliding_pose(self.vehicle.get_pose()).collided:
             self.info('Collision due to dynamic world.')
@@ -36,6 +39,8 @@ class VehicleSimulation():
         return observations
         
     def new_episode(self):
+        self.timestamp = 0.0
+        
         max_tries = 100
         for i in range(max_tries): #@UnusedVariable
             episode = self.world.new_episode()

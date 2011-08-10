@@ -1,4 +1,4 @@
-from ..interfaces import Circle, World, PolyLine
+from ..interfaces import  World, PolyLine
 from contracts import contract
 import numpy as np
 
