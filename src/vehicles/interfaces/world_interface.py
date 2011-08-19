@@ -44,7 +44,7 @@ class World:
 
 def isodate():
     now = datetime.datetime.now()
-    date = now.isoformat('-')[:16]
+    date = now.isoformat('-')[:19]
     return date
 
 

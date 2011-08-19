@@ -62,6 +62,12 @@
             {max_linear_velocity: 1, 
              max_angular_velocity: 0.2} ]
 
+- id: d_SE2_dd_v2
+  desc: 'Differentail drive robot on SE2 (faster angular velocity)'
+  code: [vehicles_dynamics.DifferentialDrive, 
+            {max_linear_velocity: 1, 
+             max_angular_velocity: 1} ]
+
 # TODO: d_SE2_rb_f
 # TODO: d_SE3_rb_v
 # TODO: d_SE3_rb_f
