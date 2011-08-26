@@ -1,7 +1,7 @@
 from . import Raytracer, contract, np
+from ..configuration import instantiate_spec
 from ..interfaces import VehicleSensor
 from geometry import SE2_project_from_SE3
-from ..configuration import instantiate_spec
 
 class Rangefinder(VehicleSensor, Raytracer):
 
@@ -16,6 +16,7 @@ class Rangefinder(VehicleSensor, Raytracer):
         self.min_range = min_range
         self.max_range = max_range
         
+        self.noise_spec = noise
         if noise is None:
             self.noise = None
         else:
@@ -23,6 +24,14 @@ class Rangefinder(VehicleSensor, Raytracer):
         
         VehicleSensor.__init__(self, len(directions))
         Raytracer.__init__(self, directions)
+    
+    def to_yaml(self):
+        return {'type': 'Rangefinder',
+                'noise_spec': self.noise_spec,
+                'invalid': self.invalid,
+                'min_range': self.min_range,
+                'max_range': self.max_range,
+                'directions': self.directions.tolist()}
     
     def _compute_observations(self, pose):
         pose = SE2_project_from_SE3(pose)

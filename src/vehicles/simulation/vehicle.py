@@ -1,18 +1,61 @@
 from . import collides_with, np, compute_collision, contract
 from geometry import translation_from_SE2, SE2_project_from_SE3
+from geometry.yaml import yaml_from_SE3
 
+# TODO: move somewhere
+def array_to_yaml(x):
+    return x.tolist()
+
+def dict_to_yaml(x):
+    ''' Sanitizes the values in the dictionary. '''  
+    x = x.copy()
+    for k in x:
+        v = x[k]
+        if isinstance(v, np.ndarray):
+            x[k] = array_to_yaml(v)
+    return x
 
 class Vehicle:
-    
+    class Attached:
+        @contract(pose='SE3', joint='int')
+        def __init__(self, sensor, pose, joint):
+            self.sensor = sensor
+            self.pose = pose
+            self.joint = joint
+            self.current_observations = None
+            self.current_pose = None
+        
+        def to_yaml(self):
+            return {
+                'sensor': self.sensor.to_yaml(),
+                'pose': yaml_from_SE3(self.pose),
+                'joint': self.joint,
+                'current_observations': dict_to_yaml(self.current_observations),
+                'current_pose': yaml_from_SE3(self.current_pose),
+            }
+            
     def __init__(self, radius=0.5): # XXX
         self.radius = radius
         self.num_sensels = 0
-        self.sensors = []
+        self.sensors = [] # array of Attached
         self.id_sensors = None
         self.id_dynamics = None # XXX
         self.dynamics = None
         
         self.primitives = set()
+        
+        self.state = None # First initialied in add_dynamics()
+        
+    def to_yaml(self):
+        data = {
+            'radius': self.radius,
+            'num_sensels': self.num_sensels,
+            'id_sensors': self.id_sensors,
+            'id_dynamics': self.id_dynamics,
+            'state': self.dynamics.state_to_yaml(self.state),
+            'sensors': [s.to_yaml() for s in self.sensors],
+        }
+        return data
         
     def __repr__(self):
         return 'V(%s;%s)' % (self.id_dynamics, self.id_sensors)
@@ -25,15 +68,6 @@ class Vehicle:
         # XXX: this is fishy
         self.state = self.dynamics.state_space().sample_uniform()
     
-    class Attached:
-        @contract(pose='SE3', joint='int')
-        def __init__(self, sensor, pose, joint):
-            self.sensor = sensor
-            self.pose = pose
-            self.joint = joint
-            self.current_observations = None
-            self.current_pose = None
-            
     
     @contract(id_sensor='str', pose='SE3', joint='int,>=0')
     def add_sensor(self, id_sensor, sensor, pose, joint):
@@ -59,13 +93,15 @@ class Vehicle:
             The idea is that all robot spaces are subgroups of SE(3)
             so this is the most general representation.
         '''
-        j_pose, j_vel = self.dynamics.joint_state(self.state, 0) #@UnusedVariable
+        pose = self.dynamics.joint_state(self.state, 0)
+        j_pose, j_vel = pose #@UnusedVariable
         return j_pose
         
     @contract(pose='SE3')
     def set_pose(self, pose):
         if self.primitives is None:
-            raise ValueError('Please call set_world_primitives() before set_state().')
+            msg = 'Please call set_world_primitives() before set_state().'
+            raise ValueError(msg)
         # TODO: check compatibility
         state = self.dynamics.pose2state(pose)
         
@@ -87,10 +123,12 @@ class Vehicle:
         
         collision = compute_collision(dynamics_function=dynamics_function,
                                       max_dt=dt,
-                                      primitives=self.primitives, radius=self.radius)
+                                      primitives=self.primitives,
+                                      radius=self.radius)
         if collision.collided:
             #print('Collision at time %s' % collision.time)
-            self.state = self.dynamics.integrate(self.state, commands, collision.time)
+            self.state = self.dynamics.integrate(self.state, commands,
+                                                 collision.time)
         else:
             self.state = self.dynamics.integrate(self.state, commands, dt)
         
@@ -100,7 +138,8 @@ class Vehicle:
         # TODO: add dynamics observations
         sensel_values = []
         for attached in self.sensors:
-            j_pose, j_vel = self.dynamics.joint_state(self.state, attached.joint) #@UnusedVariable
+            pose = self.dynamics.joint_state(self.state, attached.joint)
+            j_pose, j_vel = pose #@UnusedVariable
             attached.current_pose = np.dot(j_pose, attached.pose)
             attached.current_observations = \
                 attached.sensor.compute_observations(attached.current_pose)

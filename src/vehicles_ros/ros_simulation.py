@@ -8,10 +8,12 @@ from vehicles import (instance_vehicle_spec, instance_world_spec,
 import contracts
 import numpy as np
 import rospy #@UnresolvedImport
+import yaml
 
 class VizLevel:
     # Visualization levels
     Nothing = 0
+    State = 0 # TODO: reconsider
     Geometry = 1
     Sensels = 2
     SensorData = 3
@@ -62,6 +64,10 @@ class ROSVehicleSimulation(RobotInterface, VehicleSimulation):
             self.pub_commands_image = rospy.Publisher('~commands_image', Image)
             self.first_time = True
             
+        if self.viz_level >= VizLevel.State:
+            from . import  String
+            self.pub_state = rospy.Publisher('~state', String)
+            
     def info(self, s):
         rospy.loginfo(s)
            
@@ -74,6 +80,13 @@ class ROSVehicleSimulation(RobotInterface, VehicleSimulation):
             self.publish_ros_commands(commands)
         if self.viz_level >= VizLevel.Geometry:
             self.publish_ros_markers()
+            
+        # TODO: add level?
+        if self.viz_level >= VizLevel.State:
+            from . import String
+            y = self.to_yaml()
+            s = yaml.dump(y) 
+            self.pub_state.publish(String(s))
             
         if self.vehicle_collided:
             rospy.loginfo('Restarting new episode due to collision.')
@@ -90,22 +103,6 @@ class ROSVehicleSimulation(RobotInterface, VehicleSimulation):
         return VehicleSimulation.new_episode(self) 
     
     def publish_ros_markers(self):
-#        vehicle_pose = self.vehicle.get_pose()
-#        if False: 
-#            br = tf.TransformBroadcaster()
-#            br.sendTransform((0, 0, 0),
-#                             tf.transformations.quaternion_from_euler(0, 0, 0),
-#                             rospy.Time.now(),
-#                             "world",
-#                             "/map")
-#        
-#            rotation, translation = rotation_translation_from_pose(vehicle_pose)
-#            q = ROS_quaternion_order(quaternion_from_rotation(rotation))
-#            br.sendTransform((translation[0], translation[1], translation[2]),
-#                             (q[0], q[1], q[2], q[3]),
-#                             rospy.Time.now(),
-#                             "vehicle_pose",
-#                             "world")
         plot_params = dict(
             points_width=0.03,
             z_sensor=0.75,
@@ -121,7 +118,6 @@ class ROSVehicleSimulation(RobotInterface, VehicleSimulation):
         publish_world(self.publisher, plot_params, self.world)
         publish_vehicle(self.publisher, plot_params, self.vehicle)
     
-   
     def publish_ros_commands(self, commands):
         from reprep import posneg
         #commands = commands.reshape((1, commands.size))
@@ -138,10 +134,9 @@ class ROSVehicleSimulation(RobotInterface, VehicleSimulation):
         ros_image = numpy_to_imgmsg(obs2d_image, stamp=None)
         self.pub_sensels_image.publish(ros_image)
         
-        
-
+# TODO: move somewhere
 @contract(x='array')
-def reshape_smart(x, width=None):
+def reshape_smart(x, width=None): # TODO: move
     ''' Reshapes x into (?, width) if x is 1D.
     
         If x is 2D, it is left alone.
@@ -162,7 +157,5 @@ def reshape_smart(x, width=None):
     y.flat[0:n] = x
     y.flat[n:] = np.nan
     
-    return y 
-
-        
+    return y  
             

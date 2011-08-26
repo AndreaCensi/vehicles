@@ -5,17 +5,28 @@ from geometry import SE2_project_from_SE3
 
 class Photoreceptors(VehicleSensor, TexturedRaytracer):
     """ This is a very shallow wrap around ImageRangeSensor """
+    
     @contract(directions='seq[>0](number)')
     def __init__(self, directions, noise=None, invalid=0.5):
         self.invalid = invalid
         VehicleSensor.__init__(self, len(directions))
         TexturedRaytracer.__init__(self, directions)
         
+        self.noise_spec = noise
+        
         if noise is None:
             self.noise = None
         else:
             self.noise = instantiate_spec(noise)
-            
+
+    def to_yaml(self):
+        return {'type': 'Photoreceptors',
+                'noise': self.noise_spec,
+                'invalid': self.invalid,
+                'min_range': self.min_range,
+                'max_range': self.max_range,
+                'directions': self.directions.tolist()}
+
     def _compute_observations(self, pose):
         pose = SE2_project_from_SE3(pose)
         data = self.raytracing(pose)

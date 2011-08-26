@@ -14,6 +14,13 @@ class PolyLine(Primitive):
         Primitive.__init__(self, id_object, tags)
         self.texture = texture
         self.points = points
+        
+    def to_yaml(self):
+        return {'type': 'PolyLine',
+                'surface': self.id_object,
+                'tags': self.tags,
+                'texture': self.texture,
+                'points': self.points}
 
 class Circle(Primitive):
     @contract(id_object='int', tags='seq(str)', texture='x', # XXX
@@ -25,6 +32,14 @@ class Circle(Primitive):
         self.radius = radius
         self.solid = solid
     
+    def to_yaml(self):
+        return {'type': 'Circle',
+                'surface': self.id_object,
+                'tags': self.tags,
+                'texture': self.texture,
+                'center': self.center,
+                'solid': self.solid}
+
 class Source(Primitive):
     def __init__(self, id_object, tags, center, kernel):
         pass    

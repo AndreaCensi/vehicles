@@ -26,7 +26,7 @@ import simplejson #@UnresolvedImport
     #             obj, index = Decoder.decoder.raw_decode(buffer)
     #             return obj, index
 
-BVException = Exception
+BVException = Exception # TODO: change consistently
 
 class Raytracer:
     
@@ -65,6 +65,7 @@ class Raytracer:
             self.init_connection(self.raytracer)
         
         # Make sure that we are sending good json
+        # XXX: maybe unnecessary now?
         sio = StringIO()
         simplejson.dump(object, sio)
         s = sio.getvalue()

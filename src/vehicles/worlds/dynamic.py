@@ -1,19 +1,7 @@
 from . import World, np
-from ..interfaces import Circle, PolyLine
+from ..interfaces import Circle
 from contracts import contract
-
-@contract(cell_width='>0')
-def random_checkerboard(cell_width):
-    ''' Utility function to obtain a random checker board. '''
-    return ['vehicles.sensors.RandomCheckerboard',
-            {'cell_width': cell_width}]
-
-def box(id_object, texture, width, length):
-    ''' Returns a box. '''
-    points = [ [-1, -1], [-1, 1], [1, 1], [1, -1], [-1, -1]]
-    points = [ (np.array(p) * np.array([width, length])).tolist() for p in points]
-    return PolyLine(id_object=0, tags=[],
-                    texture=texture, points=points)
+from . import random_checkerboard, box
 
 class DynamicTest(World):
     ''' A simple example of a dynamic world. '''

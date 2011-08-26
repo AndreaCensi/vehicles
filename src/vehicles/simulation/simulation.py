@@ -16,7 +16,7 @@ class VehicleSimulation():
         return 'VSim(%s;%s)' % (self.vehicle, self.world)
             
     def info(self, s):
-        print(s)        
+        print(s) # XXX:
     
     def simulate(self, commands, dt):
         updated = self.world.simulate(dt, self.vehicle)
@@ -55,3 +55,13 @@ class VehicleSimulation():
                 return episode
         else:
             raise Exception('Cannot find a non-colliding state.')
+        
+    def to_yaml(self):
+        ''' Returns a YAML-serializable description of the state. '''
+        data = {
+            'vehicle': self.vehicle.to_yaml(),
+            'world': self.world.to_yaml(),
+            'timestamp': self.timestamp,
+            'id_episode': self.id_episode 
+        }
+        return data

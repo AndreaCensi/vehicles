@@ -8,7 +8,7 @@ try:
     from ros import sensor_msgs
     from ros import geometry_msgs
      
-    from std_msgs.msg import ColorRGBA
+    from std_msgs.msg import ColorRGBA, String
     from visualization_msgs.msg import Marker #@UnresolvedImport
     from sensor_msgs.msg import Image #@UnresolvedImport
     from geometry_msgs.msg import Point
@@ -25,5 +25,4 @@ Error: %s
 from .ros_conversions import *
 from .ros_plot_vehicle import *
 from .ros_plot_world import *
-
-from .simulation import *
+from .ros_simulation import *
