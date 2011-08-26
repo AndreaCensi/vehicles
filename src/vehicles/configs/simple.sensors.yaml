@@ -11,6 +11,9 @@
       - vehicles.sensors.PhotoreceptorsUniform
       - num_sensels: 180
         fov_deg:     360
+        noise: 
+            - vehicles.sensors.AdditiveGaussian
+            - std_dev: 0.05
         
 - id: cam_f180_n180
   desc: "A camera with 180fov, 180sensels."
@@ -18,13 +21,19 @@
       - vehicles.sensors.PhotoreceptorsUniform
       - num_sensels: 180
         fov_deg:     180
-
+        noise: 
+            - vehicles.sensors.AdditiveGaussian
+            - std_dev: 0.05
+        
 - id: cam_f180_n90
   desc: "A camera with 180fov, 90 sensels."
   code: 
       - vehicles.sensors.PhotoreceptorsUniform
       - num_sensels: 90
         fov_deg:     180
+        noise: 
+            - vehicles.sensors.AdditiveGaussian
+            - std_dev: 0.05
 
 - id: cam_f90_n45
   desc: "A camera with 90deg fov, 45 sensels."
@@ -32,6 +41,9 @@
       - vehicles.sensors.PhotoreceptorsUniform
       - num_sensels: 45
         fov_deg:     90
+        noise: 
+            - vehicles.sensors.AdditiveGaussian
+            - std_dev: 0.05
 
 - id: cam_f60_n45
   desc: "A camera with 60deg fov, 45 sensels."
@@ -39,7 +51,9 @@
       - vehicles.sensors.PhotoreceptorsUniform
       - num_sensels: 45
         fov_deg:     60
-
+        noise: 
+            - vehicles.sensors.AdditiveGaussian
+            - std_dev: 0.05
         
 - id: rf360
   desc: An omnidirectional range-finder.
@@ -47,6 +61,9 @@
       - vehicles.sensors.RangefinderUniform
       - num_sensels: 180
         fov_deg:     360
+        noise: 
+            - vehicles.sensors.AdditiveGaussian
+            - std_dev: 0.01
         
 - id: rf180
   desc: A range finder with 180fov.
@@ -54,6 +71,9 @@
       - vehicles.sensors.RangefinderUniform
       - num_sensels: 180
         fov_deg:     180
+        noise: 
+            - vehicles.sensors.AdditiveGaussian
+            - std_dev: 0.01
 
 - id: rf_f270_n180
   desc: "A range finder with 270deg fov, 180 sensels."
@@ -61,7 +81,9 @@
       - vehicles.sensors.RangefinderUniform
       - num_sensels: 180
         fov_deg:     270
-
+        noise: 
+            - vehicles.sensors.AdditiveGaussian
+            - std_dev: 0.01
 
 - id: random_5
   desc: A random sensor with 5 sensels.
