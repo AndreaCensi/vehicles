@@ -1,19 +1,7 @@
 from . import collides_with, np, compute_collision, contract
 from geometry import translation_from_SE2, SE2_project_from_SE3
-from geometry.yaml import yaml_from_SE3
+from geometry.yaml import to_yaml
 
-# TODO: move somewhere
-def array_to_yaml(x):
-    return x.tolist()
-
-def dict_to_yaml(x):
-    ''' Sanitizes the values in the dictionary. '''  
-    x = x.copy()
-    for k in x:
-        v = x[k]
-        if isinstance(v, np.ndarray):
-            x[k] = array_to_yaml(v)
-    return x
 
 class Vehicle:
     class Attached:
@@ -28,10 +16,10 @@ class Vehicle:
         def to_yaml(self):
             return {
                 'sensor': self.sensor.to_yaml(),
-                'pose': yaml_from_SE3(self.pose),
+                'pose': to_yaml('SE3', self.pose),
                 'joint': self.joint,
                 'current_observations': dict_to_yaml(self.current_observations),
-                'current_pose': yaml_from_SE3(self.current_pose),
+                'current_pose': to_yaml('SE3', self.current_pose),
             }
             
     def __init__(self, radius=0.5): # XXX
@@ -52,6 +40,8 @@ class Vehicle:
             'num_sensels': self.num_sensels,
             'id_sensors': self.id_sensors,
             'id_dynamics': self.id_dynamics,
+            'pose': to_yaml('SE3', self.dynamics.joint_state(self.state, 0)[0]),
+            'conf': to_yaml('TSE3', self.dynamics.joint_state(self.state, 0)),
             'state': self.dynamics.state_to_yaml(self.state),
             'sensors': [s.to_yaml() for s in self.sensors],
         }
@@ -160,3 +150,18 @@ class Vehicle:
         collision = collides_with(self.primitives,
                                   center, self.radius)
         return collision
+
+
+
+# TODO: move somewhere
+def array_to_yaml(x):
+    return x.tolist()
+
+def dict_to_yaml(x):
+    ''' Sanitizes the values in the dictionary. '''  
+    x = x.copy()
+    for k in x:
+        v = x[k]
+        if isinstance(v, np.ndarray):
+            x[k] = array_to_yaml(v)
+    return x

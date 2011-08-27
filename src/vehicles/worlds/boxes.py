@@ -1,9 +1,9 @@
 from ..interfaces import  World, PolyLine
 from contracts import contract
 import numpy as np
+from . import random_checkerboard
 
 SIN_TEXTURE = 'vehicles.sensors.SinTexture'
-RANDOM_TEXTURE = 'vehicles.sensors.RandomCheckerboard'
 
 class Box(World):
     ''' A simple box. '''
@@ -15,7 +15,7 @@ class Box(World):
         World.__init__(self, bounds)
         self.width = width
         self.length = length
-        texture = [RANDOM_TEXTURE, {'cell_width': 0.5}]
+        texture = random_checkerboard(0.5)
         points = [ [-1, -1], [-1, 1], [1, 1], [1, -1], [-1, -1]]
         
         points = [ (np.array(p) * np.array([width, length])).tolist() for p in points]

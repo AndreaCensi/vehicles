@@ -1,4 +1,4 @@
-from . import (publish_world, publish_vehicle, numpy_to_imgmsg,)
+from . import publish_world, publish_vehicle, numpy_to_imgmsg
 from bootstrapping_olympics import RobotInterface
 from contracts import contract
 from pprint import pformat
@@ -53,6 +53,10 @@ class ROSVehicleSimulation(RobotInterface, VehicleSimulation):
                  id_sensors=self.vehicle.id_sensors,
                  id_actuators=self.vehicle.id_dynamics)
         
+        self.last_commands = np.zeros(len(self.vehicle.commands_spec))
+        
+        
+        
         self.viz_level = params.get('viz_level', VizLevel.Everything)
         
         # TODO: make parameter
@@ -80,14 +84,7 @@ class ROSVehicleSimulation(RobotInterface, VehicleSimulation):
             self.publish_ros_commands(commands)
         if self.viz_level >= VizLevel.Geometry:
             self.publish_ros_markers()
-            
-        # TODO: add level?
-        if self.viz_level >= VizLevel.State:
-            from . import String
-            y = self.to_yaml()
-            s = yaml.dump(y) 
-            self.pub_state.publish(String(s))
-            
+                        
         if self.vehicle_collided:
             rospy.loginfo('Restarting new episode due to collision.')
             self.new_episode()
@@ -97,6 +94,12 @@ class ROSVehicleSimulation(RobotInterface, VehicleSimulation):
         if self.viz_level >= VizLevel.Sensels:
             self.publish_ros_sensels(observations)
     
+        if self.viz_level >= VizLevel.State:
+            from . import String
+            y = self.to_yaml()
+            s = yaml.dump(y) 
+            self.pub_state.publish(String(s))
+
         return self.timestamp, observations
         
     def new_episode(self):

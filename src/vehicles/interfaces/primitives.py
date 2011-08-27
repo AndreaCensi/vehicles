@@ -38,6 +38,7 @@ class Circle(Primitive):
                 'tags': self.tags,
                 'texture': self.texture,
                 'center': self.center,
+                'radius': self.radius,
                 'solid': self.solid}
 
 class Source(Primitive):

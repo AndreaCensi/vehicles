@@ -60,14 +60,14 @@ class Raytracer:
             }
             self.write_to_connection(sensor_setup)
         
-    def write_to_connection(self, object):
+    def write_to_connection(self, ob):
         if self.p is None:
             self.init_connection(self.raytracer)
         
         # Make sure that we are sending good json
         # XXX: maybe unnecessary now?
         sio = StringIO()
-        simplejson.dump(object, sio)
+        simplejson.dump(ob, sio)
         s = sio.getvalue()
         sio2 = StringIO(s)
         simplejson.load(sio2)

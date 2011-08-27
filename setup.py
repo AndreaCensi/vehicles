@@ -42,6 +42,8 @@ setup(name='PyVehicles',
          'console_scripts': [
            'vehicles_print_config = '
                 'vehicles.loading.print_config:main',
+           'vehicles_bag2movie = '
+                'vehicles_ros.bag2movie.main:main',
         ]
       }          
 )

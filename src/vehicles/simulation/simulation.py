@@ -1,6 +1,7 @@
 from . import Vehicle
 from ..interfaces import World
 from geometry import SE3
+import numpy as np
 
 class VehicleSimulation():
     
@@ -11,6 +12,8 @@ class VehicleSimulation():
         self.vehicle = vehicle
         self.world = world
         self.timestamp = 0.0
+      
+        self.last_commands = np.zeros(len(self.vehicle.commands_spec))
         
     def __repr__(self):
         return 'VSim(%s;%s)' % (self.vehicle, self.world)
@@ -31,10 +34,12 @@ class VehicleSimulation():
             self.vehicle_collided = self.vehicle.collision.collided
             if self.vehicle_collided:
                 self.info('Collision with object.')
-                
+        
+        self.last_commands = commands
+        
     def compute_observations(self):
         observations = self.vehicle.compute_observations()
-        
+        self.last_vehicle_observations = observations        
         # TODO: more than one?
         return observations
         
@@ -62,6 +67,8 @@ class VehicleSimulation():
             'vehicle': self.vehicle.to_yaml(),
             'world': self.world.to_yaml(),
             'timestamp': self.timestamp,
-            'id_episode': self.id_episode 
+            'id_episode': self.id_episode,
+            'observations':  self.last_vehicle_observations.tolist(),
+            'commands': self.last_commands.tolist(),
         }
         return data
