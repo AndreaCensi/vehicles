@@ -23,8 +23,6 @@ class Photoreceptors(VehicleSensor, TexturedRaytracer):
         return {'type': 'Photoreceptors',
                 'noise': self.noise_spec,
                 'invalid': self.invalid,
-                'min_range': self.min_range,
-                'max_range': self.max_range,
                 'directions': self.directions.tolist()}
 
     def _compute_observations(self, pose):

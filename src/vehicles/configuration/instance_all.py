@@ -123,7 +123,8 @@ def instance_vehicle_spec(entry):
             dynamics = instance_dynamics_spec(entry['dynamics'])
             
         sensors = entry['sensors']
-        vehicle = Vehicle()
+        radius = entry['radius']
+        vehicle = Vehicle(radius)
         vehicle.add_dynamics(id_dynamics, dynamics)
         for sensor in sensors:
             if 'id_sensor' in sensor:

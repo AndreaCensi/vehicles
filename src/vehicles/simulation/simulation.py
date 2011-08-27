@@ -13,6 +13,7 @@ class VehicleSimulation():
         self.world = world
         self.timestamp = 0.0
       
+        self.vehicle_collided = None
         self.last_commands = np.zeros(len(self.vehicle.commands_spec))
         
     def __repr__(self):
@@ -22,6 +23,7 @@ class VehicleSimulation():
         print(s) # XXX:
     
     def simulate(self, commands, dt):
+        commands = np.array(commands)
         updated = self.world.simulate(dt, self.vehicle)
         self.timestamp += dt
         
@@ -36,6 +38,8 @@ class VehicleSimulation():
                 self.info('Collision with object.')
         
         self.last_commands = commands
+        
+    
         
     def compute_observations(self):
         observations = self.vehicle.compute_observations()
@@ -64,6 +68,7 @@ class VehicleSimulation():
     def to_yaml(self):
         ''' Returns a YAML-serializable description of the state. '''
         data = {
+            'version': [1, 0],
             'vehicle': self.vehicle.to_yaml(),
             'world': self.world.to_yaml(),
             'timestamp': self.timestamp,

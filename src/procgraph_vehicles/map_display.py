@@ -4,8 +4,6 @@ from procgraph import Block
 from procgraph_mpl import pylab2rgb, pylab
 import numpy as np
 
-ViewMap = 'GLOBAL'
-
 class WorldDisplay(Block):
     ''' Produces a top-down plot of a circular arena.
     '''
@@ -18,8 +16,10 @@ class WorldDisplay(Block):
     
     Block.output('rgb', 'RGB image.')
     
-    Block.config('view', 'one of %s' % [ViewMap], default=ViewMap)
-      
+    Block.config('zoom', 'Either 0 for global map, '
+                 'or a value giving the size of the window', default=0)
+
+    Block.config('grid', 'Size of the grid (0: turn off)', default=1)
             
     def update(self):
         f = pylab.figure(frameon=False,
@@ -33,20 +33,20 @@ class WorldDisplay(Block):
         robot_radius = state['vehicle']['radius']
         
         
-        if True:    
+        if self.config.grid > 0:
+            S = self.config.grid    
+            M = 1 # margin (cells)
             bx = bounds[0]
             by = bounds[1]
-            # horizontal
-            S = 2
             params = dict(markersize=0.5, color=[0.8, 0.8, 1], zorder= -1000)
-            xmin = np.floor(bx[0] / S) * S
-            xmax = np.ceil(bx[1] / S) * S
-            for x in np.linspace(xmin, xmax, np.round((xmax - xmin) / S)):
-                pylab.plot([x, x], [by[0], by[1]], **params)
-            ymin = np.floor(by[0] / S) * S
-            ymax = np.ceil(by[1] / S) * S
-            for y in np.linspace(ymin, ymax, np.round((ymax - ymin) / S)):
-                pylab.plot([bx[0], bx[1]], [y, y], **params)
+            xmin = (np.floor(bx[0] / S) - M) * S
+            xmax = (np.ceil(bx[1] / S) + M) * S
+            ymin = (np.floor(by[0] / S) - M) * S
+            ymax = (np.ceil(by[1] / S) + M) * S
+            for x in np.linspace(xmin, xmax, np.round((xmax - xmin) / S) + 1):
+                pylab.plot([x, x], [ymin, ymax], **params)
+            for y in np.linspace(ymin, ymax, np.round((ymax - ymin) / S) + 1):
+                pylab.plot([xmin, xmax], [y, y], **params)
                 
         for p in primitives:
             if p['type'] == 'PolyLine':
@@ -79,9 +79,9 @@ class WorldDisplay(Block):
                 directions = np.array(sensor['directions'])
                 observations = attached['current_observations']
                 readings = np.array(observations['readings'])
-#                valid = np.array(observations['valid'])
-#                directions = directions[valid]
-#                readings = readings[valid]
+                valid = np.array(observations['valid'])
+                directions = directions[valid]
+                readings = readings[valid]
                 x = []
                 y = []
                 rho_min = 0.5
@@ -94,16 +94,41 @@ class WorldDisplay(Block):
                     y.append(None)
                 pylab.plot(x, y, color='y', markersize=0.5, zorder=2000)
             elif sensor['type'] == 'Photoreceptors':
-                pass
+                directions = np.array(sensor['directions'])
+                observations = attached['current_observations']
+                readings = np.array(observations['readings'])
+                luminance = np.array(observations['luminance'])
+                valid = np.array(observations['valid'])
+#                print directions
+#                print luminance
+                readings[np.isnan(readings)] = 0.6
+#                print readings
+#                directions = directions[valid]
+#                readings = readings[valid]
+#                luminance = luminance[valid]
+                rho_min = 0.5
+                for theta_i, rho_i, lum in zip(directions, readings, luminance):
+                    x = []
+                    y = []
+                    x.append(sensor_t[0] + np.cos(sensor_theta + theta_i) * rho_min)
+                    y.append(sensor_t[1] + np.sin(sensor_theta + theta_i) * rho_min)
+                    x.append(sensor_t[0] + np.cos(sensor_theta + theta_i) * rho_i)
+                    y.append(sensor_t[1] + np.sin(sensor_theta + theta_i) * rho_i)
+                    pylab.plot(x, y, color=(lum, lum, lum), markersize=0.5, zorder=2000)
             else:
                 print('Unknown sensor type %r' % sensor['type'])
             
-        if self.config.view == ViewMap:
+        if self.config.zoom == 0:
             bx = bounds[0]
             by = bounds[1]
             m = 0.5
             pylab.axis([bx[0] - m, bx[1] + m, by[0] - m, by[1] + m])
-        
+            pylab.axis('equal')
+        else:
+            m = self.config.zoom
+            pylab.axis([t[0] - m, t[0] + m, t[1] - m, t[1] + m])
+#            pylab.axis('equal')
+            
         pylab.plot([0, 2], [0, 0], 'r-')
         pylab.text(2, 0, 'x')
         pylab.plot([0, 0], [0, 2], 'g-')

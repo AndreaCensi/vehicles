@@ -1,6 +1,8 @@
 from . import collides_with, np, compute_collision, contract
 from geometry import translation_from_SE2, SE2_project_from_SE3
 from geometry.yaml import to_yaml
+from geometry.manifolds import SE2
+from geometry.poses import SE2_from_SE3
 
 
 class Vehicle:
@@ -22,7 +24,7 @@ class Vehicle:
                 'current_pose': to_yaml('SE3', self.current_pose),
             }
             
-    def __init__(self, radius=0.5): # XXX
+    def __init__(self, radius):
         self.radius = radius
         self.num_sensels = 0
         self.sensors = [] # array of Attached
@@ -121,7 +123,11 @@ class Vehicle:
                                                  collision.time)
         else:
             self.state = self.dynamics.integrate(self.state, commands, dt)
-        
+#        
+#        print('Current pose of robot: %s' % 
+#                  SE2.friendly((self.state[0])))
+
+
         self.collision = collision
         
     def compute_observations(self):
@@ -131,6 +137,8 @@ class Vehicle:
             pose = self.dynamics.joint_state(self.state, attached.joint)
             j_pose, j_vel = pose #@UnusedVariable
             attached.current_pose = np.dot(j_pose, attached.pose)
+#            print('Current pose of sensor: %s' % 
+#                  SE2.friendly(SE2_from_SE3(attached.current_pose)))
             attached.current_observations = \
                 attached.sensor.compute_observations(attached.current_pose)
             sensels = attached.current_observations['sensels']

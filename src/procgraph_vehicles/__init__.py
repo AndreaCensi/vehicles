@@ -15,3 +15,4 @@ pg_add_this_package_models(file=__file__, assign_to=__package__)
 
 from .vehiclelog_utils import *
 from .map_display import *
+from .yaml_log_reader import *

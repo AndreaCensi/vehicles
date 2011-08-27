@@ -1,0 +1,31 @@
+--- model veh_yaml2movie
+""" Creates a movie from a Vehicles YAML log file."""
+config file """ .yaml file"""
+config output 
+
+import procgraph_ros
+import procgraph_yaml
+
+
+|yaml_log_reader file=$file| --> state
+
+    state -> |extract_sensels| -> sensels
+    state -> |extract_commands| -> commands
+    state -> |extract_timeinfo| -> info
+
+    state -> |world_display width=600 zoom=1.5| -> map_rgb
+    
+    sensels -> |reshape2d| --> |scale max_value=1 min_value=0| --> |resize width=200| --> \
+            |veh_image_label title="Sensels"| --> sensels_rgb
+    commands -> |reshape2d height=1| --> |posneg max_value=1| --> |resize width=200| -->\
+             |veh_image_label title="Commands"| -->  commands_rgb
+    
+    sensels_rgb, commands_rgb --> |grid cols=1| --> right
+    
+    map_rgb, right --> |grid cols=2| --> out
+
+    out --> |mencoder file=$output|
+
+	
+	
+	 
