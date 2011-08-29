@@ -28,9 +28,15 @@ class Circle(Primitive):
     def __init__(self, id_object, tags, texture, center, radius, solid=False):
         Primitive.__init__(self, id_object, tags)
         self.texture = texture
-        self.center = center
         self.radius = radius
         self.solid = solid
+        self.center = [0, 0]
+        self.set_center(center)
+        
+    @contract(center='seq[2](number)')
+    def set_center(self, center):
+        self.center[0] = float(center[0])
+        self.center[1] = float(center[1])
     
     def to_yaml(self):
         return {'type': 'Circle',

@@ -13,7 +13,6 @@ def pi(normal, penetration):
 
 class CollisionUtilsTest(unittest.TestCase):
 
-    
     # parameters, result
     all_tests = [
         (cci, ([0, 0], 1, [0, +2.0], 1.0), pi([0, -1], 0.0)),
@@ -31,6 +30,12 @@ class CollisionUtilsTest(unittest.TestCase):
         (csi, ([0, 0], 1, [+0.5, +1.0], [+0.5, -1.0]), pi([-1, 0], 0.5)),
         (csi, ([0, 0], 1, [-1.0, -1.0], [+1.0, -1.0]), pi([0, +1], 0.0)),
         (csi, ([0, 0], 1, [-1.0, +1.0], [+1.0, +1.0]), pi([0, -1], 0.0)),
+        
+        
+        # inside the other
+        (cci, ([0, 0], 1, [0, 0], 1.0), pi([1, 0], 2.0)),
+        (cci, ([0, 0], 0.5, [0, 0], 1.0), pi([1, 0], 1.5)),
+
     ]
 
     def test_circle_circle_intersection(self):

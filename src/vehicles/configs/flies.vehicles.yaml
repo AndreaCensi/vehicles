@@ -1,6 +1,6 @@
 
 - id: v_fly_kin_360
-  desc: "Kinematic Fly (control in velocity), 360 photoreceptors"
+  desc: "Kinematic Fly (controlled in velocity), 360 photoreceptors"
   id_dynamics: d_SE2_fwd_v
   sensors:
       - id_sensor: cam_f360_n180

@@ -1,5 +1,3 @@
-import contracts
-contracts.disable_all()
 from vehicles.unittests.simulation_tests import random_commands
 from vehicles.configuration.load_all import load_vehicles_config, VehiclesConfig
 from vehicles.configuration.instance_all import instance_world, instance_vehicle
@@ -25,6 +23,9 @@ def check_simulation(sim, num_instants, dt):
     return fps
     
 def main():
+    import contracts
+    contracts.disable_all()
+
     load_vehicles_config()
         
     id_world = 'box10'

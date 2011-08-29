@@ -27,7 +27,11 @@ def circle_circle_intersection(c1, r1, c2, r2):
         return None
     else:
         normal = c1 - c2
-        normal /= np.linalg.norm(normal)
+        nn = np.linalg.norm(normal)
+        if nn > 0:
+            normal /= np.linalg.norm(normal)
+        else:
+            normal = np.array([1, 0])
         penetration = (r1 + r2) - dist
         assert penetration >= 0
         return PrimitiveIntersection(normal, penetration)

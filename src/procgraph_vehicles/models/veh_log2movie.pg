@@ -26,7 +26,7 @@ import procgraph_yaml
     
     sensels_rgb, commands_rgb --> |grid cols=1| --> right
     
-    map_rgb, right --> |grid cols=2| --> out
+    map_rgb, right --> |sync| --> |grid cols=2| --> out
 
     out --> |mencoder file=$output|
 

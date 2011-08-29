@@ -1,8 +1,6 @@
 from . import collides_with, np, compute_collision, contract
 from geometry import translation_from_SE2, SE2_project_from_SE3
 from geometry.yaml import to_yaml
-from geometry.manifolds import SE2
-from geometry.poses import SE2_from_SE3
 
 
 class Vehicle:
@@ -24,7 +22,7 @@ class Vehicle:
                 'current_pose': to_yaml('SE3', self.current_pose),
             }
             
-    def __init__(self, radius):
+    def __init__(self, radius=0.5):
         self.radius = radius
         self.num_sensels = 0
         self.sensors = [] # array of Attached
@@ -55,11 +53,10 @@ class Vehicle:
     def add_dynamics(self, id_dynamics, dynamics):
         assert self.dynamics is None, 'not sure if this will be implemented'
         self.dynamics = dynamics
-        self.commands_spec = dynamics.commands_spec
+        self.commands_spec = dynamics.get_commands_spec()
         self.id_dynamics = id_dynamics
-        # XXX: this is fishy
-        self.state = self.dynamics.state_space().sample_uniform()
-    
+        # XXX: this is fishy -- I'm not even sure it is needed
+        # self.state = self.dynamics.get_state_space().sample_uniform()
     
     @contract(id_sensor='str', pose='SE3', joint='int,>=0')
     def add_sensor(self, id_sensor, sensor, pose, joint):
@@ -104,6 +101,9 @@ class Vehicle:
         self.state = state
         
     def simulate(self, commands, dt):
+        if self.state is None:
+            raise ValueError('Vehicle state not initialized yet.')
+        
         # TODO: collisions
         def dynamics_function(t):
             state = self.dynamics.integrate(self.state, commands, t)

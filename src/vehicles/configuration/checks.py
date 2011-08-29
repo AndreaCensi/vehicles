@@ -1,5 +1,4 @@
-from contracts.interface import describe_type
-from contracts import contract
+from contracts import contract, describe_type
 from pprint import pformat
 
 class BadConfig(Exception):
@@ -100,8 +99,7 @@ def check_valid_vehicle_config(x):
         raise ValueError('Must be a dictionary.')
     necessary = [ ('id', str),
                   ('sensors', list),
-                  ('radius', (float, int)),
-                  ]
+                  ('radius', (float, int))]
     check_necessary(x, necessary)
     
     dynamics_alt = [ ('dynamics', dict), ('id_dynamics', str)]

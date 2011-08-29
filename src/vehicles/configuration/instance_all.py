@@ -1,14 +1,12 @@
-from . import Configuration, load_configuration, instantiate_spec
-from .. import logger
-from contracts.interface import describe_value
-from geometry import  SE3_from_SE2
-from pprint import pformat
-from vehicles.configuration.checks import check_valid_vehicle_config
+from . import (Configuration, load_configuration, instantiate_spec,
+    check_valid_vehicle_config, logger)
+from contracts import describe_value
 from copy import deepcopy
+from geometry import SE3_from_SE2, SE2_from_translation_angle
+from pprint import pformat
 import numpy as np
-from geometry.poses import SE2_from_translation_angle
 
-
+# TODO: move with tests
 def instance_all():
     ''' 
         Instantiates all dynamics, worlds, sensors and vehicles. 

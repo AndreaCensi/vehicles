@@ -55,11 +55,11 @@
             {max_linear_velocity: [*MAX_LINEAR_VEL,*MAX_LINEAR_VEL], 
              max_angular_velocity: *MA} ]
 
-- id: d_SE2_fwd_f
-  desc: 'Planar vehicle with fixed forward velocity, controlled in angular velocity.'
-  code: [vehicles_dynamics.SE2ForwardDyn, 
-            {max_linear_velocity: *MF, mass: *MASS,  damping: *DAMPING,
-             linear_velocity: *MAX_LINEAR_VEL}]
+# - id: d_SE2_fwd_f
+#   desc: 'Planar vehicle with fixed forward velocity, controlled in angular velocity.'
+#   code: [vehicles_dynamics.SE2ForwardDyn, 
+#             {max_linear_velocity: *MF, mass: *MASS,  damping: *DAMPING,
+#              linear_velocity: *MAX_LINEAR_VEL}]
              
 - id: d_SE2_fwd_v
   desc: 'Planar vehicle with fixed forward velocity, controlled in torque.'
