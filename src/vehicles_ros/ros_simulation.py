@@ -1,5 +1,11 @@
 from . import publish_world, publish_vehicle, numpy_to_imgmsg
-from bootstrapping_olympics import RobotInterface
+try:
+	from bootstrapping_olympics import RobotInterface
+	import rospy #@UnresolvedImport
+except ImportError:
+	pass
+	# XXX: we have a problem with dependencies ;-)
+
 from contracts import contract
 from pprint import pformat
 from vehicles import (instance_vehicle_spec, instance_world_spec,
@@ -7,7 +13,6 @@ from vehicles import (instance_vehicle_spec, instance_world_spec,
     VehicleSimulation)
 import contracts
 import numpy as np
-import rospy #@UnresolvedImport
 import yaml
 
 class VizLevel:

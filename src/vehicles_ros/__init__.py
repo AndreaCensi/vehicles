@@ -13,6 +13,13 @@ try:
     from sensor_msgs.msg import Image #@UnresolvedImport
     from geometry_msgs.msg import Point
     visualization_possible = True
+    
+    from .ros_conversions import *
+    from .ros_plot_vehicle import *
+    from .ros_plot_world import *
+    from .ros_simulation import *
+
+
 except ImportError as e:
     msg = """ROS Visualization packages (visualization_msgs, sensor_msgs, tf)
 not installed; not visualizing anything. 
@@ -22,7 +29,5 @@ Error: %s
     warnings.warn(msg)
     visualization_possible = False
     
-from .ros_conversions import *
-from .ros_plot_vehicle import *
-from .ros_plot_world import *
-from .ros_simulation import *
+    Marker = ColorRGBA = String = Image = Point = None
+
