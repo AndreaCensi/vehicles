@@ -38,8 +38,7 @@ class VehicleSimulation():
                 self.info('Collision with object.')
         
         self.last_commands = commands
-        
-    
+         
         
     def compute_observations(self):
         observations = self.vehicle.compute_observations()
@@ -75,6 +74,6 @@ class VehicleSimulation():
             'timestamp': self.timestamp,
             'id_episode': self.id_episode,
             'observations':  self.last_vehicle_observations.tolist(),
-            'commands': self.last_commands.tolist(),
+            'last_commands': self.last_commands.tolist(),
         }
         return data

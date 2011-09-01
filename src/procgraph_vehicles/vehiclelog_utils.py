@@ -1,15 +1,14 @@
-from procgraph import simple_block
-from procgraph import Block
-
+from procgraph import Block, simple_block
+import numpy as np
 
 @simple_block
 def extract_sensels(state):
-    return state['observations']
+    return np.array(state['observations'])
 
 
 @simple_block
 def extract_commands(state):
-    return state['commands']
+    return np.array(state['commands'])
 
 
 @simple_block

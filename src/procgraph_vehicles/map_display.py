@@ -43,8 +43,9 @@ class WorldDisplay(Block):
                 points = np.array(p['points']).T
                 pylab.plot(points[0, :], points[1, :], 'k-', markersize=10) 
             elif p['type'] == 'Circle':
+                facecolor = [0.4, 0.4, 0.4] if p['solid'] else 'none'
                 cir = pylab.Circle(p['center'], radius=p['radius'], zorder=1000,
-                                   edgecolor=[0.4, 0.4, 0.4], facecolor=[0.4, 0.4, 0.4])
+                                   edgecolor=[0.4, 0.4, 0.4], facecolor=facecolor)
                 pylab.gca().add_patch(cir)
 
             else:
@@ -54,8 +55,8 @@ class WorldDisplay(Block):
         cir = pylab.Circle((t[0], t[1]), radius=robot_radius, zorder=1001,
                            edgecolor='k', facecolor=[0.5, 0.5, 0.5])
         pylab.gca().add_patch(cir)
-        pylab.plot([t[0], t[0] + np.cos(theta) * robot_radius],
-                   [t[1], t[1] + np.sin(theta) * robot_radius], 'k', zorder=1002)
+        pylab.plot([t[0], t[0] + np.cos(theta) * robot_radius * 3],
+                   [t[1], t[1] + np.sin(theta) * robot_radius * 3], 'k', zorder=1002)
     
         if self.config.show_sensor_data:
             self.show_sensor_data(pylab, state['vehicle'])
@@ -103,7 +104,7 @@ class WorldDisplay(Block):
                 readings = readings[valid]
                 x = []
                 y = []
-                rho_min = 0.5
+                rho_min = 0.05
                 for theta_i, rho_i in zip(directions, readings):
                     x.append(sensor_t[0] + np.cos(sensor_theta + theta_i) * rho_min)
                     y.append(sensor_t[1] + np.sin(sensor_theta + theta_i) * rho_min)
