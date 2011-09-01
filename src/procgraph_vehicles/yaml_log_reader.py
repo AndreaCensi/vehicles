@@ -1,6 +1,13 @@
 from procgraph import Block, Generator
 import yaml
 
+try:
+    # Try to load the C bindings
+    from yaml import CLoader as Loader
+except ImportError: # XXX
+    print('Error importing C bindings for yaml.')
+    from yaml import Loader
+
 class YAMLLogReader(Generator):
     ''' 
         Reads the Vehicles log format (YAML)
@@ -11,7 +18,7 @@ class YAMLLogReader(Generator):
 
     def init(self):
         self.f = open(self.config.file)
-        self.iterator = yaml.load_all(self.f)
+        self.iterator = yaml.load_all(self.f, Loader=Loader)
         self._load_next()
         
     def _load_next(self):

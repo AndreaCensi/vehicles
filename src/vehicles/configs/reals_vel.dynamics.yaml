@@ -62,7 +62,7 @@
 #              linear_velocity: *MAX_LINEAR_VEL}]
              
 - id: d_SE2_fwd_v
-  desc: 'Planar vehicle with fixed forward velocity, controlled in torque.'
+  desc: 'Planar vehicle with fixed forward velocity, controlled in angular vel.'
   code: [vehicles_dynamics.SE2Forward, 
             {max_angular_velocity: 0.2, linear_velocity: *MAX_LINEAR_VEL}]
 

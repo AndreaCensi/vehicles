@@ -13,25 +13,33 @@ from collections import namedtuple
 PrimitiveIntersection = namedtuple('PrimitiveIntersection',
                                    'normal penetration')
 
-new_contract('point2', 'array[2]|seq[2](number)') 
+new_contract('point2', 'seq[2](number)') 
 new_contract('intersection', 'tuple((array[2],unit_length), >=0)')
 
-@contract(c1='point2', r1='>0', c2='point2', r2='>0',
+@contract(c1='point2', r1='>0', c2='point2', r2='>0', solid2='bool',
           returns='None|intersection')
-def circle_circle_intersection(c1, r1, c2, r2):
+def circle_circle_intersection(c1, r1, c2, r2, solid2=True):
+    ''' The second circle might or might not be solid. '''
     c1 = np.array(c1)
     c2 = np.array(c2)
     
     dist = np.linalg.norm(c1 - c2)
     if dist > r1 + r2:
+        # The two solid circle do not touch
         return None
     else:
+        # The two solid circle DO touch
         normal = c1 - c2
         nn = np.linalg.norm(normal)
         if nn > 0:
             normal /= np.linalg.norm(normal)
         else:
             normal = np.array([1, 0])
+            
+        if dist < r2 - r1:
+            # The first circle is completely inside the second
+            if not solid2:
+                return None
         penetration = (r1 + r2) - dist
         assert penetration >= 0
         return PrimitiveIntersection(normal, penetration)

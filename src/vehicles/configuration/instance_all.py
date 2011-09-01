@@ -29,10 +29,10 @@ def instance_all():
         entry['instance'] = instance_vehicle(name)
 
 
-def check_type(entry, type, obtained):
-    if not isinstance(obtained, type):
+def check_type(entry, etype, obtained):
+    if not isinstance(obtained, etype):
         msg = 'Error in instantiating code spec:\n\t%s\n' % entry['code']
-        msg += 'I expected a %s, got %s' % (type, describe_value(obtained)) 
+        msg += 'I expected a %s, got %s' % (etype, describe_value(obtained)) 
         raise Exception(msg)
 
 def instance_dynamics(id_dynamics):

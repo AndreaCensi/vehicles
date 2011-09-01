@@ -45,3 +45,10 @@ def check_state_space_2(id_dynamics, dynamics):
     pose = np.eye(4)
     state = dynamics.pose2state(pose)
     dynamics.get_state_space().friendly(state)
+    
+    
+def test_dynamics_to_str():
+    for id_dynamics, dynamics in all_dynamics(): #@UnusedVariable
+        dynamics.__str__()
+        
+

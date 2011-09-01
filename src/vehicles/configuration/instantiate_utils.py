@@ -1,5 +1,6 @@
 from contracts import contract, check
 from . import logger
+from contracts.interface import describe_value
 
 @contract(code_spec='seq[2]')
 def instantiate_spec(code_spec):
@@ -11,7 +12,21 @@ def instantiate_spec(code_spec):
     check('str', function_name)
     check('dict', parameters)
     return instantiate(function_name, parameters)
+
+
+@contract(code_spec='seq[2]')
+def instantiate_spec_and_check(code_spec, expected_type):
+    ''' Simple wrapper around instantiate_spec that 
+        checks the type. '''
+    x = instantiate_spec(code_spec)
+    if not isinstance(x, expected_type):
+        msg = 'Error in instantiating code spec:\n\t%s\n' % code_spec
+        msg += 'I expected a %s, got %s' % (expected_type, describe_value(x)) 
+        raise Exception(msg)
+    return x  
     
+# 
+
 def instantiate(function_name, parameters):
     function = import_name(function_name)
     try:
@@ -22,6 +37,8 @@ def instantiate(function_name, parameters):
         logger.error(msg)
         raise
     
+
+
 
 @contract(name='str')
 def import_name(name):

@@ -59,11 +59,12 @@ class VehicleSimulation():
             collision = self.vehicle.colliding_pose(pose) 
             if not collision.collided:
                 self.vehicle.set_pose(pose)
-                #print('Setting pose %s' % pose)
                 self.id_episode = episode.id_episode    
                 return episode
+            print('Bad random: collision  %s' % str(collision))
         else:
-            raise Exception('Cannot find a non-colliding state.')
+            msg = 'Cannot find a non-colliding state.'
+            raise Exception(msg)
         
     def to_yaml(self):
         ''' Returns a YAML-serializable description of the state. '''

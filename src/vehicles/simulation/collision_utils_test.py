@@ -51,3 +51,11 @@ class CollisionUtilsTest(unittest.TestCase):
                     raise Exception(err_msg)
                 assert_allclose(expected[0], result[0], atol=1e-8, err_msg=err_msg)
                 assert_allclose(expected[1], result[1], err_msg=err_msg)
+
+
+def test_solid():
+    assert None != circle_circle_intersection([0, 0], 1, [0, 0], 2, True)
+    assert None == circle_circle_intersection([0, 0], 1, [0, 0], 2, False)
+    
+    
+    

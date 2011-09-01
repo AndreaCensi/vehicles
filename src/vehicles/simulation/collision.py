@@ -45,11 +45,11 @@ def binary_search(f, lower, upper, precision):
     assert f(lower) == False
     assert f(upper) == True
     while upper - lower > precision:
-        next = upper * 0.5 + lower * 0.5
-        if f(next):
-            upper = next
+        next_value = upper * 0.5 + lower * 0.5
+        if f(next_value):
+            upper = next_value
         else:
-            lower = next
+            lower = next_value
     return lower, upper
 
     
@@ -82,6 +82,6 @@ def collides_with(primitives, center, radius):
 def collides_with_primitive(primitive, center, radius):
     if isinstance(primitive, Circle):
         return circle_circle_intersection(center, radius, primitive.center,
-                                          primitive.radius)
+                                          primitive.radius, primitive.solid)
     if isinstance(primitive, PolyLine):
         return circle_polyline_intersection(center, radius, primitive.points)

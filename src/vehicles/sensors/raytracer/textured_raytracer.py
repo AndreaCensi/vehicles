@@ -1,32 +1,12 @@
 from ...configuration import instantiate_spec
 from ...interfaces import PolyLine, Circle
-from StringIO import StringIO
+from .cjson_stream import CJSONStream
 from contracts import contract
 from geometry import translation_angle_from_SE2
 from subprocess import Popen, PIPE
+import cjson
 import numpy as np
-import simplejson #@UnresolvedImport
 
-    # 
-    # class CheatDecoder:
-    #     def __init__():
-    #         self.decoder = simplejson.JSONDecoder()
-    #         
-    #     def raw_decode(self, buffer):
-    #         raise Exception('Unimplemented')
-    #         
-    #         sys.stderr.write('Parsing buffer of len %d \n' % (len(buffer)))
-    #         return Decoder.decoder.raw_decode(buffer)
-    #         try: 
-    #             obj = cjson.decode(buffer)
-    #             print('Succesfully parsed')
-    #             return obj, len(buffer)
-    #         except Exception as e:
-    #             print('not succesfully: %s' % e)
-    #             obj, index = Decoder.decoder.raw_decode(buffer)
-    #             return obj, index
-
-BVException = Exception # TODO: change consistently
 
 class Raytracer:
     
@@ -43,15 +23,11 @@ class Raytracer:
     def init_connection(self, raytracer):
         try:
             self.p = Popen(raytracer, stdout=PIPE, stdin=PIPE)
-            # self.child_stream = JSONStream(self.p.stdout)
-            from .cjson_stream import CJSONStream
             self.child_stream = CJSONStream(self.p.stdout)
         except OSError as e:
-            #if e.errno == errno.ENOENT:
-                msg = ('Could not open connection to raytracer %r: %s.' % 
-                       (raytracer, e.strerror))
-                raise BVException(msg)
-            #raise e
+            msg = ('Could not open connection to raytracer %r: %s.' % 
+                   (raytracer, e.strerror))
+            raise Exception(msg)
         
         if self.directions is not None:
             sensor_setup = { 
@@ -63,15 +39,7 @@ class Raytracer:
     def write_to_connection(self, ob):
         if self.p is None:
             self.init_connection(self.raytracer)
-        
-        # Make sure that we are sending good json
-        # XXX: maybe unnecessary now?
-        sio = StringIO()
-        simplejson.dump(ob, sio)
-        s = sio.getvalue()
-        sio2 = StringIO(s)
-        simplejson.load(sio2)
-        self.p.stdin.write(s)
+        self.p.stdin.write(cjson.encode(ob))
         self.p.stdin.write('\n') 
         self.p.stdin.flush()
 
@@ -79,7 +47,7 @@ class Raytracer:
     def read_answer(self, expected):
         answer = self.child_stream.read_next()
         if answer is None:
-                raise BVException("Could not communicate with child")
+                raise Exception("Could not communicate with child")
         if ((not isinstance(answer, dict)) or 
             (not 'class' in answer) or
             (answer['class'] != expected)):

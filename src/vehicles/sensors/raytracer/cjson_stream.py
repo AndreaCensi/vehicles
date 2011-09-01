@@ -1,8 +1,8 @@
 import cjson
 
 class CJSONStream(object):
-    def __init__(self, input):
-        self.input = input
+    def __init__(self, input_stream):
+        self.input = input_stream
         
     # def read_next(self):
     #     for line in self.input:
