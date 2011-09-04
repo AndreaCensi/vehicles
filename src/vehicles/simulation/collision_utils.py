@@ -79,8 +79,9 @@ def circle_polyline_intersection(c1, r1, points):
     return closest
 
 
-def projection_on_line(p='point2', a='point2', b='point2',
-                       returns='tuple(array[2], (array[2], unit_length), >=0)'):
+@contract(p='point2', a='point2', b='point2',
+           returns='tuple(array[2], (array[2], unit_length), >=0)')
+def projection_on_line(p='point2', a='point2', b='point2'):
     ''' 
         Projects a point onto the line containing the segment a-b. 
         Returns the projected point, the normal pointing to p,
