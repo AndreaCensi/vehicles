@@ -60,7 +60,7 @@ class VehicleSimulation():
                 self.vehicle.set_pose(pose)
                 self.id_episode = episode.id_episode    
                 return episode
-            print('Bad random: collision  %s' % str(collision))
+            #print('Bad random: collision  %s' % str(collision))
         else:
             msg = 'Cannot find a non-colliding state.'
             raise Exception(msg)
