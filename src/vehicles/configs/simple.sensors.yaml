@@ -1,10 +1,4 @@
 # This file describes the available sensors
-#- id: sphere0.2  # 
- # desc: A collision sensor.
-  # code: 
-  #     - vehicles.sensors.SphereCollision
-  #     - radius: 0.2
-
 - id: cam_f360_n180
   desc: An omnidirectional camera with 180 sensels.
   code: 
