@@ -1,4 +1,4 @@
-from . import load_configuration, Configuration
+from ... import VehiclesConfig
 from .natsort import natsorted
 from optparse import OptionParser
 from reprep import Report
@@ -13,7 +13,7 @@ logger.setLevel(logging.DEBUG)
 
 usage = """
 
-    This program writes a simple summary of all the configuration available.
+    This program writes a simple summary of all the VehiclesConfig available.
 
     vehicles_print_config [-d <config directory>] -o outputdir
 """ 
@@ -24,7 +24,7 @@ def main():
     parser.add_option("-o", "--outdir", dest='outdir',
                       help="Output directory")
     parser.add_option("-d", dest="directory",
-                      help="base directory for configuration", metavar="FILE")
+                      help="base directory for VehiclesConfig", metavar="FILE")
     (options, args) = parser.parse_args()
 
     if args: 
@@ -35,7 +35,7 @@ def main():
     print_config(options.directory, options.outdir)
     
 def print_config(directory, outdir):
-    load_configuration(directory)
+    VehiclesConfig.load(directory)
      
     def write_report(r):
         out = os.path.join(outdir, '%s.html' % r.id)
@@ -43,24 +43,25 @@ def print_config(directory, outdir):
         logger.info('Writing to %r' % out)
         r.to_html(out, resources_dir=rd)
         
-    worlds = Configuration.worlds
+    worlds = VehiclesConfig.worlds
     r = Report('worlds')
-    create_generic_table(r, 'configuration', worlds, ['desc', 'code'])
+    create_generic_table(r, 'VehiclesConfig', worlds, ['desc', 'code'])
     write_report(r)
     
-    dynamics = Configuration.dynamics
+    dynamics = VehiclesConfig.dynamics
     r = Report('dynamics')
-    create_generic_table(r, 'configuration', dynamics, ['desc', 'code'])
+    create_generic_table(r, 'VehiclesConfig', dynamics, ['desc', 'code'])
     write_report(r)
     
-    sensors = Configuration.sensors
+    sensors = VehiclesConfig.sensors
     r = Report('sensors')
-    create_generic_table(r, 'configuration', sensors, ['desc', 'code'])
+    create_generic_table(r, 'VehiclesConfig', sensors, ['desc', 'code'])
     write_report(r)
     
-    vehicles = Configuration.vehicles
+    vehicles = VehiclesConfig.vehicles
     r = Report('vehicles')
-    create_generic_table(r, 'configuration', vehicles, ['desc', 'dynamics', 'sensors'])
+    create_generic_table(r, 'VehiclesConfig', vehicles,
+                          ['desc', 'dynamics', 'id_dynamics', 'sensors'])
     write_report(r)
     
 
@@ -68,11 +69,14 @@ def create_generic_table(r, nid, name2entry, cols, caption=None):
     names = natsorted(name2entry.keys())
     if names:
         table = []
+        found_cols = []
         for name in names:
             c = name2entry[name]
             row = []
             for col in cols:
-                row.append(c[col])
+                if col in c:
+                    if not col in found_cols: found_cols.append(col)
+                    row.append(c[col])
             table.append(row)
         r.table(nid, table,
                 cols=cols, rows=names, caption=caption)

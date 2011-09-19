@@ -1,6 +1,6 @@
 from StringIO import StringIO
 from geometry import DifferentiableManifold, SE3_from_R3
-from vehicles import VehiclesConfig, instance_dynamics
+from vehicles import VehiclesConfig
 import numpy as np
 import yaml
 from types import NoneType
@@ -8,7 +8,7 @@ from types import NoneType
 def all_dynamics():
     ''' Instances all dynamics. '''
     for id_dynamics in VehiclesConfig.dynamics:
-        dynamics = instance_dynamics(id_dynamics)
+        dynamics = VehiclesConfig.dynamics.instance(id_dynamics) #@UndefinedVariable
         yield id_dynamics, dynamics    
         
 def test_state_yaml_representation():

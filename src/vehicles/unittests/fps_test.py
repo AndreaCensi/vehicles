@@ -1,6 +1,5 @@
 from vehicles.unittests.simulation_tests import random_commands
-from vehicles.configuration.load_all import load_vehicles_config, VehiclesConfig
-from vehicles.configuration.instance_all import instance_world, instance_vehicle
+from vehicles  import  VehiclesConfig
 from vehicles.simulation.simulation import VehicleSimulation
 import time
 from collections import namedtuple
@@ -25,11 +24,11 @@ def check_simulation(sim, num_instants, dt):
 def main():
     import contracts
     contracts.disable_all()
-
-    load_vehicles_config()
+    
+    VehiclesConfig.load()
         
     id_world = 'box10'
-    world = instance_world(id_world)
+    world = VehiclesConfig.worlds.instance(id_world) #@UndefinedVariable
     stats = []
     Stat = namedtuple('Stat', 'id_vehicle id_world fps')
     def stat2str(s): return "v: %-25s w: %-25s %5dfps" % (s.id_vehicle, s.id_world, s.fps)
@@ -41,7 +40,7 @@ def main():
     T = 200
     dt = 0.05
     for id_vehicle in vehicles:
-        vehicle = instance_vehicle(id_vehicle)
+        vehicle = VehiclesConfig.vehicles.instance(id_vehicle) #@UndefinedVariable
         print('vehicle: %s' % vehicle)
         sim = VehicleSimulation(vehicle, world) 
         fps = check_simulation(sim, num_instants=T, dt=dt)

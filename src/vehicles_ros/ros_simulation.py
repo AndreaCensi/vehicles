@@ -2,13 +2,12 @@ from . import publish_world, publish_vehicle, numpy_to_imgmsg
 from bootstrapping_olympics import RobotInterface
 from contracts import contract
 from pprint import pformat
-from vehicles import (instance_vehicle_spec, instance_world_spec,
-    check_valid_simulation_config, instance_vehicle, instance_world,
-    VehicleSimulation)
+from vehicles import check_valid_simulation_config, VehicleSimulation
 import contracts
 import numpy as np
 import rospy #@UnresolvedImport
 import yaml
+from vehicles.configuration.master import VehiclesConfig
 
 class VizLevel:
     # Visualization levels
@@ -30,17 +29,17 @@ class ROSVehicleSimulation(RobotInterface, VehicleSimulation):
         
         if 'vehicle' in params:
             id_vehicle = params['vehicle']['id']
-            vehicle = instance_vehicle_spec(params['vehicle'])
+            vehicle = VehiclesConfig.vehicles.instance_spec(params['vehicle']) #@UndefinedVariable
         else:
             id_vehicle = params['id_vehicle']
-            vehicle = instance_vehicle(id_vehicle)
+            vehicle = VehiclesConfig.vehicles.instance(id_vehicle) #@UndefinedVariable
             
         if 'world' in params:
             id_world = params['world']['id']
-            world = instance_world_spec(params['world'])
+            world = VehiclesConfig.worlds.instance_spec(params['world']) #@UndefinedVariable
         else:
             id_world = params['id_vehicle']
-            world = instance_world(id_world)
+            world = VehiclesConfig.worlds.instance(id_world) #@UndefinedVariable
         
         VehicleSimulation.__init__(self, vehicle, world)
         

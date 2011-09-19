@@ -1,6 +1,10 @@
 from .. import contract, np, logger
-from .instantiate_utils import *
-from .config_utils import *
+
+from .worlds import *
+from .sensors import *
+from .dynamics import *
+from .vehicles import *
+from .simulation import *
+from .master import VehiclesConfig
+
 from .load_all import *
-from .instance_all import *
-from .checks import *

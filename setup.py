@@ -41,7 +41,7 @@ setup(name='PyVehicles',
       entry_points={
          'console_scripts': [
            'vehicles_print_config = '
-                'vehicles.loading.print_config:main' 
+                'vehicles.programs.print_config:main' 
         ]
       }          
 )

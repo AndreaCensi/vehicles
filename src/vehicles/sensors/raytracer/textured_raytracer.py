@@ -1,4 +1,3 @@
-from ...configuration import instantiate_spec
 from ...interfaces import PolyLine, Circle
 from .cjson_stream import CJSONStream
 from contracts import contract
@@ -6,6 +5,7 @@ from geometry import translation_angle_from_SE2
 from subprocess import Popen, PIPE
 import cjson
 import numpy as np
+from conf_tools import instantiate_spec
 
 
 class Raytracer:

@@ -15,4 +15,3 @@ from .simulation import *
 from .sensors import *
 from .worlds import *
 
-VehiclesConfiguration = Configuration

@@ -1,5 +1,6 @@
 from . import TexturedRaytracer, contract, np
-from ..configuration import instantiate_spec
+from conf_tools import instantiate_spec
+
 from ..interfaces import VehicleSensor
 from geometry import SE2_project_from_SE3
 

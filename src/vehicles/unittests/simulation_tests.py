@@ -1,11 +1,11 @@
-from vehicles import (VehicleSimulation, load_configuration, Configuration,
-    instance_world, instance_vehicle)
-import numpy as np
+from .. import logger
 from nose.plugins.attrib import attr
-import itertools
+from vehicles import VehicleSimulation
 from vehicles.simulation.vehicle import Vehicle
-from vehicles.configuration.instance_all import instance_dynamics
 from vehicles.worlds import Empty
+import itertools
+import numpy as np
+from vehicles import VehiclesConfig
 
 # TODO: remove
 def random_command(command_spec):
@@ -32,16 +32,15 @@ def check_simulation(sim, num_episodes, num_instants, dt):
 
 @attr('simulation')
 def test_simulation():
-    if not Configuration.loaded:
-        load_configuration()
+    VehiclesConfig.load()
         
-    worlds = Configuration.worlds
-    vehicles = Configuration.vehicles
+    worlds = VehiclesConfig.worlds
+    vehicles = VehiclesConfig.vehicles
     for id_world, id_vehicle in itertools.product(worlds, vehicles):
         # XXX: check compatible
         # if compatible
-        vehicle = instance_vehicle(id_vehicle)
-        world = instance_world(id_world)
+        vehicle = VehiclesConfig.vehicles.instance(id_vehicle) #@UndefinedVariable
+        world = VehiclesConfig.worlds.instance(id_world) #@UndefinedVariable
         simulation = VehicleSimulation(vehicle, world)
         num_episodes = 3
         num_instants = 100
@@ -55,23 +54,21 @@ def check_simulation_one_step(sim, dt):
     sim.simulate(cmds, dt)
     sim.compute_observations()
 
-from .. import logger
 
 def test_simulation_one_step():
     ''' Tries one step of simulation. '''
-    if not Configuration.loaded:
-        load_configuration()
+    VehiclesConfig.load()
         
-    worlds = Configuration.worlds
-    vehicles = Configuration.vehicles
+    worlds = VehiclesConfig.worlds
+    vehicles = VehiclesConfig.vehicles
     for id_world, id_vehicle in itertools.product(worlds, vehicles):
         yield check_simulation_one_step_conf, id_world, id_vehicle
 
 def check_simulation_one_step_conf(id_world, id_vehicle):
     check_simulation_one_step_conf.description = \
         'One step %r %r' % (id_world, id_vehicle)
-    vehicle = instance_vehicle(id_vehicle)
-    world = instance_world(id_world)
+    vehicle = VehiclesConfig.vehicles.instance(id_vehicle) #@UndefinedVariable
+    world = VehiclesConfig.worlds.instance(id_world) #@UndefinedVariable
     sim = VehicleSimulation(vehicle, world)
     dt = 1
     try: 
@@ -88,13 +85,14 @@ def test_with_blind_robots():
         In this test, all dynamics are instantiated and connected to a blind
         vehicle.
     '''
-    for id_dynamics in Configuration.dynamics:
+    for id_dynamics in VehiclesConfig.dynamics:
         yield check_blind_robot, id_dynamics    
         
 def check_blind_robot(id_dynamics):
-    check_blind_robot.__dict__['description'] = 'check_blind_robot(%r)' % id_dynamics
+    desc = 'check_blind_robot(%r)' % id_dynamics
+    check_blind_robot.__dict__['description'] = desc 
     vehicle = Vehicle()
-    dynamics = instance_dynamics(id_dynamics)
+    dynamics = VehiclesConfig.dynamics.instance(id_dynamics) #@UndefinedVariable
     vehicle.add_dynamics(id_dynamics, dynamics)
     world = Empty([[-10, 10], [-10, 10], [-10, 10]])
     sim = VehicleSimulation(vehicle, world)

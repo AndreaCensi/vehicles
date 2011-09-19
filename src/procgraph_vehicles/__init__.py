@@ -10,7 +10,7 @@
 
 
 from procgraph import pg_add_this_package_models
-pg_add_this_package_models(file=__file__, assign_to=__package__)
+pg_add_this_package_models(__file__, __package__)
 
 
 from .vehiclelog_utils import *
