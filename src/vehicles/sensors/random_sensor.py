@@ -6,7 +6,14 @@ class RandomSensor(VehicleSensor):
 
     @contract(num_sensels='>0')    
     def __init__(self, num_sensels):
-        VehicleSensor.__init__(self, num_sensels)
+        spec = {
+            'desc': 'Random sensor',
+            'shape': [num_sensels],
+            'format': 'C',
+            'range': [0, +1],
+            'extra': {}
+        }
+        VehicleSensor.__init__(self, spec)
         self.num_sensels = num_sensels
         
     def _compute_observations(self, pose):

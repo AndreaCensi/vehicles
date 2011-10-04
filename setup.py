@@ -41,7 +41,10 @@ setup(name='PyVehicles',
       entry_points={
          'console_scripts': [
            'vehicles_print_config = '
-                'vehicles.programs.print_config:main' 
+                'vehicles.programs.print_config:main',
+            'vehicles_create_olympics_configs = '
+                'vehicles_boot.create_olympics_configs:main' 
+ 
         ]
       }          
 )

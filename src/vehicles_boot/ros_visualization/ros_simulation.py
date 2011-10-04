@@ -1,13 +1,10 @@
 from . import publish_world, publish_vehicle, numpy_to_imgmsg
-from bootstrapping_olympics import RobotInterface
-from contracts import contract
-from pprint import pformat
-from vehicles import check_valid_simulation_config, VehicleSimulation
+from contracts import contract 
 import contracts
 import numpy as np
 import rospy #@UnresolvedImport
-import yaml
-from vehicles.configuration.master import VehiclesConfig
+import yaml 
+from .. import BOVehicleSimulation
 
 class VizLevel:
     # Visualization levels
@@ -18,47 +15,13 @@ class VizLevel:
     SensorData = 3
     Everything = 3
     
-class ROSVehicleSimulation(RobotInterface, VehicleSimulation):
+class ROSVehicleSimulation(BOVehicleSimulation):
     
     def __init__(self, **params):
-        contracts.disable_all()
-        rospy.loginfo('Received configuration:\n%s' % pformat(params))
-        check_valid_simulation_config(params)
-        
-        self.dt = params.get('dt', 0.1)
-        
-        if 'vehicle' in params:
-            id_vehicle = params['vehicle']['id']
-            vehicle = VehiclesConfig.vehicles.instance_spec(params['vehicle']) #@UndefinedVariable
-        else:
-            id_vehicle = params['id_vehicle']
-            vehicle = VehiclesConfig.vehicles.instance(id_vehicle) #@UndefinedVariable
-            
-        if 'world' in params:
-            id_world = params['world']['id']
-            world = VehiclesConfig.worlds.instance_spec(params['world']) #@UndefinedVariable
-        else:
-            id_world = params['id_vehicle']
-            world = VehiclesConfig.worlds.instance(id_world) #@UndefinedVariable
-        
-        VehicleSimulation.__init__(self, vehicle, world)
-        
-        commands_spec = self.vehicle.commands_spec
-        observations_shape = self.vehicle.num_sensels
-        
-        RobotInterface.__init__(self,
-                 observations_shape, commands_spec,
-                 id_robot=id_vehicle,
-                 id_sensors=self.vehicle.id_sensors,
-                 id_actuators=self.vehicle.id_dynamics)
-        
-        self.last_commands = np.zeros(len(self.vehicle.commands_spec))
-        
-        
-        
+        contracts.disable_all() # XXX
+
         self.viz_level = params.get('viz_level', VizLevel.Everything)
         
-        # TODO: make parameter
 
         if self.viz_level > VizLevel.Nothing:
             from . import Marker, Image
@@ -70,26 +33,27 @@ class ROSVehicleSimulation(RobotInterface, VehicleSimulation):
         if self.viz_level >= VizLevel.State:
             from . import  String
             self.pub_state = rospy.Publisher('~state', String)
-            
+        
+        BOVehicleSimulation.__init__(self, **params)
+        
     def info(self, s):
         rospy.loginfo(s)
-           
-    def __repr__(self):
-        return 'VehicleSimulation(%s,%s)' % (self.id_vehicle, self.id_world)
-
+            
     def set_commands(self, commands):
-        VehicleSimulation.simulate(self, commands, self.dt)
+        BOVehicleSimulation.set_commands(self, commands)
+        
         if self.viz_level >= VizLevel.Sensels:
             self.publish_ros_commands(commands)
         if self.viz_level >= VizLevel.Geometry:
             self.publish_ros_markers()
                         
-        if self.vehicle_collided:
+        if self.vehicle_collided: # XXX:
             rospy.loginfo('Restarting new episode due to collision.')
             self.new_episode()
             
     def get_observations(self):
-        observations = VehicleSimulation.compute_observations(self)
+        timestamp, observations = BOVehicleSimulation.get_observations(self)
+        
         if self.viz_level >= VizLevel.Sensels:
             self.publish_ros_sensels(observations)
     
@@ -99,10 +63,8 @@ class ROSVehicleSimulation(RobotInterface, VehicleSimulation):
             s = yaml.dump(y) 
             self.pub_state.publish(String(s))
 
-        return self.timestamp, observations
-        
-    def new_episode(self):
-        return VehicleSimulation.new_episode(self) 
+        return timestamp, observations
+         
     
     def publish_ros_markers(self):
         plot_params = dict(

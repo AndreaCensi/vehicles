@@ -10,15 +10,23 @@ class Photoreceptors(VehicleSensor, TexturedRaytracer):
     @contract(directions='seq[>0](number)')
     def __init__(self, directions, noise=None, invalid=0.5):
         self.invalid = invalid
-        VehicleSensor.__init__(self, len(directions))
+        
+        self.noise_spec = noise    
+        self.noise = (None if self.noise_spec is None else 
+                          instantiate_spec(self.noise_spec))
+            
+        spec = {
+            'desc': 'Photoreceptors',
+            'shape': [len(directions)],
+            'format': 'C',
+            'range': [0, +1],
+            'extra': {'directions': directions.tolist(),
+                      'noise': self.noise_spec }
+        }
+        VehicleSensor.__init__(self, spec)
+        
         TexturedRaytracer.__init__(self, directions)
-        
-        self.noise_spec = noise
-        
-        if noise is None:
-            self.noise = None
-        else:
-            self.noise = instantiate_spec(noise)
+
 
     def to_yaml(self):
         return {'type': 'Photoreceptors',

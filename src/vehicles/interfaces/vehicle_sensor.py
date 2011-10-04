@@ -6,8 +6,8 @@ from contracts import check
 class VehicleSensor:
     __metaclass__ = ABCMeta
     
-    def __init__(self, num_sensels):
-        self.num_sensels = num_sensels
+    def __init__(self, observations_spec):
+        self.observations_spec = observations_spec
            
     @abstractmethod
     def set_world_primitives(self, primitives):
@@ -37,26 +37,29 @@ class VehicleSensor:
                             (VehicleSensor.SENSELS, observations.keys()))
         sensels = observations[VehicleSensor.SENSELS ]
         sensels = np.array(sensels)
-        check("array[K]", sensels, desc='I expect a unidimenional array/list for sensels.')
+        check("array[K]", sensels,
+              desc='I expect a unidimenional array/list for sensels.')
         try:
             notfinite = not np.isfinite(sensels).all()
         except  Exception as e:
-            print('Error is: %s' % e)
+            print('Error is: %s' % e) # XXX: print
             print('Data is: %s' % sensels.dtype)
             print((observations))
             notfinite = False
             
         if notfinite:
-            msg = 'Not all are valid:\n%s\n%s' % (sensels, pformat(observations))
+            msg = ('Not all are valid:\n%s\n%s' % 
+                   (sensels, pformat(observations)))
             print(msg)
-            print('pose: %s' % pose)
+            print('pose: %s' % pose) # XXX
             # XXX: - we will solve this later.
             sensels[np.logical_not(np.isfinite(sensels))] = 0.5
             raise ValueError(msg)
         
-        if sensels.size != self.num_sensels:
-            raise ValueError('I was expecting %d sensels, not %s.' % 
-                             (self.num_sensels, sensels.size))
+        # XXX: maybe somewhere else?
+#        if sensels.size != self.num_sensels:
+#            raise ValueError('I was expecting %d sensels, not %s.' % 
+#                             (self.num_sensels, sensels.size))
         observations[VehicleSensor.SENSELS] = sensels
         return observations
 

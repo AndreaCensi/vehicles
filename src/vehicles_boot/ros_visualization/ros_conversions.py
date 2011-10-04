@@ -1,6 +1,5 @@
 from contracts import contract
-from geometry import rotation_translation_from_pose
-from geometry import quaternion_from_rotation
+from geometry import quaternion_from_rotation, rotation_translation_from_pose
 import numpy as np
 
 @contract(pose='SE3')

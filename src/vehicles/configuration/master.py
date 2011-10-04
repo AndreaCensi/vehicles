@@ -6,6 +6,7 @@ from conf_tools import ConfigMaster, GenericInstance
 from vehicles_dynamics import Dynamics
 
 class VehiclesConfigMaster(ConfigMaster):
+    
     def __init__(self):
         ConfigMaster.__init__(self)
 

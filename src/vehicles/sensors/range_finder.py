@@ -18,12 +18,18 @@ class Rangefinder(VehicleSensor, Raytracer):
         self.max_range = max_range
         
         self.noise_spec = noise
-        if noise is None:
-            self.noise = None
-        else:
-            self.noise = instantiate_spec(noise)
+        self.noise = (None if self.noise_spec is None else 
+                          instantiate_spec(self.noise_spec))
         
-        VehicleSensor.__init__(self, len(directions))
+        spec = {
+            'desc': 'Range-finder',
+            'shape': [len(directions)],
+            'format': 'C',
+            'range': [0, +1],
+            'extra': {'directions': directions.tolist(),
+                      'noise': noise }
+        }
+        VehicleSensor.__init__(self, spec)
         Raytracer.__init__(self, directions)
     
     def to_yaml(self):

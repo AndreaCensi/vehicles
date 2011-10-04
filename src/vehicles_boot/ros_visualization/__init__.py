@@ -1,5 +1,3 @@
-__version__ = '0.5'
-
 from contracts import contract
 import warnings
 
@@ -13,6 +11,7 @@ try:
     from sensor_msgs.msg import Image #@UnresolvedImport
     from geometry_msgs.msg import Point
     visualization_possible = True
+    
 except ImportError as e:
     msg = """ROS Visualization packages (visualization_msgs, sensor_msgs, tf)
 not installed; not visualizing anything. 

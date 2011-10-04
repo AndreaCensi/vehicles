@@ -14,7 +14,8 @@ class VehicleSimulation():
         self.timestamp = 0.0
       
         self.vehicle_collided = None
-        self.last_commands = np.zeros(len(self.vehicle.commands_spec))
+        cmd_spec = self.vehicle.dynamics.get_commands_spec()
+        self.last_commands = np.zeros(len(cmd_spec['format'])) # XXX
         
     def __repr__(self):
         return 'VSim(%s;%s)' % (self.vehicle, self.world)

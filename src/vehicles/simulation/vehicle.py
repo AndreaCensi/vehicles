@@ -24,7 +24,6 @@ class Vehicle:
             
     def __init__(self, radius=0.5):
         self.radius = radius
-        self.num_sensels = 0
         self.sensors = [] # array of Attached
         self.id_sensors = None
         self.id_dynamics = None # XXX
@@ -37,7 +36,6 @@ class Vehicle:
     def to_yaml(self):
         data = {
             'radius': self.radius,
-            'num_sensels': self.num_sensels,
             'id_sensors': self.id_sensors,
             'id_dynamics': self.id_dynamics,
             'pose': to_yaml('SE3', self.dynamics.joint_state(self.state, 0)[0]),
@@ -53,16 +51,12 @@ class Vehicle:
     def add_dynamics(self, id_dynamics, dynamics):
         assert self.dynamics is None, 'not sure if this will be implemented'
         self.dynamics = dynamics
-        self.commands_spec = dynamics.get_commands_spec()
         self.id_dynamics = id_dynamics
-        # XXX: this is fishy -- I'm not even sure it is needed
-        # self.state = self.dynamics.get_state_space().sample_uniform()
-    
+
     @contract(id_sensor='str', pose='SE3', joint='int,>=0')
     def add_sensor(self, id_sensor, sensor, pose, joint):
         attached = Vehicle.Attached(sensor, pose, joint)
         self.sensors.append(attached)
-        self.num_sensels += attached.sensor.num_sensels
         if not self.id_sensors:
             self.id_sensors = id_sensor
         else:
@@ -122,11 +116,7 @@ class Vehicle:
             self.state = self.dynamics.integrate(self.state, commands,
                                                  collision.time)
         else:
-            self.state = self.dynamics.integrate(self.state, commands, dt)
-#        
-#        print('Current pose of robot: %s' % 
-#                  SE2.friendly((self.state[0])))
-
+            self.state = self.dynamics.integrate(self.state, commands, dt) 
 
         self.collision = collision
         
@@ -137,8 +127,6 @@ class Vehicle:
             pose = self.dynamics.joint_state(self.state, attached.joint)
             j_pose, j_vel = pose #@UnusedVariable
             attached.current_pose = np.dot(j_pose, attached.pose)
-#            print('Current pose of sensor: %s' % 
-#                  SE2.friendly(SE2_from_SE3(attached.current_pose)))
             attached.current_observations = \
                 attached.sensor.compute_observations(attached.current_pose)
             sensels = attached.current_observations['sensels']

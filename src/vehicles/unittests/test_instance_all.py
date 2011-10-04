@@ -7,16 +7,16 @@ def check_one(method, x):
 def test_instance_all():
     VehiclesConfig.load()
     
-    for name, entry in VehiclesConfig.dynamics.items():
+    for name in VehiclesConfig.dynamics:
         yield VehiclesConfig.dynamics.instance, name #@UndefinedVariable
         
-    for name, entry in VehiclesConfig.sensors.items():
+    for name in VehiclesConfig.sensors:
         yield  VehiclesConfig.sensors.instance, name #@UndefinedVariable
         
-    for name, entry in VehiclesConfig.worlds.items():
+    for name in VehiclesConfig.worlds:
         yield  VehiclesConfig.worlds.instance, name #@UndefinedVariable
 
-    for name, entry in VehiclesConfig.vehicles.items():
+    for name in VehiclesConfig.vehicles:
         yield  VehiclesConfig.vehicles.instance, name #@UndefinedVariable
 
 
@@ -44,16 +44,3 @@ def instance_all():
     for name, entry in VehiclesConfig.vehicles.items():
         entry['instance'] = VehiclesConfig.vehicles.instance(name) #@UndefinedVariable
 
-
-#
-#    for name, entry in VehiclesConfig.dynamics.items():
-#        entry['instance'] = instance_dynamics(name)
-#
-#    for name, entry in VehiclesConfig.sensors.items():
-#        entry['instance'] = instance_sensor(name)
-#        
-#    for name, entry in VehiclesConfig.worlds.items():
-#        entry['instance'] = instance_world(name)
-#
-#    for name, entry in VehiclesConfig.vehicles.items():
-#        entry['instance'] = instance_vehicle(name)

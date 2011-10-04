@@ -1,34 +1,29 @@
-from .. import logger
+from .. import VehicleSimulation, VehiclesConfig, logger, Vehicle
+from ..worlds import Empty
 from nose.plugins.attrib import attr
-from vehicles import VehicleSimulation
-from vehicles.simulation.vehicle import Vehicle
-from vehicles.worlds import Empty
 import itertools
 import numpy as np
-from vehicles import VehiclesConfig
 
-# TODO: remove
-def random_command(command_spec):
-    if isinstance(command_spec, tuple):
-        lower, upper = command_spec
-        return lower + np.random.rand() * (upper - lower)  
-    elif isinstance(command_spec, list):
-        n = len(command_spec)
-        return command_spec[np.random.randint(n)]
-    else:
-        raise ValueError()
-        
 def random_commands(commands_spec):
-    return [random_command(x) for x in commands_spec]
+    values = []
+    for i, kind in enumerate(commands_spec['format']):
+        lower, upper = commands_spec['range'][i]
+        if kind == 'C':
+            value = lower + np.random.rand() * (upper - lower)
+        elif kind == 'D':
+            value = np.random.randint(lower, upper)
+        else: 
+            raise ValueError('Invalid kind %r in %s.' % (kind, commands_spec))
+        values.append(value)
+    return values
 
 def check_simulation(sim, num_episodes, num_instants, dt):
     for k in range(num_episodes): #@UnusedVariable
         sim.new_episode()
         for i in range(num_instants): #@UnusedVariable
-            cmds = random_commands(sim.vehicle.commands_spec)
+            cmds = random_commands(sim.vehicle.dynamics.get_commands_spec())
             sim.simulate(cmds, dt)
             sim.compute_observations()
-            #print('%3d %3d: %s' % (k, i, list(sensels_values)))
 
 @attr('simulation')
 def test_simulation():
@@ -73,7 +68,7 @@ def check_simulation_one_step_conf(id_world, id_vehicle):
     dt = 1
     try: 
         sim.new_episode()
-        cmds = random_commands(sim.vehicle.commands_spec)
+        cmds = random_commands(sim.vehicle.dynamics.get_commands_spec())
         sim.simulate(cmds, dt)
         sim.compute_observations()
     except:
@@ -96,7 +91,5 @@ def check_blind_robot(id_dynamics):
     vehicle.add_dynamics(id_dynamics, dynamics)
     world = Empty([[-10, 10], [-10, 10], [-10, 10]])
     sim = VehicleSimulation(vehicle, world)
-    check_simulation(sim, num_episodes=3, num_instants=10, dt=0.1)
-
-    
+    check_simulation(sim, num_episodes=3, num_instants=10, dt=0.1) 
     
