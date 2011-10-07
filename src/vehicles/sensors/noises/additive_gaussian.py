@@ -9,5 +9,5 @@ class AdditiveGaussian:
         self.std_dev = std_dev
         
     @contract(values='array[K]', returns='array[K]')
-    def filter(self, values):
+    def filter(self, values): #@ReservedAssignment
         return values + self.std_dev * np.random.randn(values.size)

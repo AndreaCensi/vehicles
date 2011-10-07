@@ -31,16 +31,20 @@ class Vehicle:
         
         self.primitives = set()
         
-        self.state = None # First initialied in add_dynamics()
+        # Needs to be initialized before calling certain functions
+        self._state = None 
         
     def to_yaml(self):
+        # pose, velocity
+        configuration = self.dynamics.joint_state(self._get_state(), 0)
+        pose = configuration[0]
         data = {
             'radius': self.radius,
             'id_sensors': self.id_sensors,
             'id_dynamics': self.id_dynamics,
-            'pose': to_yaml('SE3', self.dynamics.joint_state(self.state, 0)[0]),
-            'conf': to_yaml('TSE3', self.dynamics.joint_state(self.state, 0)),
-            'state': self.dynamics.state_to_yaml(self.state),
+            'pose': to_yaml('SE3', pose),
+            'conf': to_yaml('TSE3', configuration),
+            'state': self.dynamics.state_to_yaml(self._get_state()),
             'sensors': [s.to_yaml() for s in self.sensors],
         }
         return data
@@ -76,7 +80,7 @@ class Vehicle:
             The idea is that all robot spaces are subgroups of SE(3)
             so this is the most general representation.
         '''
-        pose = self.dynamics.joint_state(self.state, 0)
+        pose = self.dynamics.joint_state(self._get_state(), 0)
         j_pose, j_vel = pose #@UnusedVariable
         return j_pose
         
@@ -92,15 +96,12 @@ class Vehicle:
         if collision.collided:
             raise ValueError('Cannot put the robot in a collding state')
         
-        self.state = state
+        self._state = state
         
     def simulate(self, commands, dt):
-        if self.state is None:
-            raise ValueError('Vehicle state not initialized yet.')
-        
         # TODO: collisions
         def dynamics_function(t):
-            state = self.dynamics.integrate(self.state, commands, t)
+            state = self.dynamics.integrate(self._get_state(), commands, t)
             # compute center of robot
             j_pose, j_vel = self.dynamics.joint_state(state, 0) #@UnusedVariable
             center = translation_from_SE2(SE2_project_from_SE3(j_pose))
@@ -113,25 +114,27 @@ class Vehicle:
                                       radius=self.radius)
         if collision.collided:
             #print('Collision at time %s' % collision.time)
-            self.state = self.dynamics.integrate(self.state, commands,
+            next_state = self.dynamics.integrate(self._get_state(), commands,
                                                  collision.time)
         else:
-            self.state = self.dynamics.integrate(self.state, commands, dt) 
+            next_state = self.dynamics.integrate(self._get_state(), commands,
+                                                 dt) 
 
+        self._state = next_state 
         self.collision = collision
         
     def compute_observations(self):
         # TODO: add dynamics observations
         sensel_values = []
         for attached in self.sensors:
-            pose = self.dynamics.joint_state(self.state, attached.joint)
+            pose = self.dynamics.joint_state(self._get_state(), attached.joint)
             j_pose, j_vel = pose #@UnusedVariable
             attached.current_pose = np.dot(j_pose, attached.pose)
             attached.current_observations = \
                 attached.sensor.compute_observations(attached.current_pose)
             sensels = attached.current_observations['sensels']
             sensel_values.extend(sensels.tolist())
-        return np.array(sensel_values)
+        return np.array(sensel_values, dtype='float32')
         
     @contract(pose='SE3')
     def colliding_pose(self, pose):
@@ -147,6 +150,13 @@ class Vehicle:
                                   center, self.radius)
         return collision
 
+    def _get_state(self):
+        ''' Returns the dynamics state or raises an exception if it has
+            not been set. This is an opaque object interpretable by 
+            the Dynamics instance. '''
+        if self._state is None:
+            raise ValueError('The vehicle state has not been set yet.')
+        return self._state
 
 
 # TODO: move somewhere

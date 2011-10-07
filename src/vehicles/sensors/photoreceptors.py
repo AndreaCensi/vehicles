@@ -1,8 +1,8 @@
 from . import TexturedRaytracer, contract, np
-from conf_tools import instantiate_spec
-
 from ..interfaces import VehicleSensor
+from conf_tools import instantiate_spec
 from geometry import SE2_project_from_SE3
+
 
 class Photoreceptors(VehicleSensor, TexturedRaytracer):
     """ This is a very shallow wrap around ImageRangeSensor """
@@ -41,7 +41,9 @@ class Photoreceptors(VehicleSensor, TexturedRaytracer):
         invalid = np.logical_not(data['valid'])
         if self.noise is not None:
             luminance = self.noise.filter(luminance)
-            
+            # Bound in [0,1]
+            luminance = np.maximum(0, luminance)
+            luminance = np.minimum(1, luminance)
         luminance[invalid] = self.invalid
         data[VehicleSensor.SENSELS] = luminance
         return data

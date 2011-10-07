@@ -1,8 +1,8 @@
 from . import Raytracer, contract, np
-from conf_tools import instantiate_spec
-
 from ..interfaces import VehicleSensor
+from conf_tools import instantiate_spec
 from geometry import SE2_project_from_SE3
+
 
 class Rangefinder(VehicleSensor, Raytracer):
 
@@ -50,10 +50,13 @@ class Rangefinder(VehicleSensor, Raytracer):
         
         if self.noise is not None:
             readings = self.noise.filter(readings)
+            readings = np.minimum(self.max_range, readings)
+            readings = np.maximum(self.min_range, readings)
 
         readings[invalid] = self.invalid
         
-        sensels = (readings - self.min_range) / (self.max_range - self.min_range)
+        sensels = ((readings - self.min_range) / 
+                   (self.max_range - self.min_range))
         data[VehicleSensor.SENSELS] = sensels
         return data
 
