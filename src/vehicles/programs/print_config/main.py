@@ -1,7 +1,6 @@
 from ... import VehiclesConfig
 from .natsort import natsorted
 from optparse import OptionParser
-from reprep import Report
 import logging
 import os
 
