@@ -13,6 +13,10 @@ class VehicleSensor:
     def set_world_primitives(self, primitives):
         pass
 
+    @abstractmethod
+    def to_yaml(self, primitives):
+        pass
+
     SENSELS = 'sensels'
     
     def compute_observations(self, pose):

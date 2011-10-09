@@ -16,6 +16,10 @@ class RandomSensor(VehicleSensor):
         VehicleSensor.__init__(self, spec)
         self.num_sensels = num_sensels
         
+    def to_yaml(self):
+        return {'type': 'RandomSensor',
+                'num_sensels': self.num_sensels}
+    
     def _compute_observations(self, pose):
         values = np.random.rand(self.num_sensels)
         data = {}
