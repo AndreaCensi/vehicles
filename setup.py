@@ -35,8 +35,8 @@ setup(name='PyVehicles',
       
       package_dir={'':'src'},
       packages=find_packages('src'),
-      install_requires=[ 'PyVehiclesDynamics', 'PyYAML',
-                        'simplejson', 'PyContracts>=1.1'],
+      install_requires=[ 'ConfTools','PyVehiclesDynamics', 'PyYAML',
+                        'python-cjson','simplejson', 'PyContracts>=1.1'],
       tests_require=['nose'],
       entry_points={
          'console_scripts': [
