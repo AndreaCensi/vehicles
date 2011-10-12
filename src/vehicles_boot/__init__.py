@@ -1,3 +1,5 @@
+from vehicles import __version__
+
 try:
 	import bootstrapping_olympics
 	boot_installed = True

@@ -1,20 +1,14 @@
 import os
 from setuptools import setup, find_packages
 
-version = "0.5"
+version = "1.0"
 
-description = """""" 
-
-#def read(fname):
-#    return open(os.path.join(os.path.dirname(__file__), fname)).read()
-#    
-#long_description = read('README.rst')
+description = """"""  # TODO
     
-long_description = description  
+long_description = description    # TODO
 
 setup(name='PyVehicles',
       url='',
-      
       description=description,
       long_description=long_description,
       package_data={'':['*.*']},
@@ -22,29 +16,34 @@ setup(name='PyVehicles',
       license="",
       
       classifiers=[
-        'Development Status :: 4 - Beta',
-        # 'Intended Audience :: Developers',
-        # 'License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)',
-        # 'Topic :: Software Development :: Quality Assurance',
-        # 'Topic :: Software Development :: Documentation',
-        # 'Topic :: Software Development :: Testing'
+        'Development Status :: 4 - Beta', 
       ],
 
       version=version,
-#      download_url='http://github.com/GITHUB_USER/GITHUB_PROJECT/tarball/%s' % version,
+
+      download_url=
+        'http://github.com/AndreaCensi/vehicles/tarball/%s' % version,
       
       package_dir={'':'src'},
       packages=find_packages('src'),
-      install_requires=[ 'ConfTools','PyVehiclesDynamics', 'PyYAML',
-                        'python-cjson','simplejson', 'PyContracts>=1.1'],
+      install_requires=[ 
+        'ConfTools>=1.0,<2',
+        'PyVehiclesDynamics>=1.0,<2', 
+        'PyContracts>=1.2,<2',
+        'PyYAML',
+        'python-cjson'
+      ],
       tests_require=['nose'],
+      extras_require = {
+        'procgraph':  ["procgraph>=1.0,<2"],
+        'boot':  ["BootOlympics>=1.0,<2"],
+      },
       entry_points={
          'console_scripts': [
            'vehicles_print_config = '
                 'vehicles.programs.print_config:main',
             'vehicles_create_olympics_configs = '
-                'vehicles_boot.create_olympics_configs:main' 
- 
+                'vehicles_boot.create_olympics_configs:main'  
         ]
       }          
 )

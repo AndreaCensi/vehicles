@@ -1,3 +1,5 @@
+from vehicles import __version__
+
 ''' 
     Blocks useful for the visualization of Vehicles logs.
     
