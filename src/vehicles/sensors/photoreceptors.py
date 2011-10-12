@@ -1,4 +1,4 @@
-from . import TexturedRaytracer, contract, np
+from . import TexturedRaytracer, contract, np, get_uniform_directions
 from ..interfaces import VehicleSensor
 from conf_tools import instantiate_spec
 from geometry import SE2_project_from_SE3
@@ -55,8 +55,7 @@ class Photoreceptors(VehicleSensor, TexturedRaytracer):
 class PhotoreceptorsUniform(Photoreceptors):
     @contract(fov_deg='>0,<=360', num_sensels='int,>0')
     def __init__(self, fov_deg, num_sensels, noise=None):
-        fov_rad = np.radians(fov_deg)
-        directions = np.linspace(-fov_rad / 2, +fov_rad / 2, num_sensels)
+        directions = get_uniform_directions(fov_deg, num_sensels)
         Photoreceptors.__init__(self, directions=directions,
                                         noise=noise)
         

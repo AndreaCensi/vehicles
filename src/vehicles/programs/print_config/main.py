@@ -3,6 +3,7 @@ from .natsort import natsorted
 from optparse import OptionParser
 import logging
 import os
+from reprep import Report
 
 logging.basicConfig();
 logger = logging.getLogger("print_config")

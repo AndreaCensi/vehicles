@@ -1,0 +1,30 @@
+--- model boot_log2movie
+config logdir 'Base log dir'
+config id_robot
+config id_episode = ""
+config output 'output filename (.avi)'
+
+import procgraph_vehicles
+
+|boot_log_reader logdir=$logdir id_robot=$id_robot id_episode=$id_episode| -> observations 
+
+    observations -> |extract_from_extra fieldname='robot_state'| -> state_
+
+    state_ --> |use_simulation_time| --> state
+
+    observations -> |extract_sensels| -> sensels
+    observations -> |extract_commands| -> commands
+    observations -> |extract_timeinfo| -> info
+
+    state -> |world_display width=600 zoom=0| -> map_rgb
+    
+    sensels -> |reshape2d| --> |scale max_value=1 min_value=0| --> |resize width=200| --> \
+            |veh_image_label title="Sensels"| --> sensels_rgb
+    commands -> |reshape2d height=1| --> |posneg max_value=1| --> |resize width=200| -->\
+             |veh_image_label title="Commands"| -->  commands_rgb
+    
+    sensels_rgb, commands_rgb --> |grid cols=1| --> right
+    
+    map_rgb, right --> |sync| --> |grid cols=2| --> out
+
+    out --> |mencoder file=$output|

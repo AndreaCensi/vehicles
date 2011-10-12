@@ -1,0 +1,7 @@
+--- model test_boot_log_reader
+config logdir 'Base log dir'
+config id_robot
+
+import procgraph_vehicles
+
+|boot_log_reader logdir=$logdir id_robot=$id_robot| -> observations -> |print|

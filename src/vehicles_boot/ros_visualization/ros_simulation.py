@@ -22,7 +22,6 @@ class ROSVehicleSimulation(BOVehicleSimulation):
 
         self.viz_level = params.get('viz_level', VizLevel.Everything)
         
-
         if self.viz_level > VizLevel.Nothing:
             from . import Marker, Image
             self.publisher = rospy.Publisher('~markers', Marker)
@@ -47,7 +46,7 @@ class ROSVehicleSimulation(BOVehicleSimulation):
         if self.viz_level >= VizLevel.Geometry:
             self.publish_ros_markers()
                         
-        if self.vehicle_collided: # XXX:
+        if self.vehicle_collided: # FIXME:
             rospy.loginfo('Restarting new episode due to collision.')
             self.new_episode()
             

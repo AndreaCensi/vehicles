@@ -67,5 +67,11 @@ class BOVehicleSimulation(RobotInterface, VehicleSimulation):
         e = VehicleSimulation.new_episode(self)
         return EpisodeDesc(e.id_episode, self.id_world)
          
+    def episode_ended(self):
+        if self.vehicle_collided: # XXX:
+            return True
+        else:
+            return False
+
     def get_state(self):
         return self.to_yaml()

@@ -32,8 +32,7 @@ class World:
             Simulates the world for dt. 
         
             Returns a list of the updated ids.
-        '''
-        
+        ''' 
         
     Episode = namedtuple('Episode', 'id_episode vehicle_state')
 
@@ -45,8 +44,13 @@ class World:
         y = np.random.uniform(self.bounds[1][0], self.bounds[1][1])
         th = np.random.uniform(0, np.pi * 2)
         vehicle_state = SE3_from_SE2(SE2_from_xytheta([x, y, th]))
-        id_episode = isodate()
+        id_episode = unique_timestamp_string()
         return World.Episode(id_episode, vehicle_state)
+
+def unique_timestamp_string():
+    now = datetime.datetime.now()
+    s = now.isoformat()
+    return s.replace('-', '').replace(':', '').replace('T', '_').replace('.', '_')
 
 def isodate():
     now = datetime.datetime.now()

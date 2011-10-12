@@ -80,6 +80,16 @@
   radius: 0.5
 
 
+
+- id: d_SE2_rb_v-cam360
+  desc: An omnidirectional robot with a 360deg camera.
+  id_dynamics: d_SE2_rb_v
+  sensors:
+      - id_sensor: cam_f360_n180
+        pose: [0,0,0]
+  radius: 0.5
+
+
 - id: d_SE2_rb_v-rf180
   desc: An omnidirectional robot with a 180deg range finder.
   id_dynamics: d_SE2_rb_v

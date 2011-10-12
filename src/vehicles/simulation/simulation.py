@@ -1,9 +1,9 @@
-from . import Vehicle
+from . import Vehicle, logger
 from ..interfaces import World
 from geometry import SE3
 import numpy as np
+import time
 
-from . import logger
 
 class VehicleSimulation():
     
@@ -13,10 +13,11 @@ class VehicleSimulation():
         
         self.vehicle = vehicle
         self.world = world
-        self.timestamp = 0.0
+        self.timestamp = time.time()
       
         self.last_vehicle_observations = None # used for to_yaml()
-        
+        self.last_vehicle_observations_timestamp = None # used for to_yaml()
+
         self.vehicle_collided = None
         cmd_spec = self.vehicle.dynamics.get_commands_spec()
         self.last_commands = np.zeros(len(cmd_spec['format'])) # XXX
@@ -55,13 +56,14 @@ class VehicleSimulation():
             raise ValueError('Episode not started yet.') # XXX better exception?
         
         observations = self.vehicle.compute_observations()
-        self.last_vehicle_observations = observations        
+        self.last_vehicle_observations = observations     
+        self.last_vehicle_observations_timestamp = self.timestamp   
         # TODO: more than one?
         return observations
         
     def new_episode(self):
         self.episode_started = True
-        self.timestamp = 0.0
+        self.timestamp = time.time()
         
         max_tries = 100
         for i in range(max_tries): #@UnusedVariable
@@ -87,6 +89,11 @@ class VehicleSimulation():
         # make sure we computed the observations at least once 
         if self.last_vehicle_observations is None:
             self.compute_observations()
+            
+        if self.timestamp != self.last_vehicle_observations_timestamp:
+            logger.debug('Warning: state is at time %s, observations at %s.' % 
+                         (self.timestamp,
+                          self.last_vehicle_observations_timestamp))
             
         data = {
             'version': [1, 0],

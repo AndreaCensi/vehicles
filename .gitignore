@@ -6,3 +6,5 @@ build
 *.pgc
 .noseids
 vehicles_olympics_config
+display_demo.html
+display_demo.html_resources
