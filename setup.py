@@ -16,7 +16,7 @@ setup(name='PyVehicles',
       license="",
       
       classifiers=[
-        'Development Status :: 4 - Beta', 
+        'Development Status :: 4 - Beta',
       ],
 
       version=version,
@@ -28,13 +28,13 @@ setup(name='PyVehicles',
       packages=find_packages('src'),
       install_requires=[ 
         'ConfTools>=1.0,<2',
-        'PyVehiclesDynamics>=1.0,<2', 
+        'PyVehiclesDynamics>=1.0,<2',
         'PyContracts>=1.2,<2',
         'PyYAML',
         'python-cjson'
       ],
       tests_require=['nose'],
-      extras_require = {
+      extras_require={
         'procgraph':  ["procgraph>=1.0,<2"],
         'boot':  ["BootOlympics>=1.0,<2"],
       },
@@ -42,6 +42,8 @@ setup(name='PyVehicles',
          'console_scripts': [
            'vehicles_print_config = '
                 'vehicles.programs.print_config:main',
+           'vehicles_display_demo = '
+                'vehicles.programs.display_demo:main',
             'vehicles_create_olympics_configs = '
                 'vehicles_boot.create_olympics_configs:main'  
         ]

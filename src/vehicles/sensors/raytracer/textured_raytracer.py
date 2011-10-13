@@ -1,11 +1,11 @@
 from ...interfaces import PolyLine, Circle
 from .cjson_stream import CJSONStream
+from conf_tools import instantiate_spec
 from contracts import contract
 from geometry import translation_angle_from_SE2
 from subprocess import Popen, PIPE
 import cjson
 import numpy as np
-from conf_tools import instantiate_spec
 
 
 class Raytracer:
@@ -71,28 +71,28 @@ class Raytracer:
             pass
         #print " Closed pipe %s, %s" % (self.p.stdin,self.p.stdout)
 
-    def set_world_primitives(self, primitives):
-        # TODO: make add_circle() add_polyline()
-        for x in primitives:
-            surface = x.id_object
-            if isinstance(x, PolyLine):
-                msg = { 
-                    "class": "add_polyline",
-                    "surface": surface,
-                    "points": x.points
-                }
-                self.write_to_connection(msg)
-            elif isinstance(x, Circle):
-                msg = {
-                    "class": "add_circle",
-                    'surface': surface,
-                    'radius': x.radius,
-                    'center': x.center,
-                    'solid_inside': 1 if x.solid else 0 
-                }
-                self.write_to_connection(msg)
-            else: 
-                raise Exception('Unexpected object %s' % x)
+    @contract(surface_id='int', center='seq[2](number)', radius='>0', solid='bool')
+    def add_circle(self, surface_id, center, radius, solid):
+        msg = {
+            "class": "add_circle",
+            'surface': surface_id,
+            'radius': radius,
+            'center': center,
+            'solid_inside': 1 if solid else 0 
+        }
+        self.write_to_connection(msg)
+
+
+    @contract(surface_id='int', points='list(seq[2](number))')        
+    def add_polyline(self, surface_id, points):
+        msg = { 
+            "class": "add_polyline",
+            "surface": surface_id,
+            "points": points
+        }
+        self.write_to_connection(msg)
+
+        
 
     @contract(pose='SE2')
     def raytracing(self, pose):
@@ -136,7 +136,16 @@ class Raytracer:
             surface = None
         
         return hit, surface    
-    
+
+    # XXX: move somewhere else?    
+    def set_world_primitives(self, primitives):
+        for x in primitives:
+            if isinstance(x, PolyLine):
+                self.add_polyline(x.id_object, x.points)
+            elif isinstance(x, Circle):
+                self.add_circle(x.id_object, x.center, x.radius, x.solid)
+
+
         
 class TexturedRaytracer(Raytracer):
 

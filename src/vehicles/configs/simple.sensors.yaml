@@ -85,3 +85,14 @@
       - vehicles.sensors.RandomSensor
       - num_sensels: 5
         
+- id: fs_05_12x12
+  desc: "A field sampler with a 12x12 display."
+  code: 
+      - vehicles.sensors.FieldSamplerUniform
+      - shape: [12,12]
+        sides: [0.3,0.3]
+        noise: 
+            - vehicles.sensors.AdditiveGaussian
+            - std_dev: 0.001
+
+  

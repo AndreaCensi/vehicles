@@ -25,3 +25,13 @@
       - vehicles.worlds.StochasticBox
       - width: 10
         length: 10
+
+- id: SBox2_10a
+  desc: A box with stochastic content
+  code: 
+      - vehicles.worlds.StochasticBox2
+      - width: 10
+        length: 10
+        num_sources: 10
+        source_width: 3
+        

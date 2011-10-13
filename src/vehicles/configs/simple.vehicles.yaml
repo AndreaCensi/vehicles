@@ -98,6 +98,15 @@
         pose: [0,0,0]
   radius: 0.5
 
+
+- id: d_SE2_rb_v-fs12
+  desc: "A robot with a field sampler."
+  id_dynamics: d_SE2_rb_v
+  sensors:
+    - id_sensor: fs_05_12x12
+      pose: [0,0,0]
+  radius: 0.5
+
 - id: d_SE2_rb_v-cam180
   desc: An omnidirectional robot with a 180deg camera.
   id_dynamics: d_SE2_rb_v
