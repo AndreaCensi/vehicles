@@ -26,7 +26,7 @@ class StochasticBox(World):
                      texture=random_checkerboard(0.1),
                      center=[0, 0],
                      radius=1,
-                     solid=False)
+                     solid=True)
             self.circles.append(c)
             
         self.refresh()

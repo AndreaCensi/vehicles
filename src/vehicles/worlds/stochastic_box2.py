@@ -2,7 +2,7 @@ from . import random_checkerboard, box
 from ..interfaces import Circle, World
 from contracts import contract
 import numpy as np
-from vehicles.interfaces.primitives import Source
+from ..interfaces import Source
 
 class StochasticBox2(World):
     ''' This also includes point sources. '''
@@ -38,7 +38,7 @@ class StochasticBox2(World):
         for _ in range(num_sources):
             c = Source(id_object=id_object, tags=[],
                      center=[0, 0],
-                     kernel_spec=KernelExponential.spec(source_width))
+                     kernel_spec=KernelInverse.spec(2, 1))
             self.sources.append(c)
             id_object += 1
 
@@ -82,4 +82,20 @@ class KernelExponential():
     @staticmethod
     def spec(L):
         return ['vehicles.worlds.KernelExponential', {'L': L}]
+    
+
+class KernelInverse():
+    @contract(var='>0', scale='>0')
+    def __init__(self, scale, var):
+        self.scale = scale
+        self.var = var
+        
+    def __call__(self, distances):
+        D = np.array(distances)
+        D = D / self.scale + self.var
+        return 1 - 1 / D
+        
+    @staticmethod
+    def spec(scale, var):
+        return ['vehicles.worlds.KernelInverse', dict(scale=scale, var=var)]
     

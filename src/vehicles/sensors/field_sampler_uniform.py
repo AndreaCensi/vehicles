@@ -5,7 +5,7 @@ class FieldSamplerUniform(FieldSampler):
     ''' A field sampler with uniform disposition of sensels. '''
         
     @contract(shape='seq[2](number,>1)', sides='seq[2](number)')
-    def __init__(self, shape, sides, min_value=0, max_value=1,
+    def __init__(self, shape, sides, normalize=False, min_value=0, max_value=1,
                  noise=None):
         ''' 
             :param sides: sides of the rectangle comprising the sensels
@@ -32,6 +32,7 @@ class FieldSamplerUniform(FieldSampler):
                               positions=positions,
                               min_value=min_value,
                               max_value=max_value,
+                              normalize=normalize,
                               noise=noise)
         
     def to_yaml(self):

@@ -1,5 +1,6 @@
 from . import np, contract
-from ..interfaces import Field, VehicleSensor
+from .. import logger
+from ..interfaces import Field, VehicleSensor, Source
 from conf_tools import instantiate_spec
 from geometry import SE2_project_from_SE3
 
@@ -8,7 +9,7 @@ class FieldSampler(VehicleSensor):
     ''' A sensor that samples an intensity field. '''
         
     @contract(positions='seq[>0](seq[2](number))')
-    def __init__(self, positions, min_value=0, max_value=1, noise=None):
+    def __init__(self, positions, min_value=0, max_value=1, normalize=False, noise=None):
         ''' 
             :param positions: 2D positions of the sensels 
         '''
@@ -16,6 +17,7 @@ class FieldSampler(VehicleSensor):
         self.positions = np.array(positions)
         self.min_value = min_value
         self.max_value = max_value
+        self.normalize = normalize
         
         self.noise_spec = noise
         self.noise = (None if self.noise_spec is None else 
@@ -38,7 +40,8 @@ class FieldSampler(VehicleSensor):
                 'noise_spec': self.noise_spec,
                 'min_value': self.min_value,
                 'max_value': self.max_value,
-                'positions': self.positions.tolist()}
+                'positions': self.positions.tolist(),
+                'normalize': self.normalize}
     
     @contract(pose='SE3')
     def _compute_observations(self, pose):
@@ -51,6 +54,11 @@ class FieldSampler(VehicleSensor):
             world_point = np.dot(pose, upoint)[:2] # XXX
             sensels[i] = get_field_value(self.primitives, world_point)
         
+        if self.normalize:
+            sensels -= np.min(sensels)
+            if np.max(sensels) > 0:
+                sensels *= self.max_value / np.max(sensels)
+            
         if self.noise is not None:
             sensels = self.noise.filter(sensels)
         
@@ -61,12 +69,17 @@ class FieldSampler(VehicleSensor):
         return data
 
     def set_world_primitives(self, primitives):
-        self.primitives = primitives
+        if primitives: # FIXME: only find changed things
+            sources = [p for p in primitives if isinstance(p, Source)]
+            if not sources:
+                logger.debug('Warning: no sources given for field sampler.')
+                logger.debug('I got: %s' % primitives)
+            self.primitives = primitives
 
 def get_field_value(primitives, point):
     values = []
     for p in primitives:
-        if isinstance(p, Field):
+        if isinstance(p, Source):
             intensity = p.get_intensity_value(point)
             values.append(intensity)
     if len(values) == 0:

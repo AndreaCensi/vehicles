@@ -57,7 +57,8 @@ def show_world_geometry(pylab, world_state):
         if s['type'] == 'Source':
             sources.append(Source.from_yaml(s))
 
-    plot_sources_field(pylab,
+    if sources:
+        plot_sources_field(pylab,
                        sources=sources,
                        bounds=bounds)
 
