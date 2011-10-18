@@ -1,9 +1,5 @@
-from ..interfaces import  World, PolyLine
-from contracts import contract
-import numpy as np
-from . import random_checkerboard
-
-SIN_TEXTURE = 'vehicles.sensors.SinTexture'
+from . import random_checkerboard, np, contract
+from ..interfaces import World, PolyLine
 
 class Box(World):
     ''' A simple box. '''

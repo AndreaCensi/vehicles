@@ -1,4 +1,5 @@
---- model boot_log2movie
+--- model boot_log2movie_servo
+''' Visualizes the servoing experiments. '''
 config logdir 'Base log dir'
 config id_robot
 config id_agent = ""
@@ -13,6 +14,7 @@ import procgraph_vehicles
 |boot_log_reader logdir=$logdir id_robot=$id_robot id_agent=$id_agent id_episode=$id_episode| -> observations 
 
     observations -> |extract_from_extra fieldname='robot_state'| -> state_
+    observations -> |extract_from_extra fieldname='obs0'| -> goal
 
     state_ --> |use_simulation_time| --> state
 
@@ -29,8 +31,21 @@ import procgraph_vehicles
     commands -> |reshape2d height=1| --> |posneg max_value=1| --> |resize width=$width_right| -->\
              |veh_image_label title="Commands"| -->  commands_rgb
     
+#    goal --> |plot width=$width_right| -->  |veh_image_label title="Goal"| -->  goal_rgb
+ #   sensels --> |plot width=$width_right| -->  |veh_image_label title="Obs"| -->  obs_rgb
+
+goal, sensels --> |plot width=400 height=200 title="" y_min=0 y_max=1| -->  |veh_image_label title="Goal"| -->  servo_rgb
+
+    goal -> |array| -> goal_a
+    sensels -> |array| -> sensels_a
+    sensels_a, goal_a --> |-| --> |norm ord=1| -> error -> |print|
+    error -> |historyt interval=10| --> error_history
+    error_history -> |plot title="" width=258 height=200 y_min=0| ->  |veh_image_label title="Error"| --> error_rgb
+
     sensels_rgb, commands_rgb --> |grid cols=1| --> right
     
-    map_rgb, right --> |sync| --> |grid cols=2| --> out
+    map_rgb, right, servo_rgb, error_rgb --> |sync| --> |grid cols=2| --> out
 
     out --> |mencoder file=$output|
+
+

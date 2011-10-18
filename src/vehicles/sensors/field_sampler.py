@@ -1,9 +1,9 @@
-from . import np, contract
-from .. import logger
+from . import np, contract, logger
 from ..interfaces import Field, VehicleSensor, Source
 from conf_tools import instantiate_spec
 from geometry import SE2_project_from_SE3
 
+__all__ = ['FieldSampler', 'get_field_values', 'get_field_value']
 
 class FieldSampler(VehicleSensor):
     ''' A sensor that samples an intensity field. '''
@@ -69,11 +69,13 @@ class FieldSampler(VehicleSensor):
         return data
 
     def set_world_primitives(self, primitives):
+        # XXX this does not work with changing environments
         if primitives: # FIXME: only find changed things
             sources = [p for p in primitives if isinstance(p, Source)]
             if not sources:
                 logger.debug('Warning: no sources given for field sampler.')
                 logger.debug('I got: %s' % primitives)
+        if self.primitives is None:
             self.primitives = primitives
 
 def get_field_value(primitives, point):

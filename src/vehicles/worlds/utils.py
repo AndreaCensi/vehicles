@@ -1,6 +1,5 @@
-from contracts import contract
-from vehicles.interfaces.primitives import PolyLine
-import numpy as np
+from . import contract, np
+from ..interfaces import PolyLine
 
 @contract(cell_width='>0')
 def random_checkerboard(cell_width):

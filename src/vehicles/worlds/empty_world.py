@@ -1,5 +1,8 @@
 from ..interfaces import World
 
+__all__ = ['Empty']
+
+
 class Empty(World):
     
     def get_primitives(self):

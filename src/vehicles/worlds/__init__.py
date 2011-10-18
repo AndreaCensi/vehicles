@@ -1,3 +1,4 @@
+from .. import np, contract, logger
 from .utils import *
 from .boxes import *
 from .empty_world import *

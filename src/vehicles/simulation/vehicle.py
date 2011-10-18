@@ -87,7 +87,7 @@ class Vehicle:
     @contract(pose='SE3')
     def set_pose(self, pose):
         if self.primitives is None:
-            msg = 'Please call set_world_primitives() before set_state().'
+            msg = 'Please call set_world_primitives() before set_pose().'
             raise ValueError(msg)
         # TODO: check compatibility
         state = self.dynamics.pose2state(pose)

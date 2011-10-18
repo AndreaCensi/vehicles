@@ -1,6 +1,8 @@
 from . import FieldSampler, contract, np
 import itertools
 
+__all__ = ['FieldSamplerUniform']
+
 class FieldSamplerUniform(FieldSampler):
     ''' A field sampler with uniform disposition of sensels. '''
         

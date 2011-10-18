@@ -31,7 +31,7 @@ class BOVehicleSimulation(RobotInterface, VehicleSimulation):
         self.last_commands = cmd_spec.get_default_value()
 
         if len(self.vehicle.sensors) == 0:
-            raise Exception('Vehicle %s has no sensors defined.' % id_vehicle)
+            raise Exception('Vehicle %r has no sensors defined.' % id_vehicle)
 
         obs_spec = None
         for attached in self.vehicle.sensors:
@@ -44,7 +44,8 @@ class BOVehicleSimulation(RobotInterface, VehicleSimulation):
         self._boot_spec = BootSpec(obs_spec=obs_spec, cmd_spec=cmd_spec,
                                    id_robot=id_vehicle) 
         # XXX: id, desc, extra?
-        
+        self.commands_source = 'rest' # TODO
+
     def __repr__(self):
         return 'BOVehicleSim(%s,%s)' % (self.id_vehicle, self.id_world)
     
@@ -53,7 +54,8 @@ class BOVehicleSimulation(RobotInterface, VehicleSimulation):
     def get_spec(self):
         return self._boot_spec           
 
-    def set_commands(self, commands):
+    def set_commands(self, commands, commands_source):
+        self.commands_source = commands_source
         VehicleSimulation.simulate(self, commands, self.dt)
 
     def get_observations(self):
@@ -61,7 +63,7 @@ class BOVehicleSimulation(RobotInterface, VehicleSimulation):
         return RobotObservations(timestamp=self.timestamp,
                                  observations=observations,
                                  commands=self.last_commands,
-                                 commands_source='agent')
+                                 commands_source=self.commands_source)
 
     def new_episode(self):
         e = VehicleSimulation.new_episode(self)

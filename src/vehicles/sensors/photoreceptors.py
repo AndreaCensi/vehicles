@@ -3,6 +3,8 @@ from ..interfaces import VehicleSensor
 from conf_tools import instantiate_spec
 from geometry import SE2_project_from_SE3
 
+__all__ = ['Photoreceptors', 'PhotoreceptorsUniform']
+
 
 class Photoreceptors(VehicleSensor, TexturedRaytracer):
     """ This is a very shallow wrap around ImageRangeSensor """

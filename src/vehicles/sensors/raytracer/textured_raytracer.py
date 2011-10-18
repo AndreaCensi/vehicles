@@ -179,7 +179,7 @@ class TexturedRaytracer(Raytracer):
                 # TODO: make this more efficient
                 luminance[i] = texture(coord)
             else:
-                luminance[i] = float('nan')
+                luminance[i] = np.NaN
         
         answer['luminance'] = luminance
         

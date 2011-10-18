@@ -15,6 +15,7 @@ class BOLogReader(Generator):
     Block.output('observations')
     Block.config('logdir', 'BootOlympics logdir')
     Block.config('id_robot', 'Name of the robot')
+    Block.config('id_agent', 'If given, selects those for the agent', default="")
     Block.config('id_episode', 'If given, select a specific episode', default="")
     Block.config('read_extra', 'Load the extra information.', default=True)
     
@@ -22,16 +23,39 @@ class BOLogReader(Generator):
         from bootstrapping_olympics.logs import LogIndex
         index = LogIndex()
         index.index(self.config.logdir)
-                
+        
+        id_robot = self.config.id_robot
+        id_agent = self.config.id_agent
+        id_episode = self.config.id_episode
+        read_extra = self.config.read_extra
+        
+        self.info('Reading logs for robot: %r agent: %r episodes: %r' % 
+                (id_robot, id_agent, id_episode))
+
+
         def go():
-            if not self.config.id_episode:
-                for obs in index.read_all_robot_streams(self.config.id_robot,
-                                                    read_extra=self.config.read_extra):
+            if not id_episode:
+                self.info('Reading all episodes for %r/%r' % 
+                          (id_robot, id_agent))
+                
+                if id_agent is not None:
+                    # Checking there are some episodes
+                    episodes = index.get_episodes_for_robot(id_robot=id_robot,
+                                                            id_agent=id_agent)
+                    if not episodes:
+                        msg = ('No episodes found for %r/%r' % 
+                               (id_robot, id_agent))
+                        raise Exception(msg)
+                for obs in index.read_all_robot_streams(id_robot=id_robot,
+                                                        id_agent=id_agent,
+                                                        read_extra=read_extra):
                     yield obs['timestamp'], obs
             else:
-                for obs in index.read_robot_episode(self.config.id_robot,
-                                                    id_episode=self.config.id_episode,
-                                                    read_extra=self.config.read_extra):
+                self.info('Reading episode %s' % id_episode)
+                for obs in index.read_robot_episode(id_robot=id_robot,
+                                                    id_episode=id_episode,
+                                                    read_extra=read_extra):
+                    
                     yield obs['timestamp'], obs
         
         self.iterator = go()

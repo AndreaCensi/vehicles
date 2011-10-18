@@ -1,5 +1,4 @@
-import numpy as np
-from contracts import contract
+from . import np, contract
 
 __all__ = ['AdditiveGaussian']
 

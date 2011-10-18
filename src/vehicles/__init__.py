@@ -6,7 +6,7 @@ import numpy as np
 import logging
 
 logging.basicConfig();
-logger = logging.getLogger("vehicles")
+logger = logging.getLogger("Vehicles")
 logger.setLevel(logging.DEBUG)
 
 

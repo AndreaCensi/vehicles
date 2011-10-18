@@ -1,6 +1,6 @@
+from . import contract, np
 from ..interfaces import VehicleSensor
-from contracts import contract
-import numpy as np
+
 
 class RandomSensor(VehicleSensor):
 

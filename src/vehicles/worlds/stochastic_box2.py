@@ -1,8 +1,7 @@
-from . import random_checkerboard, box
-from ..interfaces import Circle, World
-from contracts import contract
-import numpy as np
-from ..interfaces import Source
+from . import random_checkerboard, box, np, contract
+from ..interfaces import Circle, World, Source
+
+__all__ = ['StochasticBox2', 'KernelExponential', 'KernelInverse']
 
 class StochasticBox2(World):
     ''' This also includes point sources. '''

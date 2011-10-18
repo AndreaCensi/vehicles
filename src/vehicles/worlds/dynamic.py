@@ -1,6 +1,7 @@
-from . import World, np, random_checkerboard, box
+from . import World, np, random_checkerboard, box, contract
 from ..interfaces import Circle
-from contracts import contract
+
+__all__ = ['DynamicTest']
 
 class DynamicTest(World):
     ''' A simple example of a dynamic world. '''

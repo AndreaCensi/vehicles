@@ -1,13 +1,14 @@
-from . import Raytracer, contract, np
+from . import Raytracer, contract, np, get_uniform_directions
 from ..interfaces import VehicleSensor
 from conf_tools import instantiate_spec
 from geometry import SE2_project_from_SE3
-from numpy.testing.utils import assert_allclose
 
+__all__ = ['Rangefinder', 'RangefinderUniform']
 
 class Rangefinder(VehicleSensor, Raytracer):
 
-    @contract(directions='seq[>0](number)', invalid='number')
+    @contract(directions='seq[>0](number)', invalid='number',
+              min_range='>=0,x', max_range='>=0,>x')
     def __init__(self, directions, invalid=10, min_range=0.2, max_range=10,
                  noise=None):
         ''' 
@@ -55,7 +56,7 @@ class Rangefinder(VehicleSensor, Raytracer):
             readings = np.maximum(self.min_range, readings)
 
         readings[invalid] = self.invalid
-        
+        # XXX What if invalid is not in min_range, max_range
         sensels = ((readings - self.min_range) / 
                    (self.max_range - self.min_range))
         data[VehicleSensor.SENSELS] = sensels
@@ -71,18 +72,3 @@ class RangefinderUniform(Rangefinder):
         directions = get_uniform_directions(fov_deg, num_sensels)
         Rangefinder.__init__(self, directions=directions, noise=noise)
         
-
-def get_uniform_directions(fov_deg, num_sensels):
-    if fov_deg == 360:
-        ray_dist = np.pi / (num_sensels - 1)
-        directions = np.linspace(-np.pi + ray_dist / 2,
-                                 + np.pi - ray_dist / 2, num_sensels)
-        assert_allclose(directions[-1] - directions[0], 2 * np.pi - ray_dist)
-    else:
-        fov_rad = np.radians(fov_deg)
-        directions = np.linspace(-fov_rad / 2, +fov_rad / 2, num_sensels)
-    
-        assert_allclose(directions[-1] - directions[0], fov_rad)
-    assert len(directions) == num_sensels
-    return directions
-    

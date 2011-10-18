@@ -1,6 +1,6 @@
 from procgraph import Block
 from procgraph_mpl import pylab2rgb, pylab
-from vehicles.display import * #@UnusedWildImport
+from vehicles.display import display_all
 
 class WorldDisplay(Block):
     ''' Produces a top-down plot of a circular arena.

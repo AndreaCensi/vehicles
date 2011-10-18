@@ -1,7 +1,7 @@
-from . import random_checkerboard, box
+from . import random_checkerboard, box, np, contract
 from ..interfaces import Circle, World
-from contracts import contract
-import numpy as np
+
+__all__ = ['StochasticBox']
 
 class StochasticBox(World):
     
