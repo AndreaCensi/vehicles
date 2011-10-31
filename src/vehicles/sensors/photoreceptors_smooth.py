@@ -8,8 +8,8 @@ __all__ = ['PhotoreceptorsSmooth', 'PhotoreceptorsSmoothUniform']
 class PhotoreceptorsSmooth(VehicleSensor, TexturedRaytracer):
     """ Implements  """
     
-    @contract(directions='seq[>0](number)', spatial_sigma_deg='>=0')
-    def __init__(self, directions, spatial_sigma_deg=0,
+    @contract(directions='seq[>0](number)', spatial_sigma_deg='>0')
+    def __init__(self, directions, spatial_sigma_deg,
                  noise=None, invalid=0.5):
         self.invalid = invalid
         
@@ -45,7 +45,7 @@ class PhotoreceptorsSmooth(VehicleSensor, TexturedRaytracer):
         def distances_from_directions(S):
             C = cosines_from_directions(S)
             return distances_from_cosines(C)
-        
+                    
         S = directions_from_angles(directions)
         D = distances_from_directions(S)
         
@@ -54,10 +54,13 @@ class PhotoreceptorsSmooth(VehicleSensor, TexturedRaytracer):
             return np.exp(-(x / a) ** 2)
         self.coeff = kernel(D)
         
+        assert np.all(np.isfinite(self.coeff))
         for i in range(len(directions)):
             sum_i = self.coeff[i, :].sum() 
+            assert sum_i > 0
             self.coeff[i, :] = self.coeff[i, :] / sum_i
 
+        assert np.all(np.isfinite(self.coeff))
 #        import scipy.stats
 #        eps = 0.1
 #        resolution = 7

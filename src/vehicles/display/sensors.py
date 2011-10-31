@@ -51,6 +51,8 @@ def plot_fieldsampler(pylab, pose, positions, sensels, radius=None):
         
         radius *= 2 # overlap
     
+        radius = 0.05
+        
     for i, value in enumerate(sensels):
         value = 1 - value
         facecolor = [value, value, value]

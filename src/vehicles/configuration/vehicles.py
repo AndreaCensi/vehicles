@@ -1,4 +1,4 @@
-from . import (check_valid_dynamics_config,
+from . import (check_valid_dynamics_config, np,
     check_valid_sensor_config, logger)
 from conf_tools import (BadConfig, check_necessary, check_has_exactly_one,
     wrap_check)
@@ -6,7 +6,6 @@ from contracts import describe_type
 from copy import deepcopy
 from geometry import SE3_from_SE2, SE2_from_translation_angle
 from pprint import pformat
-import numpy as np
 
 def check_valid_vehicle_config(x):
     if not isinstance(x, dict):

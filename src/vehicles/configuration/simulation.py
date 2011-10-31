@@ -1,7 +1,5 @@
-from conf_tools.checks import check_has_exactly_one, wrap_check
-from . import check_valid_vehicle_config
-from . import check_valid_world_config
-
+from . import check_valid_vehicle_config, check_valid_world_config
+from conf_tools import check_has_exactly_one, wrap_check
 
 
 def check_valid_simulation_config(x):

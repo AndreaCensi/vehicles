@@ -1,7 +1,6 @@
-from . import instance_vehicle_spec
-from ..interfaces import VehicleSensor, World
 from . import (check_valid_vehicle_config, check_valid_world_config,
-    check_valid_dynamics_config, check_valid_sensor_config)
+    check_valid_dynamics_config, check_valid_sensor_config, instance_vehicle_spec)
+from ..interfaces import VehicleSensor, World
 from conf_tools import ConfigMaster, GenericInstance
 from vehicles_dynamics import Dynamics
 

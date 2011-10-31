@@ -5,6 +5,7 @@ from ..sensors import get_field_values
 from geometry import (SE2_from_SE3, translation_angle_from_SE2,
     translation_from_SE2)
 from geometry.yaml import from_yaml
+from vehicles.display import Z_ROBOT_HEADING
 
 
 def show_grid(pylab, bx, by, spacing, margin):
@@ -88,7 +89,7 @@ def plot_sources_field(pylab, sources, bounds, disc=[100, 100], alpha=0.5,
 
 
 @contract(pose='SE2')
-def plot_robot(pylab, pose, robot_radius, zorder=Z_ROBOT):       
+def plot_robot(pylab, pose, robot_radius, zorder=Z_ROBOT, zorder_head=Z_ROBOT_HEADING):       
     t, theta = translation_angle_from_SE2(pose)
     
     plot_circle(pylab, center=t, radius=robot_radius, zorder=zorder,
@@ -97,7 +98,7 @@ def plot_robot(pylab, pose, robot_radius, zorder=Z_ROBOT):
     
     pylab.plot([t[0], t[0] + np.cos(theta) * robot_radius],
                [t[1], t[1] + np.sin(theta) * robot_radius], 'k',
-               zorder=zorder)
+               zorder=Z_ROBOT_HEADING)
 
 def display_all(pylab, state, grid=0, zoom=0, show_sensor_data=True):
     vehicle_state = state['vehicle']

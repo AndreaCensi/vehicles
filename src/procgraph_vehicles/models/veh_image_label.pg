@@ -3,18 +3,18 @@
 config title
 input rgb 
 output out "Image with border and label"
+config bgcolor = [1,0.7,0.5]
 
 |input name=rgb| --> |border| --> |text| --> |output name=out|
 
 border.left = 2
 border.right = 2
-border.top = 30
+border.top = 34
 border.bottom = 2
-border.color  = [0.5,0,0]
+border.color  = $bgcolor
 
-size = 16
+size = 22
 font = 'Candara'
-color = white
-bg =  black
-
+color = black
+bg =   white
 text.texts = [{string:$title, valign: top, halign: center, font: $font, size: $size, color: $color, bg: $bg, position: [middle,5]} ]

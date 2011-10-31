@@ -1,7 +1,6 @@
-from . import Vehicle, logger
+from . import Vehicle, logger, np
 from ..interfaces import World
 from geometry import SE3
-import numpy as np
 import time
 
 

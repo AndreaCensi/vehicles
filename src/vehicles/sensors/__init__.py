@@ -9,4 +9,4 @@ from .photoreceptors_smooth import *
 from .random_sensor import *
 from .field_sampler import *
 from .field_sampler_uniform import *
- 
+from .field_sampler_rand_circle import *

@@ -13,6 +13,8 @@ Z_CIRCLE = 0
 Z_ROBOT = 1000
 Z_SENSORS = 2000
 
+Z_ROBOT_HEADING = 3000
+
 
 from .misc_utils import *
 from .sensors import *

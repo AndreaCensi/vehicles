@@ -1,4 +1,3 @@
-
 from geometry import SE2_from_translation_angle
 from vehicles import TexturedRaytracer, Raytracer, Box
 import numpy as np

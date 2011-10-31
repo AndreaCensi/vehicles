@@ -5,8 +5,8 @@
     The penetration is a float, >=0 (=0 if touching).
      
 '''
-from contracts import new_contract, contract
-import numpy as np
+from . import contract, np
+from contracts import new_contract
 from collections import namedtuple
 
 

@@ -6,7 +6,8 @@ config id_episode = ""
 config zoom = 0
 config width_map = 600
 config width_right = 200
-config output 'output filename (.avi)'
+config output 'output basename (without .avi)'
+config bgcolor = [1,0.7,0.5]
 
 import procgraph_vehicles
 
@@ -29,8 +30,8 @@ import procgraph_vehicles
     commands -> |reshape2d height=1| --> |posneg max_value=1| --> |resize width=$width_right| -->\
              |veh_image_label title="Commands"| -->  commands_rgb
     
-    sensels_rgb, commands_rgb --> |grid cols=1| --> right
+    sensels_rgb, commands_rgb --> |grid bgcolor=$bgcolor cols=1| --> right
     
-    map_rgb, right --> |sync| --> |grid cols=2| --> out
+    map_rgb, right --> |sync| --> |grid bgcolor=$bgcolor cols=2| --> out
 
-    out --> |mencoder file=$output|
+    out --> |mencoder file="${output}.avi"|
