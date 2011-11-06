@@ -1,6 +1,6 @@
 from vehicles.unittests.simulation_tests import random_commands
 from vehicles  import  VehiclesConfig
-from vehicles.simulation.simulation import VehicleSimulation
+from vehicles import VehicleSimulation
 import time
 from collections import namedtuple
 

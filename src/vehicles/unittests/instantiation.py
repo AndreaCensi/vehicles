@@ -3,6 +3,7 @@ from vehicles.configuration.master import VehiclesConfig
 
 def make_sure_loaded():
     if not VehiclesConfig.loaded:
+        # TODO: only load test configuration
         # TODO: add from environment variable
 #        v = Constants.TEST_ADDITIONAL_CONFIG_DIR_ENV
 #        if v in os.environ:

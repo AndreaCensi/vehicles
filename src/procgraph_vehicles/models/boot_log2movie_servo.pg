@@ -14,8 +14,9 @@ import procgraph_vehicles
 
 |boot_log_reader logdir=$logdir id_robot=$id_robot id_agent=$id_agent id_episode=$id_episode| -> observations 
 
+    observations ->  |extract_from_extra fieldname='servoing'| -> extra_servoing
     observations -> |extract_from_extra fieldname='robot_state'| -> state_
-    observations -> |extract_from_extra fieldname='obs0'| -> goal
+    extra_servoing -> |extract_field field='obs0'| -> goal
 
     state_ --> |use_simulation_time| --> state
 

@@ -1,6 +1,8 @@
 from . import (for_all_sensors, for_all_vehicles, for_all_dynamics,
     for_all_worlds)
 
+# TODO: check basic things
+
 @for_all_vehicles
 def check_vehicle_instance(id_vehicle, vehicle):
     pass

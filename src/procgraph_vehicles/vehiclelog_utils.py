@@ -1,5 +1,6 @@
 from procgraph import Block, simple_block
 import numpy as np
+from procgraph import COMPULSORY
 
 @simple_block
 def extract_sensels(state):
@@ -10,6 +11,9 @@ def extract_sensels(state):
 def extract_commands(state):
     return np.array(state['commands'])
 
+@simple_block
+def extract_field(dictionary, field=COMPULSORY):
+    return dictionary[field]
 
 @simple_block
 def extract_timeinfo(state):
