@@ -39,13 +39,14 @@ class VehicleSimulation():
         
         self.vehicle.set_world_primitives(updated)
         if self.vehicle.colliding_pose(self.vehicle.get_pose()).collided:
-            self.info('Collision due to dynamic world.')
+            self.info('Collision due to dynamic world at %s.' % self.timestamp)
             self.vehicle_collided = True
         else:
             self.vehicle.simulate(commands, dt)
             self.vehicle_collided = self.vehicle.collision.collided
             if self.vehicle_collided:
-                self.info('Collision with object.')
+                self.info('Collision with object at time %.2f.' % 
+                          (self.timestamp - self.timestamp0))
         
         self.last_commands = commands
          
@@ -63,6 +64,7 @@ class VehicleSimulation():
     def new_episode(self):
         self.episode_started = True
         self.timestamp = time.time()
+        self.timestamp0 = self.timestamp
         
         max_tries = 100
         for i in range(max_tries): #@UnusedVariable
@@ -76,7 +78,7 @@ class VehicleSimulation():
                 return episode 
             #print('Bad random: collision  %s' % str(collision))
         else:
-            msg = 'Cannot find a non-colliding state.'
+            msg = 'Cannot find a non-colliding state after %d tries.' % max_tries
             raise Exception(msg)
         
  

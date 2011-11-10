@@ -1,0 +1,4 @@
+
+
+class VehiclesConstants:
+    TEST_ADDITIONAL_CONFIG_DIR_ENV = 'VEHICLES_TEST_CONFIG'

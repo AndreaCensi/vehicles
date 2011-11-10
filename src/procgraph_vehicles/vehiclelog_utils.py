@@ -6,13 +6,16 @@ from procgraph import COMPULSORY
 def extract_sensels(state):
     return np.array(state['observations'])
 
-
 @simple_block
 def extract_commands(state):
     return np.array(state['commands'])
 
 @simple_block
 def extract_field(dictionary, field=COMPULSORY):
+    if not field in dictionary:
+        msg = 'Could not find field %r; I know %s.' % (field, dictionary.keys())
+        raise ValueError(msg)
+    
     return dictionary[field]
 
 @simple_block

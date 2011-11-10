@@ -1,5 +1,5 @@
 from bootstrapping_olympics import (EpisodeDesc, RobotInterface, StreamSpec,
-    BootSpec, RobotObservations)
+    BootSpec, RobotObservations, BootOlympicsConstants)
 from vehicles import VehicleSimulation, VehiclesConfig
 
 class BOVehicleSimulation(RobotInterface, VehicleSimulation):
@@ -9,6 +9,7 @@ class BOVehicleSimulation(RobotInterface, VehicleSimulation):
         
         if 'vehicle' in params:
             id_vehicle = params['vehicle']['id']
+            # TODO: check well formed
             vehicle = VehiclesConfig.vehicles.instance_spec(params['vehicle']) #@UndefinedVariable
         else:
             id_vehicle = params['id_vehicle']
@@ -16,6 +17,7 @@ class BOVehicleSimulation(RobotInterface, VehicleSimulation):
             
         if 'world' in params:
             id_world = params['world']['id']
+            # TODO: check well formed
             world = VehiclesConfig.worlds.instance_spec(params['world']) #@UndefinedVariable
         else:
             id_world = params['id_world']
@@ -44,7 +46,7 @@ class BOVehicleSimulation(RobotInterface, VehicleSimulation):
         self._boot_spec = BootSpec(obs_spec=obs_spec, cmd_spec=cmd_spec,
                                    id_robot=id_vehicle) 
         # XXX: id, desc, extra?
-        self.commands_source = 'rest' # TODO
+        self.commands_source = BootOlympicsConstants.CMD_SOURCE_REST
 
     def __repr__(self):
         return 'BOVehicleSim(%s,%s)' % (self.id_vehicle, self.id_world)
@@ -61,19 +63,16 @@ class BOVehicleSimulation(RobotInterface, VehicleSimulation):
     def get_observations(self):
         observations = VehicleSimulation.compute_observations(self)
         return RobotObservations(timestamp=self.timestamp,
-                                 observations=observations,
-                                 commands=self.last_commands,
-                                 commands_source=self.commands_source)
+                         observations=observations,
+                         commands=self.last_commands,
+                         commands_source=self.commands_source,
+                         robot_pose=self.vehicle.get_pose(),
+                         episode_end=True if self.vehicle_collided else False)
 
     def new_episode(self):
         e = VehicleSimulation.new_episode(self)
         return EpisodeDesc(e.id_episode, self.id_world)
          
-    def episode_ended(self):
-        if self.vehicle_collided: # XXX:
-            return True
-        else:
-            return False
 
     def get_state(self):
         return self.to_yaml()

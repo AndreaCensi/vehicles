@@ -9,10 +9,11 @@ logging.basicConfig();
 logger = logging.getLogger("Vehicles")
 logger.setLevel(logging.DEBUG)
 
-
+from .constants import *
 from .configuration import *
 from .interfaces import *
 from .simulation import *
 from .sensors import *
 from .worlds import *
+
 

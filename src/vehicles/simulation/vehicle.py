@@ -94,7 +94,7 @@ class Vehicle:
         
         collision = self.colliding_pose(pose) # XXX
         if collision.collided:
-            raise ValueError('Cannot put the robot in a collding state')
+            raise ValueError('Cannot put the robot in a colliding state.')
         
         self._state = state
         
