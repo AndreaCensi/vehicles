@@ -9,7 +9,7 @@ import os
 class VehiclesConfigMaster(ConfigMaster):
     
     def __init__(self):
-        ConfigMaster.__init__(self, logger)
+        ConfigMaster.__init__(self, 'Vehicles')
 
         self.add_class('vehicles', '*.vehicles.yaml',
                         check_valid_vehicle_config, instance_vehicle_spec)

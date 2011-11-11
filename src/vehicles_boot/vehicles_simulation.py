@@ -1,26 +1,34 @@
 from bootstrapping_olympics import (EpisodeDesc, RobotInterface, StreamSpec,
     BootSpec, RobotObservations, BootOlympicsConstants)
-from vehicles import VehicleSimulation, VehiclesConfig
+from vehicles import VehicleSimulation, VehiclesConfig, VehiclesConstants
 
 class BOVehicleSimulation(RobotInterface, VehicleSimulation):
     
-    def __init__(self, **params):
-        self.dt = params.get('dt', 0.1) # XXX: put into constants
+    def __init__(self,
+                 world=None,
+                 id_world=None,
+                 vehicle=None,
+                 id_vehicle=None,
+                 dt=VehiclesConstants.DEFAULT_SIMULATION_DT):
+        self.dt = dt
         
-        if 'vehicle' in params:
-            id_vehicle = params['vehicle']['id']
+        if not ((world is not None) ^ (id_world is not None)):
+            raise ValueError('Specify exactly one of "world" and "id_world".')
+        if not ((vehicle is not None) ^ (id_vehicle is not None)):
+            raise ValueError('Specify exactly one of "vehicle" and "id_vehicle".')
+            
+        if vehicle is not None:
+            id_vehicle = vehicle['id']
             # TODO: check well formed
-            vehicle = VehiclesConfig.vehicles.instance_spec(params['vehicle']) #@UndefinedVariable
+            vehicle = VehiclesConfig.vehicles.instance_spec(vehicle) #@UndefinedVariable
         else:
-            id_vehicle = params['id_vehicle']
             vehicle = VehiclesConfig.vehicles.instance(id_vehicle) #@UndefinedVariable
             
-        if 'world' in params:
-            id_world = params['world']['id']
+        if world is not None:
+            id_world = world['id']
             # TODO: check well formed
-            world = VehiclesConfig.worlds.instance_spec(params['world']) #@UndefinedVariable
+            world = VehiclesConfig.worlds.instance_spec(world) #@UndefinedVariable
         else:
-            id_world = params['id_world']
             world = VehiclesConfig.worlds.instance(id_world) #@UndefinedVariable
         
         self.id_world = id_world
@@ -35,14 +43,7 @@ class BOVehicleSimulation(RobotInterface, VehicleSimulation):
         if len(self.vehicle.sensors) == 0:
             raise Exception('Vehicle %r has no sensors defined.' % id_vehicle)
 
-        obs_spec = None
-        for attached in self.vehicle.sensors:
-            sensor = attached.sensor
-            ss = StreamSpec.from_yaml(sensor.observations_spec)
-            obs_spec = (ss if obs_spec is None 
-                        else StreamSpec.join(obs_spec, ss))
-            assert obs_spec is not None
-        assert obs_spec is not None
+        obs_spec = create_obs_spec(self.vehicle)
         self._boot_spec = BootSpec(obs_spec=obs_spec, cmd_spec=cmd_spec,
                                    id_robot=id_vehicle) 
         # XXX: id, desc, extra?
@@ -76,3 +77,15 @@ class BOVehicleSimulation(RobotInterface, VehicleSimulation):
 
     def get_state(self):
         return self.to_yaml()
+
+
+def create_obs_spec(vehicle):
+    obs_spec = None
+    for attached in vehicle.sensors:
+        sensor = attached.sensor
+        ss = StreamSpec.from_yaml(sensor.observations_spec)
+        obs_spec = (ss if obs_spec is None 
+                    else StreamSpec.join(obs_spec, ss))
+        assert obs_spec is not None
+    assert obs_spec is not None
+    return obs_spec

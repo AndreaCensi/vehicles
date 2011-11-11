@@ -12,6 +12,13 @@ class World:
     def __init__(self, bounds):
         self.bounds = bounds
         
+        
+    def random_2d_point(self):
+        ''' Returns a random 2d point in the world bounds. '''
+        x = np.random.uniform(self.bounds[0][0], self.bounds[0][1])
+        y = np.random.uniform(self.bounds[1][0], self.bounds[1][1])
+        return [x, y]
+        
     def __repr__(self):
         return '%s' % self.__class__.__name__
     
@@ -23,6 +30,8 @@ class World:
     
     @abstractmethod
     def get_primitives(self):
+        ''' Returns the list of primitives that compose the geometry 
+            of the world. '''
         pass
     
     @abstractmethod
@@ -31,7 +40,7 @@ class World:
         ''' 
             Simulates the world for dt. 
         
-            Returns a list of the updated ids.
+            Returns a list of the updated ids. (XXX: or not?)
         ''' 
         
     Episode = namedtuple('Episode', 'id_episode vehicle_state')
@@ -47,6 +56,7 @@ class World:
         id_episode = unique_timestamp_string()
         return World.Episode(id_episode, vehicle_state)
 
+# TODO: move away
 def unique_timestamp_string():
     now = datetime.datetime.now()
     s = now.isoformat()

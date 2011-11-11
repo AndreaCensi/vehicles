@@ -46,16 +46,12 @@ class StochasticBox2(World):
         
     def refresh(self):
         for c in self.circles:
-            c.set_center(self.get_random_point())
+            c.set_center(self.random_2d_point())
             c.radius = np.random.uniform(self.circles_size[0],
                                          self.circles_size[1])
         for s in self.sources:
-            s.set_center(self.get_random_point())
-            
-    def get_random_point(self):
-        x = np.random.uniform(self.bounds[0][0], self.bounds[0][1])
-        y = np.random.uniform(self.bounds[1][0], self.bounds[1][1])
-        return [x, y]
+            s.set_center(self.random_2d_point())
+             
     
     def get_primitives(self):
         return [self.box] + self.circles + self.sources

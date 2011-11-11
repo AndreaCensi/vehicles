@@ -3,7 +3,6 @@ from ..interfaces import World
 from geometry import SE3
 import time
 
-
 class VehicleSimulation():
     
     def __init__(self, vehicle, world):

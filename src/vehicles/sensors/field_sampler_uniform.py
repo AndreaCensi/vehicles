@@ -31,11 +31,19 @@ class FieldSamplerUniform(FieldSampler):
             k += 1
 
         FieldSampler.__init__(self,
+                              shape=shape,
                               positions=positions,
                               min_value=min_value,
                               max_value=max_value,
                               normalize=normalize,
                               noise=noise)
+        
+    @contract(pose='SE3')
+    def _compute_observations(self, pose):
+        # FIXME: this will not be drawn correctly
+        sensels = FieldSampler._compute_observations(self, pose)['sensels']
+        sensels = sensels[self.cell2index]
+        return dict(sensels=sensels)
         
     def to_yaml(self):
         s = FieldSampler.to_yaml(self)

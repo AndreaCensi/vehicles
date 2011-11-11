@@ -9,10 +9,16 @@ class FieldSampler(VehicleSensor):
     ''' A sensor that samples an intensity field. '''
         
     @contract(positions='seq[>0](seq[2](number))')
-    def __init__(self, positions, min_value=0, max_value=1, normalize=False, noise=None):
+    def __init__(self, positions,
+                 min_value=0, max_value=1, normalize=False, noise=None,
+                 shape=None):
         ''' 
             :param positions: 2D positions of the sensels 
         '''
+        
+        if shape is None:
+            shape = [len(positions)]
+            
         self.num_sensels = len(positions)
         self.positions = np.array(positions)
         self.min_value = min_value
@@ -25,12 +31,13 @@ class FieldSampler(VehicleSensor):
         
         boot_spec = {
             'desc': 'Field sampler',
-            'shape': [len(positions)],
+            'shape': shape,
             'format': 'C',
             'range': [self.min_value, self.max_value],
             'extra': {'positions': positions,
                       'noise_spec': self.noise_spec }
         }
+        
         VehicleSensor.__init__(self, boot_spec)
         
         self.primitives = None

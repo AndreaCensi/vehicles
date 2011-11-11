@@ -11,7 +11,6 @@
       - vehicles.worlds.Empty
       - bounds: [[-10,10],[-10,10],[-10,10]]
       
-      
 - id: test_dynamic
   desc: A test of a world with moving objects.
   code: 
@@ -34,4 +33,21 @@
         length: 10
         num_sources: 10
         source_width: 3
-        
+
+- id: SBox3_10scale1
+  desc: "A box with stochastic content, smoothed textures, scale=1m"
+  code: 
+      - vehicles.worlds.StochasticBox3
+      - width: 10
+        length: 10
+        scale: 1
+        sigma: 0.5
+
+- id: SBox3_10scale05
+  desc: "A box with stochastic content, smoothed textures, scale=0.5m"
+  code: 
+      - vehicles.worlds.StochasticBox3
+      - width: 10
+        length: 10
+        scale: 0.5
+        sigma: 0.25

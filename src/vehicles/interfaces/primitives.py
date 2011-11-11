@@ -14,16 +14,35 @@ class Primitive:
     def __repr__(self):
         return self.to_yaml().__repr__()
     
+class GeometricShape:
+    
+    def __init__(self, texture):
+        ''' The texture is a code spec. '''
+        self.texture = texture
+    
+    @abstractmethod
+    def get_perimeter(self):
+        ''' Returns the total perimeter of this shape. '''
+        pass
 
 
-class PolyLine(Primitive):
+class PolyLine(Primitive, GeometricShape):
     @contract(id_object='int', tags='seq(str)', texture='x', # XXX
               points='list[>0](seq[2](number))')
     def __init__(self, id_object, tags, texture, points):
         Primitive.__init__(self, id_object, tags)
-        self.texture = texture
+        GeometricShape.__init__(self, texture)
+
         self.points = points
         
+    def get_perimeter(self):
+        t = 0
+        for i in range(len(self.points) - 1): 
+            p1 = np.array(self.points[i])
+            p2 = np.array(self.points[i + 1])
+            t += np.linalg.norm(p1 - p2)
+        return t
+    
     def to_yaml(self):
         return {'type': 'PolyLine',
                 'surface': self.id_object,
@@ -32,17 +51,22 @@ class PolyLine(Primitive):
                 'points': self.points}
 
 
-class Circle(Primitive):
+class Circle(Primitive, GeometricShape):
+    
     @contract(id_object='int', tags='seq(str)', texture='x', # XXX
               center='seq[2](number)', radius='>0', solid='bool')
     def __init__(self, id_object, tags, texture, center, radius, solid=False):
         Primitive.__init__(self, id_object, tags)
-        self.texture = texture
+        GeometricShape.__init__(self, texture)
+
         self.radius = radius
         self.solid = solid
         self.center = [0, 0]
         self.set_center(center)
         
+    def get_perimeter(self):
+        return 2 * np.pi * self.radius
+
     @contract(center='seq[2](number)')
     def set_center(self, center):
         self.center[0] = float(center[0])

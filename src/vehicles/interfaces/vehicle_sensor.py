@@ -1,7 +1,6 @@
 from abc import abstractmethod, ABCMeta
 import numpy as np
 from pprint import pformat
-from contracts import check
 
 class VehicleSensor:
     __metaclass__ = ABCMeta
@@ -39,10 +38,10 @@ class VehicleSensor:
         if not VehicleSensor.SENSELS in observations:
             raise ValueError('No field %r in %r' % 
                             (VehicleSensor.SENSELS, observations.keys()))
-        sensels = observations[VehicleSensor.SENSELS ]
+        sensels = observations[VehicleSensor.SENSELS]
         sensels = np.array(sensels)
-        check("array[K]", sensels,
-              desc='I expect a unidimenional array/list for sensels.')
+        #check("array[K]", sensels,
+        #      desc='I expect a unidimenional array/list for sensels.')
         try:
             notfinite = not np.isfinite(sensels).all()
         except  Exception as e:
