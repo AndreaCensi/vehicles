@@ -1,5 +1,4 @@
-from contracts import contract
-import warnings
+from .. import contract, np
 
 try:
     from ros import visualization_msgs
@@ -18,6 +17,7 @@ try:
     from .ros_simulation import *
 
 except ImportError as e:
+    import warnings
     msg = """ROS Visualization packages (visualization_msgs, sensor_msgs, tf)
 not installed; not visualizing anything. (Error: %s)""" % e
     warnings.warn(msg)

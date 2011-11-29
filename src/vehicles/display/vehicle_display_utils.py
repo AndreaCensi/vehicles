@@ -1,11 +1,10 @@
 from . import (Z_GRID, Z_POLYLINE, Z_CIRCLE, Z_SOURCE, Z_ROBOT, Z_FIELD,
-    plot_sensor_data, np, contract, logger, plot_circle)
+    plot_sensor_data, np, contract, logger, plot_circle, Z_ROBOT_HEADING)
 from ..interfaces import Source
 from ..sensors import get_field_values
 from geometry import (SE2_from_SE3, translation_angle_from_SE2,
     translation_from_SE2)
 from geometry.yaml import from_yaml
-from vehicles.display import Z_ROBOT_HEADING
 
 
 def show_grid(pylab, bx, by, spacing, margin):

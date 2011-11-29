@@ -5,9 +5,14 @@ from vehicles.display import display_all
 from vehicles.simulation import VehicleSimulation
 import os
 
+usage = """
+
+    %cmd   --vehicle <vehicle> --world <world> [-o where] 
+           [-n N] [-z ZOOM] [--figsize INCHES] 
+"""
 
 def main():
-    parser = OptionParser()
+    parser = OptionParser(usage=usage)
     parser.disable_interspersed_args()
     
     parser.add_option("--vehicle", default='d_SE2_rb_v-rf360',

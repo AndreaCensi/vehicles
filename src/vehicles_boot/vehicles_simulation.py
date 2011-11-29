@@ -2,6 +2,8 @@ from bootstrapping_olympics import (EpisodeDesc, RobotInterface, StreamSpec,
     BootSpec, RobotObservations, BootOlympicsConstants)
 from vehicles import VehicleSimulation, VehiclesConfig, VehiclesConstants
 
+__all__ = ['BOVehicleSimulation']
+
 class BOVehicleSimulation(RobotInterface, VehicleSimulation):
     
     def __init__(self,

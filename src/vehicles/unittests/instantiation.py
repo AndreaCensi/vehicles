@@ -1,7 +1,4 @@
-from . import logger
 from vehicles.configuration.master import VehiclesConfig
-import os
-from vehicles.constants import VehiclesConstants
 
 def make_sure_vehicles_config_loaded():
     if not VehiclesConfig.loaded:
