@@ -3,7 +3,7 @@ from StringIO import StringIO
 from geometry import DifferentiableManifold, SE3_from_R3
 from types import NoneType
 import yaml
-   
+
 
 @for_all_dynamics
 def check_state_yaml_representation(id_dynamics, dynamics):
@@ -11,34 +11,40 @@ def check_state_yaml_representation(id_dynamics, dynamics):
     state = dynamics.pose2state(pose)
     yaml = dynamics.state_to_yaml(state)
     assert_yaml_serializable(yaml)
-    
+
+
 def assert_yaml_serializable(x):
     s = StringIO()
     yaml.dump(x, s)
+
 
 @for_all_dynamics
 def check_state_space_1a(id_dynamics, dynamics):
     state_space = dynamics.get_state_space()
     assert isinstance(state_space, DifferentiableManifold)
 
+
 @for_all_dynamics
 def check_state_space_1b(id_dynamics, dynamics):
     pose_space = dynamics.get_pose_space()
     assert isinstance(pose_space, DifferentiableManifold)
+
 
 @for_all_dynamics
 def check_state_space_1c(id_dynamics, dynamics):
     shape_space = dynamics.get_shape_space()
     assert isinstance(shape_space, (DifferentiableManifold, NoneType))
 
+
 @for_all_dynamics
 def check_state_space_2(id_dynamics, dynamics):
     pose = np.eye(4)
     state = dynamics.pose2state(pose)
     dynamics.get_state_space().friendly(state)
-    
+
+
 @for_all_dynamics
 def dynamics_to_str(id_dynamics, dynamics):
     dynamics.__str__()
-        
+
 

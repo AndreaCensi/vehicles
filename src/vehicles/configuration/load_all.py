@@ -12,7 +12,3 @@
 #        }
 #        check_valid_vehicle_config(vehicle)
 #        Configuration.vehicles[id_vehicle] = vehicle
-#    
-#    
-    
-

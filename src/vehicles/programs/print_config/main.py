@@ -5,10 +5,9 @@ import logging
 import os
 from reprep import Report
 
-logging.basicConfig();
+logging.basicConfig()
 logger = logging.getLogger("print_config")
 logger.setLevel(logging.DEBUG)
-
 
 
 usage = """
@@ -16,7 +15,7 @@ usage = """
     This program writes a simple summary of all the VehiclesConfig available.
 
     vehicles_print_config [-d <config directory>] -o outputdir
-""" 
+"""
 
 
 def main():
@@ -27,43 +26,44 @@ def main():
                       help="base directory for VehiclesConfig", metavar="FILE")
     (options, args) = parser.parse_args()
 
-    if args: 
+    if args:
         raise Exception('Spurious arguments')
     if options.outdir is None:
         raise Exception('Please pass --outdir.')
-    
+
     print_config(options.directory, options.outdir)
-    
+
+
 def print_config(directory, outdir):
     VehiclesConfig.load(directory)
-     
+
     def write_report(r):
         out = os.path.join(outdir, '%s.html' % r.id)
         rd = os.path.join(outdir, 'images')
         logger.info('Writing to %r' % out)
         r.to_html(out, resources_dir=rd)
-        
+
     worlds = VehiclesConfig.worlds
     r = Report('worlds')
     create_generic_table(r, 'VehiclesConfig', worlds, ['desc', 'code'])
     write_report(r)
-    
+
     dynamics = VehiclesConfig.dynamics
     r = Report('dynamics')
     create_generic_table(r, 'VehiclesConfig', dynamics, ['desc', 'code'])
     write_report(r)
-    
+
     sensors = VehiclesConfig.sensors
     r = Report('sensors')
     create_generic_table(r, 'VehiclesConfig', sensors, ['desc', 'code'])
     write_report(r)
-    
+
     vehicles = VehiclesConfig.vehicles
     r = Report('vehicles')
     create_generic_table(r, 'VehiclesConfig', vehicles,
                           ['desc', 'dynamics', 'id_dynamics', 'sensors'])
     write_report(r)
-    
+
 
 def create_generic_table(r, nid, name2entry, cols, caption=None):
     names = natsorted(name2entry.keys())
@@ -80,9 +80,9 @@ def create_generic_table(r, nid, name2entry, cols, caption=None):
             table.append(row)
         r.table(nid, table,
                 cols=cols, rows=names, caption=caption)
-    else: 
-        logger.warn('warn', 'Empty %r table' % nid)    
-    
+    else:
+        logger.warn('warn', 'Empty %r table' % nid)
+
 if __name__ == '__main__':
     main()
 

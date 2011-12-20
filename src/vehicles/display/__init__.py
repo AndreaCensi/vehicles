@@ -5,9 +5,8 @@ Z_FIELD = -500
 
 
 Z_SOURCE = -10
-Z_POLYLINE = 0 
+Z_POLYLINE = 0
 Z_CIRCLE = 0
-
 
 
 Z_ROBOT = 1000

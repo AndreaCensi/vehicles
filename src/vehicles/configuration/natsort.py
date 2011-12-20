@@ -4,6 +4,7 @@
 
 # By Seo Sanghyeon.  Some changes by Connelly Barnes.
 
+
 def try_int(s):
     "Convert to integer if possible."
     try: return int(s)
@@ -25,7 +26,7 @@ def natcasecmp(a, b):
 def natsort(seq, kcmp=natcmp):
     "In-place natural string sort."
     seq.sort(kcmp)
-    
+
 def natsorted(seq, kcmp=natcmp):
     "Returns a copy of seq, sorted by natural string sort."
     # convert set -> list

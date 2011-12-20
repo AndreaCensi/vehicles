@@ -5,6 +5,7 @@ from geometry import SE2_project_from_SE3
 
 __all__ = ['Rangefinder', 'RangefinderUniform']
 
+
 class Rangefinder(VehicleSensor, Raytracer):
 
     @contract(directions='seq[>0](number)', invalid='number',
@@ -18,22 +19,22 @@ class Rangefinder(VehicleSensor, Raytracer):
         self.invalid = invalid
         self.min_range = min_range
         self.max_range = max_range
-        
+
         self.noise_spec = noise
-        self.noise = (None if self.noise_spec is None else 
+        self.noise = (None if self.noise_spec is None else
                           instantiate_spec(self.noise_spec))
-        
+
         spec = {
             'desc': 'Range-finder',
             'shape': [len(directions)],
             'format': 'C',
             'range': [0, +1],
             'extra': {'directions': directions.tolist(),
-                      'noise': noise }
+                      'noise': noise}
         }
         VehicleSensor.__init__(self, spec)
         Raytracer.__init__(self, directions)
-    
+
     def to_yaml(self):
         return {'type': 'Rangefinder',
                 'noise_spec': self.noise_spec,
@@ -41,7 +42,7 @@ class Rangefinder(VehicleSensor, Raytracer):
                 'min_range': self.min_range,
                 'max_range': self.max_range,
                 'directions': self.directions.tolist()}
-    
+
     def _compute_observations(self, pose):
         pose = SE2_project_from_SE3(pose)
         data = self.raytracing(pose)
@@ -49,7 +50,7 @@ class Rangefinder(VehicleSensor, Raytracer):
         invalid = np.logical_not(data['valid'])
         readings[:] = np.minimum(readings, self.max_range)
         readings[:] = np.maximum(readings, self.min_range)
-        
+
         if self.noise is not None:
             readings = self.noise.filter(readings)
             readings = np.minimum(self.max_range, readings)
@@ -57,7 +58,7 @@ class Rangefinder(VehicleSensor, Raytracer):
 
         readings[invalid] = self.invalid
         # XXX What if invalid is not in min_range, max_range
-        sensels = ((readings - self.min_range) / 
+        sensels = ((readings - self.min_range) /
                    (self.max_range - self.min_range))
         data[VehicleSensor.SENSELS] = sensels
         return data
@@ -65,10 +66,10 @@ class Rangefinder(VehicleSensor, Raytracer):
     def set_world_primitives(self, primitives):
         Raytracer.set_world_primitives(self, primitives)
 
-    
+
 class RangefinderUniform(Rangefinder):
     @contract(fov_deg='>0,<=360', num_sensels='int,>0')
     def __init__(self, fov_deg, num_sensels, noise=None):
         directions = get_uniform_directions(fov_deg, num_sensels)
         Rangefinder.__init__(self, directions=directions, noise=noise)
-        
+

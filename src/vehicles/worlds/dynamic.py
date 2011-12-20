@@ -3,9 +3,10 @@ from ..interfaces import Circle
 
 __all__ = ['DynamicTest']
 
+
 class DynamicTest(World):
     ''' A simple example of a dynamic world. '''
-    
+
     @contract(width='>0', length='>0')
     def __init__(self, width=10, length=10):
         self.width = width
@@ -27,12 +28,11 @@ class DynamicTest(World):
                              center=[-width, -length],
                              radius=1.5,
                              solid=True)
-        
         self.time = 0
-        
+
     def get_primitives(self):
         return [self.box, self.c1, self.c2]
-    
+
     def simulate(self, dt, vehicle_pose):
         self.time += 1
         t = self.time
@@ -41,6 +41,4 @@ class DynamicTest(World):
         self.c1.center = [np.cos(t * omega) * r, np.sin(t * omega) * r]
         r2 = self.width / 3
         self.c2.center = [np.cos(t * omega) * r2, np.sin(t * omega) * r2]
-        
         return [self.c1, self.c2]
- 

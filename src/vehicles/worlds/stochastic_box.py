@@ -3,10 +3,12 @@ from ..interfaces import Circle, World
 
 __all__ = ['StochasticBox']
 
+
 class StochasticBox(World):
-    
+
     @contract(width='>0', length='>0')
-    def __init__(self, width=10, length=10, num_circles=15, circles_size=[1, 3]):
+    def __init__(self, width=10, length=10,
+                 num_circles=15, circles_size=[1, 3]):
         self.width = width
         self.length = length
         self.num_circles = num_circles
@@ -19,8 +21,8 @@ class StochasticBox(World):
         self.bounds = bounds
 
         self.box = box(0, random_checkerboard(0.5), width, length)
-       
-        self.circles = [] 
+
+        self.circles = []
         for i in range(self.num_circles):
             c = Circle(id_object=1 + i, tags=[],
                      texture=random_checkerboard(0.1),
@@ -28,18 +30,19 @@ class StochasticBox(World):
                      radius=1,
                      solid=True)
             self.circles.append(c)
-            
+
         self.refresh()
-        
+
     def refresh(self):
         for c in self.circles:
             c.set_center(self.random_2d_point())
-            radius = np.random.uniform(self.circles_size[0], self.circles_size[1])            
+            radius = np.random.uniform(self.circles_size[0],
+                                       self.circles_size[1])
             c.radius = radius
-        
+
     def get_primitives(self):
         return [self.box] + self.circles
-    
+
     def new_episode(self):
         self.refresh()
         return World.new_episode(self)

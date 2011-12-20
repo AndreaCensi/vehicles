@@ -5,43 +5,44 @@ from geometry import SE2_project_from_SE3
 
 __all__ = ['FieldSampler', 'get_field_values', 'get_field_value']
 
+
 class FieldSampler(VehicleSensor):
     ''' A sensor that samples an intensity field. '''
-        
+
     @contract(positions='seq[>0](seq[2](number))')
     def __init__(self, positions,
                  min_value=0, max_value=1, normalize=False, noise=None,
                  shape=None):
-        ''' 
+        '''
             :param positions: 2D positions of the sensels 
         '''
-        
+
         if shape is None:
             shape = [len(positions)]
-            
+
         self.num_sensels = len(positions)
         self.positions = np.array(positions)
         self.min_value = min_value
         self.max_value = max_value
         self.normalize = normalize
-        
+
         self.noise_spec = noise
-        self.noise = (None if self.noise_spec is None else 
+        self.noise = (None if self.noise_spec is None else
                           instantiate_spec(self.noise_spec))
-        
+
         boot_spec = {
             'desc': 'Field sampler',
             'shape': shape,
             'format': 'C',
             'range': [self.min_value, self.max_value],
             'extra': {'positions': positions,
-                      'noise_spec': self.noise_spec }
+                      'noise_spec': self.noise_spec}
         }
-        
+
         VehicleSensor.__init__(self, boot_spec)
-        
+
         self.primitives = None
-    
+
     def to_yaml(self):
         return {'type': 'FieldSampler',
                 'noise_spec': self.noise_spec,
@@ -49,7 +50,7 @@ class FieldSampler(VehicleSensor):
                 'max_value': self.max_value,
                 'positions': self.positions.tolist(),
                 'normalize': self.normalize}
-    
+
     @contract(pose='SE3')
     def _compute_observations(self, pose):
         if self.primitives is None:
@@ -58,32 +59,33 @@ class FieldSampler(VehicleSensor):
         sensels = np.zeros(self.num_sensels)
         for i in range(self.num_sensels):
             upoint = np.hstack((self.positions[i], 1))
-            world_point = np.dot(pose, upoint)[:2] # XXX
+            world_point = np.dot(pose, upoint)[:2]  # XXX
             sensels[i] = get_field_value(self.primitives, world_point)
-        
+
         if self.normalize:
             sensels -= np.min(sensels)
             if np.max(sensels) > 0:
                 sensels *= self.max_value / np.max(sensels)
-            
+
         if self.noise is not None:
             sensels = self.noise.filter(sensels)
-        
+
         sensels = np.minimum(self.max_value, sensels)
         sensels = np.maximum(self.min_value, sensels)
-            
+
         data = dict(sensels=sensels)
         return data
 
     def set_world_primitives(self, primitives):
         # XXX this does not work with changing environments
-        if primitives: # FIXME: only find changed things
+        if primitives:  # FIXME: only find changed things
             sources = [p for p in primitives if isinstance(p, Source)]
             if not sources:
                 logger.debug('Warning: no sources given for field sampler.')
                 logger.debug('I got: %s' % primitives)
         if self.primitives is None:
             self.primitives = primitives
+
 
 def get_field_value(primitives, point):
     values = []
@@ -96,6 +98,7 @@ def get_field_value(primitives, point):
     else:
         return np.mean(values)
 
+
 def get_field_values(primitives, X, Y):
     values = []
     for p in primitives:
@@ -107,4 +110,4 @@ def get_field_values(primitives, X, Y):
     else:
         return np.mean(values, axis=0)
 
-   
+

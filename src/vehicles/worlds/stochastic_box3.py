@@ -4,8 +4,9 @@ from vehicles.worlds.utils import random_checkerboard_smooth
 
 __all__ = ['StochasticBox3']
 
+
 class StochasticBox3(World):
-    
+
     @contract(width='>0', length='>0')
     def __init__(self, width=10, length=10,
                         num_circles=15, circles_size=[1, 3],
@@ -19,12 +20,12 @@ class StochasticBox3(World):
                   [-length * r, +length * r],
                   [0, 5]]
         World.__init__(self, bounds)
-        
+
         texture = lambda: random_checkerboard_smooth(scale, sigma)
 
         self.box = box(0, texture(), width, length)
-       
-        self.circles = [] 
+
+        self.circles = []
         for i in range(num_circles):
             c = Circle(id_object=1 + i, tags=[],
                      texture=texture(),
@@ -32,9 +33,9 @@ class StochasticBox3(World):
                      radius=1,
                      solid=True)
             self.circles.append(c)
-            
+
         self.refresh()
-        
+
     def refresh(self):
         for c in self.circles:
             p = self.random_2d_point()
@@ -42,10 +43,10 @@ class StochasticBox3(World):
                                        self.circles_size[1])
             c.set_center(p)
             c.radius = radius
-        
+
     def get_primitives(self):
         return [self.box] + self.circles
-    
+
     def new_episode(self):
         self.refresh()
         return World.new_episode(self)

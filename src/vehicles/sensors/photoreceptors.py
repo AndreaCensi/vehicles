@@ -8,27 +8,26 @@ __all__ = ['Photoreceptors', 'PhotoreceptorsUniform']
 
 class Photoreceptors(VehicleSensor, TexturedRaytracer):
     """ This is a very shallow wrap around ImageRangeSensor """
-    
+
     @contract(directions='seq[>0](number)')
     def __init__(self, directions, noise=None, invalid=0.5):
         self.invalid = invalid
-        
-        self.noise_spec = noise    
-        self.noise = (None if self.noise_spec is None else 
+
+        self.noise_spec = noise
+        self.noise = (None if self.noise_spec is None else
                           instantiate_spec(self.noise_spec))
-            
+
         spec = {
             'desc': 'Photoreceptors',
             'shape': [len(directions)],
             'format': 'C',
             'range': [0, +1],
             'extra': {'directions': directions.tolist(),
-                      'noise': self.noise_spec }
+                      'noise': self.noise_spec}
         }
         VehicleSensor.__init__(self, spec)
-        
-        TexturedRaytracer.__init__(self, directions)
 
+        TexturedRaytracer.__init__(self, directions)
 
     def to_yaml(self):
         return {'type': 'Photoreceptors',
@@ -60,4 +59,4 @@ class PhotoreceptorsUniform(Photoreceptors):
         directions = get_uniform_directions(fov_deg, num_sensels)
         Photoreceptors.__init__(self, directions=directions,
                                         noise=noise)
-        
+

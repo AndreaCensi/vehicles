@@ -1,6 +1,7 @@
 from .. import VehicleSimulation, logger
 from . import for_all_world_vehicle_pairs, np
 
+
 def random_commands(commands_spec):
     values = []
     for i, kind in enumerate(commands_spec['format']):
@@ -9,15 +10,16 @@ def random_commands(commands_spec):
             value = lower + np.random.rand() * (upper - lower)
         elif kind == 'D':
             value = np.random.randint(lower, upper)
-        else: 
+        else:
             raise ValueError('Invalid kind %r in %s.' % (kind, commands_spec))
         values.append(value)
     return values
 
+
 def check_simulation(sim, num_episodes, num_instants, dt):
-    for k in range(num_episodes): #@UnusedVariable
+    for _ in range(num_episodes):
         sim.new_episode()
-        for i in range(num_instants): #@UnusedVariable
+        for _ in range(num_instants):
             cmds = random_commands(sim.vehicle.dynamics.get_commands_spec())
             sim.simulate(cmds, dt)
             sim.compute_observations()
@@ -31,7 +33,7 @@ def check_simulation(sim, num_episodes, num_instants, dt):
 #    for id_world, id_vehicle in itertools.product(worlds, vehicles):
 #        # XXX: check compatible
 #        # if compatible
-#        vehicle = VehiclesConfig.vehicles.instance(id_vehicle) #@UndefinedVariable
+#        vehicle = VehiclesConfig.vehicles.instance(id_vehicle) 
 #        world = VehiclesConfig.worlds.instance(id_world) #@UndefinedVariable
 #        simulation = VehicleSimulation(vehicle, world)
 #        num_episodes = 3
@@ -51,7 +53,7 @@ def check_simulation(sim, num_episodes, num_instants, dt):
 def check_simulation_one_step_conf(id_world, world, id_vehicle, vehicle):
     sim = VehicleSimulation(vehicle, world)
     dt = 1
-    try: 
+    try:
         sim.new_episode()
         cmds = random_commands(sim.vehicle.dynamics.get_commands_spec())
         sim.simulate(cmds, dt)

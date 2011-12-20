@@ -1,9 +1,10 @@
 from . import random_checkerboard, np, contract
 from ..interfaces import World, PolyLine
 
+
 class Box(World):
     ''' A simple box. '''
-    
+
     @contract(width='>0', length='>0')
     def __init__(self, width=10, length=10):
         r = 1
@@ -12,13 +13,14 @@ class Box(World):
         self.width = width
         self.length = length
         texture = random_checkerboard(0.5)
-        points = [ [-1, -1], [-1, 1], [1, 1], [1, -1], [-1, -1]]
-        
-        points = [ (np.array(p) * np.array([width, length])).tolist() for p in points]
-        self.box = PolyLine(id_object=0, tags=[], texture=texture, points=points)
+        points = [[-1, -1], [-1, 1], [1, 1], [1, -1], [-1, -1]]
+        points = [(np.array(p) * np.array([width, length])).tolist()
+                  for p in points]
+        self.box = PolyLine(id_object=0, tags=[], texture=texture,
+                            points=points)
 
     def get_primitives(self):
         return [self.box]
-    
+
     def simulate(self, dt, vehicle_pose):
         return []

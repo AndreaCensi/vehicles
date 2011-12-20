@@ -1,9 +1,11 @@
 import cjson
 
+
 class CJSONStream(object):
+
     def __init__(self, input_stream):
         self.input = input_stream
-        
+
     # def read_next(self):
     #     for line in self.input:
     #         # line = self.input.readline()
@@ -22,4 +24,4 @@ class CJSONStream(object):
             line = line.strip()
             if line:
                 return cjson.decode(line)
-        
+

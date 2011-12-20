@@ -4,14 +4,14 @@ from contracts import contract
 import numpy as np
 
 try:
-	import bootstrapping_olympics
-	boot_installed = True
+    import bootstrapping_olympics
+    boot_installed = True
 except ImportError:
-	boot_installed = False
+    boot_installed = False
 
 if boot_installed:
-	from .vehicles_simulation import *
-	from .ros_visualization import *
+    from .vehicles_simulation import *
+    from .ros_visualization import *
 else:
-	import warnings #@Reimport
-	warnings.warn('Package BootOlympics not installed.')
+    import warnings  # @Reimport
+    warnings.warn('Package BootOlympics not installed.')

@@ -1,6 +1,4 @@
-from . import SampledTexture
-import numpy as np
-from contracts import contract
+from . import SampledTexture, np, contract
 
 
 class RandomCheckerboard(SampledTexture):
@@ -9,5 +7,5 @@ class RandomCheckerboard(SampledTexture):
     def __init__(self, cell_width=1, num=100, seed=0):
         generator = np.random.mtrand.RandomState(seed)
         values = generator.uniform(0, 1, num)
-        
+
         SampledTexture.__init__(self, values, cell_width)

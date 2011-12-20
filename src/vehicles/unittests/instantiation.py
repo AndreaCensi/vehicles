@@ -1,15 +1,16 @@
 from vehicles.configuration.master import VehiclesConfig
 
+
 def make_sure_vehicles_config_loaded():
     if not VehiclesConfig.loaded:
 #        v = VehiclesConstants.TEST_ADDITIONAL_CONFIG_DIR_ENV
 #        if v in os.environ:
 #            for dirname in os.environ[v].split(':'):
 #                logger.info('Using additional dir %r.' % dirname)
-#                VehiclesConfig.load(dirname)             
+#                VehiclesConfig.load(dirname)
 #        else:
 #            logger.info('Use env var %s to add more config dirs.' % v)
-        VehiclesConfig.load() 
+        VehiclesConfig.load()
 
 
 def all_dynamics():
@@ -20,6 +21,7 @@ def all_dynamics():
         raise Exception('No dynamics defined in this configuration.')
     return dynamics
 
+
 def all_sensors():
     ''' Returns a list of all test sensors IDs. '''
     make_sure_vehicles_config_loaded()
@@ -27,6 +29,7 @@ def all_sensors():
     if not sensors:
         raise Exception('No sensors defined in this configuration.')
     return sensors
+
 
 def all_worlds():
     ''' Returns a list of all test world IDs. '''
@@ -36,6 +39,7 @@ def all_worlds():
         raise Exception('No worlds defined in this configuration.')
     return worlds
 
+
 def all_vehicles():
     ''' Returns a list of all test world IDs. '''
     make_sure_vehicles_config_loaded()
@@ -44,18 +48,22 @@ def all_vehicles():
         raise Exception('No vehicles defined in this configuration.')
     return vehicles
 
+
 def get_dynamics(id_dynamics):
     make_sure_vehicles_config_loaded()
-    return VehiclesConfig.dynamics.instance(id_dynamics) #@UndefinedVariable
+    return VehiclesConfig.dynamics.instance(id_dynamics)  # @UndefinedVariable
+
 
 def get_world(id_world):
     make_sure_vehicles_config_loaded()
-    return VehiclesConfig.worlds.instance(id_world) #@UndefinedVariable
+    return VehiclesConfig.worlds.instance(id_world)  # @UndefinedVariable
+
 
 def get_vehicle(id_vehicle):
     make_sure_vehicles_config_loaded()
-    return VehiclesConfig.vehicles.instance(id_vehicle) #@UndefinedVariable
+    return VehiclesConfig.vehicles.instance(id_vehicle)  # @UndefinedVariable
+
 
 def get_sensor(id_sensor):
     make_sure_vehicles_config_loaded()
-    return VehiclesConfig.sensors.instance(id_sensor) #@UndefinedVariable
+    return VehiclesConfig.sensors.instance(id_sensor)  # @UndefinedVariable

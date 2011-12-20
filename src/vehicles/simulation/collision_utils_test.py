@@ -1,15 +1,18 @@
+from . import np
 from .collision_utils import (PrimitiveIntersection, circle_circle_intersection,
     circle_segment_intersection)
 from geometry.basic_utils import assert_allclose
-import numpy as np
 import unittest
+
 
 # shortcuts
 cci = circle_circle_intersection
 csi = circle_segment_intersection
 
+
 def pi(normal, penetration):
     return PrimitiveIntersection(np.array(normal), penetration)
+
 
 class CollisionUtilsTest(unittest.TestCase):
 
@@ -30,8 +33,8 @@ class CollisionUtilsTest(unittest.TestCase):
         (csi, ([0, 0], 1, [+0.5, +1.0], [+0.5, -1.0]), pi([-1, 0], 0.5)),
         (csi, ([0, 0], 1, [-1.0, -1.0], [+1.0, -1.0]), pi([0, +1], 0.0)),
         (csi, ([0, 0], 1, [-1.0, +1.0], [+1.0, +1.0]), pi([0, -1], 0.0)),
-        
-        
+
+
         # inside the other
         (cci, ([0, 0], 1, [0, 0], 1.0), pi([1, 0], 2.0)),
         (cci, ([0, 0], 0.5, [0, 0], 1.0), pi([1, 0], 1.5)),
@@ -41,7 +44,8 @@ class CollisionUtilsTest(unittest.TestCase):
     def test_circle_circle_intersection(self):
         for function, params, expected in CollisionUtilsTest.all_tests:
             result = function(*params)
-            err_msg = 'Invalid match for %s:%s' % (function.__name__, params.__repr__())
+            err_msg = 'Invalid match for %s:%s' % (function.__name__,
+                                                   params.__repr__())
             err_msg += '\n expected: %s' % expected.__repr__()
             err_msg += '\n obtained: %s' % result.__repr__()
             if expected is None:
@@ -49,13 +53,14 @@ class CollisionUtilsTest(unittest.TestCase):
             else:
                 if result is None:
                     raise Exception(err_msg)
-                assert_allclose(expected[0], result[0], atol=1e-8, err_msg=err_msg)
+                assert_allclose(expected[0], result[0], atol=1e-8,
+                                err_msg=err_msg)
                 assert_allclose(expected[1], result[1], err_msg=err_msg)
 
 
 def test_solid():
     assert None != circle_circle_intersection([0, 0], 1, [0, 0], 2, True)
     assert None == circle_circle_intersection([0, 0], 1, [0, 0], 2, False)
-    
-    
-    
+
+
+
