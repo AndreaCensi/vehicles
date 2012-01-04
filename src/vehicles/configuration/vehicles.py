@@ -67,10 +67,10 @@ def instance_vehicle_spec(entry):
         for sensor in sensors:
             if 'id_sensor' in sensor:
                 id_sensor = sensor['id_sensor']
-                sensor_instance = VehiclesConfig.sensors.instance(id_sensor) #@UndefinedVariable
+                sensor_instance = VehiclesConfig.sensors.instance(id_sensor)  # @UndefinedVariable
             else:
                 id_sensor = sensor['sensor']['id']
-                sensor_instance = VehiclesConfig.sensors.instance_spec(sensor['sensor']) #@UndefinedVariable
+                sensor_instance = VehiclesConfig.sensors.instance_spec(sensor['sensor']) # @UndefinedVariable
             assert isinstance(sensor_instance, VehicleSensor)
             x, y, theta_deg = sensor['pose']
             theta = np.radians(theta_deg)
