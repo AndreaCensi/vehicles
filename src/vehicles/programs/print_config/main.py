@@ -3,7 +3,6 @@ from .natsort import natsorted
 from optparse import OptionParser
 import logging
 import os
-from reprep import Report
 
 logging.basicConfig()
 logger = logging.getLogger("print_config")
@@ -35,6 +34,8 @@ def main():
 
 
 def print_config(directory, outdir):
+    from reprep import Report
+
     VehiclesConfig.load(directory)
 
     def write_report(r):

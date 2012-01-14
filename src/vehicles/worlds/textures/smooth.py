@@ -1,6 +1,6 @@
 from . import SampledTexture, np, contract
 from conf_tools import instantiate_spec
-from numpy.testing.utils import assert_allclose
+from geometry import assert_allclose
 import scipy.signal
 
 
