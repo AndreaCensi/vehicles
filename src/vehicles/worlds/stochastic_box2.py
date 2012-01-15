@@ -1,6 +1,5 @@
-from . import random_checkerboard, box, np, contract
+from . import Counter, random_checkerboard, box, np, contract
 from ..interfaces import Circle, World, Source
-from vehicles.worlds.utils import Counter
 
 __all__ = ['StochasticBox2', 'KernelExponential', 'KernelInverse']
 

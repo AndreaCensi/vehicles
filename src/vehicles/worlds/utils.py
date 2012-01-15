@@ -27,9 +27,12 @@ def box(id_object, texture, width, length):
     return PolyLine(id_object=0, tags=[],
                     texture=texture, points=points)
 
+
 class Counter:
+
     def __init__(self):
         self.k = -1
+
     def __call__(self):
         self.k += 1
         return self.k

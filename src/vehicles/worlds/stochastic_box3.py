@@ -1,7 +1,6 @@
-from . import  box, np, contract
+from . import box, np, contract, Counter
 from ..interfaces import Circle, World
 from vehicles.worlds.utils import random_checkerboard_smooth
-from Crypto.Util import Counter
 
 __all__ = ['StochasticBox3']
 
