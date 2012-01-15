@@ -27,7 +27,7 @@ def add_dynamics_f(f, id_dynamics):
         dynamics = get_dynamics(id_dynamics)
         wrap_with_desc(f, (id_dynamics, dynamics), dynamics=dynamics)
     test_caller.dynamics = id_dynamics
-    test_caller.__name__ = '%s-%s' % (f.__name__, id_dynamics)
+    test_caller.__name__ = '%s_%s' % (f.__name__, id_dynamics)
     add_to_module(test_caller, f.__module__)
 
 
@@ -38,7 +38,7 @@ def add_pair_f(f, id_dynamics, id_sensor):
         sensor = get_sensor(id_sensor)
         wrap_with_desc(f, (id_dynamics, dynamics, id_sensor, sensor),
                        dynamics=dynamics, sensor=sensor)
-    test_caller.__name__ = '%s-%s-%s' % (f.__name__, id_dynamics, id_sensor)
+    test_caller.__name__ = '%s_%s_%s' % (f.__name__, id_dynamics, id_sensor)
     test_caller.dynamics = id_dynamics
     test_caller.sensor = id_sensor
     add_to_module(test_caller, f.__module__)
@@ -51,7 +51,7 @@ def add_world_vehicle_f(f, id_world, id_vehicle):
         vehicle = get_vehicle(id_vehicle)
         wrap_with_desc(f, (id_world, world, id_vehicle, vehicle),
                             world=world, vehicle=vehicle)
-    test_caller.__name__ = '%s-%s-%s' % (f.__name__, id_world, id_vehicle)
+    test_caller.__name__ = '%s_%s_%s' % (f.__name__, id_world, id_vehicle)
     test_caller.world = id_world
     test_caller.vehicle = id_vehicle
     add_to_module(test_caller, f.__module__)
@@ -63,7 +63,7 @@ def add_world_f(f, id_world):
         world = get_world(id_world)
         wrap_with_desc(f, (id_world, world), world=world)
     test_caller.world = id_world
-    test_caller.__name__ = '%s-%s' % (f.__name__, id_world)
+    test_caller.__name__ = '%s_%s' % (f.__name__, id_world)
     add_to_module(test_caller, f.__module__)
 
 
@@ -73,7 +73,7 @@ def add_sensor_f(f, id_sensor):
         sensor = get_sensor(id_sensor)
         wrap_with_desc(f, (id_sensor, sensor), sensor=sensor)
     test_caller.sensor = id_sensor
-    test_caller.__name__ = '%s-%s' % (f.__name__, id_sensor)
+    test_caller.__name__ = '%s_%s' % (f.__name__, id_sensor)
     add_to_module(test_caller, f.__module__)
 
 
@@ -83,7 +83,7 @@ def add_vehicle_f(f, id_vehicle):
         vehicle = get_vehicle(id_vehicle)
         wrap_with_desc(f, (id_vehicle, vehicle), vehicle=vehicle)
     test_caller.vehicle = id_vehicle
-    test_caller.__name__ = '%s-%s' % (f.__name__, id_vehicle)
+    test_caller.__name__ = '%s_%s' % (f.__name__, id_vehicle)
     add_to_module(test_caller, f.__module__)
 
 
