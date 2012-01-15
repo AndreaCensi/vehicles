@@ -1,6 +1,7 @@
 from contextlib import contextmanager
 import numpy as np
 
+
 def cairo_plot_polyline(cr, x, y):
     cr.move_to(x[0], y[0])
     for i in range(1, len(x)):

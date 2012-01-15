@@ -1,6 +1,7 @@
 from . import  box, np, contract
 from ..interfaces import Circle, World
 from vehicles.worlds.utils import random_checkerboard_smooth
+from Crypto.Util import Counter
 
 __all__ = ['StochasticBox3']
 
@@ -23,11 +24,13 @@ class StochasticBox3(World):
 
         texture = lambda: random_checkerboard_smooth(scale, sigma)
 
-        self.box = box(0, texture(), width, length)
+        id_object = Counter()
+
+        self.box = box(id_object(), texture(), width, length)
 
         self.circles = []
-        for i in range(num_circles):
-            c = Circle(id_object=1 + i, tags=[],
+        for _ in range(num_circles):
+            c = Circle(id_object=id_object(), tags=[],
                      texture=texture(),
                      center=[0, 0],
                      radius=1,

@@ -73,7 +73,9 @@ class VehicleSimulation():
             # TODO: change name
             pose = episode.vehicle_state
             SE3.belongs(pose)
-            self.vehicle.set_world_primitives(self.world.get_primitives())
+            primitives = self.world.get_primitives()
+            check_primitives(primitives)
+            self.vehicle.set_world_primitives(primitives)
             collision = self.vehicle.colliding_pose(pose)
             if not collision.collided:
                 self.vehicle.set_pose(pose)
@@ -108,3 +110,13 @@ class VehicleSimulation():
             'last_commands': self.last_commands.tolist(),
         }
         return data
+
+
+def check_primitives(primitives):
+    ids = [p.id_object for p in primitives]
+    if len(set(ids)) != len(ids):
+        msg = "Repeated IDs: %s" % ids
+        msg += ' Each primitive must have a different id_object. '
+        raise ValueError(msg)
+
+

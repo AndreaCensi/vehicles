@@ -1,11 +1,15 @@
 from ... import logger
 from optparse import OptionParser
+from reprep import MIME_PNG
+from reprep.constants import MIME_SVG
 from vehicles import VehiclesConfig
 from vehicles.display import display_all
 from vehicles.simulation import VehicleSimulation
+from vehicles_cairo import (vehicles_cairo_display_pdf,
+    vehicles_cairo_display_png)
+from vehicles_cairo.display_all import vehicles_cairo_display_svg
+import numpy as np
 import os
-from vehicles_cairo.display_all import vehicles_cairo_display_all
-from reprep.constants import MIME_PNG
 
 usage = """
 
@@ -35,6 +39,8 @@ def main():
 
     parser.add_option("--cairo", default=False, action='store_true')
 
+    parser.add_option("--seed", default=None, type='int')
+
     (options, args) = parser.parse_args()
     if args: raise Exception()
 
@@ -44,39 +50,51 @@ def main():
     logger.info('id_vehicle: %s' % id_vehicle)
     logger.info('  id_world: %s' % id_world)
 
+    if options.seed is None:
+        options.seed = np.random.randint(1000000)
+
+    np.random.seed(seed=options.seed)
+    logger.info('Using seed %s (your lucky number is %s)' %
+                (options.seed, np.random.randint(1000)))
+
+
     vehicle = VehiclesConfig.vehicles.instance(id_vehicle) #@UndefinedVariable
     world = VehiclesConfig.worlds.instance(id_world) #@UndefinedVariable
+
     simulation = VehicleSimulation(vehicle, world)
 
     from reprep import Report, MIME_PDF
     basename = 'display-%s-%s' % (id_vehicle, id_world)
     r = Report(basename)
-
+    r.text('seed', 'Seed = %s' % options.seed)
     for i in range(options.n):
         sec = r.node('simulation%d' % i)
         f = sec.figure()
+
         simulation.new_episode()
         simulation.compute_observations()
+
         sim_state = simulation.to_yaml()
+
+        plot_params = dict(grid=options.grid,
+                           zoom=options.zoom, show_sensor_data=True)
         if True:
             print('Not cairo')
             with f.plot('start', figsize=(options.figsize,
                                                 options.figsize)) as pylab:
-                    display_all(pylab, sim_state, grid=options.grid, zoom=options.zoom,
-                                show_sensor_data=True)
+                    display_all(pylab, sim_state, **plot_params)
 
-            if False:
-                with f.plot('pdf', mime=MIME_PDF,
-                                  figsize=(options.figsize,
-                                          options.figsize)) as pylab:
-                        display_all(pylab, sim_state, grid=1, zoom=0, show_sensor_data=True)
-#        else:
-#            print('Cairo')
-            with f.data_file('start_cairo', MIME_PNG) as filename:
-#                filename_pdf = filename + '.pdf'
-                vehicles_cairo_display_all(filename,
-                            sim_state, grid=options.grid, zoom=options.zoom,
-                             show_sensor_data=True)
+            with f.data_file('start_cairo_png', MIME_PNG) as filename:
+                vehicles_cairo_display_png(filename, width=800, height=800,
+                            sim_state=sim_state, **plot_params)
+
+            with f.data_file('start_cairo_pdf', MIME_PDF) as filename:
+                vehicles_cairo_display_pdf(filename, width=800, height=800,
+                            sim_state=sim_state, **plot_params)
+
+            with f.data_file('start_cairo_svg', MIME_SVG) as filename:
+                vehicles_cairo_display_svg(filename, width=800, height=800,
+                            sim_state=sim_state, **plot_params)
 
 
     filename = os.path.join(options.outdir, '%s.html' % basename)

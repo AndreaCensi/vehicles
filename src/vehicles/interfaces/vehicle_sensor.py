@@ -2,12 +2,13 @@ from abc import abstractmethod, ABCMeta
 import numpy as np
 from pprint import pformat
 
+
 class VehicleSensor:
     __metaclass__ = ABCMeta
-    
+
     def __init__(self, observations_spec):
         self.observations_spec = observations_spec
-           
+
     @abstractmethod
     def set_world_primitives(self, primitives):
         pass
@@ -17,7 +18,7 @@ class VehicleSensor:
         pass
 
     SENSELS = 'sensels'
-    
+
     def compute_observations(self, pose):
         """ Computes the observations for this vehicle         
         Args: 
@@ -36,7 +37,7 @@ class VehicleSensor:
         if not isinstance(observations, dict):
             raise ValueError('This should return a dict()')
         if not VehicleSensor.SENSELS in observations:
-            raise ValueError('No field %r in %r' % 
+            raise ValueError('No field %r in %r' %
                             (VehicleSensor.SENSELS, observations.keys()))
         sensels = observations[VehicleSensor.SENSELS]
         sensels = np.array(sensels)
@@ -49,16 +50,16 @@ class VehicleSensor:
             print('Data is: %s' % sensels.dtype)
             print((observations))
             notfinite = False
-            
+
         if notfinite:
-            msg = ('Not all are valid:\n%s\n%s' % 
+            msg = ('Not all are valid:\n%s\n%s' %
                    (sensels, pformat(observations)))
             print(msg)
             print('pose: %s' % pose) # XXX
             # XXX: - we will solve this later.
             sensels[np.logical_not(np.isfinite(sensels))] = 0.5
             raise ValueError(msg)
-        
+
         # XXX: maybe somewhere else?
 #        if sensels.size != self.num_sensels:
 #            raise ValueError('I was expecting %d sensels, not %s.' % 
@@ -69,6 +70,6 @@ class VehicleSensor:
     @abstractmethod
     def _compute_observations(self, pose):
         pass
-    
+
     def __repr__(self):
         return self.__class__.__name__

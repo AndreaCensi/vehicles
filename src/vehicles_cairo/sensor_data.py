@@ -3,14 +3,15 @@ from geometry.yaml import from_yaml
 from geometry.poses import SE2_from_SE3, translation_angle_from_SE2
 from contracts import contract
 from vehicles_cairo.utils import cairo_plot_circle
-from geometry.manifolds import SE2
 
 
 def cairo_plot_sensor_data(cr, vehicle_state, rho_min=0.05):
     for attached in vehicle_state['sensors']:
         sensor = attached['sensor']
         observations = attached['current_observations']
+        #print 'robot->sensor', attached['pose']
         sensor_pose = SE2_from_SE3(from_yaml(attached['current_pose']))
+        #print 'sensor_pose: %s' % SE2.friendly(sensor_pose)
         if sensor['type'] == 'Rangefinder':
             plot_ranges(cr=cr,
                         pose=sensor_pose,
@@ -20,7 +21,6 @@ def cairo_plot_sensor_data(cr, vehicle_state, rho_min=0.05):
                         rho_min=rho_min
                         )
         elif sensor['type'] == 'Photoreceptors':
-            print 'sensor_pose: %s' % SE2.friendly(sensor_pose)
             plot_photoreceptors(cr=cr,
                         pose=sensor_pose,
                         directions=np.array(sensor['directions']),
@@ -80,12 +80,6 @@ def plot_ranges(cr, pose, directions, valid, readings, rho_min=0.05):
     directions = directions[valid]
     readings = readings[valid]
 
-    print('directions', np.rad2deg(directions))
-    print('readings', readings)
-
-    t = np.rad2deg(directions)
-#    print t[1:] - t[:-1]
-#    print t[0] - t[-1] + 360
     for theta_i, rho_i in zip(directions, readings):
         plot_ray(cr, sensor_t, sensor_theta + theta_i,
                  rho1=rho_min,

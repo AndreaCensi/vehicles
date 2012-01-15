@@ -1,4 +1,4 @@
-from . import random_checkerboard, box, np, contract
+from . import random_checkerboard, box, np, contract, Counter
 from ..interfaces import Circle, World
 
 __all__ = ['StochasticBox']
@@ -20,15 +20,18 @@ class StochasticBox(World):
         World.__init__(self, bounds)
         self.bounds = bounds
 
-        self.box = box(0, random_checkerboard(0.5), width, length)
+        id_object = Counter()
+
+        self.box = box(id_object(), random_checkerboard(0.5), width, length)
 
         self.circles = []
-        for i in range(self.num_circles):
-            c = Circle(id_object=1 + i, tags=[],
-                     texture=random_checkerboard(0.1),
-                     center=[0, 0],
-                     radius=1,
-                     solid=True)
+        for _ in range(self.num_circles):
+            c = Circle(id_object=id_object(),
+                       tags=[],
+                       texture=random_checkerboard(0.1),
+                       center=[0, 0],
+                       radius=1,
+                       solid=True)
             self.circles.append(c)
 
         self.refresh()

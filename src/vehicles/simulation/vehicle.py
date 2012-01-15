@@ -1,6 +1,8 @@
 from . import collides_with, np, compute_collision, contract
 from geometry import translation_from_SE2, SE2_project_from_SE3
 from geometry.yaml import to_yaml
+from geometry.manifolds import SE2, SE3
+from geometry.poses import SE2_from_SE3
 
 
 class Vehicle:
@@ -14,6 +16,12 @@ class Vehicle:
             self.current_pose = None
 
         def to_yaml(self):
+            if self.current_observations is None:
+                raise Exception('Observations not computed')
+#            print(' serializing: rel pose: %s'
+#                  % SE2.friendly(SE2_from_SE3(self.pose)))
+#            print(' serializing: current pose: %s'
+#                  % SE2.friendly(SE2_from_SE3(self.current_pose)))
             return {
                 'sensor': self.sensor.to_yaml(),
                 'pose': to_yaml('SE3', self.pose),
@@ -39,6 +47,7 @@ class Vehicle:
         # pose, velocity
         configuration = self.dynamics.joint_state(self._get_state(), 0)
         pose = configuration[0]
+        #print ('Serializing robot_pose: %s' % SE2.friendly(SE2_from_SE3(pose)))
         data = {
             'radius': self.radius,
             'id_sensors': self.id_sensors,
@@ -99,6 +108,8 @@ class Vehicle:
 
         self._state = state
 
+        # TODO: invalidate observations?
+
     def simulate(self, commands, dt):
         # TODO: collisions
         def dynamics_function(t):
@@ -130,7 +141,10 @@ class Vehicle:
         for attached in self.sensors:
             pose = self.dynamics.joint_state(self._get_state(), attached.joint)
             j_pose, _ = pose
-            attached.current_pose = np.dot(j_pose, attached.pose)
+            #print('joint pose: %s' % SE2.friendly(SE2_from_SE3(j_pose)))
+            #print('  relative: %s' % SE2.friendly(SE2_from_SE3(attached.pose)))
+            attached.current_pose = SE3.multiply(j_pose, attached.pose)
+            #print('   current: %s' % SE2.friendly(SE2_from_SE3(attached.current_pose)))
             attached.current_observations = \
                 attached.sensor.compute_observations(attached.current_pose)
             sensels = attached.current_observations['sensels']

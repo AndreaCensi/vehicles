@@ -1,5 +1,6 @@
 from . import random_checkerboard, box, np, contract
 from ..interfaces import Circle, World, Source
+from vehicles.worlds.utils import Counter
 
 __all__ = ['StochasticBox2', 'KernelExponential', 'KernelInverse']
 
@@ -21,26 +22,26 @@ class StochasticBox2(World):
         World.__init__(self, bounds)
         self.bounds = bounds
 
-        self.box = box(0, random_checkerboard(0.5), width, length)
+        id_object = Counter()
+
+        self.box = box(id_object(), random_checkerboard(0.5), width, length)
 
         self.circles = []
-        id_object = 0
+
         for _ in range(num_circles):
-            c = Circle(id_object=id_object, tags=[],
+            c = Circle(id_object=id_object(), tags=[],
                      texture=random_checkerboard(0.1),
                      center=[0, 0],
                      radius=1,
                      solid=True)
             self.circles.append(c)
-            id_object += 1
 
         self.sources = []
         for _ in range(num_sources):
-            c = Source(id_object=id_object, tags=[],
+            c = Source(id_object=id_object(), tags=[],
                      center=[0, 0],
                      kernel_spec=KernelInverse.spec(2, 1))
             self.sources.append(c)
-            id_object += 1
 
         self.refresh()
 

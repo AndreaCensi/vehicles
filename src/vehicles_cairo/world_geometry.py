@@ -22,7 +22,7 @@ def cairo_plot_sources(cr, world_state):
                        bounds=bounds)
 
 
-def cairo_show_world_geometry(cr, world_state):
+def cairo_show_world_geometry(cr, world_state, plot_sources=False):
     bounds = world_state['bounds']
     primitives = world_state['primitives']
 
@@ -50,7 +50,7 @@ def cairo_show_world_geometry(cr, world_state):
                                   width=CairoConstants.obstacle_border_width)
 
             elif p['type'] == 'Source':
-                if True:
+                if plot_sources:
                     cairo_plot_circle(cr, center=p['center'], radius=0.05,
                                       edgecolor=[0, 0, 0],
                                       facecolor=[1, 0, 0],
@@ -62,7 +62,6 @@ def cairo_show_world_geometry(cr, world_state):
 def cairo_plot_sources_field(cr, sources, bounds, disc=[100, 100], alpha=0.5,
                        cmap='Greens'):
     if not sources:
-        print('No sources given.')
         return
 
     xb = bounds[0]
@@ -76,9 +75,8 @@ def cairo_plot_sources_field(cr, sources, bounds, disc=[100, 100], alpha=0.5,
     C = C - C.min()
     C = C / C.max()
     C = 1 - C
-    print C.max(), C.min()
-    Cscal = ((C) * 255).astype('uint8')
 
+    Cscal = ((C) * 255).astype('uint8')
 
     data = np.empty((disc[0], disc[1], 4), dtype=np.uint8)
     data.fill(255)
