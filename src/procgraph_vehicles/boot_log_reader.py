@@ -49,12 +49,13 @@ class BOLogReader(Generator):
                         msg = ('No episodes found for %r/%r' %
                                (id_robot, id_agent))
                         raise Exception(msg)
+
+                # FIXME: check here if there is robot_state in the extra
                 for obs in index.read_all_robot_streams(id_robot=id_robot,
                                                         id_agent=id_agent,
                                                         read_extra=read_extra):
                     yield obs['timestamp'], obs
             else:
-                self.info('Reading episode %s' % id_episode)
                 for obs in index.read_robot_episode(id_robot=id_robot,
                                                     id_episode=id_episode,
                                                     read_extra=read_extra):
@@ -80,7 +81,7 @@ class BOLogReader(Generator):
 
     def update(self):
         if not self.has_next:
-            return  # XXX: error here?
+            return  # XXX: error here? 
 
         self.set_output(0, value=self.next_value,
                         timestamp=self.next_timestamp)

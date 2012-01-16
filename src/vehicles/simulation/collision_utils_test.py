@@ -1,7 +1,7 @@
 from . import np
-from .collision_utils import (PrimitiveIntersection, circle_circle_intersection,
+from . import (PrimitiveIntersection, circle_circle_intersection,
     circle_segment_intersection)
-from geometry.basic_utils import assert_allclose
+from geometry import assert_allclose
 import unittest
 
 

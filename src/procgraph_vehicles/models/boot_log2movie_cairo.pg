@@ -1,0 +1,26 @@
+--- model boot_log2movie_cairo
+config logdir 'Base log dir'
+config id_robot
+config id_agent = ""
+config id_episode = ""
+config zoom = 0
+config width = 400
+config height =400
+config output 'output basename (without .avi)'
+
+import procgraph_vehicles
+
+|boot_log_reader logdir=$logdir id_robot=$id_robot id_agent=$id_agent id_episode=$id_episode| -> observations 
+
+    observations -> |extract_from_extra fieldname='robot_state'| -> state_
+
+     state_ --> |use_simulation_time| --> state
+    
+     state -> |vehicles_cairo_display width=$width  height=$height zoom=$zoom \
+                file="${output}.pdf"| 
+    
+    observations -> |extract_sensels| -> sensels
+    observations -> |extract_commands| -> commands
+    observations -> |extract_timeinfo| -> info
+   
+    

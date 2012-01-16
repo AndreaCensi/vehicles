@@ -1,10 +1,8 @@
-from vehicles_cairo import CairoConstants
-from vehicles_cairo.utils import (cairo_plot_polyline, cairo_save,
-    cairo_plot_circle)
-import numpy as np
-from vehicles.interfaces.primitives import Source
+from . import (cairo_plot_polyline, cairo_save, cairo_plot_circle, cairo,
+    CairoConstants)
+from vehicles.interfaces import Source
 from vehicles.sensors.field_sampler import get_field_values
-import cairo
+import numpy as np
 
 
 def cairo_plot_sources(cr, world_state):
@@ -42,12 +40,13 @@ def cairo_show_world_geometry(cr, world_state, plot_sources=False):
                     cairo_plot_polyline(cr, points[0, :], points[1, :])
 
             elif p['type'] == 'Circle':
-                facecolor = CairoConstants.obstacle_fill_color if p['solid'] else None
+                facecolor = (CairoConstants.obstacle_fill_color
+                             if p['solid'] else None)
 
                 cairo_plot_circle(cr, center=p['center'], radius=p['radius'],
-                                  edgecolor=CairoConstants.obstacle_border_color,
-                                  facecolor=facecolor,
-                                  width=CairoConstants.obstacle_border_width)
+                                edgecolor=CairoConstants.obstacle_border_color,
+                                facecolor=facecolor,
+                                width=CairoConstants.obstacle_border_width)
 
             elif p['type'] == 'Source':
                 if plot_sources:
@@ -85,8 +84,9 @@ def cairo_plot_sources_field(cr, sources, bounds, disc=[100, 100], alpha=0.5,
     data[:, :, 2] = Cscal
 #    data[:, :, 3] = Cscal
 
-    image = cairo.ImageSurface.create_for_data(
-                        data, cairo.FORMAT_ARGB32, disc[0], disc[1], disc[1] * 4) # XXX
+    image = cairo.ImageSurface.create_for_data(#@UndefinedVariable
+                        data, cairo.FORMAT_ARGB32, #@UndefinedVariable
+                         disc[0], disc[1], disc[1] * 4)
 
     with cairo_save(cr):
         Z = float(disc[0]) / (xb[1] - xb[0])

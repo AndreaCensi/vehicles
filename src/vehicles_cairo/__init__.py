@@ -7,8 +7,18 @@ class CairoConstants:
     grid_color = [0, 0, 0]
     grid_width = 0.005
 
-from .utils import *
-from .world_geometry import *
-from .sensor_data import *
-from .display_all import *
+
+try:
+    import cairo #@UnresolvedImport
+    vehicles_has_cairo = True
+
+except ImportError as e:
+    cairo_error = e
+    vehicles_has_cairo = False
+
+else:
+    from .utils import *
+    from .world_geometry import *
+    from .sensor_data import *
+    from .display_all import *
 

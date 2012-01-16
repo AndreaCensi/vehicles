@@ -1,7 +1,7 @@
-from vehicles.display.vehicle_display_utils import display_all
-from vehicles.simulation.simulation import VehicleSimulation
-from vehicles.unittests.generation import for_all_vehicles
-from vehicles.unittests.instantiation import get_world
+from ...display import display_all
+from ...simulation import VehicleSimulation
+from .. import for_all_vehicles
+from .. import get_world
 
 
 @for_all_vehicles
@@ -17,3 +17,5 @@ def plotting(id_vehicle, vehicle):
     from matplotlib import pylab
     display_all(pylab, sim_state, grid=1, zoom=1,
                             show_sensor_data=True)
+
+# TODO: add cairo tests

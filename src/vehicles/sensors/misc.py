@@ -6,7 +6,8 @@ def get_uniform_directions(fov_deg, num_sensels):
     if fov_deg == 360:
         ray_dist = 2 * np.pi / (num_sensels)
         directions = np.linspace(-np.pi + ray_dist / 2,
-                                 + np.pi - ray_dist + ray_dist / 2, num_sensels)
+                                 + np.pi - ray_dist + ray_dist / 2,
+                                 num_sensels)
 
         assert_allclose(directions[-1] - directions[0], 2 * np.pi - ray_dist)
 

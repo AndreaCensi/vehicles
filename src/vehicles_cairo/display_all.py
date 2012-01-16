@@ -1,17 +1,16 @@
 from . import (cairo_plot_sensor_data, cairo_plot_sources, cairo_save,
-    cairo_show_world_geometry)
+    cairo_show_world_geometry, cairo, CairoConstants)
 from contracts import contract
-from geometry import SE2, translation_from_SE2, SE2_from_SE3
+from geometry import translation_from_SE2, SE2_from_SE3
 from geometry.yaml import from_yaml
-from vehicles_cairo import CairoConstants
 import geometry
 import numpy as np
 
 
 def vehicles_cairo_display_png(filename, width, height, sim_state,
                                **plotting_params):
-    import cairo #@UnresolvedImport
-    surf = cairo.ImageSurface(cairo.FORMAT_ARGB32, width, height) #@UndefinedVariable
+    surf = cairo.ImageSurface(cairo.FORMAT_ARGB32, #@UndefinedVariable 
+                              width, height)
     cr = cairo.Context(surf) #@UndefinedVariable
 
     vehicles_cairo_display_all(cr, width, height, sim_state, **plotting_params)
@@ -21,7 +20,6 @@ def vehicles_cairo_display_png(filename, width, height, sim_state,
 
 def vehicles_cairo_display_pdf(filename, width, height, sim_state,
                                 **plotting_params):
-    import cairo #@UnresolvedImport
     surf = cairo.PDFSurface(filename, width, height) #@UndefinedVariable
     cr = cairo.Context(surf) #@UndefinedVariable
     vehicles_cairo_display_all(cr, width, height, sim_state, **plotting_params)
@@ -31,7 +29,6 @@ def vehicles_cairo_display_pdf(filename, width, height, sim_state,
 
 def vehicles_cairo_display_svg(filename, width, height, sim_state,
                                 **plotting_params):
-    import cairo #@UnresolvedImport
     surf = cairo.SVGSurface(filename, width, height) #@UndefinedVariable
     cr = cairo.Context(surf) #@UndefinedVariable
     vehicles_cairo_display_all(cr, width, height, sim_state, **plotting_params)
@@ -41,7 +38,6 @@ def vehicles_cairo_display_svg(filename, width, height, sim_state,
 
 def vehicles_cairo_display_all(cr, width, height,
                             sim_state, grid=1, zoom=0, show_sensor_data=True):
-    import cairo
     # Paint white
     with cairo_save(cr):
         cr.set_source_rgb(1.0, 1.0, 1)
@@ -159,7 +155,7 @@ def show_grid(cr, bx, by, spacing, margin):
         cr.stroke()
 
     S = spacing
-    M = margin  # margin (cells)
+    #M = margin  # margin (cells)
     M = 0
     xmin = (np.floor(bx[0] / S) - M) * S
     xmax = (np.ceil(bx[1] / S) + M) * S
