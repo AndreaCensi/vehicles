@@ -38,7 +38,7 @@ class World:
     def simulate(self, dt, vehicle_pose):
         '''
             Simulates the world for dt.
-
+            
             Returns a list of the updated ids. (XXX: or not?)
         '''
 

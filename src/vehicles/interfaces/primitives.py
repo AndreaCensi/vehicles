@@ -2,6 +2,9 @@
     These are the geometric primitives in our simulation that define
     the world.
 '''
+
+# TODO: remove "tags"
+
 from . import contract, np
 from abc import abstractmethod
 from conf_tools import instantiate_spec
@@ -96,11 +99,15 @@ class Field:
 
 
 class Source(Primitive, Field):
-    ''' A point-source is what field samplers are sensitive to. '''
+    ''' 
+        A point-source is what field samplers are sensitive to. 
+    '''
 
     @contract(center='seq[2](number)')
     def __init__(self, id_object, tags, center, kernel_spec):
         '''
+            Initializes the structure.
+            
             :param:center: 2D position of the source
             :param:kernel: Scalar function from distance to intensity.
                            Described as a code spec.
