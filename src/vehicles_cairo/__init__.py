@@ -29,7 +29,7 @@ except ImportError as e:
 
 else:
     from .utils import *
-    from .robot_skins import *
+    from .skins import *
     from .world_geometry import *
     from .sensor_data import *
     from .display_all import *

@@ -32,9 +32,8 @@ def check_vehicle_sensor_entry(s):
     if not isinstance(s, dict):
         raise BadConfig(s, 'I expect this to be a dictionary, not %s' %
                         describe_type(s))
-    if not 'pose' in s:
-        raise ValueError('Missing field "pose".')
-    check_valid_pose_spec(s['pose'])
+    if 'pose' in s:
+        check_valid_pose_spec(s['pose'])
 
     alternatives = [('sensor', dict), ('id_sensor', str)]
     check_has_exactly_one(s, alternatives)
@@ -62,7 +61,8 @@ def instance_vehicle_spec(entry):
 
         sensors = entry['sensors']
         radius = entry['radius']
-        vehicle = Vehicle(radius)
+        extra = entry['extra']
+        vehicle = Vehicle(radius=radius, extra=extra)
         vehicle.add_dynamics(id_dynamics, dynamics)
         for sensor in sensors:
             if 'id_sensor' in sensor:
@@ -72,7 +72,9 @@ def instance_vehicle_spec(entry):
                 id_sensor = sensor['sensor']['id']
                 sensor_instance = VehiclesConfig.sensors.instance_spec(sensor['sensor']) # @UndefinedVariable
             assert isinstance(sensor_instance, VehicleSensor)
-            x, y, theta_deg = sensor['pose']
+
+            # TODO: document this
+            x, y, theta_deg = sensor.get('pose', [0, 0, 0])
             theta = np.radians(theta_deg)
             pose = SE2_from_translation_angle([x, y], theta)
             pose = SE3_from_SE2(pose)

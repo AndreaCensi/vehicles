@@ -4,6 +4,7 @@ from . import (cairo_robot_skin_circular, cairo_plot_sensor_data,
 from contracts import contract
 from geometry import translation_from_SE2, SE2_from_SE3
 from geometry.yaml import from_yaml
+from vehicles.configuration.master import VehiclesConfig
 
 
 def vehicles_cairo_display_png(filename, width, height, sim_state,
@@ -79,7 +80,15 @@ def vehicles_cairo_display_all(cr, width, height,
             with cairo_save(cr):
                 with cairo_rototranslate(cr, robot_pose):
                     cr.scale(robot_radius, robot_radius)
-                    cairo_robot_skin_circular(cr)
+
+                    #print('Extra: %r' % vehicle_state['extra'])
+                    id_skin = vehicle_state['extra'].get('skin', 'default_skin')
+
+                    skin = VehiclesConfig.skins.instance(id_skin) #@UndefinedVariable
+
+                    skin.draw_vehicle(cr, joints=[])
+
+                    #cairo_robot_skin_circular(cr)
 
         if show_sensor_data:
             cairo_plot_sensor_data(cr, vehicle_state, rho_min=robot_radius)

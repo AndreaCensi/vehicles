@@ -1,13 +1,10 @@
-from ... import   logger
+from ... import logger
 from optparse import OptionParser
 from reprep import MIME_PNG, Report
-from vehicles_cairo import (cairo_plot_circle,
-    cairo_robot_skin_brai, cairo_set_axis,
-    show_grid, cairo_robot_skin_circular, cairo_robot_skin_ddrive,
-    cairo_robot_skin_omni)
-
+from vehicles import VehiclesConfig
+from vehicles_cairo import cairo_plot_circle, cairo_set_axis, show_grid
 import os
-from vehicles_cairo.robot_skins import cairo_robot_skin_brai_classic
+
 
 usage = """
 
@@ -22,6 +19,9 @@ def main():
     parser.add_option("--outdir", "-o", default='.',
                     help="output directory [%default]")
 
+#    parser.add_option("--outdir", "-o", default='.',
+#                    help="additional config directory [%default]")
+
     (options, args) = parser.parse_args()
     if args: raise Exception()
 
@@ -34,15 +34,13 @@ def main():
 
     import cairo
 
-    skins = [cairo_robot_skin_circular,
-             cairo_robot_skin_ddrive,
-             cairo_robot_skin_omni,
-             cairo_robot_skin_brai,
-             cairo_robot_skin_brai_classic]
+    VehiclesConfig.make_sure_loaded()
 
-    for skin_function in skins:
-        name = skin_function.__name__
-        with f.data_file(name, MIME_PNG) as filename:
+    skins = VehiclesConfig.specs['skins'].keys()
+    print skins
+    for id_skin in skins:
+        skin = VehiclesConfig.specs['skins'].instance(id_skin)
+        with f.data_file(id_skin, MIME_PNG) as filename:
             surf = cairo.ImageSurface(cairo.FORMAT_ARGB32, #@UndefinedVariable 
                                       width, height)
             cr = cairo.Context(surf) #@UndefinedVariable
@@ -54,7 +52,7 @@ def main():
 
             show_grid(cr, bx=[-3, +3], by=[-3, +3], spacing=1.0)
 
-            skin_function(cr)
+            skin.draw_vehicle(cr, joints=[])
 
             surf.write_to_png(filename) # Output to PNG
 

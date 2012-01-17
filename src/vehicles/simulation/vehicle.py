@@ -29,12 +29,17 @@ class Vehicle:
                 'current_pose': to_yaml('SE3', self.current_pose),
             }
 
-    def __init__(self, radius=0.5):
+    def __init__(self, radius=0.5, extra={}):
+        """ 
+            :param:extra: extra information
+                extra['skin'] id of the skin
+        """
         self.radius = radius
         self.sensors = []  # array of Attached
         self.id_sensors = None
         self.id_dynamics = None  # XXX
         self.dynamics = None
+        self.extra = extra
 
         self.primitives = set()
 
@@ -53,6 +58,7 @@ class Vehicle:
             'conf': to_yaml('TSE3', configuration),
             'state': self.dynamics.state_to_yaml(self._get_state()),
             'sensors': [s.to_yaml() for s in self.sensors],
+            'extra': self.extra
         }
         return data
 

@@ -75,3 +75,22 @@ def cairo_plot_circle(cr, center, radius, edgecolor=None,
             cairo_set_color(cr, edgecolor)
             cr.stroke()
 
+
+def roundedrec(context, x, y, w, h, r=10):
+    "Draw a rounded rectangle"
+    #   A****BQ
+    #  H      C
+    #  *      *
+    #  G      D
+    #   F****E
+
+    context.move_to(x + r, y)
+    context.line_to(x + w - r, y)
+    context.curve_to(x + w, y, x + w, y, x + w, y + r)
+    context.line_to(x + w, y + h - r)
+    context.curve_to(x + w, y + h, x + w, y + h, x + w - r, y + h)
+    context.line_to(x + r, y + h)
+    context.curve_to(x, y + h, x, y + h, x, y + h - r)
+    context.line_to(x, y + r)
+    context.curve_to(x, y, x, y, x + r, y)
+

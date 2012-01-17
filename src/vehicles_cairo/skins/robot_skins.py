@@ -1,24 +1,5 @@
-from . import cairo_transform, cairo_save, cairo_set_color, CairoConstants, np
-
-
-def roundedrec(context, x, y, w, h, r=10):
-    "Draw a rounded rectangle"
-    #   A****BQ
-    #  H      C
-    #  *      *
-    #  G      D
-    #   F****E
-
-    context.move_to(x + r, y)                      # Move to A
-    context.line_to(x + w - r, y)                    # Straight line to B
-    context.curve_to(x + w, y, x + w, y, x + w, y + r)       # Curve to C, Control points are both at Q
-    context.line_to(x + w, y + h - r)                  # Move to D
-    context.curve_to(x + w, y + h, x + w, y + h, x + w - r, y + h) # Curve to E
-    context.line_to(x + r, y + h)                    # Line to F
-    context.curve_to(x, y + h, x, y + h, x, y + h - r)       # Curve to G
-    context.line_to(x, y + r)                      # Line to H
-    context.curve_to(x, y, x, y, x + r, y)             # Curve to A
-
+from .. import (roundedrec, cairo_transform, cairo_save, cairo_set_color,
+    CairoConstants, np)
 
 
 def cairo_robot_skin_circular(cr):
@@ -80,7 +61,7 @@ def cairo_robot_skin_omni(cr):
         cairo_robot_skin_circular(cr)
 
 
-def cairo_robot_skin_brai(cr):
+def cairo_robot_skin_brai(cr, sensors=False):
     with cairo_save(cr):
         h = 0.8
         w = 1.3
@@ -110,27 +91,28 @@ def cairo_robot_skin_brai(cr):
             with cairo_transform(cr, t=[0, y]):
                 wheel(cr, w=wheel_w, h=wheel_h)
 
-
-def cairo_robot_skin_brai_classic(cr):
-    with cairo_save(cr):
-        h = 0.8
-        w = 1.3
-        x0 = -.3
-        wheel_h = 0.15
-        wheel_w = 0.4
-        M = h / 2 + .8 * wheel_h
-
-        cairo_robot_skin_brai(cr)
-
-        for y in [.3 * h, -.3 * h]:
-            with cairo_transform(cr, t=[0, y]):
-                cr.set_line_width(CairoConstants.robot_border_width)
-                cairo_set_color(cr, CairoConstants.robot_border_color)
-                cr.move_to(0, 0)
-                cr.line_to(1.1, 0)
-                cr.stroke()
-                r = .1
-                with cairo_transform(cr, t=[1.1 + r, 0]):
-                    cr.arc(0, 0, r, +np.pi / 2, -np.pi / 2)
+        if sensors:
+            for y in [.3 * h, -.3 * h]:
+                with cairo_transform(cr, t=[0, y]):
+                    cr.set_line_width(CairoConstants.robot_border_width)
+                    cairo_set_color(cr, CairoConstants.robot_border_color)
+                    cr.move_to(0, 0)
+                    cr.line_to(1.1, 0)
                     cr.stroke()
+                    r = .1
+                    with cairo_transform(cr, t=[1.1 + r, 0]):
+                        cr.arc(0, 0, r, +np.pi / 2, -np.pi / 2)
+                        cr.stroke()
+#
+#def cairo_robot_skin_brai_classic(cr):
+#    with cairo_save(cr):
+#        h = 0.8
+#        w = 1.3
+#        x0 = -.3
+#        wheel_h = 0.15
+#        wheel_w = 0.4
+#        M = h / 2 + .8 * wheel_h
+#
+#        cairo_robot_skin_brai(cr)
+#
 

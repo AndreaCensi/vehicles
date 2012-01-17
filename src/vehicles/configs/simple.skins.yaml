@@ -1,0 +1,35 @@
+- id: default_skin
+  desc: "Default skin; a circular robot."
+  code:
+  - vehicles_cairo.skins.circular
+  - {}
+
+- id: circular
+  desc: "A circular robot."
+  code:
+  - vehicles_cairo.skins.circular
+  - {}
+
+- id: ddrive
+  desc: "Round differential-drive."
+  code:
+  - vehicles_cairo.skins.ddrive
+  - {}
+
+- id: omni
+  desc: "Round omnidirectinal."
+  code:
+  - vehicles_cairo.skins.omni
+  - {}
+
+- id: brai_base
+  desc: "Braitenberg base."
+  code:
+  - vehicles_cairo.skins.brai
+  - sensors: False
+
+- id: brai_classic
+  desc: "Braitenberg base + receptors."
+  code:
+  - vehicles_cairo.skins.brai
+  - sensors: True
