@@ -16,11 +16,16 @@ import procgraph_vehicles
 
      state_ --> |use_simulation_time| --> state
     
-     state -> |vehicles_cairo_display width=$width  height=$height zoom=$zoom \
-                file="${output}.pdf"| 
+     observations -> |extract_sensels| -> sensels
+     observations -> |extract_commands| -> commands
     
-    observations -> |extract_sensels| -> sensels
-    observations -> |extract_commands| -> commands
+    sensels -> |reshape2d| --> |scale min_value=0 nan_color=[1,1,1]| -->  sensels_rgb
+    commands -> |reshape2d height=1| --> |posneg max_value=1| --> commands_rgb
+
+        
+     observations[boot_obs], state[state], sensels_rgb[observations], commands_rgb[commands] -> |sync|-> |vehicles_cairo_display width=$width  height=$height zoom=$zoom \
+                file="${output}.pdf"| 
+
     observations -> |extract_timeinfo| -> info
    
     

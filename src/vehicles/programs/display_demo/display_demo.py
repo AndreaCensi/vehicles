@@ -1,13 +1,9 @@
-from ... import logger
+from ... import VehicleSimulation, VehiclesConfig, logger
+from ...display import display_all
 from optparse import OptionParser
-from reprep import MIME_PNG
-from reprep.constants import MIME_SVG
-from vehicles import VehiclesConfig
-from vehicles.display import display_all
-from vehicles.simulation import VehicleSimulation
+from reprep import MIME_PNG, MIME_SVG
 from vehicles_cairo import (vehicles_cairo_display_pdf,
-    vehicles_cairo_display_png)
-from vehicles_cairo.display_all import vehicles_cairo_display_svg
+    vehicles_cairo_display_png, vehicles_cairo_display_svg)
 import numpy as np
 import os
 

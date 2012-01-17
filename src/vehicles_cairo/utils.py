@@ -1,5 +1,7 @@
 from contextlib import contextmanager
 import numpy as np
+from contracts import contract
+import geometry
 
 
 def cairo_plot_polyline(cr, x, y):
@@ -16,6 +18,44 @@ def cairo_save(cr):
     cr.restore()
 
 
+@contextmanager
+def cairo_transform(cr, t=[0, 0], r=0, s=1):
+    with cairo_save(cr):
+        cr.translate(t[0], t[1])
+        cr.rotate(r)
+        cr.scale(s, s)
+        yield cr
+
+
+@contextmanager
+@contract(pose='SE2')
+def cairo_rototranslate(cr, pose):
+    t, r = geometry.translation_angle_from_SE2(pose)
+    with cairo_transform(cr, t=t, r=r)as cr:
+        yield cr
+
+
+@contract(a='seq[4](number)')
+def cairo_set_axis(cr, width, height, a):
+    xmin, xmax, ymin, ymax = a
+    cr.translate(width / 2, height / 2)
+    Z = max(float(xmax - xmin) / width,
+            float(ymax - ymin) / height)
+    assert Z > 0
+    cr.scale(1 / Z, -1 / Z)
+    xmid = (xmin + xmax) / 2.0
+    ymid = (ymin + ymax) / 2.0
+    cr.translate(-xmid, -ymid)
+
+
+@contract(col='seq[3]|seq[4]')
+def cairo_set_color(cr, col):
+    if len(col) == 3:
+        cr.set_source_rgb(col[0], col[1], col[2])
+    else:
+        cr.set_source_rgba(col[0], col[1], col[2], col[3])
+
+
 def cairo_plot_circle(cr, center, radius, edgecolor=None,
                       facecolor=None, width=None):
     with cairo_save(cr):
@@ -24,7 +64,7 @@ def cairo_plot_circle(cr, center, radius, edgecolor=None,
 
         if facecolor is not None:
             cr.arc(0, 0, 1, 0, 2 * np.pi)
-            cr.set_source_rgb(*facecolor)
+            cairo_set_color(cr, facecolor)
             cr.fill()
 
         if width is not None:
@@ -32,6 +72,6 @@ def cairo_plot_circle(cr, center, radius, edgecolor=None,
 
         if edgecolor is not None:
             cr.arc(0, 0, 1, 0, 2 * np.pi)
-            cr.set_source_rgb(*edgecolor)
+            cairo_set_color(cr, edgecolor)
             cr.stroke()
 

@@ -30,32 +30,34 @@ def cairo_show_world_geometry(cr, world_state, plot_sources=False):
         cr.rectangle(xb[0], yb[0], xb[1] - xb[0], yb[1] - yb[0])
         cr.clip()
 
-        for p in primitives:
-            if p['type'] == 'PolyLine':
-                points = np.array(p['points']).T
+        for i in range(2):
+            for p in primitives:
+                if p['type'] == 'PolyLine':
+                    points = np.array(p['points']).T
 
-                with cairo_save(cr):
-                    cr.set_line_width(CairoConstants.obstacle_border_width)
-                    cr.set_source_rgb(*CairoConstants.obstacle_border_color)
-                    cairo_plot_polyline(cr, points[0, :], points[1, :])
+                    with cairo_save(cr):
+                        cr.set_line_width(CairoConstants.obstacle_border_width)
+                        cr.set_source_rgb(*CairoConstants.obstacle_border_color)
+                        cairo_plot_polyline(cr, points[0, :], points[1, :])
 
-            elif p['type'] == 'Circle':
-                facecolor = (CairoConstants.obstacle_fill_color
-                             if p['solid'] else None)
+                elif p['type'] == 'Circle':
+                    facecolor = (CairoConstants.obstacle_fill_color
+                                 if p['solid'] else None)
 
-                cairo_plot_circle(cr, center=p['center'], radius=p['radius'],
-                                edgecolor=CairoConstants.obstacle_border_color,
-                                facecolor=facecolor,
-                                width=CairoConstants.obstacle_border_width)
+                    cairo_plot_circle(cr, center=p['center'], radius=p['radius'],
+                                    edgecolor=CairoConstants.obstacle_border_color
+                                    if i == 0 else None,
+                                    facecolor=facecolor,
+                                    width=CairoConstants.obstacle_border_width)
 
-            elif p['type'] == 'Source':
-                if plot_sources:
-                    cairo_plot_circle(cr, center=p['center'], radius=0.05,
-                                      edgecolor=[0, 0, 0],
-                                      facecolor=[1, 0, 0],
-                                      width=0.01)
-            else:
-                pass # XXX 
+                elif p['type'] == 'Source':
+                    if plot_sources:
+                        cairo_plot_circle(cr, center=p['center'], radius=0.05,
+                                          edgecolor=[0, 0, 0],
+                                          facecolor=[1, 0, 0],
+                                          width=0.01)
+                else:
+                    pass # XXX 
 
 
 def cairo_plot_sources_field(cr, sources, bounds, disc=[100, 100], alpha=0.5,
