@@ -10,7 +10,6 @@ import os
 from procgraph import BadConfig
 
 
-
 class VehiclesCairoDisplay(Block):
     ''' Produces a top-down plot of a circular arena.
     '''
@@ -26,6 +25,8 @@ class VehiclesCairoDisplay(Block):
     # Sidebar options
     Block.config('display_sidebar', default=True)
     Block.config('sidebar_width', default=1024 - 768)
+
+    Block.config('trace', 'Trace the path', default=False)
 
     Block.config('zoom', 'Either 0 for global map, '
                  'or a value giving the size of the window', default=0)
@@ -72,7 +73,8 @@ class VehiclesCairoDisplay(Block):
         self.argb_data.fill(255)
 
         self.surf = cairo.ImageSurface.create_for_data(#@UndefinedVariable
-                        self.argb_data, cairo.FORMAT_ARGB32, #@UndefinedVariable
+                        self.argb_data,
+                        cairo.FORMAT_ARGB32, #@UndefinedVariable
                          w, h, w * 4)
 
     def update(self):
@@ -132,10 +134,14 @@ class VehiclesCairoDisplay(Block):
             with cairo_save(cr):
                 cr.rectangle(0, 0, map_width, map_height)
                 cr.clip()
+
+                # TODO: implement trace
+
                 vehicles_cairo_display_all(cr,
                                        map_width,
                                        map_height,
-                                       sim_state, **plotting_params)
+                                       sim_state,
+                                       **plotting_params)
 
             if self.config.display_sidebar:
                 cr.set_line_width(1)
