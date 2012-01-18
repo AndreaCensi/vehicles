@@ -50,27 +50,29 @@ def instance_vehicle_spec(entry):
 
     check_valid_vehicle_config(entry)
     try:
+        master = VehiclesConfig.specs['dynamics']
         if 'id_dynamics' in entry:
             id_dynamics = entry['id_dynamics']
-            dynamics = VehiclesConfig.dynamics.instance(id_dynamics) #@UndefinedVariable
+            dynamics = master.instance(id_dynamics)
         else:
             id_dynamics = entry['dynamics']['id']
-            dynamics = VehiclesConfig.dynamics.instance_spec(entry['dynamics']) #@UndefinedVariable
+            dynamics = master.instance_spec(entry['dynamics'])
 
         assert isinstance(dynamics, Dynamics)
 
         sensors = entry['sensors']
         radius = entry['radius']
-        extra = entry['extra']
+        extra = entry.get('extra', {})
         vehicle = Vehicle(radius=radius, extra=extra)
         vehicle.add_dynamics(id_dynamics, dynamics)
         for sensor in sensors:
+            master = VehiclesConfig.specs['sensors']
             if 'id_sensor' in sensor:
                 id_sensor = sensor['id_sensor']
-                sensor_instance = VehiclesConfig.sensors.instance(id_sensor)  # @UndefinedVariable
+                sensor_instance = master.instance(id_sensor)
             else:
                 id_sensor = sensor['sensor']['id']
-                sensor_instance = VehiclesConfig.sensors.instance_spec(sensor['sensor']) # @UndefinedVariable
+                sensor_instance = master.instance_spec(sensor['sensor'])
             assert isinstance(sensor_instance, VehicleSensor)
 
             # TODO: document this

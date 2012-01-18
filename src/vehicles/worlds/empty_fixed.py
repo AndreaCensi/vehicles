@@ -11,7 +11,7 @@ class EmptyFixed(World):
     """ Empty world; vehicle starts always at the same pose. """
 
     @contract(start_pose='seq[3](number)')
-    def __init__(self, bounds, start_pose):
+    def __init__(self, bounds, start_pose=[0, 0, 0]):
         World.__init__(self, bounds)
         self.start_pose = start_pose
 

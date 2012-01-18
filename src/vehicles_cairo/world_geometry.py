@@ -3,6 +3,7 @@ from . import (cairo_plot_polyline, cairo_save, cairo_plot_circle, cairo,
 from vehicles.interfaces import Source
 from vehicles.sensors.field_sampler import get_field_values
 import numpy as np
+from vehicles_cairo.utils import cairo_set_color
 
 
 def cairo_plot_sources(cr, world_state):
@@ -37,15 +38,16 @@ def cairo_show_world_geometry(cr, world_state, plot_sources=False):
 
                     with cairo_save(cr):
                         cr.set_line_width(CairoConstants.obstacle_border_width)
-                        cr.set_source_rgb(*CairoConstants.obstacle_border_color)
+                        cairo_set_color(CairoConstants.obstacle_border_color)
                         cairo_plot_polyline(cr, points[0, :], points[1, :])
 
                 elif p['type'] == 'Circle':
                     facecolor = (CairoConstants.obstacle_fill_color
                                  if p['solid'] else None)
 
-                    cairo_plot_circle(cr, center=p['center'], radius=p['radius'],
-                                    edgecolor=CairoConstants.obstacle_border_color
+                    cairo_plot_circle(cr, center=p['center'],
+                                      radius=p['radius'],
+                                edgecolor=CairoConstants.obstacle_border_color
                                     if i == 0 else None,
                                     facecolor=facecolor,
                                     width=CairoConstants.obstacle_border_width)

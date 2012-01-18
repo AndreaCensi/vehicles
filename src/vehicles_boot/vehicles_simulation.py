@@ -21,19 +21,22 @@ class BOVehicleSimulation(RobotInterface, VehicleSimulation):
             raise ValueError('Specify exactly one of "vehicle" '
                              'and "id_vehicle".')
 
+        vehicles = VehiclesConfig.specs['vehicles']
+        worlds = VehiclesConfig.specs['worlds']
+
         if vehicle is not None:
             id_vehicle = vehicle['id']
             # TODO: check well formed
-            vehicle = VehiclesConfig.vehicles.instance_spec(vehicle) #@UndefinedVariable
+            vehicle = vehicles.instance_spec(vehicle)
         else:
-            vehicle = VehiclesConfig.vehicles.instance(id_vehicle) #@UndefinedVariable
+            vehicle = vehicles.instance(id_vehicle)
 
         if world is not None:
             id_world = world['id']
             # TODO: check well formed
-            world = VehiclesConfig.worlds.instance_spec(world) #@UndefinedVariable
+            world = worlds.instance_spec(world)
         else:
-            world = VehiclesConfig.worlds.instance(id_world) #@UndefinedVariable
+            world = worlds.instance(id_world)
 
         self.id_world = id_world
         self.id_vehicle = id_vehicle

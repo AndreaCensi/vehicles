@@ -16,7 +16,6 @@
   code: 
       - vehicles.worlds.EmptyFixed
       - bounds: [[-10,10],[-10,10],[-10,10]]
-        pose: [0,0,0]
       
       
 - id: test_dynamic
