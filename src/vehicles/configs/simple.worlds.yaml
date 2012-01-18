@@ -6,10 +6,18 @@
         length: 10
 
 - id: empty
-  desc: The void.
+  desc: An empty world (no obstacles at all)
   code: 
       - vehicles.worlds.Empty
       - bounds: [[-10,10],[-10,10],[-10,10]]
+
+- id: empty_fixed
+  desc: An empty world (no obstacles at all); robot starts from pose.
+  code: 
+      - vehicles.worlds.EmptyFixed
+      - bounds: [[-10,10],[-10,10],[-10,10]]
+        pose: [0,0,0]
+      
       
 - id: test_dynamic
   desc: A test of a world with moving objects.

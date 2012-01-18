@@ -1,13 +1,14 @@
 from contracts import contract
 from procgraph import Block
 from procgraph.block_utils import make_sure_dir_exists
-from vehicles_cairo import cairo_transform, vehicles_cairo_display_all
+from procgraph_images import posneg, scale, reshape2d
+from vehicles_cairo import (cairo_set_color, cairo_save, cairo_transform,
+    vehicles_cairo_display_all)
 import itertools
 import numpy as np
 import os
-from vehicles_cairo.utils import cairo_set_color, cairo_save
-from procgraph_images.copied_from_reprep import posneg, scale
-from procgraph_pil.pil_operations import resize
+from procgraph import BadConfig
+
 
 
 class VehiclesCairoDisplay(Block):
@@ -16,46 +17,90 @@ class VehiclesCairoDisplay(Block):
 
     Block.alias('vehicles_cairo_display')
 
-    Block.config('width', 'Image width in points.', default=800)
-    Block.config('height', 'Image height in points.', default=800)
+    Block.config('format', 'pdf|png', default='pdf')
+    Block.config('file', 'Output file (pdf)', default=None)
+
+    Block.config('width', 'Image width in points.', default=768)
+    Block.config('height', 'Image height in points.', default=768)
+
+    # Sidebar options
+    Block.config('display_sidebar', default=True)
+    Block.config('sidebar_width', default=1024 - 768)
+
     Block.config('zoom', 'Either 0 for global map, '
                  'or a value giving the size of the window', default=0)
 
     Block.config('grid', 'Size of the grid (0: turn off)', default=1)
     Block.config('show_sensor_data', 'Show sensor data', default=True)
 
-    Block.config('file', 'Output file (pdf)')
-
-    Block.config('display_sidebar', default=True)
-    Block.config('sidebar_width', default=200)
-
     Block.input('boot_obs', '')
-    Block.input('state', 'Simulation state')
-    Block.input('observations', 'Observations')
-    Block.input('commands', 'Commands')
 
-    Block.output('rgb', 'RGB image.')
+    Block.output('rgb', 'RGB data (png)')
 
     def init(self):
-        import cairo
 
-        self.filename = self.config.file
-        self.tmp_filename = self.filename + '.active'
+        self.format = self.config.format
 
-        make_sure_dir_exists(self.filename)
-        self.info("Creating PDF %r." % self.filename)
-
-        total_width = self.config.width
+        self.total_width = self.config.width
         if self.config.display_sidebar:
-            total_width += self.config.sidebar_width
-
-        self.surf = cairo.PDFSurface(self.tmp_filename, #@UndefinedVariable
-                                     total_width,
-                                     self.config.height)
+            self.total_width += self.config.sidebar_width
 
         self.frame = 0
 
+        if self.format == 'pdf':
+            self.init_pdf()
+        elif self.format == 'png':
+            self.init_png()
+        else:
+            raise BadConfig('Invalid format %r.' % self.format, self, 'format')
+
+    def init_pdf(self):
+        self.filename = self.config.file
+        self.tmp_filename = self.filename + '.active'
+        make_sure_dir_exists(self.filename)
+        self.info("Creating file %r." % self.filename)
+        import cairo
+        self.surf = cairo.PDFSurface(self.tmp_filename, #@UndefinedVariable
+                                     self.total_width,
+                                     self.config.height)
+
+    def init_png(self):
+        import cairo
+        w, h = self.total_width, self.config.height
+        # note (w,h) here and (h,w,h*4) below; I'm not sure but it works
+        self.argb_data = np.empty((h, w, 4), dtype=np.uint8)
+        self.argb_data.fill(255)
+
+        self.surf = cairo.ImageSurface.create_for_data(#@UndefinedVariable
+                        self.argb_data, cairo.FORMAT_ARGB32, #@UndefinedVariable
+                         w, h, w * 4)
+
     def update(self):
+        if self.format == 'pdf':
+            self.update_pdf()
+        elif self.format == 'png':
+            self.update_png()
+        else:
+            assert False
+
+    def update_png(self):
+        import cairo
+        # If I don't recreate it, it will crash
+        cr = cairo.Context(self.surf) #@UndefinedVariable
+        self.draw_everything(cr)
+        self.surf.flush()
+
+        self.output.rgb = self.argb_data[:, :, :3].copy()
+
+    def update_pdf(self):
+        import cairo
+        # If I don't recreate it, it will crash
+        cr = cairo.Context(self.surf) #@UndefinedVariable
+        self.draw_everything(cr)
+        self.surf.flush()
+        self.surf.show_page() # Free memory self.cr?
+
+    def draw_everything(self, cr):
         plotting_params = dict(
                     grid=self.config.grid,
                     zoom=self.config.zoom,
@@ -65,16 +110,14 @@ class VehiclesCairoDisplay(Block):
 
         id_episode = boot_obs['id_episode'].item()
         id_vehicle = boot_obs['id_robot'].item()
-        sim_state = self.input.state
-        observations = self.input.observations
-        commands = self.input.commands
-
+        sim_state = boot_obs['extra'].item()['robot_state']
+        observations = scale(reshape2d(boot_obs['observations']), min_value=0,
+                             nan_color=[1, 1, 1])
+        commands = posneg(reshape2d(boot_obs['commands']), max_value=(+1),
+                              nan_color=[1, 1, 1])
+        commands_source = boot_obs['commands_source'].item()
         #timestamp = boot_obs['timestamp'].item()
         timestamp = boot_obs['time_from_episode_start'].item()
-
-        import cairo
-        # If I don't recreate it, it will crash
-        cr = cairo.Context(self.surf) #@UndefinedVariable
 
         with cairo_save(cr):
             if self.config.display_sidebar:
@@ -86,10 +129,14 @@ class VehiclesCairoDisplay(Block):
                 map_width = self.config.width
                 map_height = self.config.height
 
-            vehicles_cairo_display_all(cr,
+            with cairo_save(cr):
+                cr.rectangle(0, 0, map_width, map_height)
+                cr.clip()
+                vehicles_cairo_display_all(cr,
                                        map_width,
                                        map_height,
                                        sim_state, **plotting_params)
+
             if self.config.display_sidebar:
                 cr.set_line_width(1)
                 cr.set_source_rgb(0, 0, 0)
@@ -104,12 +151,15 @@ class VehiclesCairoDisplay(Block):
                                id_vehicle=id_vehicle,
                                id_episode=id_episode,
                                timestamp=timestamp,
-                               observations=observations, commands=commands)
-
-        self.surf.flush()
-        self.surf.show_page() # Free memory self.cr?
+                               observations=observations,
+                               commands=commands,
+                               commands_source=commands_source)
 
     def finish(self):
+        if self.format == 'pdf':
+            self.finish_pdf()
+
+    def finish_pdf(self):
         self.surf.finish()
         if os.path.exists(self.filename):
             os.unlink(self.filename)
@@ -119,19 +169,21 @@ class VehiclesCairoDisplay(Block):
 
 
 def create_sidebar(cr, width, height, sim_state, id_vehicle, id_episode,
-                   timestamp, observations, commands):
-#    M = 10
-#    cr.rectangle(M, M, width - M, height - M)
-#    cr.set_line_width(1)
-#    cr.set_source_rgb(1, 0, 0)
-#    cr.stroke()
+                   timestamp, observations, commands, commands_source):
+    import cairo
+    fo = cairo.FontOptions() #@UndefinedVariable
+    fo.set_hint_style(cairo.HINT_STYLE_FULL) #@UndefinedVariable
+    fo.set_antialias(cairo.ANTIALIAS_GRAY) #@UndefinedVariable
+    cr.set_font_options(fo)
 
-    #M = 12
-    M = width / 20.0
+    #M = width / 20.0
+    M = width / 15.0
+
+    legend_font_size = M * 0.75
+    details_font_size = M
+
     label_font = 'Mono'
     legend_font = 'Serif'
-    legend_font_size = M * 0.75
-    details_font_size = width / 30.0
 
     cr.set_source_rgb(0, 0, 0)
 
@@ -144,10 +196,10 @@ def create_sidebar(cr, width, height, sim_state, id_vehicle, id_episode,
     spacer = 0.05 * width
 
     values = np.linspace(-1, +1, nvalues)
-    values = np.vstack([values] * 1)
+    values = np.vstack([values] * 1).T
     colorbar_posneg = posneg(values)
     values = np.linspace(-1, +1, nvalues)
-    values = np.vstack([values] * 1)
+    values = np.vstack([values] * 1).T
     colorbar_scale = scale(values)
 
     cr.translate(0, 2 * M)
@@ -215,8 +267,10 @@ def create_sidebar(cr, width, height, sim_state, id_vehicle, id_episode,
 
     cr.translate(width / 10, 0)
     strings = ['vehicle: %s' % id_vehicle,
+               '  agent: %s' % commands_source,
                'episode: %s' % id_episode,
-               '   time: %6.2f' % timestamp]
+               '   time: %6.2f' % timestamp,
+               ]
     cr.select_font_face('Mono')
     cr.set_font_size(details_font_size)
     line = details_font_size * 1.2
@@ -267,7 +321,7 @@ def cairo_text_centered(cr, text):
           width='>0')
 def cairo_pixels(cr, x, width, height=None, grid_color=[1, .9, .9],
                  border_color=[0, 0, 0]):
-    x = np.transpose(x, [1, 0, 2])
+    #x = np.transpose(x, [1, 0, 2])
 
     pw = width * 1.0 / x.shape[0]
     if height is None:

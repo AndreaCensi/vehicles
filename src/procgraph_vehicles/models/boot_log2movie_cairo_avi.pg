@@ -1,4 +1,4 @@
---- model boot_log2movie_cairo
+--- model boot_log2movie_cairo_avi
 config logdir 'Base log dir'
 config id_robot
 config id_agent = ""
@@ -10,4 +10,6 @@ import procgraph_vehicles
 
 |boot_log_reader logdir=$logdir id_robot=$id_robot id_agent=$id_agent id_episode=$id_episode| -> observations 
 
-     observations[boot_obs] -> |plotter:vehicles_cairo_display format=pdf file="${output}.pdf"| 
+     observations[boot_obs] -> |plotter:vehicles_cairo_display format=png| --> rgb
+     
+     rgb --> |mencoder file="${output}.avi" |

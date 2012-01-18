@@ -1,9 +1,9 @@
 from . import (check_valid_vehicle_config, check_valid_world_config, logger,
-    check_valid_dynamics_config, check_valid_sensor_config, instance_vehicle_spec)
+    check_valid_dynamics_config, check_valid_sensor_config,
+    instance_vehicle_spec)
 from .. import VehiclesConstants
 from ..interfaces import VehicleSensor, World, VehicleSkin
-from conf_tools import ConfigMaster, GenericInstance
-from conf_tools.code_desc import check_generic_code_desc
+from conf_tools import ConfigMaster, GenericInstance, check_generic_code_desc
 from vehicles_dynamics import Dynamics
 import os
 
@@ -15,18 +15,20 @@ class VehiclesConfigMaster(ConfigMaster):
 
         self.add_class('vehicles', '*.vehicles.yaml',
                         check_valid_vehicle_config, instance_vehicle_spec)
+
         self.add_class('worlds', '*.worlds.yaml', check_valid_world_config,
                        GenericInstance(World))
+
         self.add_class('dynamics', '*.dynamics.yaml',
                        check_valid_dynamics_config,
                        GenericInstance(Dynamics))
+
         self.add_class('sensors', '*.sensors.yaml', check_valid_sensor_config,
                        GenericInstance(VehicleSensor))
 
         self.add_class('skins', '*.skins.yaml',
                        lambda x: check_generic_code_desc(x, 'skin'),
                        GenericInstance(VehicleSkin))
-
 
         self.vehicles = self.specs['vehicles']
         self.worlds = self.specs['worlds']

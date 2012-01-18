@@ -12,12 +12,6 @@ class World:
     def __init__(self, bounds):
         self.bounds = bounds
 
-    def random_2d_point(self):
-        ''' Returns a random 2d point in the world bounds. '''
-        x = np.random.uniform(self.bounds[0][0], self.bounds[0][1])
-        y = np.random.uniform(self.bounds[1][0], self.bounds[1][1])
-        return [x, y]
-
     def __repr__(self):
         return '%s' % self.__class__.__name__
 
@@ -54,6 +48,12 @@ class World:
         vehicle_state = SE3_from_SE2(SE2_from_xytheta([x, y, th]))
         id_episode = unique_timestamp_string()
         return World.Episode(id_episode, vehicle_state)
+
+    def random_2d_point(self):
+        ''' Returns a random 2d point in the world bounds. '''
+        x = np.random.uniform(self.bounds[0][0], self.bounds[0][1])
+        y = np.random.uniform(self.bounds[1][0], self.bounds[1][1])
+        return [x, y]
 
 
 # TODO: move away

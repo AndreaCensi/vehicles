@@ -1,10 +1,10 @@
-from . import (cairo_robot_skin_circular, cairo_plot_sensor_data,
-    cairo_plot_sources, cairo_save, cairo_show_world_geometry, cairo,
-    CairoConstants, cairo_set_axis, np, cairo_rototranslate)
+from . import (cairo_plot_sensor_data, cairo_plot_sources, cairo_save,
+    cairo_show_world_geometry, cairo, CairoConstants, cairo_set_axis, np,
+    cairo_rototranslate)
 from contracts import contract
 from geometry import translation_from_SE2, SE2_from_SE3
 from geometry.yaml import from_yaml
-from vehicles.configuration.master import VehiclesConfig
+from vehicles import VehiclesConfig
 
 
 def vehicles_cairo_display_png(filename, width, height, sim_state,
@@ -77,30 +77,15 @@ def vehicles_cairo_display_all(cr, width, height,
     #
         display_robot = True
         if display_robot:
-            with cairo_save(cr):
-                with cairo_rototranslate(cr, robot_pose):
-                    cr.scale(robot_radius, robot_radius)
+            id_skin = vehicle_state['extra'].get('skin', 'default_skin')
+            skin = VehiclesConfig.skins.instance(id_skin) #@UndefinedVariable
 
-                    #print('Extra: %r' % vehicle_state['extra'])
-                    id_skin = vehicle_state['extra'].get('skin', 'default_skin')
-
-                    skin = VehiclesConfig.skins.instance(id_skin) #@UndefinedVariable
-
-                    skin.draw_vehicle(cr, joints=[])
-
-                    #cairo_robot_skin_circular(cr)
+            with cairo_rototranslate(cr, robot_pose):
+                cr.scale(robot_radius, robot_radius)
+                skin.draw_vehicle(cr, joints=[])
 
         if show_sensor_data:
             cairo_plot_sensor_data(cr, vehicle_state, rho_min=robot_radius)
-
-#        # draw text
-#        cr.select_font_face('Sans')
-#        cr.set_font_size(1) # em-square height is 90 pixels
-#        cr.move_to(0, 0) # move to point (x, y) = (10, 90)
-#        cr.set_source_rgb(1.00, 0.83, 0.00) # yellow
-#        cr.show_text('Hello World')
-#        cr.stroke() # commit to surface
-#        print 'here'
 
 
 @contract(zoom='>=0')
