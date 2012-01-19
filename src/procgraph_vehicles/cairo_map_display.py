@@ -120,6 +120,7 @@ class VehiclesCairoDisplay(Block):
         commands_source = boot_obs['commands_source'].item()
         #timestamp = boot_obs['timestamp'].item()
         timestamp = boot_obs['time_from_episode_start'].item()
+        #id_vehicle = str(boot_obs['commands'])
 
         with cairo_save(cr):
             if self.config.display_sidebar:
