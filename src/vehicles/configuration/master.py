@@ -40,14 +40,15 @@ class VehiclesConfigMaster(ConfigMaster):
         if v in os.environ:
             for dirname in os.environ[v].split(':'):
                 if dirname == 'default':
-                    logger.info('Using default config.')
+                    logger.info('Using default config dir.')
                     self.load()
                 else:
                     logger.info('Using additional dir %r.' % dirname)
                     self.load(dirname)
 
         else:
-            logger.info('Use env var %s to add more config dirs.' % v)
+            #logger.info('Use env var %s to add more config dirs.' % v)
+            pass
 
     def get_default_dir(self):
         from pkg_resources import resource_filename  # @UnresolvedImport

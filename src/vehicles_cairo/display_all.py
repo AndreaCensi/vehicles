@@ -77,7 +77,8 @@ def vehicles_cairo_display_all(cr, width, height,
     #
         display_robot = True
         if display_robot:
-            id_skin = vehicle_state['extra'].get('skin', 'default_skin')
+            extra = vehicle_state.get('extra', {})
+            id_skin = extra.get('skin', 'default_skin')
             skin = VehiclesConfig.skins.instance(id_skin) #@UndefinedVariable
 
             with cairo_rototranslate(cr, robot_pose):

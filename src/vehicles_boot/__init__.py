@@ -1,3 +1,5 @@
+''' Interfacing with BootstrappingOlympics. '''
+
 from vehicles import __version__
 
 from contracts import contract

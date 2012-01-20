@@ -38,7 +38,8 @@ def cairo_show_world_geometry(cr, world_state, plot_sources=False):
 
                     with cairo_save(cr):
                         cr.set_line_width(CairoConstants.obstacle_border_width)
-                        cairo_set_color(CairoConstants.obstacle_border_color)
+                        cairo_set_color(cr,
+                                        CairoConstants.obstacle_border_color)
                         cairo_plot_polyline(cr, points[0, :], points[1, :])
 
                 elif p['type'] == 'Circle':

@@ -1,3 +1,4 @@
+''' Plotting using the Cairo library. '''
 
 
 class CairoConstants:
