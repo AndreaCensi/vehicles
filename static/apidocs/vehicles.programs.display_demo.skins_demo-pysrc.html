@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>vehicles.programs.display_demo.skins_demo</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="vehicles-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/vehicles">Vehicles</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="vehicles-module.html">Package&nbsp;vehicles</a> ::
+        <a href="vehicles.programs-module.html">Package&nbsp;programs</a> ::
+        <a href="vehicles.programs.display_demo-module.html">Package&nbsp;display_demo</a> ::
+        Module&nbsp;skins_demo
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="vehicles.programs.display_demo.skins_demo-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="vehicles.programs.display_demo.skins_demo-module.html">Module vehicles.programs.display_demo.skins_demo</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">.</tt> <tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Variable vehicles.configuration.logger=vehicles.configuration-module.html#logger,Variable vehicles.configuration.master.logger=vehicles.configuration.master-module.html#logger,Variable vehicles.configuration.vehicles.logger=vehicles.configuration.vehicles-module.html#logger,Variable vehicles.display.logger=vehicles.display-module.html#logger,Variable vehicles.display.sensors.logger=vehicles.display.sensors-module.html#logger,Variable vehicles.display.vehicle_display_utils.logger=vehicles.display.vehicle_display_utils-module.html#logger,Variable vehicles.interfaces.logger=vehicles.interfaces-module.html#logger,Variable vehicles.logger=vehicles-module.html#logger,Variable vehicles.programs.display_demo.display_demo.logger=vehicles.programs.display_demo.display_demo-module.html#logger,Variable vehicles.programs.display_demo.logger=vehicles.programs.display_demo-module.html#logger,Variable vehicles.programs.display_demo.skins_demo.logger=vehicles.programs.display_demo.skins_demo-module.html#logger,Variable vehicles.programs.inspect_textures.main'.logger=vehicles.programs.inspect_textures.main%27-module.html#logger,Variable vehicles.programs.print_config.logger=vehicles.programs.print_config-module.html#logger,Variable vehicles.programs.print_config.main'.logger=vehicles.programs.print_config.main%27-module.html#logger,Variable vehicles.sensors.field_sampler.logger=vehicles.sensors.field_sampler-module.html#logger,Variable vehicles.sensors.logger=vehicles.sensors-module.html#logger,Variable vehicles.sensors.noises.logger=vehicles.sensors.noises-module.html#logger,Variable vehicles.sensors.raytracer.logger=vehicles.sensors.raytracer-module.html#logger,Variable vehicles.simulation.logger=vehicles.simulation-module.html#logger,Variable vehicles.simulation.vsimulation.logger=vehicles.simulation.vsimulation-module.html#logger,Variable vehicles.worlds.logger=vehicles.worlds-module.html#logger"><a title="vehicles.configuration.logger
+vehicles.configuration.master.logger
+vehicles.configuration.vehicles.logger
+vehicles.display.logger
+vehicles.display.sensors.logger
+vehicles.display.vehicle_display_utils.logger
+vehicles.interfaces.logger
+vehicles.logger
+vehicles.programs.display_demo.display_demo.logger
+vehicles.programs.display_demo.logger
+vehicles.programs.display_demo.skins_demo.logger
+vehicles.programs.inspect_textures.main'.logger
+vehicles.programs.print_config.logger
+vehicles.programs.print_config.main'.logger
+vehicles.sensors.field_sampler.logger
+vehicles.sensors.logger
+vehicles.sensors.noises.logger
+vehicles.sensors.raytracer.logger
+vehicles.simulation.logger
+vehicles.simulation.vsimulation.logger
+vehicles.worlds.logger" class="py-name" href="#" onclick="return doclink('link-0', 'logger', 'link-0');">logger</a></tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">optparse</tt> <tt class="py-keyword">import</tt> <tt class="py-name">OptionParser</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">reprep</tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Variable vehicles.programs.display_demo.MIME_PNG=vehicles.programs.display_demo-module.html#MIME_PNG,Variable vehicles.programs.display_demo.display_demo.MIME_PNG=vehicles.programs.display_demo.display_demo-module.html#MIME_PNG,Variable vehicles.programs.display_demo.skins_demo.MIME_PNG=vehicles.programs.display_demo.skins_demo-module.html#MIME_PNG"><a title="vehicles.programs.display_demo.MIME_PNG
+vehicles.programs.display_demo.display_demo.MIME_PNG
+vehicles.programs.display_demo.skins_demo.MIME_PNG" class="py-name" href="#" onclick="return doclink('link-1', 'MIME_PNG', 'link-1');">MIME_PNG</a></tt><tt class="py-op">,</tt> <tt class="py-name">Report</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-2" class="py-name" targets="Package vehicles=vehicles-module.html,Module vehicles.configuration.vehicles=vehicles.configuration.vehicles-module.html"><a title="vehicles
+vehicles.configuration.vehicles" class="py-name" href="#" onclick="return doclink('link-2', 'vehicles', 'link-2');">vehicles</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Variable vehicles.VehiclesConfig=vehicles-module.html#VehiclesConfig,Variable vehicles.configuration.VehiclesConfig=vehicles.configuration-module.html#VehiclesConfig,Variable vehicles.configuration.master.VehiclesConfig=vehicles.configuration.master-module.html#VehiclesConfig,Variable vehicles.programs.display_demo.VehiclesConfig=vehicles.programs.display_demo-module.html#VehiclesConfig,Variable vehicles.programs.display_demo.display_demo.VehiclesConfig=vehicles.programs.display_demo.display_demo-module.html#VehiclesConfig,Variable vehicles.programs.display_demo.skins_demo.VehiclesConfig=vehicles.programs.display_demo.skins_demo-module.html#VehiclesConfig,Variable vehicles.programs.inspect_textures.main'.VehiclesConfig=vehicles.programs.inspect_textures.main%27-module.html#VehiclesConfig,Variable vehicles.programs.print_config.main'.VehiclesConfig=vehicles.programs.print_config.main%27-module.html#VehiclesConfig"><a title="vehicles.VehiclesConfig
+vehicles.configuration.VehiclesConfig
+vehicles.configuration.master.VehiclesConfig
+vehicles.programs.display_demo.VehiclesConfig
+vehicles.programs.display_demo.display_demo.VehiclesConfig
+vehicles.programs.display_demo.skins_demo.VehiclesConfig
+vehicles.programs.inspect_textures.main'.VehiclesConfig
+vehicles.programs.print_config.main'.VehiclesConfig" class="py-name" href="#" onclick="return doclink('link-3', 'VehiclesConfig', 'link-3');">VehiclesConfig</a></tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">vehicles_cairo</tt> <tt class="py-keyword">import</tt> <tt class="py-name">cairo_plot_circle</tt><tt class="py-op">,</tt> <tt class="py-name">cairo_set_axis</tt><tt class="py-op">,</tt> <tt id="link-4" class="py-name" targets="Function vehicles.display.vehicle_display_utils.show_grid()=vehicles.display.vehicle_display_utils-module.html#show_grid"><a title="vehicles.display.vehicle_display_utils.show_grid" class="py-name" href="#" onclick="return doclink('link-4', 'show_grid', 'link-4');">show_grid</a></tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt id="link-5" class="py-name" targets="Variable vehicles.programs.display_demo.display_demo.usage=vehicles.programs.display_demo.display_demo-module.html#usage,Variable vehicles.programs.display_demo.skins_demo.usage=vehicles.programs.display_demo.skins_demo-module.html#usage,Variable vehicles.programs.display_demo.usage=vehicles.programs.display_demo-module.html#usage,Variable vehicles.programs.inspect_textures.main'.usage=vehicles.programs.inspect_textures.main%27-module.html#usage,Variable vehicles.programs.print_config.main'.usage=vehicles.programs.print_config.main%27-module.html#usage"><a title="vehicles.programs.display_demo.display_demo.usage
+vehicles.programs.display_demo.skins_demo.usage
+vehicles.programs.display_demo.usage
+vehicles.programs.inspect_textures.main'.usage
+vehicles.programs.print_config.main'.usage" class="py-name" href="#" onclick="return doclink('link-5', 'usage', 'link-5');">usage</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"""</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-string">    %cmd  [-o where] </tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-string">"""</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"> </tt>
+<a name="main"></a><div id="main-def"><a name="L15"></a><tt class="py-lineno">15</tt> <a class="py-toggle" href="#" id="main-toggle" onclick="return toggle('main');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.programs.display_demo.skins_demo-module.html#main">main</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="main-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="main-expanded"><a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">    <tt class="py-name">parser</tt> <tt class="py-op">=</tt> <tt class="py-name">OptionParser</tt><tt class="py-op">(</tt><tt id="link-6" class="py-name"><a title="vehicles.programs.display_demo.display_demo.usage
+vehicles.programs.display_demo.skins_demo.usage
+vehicles.programs.display_demo.usage
+vehicles.programs.inspect_textures.main'.usage
+vehicles.programs.print_config.main'.usage" class="py-name" href="#" onclick="return doclink('link-6', 'usage', 'link-5');">usage</a></tt><tt class="py-op">=</tt><tt id="link-7" class="py-name"><a title="vehicles.programs.display_demo.display_demo.usage
+vehicles.programs.display_demo.skins_demo.usage
+vehicles.programs.display_demo.usage
+vehicles.programs.inspect_textures.main'.usage
+vehicles.programs.print_config.main'.usage" class="py-name" href="#" onclick="return doclink('link-7', 'usage', 'link-5');">usage</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">    <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">disable_interspersed_args</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">    <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">add_option</tt><tt class="py-op">(</tt><tt class="py-string">"--outdir"</tt><tt class="py-op">,</tt> <tt class="py-string">"-o"</tt><tt class="py-op">,</tt> <tt class="py-name">default</tt><tt class="py-op">=</tt><tt class="py-string">'.'</tt><tt class="py-op">,</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">                    <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">"output directory [%default]"</tt><tt class="py-op">)</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt class="py-comment">#    parser.add_option("--outdir", "-o", default='.',</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt class="py-comment">#                    help="additional config directory [%default]")</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-name">options</tt><tt class="py-op">,</tt> <tt class="py-name">args</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">parse_args</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">args</tt><tt class="py-op">:</tt> <tt class="py-keyword">raise</tt> <tt class="py-name">Exception</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">    <tt class="py-name">width</tt> <tt class="py-op">=</tt> <tt class="py-number">400</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">    <tt class="py-name">height</tt> <tt class="py-op">=</tt> <tt class="py-number">400</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">    <tt class="py-name">r</tt> <tt class="py-op">=</tt> <tt class="py-name">Report</tt><tt class="py-op">(</tt><tt class="py-string">'skins_demo'</tt><tt class="py-op">)</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">    <tt class="py-name">f</tt> <tt class="py-op">=</tt> <tt class="py-name">r</tt><tt class="py-op">.</tt><tt class="py-name">figure</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt class="py-name">cairo</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">    <tt id="link-8" class="py-name"><a title="vehicles.VehiclesConfig
+vehicles.configuration.VehiclesConfig
+vehicles.configuration.master.VehiclesConfig
+vehicles.programs.display_demo.VehiclesConfig
+vehicles.programs.display_demo.display_demo.VehiclesConfig
+vehicles.programs.display_demo.skins_demo.VehiclesConfig
+vehicles.programs.inspect_textures.main'.VehiclesConfig
+vehicles.programs.print_config.main'.VehiclesConfig" class="py-name" href="#" onclick="return doclink('link-8', 'VehiclesConfig', 'link-3');">VehiclesConfig</a></tt><tt class="py-op">.</tt><tt class="py-name">make_sure_loaded</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">    <tt id="link-9" class="py-name" targets="Module vehicles.interfaces.skins=vehicles.interfaces.skins-module.html"><a title="vehicles.interfaces.skins" class="py-name" href="#" onclick="return doclink('link-9', 'skins', 'link-9');">skins</a></tt> <tt class="py-op">=</tt> <tt id="link-10" class="py-name"><a title="vehicles.VehiclesConfig
+vehicles.configuration.VehiclesConfig
+vehicles.configuration.master.VehiclesConfig
+vehicles.programs.display_demo.VehiclesConfig
+vehicles.programs.display_demo.display_demo.VehiclesConfig
+vehicles.programs.display_demo.skins_demo.VehiclesConfig
+vehicles.programs.inspect_textures.main'.VehiclesConfig
+vehicles.programs.print_config.main'.VehiclesConfig" class="py-name" href="#" onclick="return doclink('link-10', 'VehiclesConfig', 'link-3');">VehiclesConfig</a></tt><tt class="py-op">.</tt><tt class="py-name">specs</tt><tt class="py-op">[</tt><tt class="py-string">'skins'</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt> <tt id="link-11" class="py-name"><a title="vehicles.interfaces.skins" class="py-name" href="#" onclick="return doclink('link-11', 'skins', 'link-9');">skins</a></tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">id_skin</tt> <tt class="py-keyword">in</tt> <tt id="link-12" class="py-name"><a title="vehicles.interfaces.skins" class="py-name" href="#" onclick="return doclink('link-12', 'skins', 'link-9');">skins</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">        <tt class="py-name">skin</tt> <tt class="py-op">=</tt> <tt id="link-13" class="py-name"><a title="vehicles.VehiclesConfig
+vehicles.configuration.VehiclesConfig
+vehicles.configuration.master.VehiclesConfig
+vehicles.programs.display_demo.VehiclesConfig
+vehicles.programs.display_demo.display_demo.VehiclesConfig
+vehicles.programs.display_demo.skins_demo.VehiclesConfig
+vehicles.programs.inspect_textures.main'.VehiclesConfig
+vehicles.programs.print_config.main'.VehiclesConfig" class="py-name" href="#" onclick="return doclink('link-13', 'VehiclesConfig', 'link-3');">VehiclesConfig</a></tt><tt class="py-op">.</tt><tt class="py-name">specs</tt><tt class="py-op">[</tt><tt class="py-string">'skins'</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">instance</tt><tt class="py-op">(</tt><tt class="py-name">id_skin</tt><tt class="py-op">)</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">        <tt class="py-keyword">with</tt> <tt class="py-name">f</tt><tt class="py-op">.</tt><tt class="py-name">data_file</tt><tt class="py-op">(</tt><tt class="py-name">id_skin</tt><tt class="py-op">,</tt> <tt id="link-14" class="py-name"><a title="vehicles.programs.display_demo.MIME_PNG
+vehicles.programs.display_demo.display_demo.MIME_PNG
+vehicles.programs.display_demo.skins_demo.MIME_PNG" class="py-name" href="#" onclick="return doclink('link-14', 'MIME_PNG', 'link-1');">MIME_PNG</a></tt><tt class="py-op">)</tt> <tt class="py-keyword">as</tt> <tt class="py-name">filename</tt><tt class="py-op">:</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">            <tt class="py-name">surf</tt> <tt class="py-op">=</tt> <tt class="py-name">cairo</tt><tt class="py-op">.</tt><tt class="py-name">ImageSurface</tt><tt class="py-op">(</tt><tt class="py-name">cairo</tt><tt class="py-op">.</tt><tt class="py-name">FORMAT_ARGB32</tt><tt class="py-op">,</tt> <tt class="py-comment">#@UndefinedVariable </tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">                                      <tt class="py-name">width</tt><tt class="py-op">,</tt> <tt class="py-name">height</tt><tt class="py-op">)</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">            <tt class="py-name">cr</tt> <tt class="py-op">=</tt> <tt class="py-name">cairo</tt><tt class="py-op">.</tt><tt class="py-name">Context</tt><tt class="py-op">(</tt><tt class="py-name">surf</tt><tt class="py-op">)</tt> <tt class="py-comment">#@UndefinedVariable</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line"> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">            <tt class="py-name">cairo_set_axis</tt><tt class="py-op">(</tt><tt class="py-name">cr</tt><tt class="py-op">,</tt> <tt class="py-name">width</tt><tt class="py-op">,</tt> <tt class="py-name">height</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt> <tt class="py-op">-</tt><tt class="py-number">2</tt><tt class="py-op">,</tt> <tt class="py-op">+</tt><tt class="py-number">2</tt><tt class="py-op">,</tt> <tt class="py-op">-</tt><tt class="py-number">2</tt><tt class="py-op">,</tt> <tt class="py-op">+</tt><tt class="py-number">2</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line"> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">            <tt class="py-name">cairo_plot_circle</tt><tt class="py-op">(</tt><tt class="py-name">cr</tt><tt class="py-op">,</tt> <tt class="py-name">center</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">radius</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-name">facecolor</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">                    <tt class="py-name">edgecolor</tt><tt class="py-op">=</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">width</tt><tt class="py-op">=</tt><tt class="py-number">0.1</tt><tt class="py-op">)</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line"> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">            <tt id="link-15" class="py-name"><a title="vehicles.display.vehicle_display_utils.show_grid" class="py-name" href="#" onclick="return doclink('link-15', 'show_grid', 'link-4');">show_grid</a></tt><tt class="py-op">(</tt><tt class="py-name">cr</tt><tt class="py-op">,</tt> <tt class="py-name">bx</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-number">3</tt><tt class="py-op">,</tt> <tt class="py-op">+</tt><tt class="py-number">3</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">by</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-number">3</tt><tt class="py-op">,</tt> <tt class="py-op">+</tt><tt class="py-number">3</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">spacing</tt><tt class="py-op">=</tt><tt class="py-number">1.0</tt><tt class="py-op">)</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line"> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">            <tt class="py-name">skin</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Method vehicles.interfaces.skins.VehicleSkin.draw_vehicle()=vehicles.interfaces.skins.VehicleSkin-class.html#draw_vehicle"><a title="vehicles.interfaces.skins.VehicleSkin.draw_vehicle" class="py-name" href="#" onclick="return doclink('link-16', 'draw_vehicle', 'link-16');">draw_vehicle</a></tt><tt class="py-op">(</tt><tt class="py-name">cr</tt><tt class="py-op">,</tt> <tt class="py-name">joints</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line"> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">            <tt class="py-name">surf</tt><tt class="py-op">.</tt><tt class="py-name">write_to_png</tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">)</tt> <tt class="py-comment"># Output to PNG</tt> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line"> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">    <tt class="py-name">filename</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">options</tt><tt class="py-op">.</tt><tt class="py-name">outdir</tt><tt class="py-op">,</tt> <tt class="py-string">'skins_demo.html'</tt><tt class="py-op">)</tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line">    <tt id="link-17" class="py-name"><a title="vehicles.configuration.logger
+vehicles.configuration.master.logger
+vehicles.configuration.vehicles.logger
+vehicles.display.logger
+vehicles.display.sensors.logger
+vehicles.display.vehicle_display_utils.logger
+vehicles.interfaces.logger
+vehicles.logger
+vehicles.programs.display_demo.display_demo.logger
+vehicles.programs.display_demo.logger
+vehicles.programs.display_demo.skins_demo.logger
+vehicles.programs.inspect_textures.main'.logger
+vehicles.programs.print_config.logger
+vehicles.programs.print_config.main'.logger
+vehicles.sensors.field_sampler.logger
+vehicles.sensors.logger
+vehicles.sensors.noises.logger
+vehicles.sensors.raytracer.logger
+vehicles.simulation.logger
+vehicles.simulation.vsimulation.logger
+vehicles.worlds.logger" class="py-name" href="#" onclick="return doclink('link-17', 'logger', 'link-0');">logger</a></tt><tt class="py-op">.</tt><tt id="link-18" class="py-name" targets="Method vehicles.simulation.vsimulation.VehicleSimulation.info()=vehicles.simulation.vsimulation.VehicleSimulation-class.html#info"><a title="vehicles.simulation.vsimulation.VehicleSimulation.info" class="py-name" href="#" onclick="return doclink('link-18', 'info', 'link-18');">info</a></tt><tt class="py-op">(</tt><tt class="py-string">'Writing to %r.'</tt> <tt class="py-op">%</tt> <tt class="py-name">filename</tt><tt class="py-op">)</tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line">    <tt class="py-name">r</tt><tt class="py-op">.</tt><tt class="py-name">to_html</tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line"> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line"> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">'__main__'</tt><tt class="py-op">:</tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">    <tt id="link-19" class="py-name" targets="Function vehicles.programs.display_demo.display_demo.main()=vehicles.programs.display_demo.display_demo-module.html#main,Function vehicles.programs.display_demo.skins_demo.main()=vehicles.programs.display_demo.skins_demo-module.html#main,Function vehicles.programs.print_config.main'.main()=vehicles.programs.print_config.main%27-module.html#main"><a title="vehicles.programs.display_demo.display_demo.main
+vehicles.programs.display_demo.skins_demo.main
+vehicles.programs.print_config.main'.main" class="py-name" href="#" onclick="return doclink('link-19', 'main', 'link-19');">main</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="vehicles-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/vehicles">Vehicles</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Jan 20 18:29:42 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

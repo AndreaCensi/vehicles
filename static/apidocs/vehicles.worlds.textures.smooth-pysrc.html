@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>vehicles.worlds.textures.smooth</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="vehicles-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/vehicles">Vehicles</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="vehicles-module.html">Package&nbsp;vehicles</a> ::
+        <a href="vehicles.worlds-module.html">Package&nbsp;worlds</a> ::
+        <a href="vehicles.worlds.textures-module.html">Package&nbsp;textures</a> ::
+        Module&nbsp;smooth
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="vehicles.worlds.textures.smooth-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="vehicles.worlds.textures.smooth-module.html">Module vehicles.worlds.textures.smooth</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt> <tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Class vehicles.worlds.textures.sampled.SampledTexture=vehicles.worlds.textures.sampled.SampledTexture-class.html"><a title="vehicles.worlds.textures.sampled.SampledTexture" class="py-name" href="#" onclick="return doclink('link-0', 'SampledTexture', 'link-0');">SampledTexture</a></tt><tt class="py-op">,</tt> <tt class="py-name">np</tt><tt class="py-op">,</tt> <tt class="py-name">contract</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">conf_tools</tt> <tt class="py-keyword">import</tt> <tt class="py-name">instantiate_spec</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">geometry</tt> <tt class="py-keyword">import</tt> <tt class="py-name">assert_allclose</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">scipy</tt><tt class="py-op">.</tt><tt class="py-name">signal</tt> </tt>
+<a name="Smoothed"></a><div id="Smoothed-def"><a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt> <a class="py-toggle" href="#" id="Smoothed-toggle" onclick="return toggle('Smoothed');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="vehicles.worlds.textures.smooth.Smoothed-class.html">Smoothed</a><tt class="py-op">(</tt><tt class="py-base-class">SampledTexture</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Smoothed-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Smoothed-expanded"><a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line">    <tt class="py-docstring">''' Smooths another texture. '''</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">sigma</tt><tt class="py-op">=</tt><tt class="py-string">'&gt;0'</tt><tt class="py-op">,</tt> <tt class="py-name">resolution</tt><tt class="py-op">=</tt><tt class="py-string">'None|&gt;0'</tt><tt class="py-op">)</tt> </tt>
+<a name="Smoothed.__init__"></a><div id="Smoothed.__init__-def"><a name="L10"></a><tt class="py-lineno">10</tt> <a class="py-toggle" href="#" id="Smoothed.__init__-toggle" onclick="return toggle('Smoothed.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.worlds.textures.smooth.Smoothed-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">sigma</tt><tt class="py-op">,</tt> <tt class="py-param">texture</tt><tt class="py-op">,</tt> <tt class="py-param">resolution</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Smoothed.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Smoothed.__init__-expanded"><a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">        <tt class="py-name">sigma</tt> <tt class="py-op">=</tt> <tt class="py-name">float</tt><tt class="py-op">(</tt><tt class="py-name">sigma</tt><tt class="py-op">)</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">resolution</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">            <tt class="py-name">resolution</tt> <tt class="py-op">=</tt> <tt class="py-name">sigma</tt> <tt class="py-op">/</tt> <tt class="py-number">10.0</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">        <tt class="py-name">max_length</tt> <tt class="py-op">=</tt> <tt class="py-number">100</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">        <tt class="py-name">texture</tt> <tt class="py-op">=</tt> <tt class="py-name">instantiate_spec</tt><tt class="py-op">(</tt><tt class="py-name">texture</tt><tt class="py-op">)</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">        <tt class="py-name">num_cells</tt> <tt class="py-op">=</tt> <tt class="py-name">max_length</tt> <tt class="py-op">/</tt> <tt class="py-name">resolution</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">        <tt class="py-name">cell_coord</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">linspace</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-name">max_length</tt><tt class="py-op">,</tt> <tt class="py-name">num_cells</tt><tt class="py-op">)</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">        <tt class="py-name">unsmoothed</tt> <tt class="py-op">=</tt> <tt class="py-name">texture</tt><tt class="py-op">(</tt><tt class="py-name">cell_coord</tt><tt class="py-op">)</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">        <tt class="py-name">kernel_size</tt> <tt class="py-op">=</tt> <tt class="py-name">int</tt><tt class="py-op">(</tt><tt class="py-number">2</tt> <tt class="py-op">*</tt> <tt class="py-op">(</tt><tt class="py-name">sigma</tt> <tt class="py-op">*</tt> <tt class="py-number">3</tt><tt class="py-op">)</tt> <tt class="py-op">/</tt> <tt class="py-name">resolution</tt><tt class="py-op">)</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">        <tt class="py-comment">#print('resol: %s' % resolution)</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">        <tt class="py-comment">#print('sigma: %s' % sigma)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">        <tt class="py-comment">#print('kernel_size: %s' % kernel_size)</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">        <tt class="py-comment">#print kernel</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">        <tt class="py-name">kernel</tt> <tt class="py-op">=</tt> <tt class="py-name">scipy</tt><tt class="py-op">.</tt><tt class="py-name">signal</tt><tt class="py-op">.</tt><tt class="py-name">gaussian</tt><tt class="py-op">(</tt><tt class="py-name">kernel_size</tt><tt class="py-op">,</tt> <tt class="py-name">sigma</tt> <tt class="py-op">/</tt> <tt class="py-name">resolution</tt><tt class="py-op">)</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">        <tt class="py-name">kernel</tt> <tt class="py-op">=</tt> <tt class="py-name">kernel</tt> <tt class="py-op">/</tt> <tt class="py-name">kernel</tt><tt class="py-op">.</tt><tt class="py-name">sum</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">kernel</tt><tt class="py-op">.</tt><tt class="py-name">size</tt> <tt class="py-op">==</tt> <tt class="py-name">kernel_size</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">        <tt class="py-name">assert_allclose</tt><tt class="py-op">(</tt><tt class="py-name">kernel</tt><tt class="py-op">.</tt><tt class="py-name">sum</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">        <tt class="py-name">smoothed</tt> <tt class="py-op">=</tt> <tt class="py-name">scipy</tt><tt class="py-op">.</tt><tt class="py-name">signal</tt><tt class="py-op">.</tt><tt class="py-name">convolve</tt><tt class="py-op">(</tt><tt class="py-name">unsmoothed</tt><tt class="py-op">,</tt> <tt class="py-name">kernel</tt><tt class="py-op">,</tt> <tt class="py-string">'same'</tt><tt class="py-op">)</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">        <tt class="py-keyword">assert</tt> <tt class="py-name">smoothed</tt><tt class="py-op">.</tt><tt class="py-name">size</tt> <tt class="py-op">==</tt> <tt class="py-name">cell_coord</tt><tt class="py-op">.</tt><tt class="py-name">size</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">        <tt id="link-1" class="py-name"><a title="vehicles.worlds.textures.sampled.SampledTexture" class="py-name" href="#" onclick="return doclink('link-1', 'SampledTexture', 'link-0');">SampledTexture</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Method vehicles.configuration.master.VehiclesConfigMaster.__init__()=vehicles.configuration.master.VehiclesConfigMaster-class.html#__init__,Method vehicles.interfaces.primitives.Circle.__init__()=vehicles.interfaces.primitives.Circle-class.html#__init__,Method vehicles.interfaces.primitives.GeometricShape.__init__()=vehicles.interfaces.primitives.GeometricShape-class.html#__init__,Method vehicles.interfaces.primitives.PolyLine.__init__()=vehicles.interfaces.primitives.PolyLine-class.html#__init__,Method vehicles.interfaces.primitives.Primitive.__init__()=vehicles.interfaces.primitives.Primitive-class.html#__init__,Method vehicles.interfaces.primitives.Source.__init__()=vehicles.interfaces.primitives.Source-class.html#__init__,Method vehicles.interfaces.vehicle_sensor.VehicleSensor.__init__()=vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html#__init__,Method vehicles.interfaces.world.World.__init__()=vehicles.interfaces.world.World-class.html#__init__,Method vehicles.sensors.field_sampler.FieldSampler.__init__()=vehicles.sensors.field_sampler.FieldSampler-class.html#__init__,Method vehicles.sensors.field_sampler_rand_circle.FieldSamplerRandCircle.__init__()=vehicles.sensors.field_sampler_rand_circle.FieldSamplerRandCircle-class.html#__init__,Method vehicles.sensors.field_sampler_uniform.FieldSamplerUniform.__init__()=vehicles.sensors.field_sampler_uniform.FieldSamplerUniform-class.html#__init__,Method vehicles.sensors.noises.additive_gaussian.AdditiveGaussian.__init__()=vehicles.sensors.noises.additive_gaussian.AdditiveGaussian-class.html#__init__,Method vehicles.sensors.photoreceptors.Photoreceptors.__init__()=vehicles.sensors.photoreceptors.Photoreceptors-class.html#__init__,Method vehicles.sensors.photoreceptors.PhotoreceptorsUniform.__init__()=vehicles.sensors.photoreceptors.PhotoreceptorsUniform-class.html#__init__,Method vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth.__init__()=vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth-class.html#__init__,Method vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmoothUniform.__init__()=vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmoothUniform-class.html#__init__,Method vehicles.sensors.random_sensor.RandomSensor.__init__()=vehicles.sensors.random_sensor.RandomSensor-class.html#__init__,Method vehicles.sensors.range_finder.Rangefinder.__init__()=vehicles.sensors.range_finder.Rangefinder-class.html#__init__,Method vehicles.sensors.range_finder.RangefinderUniform.__init__()=vehicles.sensors.range_finder.RangefinderUniform-class.html#__init__,Method vehicles.sensors.raytracer.cjson_stream.CJSONStream.__init__()=vehicles.sensors.raytracer.cjson_stream.CJSONStream-class.html#__init__,Method vehicles.sensors.raytracer.json_stream.JSONStream.__init__()=vehicles.sensors.raytracer.json_stream.JSONStream-class.html#__init__,Method vehicles.sensors.raytracer.textured_raytracer.Raytracer.__init__()=vehicles.sensors.raytracer.textured_raytracer.Raytracer-class.html#__init__,Method vehicles.sensors.raytracer.textured_raytracer.TexturedRaytracer.__init__()=vehicles.sensors.raytracer.textured_raytracer.TexturedRaytracer-class.html#__init__,Method vehicles.simulation.vehicle.Vehicle.Attached.__init__()=vehicles.simulation.vehicle.Vehicle.Attached-class.html#__init__,Method vehicles.simulation.vehicle.Vehicle.__init__()=vehicles.simulation.vehicle.Vehicle-class.html#__init__,Method vehicles.simulation.vsimulation.VehicleSimulation.__init__()=vehicles.simulation.vsimulation.VehicleSimulation-class.html#__init__,Method vehicles.worlds.boxes.Box.__init__()=vehicles.worlds.boxes.Box-class.html#__init__,Method vehicles.worlds.dynamic.DynamicTest.__init__()=vehicles.worlds.dynamic.DynamicTest-class.html#__init__,Method vehicles.worlds.empty_fixed.EmptyFixed.__init__()=vehicles.worlds.empty_fixed.EmptyFixed-class.html#__init__,Method vehicles.worlds.stochastic_box.StochasticBox.__init__()=vehicles.worlds.stochastic_box.StochasticBox-class.html#__init__,Method vehicles.worlds.stochastic_box2.KernelExponential.__init__()=vehicles.worlds.stochastic_box2.KernelExponential-class.html#__init__,Method vehicles.worlds.stochastic_box2.KernelInverse.__init__()=vehicles.worlds.stochastic_box2.KernelInverse-class.html#__init__,Method vehicles.worlds.stochastic_box2.StochasticBox2.__init__()=vehicles.worlds.stochastic_box2.StochasticBox2-class.html#__init__,Method vehicles.worlds.stochastic_box3.StochasticBox3.__init__()=vehicles.worlds.stochastic_box3.StochasticBox3-class.html#__init__,Method vehicles.worlds.textures.checkerboard.RandomCheckerboard.__init__()=vehicles.worlds.textures.checkerboard.RandomCheckerboard-class.html#__init__,Method vehicles.worlds.textures.constant.ConstantTexture.__init__()=vehicles.worlds.textures.constant.ConstantTexture-class.html#__init__,Method vehicles.worlds.textures.sampled.SampledTexture.__init__()=vehicles.worlds.textures.sampled.SampledTexture-class.html#__init__,Method vehicles.worlds.textures.smooth.Smoothed.__init__()=vehicles.worlds.textures.smooth.Smoothed-class.html#__init__,Method vehicles.worlds.textures.textures.SinTexture.__init__()=vehicles.worlds.textures.textures.SinTexture-class.html#__init__,Method vehicles.worlds.utils.Counter.__init__()=vehicles.worlds.utils.Counter-class.html#__init__"><a title="vehicles.configuration.master.VehiclesConfigMaster.__init__
+vehicles.interfaces.primitives.Circle.__init__
+vehicles.interfaces.primitives.GeometricShape.__init__
+vehicles.interfaces.primitives.PolyLine.__init__
+vehicles.interfaces.primitives.Primitive.__init__
+vehicles.interfaces.primitives.Source.__init__
+vehicles.interfaces.vehicle_sensor.VehicleSensor.__init__
+vehicles.interfaces.world.World.__init__
+vehicles.sensors.field_sampler.FieldSampler.__init__
+vehicles.sensors.field_sampler_rand_circle.FieldSamplerRandCircle.__init__
+vehicles.sensors.field_sampler_uniform.FieldSamplerUniform.__init__
+vehicles.sensors.noises.additive_gaussian.AdditiveGaussian.__init__
+vehicles.sensors.photoreceptors.Photoreceptors.__init__
+vehicles.sensors.photoreceptors.PhotoreceptorsUniform.__init__
+vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth.__init__
+vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmoothUniform.__init__
+vehicles.sensors.random_sensor.RandomSensor.__init__
+vehicles.sensors.range_finder.Rangefinder.__init__
+vehicles.sensors.range_finder.RangefinderUniform.__init__
+vehicles.sensors.raytracer.cjson_stream.CJSONStream.__init__
+vehicles.sensors.raytracer.json_stream.JSONStream.__init__
+vehicles.sensors.raytracer.textured_raytracer.Raytracer.__init__
+vehicles.sensors.raytracer.textured_raytracer.TexturedRaytracer.__init__
+vehicles.simulation.vehicle.Vehicle.Attached.__init__
+vehicles.simulation.vehicle.Vehicle.__init__
+vehicles.simulation.vsimulation.VehicleSimulation.__init__
+vehicles.worlds.boxes.Box.__init__
+vehicles.worlds.dynamic.DynamicTest.__init__
+vehicles.worlds.empty_fixed.EmptyFixed.__init__
+vehicles.worlds.stochastic_box.StochasticBox.__init__
+vehicles.worlds.stochastic_box2.KernelExponential.__init__
+vehicles.worlds.stochastic_box2.KernelInverse.__init__
+vehicles.worlds.stochastic_box2.StochasticBox2.__init__
+vehicles.worlds.stochastic_box3.StochasticBox3.__init__
+vehicles.worlds.textures.checkerboard.RandomCheckerboard.__init__
+vehicles.worlds.textures.constant.ConstantTexture.__init__
+vehicles.worlds.textures.sampled.SampledTexture.__init__
+vehicles.worlds.textures.smooth.Smoothed.__init__
+vehicles.worlds.textures.textures.SinTexture.__init__
+vehicles.worlds.utils.Counter.__init__" class="py-name" href="#" onclick="return doclink('link-2', '__init__', 'link-2');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">smoothed</tt><tt class="py-op">,</tt> <tt class="py-name">resolution</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="vehicles-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/vehicles">Vehicles</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Jan 20 18:29:42 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>vehicles.display.vehicle_display_utils</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="vehicles-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/vehicles">Vehicles</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="vehicles-module.html">Package&nbsp;vehicles</a> ::
+        <a href="vehicles.display-module.html">Package&nbsp;display</a> ::
+        Module&nbsp;vehicle_display_utils
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="vehicles.display.vehicle_display_utils-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="vehicles.display.vehicle_display_utils-module.html">Module vehicles.display.vehicle_display_utils</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt> <tt class="py-keyword">import</tt> <tt class="py-op">(</tt><tt id="link-0" class="py-name" targets="Variable vehicles.display.Z_GRID=vehicles.display-module.html#Z_GRID,Variable vehicles.display.vehicle_display_utils.Z_GRID=vehicles.display.vehicle_display_utils-module.html#Z_GRID"><a title="vehicles.display.Z_GRID
+vehicles.display.vehicle_display_utils.Z_GRID" class="py-name" href="#" onclick="return doclink('link-0', 'Z_GRID', 'link-0');">Z_GRID</a></tt><tt class="py-op">,</tt> <tt id="link-1" class="py-name" targets="Variable vehicles.display.Z_POLYLINE=vehicles.display-module.html#Z_POLYLINE,Variable vehicles.display.vehicle_display_utils.Z_POLYLINE=vehicles.display.vehicle_display_utils-module.html#Z_POLYLINE"><a title="vehicles.display.Z_POLYLINE
+vehicles.display.vehicle_display_utils.Z_POLYLINE" class="py-name" href="#" onclick="return doclink('link-1', 'Z_POLYLINE', 'link-1');">Z_POLYLINE</a></tt><tt class="py-op">,</tt> <tt id="link-2" class="py-name" targets="Variable vehicles.display.Z_CIRCLE=vehicles.display-module.html#Z_CIRCLE,Variable vehicles.display.vehicle_display_utils.Z_CIRCLE=vehicles.display.vehicle_display_utils-module.html#Z_CIRCLE"><a title="vehicles.display.Z_CIRCLE
+vehicles.display.vehicle_display_utils.Z_CIRCLE" class="py-name" href="#" onclick="return doclink('link-2', 'Z_CIRCLE', 'link-2');">Z_CIRCLE</a></tt><tt class="py-op">,</tt> <tt id="link-3" class="py-name" targets="Variable vehicles.display.Z_SOURCE=vehicles.display-module.html#Z_SOURCE,Variable vehicles.display.vehicle_display_utils.Z_SOURCE=vehicles.display.vehicle_display_utils-module.html#Z_SOURCE"><a title="vehicles.display.Z_SOURCE
+vehicles.display.vehicle_display_utils.Z_SOURCE" class="py-name" href="#" onclick="return doclink('link-3', 'Z_SOURCE', 'link-3');">Z_SOURCE</a></tt><tt class="py-op">,</tt> <tt id="link-4" class="py-name" targets="Variable vehicles.display.Z_ROBOT=vehicles.display-module.html#Z_ROBOT,Variable vehicles.display.vehicle_display_utils.Z_ROBOT=vehicles.display.vehicle_display_utils-module.html#Z_ROBOT"><a title="vehicles.display.Z_ROBOT
+vehicles.display.vehicle_display_utils.Z_ROBOT" class="py-name" href="#" onclick="return doclink('link-4', 'Z_ROBOT', 'link-4');">Z_ROBOT</a></tt><tt class="py-op">,</tt> <tt id="link-5" class="py-name" targets="Variable vehicles.display.Z_FIELD=vehicles.display-module.html#Z_FIELD,Variable vehicles.display.vehicle_display_utils.Z_FIELD=vehicles.display.vehicle_display_utils-module.html#Z_FIELD"><a title="vehicles.display.Z_FIELD
+vehicles.display.vehicle_display_utils.Z_FIELD" class="py-name" href="#" onclick="return doclink('link-5', 'Z_FIELD', 'link-5');">Z_FIELD</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line">    <tt id="link-6" class="py-name" targets="Function vehicles.display.sensors.plot_sensor_data()=vehicles.display.sensors-module.html#plot_sensor_data"><a title="vehicles.display.sensors.plot_sensor_data" class="py-name" href="#" onclick="return doclink('link-6', 'plot_sensor_data', 'link-6');">plot_sensor_data</a></tt><tt class="py-op">,</tt> <tt class="py-name">np</tt><tt class="py-op">,</tt> <tt class="py-name">contract</tt><tt class="py-op">,</tt> <tt id="link-7" class="py-name" targets="Variable vehicles.configuration.logger=vehicles.configuration-module.html#logger,Variable vehicles.configuration.master.logger=vehicles.configuration.master-module.html#logger,Variable vehicles.configuration.vehicles.logger=vehicles.configuration.vehicles-module.html#logger,Variable vehicles.display.logger=vehicles.display-module.html#logger,Variable vehicles.display.sensors.logger=vehicles.display.sensors-module.html#logger,Variable vehicles.display.vehicle_display_utils.logger=vehicles.display.vehicle_display_utils-module.html#logger,Variable vehicles.interfaces.logger=vehicles.interfaces-module.html#logger,Variable vehicles.logger=vehicles-module.html#logger,Variable vehicles.programs.display_demo.display_demo.logger=vehicles.programs.display_demo.display_demo-module.html#logger,Variable vehicles.programs.display_demo.logger=vehicles.programs.display_demo-module.html#logger,Variable vehicles.programs.display_demo.skins_demo.logger=vehicles.programs.display_demo.skins_demo-module.html#logger,Variable vehicles.programs.inspect_textures.main'.logger=vehicles.programs.inspect_textures.main%27-module.html#logger,Variable vehicles.programs.print_config.logger=vehicles.programs.print_config-module.html#logger,Variable vehicles.programs.print_config.main'.logger=vehicles.programs.print_config.main%27-module.html#logger,Variable vehicles.sensors.field_sampler.logger=vehicles.sensors.field_sampler-module.html#logger,Variable vehicles.sensors.logger=vehicles.sensors-module.html#logger,Variable vehicles.sensors.noises.logger=vehicles.sensors.noises-module.html#logger,Variable vehicles.sensors.raytracer.logger=vehicles.sensors.raytracer-module.html#logger,Variable vehicles.simulation.logger=vehicles.simulation-module.html#logger,Variable vehicles.simulation.vsimulation.logger=vehicles.simulation.vsimulation-module.html#logger,Variable vehicles.worlds.logger=vehicles.worlds-module.html#logger"><a title="vehicles.configuration.logger
+vehicles.configuration.master.logger
+vehicles.configuration.vehicles.logger
+vehicles.display.logger
+vehicles.display.sensors.logger
+vehicles.display.vehicle_display_utils.logger
+vehicles.interfaces.logger
+vehicles.logger
+vehicles.programs.display_demo.display_demo.logger
+vehicles.programs.display_demo.logger
+vehicles.programs.display_demo.skins_demo.logger
+vehicles.programs.inspect_textures.main'.logger
+vehicles.programs.print_config.logger
+vehicles.programs.print_config.main'.logger
+vehicles.sensors.field_sampler.logger
+vehicles.sensors.logger
+vehicles.sensors.noises.logger
+vehicles.sensors.raytracer.logger
+vehicles.simulation.logger
+vehicles.simulation.vsimulation.logger
+vehicles.worlds.logger" class="py-name" href="#" onclick="return doclink('link-7', 'logger', 'link-7');">logger</a></tt><tt class="py-op">,</tt> <tt id="link-8" class="py-name" targets="Function vehicles.display.misc_utils.plot_circle()=vehicles.display.misc_utils-module.html#plot_circle"><a title="vehicles.display.misc_utils.plot_circle" class="py-name" href="#" onclick="return doclink('link-8', 'plot_circle', 'link-8');">plot_circle</a></tt><tt class="py-op">,</tt> <tt id="link-9" class="py-name" targets="Variable vehicles.display.Z_ROBOT_HEADING=vehicles.display-module.html#Z_ROBOT_HEADING,Variable vehicles.display.vehicle_display_utils.Z_ROBOT_HEADING=vehicles.display.vehicle_display_utils-module.html#Z_ROBOT_HEADING"><a title="vehicles.display.Z_ROBOT_HEADING
+vehicles.display.vehicle_display_utils.Z_ROBOT_HEADING" class="py-name" href="#" onclick="return doclink('link-9', 'Z_ROBOT_HEADING', 'link-9');">Z_ROBOT_HEADING</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Package vehicles.interfaces=vehicles.interfaces-module.html"><a title="vehicles.interfaces" class="py-name" href="#" onclick="return doclink('link-10', 'interfaces', 'link-10');">interfaces</a></tt> <tt class="py-keyword">import</tt> <tt id="link-11" class="py-name" targets="Class vehicles.interfaces.primitives.Source=vehicles.interfaces.primitives.Source-class.html"><a title="vehicles.interfaces.primitives.Source" class="py-name" href="#" onclick="return doclink('link-11', 'Source', 'link-11');">Source</a></tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Module vehicles.configuration.sensors=vehicles.configuration.sensors-module.html,Module vehicles.display.sensors=vehicles.display.sensors-module.html,Package vehicles.sensors=vehicles.sensors-module.html"><a title="vehicles.configuration.sensors
+vehicles.display.sensors
+vehicles.sensors" class="py-name" href="#" onclick="return doclink('link-12', 'sensors', 'link-12');">sensors</a></tt> <tt class="py-keyword">import</tt> <tt id="link-13" class="py-name" targets="Function vehicles.sensors.field_sampler.get_field_values()=vehicles.sensors.field_sampler-module.html#get_field_values"><a title="vehicles.sensors.field_sampler.get_field_values" class="py-name" href="#" onclick="return doclink('link-13', 'get_field_values', 'link-13');">get_field_values</a></tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">geometry</tt> <tt class="py-keyword">import</tt> <tt class="py-op">(</tt><tt class="py-name">SE2_from_SE3</tt><tt class="py-op">,</tt> <tt class="py-name">translation_angle_from_SE2</tt><tt class="py-op">,</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line">    <tt class="py-name">translation_from_SE2</tt><tt class="py-op">)</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">geometry</tt><tt class="py-op">.</tt><tt class="py-name">yaml</tt> <tt class="py-keyword">import</tt> <tt id="link-14" class="py-name" targets="Static Method vehicles.interfaces.primitives.Source.from_yaml()=vehicles.interfaces.primitives.Source-class.html#from_yaml"><a title="vehicles.interfaces.primitives.Source.from_yaml" class="py-name" href="#" onclick="return doclink('link-14', 'from_yaml', 'link-14');">from_yaml</a></tt> </tt>
+<a name="show_grid"></a><div id="show_grid-def"><a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt> <a class="py-toggle" href="#" id="show_grid-toggle" onclick="return toggle('show_grid');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.display.vehicle_display_utils-module.html#show_grid">show_grid</a><tt class="py-op">(</tt><tt class="py-param">pylab</tt><tt class="py-op">,</tt> <tt class="py-param">bx</tt><tt class="py-op">,</tt> <tt class="py-param">by</tt><tt class="py-op">,</tt> <tt class="py-param">spacing</tt><tt class="py-op">,</tt> <tt class="py-param">margin</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="show_grid-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="show_grid-expanded"><a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line">    <tt class="py-name">S</tt> <tt class="py-op">=</tt> <tt class="py-name">spacing</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line">    <tt class="py-name">M</tt> <tt class="py-op">=</tt> <tt class="py-name">margin</tt>  <tt class="py-comment"># margin (cells)</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line">    <tt class="py-name">params</tt> <tt class="py-op">=</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-name">markersize</tt><tt class="py-op">=</tt><tt class="py-number">0.5</tt><tt class="py-op">,</tt> <tt class="py-name">color</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-number">0.8</tt><tt class="py-op">,</tt> <tt class="py-number">0.8</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">zorder</tt><tt class="py-op">=</tt><tt id="link-15" class="py-name"><a title="vehicles.display.Z_GRID
+vehicles.display.vehicle_display_utils.Z_GRID" class="py-name" href="#" onclick="return doclink('link-15', 'Z_GRID', 'link-0');">Z_GRID</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line">    <tt class="py-name">xmin</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">floor</tt><tt class="py-op">(</tt><tt class="py-name">bx</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">/</tt> <tt class="py-name">S</tt><tt class="py-op">)</tt> <tt class="py-op">-</tt> <tt class="py-name">M</tt><tt class="py-op">)</tt> <tt class="py-op">*</tt> <tt class="py-name">S</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line">    <tt class="py-name">xmax</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">ceil</tt><tt class="py-op">(</tt><tt class="py-name">bx</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">/</tt> <tt class="py-name">S</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-name">M</tt><tt class="py-op">)</tt> <tt class="py-op">*</tt> <tt class="py-name">S</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line">    <tt class="py-name">ymin</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">floor</tt><tt class="py-op">(</tt><tt class="py-name">by</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">/</tt> <tt class="py-name">S</tt><tt class="py-op">)</tt> <tt class="py-op">-</tt> <tt class="py-name">M</tt><tt class="py-op">)</tt> <tt class="py-op">*</tt> <tt class="py-name">S</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line">    <tt class="py-name">ymax</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">ceil</tt><tt class="py-op">(</tt><tt class="py-name">by</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">/</tt> <tt class="py-name">S</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-name">M</tt><tt class="py-op">)</tt> <tt class="py-op">*</tt> <tt class="py-name">S</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">    <tt class="py-name">px</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line">    <tt class="py-name">py</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">x</tt> <tt class="py-keyword">in</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">linspace</tt><tt class="py-op">(</tt><tt class="py-name">xmin</tt><tt class="py-op">,</tt> <tt class="py-name">xmax</tt><tt class="py-op">,</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">round</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">xmax</tt> <tt class="py-op">-</tt> <tt class="py-name">xmin</tt><tt class="py-op">)</tt> <tt class="py-op">/</tt> <tt class="py-name">S</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line">        <tt class="py-name">px</tt><tt class="py-op">.</tt><tt class="py-name">extend</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">x</tt><tt class="py-op">,</tt> <tt class="py-name">x</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line">        <tt class="py-name">py</tt><tt class="py-op">.</tt><tt class="py-name">extend</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">ymin</tt><tt class="py-op">,</tt> <tt class="py-name">ymax</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">y</tt> <tt class="py-keyword">in</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">linspace</tt><tt class="py-op">(</tt><tt class="py-name">ymin</tt><tt class="py-op">,</tt> <tt class="py-name">ymax</tt><tt class="py-op">,</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">round</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">ymax</tt> <tt class="py-op">-</tt> <tt class="py-name">ymin</tt><tt class="py-op">)</tt> <tt class="py-op">/</tt> <tt class="py-name">S</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">        <tt class="py-name">px</tt><tt class="py-op">.</tt><tt class="py-name">extend</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">xmin</tt><tt class="py-op">,</tt> <tt class="py-name">xmax</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">        <tt class="py-name">py</tt><tt class="py-op">.</tt><tt class="py-name">extend</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">y</tt><tt class="py-op">,</tt> <tt class="py-name">y</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">    <tt class="py-name">pylab</tt><tt class="py-op">.</tt><tt class="py-name">plot</tt><tt class="py-op">(</tt><tt class="py-name">px</tt><tt class="py-op">,</tt> <tt class="py-name">py</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">params</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"> </tt>
+<a name="show_world_geometry"></a><div id="show_world_geometry-def"><a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt> <a class="py-toggle" href="#" id="show_world_geometry-toggle" onclick="return toggle('show_world_geometry');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.display.vehicle_display_utils-module.html#show_world_geometry">show_world_geometry</a><tt class="py-op">(</tt><tt class="py-param">pylab</tt><tt class="py-op">,</tt> <tt class="py-param">world_state</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="show_world_geometry-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="show_world_geometry-expanded"><a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">    <tt class="py-name">bounds</tt> <tt class="py-op">=</tt> <tt class="py-name">world_state</tt><tt class="py-op">[</tt><tt class="py-string">'bounds'</tt><tt class="py-op">]</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">    <tt id="link-16" class="py-name" targets="Module vehicles.interfaces.primitives=vehicles.interfaces.primitives-module.html"><a title="vehicles.interfaces.primitives" class="py-name" href="#" onclick="return doclink('link-16', 'primitives', 'link-16');">primitives</a></tt> <tt class="py-op">=</tt> <tt class="py-name">world_state</tt><tt class="py-op">[</tt><tt class="py-string">'primitives'</tt><tt class="py-op">]</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">p</tt> <tt class="py-keyword">in</tt> <tt id="link-17" class="py-name"><a title="vehicles.interfaces.primitives" class="py-name" href="#" onclick="return doclink('link-17', 'primitives', 'link-16');">primitives</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">p</tt><tt class="py-op">[</tt><tt class="py-string">'type'</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-string">'PolyLine'</tt><tt class="py-op">:</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">            <tt class="py-name">points</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">array</tt><tt class="py-op">(</tt><tt class="py-name">p</tt><tt class="py-op">[</tt><tt class="py-string">'points'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">T</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">            <tt class="py-name">pylab</tt><tt class="py-op">.</tt><tt class="py-name">plot</tt><tt class="py-op">(</tt><tt class="py-name">points</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-op">:</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">points</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-op">:</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-string">'k-'</tt><tt class="py-op">,</tt> <tt class="py-name">markersize</tt><tt class="py-op">=</tt><tt class="py-number">10</tt><tt class="py-op">,</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">                       <tt class="py-name">zorder</tt><tt class="py-op">=</tt><tt id="link-18" class="py-name"><a title="vehicles.display.Z_POLYLINE
+vehicles.display.vehicle_display_utils.Z_POLYLINE" class="py-name" href="#" onclick="return doclink('link-18', 'Z_POLYLINE', 'link-1');">Z_POLYLINE</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">p</tt><tt class="py-op">[</tt><tt class="py-string">'type'</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-string">'Circle'</tt><tt class="py-op">:</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">            <tt class="py-name">obstacle_color</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-number">0.7</tt><tt class="py-op">,</tt> <tt class="py-number">0.7</tt><tt class="py-op">,</tt> <tt class="py-number">0.8</tt><tt class="py-op">]</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">            <tt class="py-name">facecolor</tt> <tt class="py-op">=</tt> <tt class="py-name">obstacle_color</tt> <tt class="py-keyword">if</tt> <tt class="py-name">p</tt><tt class="py-op">[</tt><tt class="py-string">'solid'</tt><tt class="py-op">]</tt> <tt class="py-keyword">else</tt> <tt class="py-string">'none'</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">            <tt id="link-19" class="py-name"><a title="vehicles.display.misc_utils.plot_circle" class="py-name" href="#" onclick="return doclink('link-19', 'plot_circle', 'link-8');">plot_circle</a></tt><tt class="py-op">(</tt><tt class="py-name">pylab</tt><tt class="py-op">,</tt> <tt class="py-name">center</tt><tt class="py-op">=</tt><tt class="py-name">p</tt><tt class="py-op">[</tt><tt class="py-string">'center'</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">radius</tt><tt class="py-op">=</tt><tt class="py-name">p</tt><tt class="py-op">[</tt><tt class="py-string">'radius'</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">                        <tt class="py-name">zorder</tt><tt class="py-op">=</tt><tt id="link-20" class="py-name"><a title="vehicles.display.Z_CIRCLE
+vehicles.display.vehicle_display_utils.Z_CIRCLE" class="py-name" href="#" onclick="return doclink('link-20', 'Z_CIRCLE', 'link-2');">Z_CIRCLE</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">                        <tt class="py-name">edgecolor</tt><tt class="py-op">=</tt><tt class="py-name">obstacle_color</tt><tt class="py-op">,</tt> <tt class="py-name">facecolor</tt><tt class="py-op">=</tt><tt class="py-name">facecolor</tt><tt class="py-op">)</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">p</tt><tt class="py-op">[</tt><tt class="py-string">'type'</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-string">'Source'</tt><tt class="py-op">:</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">False</tt><tt class="py-op">:</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">                <tt class="py-name">edgecolor</tt> <tt class="py-op">=</tt> <tt class="py-string">'k'</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">                <tt class="py-name">facecolor</tt> <tt class="py-op">=</tt> <tt class="py-string">'r'</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">                <tt class="py-comment"># XXX</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">                <tt id="link-21" class="py-name"><a title="vehicles.display.misc_utils.plot_circle" class="py-name" href="#" onclick="return doclink('link-21', 'plot_circle', 'link-8');">plot_circle</a></tt><tt class="py-op">(</tt><tt class="py-name">pylab</tt><tt class="py-op">,</tt> <tt class="py-name">center</tt><tt class="py-op">=</tt><tt class="py-name">p</tt><tt class="py-op">[</tt><tt class="py-string">'center'</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">radius</tt><tt class="py-op">=</tt><tt class="py-number">0.05</tt><tt class="py-op">,</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">                            <tt class="py-name">zorder</tt><tt class="py-op">=</tt><tt id="link-22" class="py-name"><a title="vehicles.display.Z_SOURCE
+vehicles.display.vehicle_display_utils.Z_SOURCE" class="py-name" href="#" onclick="return doclink('link-22', 'Z_SOURCE', 'link-3');">Z_SOURCE</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">                            <tt class="py-name">edgecolor</tt><tt class="py-op">=</tt><tt class="py-name">edgecolor</tt><tt class="py-op">,</tt> <tt class="py-name">facecolor</tt><tt class="py-op">=</tt><tt class="py-name">facecolor</tt><tt class="py-op">)</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">            <tt id="link-23" class="py-name"><a title="vehicles.configuration.logger
+vehicles.configuration.master.logger
+vehicles.configuration.vehicles.logger
+vehicles.display.logger
+vehicles.display.sensors.logger
+vehicles.display.vehicle_display_utils.logger
+vehicles.interfaces.logger
+vehicles.logger
+vehicles.programs.display_demo.display_demo.logger
+vehicles.programs.display_demo.logger
+vehicles.programs.display_demo.skins_demo.logger
+vehicles.programs.inspect_textures.main'.logger
+vehicles.programs.print_config.logger
+vehicles.programs.print_config.main'.logger
+vehicles.sensors.field_sampler.logger
+vehicles.sensors.logger
+vehicles.sensors.noises.logger
+vehicles.sensors.raytracer.logger
+vehicles.simulation.logger
+vehicles.simulation.vsimulation.logger
+vehicles.worlds.logger" class="py-name" href="#" onclick="return doclink('link-23', 'logger', 'link-7');">logger</a></tt><tt class="py-op">.</tt><tt class="py-name">warning</tt><tt class="py-op">(</tt><tt class="py-string">'Unknown type %r.'</tt> <tt class="py-op">%</tt> <tt class="py-name">p</tt><tt class="py-op">[</tt><tt class="py-string">'type'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">    <tt class="py-name">sources</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">s</tt> <tt class="py-keyword">in</tt> <tt id="link-24" class="py-name"><a title="vehicles.interfaces.primitives" class="py-name" href="#" onclick="return doclink('link-24', 'primitives', 'link-16');">primitives</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">s</tt><tt class="py-op">[</tt><tt class="py-string">'type'</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-string">'Source'</tt><tt class="py-op">:</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">            <tt class="py-name">sources</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt id="link-25" class="py-name"><a title="vehicles.interfaces.primitives.Source" class="py-name" href="#" onclick="return doclink('link-25', 'Source', 'link-11');">Source</a></tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="vehicles.interfaces.primitives.Source.from_yaml" class="py-name" href="#" onclick="return doclink('link-26', 'from_yaml', 'link-14');">from_yaml</a></tt><tt class="py-op">(</tt><tt class="py-name">s</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">sources</tt><tt class="py-op">:</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">        <tt id="link-27" class="py-name" targets="Function vehicles.display.vehicle_display_utils.plot_sources_field()=vehicles.display.vehicle_display_utils-module.html#plot_sources_field"><a title="vehicles.display.vehicle_display_utils.plot_sources_field" class="py-name" href="#" onclick="return doclink('link-27', 'plot_sources_field', 'link-27');">plot_sources_field</a></tt><tt class="py-op">(</tt><tt class="py-name">pylab</tt><tt class="py-op">,</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">                       <tt class="py-name">sources</tt><tt class="py-op">=</tt><tt class="py-name">sources</tt><tt class="py-op">,</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">                       <tt class="py-name">bounds</tt><tt class="py-op">=</tt><tt class="py-name">bounds</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"> </tt>
+<a name="plot_sources_field"></a><div id="plot_sources_field-def"><a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt> <a class="py-toggle" href="#" id="plot_sources_field-toggle" onclick="return toggle('plot_sources_field');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.display.vehicle_display_utils-module.html#plot_sources_field">plot_sources_field</a><tt class="py-op">(</tt><tt class="py-param">pylab</tt><tt class="py-op">,</tt> <tt class="py-param">sources</tt><tt class="py-op">,</tt> <tt class="py-param">bounds</tt><tt class="py-op">,</tt> <tt class="py-param">disc</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-number">100</tt><tt class="py-op">,</tt> <tt class="py-number">100</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-param">alpha</tt><tt class="py-op">=</tt><tt class="py-number">0.5</tt><tt class="py-op">,</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">                       <tt class="py-param">cmap</tt><tt class="py-op">=</tt><tt class="py-string">'Greens'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="plot_sources_field-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="plot_sources_field-expanded"><a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">sources</tt><tt class="py-op">:</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">        <tt id="link-28" class="py-name"><a title="vehicles.configuration.logger
+vehicles.configuration.master.logger
+vehicles.configuration.vehicles.logger
+vehicles.display.logger
+vehicles.display.sensors.logger
+vehicles.display.vehicle_display_utils.logger
+vehicles.interfaces.logger
+vehicles.logger
+vehicles.programs.display_demo.display_demo.logger
+vehicles.programs.display_demo.logger
+vehicles.programs.display_demo.skins_demo.logger
+vehicles.programs.inspect_textures.main'.logger
+vehicles.programs.print_config.logger
+vehicles.programs.print_config.main'.logger
+vehicles.sensors.field_sampler.logger
+vehicles.sensors.logger
+vehicles.sensors.noises.logger
+vehicles.sensors.raytracer.logger
+vehicles.simulation.logger
+vehicles.simulation.vsimulation.logger
+vehicles.worlds.logger" class="py-name" href="#" onclick="return doclink('link-28', 'logger', 'link-7');">logger</a></tt><tt class="py-op">.</tt><tt class="py-name">warning</tt><tt class="py-op">(</tt><tt class="py-string">'No sources given.'</tt><tt class="py-op">)</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">    <tt class="py-name">xb</tt> <tt class="py-op">=</tt> <tt class="py-name">bounds</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">    <tt class="py-name">yb</tt> <tt class="py-op">=</tt> <tt class="py-name">bounds</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">    <tt class="py-name">x</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">linspace</tt><tt class="py-op">(</tt><tt class="py-name">xb</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">xb</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">disc</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">    <tt class="py-name">y</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">linspace</tt><tt class="py-op">(</tt><tt class="py-name">yb</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">yb</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">disc</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">    <tt class="py-name">X</tt><tt class="py-op">,</tt> <tt class="py-name">Y</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">meshgrid</tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">,</tt> <tt class="py-name">y</tt><tt class="py-op">)</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"><tt class="py-comment">#    C = np.empty_like(X)</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt class="py-comment"># Note i,j and j,i --- it's a pylab quirk</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"><tt class="py-comment">#    for i, j in itertools.product(range(disc[0]), range(disc[1])):</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt class="py-comment">#        p = [ X[j, i], Y[j, i]]</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-comment">#        C[j, i] = get_field_value(sources, p)</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">    <tt class="py-name">C</tt> <tt class="py-op">=</tt> <tt id="link-29" class="py-name"><a title="vehicles.sensors.field_sampler.get_field_values" class="py-name" href="#" onclick="return doclink('link-29', 'get_field_values', 'link-13');">get_field_values</a></tt><tt class="py-op">(</tt><tt class="py-name">sources</tt><tt class="py-op">,</tt> <tt class="py-name">X</tt><tt class="py-op">,</tt> <tt class="py-name">Y</tt><tt class="py-op">)</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">    <tt class="py-name">pylab</tt><tt class="py-op">.</tt><tt class="py-name">pcolor</tt><tt class="py-op">(</tt><tt class="py-name">X</tt><tt class="py-op">,</tt> <tt class="py-name">Y</tt><tt class="py-op">,</tt> <tt class="py-name">C</tt><tt class="py-op">,</tt> <tt class="py-name">edgecolors</tt><tt class="py-op">=</tt><tt class="py-string">'none'</tt><tt class="py-op">,</tt> <tt class="py-name">alpha</tt><tt class="py-op">=</tt><tt class="py-name">alpha</tt><tt class="py-op">,</tt> <tt class="py-name">cmap</tt><tt class="py-op">=</tt><tt class="py-name">cmap</tt><tt class="py-op">,</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">                 <tt class="py-name">zorder</tt><tt class="py-op">=</tt><tt id="link-30" class="py-name"><a title="vehicles.display.Z_FIELD
+vehicles.display.vehicle_display_utils.Z_FIELD" class="py-name" href="#" onclick="return doclink('link-30', 'Z_FIELD', 'link-5');">Z_FIELD</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"> </tt>
+<a name="plot_robot"></a><div id="plot_robot-def"><a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">pose</tt><tt class="py-op">=</tt><tt class="py-string">'SE2'</tt><tt class="py-op">)</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt> <a class="py-toggle" href="#" id="plot_robot-toggle" onclick="return toggle('plot_robot');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.display.vehicle_display_utils-module.html#plot_robot">plot_robot</a><tt class="py-op">(</tt><tt class="py-param">pylab</tt><tt class="py-op">,</tt> <tt class="py-param">pose</tt><tt class="py-op">,</tt> <tt class="py-param">robot_radius</tt><tt class="py-op">,</tt> <tt class="py-param">zorder</tt><tt class="py-op">=</tt><tt id="link-31" class="py-name"><a title="vehicles.display.Z_ROBOT
+vehicles.display.vehicle_display_utils.Z_ROBOT" class="py-name" href="#" onclick="return doclink('link-31', 'Z_ROBOT', 'link-4');">Z_ROBOT</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">               <tt class="py-param">zorder_head</tt><tt class="py-op">=</tt><tt id="link-32" class="py-name"><a title="vehicles.display.Z_ROBOT_HEADING
+vehicles.display.vehicle_display_utils.Z_ROBOT_HEADING" class="py-name" href="#" onclick="return doclink('link-32', 'Z_ROBOT_HEADING', 'link-9');">Z_ROBOT_HEADING</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="plot_robot-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="plot_robot-expanded"><a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">    <tt class="py-name">t</tt><tt class="py-op">,</tt> <tt class="py-name">theta</tt> <tt class="py-op">=</tt> <tt class="py-name">translation_angle_from_SE2</tt><tt class="py-op">(</tt><tt class="py-name">pose</tt><tt class="py-op">)</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">    <tt id="link-33" class="py-name"><a title="vehicles.display.misc_utils.plot_circle" class="py-name" href="#" onclick="return doclink('link-33', 'plot_circle', 'link-8');">plot_circle</a></tt><tt class="py-op">(</tt><tt class="py-name">pylab</tt><tt class="py-op">,</tt> <tt class="py-name">center</tt><tt class="py-op">=</tt><tt class="py-name">t</tt><tt class="py-op">,</tt> <tt class="py-name">radius</tt><tt class="py-op">=</tt><tt class="py-name">robot_radius</tt><tt class="py-op">,</tt> <tt class="py-name">zorder</tt><tt class="py-op">=</tt><tt class="py-name">zorder</tt><tt class="py-op">,</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">                <tt class="py-name">edgecolor</tt><tt class="py-op">=</tt><tt class="py-string">'k'</tt><tt class="py-op">,</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">                <tt class="py-name">facecolor</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-number">0.5</tt><tt class="py-op">,</tt> <tt class="py-number">0.5</tt><tt class="py-op">,</tt> <tt class="py-number">0.5</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">    <tt class="py-name">pylab</tt><tt class="py-op">.</tt><tt class="py-name">plot</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">cos</tt><tt class="py-op">(</tt><tt class="py-name">theta</tt><tt class="py-op">)</tt> <tt class="py-op">*</tt> <tt class="py-name">robot_radius</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">               <tt class="py-op">[</tt><tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">sin</tt><tt class="py-op">(</tt><tt class="py-name">theta</tt><tt class="py-op">)</tt> <tt class="py-op">*</tt> <tt class="py-name">robot_radius</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-string">'k'</tt><tt class="py-op">,</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">               <tt class="py-name">zorder</tt><tt class="py-op">=</tt><tt id="link-34" class="py-name"><a title="vehicles.display.Z_ROBOT_HEADING
+vehicles.display.vehicle_display_utils.Z_ROBOT_HEADING" class="py-name" href="#" onclick="return doclink('link-34', 'Z_ROBOT_HEADING', 'link-9');">Z_ROBOT_HEADING</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"> </tt>
+<a name="display_all"></a><div id="display_all-def"><a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt> <a class="py-toggle" href="#" id="display_all-toggle" onclick="return toggle('display_all');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.display.vehicle_display_utils-module.html#display_all">display_all</a><tt class="py-op">(</tt><tt class="py-param">pylab</tt><tt class="py-op">,</tt> <tt class="py-param">state</tt><tt class="py-op">,</tt> <tt class="py-param">grid</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-param">zoom</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-param">show_sensor_data</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="display_all-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="display_all-expanded"><a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">    <tt id="link-35" class="py-name" targets="Variable vehicles.interfaces.world.World.Episode.vehicle_state=vehicles.interfaces.world.World.Episode-class.html#vehicle_state"><a title="vehicles.interfaces.world.World.Episode.vehicle_state" class="py-name" href="#" onclick="return doclink('link-35', 'vehicle_state', 'link-35');">vehicle_state</a></tt> <tt class="py-op">=</tt> <tt class="py-name">state</tt><tt class="py-op">[</tt><tt class="py-string">'vehicle'</tt><tt class="py-op">]</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">    <tt class="py-name">world_state</tt> <tt class="py-op">=</tt> <tt class="py-name">state</tt><tt class="py-op">[</tt><tt class="py-string">'world'</tt><tt class="py-op">]</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">    <tt class="py-name">bounds</tt> <tt class="py-op">=</tt> <tt class="py-name">world_state</tt><tt class="py-op">[</tt><tt class="py-string">'bounds'</tt><tt class="py-op">]</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">    <tt class="py-name">boundsx</tt> <tt class="py-op">=</tt> <tt class="py-name">bounds</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">    <tt class="py-name">boundsy</tt> <tt class="py-op">=</tt> <tt class="py-name">bounds</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">    <tt class="py-name">robot_pose</tt> <tt class="py-op">=</tt> <tt class="py-name">SE2_from_SE3</tt><tt class="py-op">(</tt><tt id="link-36" class="py-name"><a title="vehicles.interfaces.primitives.Source.from_yaml" class="py-name" href="#" onclick="return doclink('link-36', 'from_yaml', 'link-14');">from_yaml</a></tt><tt class="py-op">(</tt><tt id="link-37" class="py-name"><a title="vehicles.interfaces.world.World.Episode.vehicle_state" class="py-name" href="#" onclick="return doclink('link-37', 'vehicle_state', 'link-35');">vehicle_state</a></tt><tt class="py-op">[</tt><tt class="py-string">'pose'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">    <tt class="py-name">robot_radius</tt> <tt class="py-op">=</tt> <tt id="link-38" class="py-name"><a title="vehicles.interfaces.world.World.Episode.vehicle_state" class="py-name" href="#" onclick="return doclink('link-38', 'vehicle_state', 'link-35');">vehicle_state</a></tt><tt class="py-op">[</tt><tt class="py-string">'radius'</tt><tt class="py-op">]</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">grid</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">        <tt id="link-39" class="py-name" targets="Function vehicles.display.vehicle_display_utils.show_grid()=vehicles.display.vehicle_display_utils-module.html#show_grid"><a title="vehicles.display.vehicle_display_utils.show_grid" class="py-name" href="#" onclick="return doclink('link-39', 'show_grid', 'link-39');">show_grid</a></tt><tt class="py-op">(</tt><tt class="py-name">pylab</tt><tt class="py-op">,</tt> <tt class="py-name">boundsx</tt><tt class="py-op">,</tt> <tt class="py-name">boundsy</tt><tt class="py-op">,</tt> <tt class="py-name">spacing</tt><tt class="py-op">=</tt><tt class="py-name">grid</tt><tt class="py-op">,</tt> <tt class="py-name">margin</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">    <tt id="link-40" class="py-name" targets="Function vehicles.display.vehicle_display_utils.show_world_geometry()=vehicles.display.vehicle_display_utils-module.html#show_world_geometry"><a title="vehicles.display.vehicle_display_utils.show_world_geometry" class="py-name" href="#" onclick="return doclink('link-40', 'show_world_geometry', 'link-40');">show_world_geometry</a></tt><tt class="py-op">(</tt><tt class="py-name">pylab</tt><tt class="py-op">,</tt> <tt class="py-name">world_state</tt><tt class="py-op">)</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">show_sensor_data</tt><tt class="py-op">:</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">        <tt id="link-41" class="py-name"><a title="vehicles.display.sensors.plot_sensor_data" class="py-name" href="#" onclick="return doclink('link-41', 'plot_sensor_data', 'link-6');">plot_sensor_data</a></tt><tt class="py-op">(</tt><tt class="py-name">pylab</tt><tt class="py-op">,</tt> <tt id="link-42" class="py-name"><a title="vehicles.interfaces.world.World.Episode.vehicle_state" class="py-name" href="#" onclick="return doclink('link-42', 'vehicle_state', 'link-35');">vehicle_state</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line"> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">    <tt id="link-43" class="py-name" targets="Function vehicles.display.vehicle_display_utils.plot_robot()=vehicles.display.vehicle_display_utils-module.html#plot_robot"><a title="vehicles.display.vehicle_display_utils.plot_robot" class="py-name" href="#" onclick="return doclink('link-43', 'plot_robot', 'link-43');">plot_robot</a></tt><tt class="py-op">(</tt><tt class="py-name">pylab</tt><tt class="py-op">,</tt> <tt class="py-name">robot_pose</tt><tt class="py-op">,</tt> <tt class="py-name">robot_radius</tt><tt class="py-op">)</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line"> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">    <tt class="py-name">bx</tt> <tt class="py-op">=</tt> <tt class="py-name">bounds</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">    <tt class="py-name">by</tt> <tt class="py-op">=</tt> <tt class="py-name">bounds</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">zoom</tt> <tt class="py-op">==</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">        <tt class="py-name">m</tt> <tt class="py-op">=</tt> <tt class="py-number">0.5</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">        <tt class="py-name">m</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"><tt class="py-comment">#        pylab.axis('equal')</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">        <tt class="py-name">pylab</tt><tt class="py-op">.</tt><tt class="py-name">axis</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">bx</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">-</tt> <tt class="py-name">m</tt><tt class="py-op">,</tt> <tt class="py-name">bx</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-name">m</tt><tt class="py-op">,</tt> <tt class="py-name">by</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">-</tt> <tt class="py-name">m</tt><tt class="py-op">,</tt> <tt class="py-name">by</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-name">m</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line"> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">        <tt class="py-name">m</tt> <tt class="py-op">=</tt> <tt class="py-name">zoom</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">        <tt class="py-name">t</tt> <tt class="py-op">=</tt> <tt class="py-name">translation_from_SE2</tt><tt class="py-op">(</tt><tt class="py-name">robot_pose</tt><tt class="py-op">)</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line"> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">        <tt class="py-comment"># don't go over the world side</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">        <tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">maximum</tt><tt class="py-op">(</tt><tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">bx</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-name">m</tt><tt class="py-op">)</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">        <tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">minimum</tt><tt class="py-op">(</tt><tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">bx</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">-</tt> <tt class="py-name">m</tt><tt class="py-op">)</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">        <tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">maximum</tt><tt class="py-op">(</tt><tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">by</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-name">m</tt><tt class="py-op">)</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">        <tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">minimum</tt><tt class="py-op">(</tt><tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">by</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">-</tt> <tt class="py-name">m</tt><tt class="py-op">)</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">        <tt class="py-name">pylab</tt><tt class="py-op">.</tt><tt class="py-name">axis</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">-</tt> <tt class="py-name">m</tt><tt class="py-op">,</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">                    <tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-name">m</tt><tt class="py-op">,</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">                    <tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">-</tt> <tt class="py-name">m</tt><tt class="py-op">,</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">                    <tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-name">m</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">        <tt class="py-comment">#  pylab.axis('equal')</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line"> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">False</tt><tt class="py-op">:</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">        <tt class="py-name">pylab</tt><tt class="py-op">.</tt><tt class="py-name">plot</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">2</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-string">'r-'</tt><tt class="py-op">)</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line">        <tt class="py-name">pylab</tt><tt class="py-op">.</tt><tt class="py-name">text</tt><tt class="py-op">(</tt><tt class="py-number">2</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-string">'x'</tt><tt class="py-op">)</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">        <tt class="py-name">pylab</tt><tt class="py-op">.</tt><tt class="py-name">plot</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">2</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-string">'g-'</tt><tt class="py-op">)</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">        <tt class="py-name">pylab</tt><tt class="py-op">.</tt><tt class="py-name">text</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">2</tt><tt class="py-op">,</tt> <tt class="py-string">'y'</tt><tt class="py-op">)</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">    <tt class="py-comment"># turn off ticks labels</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">    <tt class="py-name">axes</tt> <tt class="py-op">=</tt> <tt class="py-name">pylab</tt><tt class="py-op">.</tt><tt class="py-name">gca</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">    <tt class="py-name">pylab</tt><tt class="py-op">.</tt><tt class="py-name">setp</tt><tt class="py-op">(</tt><tt class="py-name">axes</tt><tt class="py-op">.</tt><tt class="py-name">get_xticklabels</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">visible</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">    <tt class="py-name">pylab</tt><tt class="py-op">.</tt><tt class="py-name">setp</tt><tt class="py-op">(</tt><tt class="py-name">axes</tt><tt class="py-op">.</tt><tt class="py-name">get_yticklabels</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">visible</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="vehicles-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/vehicles">Vehicles</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Jan 20 18:29:43 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

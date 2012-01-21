@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>vehicles.interfaces.vehicle_sensor.VehicleSensor</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="vehicles-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/vehicles">Vehicles</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="vehicles-module.html">Package&nbsp;vehicles</a> ::
+        <a href="vehicles.interfaces-module.html">Package&nbsp;interfaces</a> ::
+        <a href="vehicles.interfaces.vehicle_sensor-module.html">Module&nbsp;vehicle_sensor</a> ::
+        Class&nbsp;VehicleSensor
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class VehicleSensor</h1><p class="nomargin-top"><span class="codelink"><a href="vehicles.interfaces.vehicle_sensor-pysrc.html#VehicleSensor">source&nbsp;code</a></span></p>
+<center>
+<center>  <map id="uml_class_diagram_for_vehicles_9" name="uml_class_diagram_for_vehicles_9">
+<area shape="rect" id="node1" href="vehicles.sensors.field_sampler.FieldSampler-class.html" title="A sensor that samples an intensity field." alt="" coords="457,209,711,247"/>
+<area shape="rect" id="node3" href="vehicles.sensors.field_sampler_uniform.FieldSamplerUniform-class.html" title="A field sampler with uniform disposition of sensels." alt="" coords="5,267,358,306"/>
+<area shape="rect" id="node4" href="vehicles.sensors.field_sampler_rand_circle.FieldSamplerRandCircle-class.html" title="A field sampler with sensels randomly distributed in a certain radius." alt="" coords="387,267,781,306"/>
+<area shape="rect" id="node2" href="vehicles.sensors.photoreceptors.Photoreceptors-class.html" title="This is a very shallow wrap around ImageRangeSensor" alt="" coords="846,209,1130,247"/>
+<area shape="rect" id="node8" href="vehicles.sensors.photoreceptors.PhotoreceptorsUniform-class.html" title="vehicles.sensors.photoreceptors.PhotoreceptorsUniform" alt="" coords="811,267,1141,306"/>
+<area shape="rect" id="node5_8" href="vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html#SENSELS" title="vehicles.interfaces.vehicle_sensor.VehicleSensor.SENSELS" alt="" coords="1187,31,1420,49"/>
+<area shape="rect" id="node5_9" href="vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html#__abstractmethods__" title="vehicles.interfaces.vehicle_sensor.VehicleSensor.__abstractmethods__" alt="" coords="1187,49,1420,68"/>
+<area shape="rect" id="node5_10" href="abc.ABCMeta-class.html" title="Metaclass for defining Abstract Base Classes (ABCs)." alt="" coords="1187,68,1420,87"/>
+<area shape="rect" id="node5_11" href="vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html#__init__" title="x.__init__(...) initializes x; see x.__class__.__doc__ for signature" alt="" coords="1187,89,1420,108"/>
+<area shape="rect" id="node5_12" href="vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html#__repr__" title="repr(x)" alt="" coords="1187,108,1420,127"/>
+<area shape="rect" id="node5_13" href="vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html#compute_observations" title="Computes the observations for this vehicle &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Args: &#160;&#160;&#160;&#160;&#160;pose: SE2 (world reference frame.)" alt="" coords="1187,127,1420,145"/>
+<area shape="rect" id="node5_14" href="vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html#set_world_primitives" title="vehicles.interfaces.vehicle_sensor.VehicleSensor.set_world_primitives" alt="" coords="1187,145,1420,164"/>
+<area shape="rect" id="node5_15" href="vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html#to_yaml" title="vehicles.interfaces.vehicle_sensor.VehicleSensor.to_yaml" alt="" coords="1187,164,1420,183"/>
+<area shape="rect" id="node5" href="vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html" title="vehicles.interfaces.vehicle_sensor.VehicleSensor" alt="" coords="1174,6,1431,189"/>
+<area shape="rect" id="node9" href="vehicles.sensors.range_finder.Rangefinder-class.html" title="vehicles.sensors.range_finder.Rangefinder" alt="" coords="1183,209,1425,247"/>
+<area shape="rect" id="node10" href="vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth-class.html" title="Implements" alt="" coords="1454,209,1839,247"/>
+<area shape="rect" id="node11" href="vehicles.sensors.random_sensor.RandomSensor-class.html" title="vehicles.sensors.random_sensor.RandomSensor" alt="" coords="1869,209,2150,247"/>
+<area shape="rect" id="node6" href="vehicles.sensors.range_finder.RangefinderUniform-class.html" title="vehicles.sensors.range_finder.RangefinderUniform" alt="" coords="1171,267,1461,306"/>
+<area shape="rect" id="node7" href="vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmoothUniform-class.html" title="vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmoothUniform" alt="" coords="1490,267,1923,306"/>
+</map>
+  <img src="uml_class_diagram_for_vehicles_9.gif" alt='' usemap="#uml_class_diagram_for_vehicles_9" ismap="ismap" class="graph-without-title" />
+</center>
+</center>
+<hr />
+<!-- ==================== NESTED CLASSES ==================== -->
+<a name="section-NestedClasses"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Nested Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-NestedClasses"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="abc.ABCMeta-class.html" class="summary-name">__metaclass__</a><br />
+      Metaclass for defining Abstract Base Classes (ABCs).
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">observations_spec</span>)</span><br />
+      x.__init__(...) initializes x; see x.__class__.__doc__ for signature</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="vehicles.interfaces.vehicle_sensor-pysrc.html#VehicleSensor.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html#__repr__" class="summary-sig-name">__repr__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      repr(x)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="vehicles.interfaces.vehicle_sensor-pysrc.html#VehicleSensor.__repr__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_compute_observations"></a><span class="summary-sig-name">_compute_observations</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">pose</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="vehicles.interfaces.vehicle_sensor-pysrc.html#VehicleSensor._compute_observations">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html#compute_observations" class="summary-sig-name">compute_observations</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">pose</span>)</span><br />
+      Computes the observations for this vehicle         
+Args: 
+    pose: SE2 (world reference frame.)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="vehicles.interfaces.vehicle_sensor-pysrc.html#VehicleSensor.compute_observations">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="set_world_primitives"></a><span class="summary-sig-name">set_world_primitives</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">primitives</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="vehicles.interfaces.vehicle_sensor-pysrc.html#VehicleSensor.set_world_primitives">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="to_yaml"></a><span class="summary-sig-name">to_yaml</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">primitives</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="vehicles.interfaces.vehicle_sensor-pysrc.html#VehicleSensor.to_yaml">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="SENSELS"></a><span class="summary-name">SENSELS</span> = <code title="'sensels'"><code class="variable-quote">'</code><code class="variable-string">sensels</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html#__abstractmethods__" class="summary-name">__abstractmethods__</a> = <code title="frozenset(['_compute_observations',
+           'set_world_primitives',
+           'to_yaml'])"><code class="variable-group">frozenset([</code><code class="variable-quote">'</code><code class="variable-string">_compute_observations</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">set</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_abc_cache"></a><span class="summary-name">_abc_cache</span> = <code title="set([])"><code class="variable-group">set([</code><code class="variable-group">])</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_abc_negative_cache"></a><span class="summary-name">_abc_negative_cache</span> = <code title="set([])"><code class="variable-group">set([</code><code class="variable-group">])</code></code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_abc_negative_cache_version"></a><span class="summary-name">_abc_negative_cache_version</span> = <code title="14">14</code>
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="_abc_registry"></a><span class="summary-name">_abc_registry</span> = <code title="set([])"><code class="variable-group">set([</code><code class="variable-group">])</code></code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">observations_spec</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="vehicles.interfaces.vehicle_sensor-pysrc.html#VehicleSensor.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>x.__init__(...) initializes x; see x.__class__.__doc__ for 
+  signature</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__init__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__repr__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__repr__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Representation operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="vehicles.interfaces.vehicle_sensor-pysrc.html#VehicleSensor.__repr__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>repr(x)</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__repr__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="compute_observations"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">compute_observations</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">pose</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="vehicles.interfaces.vehicle_sensor-pysrc.html#VehicleSensor.compute_observations">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <pre class="literalblock">
+Computes the observations for this vehicle         
+Args: 
+    pose: SE2 (world reference frame.)
+    
+Returns: 
+    a dictionary, containing as many data fields as desired. This data
+    is eventually passed to the client as a OpenStruct.
+    
+    There is, however, one necessary field.
+    * data[SENSELS] should be the declared sensel for the sensor.
+      This should be a numpy.ndarray, or a list of numbers.
+      No NANs allowed. 
+
+</pre>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== CLASS VARIABLE DETAILS ==================== -->
+<a name="section-ClassVariableDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variable Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariableDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__abstractmethods__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">__abstractmethods__</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">frozenset([</code><code class="variable-quote">'</code><code class="variable-string">_compute_observations</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">'</code><code class="variable-string">set_world_primitives</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+           <code class="variable-quote">'</code><code class="variable-string">to_yaml</code><code class="variable-quote">'</code><code class="variable-group">])</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="vehicles-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/vehicles">Vehicles</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Jan 20 18:29:39 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

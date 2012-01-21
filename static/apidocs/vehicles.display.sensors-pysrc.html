@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>vehicles.display.sensors</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="vehicles-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/vehicles">Vehicles</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="vehicles-module.html">Package&nbsp;vehicles</a> ::
+        <a href="vehicles.display-module.html">Package&nbsp;display</a> ::
+        Module&nbsp;sensors
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="vehicles.display.sensors-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="vehicles.display.sensors-module.html">Module vehicles.display.sensors</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt> <tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Variable vehicles.display.Z_SENSORS=vehicles.display-module.html#Z_SENSORS,Variable vehicles.display.sensors.Z_SENSORS=vehicles.display.sensors-module.html#Z_SENSORS"><a title="vehicles.display.Z_SENSORS
+vehicles.display.sensors.Z_SENSORS" class="py-name" href="#" onclick="return doclink('link-0', 'Z_SENSORS', 'link-0');">Z_SENSORS</a></tt><tt class="py-op">,</tt> <tt id="link-1" class="py-name" targets="Variable vehicles.configuration.logger=vehicles.configuration-module.html#logger,Variable vehicles.configuration.master.logger=vehicles.configuration.master-module.html#logger,Variable vehicles.configuration.vehicles.logger=vehicles.configuration.vehicles-module.html#logger,Variable vehicles.display.logger=vehicles.display-module.html#logger,Variable vehicles.display.sensors.logger=vehicles.display.sensors-module.html#logger,Variable vehicles.display.vehicle_display_utils.logger=vehicles.display.vehicle_display_utils-module.html#logger,Variable vehicles.interfaces.logger=vehicles.interfaces-module.html#logger,Variable vehicles.logger=vehicles-module.html#logger,Variable vehicles.programs.display_demo.display_demo.logger=vehicles.programs.display_demo.display_demo-module.html#logger,Variable vehicles.programs.display_demo.logger=vehicles.programs.display_demo-module.html#logger,Variable vehicles.programs.display_demo.skins_demo.logger=vehicles.programs.display_demo.skins_demo-module.html#logger,Variable vehicles.programs.inspect_textures.main'.logger=vehicles.programs.inspect_textures.main%27-module.html#logger,Variable vehicles.programs.print_config.logger=vehicles.programs.print_config-module.html#logger,Variable vehicles.programs.print_config.main'.logger=vehicles.programs.print_config.main%27-module.html#logger,Variable vehicles.sensors.field_sampler.logger=vehicles.sensors.field_sampler-module.html#logger,Variable vehicles.sensors.logger=vehicles.sensors-module.html#logger,Variable vehicles.sensors.noises.logger=vehicles.sensors.noises-module.html#logger,Variable vehicles.sensors.raytracer.logger=vehicles.sensors.raytracer-module.html#logger,Variable vehicles.simulation.logger=vehicles.simulation-module.html#logger,Variable vehicles.simulation.vsimulation.logger=vehicles.simulation.vsimulation-module.html#logger,Variable vehicles.worlds.logger=vehicles.worlds-module.html#logger"><a title="vehicles.configuration.logger
+vehicles.configuration.master.logger
+vehicles.configuration.vehicles.logger
+vehicles.display.logger
+vehicles.display.sensors.logger
+vehicles.display.vehicle_display_utils.logger
+vehicles.interfaces.logger
+vehicles.logger
+vehicles.programs.display_demo.display_demo.logger
+vehicles.programs.display_demo.logger
+vehicles.programs.display_demo.skins_demo.logger
+vehicles.programs.inspect_textures.main'.logger
+vehicles.programs.print_config.logger
+vehicles.programs.print_config.main'.logger
+vehicles.sensors.field_sampler.logger
+vehicles.sensors.logger
+vehicles.sensors.noises.logger
+vehicles.sensors.raytracer.logger
+vehicles.simulation.logger
+vehicles.simulation.vsimulation.logger
+vehicles.worlds.logger" class="py-name" href="#" onclick="return doclink('link-1', 'logger', 'link-1');">logger</a></tt><tt class="py-op">,</tt> <tt class="py-name">contract</tt><tt class="py-op">,</tt> <tt class="py-name">np</tt><tt class="py-op">,</tt> <tt id="link-2" class="py-name" targets="Function vehicles.display.misc_utils.plot_circle()=vehicles.display.misc_utils-module.html#plot_circle"><a title="vehicles.display.misc_utils.plot_circle" class="py-name" href="#" onclick="return doclink('link-2', 'plot_circle', 'link-2');">plot_circle</a></tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">geometry</tt> <tt class="py-keyword">import</tt> <tt class="py-name">SE2_from_SE3</tt><tt class="py-op">,</tt> <tt class="py-name">translation_angle_from_SE2</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">geometry</tt><tt class="py-op">.</tt><tt class="py-name">yaml</tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Static Method vehicles.interfaces.primitives.Source.from_yaml()=vehicles.interfaces.primitives.Source-class.html#from_yaml"><a title="vehicles.interfaces.primitives.Source.from_yaml" class="py-name" href="#" onclick="return doclink('link-3', 'from_yaml', 'link-3');">from_yaml</a></tt> </tt>
+<a name="plot_sensor_data"></a><div id="plot_sensor_data-def"><a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt> <a class="py-toggle" href="#" id="plot_sensor_data-toggle" onclick="return toggle('plot_sensor_data');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.display.sensors-module.html#plot_sensor_data">plot_sensor_data</a><tt class="py-op">(</tt><tt class="py-param">pylab</tt><tt class="py-op">,</tt> <tt class="py-param">vehicle_state</tt><tt class="py-op">,</tt> <tt class="py-param">rho_min</tt><tt class="py-op">=</tt><tt class="py-number">0.05</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="plot_sensor_data-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="plot_sensor_data-expanded"><a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">attached</tt> <tt class="py-keyword">in</tt> <tt id="link-4" class="py-name" targets="Variable vehicles.interfaces.world.World.Episode.vehicle_state=vehicles.interfaces.world.World.Episode-class.html#vehicle_state"><a title="vehicles.interfaces.world.World.Episode.vehicle_state" class="py-name" href="#" onclick="return doclink('link-4', 'vehicle_state', 'link-4');">vehicle_state</a></tt><tt class="py-op">[</tt><tt class="py-string">'sensors'</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line">        <tt class="py-name">sensor</tt> <tt class="py-op">=</tt> <tt class="py-name">attached</tt><tt class="py-op">[</tt><tt class="py-string">'sensor'</tt><tt class="py-op">]</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line">        <tt class="py-name">observations</tt> <tt class="py-op">=</tt> <tt class="py-name">attached</tt><tt class="py-op">[</tt><tt class="py-string">'current_observations'</tt><tt class="py-op">]</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line">        <tt class="py-name">sensor_pose</tt> <tt class="py-op">=</tt> <tt class="py-name">SE2_from_SE3</tt><tt class="py-op">(</tt><tt id="link-5" class="py-name"><a title="vehicles.interfaces.primitives.Source.from_yaml" class="py-name" href="#" onclick="return doclink('link-5', 'from_yaml', 'link-3');">from_yaml</a></tt><tt class="py-op">(</tt><tt class="py-name">attached</tt><tt class="py-op">[</tt><tt class="py-string">'current_pose'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">sensor</tt><tt class="py-op">[</tt><tt class="py-string">'type'</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-string">'Rangefinder'</tt><tt class="py-op">:</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line">            <tt id="link-6" class="py-name" targets="Function vehicles.display.sensors.plot_ranges()=vehicles.display.sensors-module.html#plot_ranges"><a title="vehicles.display.sensors.plot_ranges" class="py-name" href="#" onclick="return doclink('link-6', 'plot_ranges', 'link-6');">plot_ranges</a></tt><tt class="py-op">(</tt><tt class="py-name">pylab</tt><tt class="py-op">=</tt><tt class="py-name">pylab</tt><tt class="py-op">,</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line">                        <tt class="py-name">pose</tt><tt class="py-op">=</tt><tt class="py-name">sensor_pose</tt><tt class="py-op">,</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line">                        <tt class="py-name">directions</tt><tt class="py-op">=</tt><tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">array</tt><tt class="py-op">(</tt><tt class="py-name">sensor</tt><tt class="py-op">[</tt><tt class="py-string">'directions'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line">                        <tt class="py-name">valid</tt><tt class="py-op">=</tt><tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">array</tt><tt class="py-op">(</tt><tt class="py-name">observations</tt><tt class="py-op">[</tt><tt class="py-string">'valid'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line">                        <tt class="py-name">readings</tt><tt class="py-op">=</tt><tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">array</tt><tt class="py-op">(</tt><tt class="py-name">observations</tt><tt class="py-op">[</tt><tt class="py-string">'readings'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line">                        <tt class="py-op">)</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">sensor</tt><tt class="py-op">[</tt><tt class="py-string">'type'</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-string">'Photoreceptors'</tt><tt class="py-op">:</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line">            <tt id="link-7" class="py-name" targets="Function vehicles.display.sensors.plot_photoreceptors()=vehicles.display.sensors-module.html#plot_photoreceptors"><a title="vehicles.display.sensors.plot_photoreceptors" class="py-name" href="#" onclick="return doclink('link-7', 'plot_photoreceptors', 'link-7');">plot_photoreceptors</a></tt><tt class="py-op">(</tt><tt class="py-name">pylab</tt><tt class="py-op">=</tt><tt class="py-name">pylab</tt><tt class="py-op">,</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">                        <tt class="py-name">pose</tt><tt class="py-op">=</tt><tt class="py-name">sensor_pose</tt><tt class="py-op">,</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line">                        <tt class="py-name">directions</tt><tt class="py-op">=</tt><tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">array</tt><tt class="py-op">(</tt><tt class="py-name">sensor</tt><tt class="py-op">[</tt><tt class="py-string">'directions'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line">                        <tt class="py-name">valid</tt><tt class="py-op">=</tt><tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">array</tt><tt class="py-op">(</tt><tt class="py-name">observations</tt><tt class="py-op">[</tt><tt class="py-string">'valid'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">                        <tt class="py-name">readings</tt><tt class="py-op">=</tt><tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">array</tt><tt class="py-op">(</tt><tt class="py-name">observations</tt><tt class="py-op">[</tt><tt class="py-string">'readings'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">                        <tt class="py-name">luminance</tt><tt class="py-op">=</tt><tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">array</tt><tt class="py-op">(</tt><tt class="py-name">observations</tt><tt class="py-op">[</tt><tt class="py-string">'luminance'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">sensor</tt><tt class="py-op">[</tt><tt class="py-string">'type'</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-string">'FieldSampler'</tt><tt class="py-op">:</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">            <tt id="link-8" class="py-name" targets="Function vehicles.display.sensors.plot_fieldsampler()=vehicles.display.sensors-module.html#plot_fieldsampler"><a title="vehicles.display.sensors.plot_fieldsampler" class="py-name" href="#" onclick="return doclink('link-8', 'plot_fieldsampler', 'link-8');">plot_fieldsampler</a></tt><tt class="py-op">(</tt><tt class="py-name">pylab</tt><tt class="py-op">=</tt><tt class="py-name">pylab</tt><tt class="py-op">,</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">                        <tt class="py-name">pose</tt><tt class="py-op">=</tt><tt class="py-name">sensor_pose</tt><tt class="py-op">,</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">                        <tt class="py-name">positions</tt><tt class="py-op">=</tt><tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">array</tt><tt class="py-op">(</tt><tt class="py-name">sensor</tt><tt class="py-op">[</tt><tt class="py-string">'positions'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">                        <tt class="py-name">sensels</tt><tt class="py-op">=</tt><tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">array</tt><tt class="py-op">(</tt><tt class="py-name">observations</tt><tt class="py-op">[</tt><tt class="py-string">'sensels'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">            <tt id="link-9" class="py-name"><a title="vehicles.configuration.logger
+vehicles.configuration.master.logger
+vehicles.configuration.vehicles.logger
+vehicles.display.logger
+vehicles.display.sensors.logger
+vehicles.display.vehicle_display_utils.logger
+vehicles.interfaces.logger
+vehicles.logger
+vehicles.programs.display_demo.display_demo.logger
+vehicles.programs.display_demo.logger
+vehicles.programs.display_demo.skins_demo.logger
+vehicles.programs.inspect_textures.main'.logger
+vehicles.programs.print_config.logger
+vehicles.programs.print_config.main'.logger
+vehicles.sensors.field_sampler.logger
+vehicles.sensors.logger
+vehicles.sensors.noises.logger
+vehicles.sensors.raytracer.logger
+vehicles.simulation.logger
+vehicles.simulation.vsimulation.logger
+vehicles.worlds.logger" class="py-name" href="#" onclick="return doclink('link-9', 'logger', 'link-1');">logger</a></tt><tt class="py-op">.</tt><tt class="py-name">warning</tt><tt class="py-op">(</tt><tt class="py-string">'Unknown sensor type %r.'</tt> <tt class="py-op">%</tt> <tt class="py-name">sensor</tt><tt class="py-op">[</tt><tt class="py-string">'type'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"> </tt>
+<a name="SE2_act_R2"></a><div id="SE2_act_R2-def"><a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">q</tt><tt class="py-op">=</tt><tt class="py-string">'SE2'</tt><tt class="py-op">,</tt> <tt class="py-name">x</tt><tt class="py-op">=</tt><tt class="py-string">'array[2]'</tt><tt class="py-op">,</tt> <tt class="py-name">returns</tt><tt class="py-op">=</tt><tt class="py-string">'array[2]'</tt><tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt> <a class="py-toggle" href="#" id="SE2_act_R2-toggle" onclick="return toggle('SE2_act_R2');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.display.sensors-module.html#SE2_act_R2">SE2_act_R2</a><tt class="py-op">(</tt><tt class="py-param">q</tt><tt class="py-op">,</tt> <tt class="py-param">x</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SE2_act_R2-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="SE2_act_R2-expanded"><a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">dot</tt><tt class="py-op">(</tt><tt class="py-name">q</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-name">x</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">x</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-number">2</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">pose</tt><tt class="py-op">=</tt><tt class="py-string">'SE2'</tt><tt class="py-op">,</tt> <tt class="py-name">positions</tt><tt class="py-op">=</tt><tt class="py-string">'array[Nx2]'</tt><tt class="py-op">,</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">          <tt class="py-name">sensels</tt><tt class="py-op">=</tt><tt class="py-string">'array[N]|(array[JxK],J*K=N)'</tt><tt class="py-op">)</tt> </tt>
+<a name="plot_fieldsampler"></a><div id="plot_fieldsampler-def"><a name="L41"></a><tt class="py-lineno"> 41</tt> <a class="py-toggle" href="#" id="plot_fieldsampler-toggle" onclick="return toggle('plot_fieldsampler');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.display.sensors-module.html#plot_fieldsampler">plot_fieldsampler</a><tt class="py-op">(</tt><tt class="py-param">pylab</tt><tt class="py-op">,</tt> <tt class="py-param">pose</tt><tt class="py-op">,</tt> <tt class="py-param">positions</tt><tt class="py-op">,</tt> <tt class="py-param">sensels</tt><tt class="py-op">,</tt> <tt class="py-param">radius</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="plot_fieldsampler-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="plot_fieldsampler-expanded"><a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">    <tt class="py-comment"># Scale in [0,1] for better contrast</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">    <tt class="py-name">sensels</tt> <tt class="py-op">=</tt> <tt class="py-name">sensels</tt> <tt class="py-op">-</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">min</tt><tt class="py-op">(</tt><tt class="py-name">sensels</tt><tt class="py-op">)</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">max</tt><tt class="py-op">(</tt><tt class="py-name">sensels</tt><tt class="py-op">)</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">        <tt class="py-name">sensels</tt> <tt class="py-op">=</tt> <tt class="py-name">sensels</tt> <tt class="py-op">/</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">max</tt><tt class="py-op">(</tt><tt class="py-name">sensels</tt><tt class="py-op">)</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">    <tt class="py-comment"># find radius if none given as the minimum distance of the first</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">    <tt class="py-comment"># sensels to the others</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">radius</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">        <tt class="py-name">p0</tt> <tt class="py-op">=</tt> <tt class="py-name">positions</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-op">:</tt><tt class="py-op">]</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">        <tt id="link-10" class="py-name" targets="Function vehicles.simulation.collision_utils_test.pi()=vehicles.simulation.collision_utils_test-module.html#pi"><a title="vehicles.simulation.collision_utils_test.pi" class="py-name" href="#" onclick="return doclink('link-10', 'pi', 'link-10');">pi</a></tt> <tt class="py-op">=</tt> <tt class="py-name">positions</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-op">,</tt> <tt class="py-op">:</tt><tt class="py-op">]</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">        <tt class="py-name">D</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">hypot</tt><tt class="py-op">(</tt><tt id="link-11" class="py-name"><a title="vehicles.simulation.collision_utils_test.pi" class="py-name" href="#" onclick="return doclink('link-11', 'pi', 'link-10');">pi</a></tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">-</tt> <tt class="py-name">p0</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt id="link-12" class="py-name"><a title="vehicles.simulation.collision_utils_test.pi" class="py-name" href="#" onclick="return doclink('link-12', 'pi', 'link-10');">pi</a></tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">-</tt> <tt class="py-name">p0</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">        <tt class="py-name">radius</tt> <tt class="py-op">=</tt> <tt class="py-name">D</tt><tt class="py-op">.</tt><tt class="py-name">min</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">/</tt> <tt class="py-number">2</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">        <tt class="py-name">radius</tt> <tt class="py-op">*=</tt> <tt class="py-number">2</tt>  <tt class="py-comment"># overlap</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">        <tt class="py-name">radius</tt> <tt class="py-op">=</tt> <tt class="py-number">0.05</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">i</tt><tt class="py-op">,</tt> <tt class="py-name">value</tt> <tt class="py-keyword">in</tt> <tt class="py-name">enumerate</tt><tt class="py-op">(</tt><tt class="py-name">sensels</tt><tt class="py-op">.</tt><tt class="py-name">flat</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">        <tt class="py-name">value</tt> <tt class="py-op">=</tt> <tt class="py-number">1</tt> <tt class="py-op">-</tt> <tt class="py-name">value</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">        <tt class="py-name">facecolor</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">value</tt><tt class="py-op">,</tt> <tt class="py-name">value</tt><tt class="py-op">,</tt> <tt class="py-name">value</tt><tt class="py-op">]</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">        <tt class="py-name">pw</tt> <tt class="py-op">=</tt> <tt id="link-13" class="py-name" targets="Function vehicles.display.sensors.SE2_act_R2()=vehicles.display.sensors-module.html#SE2_act_R2"><a title="vehicles.display.sensors.SE2_act_R2" class="py-name" href="#" onclick="return doclink('link-13', 'SE2_act_R2', 'link-13');">SE2_act_R2</a></tt><tt class="py-op">(</tt><tt class="py-name">pose</tt><tt class="py-op">,</tt> <tt class="py-name">positions</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">,</tt> <tt class="py-op">:</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">        <tt id="link-14" class="py-name"><a title="vehicles.display.misc_utils.plot_circle" class="py-name" href="#" onclick="return doclink('link-14', 'plot_circle', 'link-2');">plot_circle</a></tt><tt class="py-op">(</tt><tt class="py-name">pylab</tt><tt class="py-op">,</tt> <tt class="py-name">center</tt><tt class="py-op">=</tt><tt class="py-name">pw</tt><tt class="py-op">,</tt> <tt class="py-name">radius</tt><tt class="py-op">=</tt><tt class="py-name">radius</tt><tt class="py-op">,</tt> <tt class="py-name">facecolor</tt><tt class="py-op">=</tt><tt class="py-name">facecolor</tt><tt class="py-op">,</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">                    <tt class="py-name">edgecolor</tt><tt class="py-op">=</tt><tt class="py-string">'none'</tt><tt class="py-op">,</tt> <tt class="py-name">alpha</tt><tt class="py-op">=</tt><tt class="py-number">0.6</tt><tt class="py-op">,</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">                    <tt class="py-name">zorder</tt><tt class="py-op">=</tt><tt id="link-15" class="py-name"><a title="vehicles.display.Z_SENSORS
+vehicles.display.sensors.Z_SENSORS" class="py-name" href="#" onclick="return doclink('link-15', 'Z_SENSORS', 'link-0');">Z_SENSORS</a></tt><tt class="py-op">,</tt> <tt class="py-name">ec</tt><tt class="py-op">=</tt><tt class="py-string">'none'</tt><tt class="py-op">,</tt> <tt class="py-name">lw</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">pose</tt><tt class="py-op">=</tt><tt class="py-string">'SE2'</tt><tt class="py-op">,</tt> <tt class="py-name">directions</tt><tt class="py-op">=</tt><tt class="py-string">'array[N]'</tt><tt class="py-op">,</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">          <tt class="py-name">valid</tt><tt class="py-op">=</tt><tt class="py-string">'array[N]'</tt><tt class="py-op">,</tt> <tt class="py-name">readings</tt><tt class="py-op">=</tt><tt class="py-string">'array[N]'</tt><tt class="py-op">)</tt> </tt>
+<a name="plot_ranges"></a><div id="plot_ranges-def"><a name="L71"></a><tt class="py-lineno"> 71</tt> <a class="py-toggle" href="#" id="plot_ranges-toggle" onclick="return toggle('plot_ranges');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.display.sensors-module.html#plot_ranges">plot_ranges</a><tt class="py-op">(</tt><tt class="py-param">pylab</tt><tt class="py-op">,</tt> <tt class="py-param">pose</tt><tt class="py-op">,</tt> <tt class="py-param">directions</tt><tt class="py-op">,</tt> <tt class="py-param">valid</tt><tt class="py-op">,</tt> <tt class="py-param">readings</tt><tt class="py-op">,</tt> <tt class="py-param">rho_min</tt><tt class="py-op">=</tt><tt class="py-number">0.05</tt><tt class="py-op">,</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">                <tt class="py-param">style</tt><tt class="py-op">=</tt><tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-name">zorder</tt><tt class="py-op">=</tt><tt class="py-number">200</tt><tt class="py-op">,</tt> <tt class="py-param">markersize</tt><tt class="py-op">=</tt><tt class="py-number">0.5</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="plot_ranges-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="plot_ranges-expanded"><a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">    <tt class="py-name">sensor_t</tt><tt class="py-op">,</tt> <tt class="py-name">sensor_theta</tt> <tt class="py-op">=</tt> <tt class="py-name">translation_angle_from_SE2</tt><tt class="py-op">(</tt><tt class="py-name">pose</tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">    <tt class="py-name">directions</tt> <tt class="py-op">=</tt> <tt class="py-name">directions</tt><tt class="py-op">[</tt><tt class="py-name">valid</tt><tt class="py-op">]</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">    <tt class="py-name">readings</tt> <tt class="py-op">=</tt> <tt class="py-name">readings</tt><tt class="py-op">[</tt><tt class="py-name">valid</tt><tt class="py-op">]</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">theta_i</tt><tt class="py-op">,</tt> <tt class="py-name">rho_i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">zip</tt><tt class="py-op">(</tt><tt class="py-name">directions</tt><tt class="py-op">,</tt> <tt class="py-name">readings</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">        <tt id="link-16" class="py-name" targets="Function vehicles.display.sensors.plot_ray()=vehicles.display.sensors-module.html#plot_ray"><a title="vehicles.display.sensors.plot_ray" class="py-name" href="#" onclick="return doclink('link-16', 'plot_ray', 'link-16');">plot_ray</a></tt><tt class="py-op">(</tt><tt class="py-name">pylab</tt><tt class="py-op">,</tt> <tt class="py-name">sensor_t</tt><tt class="py-op">,</tt> <tt class="py-name">sensor_theta</tt> <tt class="py-op">+</tt> <tt class="py-name">theta_i</tt><tt class="py-op">,</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">                 <tt class="py-name">rho1</tt><tt class="py-op">=</tt><tt class="py-name">rho_min</tt><tt class="py-op">,</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">                 <tt class="py-name">rho2</tt><tt class="py-op">=</tt><tt class="py-name">rho_i</tt><tt class="py-op">,</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">                 <tt class="py-name">color</tt><tt class="py-op">=</tt><tt class="py-string">'y'</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">style</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">pose</tt><tt class="py-op">=</tt><tt class="py-string">'SE2'</tt><tt class="py-op">,</tt> <tt class="py-name">directions</tt><tt class="py-op">=</tt><tt class="py-string">'array[N]'</tt><tt class="py-op">,</tt> <tt class="py-name">valid</tt><tt class="py-op">=</tt><tt class="py-string">'array[N]'</tt><tt class="py-op">,</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">          <tt class="py-name">readings</tt><tt class="py-op">=</tt><tt class="py-string">'array[N]'</tt><tt class="py-op">,</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">          <tt class="py-name">luminance</tt><tt class="py-op">=</tt><tt class="py-string">'array[N]'</tt><tt class="py-op">)</tt> </tt>
+<a name="plot_photoreceptors"></a><div id="plot_photoreceptors-def"><a name="L86"></a><tt class="py-lineno"> 86</tt> <a class="py-toggle" href="#" id="plot_photoreceptors-toggle" onclick="return toggle('plot_photoreceptors');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.display.sensors-module.html#plot_photoreceptors">plot_photoreceptors</a><tt class="py-op">(</tt><tt class="py-param">pylab</tt><tt class="py-op">,</tt> <tt class="py-param">pose</tt><tt class="py-op">,</tt> <tt class="py-param">directions</tt><tt class="py-op">,</tt> <tt class="py-param">valid</tt><tt class="py-op">,</tt> <tt class="py-param">readings</tt><tt class="py-op">,</tt> <tt class="py-param">luminance</tt><tt class="py-op">,</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">                        <tt class="py-param">rho_min</tt><tt class="py-op">=</tt><tt class="py-number">0.05</tt><tt class="py-op">,</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">                        <tt class="py-param">style</tt><tt class="py-op">=</tt><tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-name">zorder</tt><tt class="py-op">=</tt><tt class="py-number">200</tt><tt class="py-op">,</tt> <tt class="py-param">markersize</tt><tt class="py-op">=</tt><tt class="py-number">0.5</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="plot_photoreceptors-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="plot_photoreceptors-expanded"><a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">    <tt class="py-name">sensor_t</tt><tt class="py-op">,</tt> <tt class="py-name">sensor_theta</tt> <tt class="py-op">=</tt> <tt class="py-name">translation_angle_from_SE2</tt><tt class="py-op">(</tt><tt class="py-name">pose</tt><tt class="py-op">)</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">    <tt class="py-name">directions</tt> <tt class="py-op">=</tt> <tt class="py-name">directions</tt><tt class="py-op">[</tt><tt class="py-name">valid</tt><tt class="py-op">]</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">    <tt class="py-name">readings</tt> <tt class="py-op">=</tt> <tt class="py-name">readings</tt><tt class="py-op">[</tt><tt class="py-name">valid</tt><tt class="py-op">]</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">    <tt class="py-name">luminance</tt> <tt class="py-op">=</tt> <tt class="py-name">luminance</tt><tt class="py-op">[</tt><tt class="py-name">valid</tt><tt class="py-op">]</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">theta_i</tt><tt class="py-op">,</tt> <tt class="py-name">rho_i</tt><tt class="py-op">,</tt> <tt class="py-name">lum</tt> <tt class="py-keyword">in</tt> <tt class="py-name">zip</tt><tt class="py-op">(</tt><tt class="py-name">directions</tt><tt class="py-op">,</tt> <tt class="py-name">readings</tt><tt class="py-op">,</tt> <tt class="py-name">luminance</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">        <tt id="link-17" class="py-name"><a title="vehicles.display.sensors.plot_ray" class="py-name" href="#" onclick="return doclink('link-17', 'plot_ray', 'link-16');">plot_ray</a></tt><tt class="py-op">(</tt><tt class="py-name">pylab</tt><tt class="py-op">,</tt> <tt class="py-name">sensor_t</tt><tt class="py-op">,</tt> <tt class="py-name">sensor_theta</tt> <tt class="py-op">+</tt> <tt class="py-name">theta_i</tt><tt class="py-op">,</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">                 <tt class="py-name">rho1</tt><tt class="py-op">=</tt><tt class="py-name">rho_min</tt><tt class="py-op">,</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">                 <tt class="py-name">rho2</tt><tt class="py-op">=</tt><tt class="py-name">rho_i</tt><tt class="py-op">,</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">                 <tt class="py-name">color</tt><tt class="py-op">=</tt><tt class="py-op">(</tt><tt class="py-name">lum</tt><tt class="py-op">,</tt> <tt class="py-name">lum</tt><tt class="py-op">,</tt> <tt class="py-name">lum</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">style</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"> </tt>
+<a name="plot_ray"></a><div id="plot_ray-def"><a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">origin</tt><tt class="py-op">=</tt><tt class="py-string">'seq[2](number)'</tt><tt class="py-op">,</tt> <tt class="py-name">direction</tt><tt class="py-op">=</tt><tt class="py-string">'number'</tt><tt class="py-op">,</tt> <tt class="py-name">rho1</tt><tt class="py-op">=</tt><tt class="py-string">'x'</tt><tt class="py-op">,</tt> <tt class="py-name">rho2</tt><tt class="py-op">=</tt><tt class="py-string">'&gt;=x'</tt><tt class="py-op">)</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt> <a class="py-toggle" href="#" id="plot_ray-toggle" onclick="return toggle('plot_ray');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.display.sensors-module.html#plot_ray">plot_ray</a><tt class="py-op">(</tt><tt class="py-param">pylab</tt><tt class="py-op">,</tt> <tt class="py-param">origin</tt><tt class="py-op">,</tt> <tt class="py-param">direction</tt><tt class="py-op">,</tt> <tt class="py-param">rho1</tt><tt class="py-op">,</tt> <tt class="py-param">rho2</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">style</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="plot_ray-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="plot_ray-expanded"><a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">    <tt class="py-name">x</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">origin</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">cos</tt><tt class="py-op">(</tt><tt class="py-name">direction</tt><tt class="py-op">)</tt> <tt class="py-op">*</tt> <tt class="py-name">rho1</tt><tt class="py-op">,</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">         <tt class="py-name">origin</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">cos</tt><tt class="py-op">(</tt><tt class="py-name">direction</tt><tt class="py-op">)</tt> <tt class="py-op">*</tt> <tt class="py-name">rho2</tt><tt class="py-op">]</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">    <tt class="py-name">y</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">origin</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">sin</tt><tt class="py-op">(</tt><tt class="py-name">direction</tt><tt class="py-op">)</tt> <tt class="py-op">*</tt> <tt class="py-name">rho1</tt><tt class="py-op">,</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">         <tt class="py-name">origin</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">sin</tt><tt class="py-op">(</tt><tt class="py-name">direction</tt><tt class="py-op">)</tt> <tt class="py-op">*</tt> <tt class="py-name">rho2</tt><tt class="py-op">]</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">    <tt class="py-name">pylab</tt><tt class="py-op">.</tt><tt class="py-name">plot</tt><tt class="py-op">(</tt><tt class="py-name">x</tt><tt class="py-op">,</tt> <tt class="py-name">y</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">style</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="vehicles-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/vehicles">Vehicles</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Jan 20 18:29:43 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>vehicles.interfaces.world</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="vehicles-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/vehicles">Vehicles</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="vehicles-module.html">Package&nbsp;vehicles</a> ::
+        <a href="vehicles.interfaces-module.html">Package&nbsp;interfaces</a> ::
+        Module&nbsp;world
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="vehicles.interfaces.world-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="vehicles.interfaces.world-module.html">Module vehicles.interfaces.world</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt> <tt class="py-keyword">import</tt> <tt class="py-name">np</tt><tt class="py-op">,</tt> <tt class="py-name">contract</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">abc</tt> <tt class="py-keyword">import</tt> <tt class="py-name">abstractmethod</tt><tt class="py-op">,</tt> <tt id="link-0" class="py-name" targets="Class abc.ABCMeta=abc.ABCMeta-class.html"><a title="abc.ABCMeta" class="py-name" href="#" onclick="return doclink('link-0', 'ABCMeta', 'link-0');">ABCMeta</a></tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">collections</tt> <tt class="py-keyword">import</tt> <tt class="py-name">namedtuple</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">geometry</tt> <tt class="py-keyword">import</tt> <tt class="py-name">SE2_from_xytheta</tt><tt class="py-op">,</tt> <tt class="py-name">SE3_from_SE2</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">datetime</tt> </tt>
+<a name="World"></a><div id="World-def"><a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt> <a class="py-toggle" href="#" id="World-toggle" onclick="return toggle('World');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="vehicles.interfaces.world.World-class.html">World</a><tt class="py-op">:</tt> </tt>
+</div><div id="World-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="World-expanded"><a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line">    <tt class="py-name">__metaclass__</tt> <tt class="py-op">=</tt> <tt id="link-1" class="py-name"><a title="abc.ABCMeta" class="py-name" href="#" onclick="return doclink('link-1', 'ABCMeta', 'link-0');">ABCMeta</a></tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">bounds</tt><tt class="py-op">=</tt><tt class="py-string">'seq[3](seq[2](number))'</tt><tt class="py-op">)</tt> </tt>
+<a name="World.__init__"></a><div id="World.__init__-def"><a name="L12"></a><tt class="py-lineno">12</tt> <a class="py-toggle" href="#" id="World.__init__-toggle" onclick="return toggle('World.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.interfaces.world.World-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">bounds</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="World.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="World.__init__-expanded"><a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">bounds</tt> <tt class="py-op">=</tt> <tt class="py-name">bounds</tt> </tt>
+</div><a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"> </tt>
+<a name="World.__repr__"></a><div id="World.__repr__-def"><a name="L15"></a><tt class="py-lineno">15</tt> <a class="py-toggle" href="#" id="World.__repr__-toggle" onclick="return toggle('World.__repr__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.interfaces.world.World-class.html#__repr__">__repr__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="World.__repr__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="World.__repr__-expanded"><a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-string">'%s'</tt> <tt class="py-op">%</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__class__</tt><tt class="py-op">.</tt><tt class="py-name">__name__</tt> </tt>
+</div><a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"> </tt>
+<a name="World.to_yaml"></a><div id="World.to_yaml-def"><a name="L18"></a><tt class="py-lineno">18</tt> <a class="py-toggle" href="#" id="World.to_yaml-toggle" onclick="return toggle('World.to_yaml');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.interfaces.world.World-class.html#to_yaml">to_yaml</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="World.to_yaml-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="World.to_yaml-expanded"><a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-op">{</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">            <tt class="py-string">'bounds'</tt><tt class="py-op">:</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">bounds</tt><tt class="py-op">,</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">            <tt class="py-string">'primitives'</tt><tt class="py-op">:</tt> <tt class="py-op">[</tt><tt class="py-name">x</tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Method vehicles.interfaces.primitives.Circle.to_yaml()=vehicles.interfaces.primitives.Circle-class.html#to_yaml,Method vehicles.interfaces.primitives.PolyLine.to_yaml()=vehicles.interfaces.primitives.PolyLine-class.html#to_yaml,Method vehicles.interfaces.primitives.Source.to_yaml()=vehicles.interfaces.primitives.Source-class.html#to_yaml,Method vehicles.interfaces.vehicle_sensor.VehicleSensor.to_yaml()=vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html#to_yaml,Method vehicles.interfaces.world.World.to_yaml()=vehicles.interfaces.world.World-class.html#to_yaml,Method vehicles.sensors.field_sampler.FieldSampler.to_yaml()=vehicles.sensors.field_sampler.FieldSampler-class.html#to_yaml,Method vehicles.sensors.field_sampler_rand_circle.FieldSamplerRandCircle.to_yaml()=vehicles.sensors.field_sampler_rand_circle.FieldSamplerRandCircle-class.html#to_yaml,Method vehicles.sensors.field_sampler_uniform.FieldSamplerUniform.to_yaml()=vehicles.sensors.field_sampler_uniform.FieldSamplerUniform-class.html#to_yaml,Method vehicles.sensors.photoreceptors.Photoreceptors.to_yaml()=vehicles.sensors.photoreceptors.Photoreceptors-class.html#to_yaml,Method vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth.to_yaml()=vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth-class.html#to_yaml,Method vehicles.sensors.random_sensor.RandomSensor.to_yaml()=vehicles.sensors.random_sensor.RandomSensor-class.html#to_yaml,Method vehicles.sensors.range_finder.Rangefinder.to_yaml()=vehicles.sensors.range_finder.Rangefinder-class.html#to_yaml,Method vehicles.simulation.vehicle.Vehicle.Attached.to_yaml()=vehicles.simulation.vehicle.Vehicle.Attached-class.html#to_yaml,Method vehicles.simulation.vehicle.Vehicle.to_yaml()=vehicles.simulation.vehicle.Vehicle-class.html#to_yaml,Method vehicles.simulation.vsimulation.VehicleSimulation.to_yaml()=vehicles.simulation.vsimulation.VehicleSimulation-class.html#to_yaml"><a title="vehicles.interfaces.primitives.Circle.to_yaml
+vehicles.interfaces.primitives.PolyLine.to_yaml
+vehicles.interfaces.primitives.Source.to_yaml
+vehicles.interfaces.vehicle_sensor.VehicleSensor.to_yaml
+vehicles.interfaces.world.World.to_yaml
+vehicles.sensors.field_sampler.FieldSampler.to_yaml
+vehicles.sensors.field_sampler_rand_circle.FieldSamplerRandCircle.to_yaml
+vehicles.sensors.field_sampler_uniform.FieldSamplerUniform.to_yaml
+vehicles.sensors.photoreceptors.Photoreceptors.to_yaml
+vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth.to_yaml
+vehicles.sensors.random_sensor.RandomSensor.to_yaml
+vehicles.sensors.range_finder.Rangefinder.to_yaml
+vehicles.simulation.vehicle.Vehicle.Attached.to_yaml
+vehicles.simulation.vehicle.Vehicle.to_yaml
+vehicles.simulation.vsimulation.VehicleSimulation.to_yaml" class="py-name" href="#" onclick="return doclink('link-2', 'to_yaml', 'link-2');">to_yaml</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">x</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Method vehicles.interfaces.world.World.get_primitives()=vehicles.interfaces.world.World-class.html#get_primitives,Method vehicles.worlds.boxes.Box.get_primitives()=vehicles.worlds.boxes.Box-class.html#get_primitives,Method vehicles.worlds.dynamic.DynamicTest.get_primitives()=vehicles.worlds.dynamic.DynamicTest-class.html#get_primitives,Method vehicles.worlds.empty_fixed.EmptyFixed.get_primitives()=vehicles.worlds.empty_fixed.EmptyFixed-class.html#get_primitives,Method vehicles.worlds.empty_world.Empty.get_primitives()=vehicles.worlds.empty_world.Empty-class.html#get_primitives,Method vehicles.worlds.stochastic_box.StochasticBox.get_primitives()=vehicles.worlds.stochastic_box.StochasticBox-class.html#get_primitives,Method vehicles.worlds.stochastic_box2.StochasticBox2.get_primitives()=vehicles.worlds.stochastic_box2.StochasticBox2-class.html#get_primitives,Method vehicles.worlds.stochastic_box3.StochasticBox3.get_primitives()=vehicles.worlds.stochastic_box3.StochasticBox3-class.html#get_primitives"><a title="vehicles.interfaces.world.World.get_primitives
+vehicles.worlds.boxes.Box.get_primitives
+vehicles.worlds.dynamic.DynamicTest.get_primitives
+vehicles.worlds.empty_fixed.EmptyFixed.get_primitives
+vehicles.worlds.empty_world.Empty.get_primitives
+vehicles.worlds.stochastic_box.StochasticBox.get_primitives
+vehicles.worlds.stochastic_box2.StochasticBox2.get_primitives
+vehicles.worlds.stochastic_box3.StochasticBox3.get_primitives" class="py-name" href="#" onclick="return doclink('link-3', 'get_primitives', 'link-3');">get_primitives</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">        <tt class="py-op">}</tt> </tt>
+</div><a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">abstractmethod</tt> </tt>
+<a name="World.get_primitives"></a><div id="World.get_primitives-def"><a name="L25"></a><tt class="py-lineno">25</tt> <a class="py-toggle" href="#" id="World.get_primitives-toggle" onclick="return toggle('World.get_primitives');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.interfaces.world.World-class.html#get_primitives">get_primitives</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="World.get_primitives-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="World.get_primitives-expanded"><a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">        <tt class="py-docstring">''' Returns the list of primitives that compose the geometry</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"><tt class="py-docstring">            of the world. '''</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">abstractmethod</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">dt</tt><tt class="py-op">=</tt><tt class="py-string">'&gt;0'</tt><tt class="py-op">,</tt> <tt class="py-name">returns</tt><tt class="py-op">=</tt><tt class="py-string">'list(int)'</tt><tt class="py-op">)</tt> </tt>
+<a name="World.simulate"></a><div id="World.simulate-def"><a name="L32"></a><tt class="py-lineno">32</tt> <a class="py-toggle" href="#" id="World.simulate-toggle" onclick="return toggle('World.simulate');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.interfaces.world.World-class.html#simulate">simulate</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">dt</tt><tt class="py-op">,</tt> <tt class="py-param">vehicle_pose</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="World.simulate-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="World.simulate-expanded"><a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">        <tt class="py-docstring">'''</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"><tt class="py-docstring">            Simulates the world for dt.</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"><tt class="py-docstring">            </tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"><tt class="py-docstring">            Returns a list of the updated ids. (XXX: or not?)</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+</div><a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">    <tt id="link-4" class="py-name" targets="Class vehicles.interfaces.world.World.Episode=vehicles.interfaces.world.World.Episode-class.html"><a title="vehicles.interfaces.world.World.Episode" class="py-name" href="#" onclick="return doclink('link-4', 'Episode', 'link-4');">Episode</a></tt> <tt class="py-op">=</tt> <tt class="py-name">namedtuple</tt><tt class="py-op">(</tt><tt class="py-string">'Episode'</tt><tt class="py-op">,</tt> <tt class="py-string">'id_episode vehicle_state'</tt><tt class="py-op">)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"> </tt>
+<a name="World.new_episode"></a><div id="World.new_episode-def"><a name="L41"></a><tt class="py-lineno">41</tt> <a class="py-toggle" href="#" id="World.new_episode-toggle" onclick="return toggle('World.new_episode');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.interfaces.world.World-class.html#new_episode">new_episode</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="World.new_episode-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="World.new_episode-expanded"><a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">        <tt class="py-docstring">''' Returns an episode tuple. By default it just</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line"><tt class="py-docstring">            samples a random pose for the robot.</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">        <tt class="py-name">x</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">random</tt><tt class="py-op">.</tt><tt class="py-name">uniform</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">bounds</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">bounds</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">        <tt class="py-name">y</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">random</tt><tt class="py-op">.</tt><tt class="py-name">uniform</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">bounds</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">bounds</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">        <tt class="py-name">th</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">random</tt><tt class="py-op">.</tt><tt class="py-name">uniform</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Function vehicles.simulation.collision_utils_test.pi()=vehicles.simulation.collision_utils_test-module.html#pi"><a title="vehicles.simulation.collision_utils_test.pi" class="py-name" href="#" onclick="return doclink('link-5', 'pi', 'link-5');">pi</a></tt> <tt class="py-op">*</tt> <tt class="py-number">2</tt><tt class="py-op">)</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">        <tt id="link-6" class="py-name" targets="Variable vehicles.interfaces.world.World.Episode.vehicle_state=vehicles.interfaces.world.World.Episode-class.html#vehicle_state"><a title="vehicles.interfaces.world.World.Episode.vehicle_state" class="py-name" href="#" onclick="return doclink('link-6', 'vehicle_state', 'link-6');">vehicle_state</a></tt> <tt class="py-op">=</tt> <tt class="py-name">SE3_from_SE2</tt><tt class="py-op">(</tt><tt class="py-name">SE2_from_xytheta</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">x</tt><tt class="py-op">,</tt> <tt class="py-name">y</tt><tt class="py-op">,</tt> <tt class="py-name">th</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">        <tt id="link-7" class="py-name" targets="Variable vehicles.interfaces.world.World.Episode.id_episode=vehicles.interfaces.world.World.Episode-class.html#id_episode"><a title="vehicles.interfaces.world.World.Episode.id_episode" class="py-name" href="#" onclick="return doclink('link-7', 'id_episode', 'link-7');">id_episode</a></tt> <tt class="py-op">=</tt> <tt id="link-8" class="py-name" targets="Function vehicles.interfaces.world.unique_timestamp_string()=vehicles.interfaces.world-module.html#unique_timestamp_string"><a title="vehicles.interfaces.world.unique_timestamp_string" class="py-name" href="#" onclick="return doclink('link-8', 'unique_timestamp_string', 'link-8');">unique_timestamp_string</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-9" class="py-name" targets="Class vehicles.interfaces.world.World=vehicles.interfaces.world.World-class.html"><a title="vehicles.interfaces.world.World" class="py-name" href="#" onclick="return doclink('link-9', 'World', 'link-9');">World</a></tt><tt class="py-op">.</tt><tt id="link-10" class="py-name"><a title="vehicles.interfaces.world.World.Episode" class="py-name" href="#" onclick="return doclink('link-10', 'Episode', 'link-4');">Episode</a></tt><tt class="py-op">(</tt><tt id="link-11" class="py-name"><a title="vehicles.interfaces.world.World.Episode.id_episode" class="py-name" href="#" onclick="return doclink('link-11', 'id_episode', 'link-7');">id_episode</a></tt><tt class="py-op">,</tt> <tt id="link-12" class="py-name"><a title="vehicles.interfaces.world.World.Episode.vehicle_state" class="py-name" href="#" onclick="return doclink('link-12', 'vehicle_state', 'link-6');">vehicle_state</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line"> </tt>
+<a name="World.random_2d_point"></a><div id="World.random_2d_point-def"><a name="L52"></a><tt class="py-lineno">52</tt> <a class="py-toggle" href="#" id="World.random_2d_point-toggle" onclick="return toggle('World.random_2d_point');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.interfaces.world.World-class.html#random_2d_point">random_2d_point</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="World.random_2d_point-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="World.random_2d_point-expanded"><a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">        <tt class="py-docstring">''' Returns a random 2d point in the world bounds. '''</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">        <tt class="py-name">x</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">random</tt><tt class="py-op">.</tt><tt class="py-name">uniform</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">bounds</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">bounds</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">        <tt class="py-name">y</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">random</tt><tt class="py-op">.</tt><tt class="py-name">uniform</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">bounds</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">bounds</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-op">[</tt><tt class="py-name">x</tt><tt class="py-op">,</tt> <tt class="py-name">y</tt><tt class="py-op">]</tt> </tt>
+</div></div><a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line"> </tt>
+<a name="unique_timestamp_string"></a><div id="unique_timestamp_string-def"><a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line"> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line"><tt class="py-comment"># TODO: move away</tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt> <a class="py-toggle" href="#" id="unique_timestamp_string-toggle" onclick="return toggle('unique_timestamp_string');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.interfaces.world-module.html#unique_timestamp_string">unique_timestamp_string</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="unique_timestamp_string-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="unique_timestamp_string-expanded"><a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line">    <tt class="py-name">now</tt> <tt class="py-op">=</tt> <tt class="py-name">datetime</tt><tt class="py-op">.</tt><tt class="py-name">datetime</tt><tt class="py-op">.</tt><tt class="py-name">now</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line">    <tt class="py-name">s</tt> <tt class="py-op">=</tt> <tt class="py-name">now</tt><tt class="py-op">.</tt><tt class="py-name">isoformat</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">    <tt class="py-name">s</tt> <tt class="py-op">=</tt> <tt class="py-name">s</tt><tt class="py-op">.</tt><tt class="py-name">replace</tt><tt class="py-op">(</tt><tt class="py-string">'-'</tt><tt class="py-op">,</tt> <tt class="py-string">''</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">replace</tt><tt class="py-op">(</tt><tt class="py-string">':'</tt><tt class="py-op">,</tt> <tt class="py-string">''</tt><tt class="py-op">)</tt> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line">    <tt class="py-name">s</tt> <tt class="py-op">=</tt> <tt class="py-name">s</tt><tt class="py-op">.</tt><tt class="py-name">replace</tt><tt class="py-op">(</tt><tt class="py-string">'T'</tt><tt class="py-op">,</tt> <tt class="py-string">'_'</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">replace</tt><tt class="py-op">(</tt><tt class="py-string">'.'</tt><tt class="py-op">,</tt> <tt class="py-string">'_'</tt><tt class="py-op">)</tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">s</tt> </tt>
+</div><a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line"> </tt>
+<a name="isodate"></a><div id="isodate-def"><a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line"> </tt>
+<a name="L68"></a><tt class="py-lineno">68</tt> <a class="py-toggle" href="#" id="isodate-toggle" onclick="return toggle('isodate');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.interfaces.world-module.html#isodate">isodate</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="isodate-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="isodate-expanded"><a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line">    <tt class="py-name">now</tt> <tt class="py-op">=</tt> <tt class="py-name">datetime</tt><tt class="py-op">.</tt><tt class="py-name">datetime</tt><tt class="py-op">.</tt><tt class="py-name">now</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line">    <tt class="py-name">date</tt> <tt class="py-op">=</tt> <tt class="py-name">now</tt><tt class="py-op">.</tt><tt class="py-name">isoformat</tt><tt class="py-op">(</tt><tt class="py-string">'-'</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-number">19</tt><tt class="py-op">]</tt> </tt>
+<a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">date</tt> </tt>
+</div><a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="vehicles-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/vehicles">Vehicles</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Jan 20 18:29:43 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+
+<html>
+<head>  
+    <script type="text/javascript" 
+        src="images/static/jquery/jquery.js"></script>
+    
+    <!-- Use imagezoom plugin --> 
+    <script type="text/javascript" 
+        src="images/static/jquery/jquery.imageZoom.js"></script>
+    <link rel="stylesheet" href="images/static/jquery/jquery.imageZoom.css"/>
+    <script type="text/javascript"> 
+        $(document).ready( function () {
+            $('.zoomable').imageZoom();
+        });       
+    </script>
+    
+    <style type="text/css">
+    /* Extra CSS passed by user. */
+        
+    </style>
+
+    <link rel="stylesheet" href="images/static/reprep/default_style.css"/>
+
+    <title> worlds </title>
+<body>
+
+    <div class='report-node' id="worlds">
+    <h>worlds</h><section> 
+<table class="report-table">
+<caption>VehiclesConfig</caption>
+<tbody>
+<tr>
+<th></th>	<th>desc</th>
+	<th>code</th>
+</tr>
+<tr class="even">
+<th>SBox2_10a</th>
+	<td>A box with stochastic content</td>
+	<td>['vehicles.worlds.StochasticBox2', {'num_sources': 10, 'width': 10, 'length': 10, 'source_width': 3}]</td>
+</tr>
+<tr class="odd">
+<th>SBox3_10scale1</th>
+	<td>A box with stochastic content, smoothed textures, scale=1m</td>
+	<td>['vehicles.worlds.StochasticBox3', {'width': 10, 'length': 10, 'scale': 1, 'sigma': 0.5}]</td>
+</tr>
+<tr class="even">
+<th>SBox3_10scale05</th>
+	<td>A box with stochastic content, smoothed textures, scale=0.5m</td>
+	<td>['vehicles.worlds.StochasticBox3', {'width': 10, 'length': 10, 'scale': 0.5, 'sigma': 0.25}]</td>
+</tr>
+<tr class="odd">
+<th>box10</th>
+	<td>A 10m by 10m empty box.</td>
+	<td>['vehicles.worlds.Box', {'width': 10, 'length': 10}]</td>
+</tr>
+<tr class="even">
+<th>empty</th>
+	<td>An empty world (no obstacles at all)</td>
+	<td>['vehicles.worlds.Empty', {'bounds': [[-10, 10], [-10, 10], [-10, 10]]}]</td>
+</tr>
+<tr class="odd">
+<th>empty_fixed</th>
+	<td>An empty world (no obstacles at all); robot starts from pose.</td>
+	<td>['vehicles.worlds.EmptyFixed', {'bounds': [[-10, 10], [-10, 10], [-10, 10]]}]</td>
+</tr>
+<tr class="even">
+<th>stochastic_box_10</th>
+	<td>A box with stochastic content</td>
+	<td>['vehicles.worlds.StochasticBox', {'width': 10, 'length': 10}]</td>
+</tr>
+<tr class="odd">
+<th>test_dynamic</th>
+	<td>A test of a world with moving objects.</td>
+	<td>['vehicles.worlds.DynamicTest', {'width': 10, 'length': 10}]</td>
+</tr>
+</tbody>
+</table>
+</section> 
+</div> 
+
+
+<p id="reprep-credits"> 
+    Created by <a href="http://purl.org/censi/2010/RepRep">RepRep</a>. 
+</p>
+
+</body>
+</html>

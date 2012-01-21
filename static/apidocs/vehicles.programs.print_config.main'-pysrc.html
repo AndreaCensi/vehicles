@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>vehicles.programs.print_config.main'</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="vehicles-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/vehicles">Vehicles</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="vehicles-module.html">Package&nbsp;vehicles</a> ::
+        <a href="vehicles.programs-module.html">Package&nbsp;programs</a> ::
+        <a href="vehicles.programs.print_config-module.html">Package&nbsp;print_config</a> ::
+        Module&nbsp;main'
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="vehicles.programs.print_config.main%27-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="vehicles.programs.print_config.main%27-module.html">Module vehicles.programs.print_config.main'</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt><tt class="py-op">.</tt> <tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Variable vehicles.VehiclesConfig=vehicles-module.html#VehiclesConfig,Variable vehicles.configuration.VehiclesConfig=vehicles.configuration-module.html#VehiclesConfig,Variable vehicles.configuration.master.VehiclesConfig=vehicles.configuration.master-module.html#VehiclesConfig,Variable vehicles.programs.display_demo.VehiclesConfig=vehicles.programs.display_demo-module.html#VehiclesConfig,Variable vehicles.programs.display_demo.display_demo.VehiclesConfig=vehicles.programs.display_demo.display_demo-module.html#VehiclesConfig,Variable vehicles.programs.display_demo.skins_demo.VehiclesConfig=vehicles.programs.display_demo.skins_demo-module.html#VehiclesConfig,Variable vehicles.programs.inspect_textures.main'.VehiclesConfig=vehicles.programs.inspect_textures.main%27-module.html#VehiclesConfig,Variable vehicles.programs.print_config.main'.VehiclesConfig=vehicles.programs.print_config.main%27-module.html#VehiclesConfig"><a title="vehicles.VehiclesConfig
+vehicles.configuration.VehiclesConfig
+vehicles.configuration.master.VehiclesConfig
+vehicles.programs.display_demo.VehiclesConfig
+vehicles.programs.display_demo.display_demo.VehiclesConfig
+vehicles.programs.display_demo.skins_demo.VehiclesConfig
+vehicles.programs.inspect_textures.main'.VehiclesConfig
+vehicles.programs.print_config.main'.VehiclesConfig" class="py-name" href="#" onclick="return doclink('link-0', 'VehiclesConfig', 'link-0');">VehiclesConfig</a></tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Module vehicles.configuration.natsort=vehicles.configuration.natsort-module.html,Function vehicles.configuration.natsort.natsort()=vehicles.configuration.natsort-module.html#natsort,Module vehicles.programs.print_config.natsort=vehicles.programs.print_config.natsort-module.html,Function vehicles.programs.print_config.natsort.natsort()=vehicles.programs.print_config.natsort-module.html#natsort"><a title="vehicles.configuration.natsort
+vehicles.configuration.natsort.natsort
+vehicles.programs.print_config.natsort
+vehicles.programs.print_config.natsort.natsort" class="py-name" href="#" onclick="return doclink('link-1', 'natsort', 'link-1');">natsort</a></tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Function vehicles.configuration.natsort.natsorted()=vehicles.configuration.natsort-module.html#natsorted,Function vehicles.programs.print_config.natsort.natsorted()=vehicles.programs.print_config.natsort-module.html#natsorted"><a title="vehicles.configuration.natsort.natsorted
+vehicles.programs.print_config.natsort.natsorted" class="py-name" href="#" onclick="return doclink('link-2', 'natsorted', 'link-2');">natsorted</a></tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">optparse</tt> <tt class="py-keyword">import</tt> <tt class="py-name">OptionParser</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">logging</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">basicConfig</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt id="link-3" class="py-name" targets="Variable vehicles.configuration.logger=vehicles.configuration-module.html#logger,Variable vehicles.configuration.master.logger=vehicles.configuration.master-module.html#logger,Variable vehicles.configuration.vehicles.logger=vehicles.configuration.vehicles-module.html#logger,Variable vehicles.display.logger=vehicles.display-module.html#logger,Variable vehicles.display.sensors.logger=vehicles.display.sensors-module.html#logger,Variable vehicles.display.vehicle_display_utils.logger=vehicles.display.vehicle_display_utils-module.html#logger,Variable vehicles.interfaces.logger=vehicles.interfaces-module.html#logger,Variable vehicles.logger=vehicles-module.html#logger,Variable vehicles.programs.display_demo.display_demo.logger=vehicles.programs.display_demo.display_demo-module.html#logger,Variable vehicles.programs.display_demo.logger=vehicles.programs.display_demo-module.html#logger,Variable vehicles.programs.display_demo.skins_demo.logger=vehicles.programs.display_demo.skins_demo-module.html#logger,Variable vehicles.programs.inspect_textures.main'.logger=vehicles.programs.inspect_textures.main%27-module.html#logger,Variable vehicles.programs.print_config.logger=vehicles.programs.print_config-module.html#logger,Variable vehicles.programs.print_config.main'.logger=vehicles.programs.print_config.main%27-module.html#logger,Variable vehicles.sensors.field_sampler.logger=vehicles.sensors.field_sampler-module.html#logger,Variable vehicles.sensors.logger=vehicles.sensors-module.html#logger,Variable vehicles.sensors.noises.logger=vehicles.sensors.noises-module.html#logger,Variable vehicles.sensors.raytracer.logger=vehicles.sensors.raytracer-module.html#logger,Variable vehicles.simulation.logger=vehicles.simulation-module.html#logger,Variable vehicles.simulation.vsimulation.logger=vehicles.simulation.vsimulation-module.html#logger,Variable vehicles.worlds.logger=vehicles.worlds-module.html#logger"><a title="vehicles.configuration.logger
+vehicles.configuration.master.logger
+vehicles.configuration.vehicles.logger
+vehicles.display.logger
+vehicles.display.sensors.logger
+vehicles.display.vehicle_display_utils.logger
+vehicles.interfaces.logger
+vehicles.logger
+vehicles.programs.display_demo.display_demo.logger
+vehicles.programs.display_demo.logger
+vehicles.programs.display_demo.skins_demo.logger
+vehicles.programs.inspect_textures.main'.logger
+vehicles.programs.print_config.logger
+vehicles.programs.print_config.main'.logger
+vehicles.sensors.field_sampler.logger
+vehicles.sensors.logger
+vehicles.sensors.noises.logger
+vehicles.sensors.raytracer.logger
+vehicles.simulation.logger
+vehicles.simulation.vsimulation.logger
+vehicles.worlds.logger" class="py-name" href="#" onclick="return doclink('link-3', 'logger', 'link-3');">logger</a></tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">getLogger</tt><tt class="py-op">(</tt><tt class="py-string">"print_config"</tt><tt class="py-op">)</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt id="link-4" class="py-name"><a title="vehicles.configuration.logger
+vehicles.configuration.master.logger
+vehicles.configuration.vehicles.logger
+vehicles.display.logger
+vehicles.display.sensors.logger
+vehicles.display.vehicle_display_utils.logger
+vehicles.interfaces.logger
+vehicles.logger
+vehicles.programs.display_demo.display_demo.logger
+vehicles.programs.display_demo.logger
+vehicles.programs.display_demo.skins_demo.logger
+vehicles.programs.inspect_textures.main'.logger
+vehicles.programs.print_config.logger
+vehicles.programs.print_config.main'.logger
+vehicles.sensors.field_sampler.logger
+vehicles.sensors.logger
+vehicles.sensors.noises.logger
+vehicles.sensors.raytracer.logger
+vehicles.simulation.logger
+vehicles.simulation.vsimulation.logger
+vehicles.worlds.logger" class="py-name" href="#" onclick="return doclink('link-4', 'logger', 'link-3');">logger</a></tt><tt class="py-op">.</tt><tt class="py-name">setLevel</tt><tt class="py-op">(</tt><tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">DEBUG</tt><tt class="py-op">)</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt id="link-5" class="py-name" targets="Variable vehicles.programs.display_demo.display_demo.usage=vehicles.programs.display_demo.display_demo-module.html#usage,Variable vehicles.programs.display_demo.skins_demo.usage=vehicles.programs.display_demo.skins_demo-module.html#usage,Variable vehicles.programs.display_demo.usage=vehicles.programs.display_demo-module.html#usage,Variable vehicles.programs.inspect_textures.main'.usage=vehicles.programs.inspect_textures.main%27-module.html#usage,Variable vehicles.programs.print_config.main'.usage=vehicles.programs.print_config.main%27-module.html#usage"><a title="vehicles.programs.display_demo.display_demo.usage
+vehicles.programs.display_demo.skins_demo.usage
+vehicles.programs.display_demo.usage
+vehicles.programs.inspect_textures.main'.usage
+vehicles.programs.print_config.main'.usage" class="py-name" href="#" onclick="return doclink('link-5', 'usage', 'link-5');">usage</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"""</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-string">    This program writes a simple summary of all the VehiclesConfig available.</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-string">    vehicles_print_config [-d &lt;config directory&gt;] -o outputdir</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-string">"""</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"> </tt>
+<a name="main"></a><div id="main-def"><a name="L20"></a><tt class="py-lineno">20</tt> <a class="py-toggle" href="#" id="main-toggle" onclick="return toggle('main');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.programs.print_config.main'-module.html#main">main</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="main-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="main-expanded"><a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">    <tt class="py-name">parser</tt> <tt class="py-op">=</tt> <tt class="py-name">OptionParser</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">    <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">add_option</tt><tt class="py-op">(</tt><tt class="py-string">"-o"</tt><tt class="py-op">,</tt> <tt class="py-string">"--outdir"</tt><tt class="py-op">,</tt> <tt class="py-name">dest</tt><tt class="py-op">=</tt><tt class="py-string">'outdir'</tt><tt class="py-op">,</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">                      <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">"Output directory"</tt><tt class="py-op">)</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">    <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">add_option</tt><tt class="py-op">(</tt><tt class="py-string">"-d"</tt><tt class="py-op">,</tt> <tt class="py-name">dest</tt><tt class="py-op">=</tt><tt class="py-string">"directory"</tt><tt class="py-op">,</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">                      <tt class="py-name">help</tt><tt class="py-op">=</tt><tt class="py-string">"base directory for VehiclesConfig"</tt><tt class="py-op">,</tt> <tt class="py-name">metavar</tt><tt class="py-op">=</tt><tt class="py-string">"FILE"</tt><tt class="py-op">)</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-name">options</tt><tt class="py-op">,</tt> <tt class="py-name">args</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">parse_args</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">args</tt><tt class="py-op">:</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">Exception</tt><tt class="py-op">(</tt><tt class="py-string">'Spurious arguments'</tt><tt class="py-op">)</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">options</tt><tt class="py-op">.</tt><tt class="py-name">outdir</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">Exception</tt><tt class="py-op">(</tt><tt class="py-string">'Please pass --outdir.'</tt><tt class="py-op">)</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">    <tt id="link-6" class="py-name" targets="Package vehicles.programs.print_config=vehicles.programs.print_config-module.html,Function vehicles.programs.print_config.main'.print_config()=vehicles.programs.print_config.main%27-module.html#print_config"><a title="vehicles.programs.print_config
+vehicles.programs.print_config.main'.print_config" class="py-name" href="#" onclick="return doclink('link-6', 'print_config', 'link-6');">print_config</a></tt><tt class="py-op">(</tt><tt class="py-name">options</tt><tt class="py-op">.</tt><tt class="py-name">directory</tt><tt class="py-op">,</tt> <tt class="py-name">options</tt><tt class="py-op">.</tt><tt class="py-name">outdir</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"> </tt>
+<a name="print_config"></a><div id="print_config-def"><a name="L36"></a><tt class="py-lineno">36</tt> <a class="py-toggle" href="#" id="print_config-toggle" onclick="return toggle('print_config');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.programs.print_config.main'-module.html#print_config">print_config</a><tt class="py-op">(</tt><tt class="py-param">directory</tt><tt class="py-op">,</tt> <tt class="py-param">outdir</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="print_config-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="print_config-expanded"><a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt class="py-name">reprep</tt> <tt class="py-keyword">import</tt> <tt class="py-name">Report</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">    <tt id="link-7" class="py-name"><a title="vehicles.VehiclesConfig
+vehicles.configuration.VehiclesConfig
+vehicles.configuration.master.VehiclesConfig
+vehicles.programs.display_demo.VehiclesConfig
+vehicles.programs.display_demo.display_demo.VehiclesConfig
+vehicles.programs.display_demo.skins_demo.VehiclesConfig
+vehicles.programs.inspect_textures.main'.VehiclesConfig
+vehicles.programs.print_config.main'.VehiclesConfig" class="py-name" href="#" onclick="return doclink('link-7', 'VehiclesConfig', 'link-0');">VehiclesConfig</a></tt><tt class="py-op">.</tt><tt class="py-name">load</tt><tt class="py-op">(</tt><tt class="py-name">directory</tt><tt class="py-op">)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">    <tt class="py-keyword">def</tt> <tt class="py-def-name">write_report</tt><tt class="py-op">(</tt><tt class="py-param">r</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">        <tt class="py-name">out</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">outdir</tt><tt class="py-op">,</tt> <tt class="py-string">'%s.html'</tt> <tt class="py-op">%</tt> <tt class="py-name">r</tt><tt class="py-op">.</tt><tt class="py-name">nid</tt><tt class="py-op">)</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">        <tt class="py-name">rd</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">outdir</tt><tt class="py-op">,</tt> <tt class="py-string">'images'</tt><tt class="py-op">)</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">        <tt id="link-8" class="py-name"><a title="vehicles.configuration.logger
+vehicles.configuration.master.logger
+vehicles.configuration.vehicles.logger
+vehicles.display.logger
+vehicles.display.sensors.logger
+vehicles.display.vehicle_display_utils.logger
+vehicles.interfaces.logger
+vehicles.logger
+vehicles.programs.display_demo.display_demo.logger
+vehicles.programs.display_demo.logger
+vehicles.programs.display_demo.skins_demo.logger
+vehicles.programs.inspect_textures.main'.logger
+vehicles.programs.print_config.logger
+vehicles.programs.print_config.main'.logger
+vehicles.sensors.field_sampler.logger
+vehicles.sensors.logger
+vehicles.sensors.noises.logger
+vehicles.sensors.raytracer.logger
+vehicles.simulation.logger
+vehicles.simulation.vsimulation.logger
+vehicles.worlds.logger" class="py-name" href="#" onclick="return doclink('link-8', 'logger', 'link-3');">logger</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Method vehicles.simulation.vsimulation.VehicleSimulation.info()=vehicles.simulation.vsimulation.VehicleSimulation-class.html#info"><a title="vehicles.simulation.vsimulation.VehicleSimulation.info" class="py-name" href="#" onclick="return doclink('link-9', 'info', 'link-9');">info</a></tt><tt class="py-op">(</tt><tt class="py-string">'Writing to %r'</tt> <tt class="py-op">%</tt> <tt class="py-name">out</tt><tt class="py-op">)</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">        <tt class="py-name">r</tt><tt class="py-op">.</tt><tt class="py-name">to_html</tt><tt class="py-op">(</tt><tt class="py-name">out</tt><tt class="py-op">,</tt> <tt class="py-name">resources_dir</tt><tt class="py-op">=</tt><tt class="py-name">rd</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line"> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">    <tt id="link-10" class="py-name" targets="Module vehicles.configuration.worlds=vehicles.configuration.worlds-module.html,Package vehicles.worlds=vehicles.worlds-module.html"><a title="vehicles.configuration.worlds
+vehicles.worlds" class="py-name" href="#" onclick="return doclink('link-10', 'worlds', 'link-10');">worlds</a></tt> <tt class="py-op">=</tt> <tt id="link-11" class="py-name"><a title="vehicles.VehiclesConfig
+vehicles.configuration.VehiclesConfig
+vehicles.configuration.master.VehiclesConfig
+vehicles.programs.display_demo.VehiclesConfig
+vehicles.programs.display_demo.display_demo.VehiclesConfig
+vehicles.programs.display_demo.skins_demo.VehiclesConfig
+vehicles.programs.inspect_textures.main'.VehiclesConfig
+vehicles.programs.print_config.main'.VehiclesConfig" class="py-name" href="#" onclick="return doclink('link-11', 'VehiclesConfig', 'link-0');">VehiclesConfig</a></tt><tt class="py-op">.</tt><tt id="link-12" class="py-name"><a title="vehicles.configuration.worlds
+vehicles.worlds" class="py-name" href="#" onclick="return doclink('link-12', 'worlds', 'link-10');">worlds</a></tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">    <tt class="py-name">r</tt> <tt class="py-op">=</tt> <tt class="py-name">Report</tt><tt class="py-op">(</tt><tt class="py-string">'worlds'</tt><tt class="py-op">)</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">    <tt id="link-13" class="py-name" targets="Function vehicles.programs.print_config.main'.create_generic_table()=vehicles.programs.print_config.main%27-module.html#create_generic_table"><a title="vehicles.programs.print_config.main'.create_generic_table" class="py-name" href="#" onclick="return doclink('link-13', 'create_generic_table', 'link-13');">create_generic_table</a></tt><tt class="py-op">(</tt><tt class="py-name">r</tt><tt class="py-op">,</tt> <tt class="py-string">'VehiclesConfig'</tt><tt class="py-op">,</tt> <tt id="link-14" class="py-name"><a title="vehicles.configuration.worlds
+vehicles.worlds" class="py-name" href="#" onclick="return doclink('link-14', 'worlds', 'link-10');">worlds</a></tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-string">'desc'</tt><tt class="py-op">,</tt> <tt class="py-string">'code'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">    <tt class="py-name">write_report</tt><tt class="py-op">(</tt><tt class="py-name">r</tt><tt class="py-op">)</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line"> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">    <tt id="link-15" class="py-name" targets="Module vehicles.configuration.dynamics=vehicles.configuration.dynamics-module.html"><a title="vehicles.configuration.dynamics" class="py-name" href="#" onclick="return doclink('link-15', 'dynamics', 'link-15');">dynamics</a></tt> <tt class="py-op">=</tt> <tt id="link-16" class="py-name"><a title="vehicles.VehiclesConfig
+vehicles.configuration.VehiclesConfig
+vehicles.configuration.master.VehiclesConfig
+vehicles.programs.display_demo.VehiclesConfig
+vehicles.programs.display_demo.display_demo.VehiclesConfig
+vehicles.programs.display_demo.skins_demo.VehiclesConfig
+vehicles.programs.inspect_textures.main'.VehiclesConfig
+vehicles.programs.print_config.main'.VehiclesConfig" class="py-name" href="#" onclick="return doclink('link-16', 'VehiclesConfig', 'link-0');">VehiclesConfig</a></tt><tt class="py-op">.</tt><tt id="link-17" class="py-name"><a title="vehicles.configuration.dynamics" class="py-name" href="#" onclick="return doclink('link-17', 'dynamics', 'link-15');">dynamics</a></tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">    <tt class="py-name">r</tt> <tt class="py-op">=</tt> <tt class="py-name">Report</tt><tt class="py-op">(</tt><tt class="py-string">'dynamics'</tt><tt class="py-op">)</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">    <tt id="link-18" class="py-name"><a title="vehicles.programs.print_config.main'.create_generic_table" class="py-name" href="#" onclick="return doclink('link-18', 'create_generic_table', 'link-13');">create_generic_table</a></tt><tt class="py-op">(</tt><tt class="py-name">r</tt><tt class="py-op">,</tt> <tt class="py-string">'VehiclesConfig'</tt><tt class="py-op">,</tt> <tt id="link-19" class="py-name"><a title="vehicles.configuration.dynamics" class="py-name" href="#" onclick="return doclink('link-19', 'dynamics', 'link-15');">dynamics</a></tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-string">'desc'</tt><tt class="py-op">,</tt> <tt class="py-string">'code'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">    <tt class="py-name">write_report</tt><tt class="py-op">(</tt><tt class="py-name">r</tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line"> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">    <tt id="link-20" class="py-name" targets="Module vehicles.configuration.sensors=vehicles.configuration.sensors-module.html,Module vehicles.display.sensors=vehicles.display.sensors-module.html,Package vehicles.sensors=vehicles.sensors-module.html"><a title="vehicles.configuration.sensors
+vehicles.display.sensors
+vehicles.sensors" class="py-name" href="#" onclick="return doclink('link-20', 'sensors', 'link-20');">sensors</a></tt> <tt class="py-op">=</tt> <tt id="link-21" class="py-name"><a title="vehicles.VehiclesConfig
+vehicles.configuration.VehiclesConfig
+vehicles.configuration.master.VehiclesConfig
+vehicles.programs.display_demo.VehiclesConfig
+vehicles.programs.display_demo.display_demo.VehiclesConfig
+vehicles.programs.display_demo.skins_demo.VehiclesConfig
+vehicles.programs.inspect_textures.main'.VehiclesConfig
+vehicles.programs.print_config.main'.VehiclesConfig" class="py-name" href="#" onclick="return doclink('link-21', 'VehiclesConfig', 'link-0');">VehiclesConfig</a></tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="vehicles.configuration.sensors
+vehicles.display.sensors
+vehicles.sensors" class="py-name" href="#" onclick="return doclink('link-22', 'sensors', 'link-20');">sensors</a></tt> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line">    <tt class="py-name">r</tt> <tt class="py-op">=</tt> <tt class="py-name">Report</tt><tt class="py-op">(</tt><tt class="py-string">'sensors'</tt><tt class="py-op">)</tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">    <tt id="link-23" class="py-name"><a title="vehicles.programs.print_config.main'.create_generic_table" class="py-name" href="#" onclick="return doclink('link-23', 'create_generic_table', 'link-13');">create_generic_table</a></tt><tt class="py-op">(</tt><tt class="py-name">r</tt><tt class="py-op">,</tt> <tt class="py-string">'VehiclesConfig'</tt><tt class="py-op">,</tt> <tt id="link-24" class="py-name"><a title="vehicles.configuration.sensors
+vehicles.display.sensors
+vehicles.sensors" class="py-name" href="#" onclick="return doclink('link-24', 'sensors', 'link-20');">sensors</a></tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-string">'desc'</tt><tt class="py-op">,</tt> <tt class="py-string">'code'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line">    <tt class="py-name">write_report</tt><tt class="py-op">(</tt><tt class="py-name">r</tt><tt class="py-op">)</tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line"> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line">    <tt id="link-25" class="py-name" targets="Package vehicles=vehicles-module.html,Module vehicles.configuration.vehicles=vehicles.configuration.vehicles-module.html"><a title="vehicles
+vehicles.configuration.vehicles" class="py-name" href="#" onclick="return doclink('link-25', 'vehicles', 'link-25');">vehicles</a></tt> <tt class="py-op">=</tt> <tt id="link-26" class="py-name"><a title="vehicles.VehiclesConfig
+vehicles.configuration.VehiclesConfig
+vehicles.configuration.master.VehiclesConfig
+vehicles.programs.display_demo.VehiclesConfig
+vehicles.programs.display_demo.display_demo.VehiclesConfig
+vehicles.programs.display_demo.skins_demo.VehiclesConfig
+vehicles.programs.inspect_textures.main'.VehiclesConfig
+vehicles.programs.print_config.main'.VehiclesConfig" class="py-name" href="#" onclick="return doclink('link-26', 'VehiclesConfig', 'link-0');">VehiclesConfig</a></tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="vehicles
+vehicles.configuration.vehicles" class="py-name" href="#" onclick="return doclink('link-27', 'vehicles', 'link-25');">vehicles</a></tt> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">    <tt class="py-name">r</tt> <tt class="py-op">=</tt> <tt class="py-name">Report</tt><tt class="py-op">(</tt><tt class="py-string">'vehicles'</tt><tt class="py-op">)</tt> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line">    <tt id="link-28" class="py-name"><a title="vehicles.programs.print_config.main'.create_generic_table" class="py-name" href="#" onclick="return doclink('link-28', 'create_generic_table', 'link-13');">create_generic_table</a></tt><tt class="py-op">(</tt><tt class="py-name">r</tt><tt class="py-op">,</tt> <tt class="py-string">'VehiclesConfig'</tt><tt class="py-op">,</tt> <tt id="link-29" class="py-name"><a title="vehicles
+vehicles.configuration.vehicles" class="py-name" href="#" onclick="return doclink('link-29', 'vehicles', 'link-25');">vehicles</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">                          <tt class="py-op">[</tt><tt class="py-string">'desc'</tt><tt class="py-op">,</tt> <tt class="py-string">'dynamics'</tt><tt class="py-op">,</tt> <tt class="py-string">'id_dynamics'</tt><tt class="py-op">,</tt> <tt class="py-string">'sensors'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line">    <tt class="py-name">write_report</tt><tt class="py-op">(</tt><tt class="py-name">r</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line"> </tt>
+<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line"> </tt>
+<a name="create_generic_table"></a><div id="create_generic_table-def"><a name="L69"></a><tt class="py-lineno">69</tt> <a class="py-toggle" href="#" id="create_generic_table-toggle" onclick="return toggle('create_generic_table');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.programs.print_config.main'-module.html#create_generic_table">create_generic_table</a><tt class="py-op">(</tt><tt class="py-param">r</tt><tt class="py-op">,</tt> <tt class="py-param">nid</tt><tt class="py-op">,</tt> <tt class="py-param">name2entry</tt><tt class="py-op">,</tt> <tt class="py-param">cols</tt><tt class="py-op">,</tt> <tt class="py-param">caption</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="create_generic_table-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="create_generic_table-expanded"><a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line">    <tt class="py-name">names</tt> <tt class="py-op">=</tt> <tt id="link-30" class="py-name"><a title="vehicles.configuration.natsort.natsorted
+vehicles.programs.print_config.natsort.natsorted" class="py-name" href="#" onclick="return doclink('link-30', 'natsorted', 'link-2');">natsorted</a></tt><tt class="py-op">(</tt><tt class="py-name">name2entry</tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">names</tt><tt class="py-op">:</tt> </tt>
+<a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line">        <tt class="py-name">table</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line">        <tt class="py-name">found_cols</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">name</tt> <tt class="py-keyword">in</tt> <tt class="py-name">names</tt><tt class="py-op">:</tt> </tt>
+<a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line">            <tt class="py-name">c</tt> <tt class="py-op">=</tt> <tt class="py-name">name2entry</tt><tt class="py-op">[</tt><tt class="py-name">name</tt><tt class="py-op">]</tt> </tt>
+<a name="L76"></a><tt class="py-lineno">76</tt>  <tt class="py-line">            <tt class="py-name">row</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L77"></a><tt class="py-lineno">77</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt class="py-name">col</tt> <tt class="py-keyword">in</tt> <tt class="py-name">cols</tt><tt class="py-op">:</tt> </tt>
+<a name="L78"></a><tt class="py-lineno">78</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">col</tt> <tt class="py-keyword">in</tt> <tt class="py-name">c</tt><tt class="py-op">:</tt> </tt>
+<a name="L79"></a><tt class="py-lineno">79</tt>  <tt class="py-line">                    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">col</tt> <tt class="py-keyword">in</tt> <tt class="py-name">found_cols</tt><tt class="py-op">:</tt> <tt class="py-name">found_cols</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">col</tt><tt class="py-op">)</tt> </tt>
+<a name="L80"></a><tt class="py-lineno">80</tt>  <tt class="py-line">                    <tt class="py-name">row</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">c</tt><tt class="py-op">[</tt><tt class="py-name">col</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L81"></a><tt class="py-lineno">81</tt>  <tt class="py-line">            <tt class="py-name">table</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">row</tt><tt class="py-op">)</tt> </tt>
+<a name="L82"></a><tt class="py-lineno">82</tt>  <tt class="py-line">        <tt class="py-name">r</tt><tt class="py-op">.</tt><tt class="py-name">table</tt><tt class="py-op">(</tt><tt class="py-name">nid</tt><tt class="py-op">,</tt> <tt class="py-name">table</tt><tt class="py-op">,</tt> </tt>
+<a name="L83"></a><tt class="py-lineno">83</tt>  <tt class="py-line">                <tt class="py-name">cols</tt><tt class="py-op">=</tt><tt class="py-name">cols</tt><tt class="py-op">,</tt> <tt class="py-name">rows</tt><tt class="py-op">=</tt><tt class="py-name">names</tt><tt class="py-op">,</tt> <tt class="py-name">caption</tt><tt class="py-op">=</tt><tt class="py-name">caption</tt><tt class="py-op">)</tt> </tt>
+<a name="L84"></a><tt class="py-lineno">84</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L85"></a><tt class="py-lineno">85</tt>  <tt class="py-line">        <tt id="link-31" class="py-name"><a title="vehicles.configuration.logger
+vehicles.configuration.master.logger
+vehicles.configuration.vehicles.logger
+vehicles.display.logger
+vehicles.display.sensors.logger
+vehicles.display.vehicle_display_utils.logger
+vehicles.interfaces.logger
+vehicles.logger
+vehicles.programs.display_demo.display_demo.logger
+vehicles.programs.display_demo.logger
+vehicles.programs.display_demo.skins_demo.logger
+vehicles.programs.inspect_textures.main'.logger
+vehicles.programs.print_config.logger
+vehicles.programs.print_config.main'.logger
+vehicles.sensors.field_sampler.logger
+vehicles.sensors.logger
+vehicles.sensors.noises.logger
+vehicles.sensors.raytracer.logger
+vehicles.simulation.logger
+vehicles.simulation.vsimulation.logger
+vehicles.worlds.logger" class="py-name" href="#" onclick="return doclink('link-31', 'logger', 'link-3');">logger</a></tt><tt class="py-op">.</tt><tt class="py-name">warn</tt><tt class="py-op">(</tt><tt class="py-string">'warn'</tt><tt class="py-op">,</tt> <tt class="py-string">'Empty %r table'</tt> <tt class="py-op">%</tt> <tt class="py-name">nid</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L86"></a><tt class="py-lineno">86</tt>  <tt class="py-line"> </tt>
+<a name="L87"></a><tt class="py-lineno">87</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">'__main__'</tt><tt class="py-op">:</tt> </tt>
+<a name="L88"></a><tt class="py-lineno">88</tt>  <tt class="py-line">    <tt id="link-32" class="py-name" targets="Function vehicles.programs.display_demo.display_demo.main()=vehicles.programs.display_demo.display_demo-module.html#main,Function vehicles.programs.display_demo.skins_demo.main()=vehicles.programs.display_demo.skins_demo-module.html#main,Function vehicles.programs.print_config.main'.main()=vehicles.programs.print_config.main%27-module.html#main"><a title="vehicles.programs.display_demo.display_demo.main
+vehicles.programs.display_demo.skins_demo.main
+vehicles.programs.print_config.main'.main" class="py-name" href="#" onclick="return doclink('link-32', 'main', 'link-32');">main</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L89"></a><tt class="py-lineno">89</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="vehicles-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/vehicles">Vehicles</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Jan 20 18:29:43 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>vehicles.worlds.boxes</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="vehicles-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/vehicles">Vehicles</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="vehicles-module.html">Package&nbsp;vehicles</a> ::
+        <a href="vehicles.worlds-module.html">Package&nbsp;worlds</a> ::
+        Module&nbsp;boxes
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="vehicles.worlds.boxes-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="vehicles.worlds.boxes-module.html">Module vehicles.worlds.boxes</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt> <tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Function vehicles.worlds.utils.random_checkerboard()=vehicles.worlds.utils-module.html#random_checkerboard"><a title="vehicles.worlds.utils.random_checkerboard" class="py-name" href="#" onclick="return doclink('link-0', 'random_checkerboard', 'link-0');">random_checkerboard</a></tt><tt class="py-op">,</tt> <tt class="py-name">np</tt><tt class="py-op">,</tt> <tt class="py-name">contract</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package vehicles.interfaces=vehicles.interfaces-module.html"><a title="vehicles.interfaces" class="py-name" href="#" onclick="return doclink('link-1', 'interfaces', 'link-1');">interfaces</a></tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Class vehicles.interfaces.world.World=vehicles.interfaces.world.World-class.html"><a title="vehicles.interfaces.world.World" class="py-name" href="#" onclick="return doclink('link-2', 'World', 'link-2');">World</a></tt><tt class="py-op">,</tt> <tt id="link-3" class="py-name" targets="Class vehicles.interfaces.primitives.PolyLine=vehicles.interfaces.primitives.PolyLine-class.html"><a title="vehicles.interfaces.primitives.PolyLine" class="py-name" href="#" onclick="return doclink('link-3', 'PolyLine', 'link-3');">PolyLine</a></tt> </tt>
+<a name="Box"></a><div id="Box-def"><a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt> <a class="py-toggle" href="#" id="Box-toggle" onclick="return toggle('Box');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="vehicles.worlds.boxes.Box-class.html">Box</a><tt class="py-op">(</tt><tt class="py-base-class">World</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Box-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Box-expanded"><a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line">    <tt class="py-docstring">''' A simple box. '''</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">width</tt><tt class="py-op">=</tt><tt class="py-string">'&gt;0'</tt><tt class="py-op">,</tt> <tt class="py-name">length</tt><tt class="py-op">=</tt><tt class="py-string">'&gt;0'</tt><tt class="py-op">)</tt> </tt>
+<a name="Box.__init__"></a><div id="Box.__init__-def"><a name="L9"></a><tt class="py-lineno"> 9</tt> <a class="py-toggle" href="#" id="Box.__init__-toggle" onclick="return toggle('Box.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.worlds.boxes.Box-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">width</tt><tt class="py-op">=</tt><tt class="py-number">10</tt><tt class="py-op">,</tt> <tt class="py-param">length</tt><tt class="py-op">=</tt><tt class="py-number">10</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Box.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Box.__init__-expanded"><a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line">        <tt class="py-name">r</tt> <tt class="py-op">=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">        <tt class="py-name">bounds</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-name">width</tt> <tt class="py-op">*</tt> <tt class="py-name">r</tt><tt class="py-op">,</tt> <tt class="py-op">+</tt><tt class="py-name">width</tt> <tt class="py-op">*</tt> <tt class="py-name">r</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-name">length</tt> <tt class="py-op">*</tt> <tt class="py-name">r</tt><tt class="py-op">,</tt> <tt class="py-op">+</tt><tt class="py-name">length</tt> <tt class="py-op">*</tt> <tt class="py-name">r</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">5</tt><tt class="py-op">]</tt><tt class="py-op">]</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">        <tt id="link-4" class="py-name"><a title="vehicles.interfaces.world.World" class="py-name" href="#" onclick="return doclink('link-4', 'World', 'link-2');">World</a></tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Method vehicles.configuration.master.VehiclesConfigMaster.__init__()=vehicles.configuration.master.VehiclesConfigMaster-class.html#__init__,Method vehicles.interfaces.primitives.Circle.__init__()=vehicles.interfaces.primitives.Circle-class.html#__init__,Method vehicles.interfaces.primitives.GeometricShape.__init__()=vehicles.interfaces.primitives.GeometricShape-class.html#__init__,Method vehicles.interfaces.primitives.PolyLine.__init__()=vehicles.interfaces.primitives.PolyLine-class.html#__init__,Method vehicles.interfaces.primitives.Primitive.__init__()=vehicles.interfaces.primitives.Primitive-class.html#__init__,Method vehicles.interfaces.primitives.Source.__init__()=vehicles.interfaces.primitives.Source-class.html#__init__,Method vehicles.interfaces.vehicle_sensor.VehicleSensor.__init__()=vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html#__init__,Method vehicles.interfaces.world.World.__init__()=vehicles.interfaces.world.World-class.html#__init__,Method vehicles.sensors.field_sampler.FieldSampler.__init__()=vehicles.sensors.field_sampler.FieldSampler-class.html#__init__,Method vehicles.sensors.field_sampler_rand_circle.FieldSamplerRandCircle.__init__()=vehicles.sensors.field_sampler_rand_circle.FieldSamplerRandCircle-class.html#__init__,Method vehicles.sensors.field_sampler_uniform.FieldSamplerUniform.__init__()=vehicles.sensors.field_sampler_uniform.FieldSamplerUniform-class.html#__init__,Method vehicles.sensors.noises.additive_gaussian.AdditiveGaussian.__init__()=vehicles.sensors.noises.additive_gaussian.AdditiveGaussian-class.html#__init__,Method vehicles.sensors.photoreceptors.Photoreceptors.__init__()=vehicles.sensors.photoreceptors.Photoreceptors-class.html#__init__,Method vehicles.sensors.photoreceptors.PhotoreceptorsUniform.__init__()=vehicles.sensors.photoreceptors.PhotoreceptorsUniform-class.html#__init__,Method vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth.__init__()=vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth-class.html#__init__,Method vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmoothUniform.__init__()=vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmoothUniform-class.html#__init__,Method vehicles.sensors.random_sensor.RandomSensor.__init__()=vehicles.sensors.random_sensor.RandomSensor-class.html#__init__,Method vehicles.sensors.range_finder.Rangefinder.__init__()=vehicles.sensors.range_finder.Rangefinder-class.html#__init__,Method vehicles.sensors.range_finder.RangefinderUniform.__init__()=vehicles.sensors.range_finder.RangefinderUniform-class.html#__init__,Method vehicles.sensors.raytracer.cjson_stream.CJSONStream.__init__()=vehicles.sensors.raytracer.cjson_stream.CJSONStream-class.html#__init__,Method vehicles.sensors.raytracer.json_stream.JSONStream.__init__()=vehicles.sensors.raytracer.json_stream.JSONStream-class.html#__init__,Method vehicles.sensors.raytracer.textured_raytracer.Raytracer.__init__()=vehicles.sensors.raytracer.textured_raytracer.Raytracer-class.html#__init__,Method vehicles.sensors.raytracer.textured_raytracer.TexturedRaytracer.__init__()=vehicles.sensors.raytracer.textured_raytracer.TexturedRaytracer-class.html#__init__,Method vehicles.simulation.vehicle.Vehicle.Attached.__init__()=vehicles.simulation.vehicle.Vehicle.Attached-class.html#__init__,Method vehicles.simulation.vehicle.Vehicle.__init__()=vehicles.simulation.vehicle.Vehicle-class.html#__init__,Method vehicles.simulation.vsimulation.VehicleSimulation.__init__()=vehicles.simulation.vsimulation.VehicleSimulation-class.html#__init__,Method vehicles.worlds.boxes.Box.__init__()=vehicles.worlds.boxes.Box-class.html#__init__,Method vehicles.worlds.dynamic.DynamicTest.__init__()=vehicles.worlds.dynamic.DynamicTest-class.html#__init__,Method vehicles.worlds.empty_fixed.EmptyFixed.__init__()=vehicles.worlds.empty_fixed.EmptyFixed-class.html#__init__,Method vehicles.worlds.stochastic_box.StochasticBox.__init__()=vehicles.worlds.stochastic_box.StochasticBox-class.html#__init__,Method vehicles.worlds.stochastic_box2.KernelExponential.__init__()=vehicles.worlds.stochastic_box2.KernelExponential-class.html#__init__,Method vehicles.worlds.stochastic_box2.KernelInverse.__init__()=vehicles.worlds.stochastic_box2.KernelInverse-class.html#__init__,Method vehicles.worlds.stochastic_box2.StochasticBox2.__init__()=vehicles.worlds.stochastic_box2.StochasticBox2-class.html#__init__,Method vehicles.worlds.stochastic_box3.StochasticBox3.__init__()=vehicles.worlds.stochastic_box3.StochasticBox3-class.html#__init__,Method vehicles.worlds.textures.checkerboard.RandomCheckerboard.__init__()=vehicles.worlds.textures.checkerboard.RandomCheckerboard-class.html#__init__,Method vehicles.worlds.textures.constant.ConstantTexture.__init__()=vehicles.worlds.textures.constant.ConstantTexture-class.html#__init__,Method vehicles.worlds.textures.sampled.SampledTexture.__init__()=vehicles.worlds.textures.sampled.SampledTexture-class.html#__init__,Method vehicles.worlds.textures.smooth.Smoothed.__init__()=vehicles.worlds.textures.smooth.Smoothed-class.html#__init__,Method vehicles.worlds.textures.textures.SinTexture.__init__()=vehicles.worlds.textures.textures.SinTexture-class.html#__init__,Method vehicles.worlds.utils.Counter.__init__()=vehicles.worlds.utils.Counter-class.html#__init__"><a title="vehicles.configuration.master.VehiclesConfigMaster.__init__
+vehicles.interfaces.primitives.Circle.__init__
+vehicles.interfaces.primitives.GeometricShape.__init__
+vehicles.interfaces.primitives.PolyLine.__init__
+vehicles.interfaces.primitives.Primitive.__init__
+vehicles.interfaces.primitives.Source.__init__
+vehicles.interfaces.vehicle_sensor.VehicleSensor.__init__
+vehicles.interfaces.world.World.__init__
+vehicles.sensors.field_sampler.FieldSampler.__init__
+vehicles.sensors.field_sampler_rand_circle.FieldSamplerRandCircle.__init__
+vehicles.sensors.field_sampler_uniform.FieldSamplerUniform.__init__
+vehicles.sensors.noises.additive_gaussian.AdditiveGaussian.__init__
+vehicles.sensors.photoreceptors.Photoreceptors.__init__
+vehicles.sensors.photoreceptors.PhotoreceptorsUniform.__init__
+vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth.__init__
+vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmoothUniform.__init__
+vehicles.sensors.random_sensor.RandomSensor.__init__
+vehicles.sensors.range_finder.Rangefinder.__init__
+vehicles.sensors.range_finder.RangefinderUniform.__init__
+vehicles.sensors.raytracer.cjson_stream.CJSONStream.__init__
+vehicles.sensors.raytracer.json_stream.JSONStream.__init__
+vehicles.sensors.raytracer.textured_raytracer.Raytracer.__init__
+vehicles.sensors.raytracer.textured_raytracer.TexturedRaytracer.__init__
+vehicles.simulation.vehicle.Vehicle.Attached.__init__
+vehicles.simulation.vehicle.Vehicle.__init__
+vehicles.simulation.vsimulation.VehicleSimulation.__init__
+vehicles.worlds.boxes.Box.__init__
+vehicles.worlds.dynamic.DynamicTest.__init__
+vehicles.worlds.empty_fixed.EmptyFixed.__init__
+vehicles.worlds.stochastic_box.StochasticBox.__init__
+vehicles.worlds.stochastic_box2.KernelExponential.__init__
+vehicles.worlds.stochastic_box2.KernelInverse.__init__
+vehicles.worlds.stochastic_box2.StochasticBox2.__init__
+vehicles.worlds.stochastic_box3.StochasticBox3.__init__
+vehicles.worlds.textures.checkerboard.RandomCheckerboard.__init__
+vehicles.worlds.textures.constant.ConstantTexture.__init__
+vehicles.worlds.textures.sampled.SampledTexture.__init__
+vehicles.worlds.textures.smooth.Smoothed.__init__
+vehicles.worlds.textures.textures.SinTexture.__init__
+vehicles.worlds.utils.Counter.__init__" class="py-name" href="#" onclick="return doclink('link-5', '__init__', 'link-5');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">bounds</tt><tt class="py-op">)</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">width</tt> <tt class="py-op">=</tt> <tt class="py-name">width</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">length</tt> <tt class="py-op">=</tt> <tt class="py-name">length</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">        <tt class="py-name">texture</tt> <tt class="py-op">=</tt> <tt id="link-6" class="py-name"><a title="vehicles.worlds.utils.random_checkerboard" class="py-name" href="#" onclick="return doclink('link-6', 'random_checkerboard', 'link-0');">random_checkerboard</a></tt><tt class="py-op">(</tt><tt class="py-number">0.5</tt><tt class="py-op">)</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">        <tt class="py-name">points</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">]</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">        <tt class="py-name">points</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">(</tt><tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">array</tt><tt class="py-op">(</tt><tt class="py-name">p</tt><tt class="py-op">)</tt> <tt class="py-op">*</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">array</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">width</tt><tt class="py-op">,</tt> <tt class="py-name">length</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">tolist</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">                  <tt class="py-keyword">for</tt> <tt class="py-name">p</tt> <tt class="py-keyword">in</tt> <tt class="py-name">points</tt><tt class="py-op">]</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Function vehicles.worlds.utils.box()=vehicles.worlds.utils-module.html#box"><a title="vehicles.worlds.utils.box" class="py-name" href="#" onclick="return doclink('link-7', 'box', 'link-7');">box</a></tt> <tt class="py-op">=</tt> <tt id="link-8" class="py-name"><a title="vehicles.interfaces.primitives.PolyLine" class="py-name" href="#" onclick="return doclink('link-8', 'PolyLine', 'link-3');">PolyLine</a></tt><tt class="py-op">(</tt><tt class="py-name">id_object</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-name">tags</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">texture</tt><tt class="py-op">=</tt><tt class="py-name">texture</tt><tt class="py-op">,</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">                            <tt class="py-name">points</tt><tt class="py-op">=</tt><tt class="py-name">points</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"> </tt>
+<a name="Box.get_primitives"></a><div id="Box.get_primitives-def"><a name="L22"></a><tt class="py-lineno">22</tt> <a class="py-toggle" href="#" id="Box.get_primitives-toggle" onclick="return toggle('Box.get_primitives');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.worlds.boxes.Box-class.html#get_primitives">get_primitives</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Box.get_primitives-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Box.get_primitives-expanded"><a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-op">[</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name"><a title="vehicles.worlds.utils.box" class="py-name" href="#" onclick="return doclink('link-9', 'box', 'link-7');">box</a></tt><tt class="py-op">]</tt> </tt>
+</div><a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"> </tt>
+<a name="Box.simulate"></a><div id="Box.simulate-def"><a name="L25"></a><tt class="py-lineno">25</tt> <a class="py-toggle" href="#" id="Box.simulate-toggle" onclick="return toggle('Box.simulate');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.worlds.boxes.Box-class.html#simulate">simulate</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">dt</tt><tt class="py-op">,</tt> <tt class="py-param">vehicle_pose</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Box.simulate-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Box.simulate-expanded"><a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+</div></div><a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="vehicles-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/vehicles">Vehicles</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Jan 20 18:29:42 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
