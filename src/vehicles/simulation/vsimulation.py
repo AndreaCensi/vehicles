@@ -63,6 +63,7 @@ class VehicleSimulation():
         return observations
 
     def new_episode(self):
+        self.vehicle_collided = None
         self.episode_started = True
         self.timestamp = time.time()
         self.timestamp0 = self.timestamp

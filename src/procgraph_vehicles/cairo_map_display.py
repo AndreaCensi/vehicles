@@ -1,5 +1,5 @@
 from contracts import contract
-from procgraph import Block
+from procgraph import BadConfig, Block
 from procgraph.block_utils import make_sure_dir_exists
 from procgraph_images import posneg, scale, reshape2d
 from vehicles_cairo import (cairo_set_color, cairo_save, cairo_transform,
@@ -7,7 +7,7 @@ from vehicles_cairo import (cairo_set_color, cairo_save, cairo_transform,
 import itertools
 import numpy as np
 import os
-from procgraph import BadConfig
+import subprocess
 
 
 class VehiclesCairoDisplay(Block):
@@ -34,6 +34,8 @@ class VehiclesCairoDisplay(Block):
     Block.config('grid', 'Size of the grid (0: turn off)', default=1)
     Block.config('show_sensor_data', 'Show sensor data', default=True)
 
+    Block.config('swf', 'Converts PDF to SWF using pdf2swf', default=True)
+
     Block.input('boot_obs', '')
 
     Block.output('rgb', 'RGB data (png)')
@@ -54,6 +56,9 @@ class VehiclesCairoDisplay(Block):
             self.init_png()
         else:
             raise BadConfig('Invalid format %r.' % self.format, self, 'format')
+        self.count = 0
+        self.fps = None
+        self.t0 = None
 
     def init_pdf(self):
         self.filename = self.config.file
@@ -78,6 +83,15 @@ class VehiclesCairoDisplay(Block):
                          w, h, w * 4)
 
     def update(self):
+        # Estimate fps
+        if self.count == 0:
+            self.t0 = self.get_input_timestamp(0)
+        if self.count >= 1:
+            delta = self.get_input_timestamp(0) - self.t0
+            self.fps = 1.0 * self.count / delta
+
+        self.count += 1
+
         if self.format == 'pdf':
             self.update_pdf()
         elif self.format == 'png':
@@ -172,6 +186,28 @@ class VehiclesCairoDisplay(Block):
             os.unlink(self.filename)
         if os.path.exists(self.tmp_filename):
             os.rename(self.tmp_filename, self.filename)
+
+        if self.config.swf:
+            if self.fps is None:
+                self.error('Only one frame seen?')
+            else:
+                basename, _ = os.path.splitext(self.filename)
+                swf = '%s.swf' % basename
+                try:
+                    command = ['pdf2swf',
+                                           #"-b", # --defaultviewer
+                                           #"-l", # --defaultloader
+                                           '-G', # flatten
+                                           '-s', 'framerate=%d' % self.fps,
+                                            self.filename,
+                                            '-o', swf]
+                    self.info(' '.join(command))
+                    subprocess.check_call(command)
+                except Exception as e:
+                    self.error('Could not convert to swf: %s' % e)
+                    if os.path.exists(swf):
+                        os.unlink(swf)
+
         self.info("Completed %r." % self.filename)
 
 

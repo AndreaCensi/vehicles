@@ -39,7 +39,7 @@ def print_config(directory, outdir):
     VehiclesConfig.load(directory)
 
     def write_report(r):
-        out = os.path.join(outdir, '%s.html' % r.id)
+        out = os.path.join(outdir, '%s.html' % r.nid)
         rd = os.path.join(outdir, 'images')
         logger.info('Writing to %r' % out)
         r.to_html(out, resources_dir=rd)

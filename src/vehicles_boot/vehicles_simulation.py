@@ -71,12 +71,16 @@ class BOVehicleSimulation(RobotInterface, VehicleSimulation):
 
     def get_observations(self):
         observations = VehicleSimulation.compute_observations(self)
+        episode_end = True if self.vehicle_collided else False
+        if episode_end:
+            self.info("Collision detected.")
+
         return RobotObservations(timestamp=self.timestamp,
                          observations=observations,
                          commands=self.last_commands,
                          commands_source=self.commands_source,
                          robot_pose=self.vehicle.get_pose(),
-                         episode_end=True if self.vehicle_collided else False)
+                         episode_end=episode_end)
 
     def new_episode(self):
         e = VehicleSimulation.new_episode(self)
