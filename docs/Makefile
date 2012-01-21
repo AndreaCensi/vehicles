@@ -1,4 +1,4 @@
-# v. 1.0
+# v. 1.5
 demos_root=source/my_static/demos
 github_repo=git@github.com:AndreaCensi/vehicles.git
 

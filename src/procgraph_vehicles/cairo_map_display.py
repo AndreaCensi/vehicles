@@ -106,7 +106,12 @@ class VehiclesCairoDisplay(Block):
         self.draw_everything(cr)
         self.surf.flush()
 
-        self.output.rgb = self.argb_data[:, :, :3].copy()
+        rgb = self.argb_data[:, :, :3].copy()
+        # fix red/blue inversion
+        rgb[:, :, 0] = self.argb_data[:, :, 2]
+        rgb[:, :, 2] = self.argb_data[:, :, 0]
+
+        self.output.rgb = rgb
 
     def update_pdf(self):
         import cairo
@@ -127,6 +132,7 @@ class VehiclesCairoDisplay(Block):
         id_episode = boot_obs['id_episode'].item()
         id_vehicle = boot_obs['id_robot'].item()
         sim_state = boot_obs['extra'].item()['robot_state']
+
         observations = scale(reshape2d(boot_obs['observations']), min_value=0,
                              nan_color=[1, 1, 1])
         commands = posneg(reshape2d(boot_obs['commands']), max_value=(+1),
@@ -254,7 +260,16 @@ def create_sidebar(cr, width, height, sim_state, id_vehicle, id_episode,
 
     with cairo_transform(cr, t=[padding, 0]):
         data_width = width - 2 * padding
-        last_height = cairo_pixels(cr, observations, data_width)
+        # Don't draw grid if there are many pixels
+        if max(observations.shape[0], observations.shape[1]) > 15:
+            grid_color = None
+        else:
+            grid_color = [1, .9, .9]
+
+        last_height = cairo_pixels(cr, observations, width=data_width,
+                                   # Force square
+                                   height=data_width,
+                                   grid_color=grid_color)
 
     cr.translate(0, last_height)
 
@@ -363,7 +378,7 @@ def cairo_text_centered(cr, text):
 @contract(x='array[HxWx3](uint8)',
           width='>0')
 def cairo_pixels(cr, x, width, height=None, grid_color=[1, .9, .9],
-                 border_color=[0, 0, 0]):
+                 border_color=[0, 0, 0], bg_color=[1, 1, 1]):
     #x = np.transpose(x, [1, 0, 2])
 
     pw = width * 1.0 / x.shape[0]
@@ -373,16 +388,26 @@ def cairo_pixels(cr, x, width, height=None, grid_color=[1, .9, .9],
     else:
         ph = height * 1.0 / x.shape[1]
 
+    cr.rectangle(0, 0, width, height)
+    cr.set_source_rgb(bg_color[0], bg_color[1], bg_color[2])
+    cr.fill()
+
     bleed = 0.5
+
     # not sure j, i
     for i, j in itertools.product(range(x.shape[0]),
                                   range(x.shape[1])):
         with cairo_transform(cr, t=[i * pw,
                                     j * ph]):
-            cr.rectangle(0, 0, pw + bleed, ph + bleed)
             col = x[i, j, :] / 255.0
-            cr.set_source_rgb(col[0], col[1], col[2])
-            cr.fill()
+
+            if np.all(col == bg_color): # XXX: tol?
+                # Do not draw, if it is the same color as the background
+                continue
+            else:
+                cr.rectangle(0, 0, pw + bleed, ph + bleed)
+                cr.set_source_rgb(col[0], col[1], col[2])
+                cr.fill()
 
     if grid_color is not None:
         cairo_set_color(cr, grid_color)
