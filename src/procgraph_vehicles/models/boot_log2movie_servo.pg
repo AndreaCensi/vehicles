@@ -48,6 +48,6 @@ goal, sensels --> |plot width=450 height=150 title="" y_min=0 y_max=1| -->  |veh
     
     map_rgb, right, servo_rgb, error_rgb --> |sync| --> |grid bgcolor=$bgcolor  cols=2| --> out
 
-    out --> |mencoder file="${output}.avi"|
+    out --> |mencoder file="${output}.mp4" timestamps=0|
 
 

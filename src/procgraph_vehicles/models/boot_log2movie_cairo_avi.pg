@@ -12,4 +12,4 @@ import procgraph_vehicles
 
      observations[boot_obs] -> |plotter:vehicles_cairo_display format=png| --> rgb
      
-     rgb --> |mencoder file="${output}.avi" |
+     rgb --> |mencoder file="${output}.mp4" timestamps=0|

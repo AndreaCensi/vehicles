@@ -63,7 +63,14 @@
   - {}
 
 - id: FieldSampler
-  desc: "Default skin for FieldSampler"
+  desc: "Default skin for FieldSampler (transparent)"
+  code:
+  - vehicles_cairo.skins.transparent
+  - {}
+
+
+- id: RandomSensor
+  desc: "Default skin for RandomSensor (transparent)"
   code:
   - vehicles_cairo.skins.transparent
   - {}

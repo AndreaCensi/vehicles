@@ -10,4 +10,4 @@ import procgraph_vehicles
 
 |boot_log_reader logdir=$logdir id_robot=$id_robot id_agent=$id_agent id_episode=$id_episode| -> observations 
 
-     observations[boot_obs] -> |plotter:vehicles_cairo_display format=pdf file="${output}.pdf"| 
+     observations[boot_obs] -> |plotter:vehicles_cairo_display format=pdf swf=0 file="${output}.pdf"| 

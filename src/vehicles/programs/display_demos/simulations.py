@@ -1,5 +1,4 @@
 from ... import VehicleSimulation, VehiclesConfig, logger
-from ...display import display_all
 from optparse import OptionParser
 from reprep import MIME_PNG, MIME_SVG
 import numpy as np
