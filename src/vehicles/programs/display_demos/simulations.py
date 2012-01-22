@@ -2,10 +2,9 @@ from ... import VehicleSimulation, VehiclesConfig, logger
 from ...display import display_all
 from optparse import OptionParser
 from reprep import MIME_PNG, MIME_SVG
-from vehicles_cairo import (vehicles_cairo_display_pdf,
-    vehicles_cairo_display_png, vehicles_cairo_display_svg)
 import numpy as np
 import os
+from vehicles_cairo import vehicles_has_cairo
 
 usage = """
 
@@ -15,6 +14,13 @@ usage = """
 
 
 def main():
+    if not vehicles_has_cairo:
+        logger.error('This program cannot be run if Cairo is not installed.')
+        return
+    from vehicles_cairo import (vehicles_cairo_display_pdf,
+                                vehicles_cairo_display_png,
+                                vehicles_cairo_display_svg)
+
     parser = OptionParser(usage=usage)
     parser.disable_interspersed_args()
 
@@ -74,23 +80,21 @@ def main():
 
         plot_params = dict(grid=options.grid,
                            zoom=options.zoom, show_sensor_data=True)
-        if True:
-            print('Not cairo')
-            with f.plot('start', figsize=(options.figsize,
-                                                options.figsize)) as pylab:
-                    display_all(pylab, sim_state, **plot_params)
+#            with f.plot('start', figsize=(options.figsize,
+#                                                options.figsize)) as pylab:
+#                    display_all(pylab, sim_state, **plot_params)
 
-            with f.data_file('start_cairo_png', MIME_PNG) as filename:
-                vehicles_cairo_display_png(filename, width=800, height=800,
-                            sim_state=sim_state, **plot_params)
+        with f.data_file('start_cairo_png', MIME_PNG) as filename:
+            vehicles_cairo_display_png(filename, width=800, height=800,
+                        sim_state=sim_state, **plot_params)
 
-            with f.data_file('start_cairo_pdf', MIME_PDF) as filename:
-                vehicles_cairo_display_pdf(filename, width=800, height=800,
-                            sim_state=sim_state, **plot_params)
+        with f.data_file('start_cairo_pdf', MIME_PDF) as filename:
+            vehicles_cairo_display_pdf(filename, width=800, height=800,
+                        sim_state=sim_state, **plot_params)
 
-            with f.data_file('start_cairo_svg', MIME_SVG) as filename:
-                vehicles_cairo_display_svg(filename, width=800, height=800,
-                            sim_state=sim_state, **plot_params)
+        with f.data_file('start_cairo_svg', MIME_SVG) as filename:
+            vehicles_cairo_display_svg(filename, width=800, height=800,
+                        sim_state=sim_state, **plot_params)
 
 
     filename = os.path.join(options.outdir, '%s.html' % basename)

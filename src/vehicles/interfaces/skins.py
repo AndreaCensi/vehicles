@@ -15,3 +15,6 @@ class VehicleSkin:
             :param:joints: list of joints configuration, relative to robot
                 coordinates (joints[0] == Identity)
         '''
+
+    def draw(self, cr):
+        ''' Draw the skin on the given Cairo context. '''

@@ -22,6 +22,21 @@
   - vehicles_cairo.skins.omni
   - {}
 
+
+- id: landroid
+  desc: "Custom skin for landroid (TODO)."
+  code:
+  - vehicles_cairo.skins.omni
+  - {}
+
+
+- id: car
+  desc: "A simple car."
+  code:
+  - vehicles_cairo.skins.car
+  - {}
+
+
 - id: brai_base
   desc: "Braitenberg base."
   code:
@@ -33,3 +48,23 @@
   code:
   - vehicles_cairo.skins.brai
   - sensors: True
+
+
+- id: Rangefinder
+  desc: "Default skin for rangefinder"
+  code:
+  - vehicles_cairo.skins.sick
+  - {}
+
+- id: Photoreceptors
+  desc: "Default skin for Photoreceptors"
+  code:
+  - vehicles_cairo.skins.eye
+  - {}
+
+- id: FieldSampler
+  desc: "Default skin for FieldSampler"
+  code:
+  - vehicles_cairo.skins.transparent
+  - {}
+

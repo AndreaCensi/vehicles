@@ -1,9 +1,7 @@
 from . import (cairo_plot_polyline, cairo_save, cairo_plot_circle, cairo,
-    CairoConstants)
+    CairoConstants, cairo_set_color, np)
 from vehicles.interfaces import Source
 from vehicles.sensors.field_sampler import get_field_values
-import numpy as np
-from vehicles_cairo.utils import cairo_set_color
 
 
 def cairo_plot_sources(cr, world_state):

@@ -34,7 +34,8 @@ epydoc:
 demos:
 	mkdir -p $(demos_root)
 	vehicles_print_config --outdir $(demos_root)/config
-	vehicles_demo_display --outdir $(demos_root)/display
-	vehicles_demo_skins   --outdir $(demos_root)/skins
-	vehicles_inspect_textures --outdir $(demos_root)/textures
+	vehicles_display_demo_simulations --outdir $(demos_root)/simulations
+	vehicles_display_demo_skins       --outdir $(demos_root)/skins
+	vehicles_display_demo_vehicles    -d default --outdir $(demos_root)/vehicles
+	vehicles_inspect_textures         --outdir $(demos_root)/textures
 	

@@ -41,14 +41,9 @@ def vehicles_cairo_display_all(cr, width, height,
     with cairo_save(cr):
         # Paint white
         with cairo_save(cr):
-            cr.set_source_rgb(1.0, 1.0, 1)
-            cr.set_operator(cairo.OPERATOR_SOURCE) #@UndefinedVariable
-            cr.paint()
-
-        if False:
-            cr.set_source_rgb(1, 0, 0)
-            cr.rectangle(5, 5, width - 5, height - 5)
-            cr.stroke()
+            cr.set_source_rgb(1, 1, 1)
+            cr.rectangle(0, 0, width, height)
+            cr.fill()
 
         vehicle_state = sim_state['vehicle']
         robot_pose = SE2_from_SE3(from_yaml(vehicle_state['pose']))

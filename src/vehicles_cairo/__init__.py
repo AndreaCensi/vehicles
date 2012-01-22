@@ -1,8 +1,12 @@
 ''' Plotting using the Cairo library. '''
 
+from vehicles import __version__, logger
+
 
 class CairoConstants:
     BLACK = [0, 0, 0]
+    WHITE = [1, 1, 1]
+    YELLOW = [1, 1, 0]
 
     obstacle_border_width = 0.01
     obstacle_border_color = [0, 0, 0]
@@ -29,6 +33,7 @@ except ImportError as e:
     vehicles_has_cairo = False
 
 else:
+    from .cairo_utils import *
     from .utils import *
     from .skins import *
     from .world_geometry import *

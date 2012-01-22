@@ -67,7 +67,7 @@ def inspect_textures():
 
                 lum = texture(x)
 
-                with f.data_pylab('chunk%s' % c,
+                with f.plot('chunk%s' % c,
                               figsize=(options.figsize * 10,
                                       options.figsize)) as pylab:
                     pylab.plot(x, lum)

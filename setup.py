@@ -42,10 +42,12 @@ setup(name='PyVehicles',
          'console_scripts': [
            'vehicles_print_config = '
                 'vehicles.programs.print_config:main',
-           'vehicles_demo_display = '
-                'vehicles.programs.display_demo:main',
-           'vehicles_demo_skins = '
-                'vehicles.programs.display_demo.skins_demo:main',
+           'vehicles_display_demo_simulations = '
+                'vehicles.programs.display_demos.simulations:main',
+           'vehicles_display_demo_skins = '
+                'vehicles.programs.display_demos.skins:main',
+           'vehicles_display_demo_vehicles = '
+                'vehicles.programs.display_demos.vehicles:main',
            'vehicles_inspect_textures = '
                 'vehicles.programs.inspect_textures:main',
             'vehicles_create_olympics_configs = '

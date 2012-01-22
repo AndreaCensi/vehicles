@@ -1,8 +1,9 @@
-import numpy as np
-from geometry.yaml import from_yaml
-from geometry.poses import SE2_from_SE3, translation_angle_from_SE2
+from . import logger
 from contracts import contract
-from vehicles_cairo.utils import cairo_plot_circle
+from geometry.poses import SE2_from_SE3, translation_angle_from_SE2
+from geometry.yaml import from_yaml
+from vehicles import VehiclesConfig
+from . import cairo_plot_circle, cairo_rototranslate, np
 
 
 def cairo_plot_sensor_data(cr, vehicle_state, rho_min=0.05):
@@ -12,6 +13,19 @@ def cairo_plot_sensor_data(cr, vehicle_state, rho_min=0.05):
         #print 'robot->sensor', attached['pose']
         sensor_pose = SE2_from_SE3(from_yaml(attached['current_pose']))
         #print 'sensor_pose: %s' % SE2.friendly(sensor_pose)
+
+        sensor_skin = sensor.get('extra', {}).get('skin', None)
+        if sensor_skin is None:
+            sensor_skin = sensor['type']
+
+        if not sensor_skin in VehiclesConfig.skins:
+            logger.warning('Could not find skin %r' % sensor_skin)
+        else:
+            skin = VehiclesConfig.skins.instance(sensor_skin) #@UndefinedVariable
+
+            with cairo_rototranslate(cr, sensor_pose):
+                skin.draw(cr)
+
         if sensor['type'] == 'Rangefinder':
             plot_ranges(cr=cr,
                         pose=sensor_pose,
@@ -34,8 +48,8 @@ def cairo_plot_sensor_data(cr, vehicle_state, rho_min=0.05):
                         positions=np.array(sensor['positions']),
                         sensels=np.array(observations['sensels']))
         else:
-            pass # XXX
-            #logger.warning('Unknown sensor type %r.' % sensor['type'])
+            logger.warning('Unknown sensor type %r.' % sensor['type'])
+            pass
 
 
 @contract(q='SE2', x='array[2]', returns='array[2]')

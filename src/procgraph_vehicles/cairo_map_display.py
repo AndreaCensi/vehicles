@@ -1,10 +1,8 @@
-from contracts import contract
 from procgraph import BadConfig, Block
 from procgraph.block_utils import make_sure_dir_exists
 from procgraph_images import posneg, scale, reshape2d
-from vehicles_cairo import (cairo_set_color, cairo_save, cairo_transform,
-    vehicles_cairo_display_all)
-import itertools
+from vehicles_cairo import (cairo_save, cairo_transform,
+    vehicles_cairo_display_all, cairo_pixels, cairo_text_align)
 import numpy as np
 import os
 import subprocess
@@ -255,7 +253,8 @@ def create_sidebar(cr, width, height, sim_state, id_vehicle, id_episode,
     with cairo_transform(cr, t=[width / 2, 0]):
         cr.select_font_face(label_font)
         cr.set_font_size(M)
-        cairo_text_centered(cr, 'observations')
+        cairo_text_align(cr, 'observations', halign='center')
+
     cr.translate(0, M * 0.8)
 
     with cairo_transform(cr, t=[padding, 0]):
@@ -295,7 +294,7 @@ def create_sidebar(cr, width, height, sim_state, id_vehicle, id_episode,
     with cairo_transform(cr, t=[width / 2, 0]):
         cr.select_font_face(label_font)
         cr.set_font_size(M)
-        cairo_text_centered(cr, 'commands')
+        cairo_text_align(cr, 'commands', halign='center')
     cr.translate(0, M * 0.8)
 
     padding = padding * 2
@@ -337,93 +336,4 @@ def create_sidebar(cr, width, height, sim_state, id_vehicle, id_episode,
             cr.show_text(s)
             cr.stroke()
         cr.translate(0, line)
-
-
-def cairo_text_align(cr, text, halign='left', valign='bottom'):
-    extents = cr.text_extents(text)
-    width = extents[2]
-    height = extents[3]
-    if halign == 'center':
-        x = -width / 2.0
-    elif halign == 'left':
-        x = 0
-    elif halign == 'right':
-        x = -width
-    else:
-        assert False
-
-    if valign == 'middle':
-        y = +height / 2.0
-    elif valign == 'bottom':
-        y = 0
-    elif valign == 'top':
-        y = +height
-    else:
-        assert False
-
-    t = [x, y]
-    with cairo_transform(cr, t=t):
-        cr.show_text(text)
-        cr.stroke()
-
-
-def cairo_text_centered(cr, text):
-    extents = cr.text_extents(text)
-    width = extents[2]
-    with cairo_transform(cr, t=[-width / 2.0, 0]):
-        cr.show_text(text)
-        cr.stroke()
-
-
-@contract(x='array[HxWx3](uint8)',
-          width='>0')
-def cairo_pixels(cr, x, width, height=None, grid_color=[1, .9, .9],
-                 border_color=[0, 0, 0], bg_color=[1, 1, 1]):
-    #x = np.transpose(x, [1, 0, 2])
-
-    pw = width * 1.0 / x.shape[0]
-    if height is None:
-        ph = pw
-        height = pw * x.shape[1]
-    else:
-        ph = height * 1.0 / x.shape[1]
-
-    cr.rectangle(0, 0, width, height)
-    cr.set_source_rgb(bg_color[0], bg_color[1], bg_color[2])
-    cr.fill()
-
-    bleed = 0.5
-
-    # not sure j, i
-    for i, j in itertools.product(range(x.shape[0]),
-                                  range(x.shape[1])):
-        with cairo_transform(cr, t=[i * pw,
-                                    j * ph]):
-            col = x[i, j, :] / 255.0
-
-            if np.all(col == bg_color): # XXX: tol?
-                # Do not draw, if it is the same color as the background
-                continue
-            else:
-                cr.rectangle(0, 0, pw + bleed, ph + bleed)
-                cr.set_source_rgb(col[0], col[1], col[2])
-                cr.fill()
-
-    if grid_color is not None:
-        cairo_set_color(cr, grid_color)
-        for i, j in itertools.product(range(x.shape[0]),
-                                      range(x.shape[1])):
-            with cairo_transform(cr, t=[i * pw,
-                                        j * ph]):
-                cr.set_line_width(1)
-                cr.rectangle(0, 0, pw, ph)
-                cr.stroke()
-
-    cr.rectangle(0, 0, width, height)
-    cr.set_line_width(1)
-    cairo_set_color(cr, border_color)
-    cr.stroke()
-
-    return height
-
 

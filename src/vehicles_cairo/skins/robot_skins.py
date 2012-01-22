@@ -103,16 +103,8 @@ def cairo_robot_skin_brai(cr, sensors=False):
                     with cairo_transform(cr, t=[1.1 + r, 0]):
                         cr.arc(0, 0, r, +np.pi / 2, -np.pi / 2)
                         cr.stroke()
-#
-#def cairo_robot_skin_brai_classic(cr):
-#    with cairo_save(cr):
-#        h = 0.8
-#        w = 1.3
-#        x0 = -.3
-#        wheel_h = 0.15
-#        wheel_w = 0.4
-#        M = h / 2 + .8 * wheel_h
-#
-#        cairo_robot_skin_brai(cr)
-#
+
+
+def cairo_robot_skin_car(cr):
+    cairo_robot_skin_brai(cr, sensors=False)
 
