@@ -1,0 +1,6 @@
+
+- id: fly1
+  desc: "Stylized fly"
+  code:
+  - vehicles_cairo.skins.fly1
+  - {}

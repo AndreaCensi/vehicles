@@ -1,0 +1,10 @@
+- id: photo_f360_n180
+  desc: 180 photoreceptors distributed on 360deg
+  code: 
+      - vehicles.sensors.PhotoreceptorsUniform
+      - num_sensels: 180
+        fov_deg:     360
+        noise: 
+            - vehicles.sensors.AdditiveGaussian
+            - std_dev: 0.05
+        

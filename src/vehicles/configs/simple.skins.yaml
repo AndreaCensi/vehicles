@@ -23,12 +23,6 @@
   - {}
 
 
-- id: landroid
-  desc: "Custom skin for landroid (TODO)."
-  code:
-  - vehicles_cairo.skins.omni
-  - {}
-
 
 - id: car
   desc: "A simple car."
@@ -49,18 +43,17 @@
   - vehicles_cairo.skins.brai
   - sensors: True
 
-
 - id: Rangefinder
   desc: "Default skin for rangefinder"
   code:
   - vehicles_cairo.skins.sick
-  - {}
+  - size: 0.25
 
 - id: Photoreceptors
   desc: "Default skin for Photoreceptors"
   code:
   - vehicles_cairo.skins.eye
-  - {}
+  - size: 0.2
 
 - id: FieldSampler
   desc: "Default skin for FieldSampler (transparent)"
@@ -68,10 +61,16 @@
   - vehicles_cairo.skins.transparent
   - {}
 
-
 - id: RandomSensor
   desc: "Default skin for RandomSensor (transparent)"
   code:
   - vehicles_cairo.skins.transparent
   - {}
+
+- id: transparent
+  desc: "Transparent skin (do not draw)"
+  code:
+  - vehicles_cairo.skins.transparent
+  - {}
+
 

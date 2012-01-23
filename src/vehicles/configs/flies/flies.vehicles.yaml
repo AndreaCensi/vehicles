@@ -1,0 +1,23 @@
+- id: v_se2_k_fwd_cam360
+  desc: "Kinematic Fly, controlled in velocity, fixed linear vel, 360 photoreceptors"
+  id_dynamics:  d_SE2_fwd_v_n1
+  sensors:
+      - id_sensor: photo_f360_n180
+        pose: [0,0,0]
+        extra:
+            skin: transparent
+  radius: 0.005
+  extra:
+      skin: fly1
+
+- id: v_se2_k_cam360
+  desc: "Kinematic Fly, controlled in velocity, 3DOF, 360 photoreceptors"
+  id_dynamics: d_SE2_rb_v_n1
+  sensors:
+      - id_sensor: photo_f360_n180
+        pose: [0,0,0]
+        extra:
+            skin: transparent
+  radius: 0.005
+  extra:
+      skin: fly1

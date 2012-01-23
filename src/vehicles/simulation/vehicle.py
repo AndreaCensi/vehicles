@@ -6,24 +6,26 @@ from geometry.yaml import to_yaml
 class Vehicle:
     class Attached:
         @contract(pose='SE3', joint='int')
-        def __init__(self, sensor, pose, joint):
+        def __init__(self, sensor, pose, joint, extra):
+            '''
+                :param:extra: dict convertible to YAML.
+                :param:extra['skin']: sing for this sensor.
+            '''
             self.sensor = sensor
             self.pose = pose
             self.joint = joint
             self.current_observations = None
             self.current_pose = None
+            self.extra = extra
 
         def to_yaml(self):
             if self.current_observations is None:
                 raise Exception('Observations not computed')
-#            print(' serializing: rel pose: %s'
-#                  % SE2.friendly(SE2_from_SE3(self.pose)))
-#            print(' serializing: current pose: %s'
-#                  % SE2.friendly(SE2_from_SE3(self.current_pose)))
             return {
                 'sensor': self.sensor.to_yaml(),
                 'pose': to_yaml('SE3', self.pose),
                 'joint': self.joint,
+                'extra': self.extra,
                 'current_observations':
                     dict_to_yaml(self.current_observations),
                 'current_pose': to_yaml('SE3', self.current_pose),
@@ -71,8 +73,9 @@ class Vehicle:
         self.id_dynamics = id_dynamics
 
     @contract(id_sensor='str', pose='SE3', joint='int,>=0')
-    def add_sensor(self, id_sensor, sensor, pose, joint):
-        attached = Vehicle.Attached(sensor, pose, joint)
+    def add_sensor(self, id_sensor, sensor, pose, joint, extra):
+        attached = Vehicle.Attached(sensor=sensor, pose=pose,
+                                    joint=joint, extra=extra)
         self.sensors.append(attached)
         if not self.id_sensors:
             self.id_sensors = id_sensor

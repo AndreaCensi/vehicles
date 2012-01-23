@@ -54,13 +54,13 @@ class PhotoreceptorsSmooth(VehicleSensor, TexturedRaytracer):
             return np.exp(-(x / a) ** 2)
         self.coeff = kernel(D)
 
-        assert np.all(np.isfinite(self.coeff))
+        #check_finite(self.coeff)
+        assert np.all(np.isfinite(self.coeff)) # XXX
         for i in range(len(directions)):
             sum_i = self.coeff[i, :].sum()
             assert sum_i > 0
-            self.coeff[i, :] = self.coeff[i, :] / sum_i
+            self.coeff[i, :] = self.coeff[i, :] / sum_i  # XXX underflow 
 
-        assert np.all(np.isfinite(self.coeff))
 #        import scipy.stats
 #        eps = 0.1
 #        resolution = 7

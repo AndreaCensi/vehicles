@@ -1,5 +1,6 @@
 from .. import (roundedrec, cairo_transform, cairo_save, cairo_set_color,
     CairoConstants, np)
+from vehicles_cairo.cairo_utils.shape import cairo_plot_rectangle
 
 
 def cairo_robot_skin_circular(cr):
@@ -16,11 +17,27 @@ def cairo_robot_skin_circular(cr):
         cr.stroke()
 
 
+def cairo_robot_skin_tracked(cr, width=1.0, length=1.0):
+    with cairo_save(cr):
+        def track():
+            wheel(cr, w=length * .7, h=width / 3.0)
+
+        with cairo_transform(cr, t=[0, -width / 2.0]):
+            track()
+        with cairo_transform(cr, t=[0, +width / 2.0]):
+            track()
+        cairo_plot_rectangle(cr, -length / 2.0, -width / 2.0,
+                             length, width,
+                             fill_color=CairoConstants.robot_fill_color,
+                             border_width=CairoConstants.robot_border_width,
+                             border_color=CairoConstants.robot_border_color)
+
+
 def wheel(cr, w=0.7, h=0.5):
     with cairo_save(cr):
         def shape():
 #            cr.rectangle(-w / 2, -h / 2, w, h)
-            roundedrec(cr, -w / 2, -h / 2, w, h, r=w / 3)
+            roundedrec(cr, -w / 2.0, -h / 2.0, w, h, r=min(w, h) / 3.0)
         shape()
         cairo_set_color(cr, CairoConstants.robot_wheel_fill_color)
         cr.fill()

@@ -1,12 +1,13 @@
-from ... import VehicleSimulation, VehiclesConfig, logger
+from ... import VehicleSimulation, VehiclesConfig, logger, expand_string
 from optparse import OptionParser
 from reprep import MIME_PNG, MIME_SVG
-import os
 from vehicles_cairo import vehicles_has_cairo
+import os
+
 
 usage = """
 
-    %cmd   --vehicle <vehicle> --world <world> [-o where] 
+    %cmd   [--vehicles <pattern>] --world <world> [-o where] 
            [-n N] [-z ZOOM] [--figsize INCHES] 
 """
 
@@ -32,8 +33,6 @@ def main():
                     help="output directory [%default]")
     parser.add_option("--figsize", default=10, type='float',
                     help="figsize (inches) [%default]")
-    parser.add_option("-z", "--zoom", default=1.4, type='float',
-                    help="zoom in meters; 0 for full view [%default]")
     parser.add_option("-g", "--grid", default=1, type='float',
                     help="grid size in meters; 0 for no grid [%default]")
 
@@ -43,7 +42,7 @@ def main():
     # TODO: other config dirs
 
     (options, args) = parser.parse_args()
-    if args: raise Exception()
+    if args: raise Exception() # XXX
 
     id_world = options.world
 
@@ -57,9 +56,15 @@ def main():
     VehiclesConfig.load(options.config)
 
     # TODO: selection
-    vehicles = VehiclesConfig.vehicles.keys()
+    all_vehicles = VehiclesConfig.vehicles.keys()
+    if options.vehicles is None:
+        vehicles = all_vehicles
+    else:
+        vehicles = expand_string(options.vehicles, all_vehicles)
 
     print('Plotting vehicles: %s' % vehicles)
+
+    f0 = r.figure(cols=4)
 
     for id_vehicle in sorted(vehicles):
         sec = r.node(id_vehicle)
@@ -73,13 +78,15 @@ def main():
         sim_state = simulation.to_yaml()
 
         plot_params = dict(grid=options.grid,
-                           zoom=options.zoom,
+                           zoom=vehicle.radius * 2,
                            width=800, height=800,
                            show_sensor_data=True)
 
         with f.data_file('start_cairo_png', MIME_PNG) as filename:
             vehicles_cairo_display_png(filename,
                         sim_state=sim_state, **plot_params)
+
+        f0.sub(f.last(), caption=id_vehicle)
 
         with f.data_file('start_cairo_pdf', MIME_PDF) as filename:
             vehicles_cairo_display_pdf(filename,

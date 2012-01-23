@@ -65,8 +65,9 @@ def instance_vehicle_spec(entry):
         extra = entry.get('extra', {})
         vehicle = Vehicle(radius=radius, extra=extra)
         vehicle.add_dynamics(id_dynamics, dynamics)
+        master = VehiclesConfig.specs['sensors']
+
         for sensor in sensors:
-            master = VehiclesConfig.specs['sensors']
             if 'id_sensor' in sensor:
                 id_sensor = sensor['id_sensor']
                 sensor_instance = master.instance(id_sensor)
@@ -81,8 +82,11 @@ def instance_vehicle_spec(entry):
             pose = SE2_from_translation_angle([x, y], theta)
             pose = SE3_from_SE2(pose)
             joint = sensor.get('joint', 0)
+            extra = sensor.get('extra', {})
             vehicle.add_sensor(id_sensor=id_sensor,
-                               sensor=sensor_instance, pose=pose, joint=joint)
+                               sensor=sensor_instance,
+                               pose=pose, joint=joint,
+                               extra=extra)
         return vehicle
     except:
         logger.error('Error while trying to instantiate vehicle. Entry:\n%s'
