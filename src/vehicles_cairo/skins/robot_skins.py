@@ -1,20 +1,19 @@
 from .. import (roundedrec, cairo_transform, cairo_save, cairo_set_color,
     CairoConstants, np)
-from vehicles_cairo.cairo_utils.shape import cairo_plot_rectangle
+from vehicles_cairo.cairo_utils import (cairo_plot_rectangle,
+                                        cairo_plot_circle2,
+    cairo_plot_with_style, cairo_stroke_with_style)
 
 
 def cairo_robot_skin_circular(cr):
     with cairo_save(cr):
-        cr.set_line_width(CairoConstants.robot_border_width)
-        cairo_set_color(cr, CairoConstants.robot_fill_color)
-        cr.arc(0, 0, 1, 0, 2 * np.pi)
-        cr.fill()
-        cr.arc(0, 0, 1, 0, 2 * np.pi)
-        cairo_set_color(cr, CairoConstants.robot_border_color)
-        cr.stroke()
-        cr.move_to(0.2, 0)
-        cr.line_to(1, 0)
-        cr.stroke()
+        cairo_plot_circle2(cr, 0, 0, 1, **CairoConstants.robot_body_style)
+
+        def line():
+            cr.move_to(0.2, 0)
+            cr.line_to(1, 0)
+
+        cairo_stroke_with_style(cr, line, **CairoConstants.robot_body_style)
 
 
 def cairo_robot_skin_tracked(cr, width=1.0, length=1.0):
@@ -24,71 +23,62 @@ def cairo_robot_skin_tracked(cr, width=1.0, length=1.0):
 
         with cairo_transform(cr, t=[0, -width / 2.0]):
             track()
+
         with cairo_transform(cr, t=[0, +width / 2.0]):
             track()
+
         cairo_plot_rectangle(cr, -length / 2.0, -width / 2.0,
                              length, width,
-                             fill_color=CairoConstants.robot_fill_color,
-                             border_width=CairoConstants.robot_border_width,
-                             border_color=CairoConstants.robot_border_color)
+                             **CairoConstants.robot_body_style)
 
 
-def wheel(cr, w=0.7, h=0.5):
+def wheel(cr, w=0.4, h=0.15):
     with cairo_save(cr):
         def shape():
-#            cr.rectangle(-w / 2, -h / 2, w, h)
             roundedrec(cr, -w / 2.0, -h / 2.0, w, h, r=min(w, h) / 3.0)
-        shape()
-        cairo_set_color(cr, CairoConstants.robot_wheel_fill_color)
-        cr.fill()
-        shape()
-        cr.set_line_width(CairoConstants.robot_wheel_border_width)
-        cairo_set_color(cr, CairoConstants.robot_wheel_border_color)
-        cr.stroke()
+
+        cairo_plot_with_style(cr, shape, **CairoConstants.robot_wheel_style)
 
 
-def omni_wheel(cr):
-    wheel(cr) # TODO: make different color
+def omni_wheel(cr, r=0.15):
+    cairo_plot_circle2(cr, 0, 0, r, **CairoConstants.omni_wheel_style)
 
 
 def cairo_robot_skin_ddrive(cr):
     with cairo_save(cr):
 
-        cr.scale(0.8, 0.8) # make it stay in <1 
-
-        with cairo_transform(cr, [0, +.9], 0):
+        with cairo_transform(cr, [0, +.8], 0):
             wheel(cr)
 
-        with cairo_transform(cr, [0, -.9], 0):
+        with cairo_transform(cr, [0, -.8], 0):
             wheel(cr)
 
+        cr.scale(0.7, 0.7) # make it stay in < 1
         cairo_robot_skin_circular(cr)
 
 
 def cairo_robot_skin_omni(cr):
     with cairo_save(cr):
 
-        cr.scale(0.8, 0.8) # make it stay in < 1
-
         for theta in [0, 2 * np.pi / 3, -2 * np.pi / 3]:
             with cairo_transform(cr, r=theta - np.pi / 2):
-                with cairo_transform(cr, [0, +.9], np.pi / 2):
+                with cairo_transform(cr, [0, +.8], np.pi / 2):
                     omni_wheel(cr)
 
+        cr.scale(0.7, 0.7) # make it stay in < 1
         cairo_robot_skin_circular(cr)
 
 
-def cairo_robot_skin_brai(cr, sensors=False):
+def cairo_robot_skin_brai(cr, w=1.3, h=0.8, sensors=False):
     with cairo_save(cr):
-        h = 0.8
-        w = 1.3
         x0 = -.3
         wheel_h = 0.15
         wheel_w = 0.4
         M = h / 2 + .8 * wheel_h
 
         def body():
-            cr.rectangle(x0, -h / 2, w, h)
+            roundedrec(cr, x0, -h / 2, w, h, r=min(w, h) / 8.0)
+            #cr.rectangle(x0, -h / 2, w, h)
 
         cr.move_to(0, M)
         cr.line_to(0, -M)
@@ -96,13 +86,7 @@ def cairo_robot_skin_brai(cr, sensors=False):
         cr.set_line_width(0.05)
         cr.stroke()
 
-        body()
-        cairo_set_color(cr, CairoConstants.robot_fill_color)
-        cr.fill()
-        body()
-        cr.set_line_width(CairoConstants.robot_border_width)
-        cairo_set_color(cr, CairoConstants.robot_border_color)
-        cr.stroke()
+        cairo_plot_with_style(cr, body, **CairoConstants.robot_body_style)
 
         for y in [-M, +M]:
             with cairo_transform(cr, t=[0, y]):

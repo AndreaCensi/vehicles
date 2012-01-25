@@ -52,6 +52,12 @@ class Vehicle:
         # pose, velocity
         configuration = self.dynamics.joint_state(self._get_state(), 0)
         pose = configuration[0]
+
+        joints = []
+        for i in range(self.dynamics.num_joints()):
+            jc = self.dynamics.joint_state(self._get_state(), i)
+            joints.append(to_yaml("TSE3", jc))
+
         data = {
             'radius': self.radius,
             'id_sensors': self.id_sensors,
@@ -59,6 +65,7 @@ class Vehicle:
             'pose': to_yaml('SE3', pose),
             'conf': to_yaml('TSE3', configuration),
             'state': self.dynamics.state_to_yaml(self._get_state()),
+            'joints': joints,
             'sensors': [s.to_yaml() for s in self.sensors],
             'extra': self.extra
         }

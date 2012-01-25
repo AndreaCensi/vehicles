@@ -90,7 +90,18 @@
   code: 
       - vehicles.sensors.FieldSamplerUniform
       - shape: [12,12]
-        sides: [0.3,0.3]
+        sides: [0.22,0.22]
+        normalize: True
+        noise: 
+            - vehicles.sensors.AdditiveGaussian
+            - std_dev: 0.0
+
+- id: fs_05_rand144
+  desc: "A field sampler with a 12x12 display."
+  code: 
+      - vehicles.sensors.FieldSamplerRandCircle
+      - n: 144
+        radius: 0.25
         normalize: True
         noise: 
             - vehicles.sensors.AdditiveGaussian

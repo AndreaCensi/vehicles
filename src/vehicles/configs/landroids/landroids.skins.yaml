@@ -2,19 +2,19 @@
   desc: "Custom skin for landroid (TODO)."
   code:
   - vehicles_cairo.skins.tracks
-  - length: 1.0
-    width: 0.5
-
-- id: landroid-cam
-  desc: "landroid camera"
-  code:
-  - vehicles_cairo.skins.eye
-  - size: 0.03
-  
-
-- id: landroid-rf
-  desc: "landroid range-finder"
-  code:
-  - vehicles_cairo.skins.sick
-  - size: 0.05
-  
+  - length: 1.5
+    width: 0.75
+# 
+# - id: landroid-cam
+#   desc: "landroid camera"
+#   code:
+#   - vehicles_cairo.skins.eye
+#   - size: 0.03
+#   
+# 
+# - id: landroid-rf
+#   desc: "landroid range-finder"
+#   code:
+#   - vehicles_cairo.skins.sick
+#   - size: 0.05
+#   

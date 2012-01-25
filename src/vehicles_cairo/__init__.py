@@ -12,8 +12,17 @@ class CairoConstants:
     obstacle_border_color = [0, 0, 0]
     obstacle_fill_color = [0.7, 0.7, 0.8]
 
-    grid_color = [0.5, 0.5, 0.5]
+    omni_wheel_style = dict(border_color=BLACK, border_width=0.01,
+                            fill_color=[.3, .3, 1])
+
+    robot_wheel_style = dict(border_color=BLACK, border_width=0.04,
+                            fill_color=[.2, .2, .2])
+
+    grid_color = [0.8, 0.8, 0.8]
     grid_width = 0.005
+
+    robot_body_style = dict(border_width=0.01, border_color=BLACK,
+                          fill_color=[0.8, 0.8, 0.8])
 
     robot_border_width = 0.01
     robot_border_color = BLACK

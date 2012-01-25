@@ -5,7 +5,7 @@ from geometry.yaml import from_yaml
 from vehicles import VehiclesConfig
 
 
-def cairo_plot_sensor_data(cr, vehicle_state, rho_min=0.05):
+def cairo_plot_sensor_data(cr, vehicle_state, rho_min=0.05, scale=1.0):
     for attached in vehicle_state['sensors']:
 
         sensor = attached['sensor']
@@ -26,6 +26,7 @@ def cairo_plot_sensor_data(cr, vehicle_state, rho_min=0.05):
             skin = VehiclesConfig.specs['skins'].instance(sensor_skin)
 
             with cairo_rototranslate(cr, sensor_pose):
+                cr.scale(scale, scale)
                 skin.draw(cr)
 
         if sensor['type'] == 'Rangefinder': # XXX
@@ -49,6 +50,9 @@ def cairo_plot_sensor_data(cr, vehicle_state, rho_min=0.05):
                         pose=sensor_pose,
                         positions=np.array(sensor['positions']),
                         sensels=np.array(observations['sensels']))
+        elif sensor['type'] == 'RandomSensor':
+            # XXX: how can we visualize this?
+            pass
         else:
             logger.warning('Unknown sensor type %r.' % sensor['type'])
             pass

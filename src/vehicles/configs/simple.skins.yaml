@@ -21,14 +21,33 @@
   code:
   - vehicles_cairo.skins.omni
   - {}
-
-
+  
+  
+- id: car_with_wheels
+  desc: "Car with moving wheels"
+  code:
+  - vehicles_cairo.skins.ComplexSkin
+  - skins:
+      - joint: 1
+        skin: wheel
+      - joint: 2
+        skin: wheel
+      - joint: 0
+        skin: car
 
 - id: car
   desc: "A simple car."
   code:
   - vehicles_cairo.skins.car
   - {}
+
+
+- id: wheel
+  desc: "Wheel skin"
+  code:
+  - vehicles_cairo.skins.wheel
+  - {} # w=0.7, h=0.5):
+
 
 
 - id: brai_base
@@ -47,13 +66,13 @@
   desc: "Default skin for rangefinder"
   code:
   - vehicles_cairo.skins.sick
-  - size: 0.25
+  - size: 0.45
 
 - id: Photoreceptors
   desc: "Default skin for Photoreceptors"
   code:
   - vehicles_cairo.skins.eye
-  - size: 0.2
+  - size: 0.20
 
 - id: FieldSampler
   desc: "Default skin for FieldSampler (transparent)"

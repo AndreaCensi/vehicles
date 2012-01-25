@@ -47,6 +47,19 @@ def cairo_plot_with_style(cr, shape, border_color=None,
             cr.stroke()
 
 
+def cairo_stroke_with_style(cr, shape, border_color=None,
+                                       border_width=None,
+                                       fill_color=None):
+    with cairo_save(cr):
+
+        if border_color is not None:
+            if border_width is not None:
+                cr.set_line_width(border_width)
+            shape()
+            cairo_set_color(cr, border_color)
+            cr.stroke()
+
+
 def cairo_plot_rectangle(cr, x, y, w, h, **kwargs):
     def shape():
         cr.rectangle(x, y, w, h)

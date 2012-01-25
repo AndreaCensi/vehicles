@@ -37,7 +37,8 @@ def vehicles_cairo_display_svg(filename, width, height, sim_state,
 
 
 def vehicles_cairo_display_all(cr, width, height,
-                            sim_state, grid=1, zoom=0, show_sensor_data=True):
+                            sim_state, grid=1, zoom=0, show_sensor_data=True,
+                            extra_draw_world=None):
     with cairo_save(cr):
         # Paint white
         with cairo_save(cr):
@@ -66,22 +67,35 @@ def vehicles_cairo_display_all(cr, width, height,
         if grid > 0:
             show_grid(cr, bx, by, spacing=grid, margin=1)
 
+        if extra_draw_world is not None:
+            extra_draw_world(cr)
+
         cairo_plot_sources(cr, world_state)
 
         cairo_show_world_geometry(cr, world_state)
     #
         display_robot = True
         if display_robot:
+            joints = get_joints_as_TSE3(vehicle_state)
             extra = vehicle_state.get('extra', {})
             id_skin = extra.get('skin', 'default_skin')
             skin = VehiclesConfig.skins.instance(id_skin) #@UndefinedVariable
 
             with cairo_rototranslate(cr, robot_pose):
                 cr.scale(robot_radius, robot_radius)
-                skin.draw_vehicle(cr, joints=[])
+                skin.draw(cr, joints=joints,
+                          timestamp=sim_state['timestamp'])
 
         if show_sensor_data:
-            cairo_plot_sensor_data(cr, vehicle_state, rho_min=robot_radius)
+            cairo_plot_sensor_data(cr, vehicle_state, rho_min=robot_radius,
+                                   scale=robot_radius)
+
+
+def get_joints_as_TSE3(vehicle_state):
+    joints = []
+    for js in vehicle_state['joints']:
+        joints.append(from_yaml(js))
+    return joints
 
 
 @contract(zoom='>=0')

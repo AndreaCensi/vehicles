@@ -7,7 +7,7 @@ class VehicleSkin:
 
     @abstractmethod
     @contract(joints='list') # TODO: add what is this
-    def draw_vehicle(self, cr, joints):
+    def draw(self, cr, joints=None, timestamp=None):
         '''
             Draws the vehicle to the given context.
             
@@ -15,6 +15,3 @@ class VehicleSkin:
             :param:joints: list of joints configuration, relative to robot
                 coordinates (joints[0] == Identity)
         '''
-
-    def draw(self, cr):
-        ''' Draw the skin on the given Cairo context. '''

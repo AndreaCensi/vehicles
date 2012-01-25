@@ -5,23 +5,38 @@
   MF: &MF 2  # max force
   MASS: &MASS 1  # robot mass  
   CAR_LENGTH: &CAR_LENGTH 0.5
+  AXIS_DIST: &AXIS_DIST 0.7
   DAMPING: &DAMPING 1
   MAX_STEERING_ANGLE: &MAX_STEERING_ANGLE 0.52359877 # 30deg
   id:   d_R1_rb_v
   desc: 'Rigid body on R1, controlled in velocity.'
-  code: [vehicles_dynamics.EuclideanVel, {ndim: 1, max_velocity: [*MAX_LINEAR_VEL]} ]
+  code: 
+  - vehicles_dynamics.EuclideanVel
+  - ndim: 1
+    max_velocity: [*MAX_LINEAR_VEL]
 
 - id:   d_R2_rb_v
   desc: 'Rigid body on R2, controlled in velocity.'
-  code: [vehicles_dynamics.EuclideanVel, {ndim: 2, max_velocity: [*MAX_LINEAR_VEL, *MAX_LINEAR_VEL]}]
+  code: 
+  - vehicles_dynamics.EuclideanVel
+  - ndim: 2
+    max_velocity: [*MAX_LINEAR_VEL, *MAX_LINEAR_VEL]
 
 - id:   d_R3_rb_v
   desc: 'Rigid body on R2, controlled in velocity.'
-  code: [vehicles_dynamics.EuclideanVel, {ndim: 3, max_velocity: [*MAX_LINEAR_VEL, *MAX_LINEAR_VEL, *MAX_LINEAR_VEL]} ]
+  code: 
+  - vehicles_dynamics.EuclideanVel
+  - ndim: 3 
+    max_velocity: [*MAX_LINEAR_VEL, *MAX_LINEAR_VEL, *MAX_LINEAR_VEL]
 
 - id:   d_R1_rb_f
   desc: 'Rigid body on R1, controlled in force.'
-  code: [vehicles_dynamics.EuclideanForce, {ndim: 1, max_force: [*MF], mass: *MASS,  damping: *DAMPING} ]
+  code: 
+  - vehicles_dynamics.EuclideanForce
+  - ndim: 1 
+    max_force: [*MF] 
+    mass: *MASS
+    damping: *DAMPING
 
 - id: d_R2_rb_f
   desc: 'Rigid body on R2, controlled in force.'
@@ -62,27 +77,32 @@
 #              linear_velocity: *MAX_LINEAR_VEL}]
              
 - id: d_SE2_fwd_v
-  desc: 'Planar vehicle with fixed forward velocity, controlled in angular vel.'
-  code: [vehicles_dynamics.SE2Forward, 
-            {max_angular_velocity: 0.2, linear_velocity: *MAX_LINEAR_VEL}]
+  desc: 'Planar vehicle with fixed forward velocity, controlled in angular velocity.'
+  code: 
+  - vehicles_dynamics.SE2Forward
+  - max_angular_velocity: 0.2 
+    linear_velocity: *MAX_LINEAR_VEL
 
 
 # Now things on SE2
 - id: d_SE2_dd_v
   desc: 'Differential drive robot on SE2'
-  code: [vehicles_dynamics.DifferentialDrive, 
-            {max_linear_velocity: 1, 
-             max_angular_velocity: 0.2} ]
+  code: 
+  - vehicles_dynamics.DifferentialDrive
+  - max_linear_velocity: 1.0
+    max_angular_velocity: 0.2
 
 - id: d_SE2_dd_v2
   desc: 'Differential drive robot on SE2 (faster angular velocity)'
-  code: [vehicles_dynamics.DifferentialDrive, 
-            {max_linear_velocity: 1, 
-             max_angular_velocity: 1} ]
+  code: 
+  - vehicles_dynamics.DifferentialDrive
+  - max_linear_velocity: 1.0
+    max_angular_velocity: 1.0
 
 # TODO: d_SE2_rb_f
 # TODO: d_SE3_rb_v
 # TODO: d_SE3_rb_f
+
 - id: d_SE2_car_v
   desc: 'The simple car'
   code: 
@@ -90,6 +110,8 @@
       - max_linear_velocity: *MAX_LINEAR_VEL
         max_steering_angle: *MAX_STEERING_ANGLE
         L: *CAR_LENGTH
+        axis_dist: *AXIS_DIST
+
 - id: d_SE2_reeds_sheep
   desc: 'Reeds-Sheep car'
   code: 
@@ -97,6 +119,8 @@
       - max_linear_velocity: *MAX_LINEAR_VEL
         max_steering_angle: *MAX_STEERING_ANGLE
         L: *CAR_LENGTH
+        axis_dist: *AXIS_DIST
+        
 - id: d_SE2_dubins
   desc: 'Dubins car'
   code: 
@@ -104,12 +128,44 @@
       - max_linear_velocity: *MAX_LINEAR_VEL
         max_steering_angle: *MAX_STEERING_ANGLE
         L: *CAR_LENGTH
-# Now things on SE2
+        axis_dist: *AXIS_DIST
+        
+
+- id: d_SE2_car_v_w
+  desc: 'The simple car (with wheels joints)'
+  code: 
+      - vehicles_dynamics.CarWithWheels
+      - max_linear_velocity: *MAX_LINEAR_VEL
+        max_steering_angle: *MAX_STEERING_ANGLE
+        L: *CAR_LENGTH
+        axis_dist: *AXIS_DIST
+
+- id: d_SE2_reeds_sheep_w
+  desc: 'Reeds-Sheep car (with wheels)'
+  code: 
+      - vehicles_dynamics.ReedsSheepCarWithWheels
+      - max_linear_velocity: *MAX_LINEAR_VEL
+        max_steering_angle: *MAX_STEERING_ANGLE
+        L: *CAR_LENGTH
+        axis_dist: *AXIS_DIST
+                
+                
+- id: d_SE2_dubins_w
+  desc: 'Dubins car (with wheels)'
+  code: 
+      - vehicles_dynamics.DubinsCarWithWheels
+      - max_linear_velocity: *MAX_LINEAR_VEL
+        max_steering_angle: *MAX_STEERING_ANGLE
+        L: *CAR_LENGTH
+        axis_dist: *AXIS_DIST
+
+         
 - id: d_fixed
   desc: 'A robot that is out of battery.'
-  code: [vehicles_dynamics.SE2Dynamics, 
-            {max_linear_velocity: [0,0], 
-             max_angular_velocity: 0} ]
+  code: 
+  - vehicles_dynamics.SE2Dynamics
+  - max_linear_velocity: [0, 0]
+    max_angular_velocity: 0
 
 # 
 # 

@@ -3,6 +3,8 @@ from optparse import OptionParser
 from reprep import MIME_PNG, MIME_SVG
 from vehicles_cairo import vehicles_has_cairo
 import os
+from vehicles_cairo.cairo_utils.shape import cairo_plot_circle, \
+    cairo_plot_circle2
 
 
 usage = """
@@ -77,10 +79,16 @@ def main():
         simulation.compute_observations()
         sim_state = simulation.to_yaml()
 
+        def draw_scale(cr):
+            cairo_plot_circle2(cr, 0, 0, vehicle.radius, fill_color=(1, .7, .7))
+
         plot_params = dict(grid=options.grid,
-                           zoom=vehicle.radius * 2,
+                           zoom=vehicle.radius * 1.5,
                            width=800, height=800,
-                           show_sensor_data=True)
+                           show_sensor_data=True,
+                           extra_draw_world=draw_scale)
+
+
 
         with f.data_file('start_cairo_png', MIME_PNG) as filename:
             vehicles_cairo_display_png(filename,

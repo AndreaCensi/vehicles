@@ -4,8 +4,8 @@
   sensors:
       - id_sensor: rf_f270_n180
         pose: [0.03,0,0]
-        extra:
-          skin: landroid-rf
+        # extra:
+        #   skin: landroid-rf
         
   radius: 0.2
   extra:
@@ -17,24 +17,15 @@
   sensors:
     - id_sensor: rf_f270_n180
       pose: [0.03,0,0]
-      extra:
-          skin: landroid-rf
     - id_sensor: cam_f60_n45
-      pose: [0.1,0,0]
-      extra:
-          skin: landroid-cam
+      pose: [0.15,0,0] 
     - id_sensor: cam_f60_n45
-      pose: [-0.03,0.05,+90]
-      extra:
-          skin: landroid-cam
+      pose: [-0.05,+0.075,+90] 
     - id_sensor: cam_f60_n45
-      pose: [-0.03,-0.05,-90]
-      extra:
-          skin: landroid-cam
+      pose: [-0.05,-0.075,-90] 
     - id_sensor: cam_f60_n45
-      pose: [-0.1,0,180]
-      extra:
-          skin: landroid-cam
+      pose: [-0.15,0,180] 
+  
   radius: 0.2
   extra:
     skin: landroid
@@ -45,21 +36,13 @@
   id_dynamics: d_SE2_car_v
   sensors:
       - id_sensor: cam_f60_n45
-        pose: [0.1,0,0]
-        extra:
-            skin: landroid-cam
+        pose: [0.15,0,0] 
       - id_sensor: cam_f60_n45
-        pose: [-0.03,0.05,+90]
-        extra:
-            skin: landroid-cam
+        pose: [-0.05,+0.075,+90] 
       - id_sensor: cam_f60_n45
-        pose: [-0.03,-0.05,-90]
-        extra:
-            skin: landroid-cam
+        pose: [-0.05,-0.075,-90] 
       - id_sensor: cam_f60_n45
-        pose: [-0.1,0,180]
-        extra:
-            skin: landroid-cam
+        pose: [-0.15,0,180] 
   radius: 0.2
   extra:
     skin: landroid
