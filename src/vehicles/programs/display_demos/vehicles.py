@@ -3,9 +3,7 @@ from optparse import OptionParser
 from reprep import MIME_PNG, MIME_SVG
 from vehicles_cairo import vehicles_has_cairo
 import os
-from vehicles_cairo.cairo_utils.shape import cairo_plot_circle, \
-    cairo_plot_circle2
-
+from vehicles_cairo.cairo_utils import  cairo_plot_circle2
 
 usage = """
 
