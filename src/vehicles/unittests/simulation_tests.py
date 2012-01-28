@@ -3,9 +3,27 @@ from . import for_all_world_vehicle_pairs, np
 
 
 def random_commands(commands_spec):
+    """ Gets random commands for the given spec. Note that it works
+        only for simple specs, but it is enough to not depend on boot_olympics
+        proper routines (see StreamSpec). 
+    """
+    shape = commands_spec['shape']
+    if len(shape) != 1:
+        raise ValueError('Sorry, I can do this only for simple specs.')
+
     values = []
-    for i, kind in enumerate(commands_spec['format']):
-        lower, upper = commands_spec['range'][i]
+
+    for i in range(shape[0]):
+
+        if isinstance(commands_spec['format'], str):
+            kind = commands_spec['format']
+            vrange = commands_spec['range']
+        else:
+            kind = commands_spec['format'][i]
+            vrange = commands_spec['range'][i]
+
+        lower, upper = vrange
+
         if kind == 'C':
             value = lower + np.random.rand() * (upper - lower)
         elif kind == 'D':
