@@ -23,6 +23,7 @@ def cairo_show_world_geometry(cr, world_state, plot_sources=False):
     bounds = world_state['bounds']
     primitives = world_state['primitives']
 
+
     with cairo_save(cr):
         xb = bounds[0]
         yb = bounds[1]

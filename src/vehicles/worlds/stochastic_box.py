@@ -34,9 +34,10 @@ class StochasticBox(World):
                        solid=True)
             self.circles.append(c)
 
-        self.refresh()
+        self.new_episode_called = False
 
     def refresh(self):
+        print('Refreshing world...')
         for c in self.circles:
             c.set_center(self.random_2d_point())
             radius = np.random.uniform(self.circles_size[0],
@@ -44,9 +45,12 @@ class StochasticBox(World):
             c.radius = radius
 
     def get_primitives(self):
+        if not self.new_episode_called:
+            raise Exception('get_primitives() called before new_episode()')
         return [self.box] + self.circles
 
     def new_episode(self):
+        self.new_episode_called = True
         self.refresh()
         return World.new_episode(self)
 

@@ -1,8 +1,12 @@
+from geometry import SE2_from_SE3
+from geometry.yaml import from_yaml
 from procgraph import BadConfig, Block
 from procgraph.block_utils import make_sure_dir_exists
 from procgraph_images import posneg, scale, reshape2d
 from vehicles_cairo import (cairo_save, cairo_transform,
     vehicles_cairo_display_all, cairo_pixels, cairo_text_align)
+from vehicles_cairo.skins.sensors import cairo_ref_frame
+from vehicles_cairo.utils import cairo_rototranslate
 import numpy as np
 import os
 import subprocess
@@ -29,6 +33,8 @@ class VehiclesCairoDisplay(Block):
     Block.config('zoom', 'Either 0 for global map, '
                  'or a value giving the size of the window', default=0)
 
+    Block.config('fp', 'If true, we use the robot first person', default=True)
+
     Block.config('grid', 'Size of the grid (0: turn off)', default=1)
     Block.config('show_sensor_data', 'Show sensor data', default=True)
 
@@ -45,7 +51,7 @@ class VehiclesCairoDisplay(Block):
         self.total_width = self.config.width
         if self.config.display_sidebar:
             self.total_width += self.config.sidebar_width
-
+        self.total_height = self.config.height
         self.frame = 0
 
         if self.format == 'pdf':
@@ -66,11 +72,11 @@ class VehiclesCairoDisplay(Block):
         import cairo
         self.surf = cairo.PDFSurface(self.tmp_filename, #@UndefinedVariable
                                      self.total_width,
-                                     self.config.height)
+                                     self.total_height)
 
     def init_png(self):
         import cairo
-        w, h = self.total_width, self.config.height
+        w, h = self.total_width, self.total_height
         # note (w,h) here and (h,w,h*4) below; I'm not sure but it works
         self.argb_data = np.empty((h, w, 4), dtype=np.uint8)
         self.argb_data.fill(255)
@@ -101,6 +107,7 @@ class VehiclesCairoDisplay(Block):
         import cairo
         # If I don't recreate it, it will crash
         cr = cairo.Context(self.surf) #@UndefinedVariable
+
         self.draw_everything(cr)
         self.surf.flush()
 
@@ -120,16 +127,32 @@ class VehiclesCairoDisplay(Block):
         self.surf.show_page() # Free memory self.cr?
 
     def draw_everything(self, cr):
-        plotting_params = dict(
-                    grid=self.config.grid,
-                    zoom=self.config.zoom,
-                    show_sensor_data=self.config.show_sensor_data)
+
+        # Set white background
+        bg_color = [1, 1, 1]
+        cr.rectangle(0, 0, self.total_width, self.total_height)
+        cr.set_source_rgb(bg_color[0], bg_color[1], bg_color[2])
+        cr.fill()
 
         boot_obs = self.input.boot_obs
 
         id_episode = boot_obs['id_episode'].item()
         id_vehicle = boot_obs['id_robot'].item()
-        sim_state = boot_obs['extra'].item()['robot_state']
+        extra = boot_obs['extra'].item()
+
+        def extra_draw_world(cr):
+            if 'servonav' in extra:
+                plot_servonave(cr, extra['servonav'])
+
+        plotting_params = dict(
+                    grid=self.config.grid,
+                    zoom=self.config.zoom,
+                    show_sensor_data=self.config.show_sensor_data,
+                    first_person=self.config.fp,
+                    extra_draw_world=extra_draw_world)
+
+        # todo: check
+        sim_state = extra['robot_state']
 
         observations = scale(reshape2d(boot_obs['observations']), min_value=0,
                              nan_color=[1, 1, 1])
@@ -216,8 +239,14 @@ class VehiclesCairoDisplay(Block):
 
 
 def create_sidebar(cr, width, height, sim_state, id_vehicle, id_episode,
-                   timestamp, observations, commands, commands_source):
+                   timestamp, observations, commands, commands_source,
+                   bg_color=None):
     import cairo
+    if bg_color is not None:
+        cr.rectangle(0, 0, width, height)
+        cr.set_source_rgb(bg_color[0], bg_color[1], bg_color[2])
+        cr.fill()
+
     fo = cairo.FontOptions() #@UndefinedVariable
     fo.set_hint_style(cairo.HINT_STYLE_FULL) #@UndefinedVariable
     fo.set_antialias(cairo.ANTIALIAS_GRAY) #@UndefinedVariable
@@ -336,4 +365,16 @@ def create_sidebar(cr, width, height, sim_state, id_vehicle, id_episode,
             cr.show_text(s)
             cr.stroke()
         cr.translate(0, line)
+
+def plot_servonave(cr, servonav):
+    locations = servonav['locations']
+    current_goal = servonav['current_goal']
+    for i, loc in enumerate(locations):
+        pose = SE2_from_SE3(from_yaml(loc['pose']))
+        with cairo_rototranslate(cr, pose):
+            if current_goal == i:
+                cairo_ref_frame(cr, l=0.5)
+            else:
+                cairo_ref_frame(cr, l=0.5, x_color=[0, 0, 0], y_color=[0, 0, 0])
+
 

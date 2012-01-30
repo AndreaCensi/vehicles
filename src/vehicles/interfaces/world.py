@@ -4,7 +4,6 @@ from collections import namedtuple
 from geometry import SE2_from_xytheta, SE3_from_SE2
 import datetime
 
-
 class World:
     __metaclass__ = ABCMeta
 

@@ -5,6 +5,7 @@ from contracts import contract
 from geometry import translation_from_SE2, SE2_from_SE3
 from geometry.yaml import from_yaml
 from vehicles import VehiclesConfig
+from geometry import angle_from_SE2
 
 
 def vehicles_cairo_display_png(filename, width, height, sim_state,
@@ -38,7 +39,8 @@ def vehicles_cairo_display_svg(filename, width, height, sim_state,
 
 def vehicles_cairo_display_all(cr, width, height,
                             sim_state, grid=1, zoom=0, show_sensor_data=True,
-                            extra_draw_world=None):
+                            extra_draw_world=None,
+                            first_person=True):
     with cairo_save(cr):
         # Paint white
         with cairo_save(cr):
@@ -56,7 +58,9 @@ def vehicles_cairo_display_all(cr, width, height,
         by = bounds[1]
 
         vehicles_cairo_set_coordinates(cr, width, height,
-                                       bounds, robot_pose, zoom)
+                                       bounds, robot_pose,
+                                       zoom=zoom,
+                                       first_person=first_person)
 
         if False:
             cr.set_source_rgb(0, 1, 0)
@@ -73,7 +77,11 @@ def vehicles_cairo_display_all(cr, width, height,
         cairo_plot_sources(cr, world_state)
 
         cairo_show_world_geometry(cr, world_state)
-    #
+
+        # XXX: tmp
+        if extra_draw_world is not None:
+            extra_draw_world(cr)
+#
         display_robot = True
         if display_robot:
             joints = get_joints_as_TSE3(vehicle_state)
@@ -100,7 +108,8 @@ def get_joints_as_TSE3(vehicle_state):
 
 @contract(zoom='>=0')
 def vehicles_cairo_set_coordinates(cr, width, height, world_bounds,
-                                        robot_pose, zoom):
+                                        robot_pose, zoom,
+                                        first_person=False):
     bx = world_bounds[0]
     by = world_bounds[1]
 
@@ -124,7 +133,17 @@ def vehicles_cairo_set_coordinates(cr, width, height, world_bounds,
                    t[1] - zoom - m,
                    t[1] + zoom + m]
 
+
     cairo_set_axis(cr, width, height, extents)
+
+    if first_person and zoom != 0:
+        angle = angle_from_SE2(robot_pose)
+        t = translation_from_SE2(robot_pose)
+        cr.translate(t[0], t[1])
+        cr.rotate(-angle)
+        cr.rotate(+np.pi / 2) # make the robot point "up"
+        cr.translate(-t[0], -t[1])
+
 
 
 def show_grid(cr, bx, by, spacing=1, margin=0):

@@ -1,5 +1,7 @@
 from .. import cairo_plot_rectangle, cairo_plot_circle2
 from vehicles_cairo.cairo_utils.contexts import cairo_save
+from vehicles_cairo.cairo_utils.transformations import cairo_transform
+from vehicles_cairo.cairo_utils.colors import cairo_set_color
 
 WHITE = [1, 1, 1]
 BLACK = [0, 0, 0]
@@ -43,3 +45,26 @@ def cairo_skin_eye(cr, size=1.0):
 
 def cairo_skin_transparent(cr):
     pass
+
+import numpy as np
+
+def cairo_ref_frame(cr, l=1, x_color=[1, 0, 0], y_color=[0, 1, 0]):
+    with cairo_save(cr):
+        cairo_arrow(cr, length=l, border_width=0.05, border_color=x_color)
+        with cairo_transform(cr, r=np.pi / 2):
+            cairo_arrow(cr, length=l, border_width=0.05, border_color=y_color)
+
+def cairo_arrow(cr, length, caplen=0.05, capwidth=0.05,
+                border_width=0.05, border_color=[0, 0, 0]):
+
+    cr.set_line_width(border_width)
+    cairo_set_color(cr, border_color)
+
+    cr.move_to(0, 0)
+    cr.line_to(length, 0)
+    cr.stroke()
+
+    cr.move_to(length - caplen, capwidth / 2.0)
+    cr.line_to(length, 0)
+    cr.line_to(length - caplen, -capwidth / 2.0)
+    cr.fill()

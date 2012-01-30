@@ -1,4 +1,4 @@
---- model boot_log2movie_cairo_avi
+--- model boot_log2movie_servonav
 config logdir 'Base log dir'
 config id_robot
 config id_agent = ""

@@ -40,3 +40,6 @@ make_skin(cairo_skin_sick, 'sick')
 make_skin(cairo_skin_transparent, 'transparent')
 
 make_skin(cairo_skin_fly1, 'fly1')
+
+make_skin(cairo_robot_skin_rectangle, 'rectangle')
+

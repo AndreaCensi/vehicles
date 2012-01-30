@@ -88,3 +88,5 @@ def collides_with_primitive(primitive, center, radius):
                                           primitive.radius, primitive.solid)
     if isinstance(primitive, PolyLine):
         return circle_polyline_intersection(center, radius, primitive.points)
+
+    # XXX: warn?

@@ -8,8 +8,10 @@ def check_simulation(sim, num_instants, dt):
     sim.new_episode()
     t0 = time.clock()
     count = 0
+    commands_spec = sim.vehicle.dynamics.get_commands_spec()
+
     for i in range(num_instants):  # @UnusedVariable
-        cmds = random_commands(sim.vehicle.commands_spec)
+        cmds = random_commands(commands_spec)
         sim.simulate(cmds, dt)
         sim.compute_observations()
         count += 1
@@ -39,7 +41,7 @@ def main():
     vehicles = list(VehiclesConfig.vehicles.keys())
     print vehicles
     vehicles = ['d_SE2_rb_v-rf180', 'd_SE2_rb_v-cam180']
-    vehicles = ['d_SE2_rb_v-rf180']
+#    vehicles = ['d_SE2_rb_v-rf180']
     T = 200
     dt = 0.05
     for id_vehicle in vehicles:
@@ -60,7 +62,7 @@ def main():
 
 if __name__ == '__main__':
     profile = True
-    profile = False
+#    profile = False
     if not profile:
         main()
     else:

@@ -16,6 +16,13 @@ def cairo_robot_skin_circular(cr):
         cairo_stroke_with_style(cr, line, **CairoConstants.robot_body_style)
 
 
+def cairo_robot_skin_rectangle(cr, w, h):
+    """ A simple rectangle painted like the robot. """
+    with cairo_save(cr):
+        cairo_plot_rectangle(cr, -w / 2.0, -h / 2.0, w, h,
+                             ** CairoConstants.robot_body_style)
+
+
 def cairo_robot_skin_tracked(cr, width=1.0, length=1.0):
     with cairo_save(cr):
         def track():
