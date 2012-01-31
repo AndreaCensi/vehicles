@@ -5,6 +5,8 @@ from contracts import contract
 from geometry import translation_angle_from_SE2
 from subprocess import Popen, PIPE
 import cjson
+import time
+import warnings
 
 
 class Raytracer:
@@ -162,22 +164,57 @@ class TexturedRaytracer(Raytracer):
     def raytracing(self, pose):
         answer = Raytracer.raytracing(self, pose)
 
-        n = len(answer['surface'])
+        #c0 = time.clock()
+        surface = answer['surface']
+        valid = answer['valid']
+        n = len(surface)
         luminance = np.zeros(n)
-        for i, surface_id in enumerate(answer['surface']):
-            if answer['valid'][i]:
-                if not surface_id in self.surface2texture:
-                    raise Exception("Unknown surface %r; I know %r." %
-                                    (surface_id, self.surface2texture.keys()))
-                texture = self.surface2texture[surface_id]
-                coord = answer['curvilinear_coordinate'][i]
-                # TODO: make this more efficient
-                luminance[i] = texture(coord)
-            else:
-                luminance[i] = np.NaN
+        # TODO: make this step vectorial
 
+        if np.min(answer['curvilinear_coordinate']) < 0:
+            msg = ('coords in [%s, %s] but expect positive' %
+                    (np.min(answer['curvilinear_coordinate']),
+                     np.max(answer['curvilinear_coordinate'])))
+            warnings.warn(msg)
+
+        luminance.fill(np.nan)
+        for surface_id in  np.unique(surface):
+            if not surface_id in self.surface2texture:
+                continue
+            texture = self.surface2texture[surface_id]
+            which = (surface == surface_id) & valid
+            if np.sum(which) == 0:
+                continue
+            coord = answer['curvilinear_coordinate'][which]
+            luminance[which] = texture(coord)
+
+        #print('texturized in %sms' % ((time.clock() - c0) * 1000))
         answer['luminance'] = luminance
 
         return answer
+
+#
+#    @contract(pose='SE2')
+#    def raytracing_old(self, pose):
+#        answer = Raytracer.raytracing(self, pose)
+#
+#        n = len(answer['surface'])
+#        luminance = np.zeros(n)
+#        # TODO: make this step vectorial
+#        for i, surface_id in enumerate(answer['surface']):
+#            if answer['valid'][i]:
+#                if not surface_id in self.surface2texture:
+#                    raise Exception("Unknown surface %r; I know %r." %
+#                                    (surface_id, self.surface2texture.keys()))
+#                texture = self.surface2texture[surface_id]
+#                coord = answer['curvilinear_coordinate'][i]
+#                # TODO: make this more efficient
+#                luminance[i] = texture(coord)
+#            else:
+#                luminance[i] = np.NaN
+#
+#        answer['luminance'] = luminance
+#
+#        return answer
 
 

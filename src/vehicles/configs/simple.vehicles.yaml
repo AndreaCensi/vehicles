@@ -2,7 +2,7 @@
   desc: A fixed camera.
   id_dynamics: d_fixed
   sensors:
-      - id_sensor: cam_f360_n180
+      - id_sensor: cam_f360_n180_s
   radius: 0.5
   extra:
     skin: transparent
@@ -23,7 +23,7 @@
   desc: A simple car with an omnidirectional camera.
   id_dynamics: d_SE2_car_v_w
   sensors:
-      - id_sensor: cam_f360_n180
+      - id_sensor: cam_f360_n180_s
   radius: 0.5
   extra:
       skin: car_with_wheels
@@ -42,7 +42,7 @@
   desc: A simple car (with wheels joints) and camera
   id_dynamics: d_SE2_car_v_w
   sensors:
-      - id_sensor: cam_f360_n180 
+      - id_sensor: cam_f360_n180_s
   radius: 0.5
   extra:
     skin: car_with_wheels
@@ -63,7 +63,7 @@
   desc: Differential drive with omnidirectional camera (Faster)
   id_dynamics: d_SE2_dd_v2
   sensors:
-      - id_sensor: cam_f360_n180 
+      - id_sensor: cam_f360_n180_s
   radius: 0.5
   extra:
     skin: ddrive
@@ -91,14 +91,25 @@
 
 
 
+
 - id: d_SE2_rb_v-cam360
   desc: An omnidirectional robot with a 360deg camera.
   id_dynamics: d_SE2_rb_v
   sensors:
-      - id_sensor: cam_f360_n180
+      - id_sensor: cam_f360_n180_s
   radius: 0.5
   extra:
     skin: omni
+
+# - id: d_SE2_rb_v-cam360s
+#   desc: An omnidirectional robot with a 360deg camera.
+#   id_dynamics: d_SE2_rb_v
+#   sensors:
+#       - id_sensor: cam_f360_n180_s
+#   radius: 0.5
+#   extra:
+#     skin: omni
+
 
 
 - id: d_SE2_rb_v-rf180
@@ -135,7 +146,7 @@
   desc: An omnidirectional robot with a 180deg camera.
   id_dynamics: d_SE2_rb_v
   sensors:
-      - id_sensor: cam_f180_n180
+      - id_sensor: cam_f180_n180_s
   radius: 0.5
   extra:
     skin: omni
@@ -145,9 +156,9 @@
   desc: An omnidirectional robot with two 180deg camera.
   id_dynamics: d_SE2_rb_v
   sensors:
-      - id_sensor: cam_f180_n90
+      - id_sensor: cam_f180_n90_s
         pose: [0,+0.2,0]
-      - id_sensor: cam_f180_n90
+      - id_sensor: cam_f180_n90_s
         pose: [0,-0.2,0]
   radius: 0.5
   extra:
@@ -170,7 +181,7 @@
   desc: "An orb controlled in velocity"
   id_dynamics: d_S1_rb_v
   sensors:
-      - id_sensor: cam_f60_n45
+      - id_sensor: cam_f60_n45_s
   radius: 0.2
 
   

@@ -33,6 +33,9 @@ class CairoConstants:
     robot_wheel_border_color = BLACK
 
 
+    texture_resolution = 0.05 # meters
+    texture_width = 0.2 # meters
+
 try:
     import cairo #@UnresolvedImport
     vehicles_has_cairo = True

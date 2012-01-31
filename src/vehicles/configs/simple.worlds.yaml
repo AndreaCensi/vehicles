@@ -58,3 +58,11 @@
         length: 10
         scale: 0.5
         sigma: 0.25
+
+- id: BigMamarama_r10_s1
+  desc: "A circular box"
+  code: 
+      - vehicles.worlds.BigMamarama
+      - radius: 10
+        scale: 3
+        

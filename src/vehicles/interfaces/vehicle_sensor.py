@@ -41,6 +41,7 @@ class VehicleSensor:
                             (VehicleSensor.SENSELS, observations.keys()))
         sensels = observations[VehicleSensor.SENSELS]
         sensels = np.array(sensels)
+        # todo: check spec
         #check("array[K]", sensels,
         #      desc='I expect a unidimenional array/list for sensels.')
         try:

@@ -10,7 +10,7 @@ class PhotoreceptorsSmooth(VehicleSensor, TexturedRaytracer):
     """ Implements  """
 
     @contract(directions='seq[>0](number)', spatial_sigma_deg='>0')
-    def __init__(self, directions, spatial_sigma_deg,
+    def __init__(self, directions, spatial_sigma_deg, upsample=10,
                  noise=None, invalid=0.5):
         self.invalid = invalid
 
@@ -18,77 +18,103 @@ class PhotoreceptorsSmooth(VehicleSensor, TexturedRaytracer):
         self.noise = (None if self.noise_spec is None else
                           instantiate_spec(self.noise_spec))
 
+
+        self.delta = np.linspace(-3, 3, upsample) * np.deg2rad(spatial_sigma_deg)
+
+        directions2 = []
+        for d in directions:
+            for s in self.delta:
+                directions2.append(d + s)
+
+
+        self.directions_o = np.array(directions)
+
         spec = {
             'desc': 'Photoreceptors',
             'shape': [len(directions)],
             'format': 'C',
             'range': [0, +1],
-            'extra': {'directions': directions.tolist(),
+            'extra': {'directions': directions,
                       'noise': self.noise_spec,
                       'spatial_sigma_deg': spatial_sigma_deg},
         }
+
         VehicleSensor.__init__(self, spec)
 
-        def directions_from_angles(theta):
-            return np.vstack((np.cos(theta), np.sin(theta)))
-
-        def cosines_from_directions(S):
-            C = np.dot(S.T, S)
-            return np.clip(C, -1, 1, C)
-
-        def distances_from_cosines(C):
-            return np.real(np.arccos(C))
-
-        def cosines_from_distances(D):
-            return np.cos(D)
-
-        def distances_from_directions(S):
-            C = cosines_from_directions(S)
-            return distances_from_cosines(C)
-
-        S = directions_from_angles(directions)
-        D = distances_from_directions(S)
 
         def kernel(x):
-            a = np.deg2rad(spatial_sigma_deg)
-            return np.exp(-(x / a) ** 2)
-        self.coeff = kernel(D)
+            return np.exp(-(x ** 2))
 
-        #check_finite(self.coeff)
-        assert np.all(np.isfinite(self.coeff)) # XXX
-        for i in range(len(directions)):
-            sum_i = self.coeff[i, :].sum()
-            assert sum_i > 0
-            self.coeff[i, :] = self.coeff[i, :] / sum_i  # XXX underflow 
+        self.coeff = kernel(self.delta)
+        self.coeff = self.coeff / np.sum(self.coeff)
 
-#        import scipy.stats
-#        eps = 0.1
-#        resolution = 7
-#        offsets = scipy.stats.norm.ppf(np.linspace(eps, 1 - eps, resolution))
-#        rawdirs = []
-#
-
-        TexturedRaytracer.__init__(self, directions)
+        TexturedRaytracer.__init__(self, np.array(directions2))
 
     def to_yaml(self):
         return {'type': 'Photoreceptors',
                 'noise': self.noise_spec,
                 'invalid': self.invalid,
-                'directions': self.directions.tolist()}
+                'directions': self.directions_o.tolist()}
 
     def _compute_observations(self, pose):
         pose = SE2_project_from_SE3(pose)
         data = self.raytracing(pose)
         luminance = data['luminance']
-        invalid = np.logical_not(data['valid'])
+        valid = data['valid']
+        readings = data['readings']
+        invalid = np.logical_not(valid)
         if self.noise is not None:
             luminance = self.noise.filter(luminance)
             # Bound in [0,1]
             luminance = np.maximum(0, luminance)
             luminance = np.minimum(1, luminance)
         luminance[invalid] = self.invalid
-        luminance_smooth = np.dot(self.coeff, luminance)
-        data[VehicleSensor.SENSELS] = luminance_smooth
+
+        delta_size = len(self.delta)
+        n = len(self.directions_o)
+        luminance_smooth = np.zeros(n)
+
+        def smooth(what):
+            res = np.zeros(n)
+            for i in range(n):
+                other = what[i * delta_size:(i + 1) * delta_size]
+                res[i] = np.sum(other * self.coeff)
+            return res
+
+
+        valid2 = np.zeros(n, dtype=bool)
+        readings2 = np.zeros(n, dtype='float32')
+
+        for i in range(n):
+            interval = np.array(range(i * delta_size, (i + 1) * delta_size))
+#            print('%s' % interval)
+            if np.any(valid[interval]):
+                valid2[i] = True
+#                print('interval %s' % interval.shape)
+#                print('valid[interval] %s' % valid[interval].shape)
+                subset = interval[valid[interval]]
+#                print('interval %s sub %s' % (interval. subset))
+
+# TODO: there is a bug with infinity, for the readings
+                which = int((i + 0.5) * delta_size)
+                if valid[which]:
+                    readings2[i] = readings[which]
+                else:
+                    readings2[i] = np.mean(readings[subset])
+            else:
+                valid2[i] = False
+
+
+        luminance2 = smooth(data['luminance'])
+        luminance2 = np.maximum(0, np.minimum(1, luminance2))
+        luminance2[np.logical_not(valid2)] = self.invalid
+
+        data = {'luminance': luminance2,
+                'readings': readings2,
+                'directions': self.directions_o,
+                'valid': valid2,
+                VehicleSensor.SENSELS:  luminance_smooth}
+
         return data
 
     def set_world_primitives(self, primitives):
@@ -97,8 +123,10 @@ class PhotoreceptorsSmooth(VehicleSensor, TexturedRaytracer):
 
 class PhotoreceptorsSmoothUniform(PhotoreceptorsSmooth):
     @contract(fov_deg='>0,<=360', num_sensels='int,>0')
-    def __init__(self, fov_deg, num_sensels, spatial_sigma_deg=0, noise=None):
+    def __init__(self, fov_deg, num_sensels, spatial_sigma_deg=10,
+                 upsample=5, noise=None):
         directions = get_uniform_directions(fov_deg, num_sensels)
         PhotoreceptorsSmooth.__init__(self, directions=directions,
                                       spatial_sigma_deg=spatial_sigma_deg,
+                                      upsample=upsample,
                                         noise=noise)

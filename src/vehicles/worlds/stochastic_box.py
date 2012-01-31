@@ -28,7 +28,7 @@ class StochasticBox(World):
         for _ in range(self.num_circles):
             c = Circle(id_object=id_object(),
                        tags=[],
-                       texture=random_checkerboard(0.1),
+                       texture=random_checkerboard(0.5),
                        center=[0, 0],
                        radius=1,
                        solid=True)

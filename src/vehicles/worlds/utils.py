@@ -18,6 +18,11 @@ def random_checkerboard_smooth(cell_width, sigma):
     return ['vehicles.worlds.textures.Smoothed',
             dict(sigma=sigma, texture=texture)]
 
+def blackwhite_checkerboard(cell_width):
+    texture = ['vehicles.worlds.textures.BWCheckerboard',
+               dict(cell_width=cell_width)]
+    return texture
+
 
 def box(id_object, texture, width, length):
     ''' Returns a box. '''

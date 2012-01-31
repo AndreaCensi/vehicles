@@ -19,7 +19,7 @@ class ComplexSkin(VehicleSkin):
                 raise ValueError(msg)
 
             skin = js.get('skin')
-            pose = js.get('pose', [0, 0, 0])
+            pose = js.get('pose', [0, 0, 0]) # TODO: honor this
 
             skin_impl = VehiclesConfig.specs['skins'].instance(skin)
 

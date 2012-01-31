@@ -7,8 +7,8 @@
         fov_deg:     360
         noise: 
             - vehicles.sensors.AdditiveGaussian
-            - std_dev: 0.05
-        
+            - std_dev: 0.05          
+      
 - id: cam_f180_n180
   desc: "A camera with 180fov, 180sensels."
   code: 
@@ -48,7 +48,72 @@
         noise: 
             - vehicles.sensors.AdditiveGaussian
             - std_dev: 0.05
+
+# Smoothed version: we use sigma = 2 * pixel interval
+# for example: 
+#  num_sensels: 180
+#   fov_deg:     360
+#  sigma = 2*fov_deg / num_sensels) = 4
+
+- id: cam_f360_n180_s
+  desc: An omnidirectional camera with 180 sensels (smooth).
+  code: 
+      - vehicles.sensors.PhotoreceptorsSmoothUniform
+      - num_sensels: 180
+        fov_deg:     360
+        spatial_sigma_deg: 4
+        upsample: 15
+        noise: 
+            - vehicles.sensors.AdditiveGaussian
+            - std_dev: 0.05
+
+- id: cam_f180_n180_s
+  desc: "A camera with 180fov, 180sensels."
+  code: 
+      - vehicles.sensors.PhotoreceptorsSmoothUniform
+      - num_sensels: 180
+        fov_deg:     180
+        spatial_sigma_deg: 2
+        noise: 
+            - vehicles.sensors.AdditiveGaussian
+            - std_dev: 0.05
         
+- id: cam_f180_n90_s
+  desc: "A camera with 180fov, 90 sensels."
+  code: 
+      - vehicles.sensors.PhotoreceptorsSmoothUniform
+      - num_sensels: 90
+        fov_deg:     180
+        spatial_sigma_deg: 4
+        noise: 
+            - vehicles.sensors.AdditiveGaussian
+            - std_dev: 0.05
+
+- id: cam_f90_n45_s
+  desc: "A camera with 90deg fov, 45 sensels."
+  code: 
+      - vehicles.sensors.PhotoreceptorsSmoothUniform
+      - num_sensels: 45
+        fov_deg:     90
+        spatial_sigma_deg: 4
+        noise: 
+            - vehicles.sensors.AdditiveGaussian
+            - std_dev: 0.05
+
+- id: cam_f60_n45_s
+  desc: "A camera with 60deg fov, 45 sensels."
+  code: 
+      - vehicles.sensors.PhotoreceptorsSmoothUniform
+      - num_sensels: 45
+        fov_deg:     60
+        spatial_sigma_deg: 2.7
+        noise: 
+            - vehicles.sensors.AdditiveGaussian
+            - std_dev: 0.05
+
+
+
+
 - id: rf360
   desc: An omnidirectional range-finder.
   code: 

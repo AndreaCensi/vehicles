@@ -8,3 +8,4 @@ from .textures import *
 from .stochastic_box2 import *
 from .stochastic_box3 import *
 from .empty_fixed import *
+from .bigmama import *

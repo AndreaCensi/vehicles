@@ -118,11 +118,18 @@ def plot_photoreceptors(cr, pose, directions, valid, readings, luminance,
     readings = readings[valid]
     luminance = luminance[valid]
 
+
     for theta_i, rho_i, lum in zip(directions, readings, luminance):
+        alpha = 0.2
+        x = alpha + lum * (1 - 2 * alpha)
+        color = (x, x, 1)
+        # color = (lum, lum, 1) # bluish
+        # color = (lum, lum, lum) # normal
+
         plot_ray(cr, sensor_t, sensor_theta + theta_i,
                  rho1=rho_min,
                  rho2=rho_i,
-                 color=(lum, lum, lum))
+                 color=color)
 
 
 @contract(origin='seq[2](number)', direction='number', rho1='x', rho2='>=x')
@@ -133,7 +140,7 @@ def plot_ray(cr, origin, direction, rho1, rho2, color=[0, 0, 0]):
          origin[1] + np.sin(direction) * rho2]
     cr.move_to(x[0], y[0])
     cr.line_to(x[1], y[1])
-    cr.set_line_width(0.01)
+    cr.set_line_width(0.01) # XXX
     cr.set_source_rgb(*color)
     cr.stroke()
 
