@@ -14,9 +14,6 @@
 <table class="navbar" border="0" width="100%" cellpadding="0"
        bgcolor="#a0c0ff" cellspacing="0">
   <tr valign="middle">
-  <!-- Home link -->
-      <th>&nbsp;&nbsp;&nbsp;<a
-        href="vehicles-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
 
   <!-- Tree link -->
       <th>&nbsp;&nbsp;&nbsp;<a
@@ -62,17 +59,14 @@
 </table>
 <h1 class="epydoc">Source Code for <a href="vehicles.simulation.vsimulation-module.html">Module vehicles.simulation.vsimulation</a></h1>
 <pre class="py-src">
-<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt> <tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Class vehicles.simulation.vehicle.Vehicle=vehicles.simulation.vehicle.Vehicle-class.html"><a title="vehicles.simulation.vehicle.Vehicle" class="py-name" href="#" onclick="return doclink('link-0', 'Vehicle', 'link-0');">Vehicle</a></tt><tt class="py-op">,</tt> <tt id="link-1" class="py-name" targets="Variable vehicles.configuration.logger=vehicles.configuration-module.html#logger,Variable vehicles.configuration.master.logger=vehicles.configuration.master-module.html#logger,Variable vehicles.configuration.vehicles.logger=vehicles.configuration.vehicles-module.html#logger,Variable vehicles.display.logger=vehicles.display-module.html#logger,Variable vehicles.display.sensors.logger=vehicles.display.sensors-module.html#logger,Variable vehicles.display.vehicle_display_utils.logger=vehicles.display.vehicle_display_utils-module.html#logger,Variable vehicles.interfaces.logger=vehicles.interfaces-module.html#logger,Variable vehicles.logger=vehicles-module.html#logger,Variable vehicles.programs.display_demo.display_demo.logger=vehicles.programs.display_demo.display_demo-module.html#logger,Variable vehicles.programs.display_demo.logger=vehicles.programs.display_demo-module.html#logger,Variable vehicles.programs.display_demo.skins_demo.logger=vehicles.programs.display_demo.skins_demo-module.html#logger,Variable vehicles.programs.inspect_textures.main'.logger=vehicles.programs.inspect_textures.main%27-module.html#logger,Variable vehicles.programs.print_config.logger=vehicles.programs.print_config-module.html#logger,Variable vehicles.programs.print_config.main'.logger=vehicles.programs.print_config.main%27-module.html#logger,Variable vehicles.sensors.field_sampler.logger=vehicles.sensors.field_sampler-module.html#logger,Variable vehicles.sensors.logger=vehicles.sensors-module.html#logger,Variable vehicles.sensors.noises.logger=vehicles.sensors.noises-module.html#logger,Variable vehicles.sensors.raytracer.logger=vehicles.sensors.raytracer-module.html#logger,Variable vehicles.simulation.logger=vehicles.simulation-module.html#logger,Variable vehicles.simulation.vsimulation.logger=vehicles.simulation.vsimulation-module.html#logger,Variable vehicles.worlds.logger=vehicles.worlds-module.html#logger"><a title="vehicles.configuration.logger
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt> <tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Class vehicles.simulation.vehicle.Vehicle=vehicles.simulation.vehicle.Vehicle-class.html"><a title="vehicles.simulation.vehicle.Vehicle" class="py-name" href="#" onclick="return doclink('link-0', 'Vehicle', 'link-0');">Vehicle</a></tt><tt class="py-op">,</tt> <tt id="link-1" class="py-name" targets="Variable vehicles.configuration.logger=vehicles.configuration-module.html#logger,Variable vehicles.configuration.master.logger=vehicles.configuration.master-module.html#logger,Variable vehicles.configuration.vehicles.logger=vehicles.configuration.vehicles-module.html#logger,Variable vehicles.interfaces.logger=vehicles.interfaces-module.html#logger,Variable vehicles.logger=vehicles-module.html#logger,Variable vehicles.programs.display_demos.simulations.logger=vehicles.programs.display_demos.simulations-module.html#logger,Variable vehicles.programs.display_demos.skins.logger=vehicles.programs.display_demos.skins-module.html#logger,Variable vehicles.programs.display_demos.vehicles.logger=vehicles.programs.display_demos.vehicles-module.html#logger,Variable vehicles.programs.inspect_textures.main'.logger=vehicles.programs.inspect_textures.main%27-module.html#logger,Variable vehicles.programs.print_config.logger=vehicles.programs.print_config-module.html#logger,Variable vehicles.programs.print_config.main'.logger=vehicles.programs.print_config.main%27-module.html#logger,Variable vehicles.sensors.field_sampler.logger=vehicles.sensors.field_sampler-module.html#logger,Variable vehicles.sensors.logger=vehicles.sensors-module.html#logger,Variable vehicles.sensors.noises.logger=vehicles.sensors.noises-module.html#logger,Variable vehicles.sensors.raytracer.logger=vehicles.sensors.raytracer-module.html#logger,Variable vehicles.simulation.logger=vehicles.simulation-module.html#logger,Variable vehicles.simulation.vsimulation.logger=vehicles.simulation.vsimulation-module.html#logger,Variable vehicles.worlds.logger=vehicles.worlds-module.html#logger,Variable vehicles_boot.create_olympics_configs.logger=vehicles_boot.create_olympics_configs-module.html#logger,Variable vehicles_boot.create_olympics_configs.main'.logger=vehicles_boot.create_olympics_configs.main%27-module.html#logger,Variable vehicles_cairo.logger=vehicles_cairo-module.html#logger,Variable vehicles_cairo.sensor_data.logger=vehicles_cairo.sensor_data-module.html#logger"><a title="vehicles.configuration.logger
 vehicles.configuration.master.logger
 vehicles.configuration.vehicles.logger
-vehicles.display.logger
-vehicles.display.sensors.logger
-vehicles.display.vehicle_display_utils.logger
 vehicles.interfaces.logger
 vehicles.logger
-vehicles.programs.display_demo.display_demo.logger
-vehicles.programs.display_demo.logger
-vehicles.programs.display_demo.skins_demo.logger
+vehicles.programs.display_demos.simulations.logger
+vehicles.programs.display_demos.skins.logger
+vehicles.programs.display_demos.vehicles.logger
 vehicles.programs.inspect_textures.main'.logger
 vehicles.programs.print_config.logger
 vehicles.programs.print_config.main'.logger
@@ -82,12 +76,19 @@ vehicles.sensors.noises.logger
 vehicles.sensors.raytracer.logger
 vehicles.simulation.logger
 vehicles.simulation.vsimulation.logger
-vehicles.worlds.logger" class="py-name" href="#" onclick="return doclink('link-1', 'logger', 'link-1');">logger</a></tt><tt class="py-op">,</tt> <tt class="py-name">np</tt> </tt>
+vehicles.worlds.logger
+vehicles_boot.create_olympics_configs.logger
+vehicles_boot.create_olympics_configs.main'.logger
+vehicles_cairo.logger
+vehicles_cairo.sensor_data.logger" class="py-name" href="#" onclick="return doclink('link-1', 'logger', 'link-1');">logger</a></tt><tt class="py-op">,</tt> <tt class="py-name">np</tt> </tt>
 <a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Package vehicles.interfaces=vehicles.interfaces-module.html"><a title="vehicles.interfaces" class="py-name" href="#" onclick="return doclink('link-2', 'interfaces', 'link-2');">interfaces</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Class vehicles.interfaces.world.World=vehicles.interfaces.world.World-class.html"><a title="vehicles.interfaces.world.World" class="py-name" href="#" onclick="return doclink('link-3', 'World', 'link-3');">World</a></tt> </tt>
-<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">geometry</tt> <tt class="py-keyword">import</tt> <tt id="link-4" class="py-name" targets="Variable vehicles.SE3=vehicles-module.html#SE3,Variable vehicles.simulation.SE3=vehicles.simulation-module.html#SE3,Variable vehicles.simulation.vehicle.SE3=vehicles.simulation.vehicle-module.html#SE3,Variable vehicles.simulation.vsimulation.SE3=vehicles.simulation.vsimulation-module.html#SE3"><a title="vehicles.SE3
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">geometry</tt> <tt class="py-keyword">import</tt> <tt id="link-4" class="py-name" targets="Variable vehicles.SE3=vehicles-module.html#SE3,Variable vehicles.simulation.SE3=vehicles.simulation-module.html#SE3,Variable vehicles.simulation.vehicle.SE3=vehicles.simulation.vehicle-module.html#SE3,Variable vehicles.simulation.vsimulation.SE3=vehicles.simulation.vsimulation-module.html#SE3,Variable vehicles_cairo.SE3=vehicles_cairo-module.html#SE3,Variable vehicles_cairo.display_all.SE3=vehicles_cairo.display_all-module.html#SE3,Variable vehicles_cairo.sensor_data.SE3=vehicles_cairo.sensor_data-module.html#SE3"><a title="vehicles.SE3
 vehicles.simulation.SE3
 vehicles.simulation.vehicle.SE3
-vehicles.simulation.vsimulation.SE3" class="py-name" href="#" onclick="return doclink('link-4', 'SE3', 'link-4');">SE3</a></tt> </tt>
+vehicles.simulation.vsimulation.SE3
+vehicles_cairo.SE3
+vehicles_cairo.display_all.SE3
+vehicles_cairo.sensor_data.SE3" class="py-name" href="#" onclick="return doclink('link-4', 'SE3', 'link-4');">SE3</a></tt> </tt>
 <a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-5" class="py-name" targets="Variable vehicles.simulation.collision.CollisionInfo.time=vehicles.simulation.collision.CollisionInfo-class.html#time"><a title="vehicles.simulation.collision.CollisionInfo.time" class="py-name" href="#" onclick="return doclink('link-5', 'time', 'link-5');">time</a></tt> </tt>
 <a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"> </tt>
 <a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"> </tt>
@@ -117,14 +118,11 @@ vehicles.simulation.vsimulation.SE3" class="py-name" href="#" onclick="return do
 </div><div id="VehicleSimulation.info-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="VehicleSimulation.info-expanded"><a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">        <tt id="link-20" class="py-name"><a title="vehicles.configuration.logger
 vehicles.configuration.master.logger
 vehicles.configuration.vehicles.logger
-vehicles.display.logger
-vehicles.display.sensors.logger
-vehicles.display.vehicle_display_utils.logger
 vehicles.interfaces.logger
 vehicles.logger
-vehicles.programs.display_demo.display_demo.logger
-vehicles.programs.display_demo.logger
-vehicles.programs.display_demo.skins_demo.logger
+vehicles.programs.display_demos.simulations.logger
+vehicles.programs.display_demos.skins.logger
+vehicles.programs.display_demos.vehicles.logger
 vehicles.programs.inspect_textures.main'.logger
 vehicles.programs.print_config.logger
 vehicles.programs.print_config.main'.logger
@@ -134,7 +132,12 @@ vehicles.sensors.noises.logger
 vehicles.sensors.raytracer.logger
 vehicles.simulation.logger
 vehicles.simulation.vsimulation.logger
-vehicles.worlds.logger" class="py-name" href="#" onclick="return doclink('link-20', 'logger', 'link-1');">logger</a></tt><tt class="py-op">.</tt><tt id="link-21" class="py-name" targets="Method vehicles.simulation.vsimulation.VehicleSimulation.info()=vehicles.simulation.vsimulation.VehicleSimulation-class.html#info"><a title="vehicles.simulation.vsimulation.VehicleSimulation.info" class="py-name" href="#" onclick="return doclink('link-21', 'info', 'link-21');">info</a></tt><tt class="py-op">(</tt><tt class="py-name">s</tt><tt class="py-op">)</tt>  <tt class="py-comment"># XXX</tt> </tt>
+vehicles.worlds.logger
+vehicles_boot.create_olympics_configs.logger
+vehicles_boot.create_olympics_configs.main'.logger
+vehicles_cairo.logger
+vehicles_cairo.sensor_data.logger" class="py-name" href="#" onclick="return doclink('link-20', 'logger', 'link-1');">logger</a></tt><tt class="py-op">.</tt><tt id="link-21" class="py-name" targets="Method vehicles.simulation.vsimulation.VehicleSimulation.info()=vehicles.simulation.vsimulation.VehicleSimulation-class.html#info,Method vehicles_boot.ros_visualization.ros_simulation.ROSVehicleSimulation.info()=vehicles_boot.ros_visualization.ros_simulation.ROSVehicleSimulation-class.html#info"><a title="vehicles.simulation.vsimulation.VehicleSimulation.info
+vehicles_boot.ros_visualization.ros_simulation.ROSVehicleSimulation.info" class="py-name" href="#" onclick="return doclink('link-21', 'info', 'link-21');">info</a></tt><tt class="py-op">(</tt><tt class="py-name">s</tt><tt class="py-op">)</tt>  <tt class="py-comment"># XXX</tt> </tt>
 </div><a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"> </tt>
 <a name="VehicleSimulation.simulate"></a><div id="VehicleSimulation.simulate-def"><a name="L32"></a><tt class="py-lineno"> 32</tt> <a class="py-toggle" href="#" id="VehicleSimulation.simulate-toggle" onclick="return toggle('VehicleSimulation.simulate');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.simulation.vsimulation.VehicleSimulation-class.html#simulate">simulate</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">commands</tt><tt class="py-op">,</tt> <tt class="py-param">dt</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
 </div><div id="VehicleSimulation.simulate-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="VehicleSimulation.simulate-expanded"><a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">episode_started</tt><tt class="py-op">:</tt> </tt>
@@ -142,16 +145,18 @@ vehicles.worlds.logger" class="py-name" href="#" onclick="return doclink('link-2
 <a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">'Episode not started yet.'</tt><tt class="py-op">)</tt> </tt>
 <a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"> </tt>
 <a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">        <tt class="py-name">commands</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">array</tt><tt class="py-op">(</tt><tt class="py-name">commands</tt><tt class="py-op">)</tt> </tt>
-<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">        <tt class="py-name">updated</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="vehicles.interfaces.world" class="py-name" href="#" onclick="return doclink('link-22', 'world', 'link-8');">world</a></tt><tt class="py-op">.</tt><tt id="link-23" class="py-name" targets="Method vehicles.interfaces.world.World.simulate()=vehicles.interfaces.world.World-class.html#simulate,Method vehicles.simulation.vehicle.Vehicle.simulate()=vehicles.simulation.vehicle.Vehicle-class.html#simulate,Method vehicles.simulation.vsimulation.VehicleSimulation.simulate()=vehicles.simulation.vsimulation.VehicleSimulation-class.html#simulate,Method vehicles.worlds.boxes.Box.simulate()=vehicles.worlds.boxes.Box-class.html#simulate,Method vehicles.worlds.dynamic.DynamicTest.simulate()=vehicles.worlds.dynamic.DynamicTest-class.html#simulate,Method vehicles.worlds.empty_fixed.EmptyFixed.simulate()=vehicles.worlds.empty_fixed.EmptyFixed-class.html#simulate,Method vehicles.worlds.empty_world.Empty.simulate()=vehicles.worlds.empty_world.Empty-class.html#simulate,Method vehicles.worlds.stochastic_box.StochasticBox.simulate()=vehicles.worlds.stochastic_box.StochasticBox-class.html#simulate,Method vehicles.worlds.stochastic_box2.StochasticBox2.simulate()=vehicles.worlds.stochastic_box2.StochasticBox2-class.html#simulate,Method vehicles.worlds.stochastic_box3.StochasticBox3.simulate()=vehicles.worlds.stochastic_box3.StochasticBox3-class.html#simulate"><a title="vehicles.interfaces.world.World.simulate
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">        <tt class="py-name">updated</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="vehicles.interfaces.world" class="py-name" href="#" onclick="return doclink('link-22', 'world', 'link-8');">world</a></tt><tt class="py-op">.</tt><tt id="link-23" class="py-name" targets="Method vehicles.interfaces.world.World.simulate()=vehicles.interfaces.world.World-class.html#simulate,Method vehicles.simulation.vehicle.Vehicle.simulate()=vehicles.simulation.vehicle.Vehicle-class.html#simulate,Method vehicles.simulation.vsimulation.VehicleSimulation.simulate()=vehicles.simulation.vsimulation.VehicleSimulation-class.html#simulate,Method vehicles.worlds.bigmama.BigMamarama.simulate()=vehicles.worlds.bigmama.BigMamarama-class.html#simulate,Method vehicles.worlds.boxes.Box.simulate()=vehicles.worlds.boxes.Box-class.html#simulate,Method vehicles.worlds.dynamic.DynamicTest.simulate()=vehicles.worlds.dynamic.DynamicTest-class.html#simulate,Method vehicles.worlds.empty_fixed.EmptyFixed.simulate()=vehicles.worlds.empty_fixed.EmptyFixed-class.html#simulate,Method vehicles.worlds.empty_world.Empty.simulate()=vehicles.worlds.empty_world.Empty-class.html#simulate,Method vehicles.worlds.stochastic_box.StochasticBox.simulate()=vehicles.worlds.stochastic_box.StochasticBox-class.html#simulate,Method vehicles.worlds.stochastic_box2.StochasticBox2.simulate()=vehicles.worlds.stochastic_box2.StochasticBox2-class.html#simulate,Method vehicles.worlds.stochastic_box3.StochasticBox3.simulate()=vehicles.worlds.stochastic_box3.StochasticBox3-class.html#simulate,Method vehicles.worlds.stochastic_sources.StochasticSources.simulate()=vehicles.worlds.stochastic_sources.StochasticSources-class.html#simulate"><a title="vehicles.interfaces.world.World.simulate
 vehicles.simulation.vehicle.Vehicle.simulate
 vehicles.simulation.vsimulation.VehicleSimulation.simulate
+vehicles.worlds.bigmama.BigMamarama.simulate
 vehicles.worlds.boxes.Box.simulate
 vehicles.worlds.dynamic.DynamicTest.simulate
 vehicles.worlds.empty_fixed.EmptyFixed.simulate
 vehicles.worlds.empty_world.Empty.simulate
 vehicles.worlds.stochastic_box.StochasticBox.simulate
 vehicles.worlds.stochastic_box2.StochasticBox2.simulate
-vehicles.worlds.stochastic_box3.StochasticBox3.simulate" class="py-name" href="#" onclick="return doclink('link-23', 'simulate', 'link-23');">simulate</a></tt><tt class="py-op">(</tt><tt class="py-name">dt</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="vehicles.simulation.vehicle" class="py-name" href="#" onclick="return doclink('link-24', 'vehicle', 'link-6');">vehicle</a></tt><tt class="py-op">)</tt> </tt>
+vehicles.worlds.stochastic_box3.StochasticBox3.simulate
+vehicles.worlds.stochastic_sources.StochasticSources.simulate" class="py-name" href="#" onclick="return doclink('link-23', 'simulate', 'link-23');">simulate</a></tt><tt class="py-op">(</tt><tt class="py-name">dt</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="vehicles.simulation.vehicle" class="py-name" href="#" onclick="return doclink('link-24', 'vehicle', 'link-6');">vehicle</a></tt><tt class="py-op">)</tt> </tt>
 <a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">timestamp</tt> <tt class="py-op">+=</tt> <tt class="py-name">dt</tt> </tt>
 <a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"> </tt>
 <a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="vehicles.simulation.vehicle" class="py-name" href="#" onclick="return doclink('link-25', 'vehicle', 'link-6');">vehicle</a></tt><tt class="py-op">.</tt><tt id="link-26" class="py-name" targets="Method vehicles.interfaces.vehicle_sensor.VehicleSensor.set_world_primitives()=vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html#set_world_primitives,Method vehicles.sensors.field_sampler.FieldSampler.set_world_primitives()=vehicles.sensors.field_sampler.FieldSampler-class.html#set_world_primitives,Method vehicles.sensors.photoreceptors.Photoreceptors.set_world_primitives()=vehicles.sensors.photoreceptors.Photoreceptors-class.html#set_world_primitives,Method vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth.set_world_primitives()=vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth-class.html#set_world_primitives,Method vehicles.sensors.random_sensor.RandomSensor.set_world_primitives()=vehicles.sensors.random_sensor.RandomSensor-class.html#set_world_primitives,Method vehicles.sensors.range_finder.Rangefinder.set_world_primitives()=vehicles.sensors.range_finder.Rangefinder-class.html#set_world_primitives,Method vehicles.sensors.raytracer.textured_raytracer.Raytracer.set_world_primitives()=vehicles.sensors.raytracer.textured_raytracer.Raytracer-class.html#set_world_primitives,Method vehicles.sensors.raytracer.textured_raytracer.TexturedRaytracer.set_world_primitives()=vehicles.sensors.raytracer.textured_raytracer.TexturedRaytracer-class.html#set_world_primitives,Method vehicles.simulation.vehicle.Vehicle.set_world_primitives()=vehicles.simulation.vehicle.Vehicle-class.html#set_world_primitives"><a title="vehicles.interfaces.vehicle_sensor.VehicleSensor.set_world_primitives
@@ -164,22 +169,26 @@ vehicles.sensors.raytracer.textured_raytracer.Raytracer.set_world_primitives
 vehicles.sensors.raytracer.textured_raytracer.TexturedRaytracer.set_world_primitives
 vehicles.simulation.vehicle.Vehicle.set_world_primitives" class="py-name" href="#" onclick="return doclink('link-26', 'set_world_primitives', 'link-26');">set_world_primitives</a></tt><tt class="py-op">(</tt><tt class="py-name">updated</tt><tt class="py-op">)</tt> </tt>
 <a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="vehicles.simulation.vehicle" class="py-name" href="#" onclick="return doclink('link-27', 'vehicle', 'link-6');">vehicle</a></tt><tt class="py-op">.</tt><tt id="link-28" class="py-name" targets="Method vehicles.simulation.vehicle.Vehicle.colliding_pose()=vehicles.simulation.vehicle.Vehicle-class.html#colliding_pose"><a title="vehicles.simulation.vehicle.Vehicle.colliding_pose" class="py-name" href="#" onclick="return doclink('link-28', 'colliding_pose', 'link-28');">colliding_pose</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="vehicles.simulation.vehicle" class="py-name" href="#" onclick="return doclink('link-29', 'vehicle', 'link-6');">vehicle</a></tt><tt class="py-op">.</tt><tt id="link-30" class="py-name" targets="Method vehicles.simulation.vehicle.Vehicle.get_pose()=vehicles.simulation.vehicle.Vehicle-class.html#get_pose"><a title="vehicles.simulation.vehicle.Vehicle.get_pose" class="py-name" href="#" onclick="return doclink('link-30', 'get_pose', 'link-30');">get_pose</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-31" class="py-name" targets="Variable vehicles.simulation.collision.CollisionInfo.collided=vehicles.simulation.collision.CollisionInfo-class.html#collided"><a title="vehicles.simulation.collision.CollisionInfo.collided" class="py-name" href="#" onclick="return doclink('link-31', 'collided', 'link-31');">collided</a></tt><tt class="py-op">:</tt> </tt>
-<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-32" class="py-name"><a title="vehicles.simulation.vsimulation.VehicleSimulation.info" class="py-name" href="#" onclick="return doclink('link-32', 'info', 'link-21');">info</a></tt><tt class="py-op">(</tt><tt class="py-string">'Collision due to dynamic world at %s.'</tt> <tt class="py-op">%</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">timestamp</tt><tt class="py-op">)</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-32" class="py-name"><a title="vehicles.simulation.vsimulation.VehicleSimulation.info
+vehicles_boot.ros_visualization.ros_simulation.ROSVehicleSimulation.info" class="py-name" href="#" onclick="return doclink('link-32', 'info', 'link-21');">info</a></tt><tt class="py-op">(</tt><tt class="py-string">'Collision due to dynamic world at %s.'</tt> <tt class="py-op">%</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">timestamp</tt><tt class="py-op">)</tt> </tt>
 <a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">vehicle_collided</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
 <a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
 <a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-33" class="py-name"><a title="vehicles.simulation.vehicle" class="py-name" href="#" onclick="return doclink('link-33', 'vehicle', 'link-6');">vehicle</a></tt><tt class="py-op">.</tt><tt id="link-34" class="py-name"><a title="vehicles.interfaces.world.World.simulate
 vehicles.simulation.vehicle.Vehicle.simulate
 vehicles.simulation.vsimulation.VehicleSimulation.simulate
+vehicles.worlds.bigmama.BigMamarama.simulate
 vehicles.worlds.boxes.Box.simulate
 vehicles.worlds.dynamic.DynamicTest.simulate
 vehicles.worlds.empty_fixed.EmptyFixed.simulate
 vehicles.worlds.empty_world.Empty.simulate
 vehicles.worlds.stochastic_box.StochasticBox.simulate
 vehicles.worlds.stochastic_box2.StochasticBox2.simulate
-vehicles.worlds.stochastic_box3.StochasticBox3.simulate" class="py-name" href="#" onclick="return doclink('link-34', 'simulate', 'link-23');">simulate</a></tt><tt class="py-op">(</tt><tt class="py-name">commands</tt><tt class="py-op">,</tt> <tt class="py-name">dt</tt><tt class="py-op">)</tt> </tt>
+vehicles.worlds.stochastic_box3.StochasticBox3.simulate
+vehicles.worlds.stochastic_sources.StochasticSources.simulate" class="py-name" href="#" onclick="return doclink('link-34', 'simulate', 'link-23');">simulate</a></tt><tt class="py-op">(</tt><tt class="py-name">commands</tt><tt class="py-op">,</tt> <tt class="py-name">dt</tt><tt class="py-op">)</tt> </tt>
 <a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">vehicle_collided</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-35" class="py-name"><a title="vehicles.simulation.vehicle" class="py-name" href="#" onclick="return doclink('link-35', 'vehicle', 'link-6');">vehicle</a></tt><tt class="py-op">.</tt><tt id="link-36" class="py-name" targets="Module vehicles.simulation.collision=vehicles.simulation.collision-module.html"><a title="vehicles.simulation.collision" class="py-name" href="#" onclick="return doclink('link-36', 'collision', 'link-36');">collision</a></tt><tt class="py-op">.</tt><tt id="link-37" class="py-name"><a title="vehicles.simulation.collision.CollisionInfo.collided" class="py-name" href="#" onclick="return doclink('link-37', 'collided', 'link-31');">collided</a></tt> </tt>
 <a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">vehicle_collided</tt><tt class="py-op">:</tt> </tt>
-<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-38" class="py-name"><a title="vehicles.simulation.vsimulation.VehicleSimulation.info" class="py-name" href="#" onclick="return doclink('link-38', 'info', 'link-21');">info</a></tt><tt class="py-op">(</tt><tt class="py-string">'Collision with object at time %.2f.'</tt> <tt class="py-op">%</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-38" class="py-name"><a title="vehicles.simulation.vsimulation.VehicleSimulation.info
+vehicles_boot.ros_visualization.ros_simulation.ROSVehicleSimulation.info" class="py-name" href="#" onclick="return doclink('link-38', 'info', 'link-21');">info</a></tt><tt class="py-op">(</tt><tt class="py-string">'Collision with object at time %.2f.'</tt> <tt class="py-op">%</tt> </tt>
 <a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">                          <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">timestamp</tt> <tt class="py-op">-</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">timestamp0</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
 <a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"> </tt>
 <a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">last_commands</tt> <tt class="py-op">=</tt> <tt class="py-name">commands</tt> </tt>
@@ -205,26 +214,33 @@ vehicles.simulation.vsimulation.VehicleSimulation.compute_observations" class="p
 <a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"> </tt>
 <a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">        <tt class="py-name">max_tries</tt> <tt class="py-op">=</tt> <tt class="py-number">100</tt> </tt>
 <a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">_</tt>  <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-name">max_tries</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">            <tt class="py-name">episode</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-43" class="py-name"><a title="vehicles.interfaces.world" class="py-name" href="#" onclick="return doclink('link-43', 'world', 'link-8');">world</a></tt><tt class="py-op">.</tt><tt id="link-44" class="py-name" targets="Method vehicles.interfaces.world.World.new_episode()=vehicles.interfaces.world.World-class.html#new_episode,Method vehicles.simulation.vsimulation.VehicleSimulation.new_episode()=vehicles.simulation.vsimulation.VehicleSimulation-class.html#new_episode,Method vehicles.worlds.empty_fixed.EmptyFixed.new_episode()=vehicles.worlds.empty_fixed.EmptyFixed-class.html#new_episode,Method vehicles.worlds.stochastic_box.StochasticBox.new_episode()=vehicles.worlds.stochastic_box.StochasticBox-class.html#new_episode,Method vehicles.worlds.stochastic_box2.StochasticBox2.new_episode()=vehicles.worlds.stochastic_box2.StochasticBox2-class.html#new_episode,Method vehicles.worlds.stochastic_box3.StochasticBox3.new_episode()=vehicles.worlds.stochastic_box3.StochasticBox3-class.html#new_episode"><a title="vehicles.interfaces.world.World.new_episode
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">            <tt class="py-name">episode</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-43" class="py-name"><a title="vehicles.interfaces.world" class="py-name" href="#" onclick="return doclink('link-43', 'world', 'link-8');">world</a></tt><tt class="py-op">.</tt><tt id="link-44" class="py-name" targets="Method vehicles.interfaces.world.World.new_episode()=vehicles.interfaces.world.World-class.html#new_episode,Method vehicles.simulation.vsimulation.VehicleSimulation.new_episode()=vehicles.simulation.vsimulation.VehicleSimulation-class.html#new_episode,Method vehicles.worlds.empty_fixed.EmptyFixed.new_episode()=vehicles.worlds.empty_fixed.EmptyFixed-class.html#new_episode,Method vehicles.worlds.stochastic_box.StochasticBox.new_episode()=vehicles.worlds.stochastic_box.StochasticBox-class.html#new_episode,Method vehicles.worlds.stochastic_box2.StochasticBox2.new_episode()=vehicles.worlds.stochastic_box2.StochasticBox2-class.html#new_episode,Method vehicles.worlds.stochastic_box3.StochasticBox3.new_episode()=vehicles.worlds.stochastic_box3.StochasticBox3-class.html#new_episode,Method vehicles.worlds.stochastic_sources.StochasticSources.new_episode()=vehicles.worlds.stochastic_sources.StochasticSources-class.html#new_episode,Method vehicles_boot.vehicles_simulation.BOVehicleSimulation.new_episode()=vehicles_boot.vehicles_simulation.BOVehicleSimulation-class.html#new_episode"><a title="vehicles.interfaces.world.World.new_episode
 vehicles.simulation.vsimulation.VehicleSimulation.new_episode
 vehicles.worlds.empty_fixed.EmptyFixed.new_episode
 vehicles.worlds.stochastic_box.StochasticBox.new_episode
 vehicles.worlds.stochastic_box2.StochasticBox2.new_episode
-vehicles.worlds.stochastic_box3.StochasticBox3.new_episode" class="py-name" href="#" onclick="return doclink('link-44', 'new_episode', 'link-44');">new_episode</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+vehicles.worlds.stochastic_box3.StochasticBox3.new_episode
+vehicles.worlds.stochastic_sources.StochasticSources.new_episode
+vehicles_boot.vehicles_simulation.BOVehicleSimulation.new_episode" class="py-name" href="#" onclick="return doclink('link-44', 'new_episode', 'link-44');">new_episode</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
 <a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">            <tt class="py-comment"># TODO: change name</tt> </tt>
 <a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">            <tt class="py-name">pose</tt> <tt class="py-op">=</tt> <tt class="py-name">episode</tt><tt class="py-op">.</tt><tt id="link-45" class="py-name" targets="Variable vehicles.interfaces.world.World.Episode.vehicle_state=vehicles.interfaces.world.World.Episode-class.html#vehicle_state"><a title="vehicles.interfaces.world.World.Episode.vehicle_state" class="py-name" href="#" onclick="return doclink('link-45', 'vehicle_state', 'link-45');">vehicle_state</a></tt> </tt>
 <a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">            <tt id="link-46" class="py-name"><a title="vehicles.SE3
 vehicles.simulation.SE3
 vehicles.simulation.vehicle.SE3
-vehicles.simulation.vsimulation.SE3" class="py-name" href="#" onclick="return doclink('link-46', 'SE3', 'link-4');">SE3</a></tt><tt class="py-op">.</tt><tt class="py-name">belongs</tt><tt class="py-op">(</tt><tt class="py-name">pose</tt><tt class="py-op">)</tt> </tt>
-<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">            <tt id="link-47" class="py-name" targets="Module vehicles.interfaces.primitives=vehicles.interfaces.primitives-module.html"><a title="vehicles.interfaces.primitives" class="py-name" href="#" onclick="return doclink('link-47', 'primitives', 'link-47');">primitives</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-48" class="py-name"><a title="vehicles.interfaces.world" class="py-name" href="#" onclick="return doclink('link-48', 'world', 'link-8');">world</a></tt><tt class="py-op">.</tt><tt id="link-49" class="py-name" targets="Method vehicles.interfaces.world.World.get_primitives()=vehicles.interfaces.world.World-class.html#get_primitives,Method vehicles.worlds.boxes.Box.get_primitives()=vehicles.worlds.boxes.Box-class.html#get_primitives,Method vehicles.worlds.dynamic.DynamicTest.get_primitives()=vehicles.worlds.dynamic.DynamicTest-class.html#get_primitives,Method vehicles.worlds.empty_fixed.EmptyFixed.get_primitives()=vehicles.worlds.empty_fixed.EmptyFixed-class.html#get_primitives,Method vehicles.worlds.empty_world.Empty.get_primitives()=vehicles.worlds.empty_world.Empty-class.html#get_primitives,Method vehicles.worlds.stochastic_box.StochasticBox.get_primitives()=vehicles.worlds.stochastic_box.StochasticBox-class.html#get_primitives,Method vehicles.worlds.stochastic_box2.StochasticBox2.get_primitives()=vehicles.worlds.stochastic_box2.StochasticBox2-class.html#get_primitives,Method vehicles.worlds.stochastic_box3.StochasticBox3.get_primitives()=vehicles.worlds.stochastic_box3.StochasticBox3-class.html#get_primitives"><a title="vehicles.interfaces.world.World.get_primitives
+vehicles.simulation.vsimulation.SE3
+vehicles_cairo.SE3
+vehicles_cairo.display_all.SE3
+vehicles_cairo.sensor_data.SE3" class="py-name" href="#" onclick="return doclink('link-46', 'SE3', 'link-4');">SE3</a></tt><tt class="py-op">.</tt><tt class="py-name">belongs</tt><tt class="py-op">(</tt><tt class="py-name">pose</tt><tt class="py-op">)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">            <tt id="link-47" class="py-name" targets="Module vehicles.interfaces.primitives=vehicles.interfaces.primitives-module.html"><a title="vehicles.interfaces.primitives" class="py-name" href="#" onclick="return doclink('link-47', 'primitives', 'link-47');">primitives</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-48" class="py-name"><a title="vehicles.interfaces.world" class="py-name" href="#" onclick="return doclink('link-48', 'world', 'link-8');">world</a></tt><tt class="py-op">.</tt><tt id="link-49" class="py-name" targets="Method vehicles.interfaces.world.World.get_primitives()=vehicles.interfaces.world.World-class.html#get_primitives,Method vehicles.worlds.bigmama.BigMamarama.get_primitives()=vehicles.worlds.bigmama.BigMamarama-class.html#get_primitives,Method vehicles.worlds.boxes.Box.get_primitives()=vehicles.worlds.boxes.Box-class.html#get_primitives,Method vehicles.worlds.dynamic.DynamicTest.get_primitives()=vehicles.worlds.dynamic.DynamicTest-class.html#get_primitives,Method vehicles.worlds.empty_fixed.EmptyFixed.get_primitives()=vehicles.worlds.empty_fixed.EmptyFixed-class.html#get_primitives,Method vehicles.worlds.empty_world.Empty.get_primitives()=vehicles.worlds.empty_world.Empty-class.html#get_primitives,Method vehicles.worlds.stochastic_box.StochasticBox.get_primitives()=vehicles.worlds.stochastic_box.StochasticBox-class.html#get_primitives,Method vehicles.worlds.stochastic_box2.StochasticBox2.get_primitives()=vehicles.worlds.stochastic_box2.StochasticBox2-class.html#get_primitives,Method vehicles.worlds.stochastic_box3.StochasticBox3.get_primitives()=vehicles.worlds.stochastic_box3.StochasticBox3-class.html#get_primitives,Method vehicles.worlds.stochastic_sources.StochasticSources.get_primitives()=vehicles.worlds.stochastic_sources.StochasticSources-class.html#get_primitives"><a title="vehicles.interfaces.world.World.get_primitives
+vehicles.worlds.bigmama.BigMamarama.get_primitives
 vehicles.worlds.boxes.Box.get_primitives
 vehicles.worlds.dynamic.DynamicTest.get_primitives
 vehicles.worlds.empty_fixed.EmptyFixed.get_primitives
 vehicles.worlds.empty_world.Empty.get_primitives
 vehicles.worlds.stochastic_box.StochasticBox.get_primitives
 vehicles.worlds.stochastic_box2.StochasticBox2.get_primitives
-vehicles.worlds.stochastic_box3.StochasticBox3.get_primitives" class="py-name" href="#" onclick="return doclink('link-49', 'get_primitives', 'link-49');">get_primitives</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+vehicles.worlds.stochastic_box3.StochasticBox3.get_primitives
+vehicles.worlds.stochastic_sources.StochasticSources.get_primitives" class="py-name" href="#" onclick="return doclink('link-49', 'get_primitives', 'link-49');">get_primitives</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
 <a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">            <tt id="link-50" class="py-name" targets="Function vehicles.simulation.vsimulation.check_primitives()=vehicles.simulation.vsimulation-module.html#check_primitives"><a title="vehicles.simulation.vsimulation.check_primitives" class="py-name" href="#" onclick="return doclink('link-50', 'check_primitives', 'link-50');">check_primitives</a></tt><tt class="py-op">(</tt><tt id="link-51" class="py-name"><a title="vehicles.interfaces.primitives" class="py-name" href="#" onclick="return doclink('link-51', 'primitives', 'link-47');">primitives</a></tt><tt class="py-op">)</tt> </tt>
 <a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-52" class="py-name"><a title="vehicles.simulation.vehicle" class="py-name" href="#" onclick="return doclink('link-52', 'vehicle', 'link-6');">vehicle</a></tt><tt class="py-op">.</tt><tt id="link-53" class="py-name"><a title="vehicles.interfaces.vehicle_sensor.VehicleSensor.set_world_primitives
 vehicles.sensors.field_sampler.FieldSampler.set_world_primitives
@@ -261,14 +277,11 @@ vehicles.simulation.vsimulation.VehicleSimulation.compute_observations" class="p
 <a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">            <tt id="link-63" class="py-name"><a title="vehicles.configuration.logger
 vehicles.configuration.master.logger
 vehicles.configuration.vehicles.logger
-vehicles.display.logger
-vehicles.display.sensors.logger
-vehicles.display.vehicle_display_utils.logger
 vehicles.interfaces.logger
 vehicles.logger
-vehicles.programs.display_demo.display_demo.logger
-vehicles.programs.display_demo.logger
-vehicles.programs.display_demo.skins_demo.logger
+vehicles.programs.display_demos.simulations.logger
+vehicles.programs.display_demos.skins.logger
+vehicles.programs.display_demos.vehicles.logger
 vehicles.programs.inspect_textures.main'.logger
 vehicles.programs.print_config.logger
 vehicles.programs.print_config.main'.logger
@@ -278,7 +291,11 @@ vehicles.sensors.noises.logger
 vehicles.sensors.raytracer.logger
 vehicles.simulation.logger
 vehicles.simulation.vsimulation.logger
-vehicles.worlds.logger" class="py-name" href="#" onclick="return doclink('link-63', 'logger', 'link-1');">logger</a></tt><tt class="py-op">.</tt><tt class="py-name">debug</tt><tt class="py-op">(</tt><tt class="py-string">'Warning: state is at time %s, observations at %s.'</tt> <tt class="py-op">%</tt> </tt>
+vehicles.worlds.logger
+vehicles_boot.create_olympics_configs.logger
+vehicles_boot.create_olympics_configs.main'.logger
+vehicles_cairo.logger
+vehicles_cairo.sensor_data.logger" class="py-name" href="#" onclick="return doclink('link-63', 'logger', 'link-1');">logger</a></tt><tt class="py-op">.</tt><tt class="py-name">debug</tt><tt class="py-op">(</tt><tt class="py-string">'Warning: state is at time %s, observations at %s.'</tt> <tt class="py-op">%</tt> </tt>
 <a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">                         <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">timestamp</tt><tt class="py-op">,</tt> </tt>
 <a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">                          <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">last_vehicle_observations_timestamp</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
 <a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"> </tt>
@@ -338,9 +355,6 @@ expandto(location.href);
 <table class="navbar" border="0" width="100%" cellpadding="0"
        bgcolor="#a0c0ff" cellspacing="0">
   <tr valign="middle">
-  <!-- Home link -->
-      <th>&nbsp;&nbsp;&nbsp;<a
-        href="vehicles-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
 
   <!-- Tree link -->
       <th>&nbsp;&nbsp;&nbsp;<a
@@ -365,7 +379,7 @@ expandto(location.href);
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Fri Jan 20 18:29:42 2012
+    Generated by Epydoc 3.0.1 on Wed Feb  1 14:46:48 2012
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

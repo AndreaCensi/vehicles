@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>vehicles_cairo.skins.sensors</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/vehicles">Vehicles</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="vehicles_cairo-module.html">Package&nbsp;vehicles_cairo</a> ::
+        <a href="vehicles_cairo.skins-module.html">Package&nbsp;skins</a> ::
+        Module&nbsp;sensors
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="vehicles_cairo.skins.sensors-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="vehicles_cairo.skins.sensors-module.html">Module vehicles_cairo.skins.sensors</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt> <tt class="py-keyword">import</tt> <tt class="py-name">np</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package cairo_utils=cairo_utils-module.html"><a title="cairo_utils" class="py-name" href="#" onclick="return doclink('link-0', 'cairo_utils', 'link-0');">cairo_utils</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">(</tt><tt id="link-1" class="py-name" targets="Function cairo_utils.contexts.cairo_save()=cairo_utils.contexts-module.html#cairo_save"><a title="cairo_utils.contexts.cairo_save" class="py-name" href="#" onclick="return doclink('link-1', 'cairo_save', 'link-1');">cairo_save</a></tt><tt class="py-op">,</tt> <tt id="link-2" class="py-name" targets="Function cairo_utils.colors.cairo_set_color()=cairo_utils.colors-module.html#cairo_set_color"><a title="cairo_utils.colors.cairo_set_color" class="py-name" href="#" onclick="return doclink('link-2', 'cairo_set_color', 'link-2');">cairo_set_color</a></tt><tt class="py-op">,</tt> <tt id="link-3" class="py-name" targets="Function cairo_utils.transformations.cairo_transform()=cairo_utils.transformations-module.html#cairo_transform"><a title="cairo_utils.transformations.cairo_transform" class="py-name" href="#" onclick="return doclink('link-3', 'cairo_transform', 'link-3');">cairo_transform</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line">    <tt id="link-4" class="py-name" targets="Function cairo_utils.shape.cairo_plot_rectangle()=cairo_utils.shape-module.html#cairo_plot_rectangle"><a title="cairo_utils.shape.cairo_plot_rectangle" class="py-name" href="#" onclick="return doclink('link-4', 'cairo_plot_rectangle', 'link-4');">cairo_plot_rectangle</a></tt><tt class="py-op">,</tt> <tt id="link-5" class="py-name" targets="Function cairo_utils.shape.cairo_plot_circle2()=cairo_utils.shape-module.html#cairo_plot_circle2"><a title="cairo_utils.shape.cairo_plot_circle2" class="py-name" href="#" onclick="return doclink('link-5', 'cairo_plot_circle2', 'link-5');">cairo_plot_circle2</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt id="link-6" class="py-name" targets="Variable vehicles_cairo.WHITE=vehicles_cairo-module.html#WHITE,Variable vehicles_cairo.constants.WHITE=vehicles_cairo.constants-module.html#WHITE,Variable vehicles_cairo.skins.WHITE=vehicles_cairo.skins-module.html#WHITE,Variable vehicles_cairo.skins.flies.WHITE=vehicles_cairo.skins.flies-module.html#WHITE,Variable vehicles_cairo.skins.sensors.WHITE=vehicles_cairo.skins.sensors-module.html#WHITE"><a title="vehicles_cairo.WHITE
+vehicles_cairo.constants.WHITE
+vehicles_cairo.skins.WHITE
+vehicles_cairo.skins.flies.WHITE
+vehicles_cairo.skins.sensors.WHITE" class="py-name" href="#" onclick="return doclink('link-6', 'WHITE', 'link-6');">WHITE</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt id="link-7" class="py-name" targets="Variable vehicles_cairo.BLACK=vehicles_cairo-module.html#BLACK,Variable vehicles_cairo.constants.BLACK=vehicles_cairo.constants-module.html#BLACK,Variable vehicles_cairo.skins.BLACK=vehicles_cairo.skins-module.html#BLACK,Variable vehicles_cairo.skins.flies.BLACK=vehicles_cairo.skins.flies-module.html#BLACK,Variable vehicles_cairo.skins.robot_skins.BLACK=vehicles_cairo.skins.robot_skins-module.html#BLACK,Variable vehicles_cairo.skins.sensors.BLACK=vehicles_cairo.skins.sensors-module.html#BLACK"><a title="vehicles_cairo.BLACK
+vehicles_cairo.constants.BLACK
+vehicles_cairo.skins.BLACK
+vehicles_cairo.skins.flies.BLACK
+vehicles_cairo.skins.robot_skins.BLACK
+vehicles_cairo.skins.sensors.BLACK" class="py-name" href="#" onclick="return doclink('link-7', 'BLACK', 'link-7');">BLACK</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt id="link-8" class="py-name" targets="Variable vehicles_cairo.YELLOW=vehicles_cairo-module.html#YELLOW,Variable vehicles_cairo.constants.YELLOW=vehicles_cairo.constants-module.html#YELLOW,Variable vehicles_cairo.skins.YELLOW=vehicles_cairo.skins-module.html#YELLOW,Variable vehicles_cairo.skins.sensors.YELLOW=vehicles_cairo.skins.sensors-module.html#YELLOW"><a title="vehicles_cairo.YELLOW
+vehicles_cairo.constants.YELLOW
+vehicles_cairo.skins.YELLOW
+vehicles_cairo.skins.sensors.YELLOW" class="py-name" href="#" onclick="return doclink('link-8', 'YELLOW', 'link-8');">YELLOW</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"> </tt>
+<a name="cairo_skin_sick"></a><div id="cairo_skin_sick-def"><a name="L11"></a><tt class="py-lineno">11</tt> <a class="py-toggle" href="#" id="cairo_skin_sick-toggle" onclick="return toggle('cairo_skin_sick');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles_cairo.skins.sensors-module.html#cairo_skin_sick">cairo_skin_sick</a><tt class="py-op">(</tt><tt class="py-param">cr</tt><tt class="py-op">,</tt> <tt class="py-param">size</tt><tt class="py-op">=</tt><tt class="py-number">1.0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="cairo_skin_sick-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="cairo_skin_sick-expanded"><a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">    <tt class="py-keyword">with</tt> <tt id="link-9" class="py-name"><a title="cairo_utils.contexts.cairo_save" class="py-name" href="#" onclick="return doclink('link-9', 'cairo_save', 'link-1');">cairo_save</a></tt><tt class="py-op">(</tt><tt class="py-name">cr</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">        <tt class="py-name">cr</tt><tt class="py-op">.</tt><tt class="py-name">scale</tt><tt class="py-op">(</tt><tt class="py-name">size</tt><tt class="py-op">,</tt> <tt class="py-name">size</tt><tt class="py-op">)</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">        <tt id="link-10" class="py-name"><a title="cairo_utils.shape.cairo_plot_rectangle" class="py-name" href="#" onclick="return doclink('link-10', 'cairo_plot_rectangle', 'link-4');">cairo_plot_rectangle</a></tt><tt class="py-op">(</tt><tt class="py-name">cr</tt><tt class="py-op">,</tt> <tt class="py-op">-</tt><tt class="py-number">.5</tt><tt class="py-op">,</tt> <tt class="py-op">-</tt><tt class="py-number">.5</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">                             <tt class="py-name">fill_color</tt><tt class="py-op">=</tt><tt id="link-11" class="py-name"><a title="vehicles_cairo.YELLOW
+vehicles_cairo.constants.YELLOW
+vehicles_cairo.skins.YELLOW
+vehicles_cairo.skins.sensors.YELLOW" class="py-name" href="#" onclick="return doclink('link-11', 'YELLOW', 'link-8');">YELLOW</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">                             <tt class="py-name">border_color</tt><tt class="py-op">=</tt><tt id="link-12" class="py-name"><a title="vehicles_cairo.BLACK
+vehicles_cairo.constants.BLACK
+vehicles_cairo.skins.BLACK
+vehicles_cairo.skins.flies.BLACK
+vehicles_cairo.skins.robot_skins.BLACK
+vehicles_cairo.skins.sensors.BLACK" class="py-name" href="#" onclick="return doclink('link-12', 'BLACK', 'link-7');">BLACK</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">                             <tt class="py-name">border_width</tt><tt class="py-op">=</tt><tt class="py-number">0.005</tt><tt class="py-op">)</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">        <tt class="py-name">w2</tt> <tt class="py-op">=</tt> <tt class="py-number">1.0</tt> <tt class="py-op">/</tt> <tt class="py-number">1.6</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">        <tt class="py-name">l</tt> <tt class="py-op">=</tt> <tt class="py-number">1.0</tt> <tt class="py-op">/</tt> <tt class="py-number">3</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">        <tt id="link-13" class="py-name"><a title="cairo_utils.shape.cairo_plot_rectangle" class="py-name" href="#" onclick="return doclink('link-13', 'cairo_plot_rectangle', 'link-4');">cairo_plot_rectangle</a></tt><tt class="py-op">(</tt><tt class="py-name">cr</tt><tt class="py-op">,</tt> <tt class="py-number">.5</tt> <tt class="py-op">-</tt> <tt class="py-name">l</tt><tt class="py-op">,</tt> <tt class="py-op">-</tt><tt class="py-name">w2</tt> <tt class="py-op">/</tt> <tt class="py-number">2</tt><tt class="py-op">,</tt> <tt class="py-name">l</tt><tt class="py-op">,</tt> <tt class="py-name">w2</tt><tt class="py-op">,</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">                             <tt class="py-name">fill_color</tt><tt class="py-op">=</tt><tt id="link-14" class="py-name"><a title="vehicles_cairo.BLACK
+vehicles_cairo.constants.BLACK
+vehicles_cairo.skins.BLACK
+vehicles_cairo.skins.flies.BLACK
+vehicles_cairo.skins.robot_skins.BLACK
+vehicles_cairo.skins.sensors.BLACK" class="py-name" href="#" onclick="return doclink('link-14', 'BLACK', 'link-7');">BLACK</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"> </tt>
+<a name="cairo_skin_eye"></a><div id="cairo_skin_eye-def"><a name="L25"></a><tt class="py-lineno">25</tt> <a class="py-toggle" href="#" id="cairo_skin_eye-toggle" onclick="return toggle('cairo_skin_eye');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles_cairo.skins.sensors-module.html#cairo_skin_eye">cairo_skin_eye</a><tt class="py-op">(</tt><tt class="py-param">cr</tt><tt class="py-op">,</tt> <tt class="py-param">size</tt><tt class="py-op">=</tt><tt class="py-number">1.0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="cairo_skin_eye-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="cairo_skin_eye-expanded"><a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">    <tt class="py-keyword">with</tt> <tt id="link-15" class="py-name"><a title="cairo_utils.contexts.cairo_save" class="py-name" href="#" onclick="return doclink('link-15', 'cairo_save', 'link-1');">cairo_save</a></tt><tt class="py-op">(</tt><tt class="py-name">cr</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">        <tt class="py-name">cr</tt><tt class="py-op">.</tt><tt class="py-name">scale</tt><tt class="py-op">(</tt><tt class="py-name">size</tt><tt class="py-op">,</tt> <tt class="py-name">size</tt><tt class="py-op">)</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">        <tt class="py-comment"># White part</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">        <tt id="link-16" class="py-name"><a title="cairo_utils.shape.cairo_plot_circle2" class="py-name" href="#" onclick="return doclink('link-16', 'cairo_plot_circle2', 'link-5');">cairo_plot_circle2</a></tt><tt class="py-op">(</tt><tt class="py-name">cr</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">                           <tt class="py-name">fill_color</tt><tt class="py-op">=</tt><tt id="link-17" class="py-name"><a title="vehicles_cairo.WHITE
+vehicles_cairo.constants.WHITE
+vehicles_cairo.skins.WHITE
+vehicles_cairo.skins.flies.WHITE
+vehicles_cairo.skins.sensors.WHITE" class="py-name" href="#" onclick="return doclink('link-17', 'WHITE', 'link-6');">WHITE</a></tt><tt class="py-op">,</tt> <tt class="py-name">border_color</tt><tt class="py-op">=</tt><tt id="link-18" class="py-name"><a title="vehicles_cairo.BLACK
+vehicles_cairo.constants.BLACK
+vehicles_cairo.skins.BLACK
+vehicles_cairo.skins.flies.BLACK
+vehicles_cairo.skins.robot_skins.BLACK
+vehicles_cairo.skins.sensors.BLACK" class="py-name" href="#" onclick="return doclink('link-18', 'BLACK', 'link-7');">BLACK</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">                           <tt class="py-name">border_width</tt><tt class="py-op">=</tt><tt class="py-number">0.05</tt><tt class="py-op">)</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">        <tt class="py-comment"># Brown</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">        <tt id="link-19" class="py-name"><a title="cairo_utils.shape.cairo_plot_circle2" class="py-name" href="#" onclick="return doclink('link-19', 'cairo_plot_circle2', 'link-5');">cairo_plot_circle2</a></tt><tt class="py-op">(</tt><tt class="py-name">cr</tt><tt class="py-op">,</tt> <tt class="py-number">0.5</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0.5</tt><tt class="py-op">,</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">                           <tt class="py-name">fill_color</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-number">.4</tt><tt class="py-op">,</tt> <tt class="py-number">.2</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">                           <tt class="py-name">border_color</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">                           <tt class="py-name">border_width</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">        <tt class="py-comment"># Black</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">        <tt id="link-20" class="py-name"><a title="cairo_utils.shape.cairo_plot_circle2" class="py-name" href="#" onclick="return doclink('link-20', 'cairo_plot_circle2', 'link-5');">cairo_plot_circle2</a></tt><tt class="py-op">(</tt><tt class="py-name">cr</tt><tt class="py-op">,</tt> <tt class="py-number">0.6</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0.25</tt><tt class="py-op">,</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">                           <tt class="py-name">fill_color</tt><tt class="py-op">=</tt><tt id="link-21" class="py-name"><a title="vehicles_cairo.BLACK
+vehicles_cairo.constants.BLACK
+vehicles_cairo.skins.BLACK
+vehicles_cairo.skins.flies.BLACK
+vehicles_cairo.skins.robot_skins.BLACK
+vehicles_cairo.skins.sensors.BLACK" class="py-name" href="#" onclick="return doclink('link-21', 'BLACK', 'link-7');">BLACK</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">                           <tt class="py-name">border_color</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">                           <tt class="py-name">border_width</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line"> </tt>
+<a name="cairo_skin_transparent"></a><div id="cairo_skin_transparent-def"><a name="L46"></a><tt class="py-lineno">46</tt> <a class="py-toggle" href="#" id="cairo_skin_transparent-toggle" onclick="return toggle('cairo_skin_transparent');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles_cairo.skins.sensors-module.html#cairo_skin_transparent">cairo_skin_transparent</a><tt class="py-op">(</tt><tt class="py-param">cr</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="cairo_skin_transparent-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="cairo_skin_transparent-expanded"><a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">    <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line"> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line"> </tt>
+<a name="cairo_ref_frame"></a><div id="cairo_ref_frame-def"><a name="L50"></a><tt class="py-lineno">50</tt> <a class="py-toggle" href="#" id="cairo_ref_frame-toggle" onclick="return toggle('cairo_ref_frame');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles_cairo.skins.sensors-module.html#cairo_ref_frame">cairo_ref_frame</a><tt class="py-op">(</tt><tt class="py-param">cr</tt><tt class="py-op">,</tt> <tt class="py-param">l</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-param">x_color</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-param">y_color</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="cairo_ref_frame-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="cairo_ref_frame-expanded"><a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">    <tt class="py-keyword">with</tt> <tt id="link-22" class="py-name"><a title="cairo_utils.contexts.cairo_save" class="py-name" href="#" onclick="return doclink('link-22', 'cairo_save', 'link-1');">cairo_save</a></tt><tt class="py-op">(</tt><tt class="py-name">cr</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">        <tt id="link-23" class="py-name" targets="Function vehicles_cairo.skins.sensors.cairo_arrow()=vehicles_cairo.skins.sensors-module.html#cairo_arrow"><a title="vehicles_cairo.skins.sensors.cairo_arrow" class="py-name" href="#" onclick="return doclink('link-23', 'cairo_arrow', 'link-23');">cairo_arrow</a></tt><tt class="py-op">(</tt><tt class="py-name">cr</tt><tt class="py-op">,</tt> <tt class="py-name">length</tt><tt class="py-op">=</tt><tt class="py-name">l</tt><tt class="py-op">,</tt> <tt class="py-name">border_width</tt><tt class="py-op">=</tt><tt class="py-number">0.05</tt><tt class="py-op">,</tt> <tt class="py-name">border_color</tt><tt class="py-op">=</tt><tt class="py-name">x_color</tt><tt class="py-op">)</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">        <tt class="py-keyword">with</tt> <tt id="link-24" class="py-name"><a title="cairo_utils.transformations.cairo_transform" class="py-name" href="#" onclick="return doclink('link-24', 'cairo_transform', 'link-3');">cairo_transform</a></tt><tt class="py-op">(</tt><tt class="py-name">cr</tt><tt class="py-op">,</tt> <tt class="py-name">r</tt><tt class="py-op">=</tt><tt class="py-name">np</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name" targets="Function vehicles.simulation.collision_utils_test.pi()=vehicles.simulation.collision_utils_test-module.html#pi"><a title="vehicles.simulation.collision_utils_test.pi" class="py-name" href="#" onclick="return doclink('link-25', 'pi', 'link-25');">pi</a></tt> <tt class="py-op">/</tt> <tt class="py-number">2</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">            <tt id="link-26" class="py-name"><a title="vehicles_cairo.skins.sensors.cairo_arrow" class="py-name" href="#" onclick="return doclink('link-26', 'cairo_arrow', 'link-23');">cairo_arrow</a></tt><tt class="py-op">(</tt><tt class="py-name">cr</tt><tt class="py-op">,</tt> <tt class="py-name">length</tt><tt class="py-op">=</tt><tt class="py-name">l</tt><tt class="py-op">,</tt> <tt class="py-name">border_width</tt><tt class="py-op">=</tt><tt class="py-number">0.05</tt><tt class="py-op">,</tt> <tt class="py-name">border_color</tt><tt class="py-op">=</tt><tt class="py-name">y_color</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line"> </tt>
+<a name="cairo_arrow"></a><div id="cairo_arrow-def"><a name="L56"></a><tt class="py-lineno">56</tt> <a class="py-toggle" href="#" id="cairo_arrow-toggle" onclick="return toggle('cairo_arrow');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles_cairo.skins.sensors-module.html#cairo_arrow">cairo_arrow</a><tt class="py-op">(</tt><tt class="py-param">cr</tt><tt class="py-op">,</tt> <tt class="py-param">length</tt><tt class="py-op">,</tt> <tt class="py-param">caplen</tt><tt class="py-op">=</tt><tt class="py-number">0.05</tt><tt class="py-op">,</tt> <tt class="py-param">capwidth</tt><tt class="py-op">=</tt><tt class="py-number">0.05</tt><tt class="py-op">,</tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">                <tt class="py-param">border_width</tt><tt class="py-op">=</tt><tt class="py-number">0.05</tt><tt class="py-op">,</tt> <tt class="py-param">border_color</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="cairo_arrow-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="cairo_arrow-expanded"><a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line"> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">    <tt class="py-name">cr</tt><tt class="py-op">.</tt><tt class="py-name">set_line_width</tt><tt class="py-op">(</tt><tt class="py-name">border_width</tt><tt class="py-op">)</tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line">    <tt id="link-27" class="py-name"><a title="cairo_utils.colors.cairo_set_color" class="py-name" href="#" onclick="return doclink('link-27', 'cairo_set_color', 'link-2');">cairo_set_color</a></tt><tt class="py-op">(</tt><tt class="py-name">cr</tt><tt class="py-op">,</tt> <tt class="py-name">border_color</tt><tt class="py-op">)</tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line"> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line">    <tt class="py-name">cr</tt><tt class="py-op">.</tt><tt class="py-name">move_to</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">    <tt class="py-name">cr</tt><tt class="py-op">.</tt><tt class="py-name">line_to</tt><tt class="py-op">(</tt><tt class="py-name">length</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line">    <tt class="py-name">cr</tt><tt class="py-op">.</tt><tt class="py-name">stroke</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line"> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line">    <tt class="py-name">cr</tt><tt class="py-op">.</tt><tt class="py-name">move_to</tt><tt class="py-op">(</tt><tt class="py-name">length</tt> <tt class="py-op">-</tt> <tt class="py-name">caplen</tt><tt class="py-op">,</tt> <tt class="py-name">capwidth</tt> <tt class="py-op">/</tt> <tt class="py-number">2.0</tt><tt class="py-op">)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line">    <tt class="py-name">cr</tt><tt class="py-op">.</tt><tt class="py-name">line_to</tt><tt class="py-op">(</tt><tt class="py-name">length</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line">    <tt class="py-name">cr</tt><tt class="py-op">.</tt><tt class="py-name">line_to</tt><tt class="py-op">(</tt><tt class="py-name">length</tt> <tt class="py-op">-</tt> <tt class="py-name">caplen</tt><tt class="py-op">,</tt> <tt class="py-op">-</tt><tt class="py-name">capwidth</tt> <tt class="py-op">/</tt> <tt class="py-number">2.0</tt><tt class="py-op">)</tt> </tt>
+<a name="L69"></a><tt class="py-lineno">69</tt>  <tt class="py-line">    <tt class="py-name">cr</tt><tt class="py-op">.</tt><tt class="py-name">fill</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/vehicles">Vehicles</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Wed Feb  1 14:46:47 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

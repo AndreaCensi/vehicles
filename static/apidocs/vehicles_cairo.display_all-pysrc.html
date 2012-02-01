@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>vehicles_cairo.display_all</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/vehicles">Vehicles</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="vehicles_cairo-module.html">Package&nbsp;vehicles_cairo</a> ::
+        Module&nbsp;display_all
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="vehicles_cairo.display_all-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="vehicles_cairo.display_all-module.html">Module vehicles_cairo.display_all</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt> <tt class="py-keyword">import</tt> <tt class="py-op">(</tt><tt id="link-0" class="py-name" targets="Function vehicles_cairo.sensor_data.cairo_plot_sensor_data()=vehicles_cairo.sensor_data-module.html#cairo_plot_sensor_data"><a title="vehicles_cairo.sensor_data.cairo_plot_sensor_data" class="py-name" href="#" onclick="return doclink('link-0', 'cairo_plot_sensor_data', 'link-0');">cairo_plot_sensor_data</a></tt><tt class="py-op">,</tt> <tt id="link-1" class="py-name" targets="Function vehicles_cairo.world_geometry.cairo_plot_sources()=vehicles_cairo.world_geometry-module.html#cairo_plot_sources"><a title="vehicles_cairo.world_geometry.cairo_plot_sources" class="py-name" href="#" onclick="return doclink('link-1', 'cairo_plot_sources', 'link-1');">cairo_plot_sources</a></tt><tt class="py-op">,</tt> <tt id="link-2" class="py-name" targets="Function cairo_utils.contexts.cairo_save()=cairo_utils.contexts-module.html#cairo_save"><a title="cairo_utils.contexts.cairo_save" class="py-name" href="#" onclick="return doclink('link-2', 'cairo_save', 'link-2');">cairo_save</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line">    <tt id="link-3" class="py-name" targets="Function vehicles_cairo.world_geometry.cairo_show_world_geometry()=vehicles_cairo.world_geometry-module.html#cairo_show_world_geometry"><a title="vehicles_cairo.world_geometry.cairo_show_world_geometry" class="py-name" href="#" onclick="return doclink('link-3', 'cairo_show_world_geometry', 'link-3');">cairo_show_world_geometry</a></tt><tt class="py-op">,</tt> <tt class="py-name">cairo</tt><tt class="py-op">,</tt> <tt id="link-4" class="py-name" targets="Class vehicles_cairo.constants.CairoConstants=vehicles_cairo.constants.CairoConstants-class.html"><a title="vehicles_cairo.constants.CairoConstants" class="py-name" href="#" onclick="return doclink('link-4', 'CairoConstants', 'link-4');">CairoConstants</a></tt><tt class="py-op">,</tt> <tt id="link-5" class="py-name" targets="Function vehicles_cairo.utils.cairo_set_axis()=vehicles_cairo.utils-module.html#cairo_set_axis"><a title="vehicles_cairo.utils.cairo_set_axis" class="py-name" href="#" onclick="return doclink('link-5', 'cairo_set_axis', 'link-5');">cairo_set_axis</a></tt><tt class="py-op">,</tt> <tt class="py-name">np</tt><tt class="py-op">,</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line">    <tt id="link-6" class="py-name" targets="Function vehicles_cairo.utils.cairo_rototranslate()=vehicles_cairo.utils-module.html#cairo_rototranslate"><a title="vehicles_cairo.utils.cairo_rototranslate" class="py-name" href="#" onclick="return doclink('link-6', 'cairo_rototranslate', 'link-6');">cairo_rototranslate</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">contracts</tt> <tt class="py-keyword">import</tt> <tt class="py-name">contract</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">geometry</tt> <tt class="py-keyword">import</tt> <tt class="py-name">translation_from_SE2</tt><tt class="py-op">,</tt> <tt class="py-name">SE2_from_SE3</tt><tt class="py-op">,</tt> <tt id="link-7" class="py-name" targets="Variable vehicles.SE3=vehicles-module.html#SE3,Variable vehicles.simulation.SE3=vehicles.simulation-module.html#SE3,Variable vehicles.simulation.vehicle.SE3=vehicles.simulation.vehicle-module.html#SE3,Variable vehicles.simulation.vsimulation.SE3=vehicles.simulation.vsimulation-module.html#SE3,Variable vehicles_cairo.SE3=vehicles_cairo-module.html#SE3,Variable vehicles_cairo.display_all.SE3=vehicles_cairo.display_all-module.html#SE3,Variable vehicles_cairo.sensor_data.SE3=vehicles_cairo.sensor_data-module.html#SE3"><a title="vehicles.SE3
+vehicles.simulation.SE3
+vehicles.simulation.vehicle.SE3
+vehicles.simulation.vsimulation.SE3
+vehicles_cairo.SE3
+vehicles_cairo.display_all.SE3
+vehicles_cairo.sensor_data.SE3" class="py-name" href="#" onclick="return doclink('link-7', 'SE3', 'link-7');">SE3</a></tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-8" class="py-name" targets="Package vehicles=vehicles-module.html,Module vehicles.configuration.vehicles=vehicles.configuration.vehicles-module.html,Module vehicles.programs.display_demos.vehicles=vehicles.programs.display_demos.vehicles-module.html"><a title="vehicles
+vehicles.configuration.vehicles
+vehicles.programs.display_demos.vehicles" class="py-name" href="#" onclick="return doclink('link-8', 'vehicles', 'link-8');">vehicles</a></tt> <tt class="py-keyword">import</tt> <tt id="link-9" class="py-name" targets="Variable vehicles.VehiclesConfig=vehicles-module.html#VehiclesConfig,Variable vehicles.configuration.VehiclesConfig=vehicles.configuration-module.html#VehiclesConfig,Variable vehicles.configuration.master.VehiclesConfig=vehicles.configuration.master-module.html#VehiclesConfig,Variable vehicles.programs.display_demos.simulations.VehiclesConfig=vehicles.programs.display_demos.simulations-module.html#VehiclesConfig,Variable vehicles.programs.display_demos.skins.VehiclesConfig=vehicles.programs.display_demos.skins-module.html#VehiclesConfig,Variable vehicles.programs.display_demos.vehicles.VehiclesConfig=vehicles.programs.display_demos.vehicles-module.html#VehiclesConfig,Variable vehicles.programs.inspect_textures.main'.VehiclesConfig=vehicles.programs.inspect_textures.main%27-module.html#VehiclesConfig,Variable vehicles.programs.print_config.main'.VehiclesConfig=vehicles.programs.print_config.main%27-module.html#VehiclesConfig,Variable vehicles_boot.create_olympics_configs.VehiclesConfig=vehicles_boot.create_olympics_configs-module.html#VehiclesConfig,Variable vehicles_boot.create_olympics_configs.main'.VehiclesConfig=vehicles_boot.create_olympics_configs.main%27-module.html#VehiclesConfig,Variable vehicles_boot.vehicles_simulation.VehiclesConfig=vehicles_boot.vehicles_simulation-module.html#VehiclesConfig,Variable vehicles_cairo.VehiclesConfig=vehicles_cairo-module.html#VehiclesConfig,Variable vehicles_cairo.display_all.VehiclesConfig=vehicles_cairo.display_all-module.html#VehiclesConfig,Variable vehicles_cairo.sensor_data.VehiclesConfig=vehicles_cairo.sensor_data-module.html#VehiclesConfig,Variable vehicles_cairo.skins.VehiclesConfig=vehicles_cairo.skins-module.html#VehiclesConfig,Variable vehicles_cairo.skins.complex_skin.VehiclesConfig=vehicles_cairo.skins.complex_skin-module.html#VehiclesConfig"><a title="vehicles.VehiclesConfig
+vehicles.configuration.VehiclesConfig
+vehicles.configuration.master.VehiclesConfig
+vehicles.programs.display_demos.simulations.VehiclesConfig
+vehicles.programs.display_demos.skins.VehiclesConfig
+vehicles.programs.display_demos.vehicles.VehiclesConfig
+vehicles.programs.inspect_textures.main'.VehiclesConfig
+vehicles.programs.print_config.main'.VehiclesConfig
+vehicles_boot.create_olympics_configs.VehiclesConfig
+vehicles_boot.create_olympics_configs.main'.VehiclesConfig
+vehicles_boot.vehicles_simulation.VehiclesConfig
+vehicles_cairo.VehiclesConfig
+vehicles_cairo.display_all.VehiclesConfig
+vehicles_cairo.sensor_data.VehiclesConfig
+vehicles_cairo.skins.VehiclesConfig
+vehicles_cairo.skins.complex_skin.VehiclesConfig" class="py-name" href="#" onclick="return doclink('link-9', 'VehiclesConfig', 'link-9');">VehiclesConfig</a></tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">geometry</tt> <tt class="py-keyword">import</tt> <tt class="py-name">angle_from_SE2</tt> </tt>
+<a name="vehicles_cairo_display_png"></a><div id="vehicles_cairo_display_png-def"><a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt> <a class="py-toggle" href="#" id="vehicles_cairo_display_png-toggle" onclick="return toggle('vehicles_cairo_display_png');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles_cairo.display_all-module.html#vehicles_cairo_display_png">vehicles_cairo_display_png</a><tt class="py-op">(</tt><tt class="py-param">filename</tt><tt class="py-op">,</tt> <tt class="py-param">width</tt><tt class="py-op">,</tt> <tt class="py-param">height</tt><tt class="py-op">,</tt> <tt class="py-param">sim_state</tt><tt class="py-op">,</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line">                               <tt class="py-op">**</tt><tt class="py-param">plotting_params</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="vehicles_cairo_display_png-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="vehicles_cairo_display_png-expanded"><a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line">    <tt class="py-name">surf</tt> <tt class="py-op">=</tt> <tt class="py-name">cairo</tt><tt class="py-op">.</tt><tt class="py-name">ImageSurface</tt><tt class="py-op">(</tt><tt class="py-name">cairo</tt><tt class="py-op">.</tt><tt class="py-name">FORMAT_ARGB32</tt><tt class="py-op">,</tt> <tt class="py-comment">#@UndefinedVariable </tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line">                              <tt class="py-name">width</tt><tt class="py-op">,</tt> <tt class="py-name">height</tt><tt class="py-op">)</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line">    <tt class="py-name">cr</tt> <tt class="py-op">=</tt> <tt class="py-name">cairo</tt><tt class="py-op">.</tt><tt class="py-name">Context</tt><tt class="py-op">(</tt><tt class="py-name">surf</tt><tt class="py-op">)</tt> <tt class="py-comment">#@UndefinedVariable</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line">    <tt id="link-10" class="py-name" targets="Function vehicles_cairo.display_all.vehicles_cairo_display_all()=vehicles_cairo.display_all-module.html#vehicles_cairo_display_all"><a title="vehicles_cairo.display_all.vehicles_cairo_display_all" class="py-name" href="#" onclick="return doclink('link-10', 'vehicles_cairo_display_all', 'link-10');">vehicles_cairo_display_all</a></tt><tt class="py-op">(</tt><tt class="py-name">cr</tt><tt class="py-op">,</tt> <tt class="py-name">width</tt><tt class="py-op">,</tt> <tt class="py-name">height</tt><tt class="py-op">,</tt> <tt class="py-name">sim_state</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">plotting_params</tt><tt class="py-op">)</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">    <tt class="py-name">surf</tt><tt class="py-op">.</tt><tt class="py-name">write_to_png</tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">)</tt> <tt class="py-comment"># Output to PNG</tt> </tt>
+</div><a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"> </tt>
+<a name="vehicles_cairo_display_pdf"></a><div id="vehicles_cairo_display_pdf-def"><a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt> <a class="py-toggle" href="#" id="vehicles_cairo_display_pdf-toggle" onclick="return toggle('vehicles_cairo_display_pdf');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles_cairo.display_all-module.html#vehicles_cairo_display_pdf">vehicles_cairo_display_pdf</a><tt class="py-op">(</tt><tt class="py-param">filename</tt><tt class="py-op">,</tt> <tt class="py-param">width</tt><tt class="py-op">,</tt> <tt class="py-param">height</tt><tt class="py-op">,</tt> <tt class="py-param">sim_state</tt><tt class="py-op">,</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line">                                <tt class="py-op">**</tt><tt class="py-param">plotting_params</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="vehicles_cairo_display_pdf-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="vehicles_cairo_display_pdf-expanded"><a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">    <tt class="py-name">surf</tt> <tt class="py-op">=</tt> <tt class="py-name">cairo</tt><tt class="py-op">.</tt><tt class="py-name">PDFSurface</tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">,</tt> <tt class="py-name">width</tt><tt class="py-op">,</tt> <tt class="py-name">height</tt><tt class="py-op">)</tt> <tt class="py-comment">#@UndefinedVariable</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">    <tt class="py-name">cr</tt> <tt class="py-op">=</tt> <tt class="py-name">cairo</tt><tt class="py-op">.</tt><tt class="py-name">Context</tt><tt class="py-op">(</tt><tt class="py-name">surf</tt><tt class="py-op">)</tt> <tt class="py-comment">#@UndefinedVariable</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">    <tt id="link-11" class="py-name"><a title="vehicles_cairo.display_all.vehicles_cairo_display_all" class="py-name" href="#" onclick="return doclink('link-11', 'vehicles_cairo_display_all', 'link-10');">vehicles_cairo_display_all</a></tt><tt class="py-op">(</tt><tt class="py-name">cr</tt><tt class="py-op">,</tt> <tt class="py-name">width</tt><tt class="py-op">,</tt> <tt class="py-name">height</tt><tt class="py-op">,</tt> <tt class="py-name">sim_state</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">plotting_params</tt><tt class="py-op">)</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">    <tt class="py-name">surf</tt><tt class="py-op">.</tt><tt class="py-name">show_page</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">    <tt class="py-name">surf</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Method procgraph_vehicles.boot_log_reader.BOLogReader.finish()=procgraph_vehicles.boot_log_reader.BOLogReader-class.html#finish,Method procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.finish()=procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay-class.html#finish,Method procgraph_vehicles.yaml_log_reader.YAMLLogReader.finish()=procgraph_vehicles.yaml_log_reader.YAMLLogReader-class.html#finish"><a title="procgraph_vehicles.boot_log_reader.BOLogReader.finish
+procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.finish
+procgraph_vehicles.yaml_log_reader.YAMLLogReader.finish" class="py-name" href="#" onclick="return doclink('link-12', 'finish', 'link-12');">finish</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"> </tt>
+<a name="vehicles_cairo_display_svg"></a><div id="vehicles_cairo_display_svg-def"><a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt> <a class="py-toggle" href="#" id="vehicles_cairo_display_svg-toggle" onclick="return toggle('vehicles_cairo_display_svg');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles_cairo.display_all-module.html#vehicles_cairo_display_svg">vehicles_cairo_display_svg</a><tt class="py-op">(</tt><tt class="py-param">filename</tt><tt class="py-op">,</tt> <tt class="py-param">width</tt><tt class="py-op">,</tt> <tt class="py-param">height</tt><tt class="py-op">,</tt> <tt class="py-param">sim_state</tt><tt class="py-op">,</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">                                <tt class="py-op">**</tt><tt class="py-param">plotting_params</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="vehicles_cairo_display_svg-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="vehicles_cairo_display_svg-expanded"><a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">    <tt class="py-name">surf</tt> <tt class="py-op">=</tt> <tt class="py-name">cairo</tt><tt class="py-op">.</tt><tt class="py-name">SVGSurface</tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">,</tt> <tt class="py-name">width</tt><tt class="py-op">,</tt> <tt class="py-name">height</tt><tt class="py-op">)</tt> <tt class="py-comment">#@UndefinedVariable</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">    <tt class="py-name">cr</tt> <tt class="py-op">=</tt> <tt class="py-name">cairo</tt><tt class="py-op">.</tt><tt class="py-name">Context</tt><tt class="py-op">(</tt><tt class="py-name">surf</tt><tt class="py-op">)</tt> <tt class="py-comment">#@UndefinedVariable</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">    <tt id="link-13" class="py-name"><a title="vehicles_cairo.display_all.vehicles_cairo_display_all" class="py-name" href="#" onclick="return doclink('link-13', 'vehicles_cairo_display_all', 'link-10');">vehicles_cairo_display_all</a></tt><tt class="py-op">(</tt><tt class="py-name">cr</tt><tt class="py-op">,</tt> <tt class="py-name">width</tt><tt class="py-op">,</tt> <tt class="py-name">height</tt><tt class="py-op">,</tt> <tt class="py-name">sim_state</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">plotting_params</tt><tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">    <tt class="py-name">surf</tt><tt class="py-op">.</tt><tt class="py-name">show_page</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">    <tt class="py-name">surf</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name"><a title="procgraph_vehicles.boot_log_reader.BOLogReader.finish
+procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.finish
+procgraph_vehicles.yaml_log_reader.YAMLLogReader.finish" class="py-name" href="#" onclick="return doclink('link-14', 'finish', 'link-12');">finish</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"> </tt>
+<a name="vehicles_cairo_display_all"></a><div id="vehicles_cairo_display_all-def"><a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt> <a class="py-toggle" href="#" id="vehicles_cairo_display_all-toggle" onclick="return toggle('vehicles_cairo_display_all');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles_cairo.display_all-module.html#vehicles_cairo_display_all">vehicles_cairo_display_all</a><tt class="py-op">(</tt><tt class="py-param">cr</tt><tt class="py-op">,</tt> <tt class="py-param">width</tt><tt class="py-op">,</tt> <tt class="py-param">height</tt><tt class="py-op">,</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">                            <tt class="py-param">sim_state</tt><tt class="py-op">,</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">                            <tt class="py-param">grid</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">                            <tt class="py-param">zoom</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">                            <tt class="py-param">show_sensor_data</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">,</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">                            <tt class="py-param">extra_draw_world</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">                            <tt class="py-param">first_person</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">,</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">                            <tt class="py-param">show_sensor_data_compact</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="vehicles_cairo_display_all-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="vehicles_cairo_display_all-expanded"><a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">    <tt class="py-keyword">with</tt> <tt id="link-15" class="py-name"><a title="cairo_utils.contexts.cairo_save" class="py-name" href="#" onclick="return doclink('link-15', 'cairo_save', 'link-2');">cairo_save</a></tt><tt class="py-op">(</tt><tt class="py-name">cr</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">        <tt class="py-comment"># Paint white</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">        <tt class="py-keyword">with</tt> <tt id="link-16" class="py-name"><a title="cairo_utils.contexts.cairo_save" class="py-name" href="#" onclick="return doclink('link-16', 'cairo_save', 'link-2');">cairo_save</a></tt><tt class="py-op">(</tt><tt class="py-name">cr</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">            <tt class="py-name">cr</tt><tt class="py-op">.</tt><tt class="py-name">set_source_rgb</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">            <tt class="py-name">cr</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name" targets="Class vehicles_cairo.skins.rectangle=vehicles_cairo.skins.rectangle-class.html"><a title="vehicles_cairo.skins.rectangle" class="py-name" href="#" onclick="return doclink('link-17', 'rectangle', 'link-17');">rectangle</a></tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-name">width</tt><tt class="py-op">,</tt> <tt class="py-name">height</tt><tt class="py-op">)</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">            <tt class="py-name">cr</tt><tt class="py-op">.</tt><tt class="py-name">fill</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">        <tt id="link-18" class="py-name" targets="Variable vehicles.interfaces.world.World.Episode.vehicle_state=vehicles.interfaces.world.World.Episode-class.html#vehicle_state"><a title="vehicles.interfaces.world.World.Episode.vehicle_state" class="py-name" href="#" onclick="return doclink('link-18', 'vehicle_state', 'link-18');">vehicle_state</a></tt> <tt class="py-op">=</tt> <tt class="py-name">sim_state</tt><tt class="py-op">[</tt><tt class="py-string">'vehicle'</tt><tt class="py-op">]</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">        <tt class="py-name">robot_pose</tt> <tt class="py-op">=</tt> <tt class="py-name">SE2_from_SE3</tt><tt class="py-op">(</tt><tt id="link-19" class="py-name"><a title="vehicles.SE3
+vehicles.simulation.SE3
+vehicles.simulation.vehicle.SE3
+vehicles.simulation.vsimulation.SE3
+vehicles_cairo.SE3
+vehicles_cairo.display_all.SE3
+vehicles_cairo.sensor_data.SE3" class="py-name" href="#" onclick="return doclink('link-19', 'SE3', 'link-7');">SE3</a></tt><tt class="py-op">.</tt><tt id="link-20" class="py-name" targets="Static Method vehicles.interfaces.primitives.Source.from_yaml()=vehicles.interfaces.primitives.Source-class.html#from_yaml"><a title="vehicles.interfaces.primitives.Source.from_yaml" class="py-name" href="#" onclick="return doclink('link-20', 'from_yaml', 'link-20');">from_yaml</a></tt><tt class="py-op">(</tt><tt id="link-21" class="py-name"><a title="vehicles.interfaces.world.World.Episode.vehicle_state" class="py-name" href="#" onclick="return doclink('link-21', 'vehicle_state', 'link-18');">vehicle_state</a></tt><tt class="py-op">[</tt><tt class="py-string">'pose'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">        <tt class="py-name">robot_radius</tt> <tt class="py-op">=</tt> <tt id="link-22" class="py-name"><a title="vehicles.interfaces.world.World.Episode.vehicle_state" class="py-name" href="#" onclick="return doclink('link-22', 'vehicle_state', 'link-18');">vehicle_state</a></tt><tt class="py-op">[</tt><tt class="py-string">'radius'</tt><tt class="py-op">]</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">        <tt class="py-name">world_state</tt> <tt class="py-op">=</tt> <tt class="py-name">sim_state</tt><tt class="py-op">[</tt><tt class="py-string">'world'</tt><tt class="py-op">]</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">        <tt class="py-name">bounds</tt> <tt class="py-op">=</tt> <tt class="py-name">world_state</tt><tt class="py-op">[</tt><tt class="py-string">'bounds'</tt><tt class="py-op">]</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">        <tt class="py-name">bx</tt> <tt class="py-op">=</tt> <tt class="py-name">bounds</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">        <tt class="py-name">by</tt> <tt class="py-op">=</tt> <tt class="py-name">bounds</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">        <tt id="link-23" class="py-name" targets="Function vehicles_cairo.display_all.vehicles_cairo_set_coordinates()=vehicles_cairo.display_all-module.html#vehicles_cairo_set_coordinates"><a title="vehicles_cairo.display_all.vehicles_cairo_set_coordinates" class="py-name" href="#" onclick="return doclink('link-23', 'vehicles_cairo_set_coordinates', 'link-23');">vehicles_cairo_set_coordinates</a></tt><tt class="py-op">(</tt><tt class="py-name">cr</tt><tt class="py-op">,</tt> <tt class="py-name">width</tt><tt class="py-op">,</tt> <tt class="py-name">height</tt><tt class="py-op">,</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">                                       <tt class="py-name">bounds</tt><tt class="py-op">,</tt> <tt class="py-name">robot_pose</tt><tt class="py-op">,</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">                                       <tt class="py-name">zoom</tt><tt class="py-op">=</tt><tt class="py-name">zoom</tt><tt class="py-op">,</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">                                       <tt class="py-name">first_person</tt><tt class="py-op">=</tt><tt class="py-name">first_person</tt><tt class="py-op">)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">False</tt><tt class="py-op">:</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">            <tt class="py-name">cr</tt><tt class="py-op">.</tt><tt class="py-name">set_source_rgb</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">            <tt class="py-name">cr</tt><tt class="py-op">.</tt><tt class="py-name">set_line_width</tt><tt class="py-op">(</tt><tt class="py-number">0.05</tt><tt class="py-op">)</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">            <tt class="py-name">cr</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="vehicles_cairo.skins.rectangle" class="py-name" href="#" onclick="return doclink('link-24', 'rectangle', 'link-17');">rectangle</a></tt><tt class="py-op">(</tt><tt class="py-name">bx</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">by</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">bx</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">-</tt> <tt class="py-name">bx</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">by</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">-</tt> <tt class="py-name">by</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">            <tt class="py-name">cr</tt><tt class="py-op">.</tt><tt class="py-name">stroke</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">grid</tt> <tt class="py-op">&gt;</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">            <tt id="link-25" class="py-name" targets="Function vehicles_cairo.display_all.show_grid()=vehicles_cairo.display_all-module.html#show_grid"><a title="vehicles_cairo.display_all.show_grid" class="py-name" href="#" onclick="return doclink('link-25', 'show_grid', 'link-25');">show_grid</a></tt><tt class="py-op">(</tt><tt class="py-name">cr</tt><tt class="py-op">,</tt> <tt class="py-name">bx</tt><tt class="py-op">,</tt> <tt class="py-name">by</tt><tt class="py-op">,</tt> <tt class="py-name">spacing</tt><tt class="py-op">=</tt><tt class="py-name">grid</tt><tt class="py-op">,</tt> <tt class="py-name">margin</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">extra_draw_world</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">            <tt class="py-name">extra_draw_world</tt><tt class="py-op">(</tt><tt class="py-name">cr</tt><tt class="py-op">)</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">        <tt id="link-26" class="py-name"><a title="vehicles_cairo.world_geometry.cairo_plot_sources" class="py-name" href="#" onclick="return doclink('link-26', 'cairo_plot_sources', 'link-1');">cairo_plot_sources</a></tt><tt class="py-op">(</tt><tt class="py-name">cr</tt><tt class="py-op">,</tt> <tt class="py-name">world_state</tt><tt class="py-op">)</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">        <tt id="link-27" class="py-name"><a title="vehicles_cairo.world_geometry.cairo_show_world_geometry" class="py-name" href="#" onclick="return doclink('link-27', 'cairo_show_world_geometry', 'link-3');">cairo_show_world_geometry</a></tt><tt class="py-op">(</tt><tt class="py-name">cr</tt><tt class="py-op">,</tt> <tt class="py-name">world_state</tt><tt class="py-op">)</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">        <tt class="py-comment"># XXX: tmp</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">extra_draw_world</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">            <tt class="py-name">extra_draw_world</tt><tt class="py-op">(</tt><tt class="py-name">cr</tt><tt class="py-op">)</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">        <tt class="py-name">display_robot</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">display_robot</tt><tt class="py-op">:</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">            <tt class="py-name">joints</tt> <tt class="py-op">=</tt> <tt id="link-28" class="py-name" targets="Function vehicles_cairo.display_all.get_joints_as_TSE3()=vehicles_cairo.display_all-module.html#get_joints_as_TSE3"><a title="vehicles_cairo.display_all.get_joints_as_TSE3" class="py-name" href="#" onclick="return doclink('link-28', 'get_joints_as_TSE3', 'link-28');">get_joints_as_TSE3</a></tt><tt class="py-op">(</tt><tt id="link-29" class="py-name"><a title="vehicles.interfaces.world.World.Episode.vehicle_state" class="py-name" href="#" onclick="return doclink('link-29', 'vehicle_state', 'link-18');">vehicle_state</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">            <tt class="py-name">extra</tt> <tt class="py-op">=</tt> <tt id="link-30" class="py-name"><a title="vehicles.interfaces.world.World.Episode.vehicle_state" class="py-name" href="#" onclick="return doclink('link-30', 'vehicle_state', 'link-18');">vehicle_state</a></tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-string">'extra'</tt><tt class="py-op">,</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">            <tt class="py-name">id_skin</tt> <tt class="py-op">=</tt> <tt class="py-name">extra</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-string">'skin'</tt><tt class="py-op">,</tt> <tt class="py-string">'default_skin'</tt><tt class="py-op">)</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">            <tt class="py-name">skin</tt> <tt class="py-op">=</tt> <tt id="link-31" class="py-name"><a title="vehicles.VehiclesConfig
+vehicles.configuration.VehiclesConfig
+vehicles.configuration.master.VehiclesConfig
+vehicles.programs.display_demos.simulations.VehiclesConfig
+vehicles.programs.display_demos.skins.VehiclesConfig
+vehicles.programs.display_demos.vehicles.VehiclesConfig
+vehicles.programs.inspect_textures.main'.VehiclesConfig
+vehicles.programs.print_config.main'.VehiclesConfig
+vehicles_boot.create_olympics_configs.VehiclesConfig
+vehicles_boot.create_olympics_configs.main'.VehiclesConfig
+vehicles_boot.vehicles_simulation.VehiclesConfig
+vehicles_cairo.VehiclesConfig
+vehicles_cairo.display_all.VehiclesConfig
+vehicles_cairo.sensor_data.VehiclesConfig
+vehicles_cairo.skins.VehiclesConfig
+vehicles_cairo.skins.complex_skin.VehiclesConfig" class="py-name" href="#" onclick="return doclink('link-31', 'VehiclesConfig', 'link-9');">VehiclesConfig</a></tt><tt class="py-op">.</tt><tt id="link-32" class="py-name" targets="Module vehicles.interfaces.skins=vehicles.interfaces.skins-module.html,Module vehicles.programs.display_demos.skins=vehicles.programs.display_demos.skins-module.html,Package vehicles_cairo.skins=vehicles_cairo.skins-module.html"><a title="vehicles.interfaces.skins
+vehicles.programs.display_demos.skins
+vehicles_cairo.skins" class="py-name" href="#" onclick="return doclink('link-32', 'skins', 'link-32');">skins</a></tt><tt class="py-op">.</tt><tt class="py-name">instance</tt><tt class="py-op">(</tt><tt class="py-name">id_skin</tt><tt class="py-op">)</tt> <tt class="py-comment">#@UndefinedVariable</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">            <tt class="py-keyword">with</tt> <tt id="link-33" class="py-name"><a title="vehicles_cairo.utils.cairo_rototranslate" class="py-name" href="#" onclick="return doclink('link-33', 'cairo_rototranslate', 'link-6');">cairo_rototranslate</a></tt><tt class="py-op">(</tt><tt class="py-name">cr</tt><tt class="py-op">,</tt> <tt class="py-name">robot_pose</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">                <tt class="py-name">cr</tt><tt class="py-op">.</tt><tt class="py-name">scale</tt><tt class="py-op">(</tt><tt class="py-name">robot_radius</tt><tt class="py-op">,</tt> <tt class="py-name">robot_radius</tt><tt class="py-op">)</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">                <tt class="py-name">skin</tt><tt class="py-op">.</tt><tt id="link-34" class="py-name" targets="Method vehicles.interfaces.skins.VehicleSkin.draw()=vehicles.interfaces.skins.VehicleSkin-class.html#draw,Method vehicles_cairo.skins.brai.draw()=vehicles_cairo.skins.brai-class.html#draw,Method vehicles_cairo.skins.car.draw()=vehicles_cairo.skins.car-class.html#draw,Method vehicles_cairo.skins.circular.draw()=vehicles_cairo.skins.circular-class.html#draw,Method vehicles_cairo.skins.complex_skin.ComplexSkin.draw()=vehicles_cairo.skins.complex_skin.ComplexSkin-class.html#draw,Method vehicles_cairo.skins.ddrive.draw()=vehicles_cairo.skins.ddrive-class.html#draw,Method vehicles_cairo.skins.eye.draw()=vehicles_cairo.skins.eye-class.html#draw,Method vehicles_cairo.skins.fly1.draw()=vehicles_cairo.skins.fly1-class.html#draw,Method vehicles_cairo.skins.omni.draw()=vehicles_cairo.skins.omni-class.html#draw,Method vehicles_cairo.skins.rectangle.draw()=vehicles_cairo.skins.rectangle-class.html#draw,Method vehicles_cairo.skins.sick.draw()=vehicles_cairo.skins.sick-class.html#draw,Method vehicles_cairo.skins.tracks.draw()=vehicles_cairo.skins.tracks-class.html#draw,Method vehicles_cairo.skins.transparent.draw()=vehicles_cairo.skins.transparent-class.html#draw,Method vehicles_cairo.skins.wheel.draw()=vehicles_cairo.skins.wheel-class.html#draw"><a title="vehicles.interfaces.skins.VehicleSkin.draw
+vehicles_cairo.skins.brai.draw
+vehicles_cairo.skins.car.draw
+vehicles_cairo.skins.circular.draw
+vehicles_cairo.skins.complex_skin.ComplexSkin.draw
+vehicles_cairo.skins.ddrive.draw
+vehicles_cairo.skins.eye.draw
+vehicles_cairo.skins.fly1.draw
+vehicles_cairo.skins.omni.draw
+vehicles_cairo.skins.rectangle.draw
+vehicles_cairo.skins.sick.draw
+vehicles_cairo.skins.tracks.draw
+vehicles_cairo.skins.transparent.draw
+vehicles_cairo.skins.wheel.draw" class="py-name" href="#" onclick="return doclink('link-34', 'draw', 'link-34');">draw</a></tt><tt class="py-op">(</tt><tt class="py-name">cr</tt><tt class="py-op">,</tt> <tt class="py-name">joints</tt><tt class="py-op">=</tt><tt class="py-name">joints</tt><tt class="py-op">,</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">                          <tt class="py-name">timestamp</tt><tt class="py-op">=</tt><tt class="py-name">sim_state</tt><tt class="py-op">[</tt><tt class="py-string">'timestamp'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">show_sensor_data</tt><tt class="py-op">:</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">            <tt id="link-35" class="py-name"><a title="vehicles_cairo.sensor_data.cairo_plot_sensor_data" class="py-name" href="#" onclick="return doclink('link-35', 'cairo_plot_sensor_data', 'link-0');">cairo_plot_sensor_data</a></tt><tt class="py-op">(</tt><tt class="py-name">cr</tt><tt class="py-op">,</tt> <tt id="link-36" class="py-name"><a title="vehicles.interfaces.world.World.Episode.vehicle_state" class="py-name" href="#" onclick="return doclink('link-36', 'vehicle_state', 'link-18');">vehicle_state</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">                                   <tt class="py-comment">#rho_min=robot_radius,</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">                                   <tt class="py-name">scale</tt><tt class="py-op">=</tt><tt class="py-name">robot_radius</tt><tt class="py-op">,</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">                                   <tt class="py-name">compact</tt><tt class="py-op">=</tt><tt class="py-name">show_sensor_data_compact</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"> </tt>
+<a name="get_joints_as_TSE3"></a><div id="get_joints_as_TSE3-def"><a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt> <a class="py-toggle" href="#" id="get_joints_as_TSE3-toggle" onclick="return toggle('get_joints_as_TSE3');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles_cairo.display_all-module.html#get_joints_as_TSE3">get_joints_as_TSE3</a><tt class="py-op">(</tt><tt class="py-param">vehicle_state</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="get_joints_as_TSE3-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="get_joints_as_TSE3-expanded"><a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">    <tt class="py-name">joints</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">js</tt> <tt class="py-keyword">in</tt> <tt id="link-37" class="py-name"><a title="vehicles.interfaces.world.World.Episode.vehicle_state" class="py-name" href="#" onclick="return doclink('link-37', 'vehicle_state', 'link-18');">vehicle_state</a></tt><tt class="py-op">[</tt><tt class="py-string">'joints'</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">        <tt class="py-name">joints</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt id="link-38" class="py-name"><a title="vehicles.SE3
+vehicles.simulation.SE3
+vehicles.simulation.vehicle.SE3
+vehicles.simulation.vsimulation.SE3
+vehicles_cairo.SE3
+vehicles_cairo.display_all.SE3
+vehicles_cairo.sensor_data.SE3" class="py-name" href="#" onclick="return doclink('link-38', 'SE3', 'link-7');">SE3</a></tt><tt class="py-op">.</tt><tt id="link-39" class="py-name"><a title="vehicles.interfaces.primitives.Source.from_yaml" class="py-name" href="#" onclick="return doclink('link-39', 'from_yaml', 'link-20');">from_yaml</a></tt><tt class="py-op">(</tt><tt class="py-name">js</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">joints</tt> </tt>
+</div><a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"> </tt>
+<a name="vehicles_cairo_set_coordinates"></a><div id="vehicles_cairo_set_coordinates-def"><a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">zoom</tt><tt class="py-op">=</tt><tt class="py-string">'&gt;=0'</tt><tt class="py-op">)</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt> <a class="py-toggle" href="#" id="vehicles_cairo_set_coordinates-toggle" onclick="return toggle('vehicles_cairo_set_coordinates');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles_cairo.display_all-module.html#vehicles_cairo_set_coordinates">vehicles_cairo_set_coordinates</a><tt class="py-op">(</tt><tt class="py-param">cr</tt><tt class="py-op">,</tt> <tt class="py-param">width</tt><tt class="py-op">,</tt> <tt class="py-param">height</tt><tt class="py-op">,</tt> <tt class="py-param">world_bounds</tt><tt class="py-op">,</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">                                        <tt class="py-param">robot_pose</tt><tt class="py-op">,</tt> <tt class="py-param">zoom</tt><tt class="py-op">,</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">                                        <tt class="py-param">first_person</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="vehicles_cairo_set_coordinates-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="vehicles_cairo_set_coordinates-expanded"><a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">    <tt class="py-name">bx</tt> <tt class="py-op">=</tt> <tt class="py-name">world_bounds</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">    <tt class="py-name">by</tt> <tt class="py-op">=</tt> <tt class="py-name">world_bounds</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line"> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">    <tt class="py-name">m</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> <tt class="py-comment"># extra space</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line"> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">zoom</tt> <tt class="py-op">==</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">        <tt class="py-name">extents</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">bx</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">-</tt> <tt class="py-name">m</tt><tt class="py-op">,</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">                   <tt class="py-name">bx</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-name">m</tt><tt class="py-op">,</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">                   <tt class="py-name">by</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">-</tt> <tt class="py-name">m</tt><tt class="py-op">,</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">                   <tt class="py-name">by</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-name">m</tt><tt class="py-op">]</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">        <tt class="py-name">t</tt> <tt class="py-op">=</tt> <tt class="py-name">translation_from_SE2</tt><tt class="py-op">(</tt><tt class="py-name">robot_pose</tt><tt class="py-op">)</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">        <tt class="py-comment"># don't go over the world side</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">first_person</tt><tt class="py-op">:</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">            <tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">maximum</tt><tt class="py-op">(</tt><tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">bx</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-name">zoom</tt><tt class="py-op">)</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">            <tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">minimum</tt><tt class="py-op">(</tt><tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">bx</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">-</tt> <tt class="py-name">zoom</tt><tt class="py-op">)</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">            <tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">maximum</tt><tt class="py-op">(</tt><tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">by</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-name">zoom</tt><tt class="py-op">)</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">            <tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">minimum</tt><tt class="py-op">(</tt><tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">by</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">-</tt> <tt class="py-name">zoom</tt><tt class="py-op">)</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line"> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">        <tt class="py-name">extents</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">-</tt> <tt class="py-name">zoom</tt> <tt class="py-op">-</tt> <tt class="py-name">m</tt><tt class="py-op">,</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">                   <tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-name">zoom</tt> <tt class="py-op">+</tt> <tt class="py-name">m</tt><tt class="py-op">,</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">                   <tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">-</tt> <tt class="py-name">zoom</tt> <tt class="py-op">-</tt> <tt class="py-name">m</tt><tt class="py-op">,</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">                   <tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">+</tt> <tt class="py-name">zoom</tt> <tt class="py-op">+</tt> <tt class="py-name">m</tt><tt class="py-op">]</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line"> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">    <tt id="link-40" class="py-name"><a title="vehicles_cairo.utils.cairo_set_axis" class="py-name" href="#" onclick="return doclink('link-40', 'cairo_set_axis', 'link-5');">cairo_set_axis</a></tt><tt class="py-op">(</tt><tt class="py-name">cr</tt><tt class="py-op">,</tt> <tt class="py-name">width</tt><tt class="py-op">,</tt> <tt class="py-name">height</tt><tt class="py-op">,</tt> <tt class="py-name">extents</tt><tt class="py-op">)</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line"> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">first_person</tt> <tt class="py-keyword">and</tt> <tt class="py-name">zoom</tt> <tt class="py-op">!=</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">        <tt class="py-name">angle</tt> <tt class="py-op">=</tt> <tt class="py-name">angle_from_SE2</tt><tt class="py-op">(</tt><tt class="py-name">robot_pose</tt><tt class="py-op">)</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">        <tt class="py-name">t</tt> <tt class="py-op">=</tt> <tt class="py-name">translation_from_SE2</tt><tt class="py-op">(</tt><tt class="py-name">robot_pose</tt><tt class="py-op">)</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">        <tt class="py-name">cr</tt><tt class="py-op">.</tt><tt class="py-name">translate</tt><tt class="py-op">(</tt><tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">        <tt class="py-name">cr</tt><tt class="py-op">.</tt><tt class="py-name">rotate</tt><tt class="py-op">(</tt><tt class="py-op">-</tt><tt class="py-name">angle</tt><tt class="py-op">)</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">        <tt class="py-name">cr</tt><tt class="py-op">.</tt><tt class="py-name">rotate</tt><tt class="py-op">(</tt><tt class="py-op">+</tt><tt class="py-name">np</tt><tt class="py-op">.</tt><tt id="link-41" class="py-name" targets="Function vehicles.simulation.collision_utils_test.pi()=vehicles.simulation.collision_utils_test-module.html#pi"><a title="vehicles.simulation.collision_utils_test.pi" class="py-name" href="#" onclick="return doclink('link-41', 'pi', 'link-41');">pi</a></tt> <tt class="py-op">/</tt> <tt class="py-number">2</tt><tt class="py-op">)</tt> <tt class="py-comment"># make the robot point "up"</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line">        <tt class="py-name">cr</tt><tt class="py-op">.</tt><tt class="py-name">translate</tt><tt class="py-op">(</tt><tt class="py-op">-</tt><tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-op">-</tt><tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line"> </tt>
+<a name="show_grid"></a><div id="show_grid-def"><a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line"> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line"> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt> <a class="py-toggle" href="#" id="show_grid-toggle" onclick="return toggle('show_grid');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles_cairo.display_all-module.html#show_grid">show_grid</a><tt class="py-op">(</tt><tt class="py-param">cr</tt><tt class="py-op">,</tt> <tt class="py-param">bx</tt><tt class="py-op">,</tt> <tt class="py-param">by</tt><tt class="py-op">,</tt> <tt class="py-param">spacing</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> <tt class="py-param">margin</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="show_grid-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="show_grid-expanded"><a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">    <tt class="py-name">cr</tt><tt class="py-op">.</tt><tt class="py-name">save</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line"> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line">    <tt class="py-name">cr</tt><tt class="py-op">.</tt><tt class="py-name">set_source_rgb</tt><tt class="py-op">(</tt><tt class="py-op">*</tt><tt id="link-42" class="py-name"><a title="vehicles_cairo.constants.CairoConstants" class="py-name" href="#" onclick="return doclink('link-42', 'CairoConstants', 'link-4');">CairoConstants</a></tt><tt class="py-op">.</tt><tt id="link-43" class="py-name" targets="Variable vehicles_cairo.constants.CairoConstants.grid_color=vehicles_cairo.constants.CairoConstants-class.html#grid_color"><a title="vehicles_cairo.constants.CairoConstants.grid_color" class="py-name" href="#" onclick="return doclink('link-43', 'grid_color', 'link-43');">grid_color</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line">    <tt class="py-name">cr</tt><tt class="py-op">.</tt><tt class="py-name">set_line_width</tt><tt class="py-op">(</tt><tt id="link-44" class="py-name"><a title="vehicles_cairo.constants.CairoConstants" class="py-name" href="#" onclick="return doclink('link-44', 'CairoConstants', 'link-4');">CairoConstants</a></tt><tt class="py-op">.</tt><tt id="link-45" class="py-name" targets="Variable vehicles_cairo.constants.CairoConstants.grid_width=vehicles_cairo.constants.CairoConstants-class.html#grid_width"><a title="vehicles_cairo.constants.CairoConstants.grid_width" class="py-name" href="#" onclick="return doclink('link-45', 'grid_width', 'link-45');">grid_width</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line"> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">    <tt class="py-keyword">def</tt> <tt class="py-def-name">segment</tt><tt class="py-op">(</tt><tt class="py-param">cr</tt><tt class="py-op">,</tt> <tt class="py-param">x0</tt><tt class="py-op">,</tt> <tt class="py-param">x1</tt><tt class="py-op">,</tt> <tt class="py-param">y0</tt><tt class="py-op">,</tt> <tt class="py-param">y1</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line">        <tt class="py-name">cr</tt><tt class="py-op">.</tt><tt class="py-name">move_to</tt><tt class="py-op">(</tt><tt class="py-name">x0</tt><tt class="py-op">,</tt> <tt class="py-name">y0</tt><tt class="py-op">)</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">        <tt class="py-name">cr</tt><tt class="py-op">.</tt><tt class="py-name">line_to</tt><tt class="py-op">(</tt><tt class="py-name">x1</tt><tt class="py-op">,</tt> <tt class="py-name">y1</tt><tt class="py-op">)</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line">        <tt class="py-name">cr</tt><tt class="py-op">.</tt><tt class="py-name">stroke</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line"> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">    <tt class="py-name">S</tt> <tt class="py-op">=</tt> <tt class="py-name">spacing</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">    <tt class="py-comment">#M = margin  # margin (cells)</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">    <tt class="py-name">M</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">    <tt class="py-name">xmin</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">floor</tt><tt class="py-op">(</tt><tt class="py-name">bx</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">/</tt> <tt class="py-name">S</tt><tt class="py-op">)</tt> <tt class="py-op">-</tt> <tt class="py-name">M</tt><tt class="py-op">)</tt> <tt class="py-op">*</tt> <tt class="py-name">S</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">    <tt class="py-name">xmax</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">ceil</tt><tt class="py-op">(</tt><tt class="py-name">bx</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">/</tt> <tt class="py-name">S</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-name">M</tt><tt class="py-op">)</tt> <tt class="py-op">*</tt> <tt class="py-name">S</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">    <tt class="py-name">ymin</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">floor</tt><tt class="py-op">(</tt><tt class="py-name">by</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">/</tt> <tt class="py-name">S</tt><tt class="py-op">)</tt> <tt class="py-op">-</tt> <tt class="py-name">M</tt><tt class="py-op">)</tt> <tt class="py-op">*</tt> <tt class="py-name">S</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">    <tt class="py-name">ymax</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">ceil</tt><tt class="py-op">(</tt><tt class="py-name">by</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">/</tt> <tt class="py-name">S</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-name">M</tt><tt class="py-op">)</tt> <tt class="py-op">*</tt> <tt class="py-name">S</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line"> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">x</tt> <tt class="py-keyword">in</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">linspace</tt><tt class="py-op">(</tt><tt class="py-name">xmin</tt><tt class="py-op">,</tt> <tt class="py-name">xmax</tt><tt class="py-op">,</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">round</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">xmax</tt> <tt class="py-op">-</tt> <tt class="py-name">xmin</tt><tt class="py-op">)</tt> <tt class="py-op">/</tt> <tt class="py-name">S</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line">        <tt class="py-name">segment</tt><tt class="py-op">(</tt><tt class="py-name">cr</tt><tt class="py-op">,</tt> <tt class="py-name">x</tt><tt class="py-op">,</tt> <tt class="py-name">x</tt><tt class="py-op">,</tt> <tt class="py-name">ymin</tt><tt class="py-op">,</tt> <tt class="py-name">ymax</tt><tt class="py-op">)</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line"> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-name">y</tt> <tt class="py-keyword">in</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">linspace</tt><tt class="py-op">(</tt><tt class="py-name">ymin</tt><tt class="py-op">,</tt> <tt class="py-name">ymax</tt><tt class="py-op">,</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">round</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">ymax</tt> <tt class="py-op">-</tt> <tt class="py-name">ymin</tt><tt class="py-op">)</tt> <tt class="py-op">/</tt> <tt class="py-name">S</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line">        <tt class="py-name">segment</tt><tt class="py-op">(</tt><tt class="py-name">cr</tt><tt class="py-op">,</tt> <tt class="py-name">xmin</tt><tt class="py-op">,</tt> <tt class="py-name">xmax</tt><tt class="py-op">,</tt> <tt class="py-name">y</tt><tt class="py-op">,</tt> <tt class="py-name">y</tt><tt class="py-op">)</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line"> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line">    <tt class="py-name">cr</tt><tt class="py-op">.</tt><tt class="py-name">restore</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/vehicles">Vehicles</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Wed Feb  1 14:46:48 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>vehicles_boot.ros_visualization.ros_conversions</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/vehicles">Vehicles</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="vehicles_boot-module.html">Package&nbsp;vehicles_boot</a> ::
+        <a href="vehicles_boot.ros_visualization-module.html">Package&nbsp;ros_visualization</a> ::
+        Module&nbsp;ros_conversions
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="vehicles_boot.ros_visualization.ros_conversions-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="vehicles_boot.ros_visualization.ros_conversions-module.html">Module vehicles_boot.ros_visualization.ros_conversions</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">contracts</tt> <tt class="py-keyword">import</tt> <tt class="py-name">contract</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">geometry</tt> <tt class="py-keyword">import</tt> <tt class="py-name">quaternion_from_rotation</tt><tt class="py-op">,</tt> <tt class="py-name">rotation_translation_from_pose</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">numpy</tt> <tt class="py-keyword">as</tt> <tt class="py-name">np</tt> </tt>
+<a name="ROS_Pose_from_SE3"></a><div id="ROS_Pose_from_SE3-def"><a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">pose</tt><tt class="py-op">=</tt><tt class="py-string">'SE3'</tt><tt class="py-op">)</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt> <a class="py-toggle" href="#" id="ROS_Pose_from_SE3-toggle" onclick="return toggle('ROS_Pose_from_SE3');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles_boot.ros_visualization.ros_conversions-module.html#ROS_Pose_from_SE3">ROS_Pose_from_SE3</a><tt class="py-op">(</tt><tt class="py-param">pose</tt><tt class="py-op">,</tt> <tt class="py-param">z</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ROS_Pose_from_SE3-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="ROS_Pose_from_SE3-expanded"><a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line">    <tt class="py-docstring">''' Converts an element of SE3 (as a 4x4 matrix) into the ROS format. '''</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt class="py-name">geometry_msgs</tt><tt class="py-op">.</tt><tt class="py-name">msg</tt> <tt class="py-keyword">import</tt> <tt class="py-name">Pose</tt><tt class="py-op">,</tt> <tt class="py-name">Point</tt>  <tt class="py-comment"># @UnresolvedImport</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line">    <tt class="py-name">R</tt><tt class="py-op">,</tt> <tt class="py-name">t</tt> <tt class="py-op">=</tt> <tt class="py-name">rotation_translation_from_pose</tt><tt class="py-op">(</tt><tt class="py-name">pose</tt><tt class="py-op">)</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">    <tt class="py-name">q1</tt> <tt class="py-op">=</tt> <tt class="py-name">quaternion_from_rotation</tt><tt class="py-op">(</tt><tt class="py-name">R</tt><tt class="py-op">)</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">    <tt class="py-name">q</tt> <tt class="py-op">=</tt> <tt id="link-0" class="py-name" targets="Function vehicles_boot.ros_visualization.ros_conversions.ROS_quaternion_from_my_quaternion()=vehicles_boot.ros_visualization.ros_conversions-module.html#ROS_quaternion_from_my_quaternion"><a title="vehicles_boot.ros_visualization.ros_conversions.ROS_quaternion_from_my_quaternion" class="py-name" href="#" onclick="return doclink('link-0', 'ROS_quaternion_from_my_quaternion', 'link-0');">ROS_quaternion_from_my_quaternion</a></tt><tt class="py-op">(</tt><tt class="py-name">q1</tt><tt class="py-op">)</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">Pose</tt><tt class="py-op">(</tt><tt class="py-name">Point</tt><tt class="py-op">(</tt><tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">t</tt><tt class="py-op">[</tt><tt class="py-number">2</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">q</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"> </tt>
+<a name="ROS_quaternion_order"></a><div id="ROS_quaternion_order-def"><a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt> <a class="py-toggle" href="#" id="ROS_quaternion_order-toggle" onclick="return toggle('ROS_quaternion_order');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles_boot.ros_visualization.ros_conversions-module.html#ROS_quaternion_order">ROS_quaternion_order</a><tt class="py-op">(</tt><tt class="py-param">q</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ROS_quaternion_order-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="ROS_quaternion_order-expanded"><a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">array</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">q</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">q</tt><tt class="py-op">[</tt><tt class="py-number">2</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">q</tt><tt class="py-op">[</tt><tt class="py-number">3</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">q</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"> </tt>
+<a name="ROS_quaternion_from_my_quaternion"></a><div id="ROS_quaternion_from_my_quaternion-def"><a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt> <a class="py-toggle" href="#" id="ROS_quaternion_from_my_quaternion-toggle" onclick="return toggle('ROS_quaternion_from_my_quaternion');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles_boot.ros_visualization.ros_conversions-module.html#ROS_quaternion_from_my_quaternion">ROS_quaternion_from_my_quaternion</a><tt class="py-op">(</tt><tt class="py-param">q</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ROS_quaternion_from_my_quaternion-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="ROS_quaternion_from_my_quaternion-expanded"><a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt class="py-name">geometry_msgs</tt><tt class="py-op">.</tt><tt class="py-name">msg</tt> <tt class="py-keyword">import</tt> <tt class="py-name">Quaternion</tt>  <tt class="py-comment"># @UnresolvedImport</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">    <tt class="py-name">q</tt> <tt class="py-op">=</tt> <tt id="link-1" class="py-name" targets="Function vehicles_boot.ros_visualization.ros_conversions.ROS_quaternion_order()=vehicles_boot.ros_visualization.ros_conversions-module.html#ROS_quaternion_order"><a title="vehicles_boot.ros_visualization.ros_conversions.ROS_quaternion_order" class="py-name" href="#" onclick="return doclink('link-1', 'ROS_quaternion_order', 'link-1');">ROS_quaternion_order</a></tt><tt class="py-op">(</tt><tt class="py-name">q</tt><tt class="py-op">)</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">Quaternion</tt><tt class="py-op">(</tt><tt class="py-name">q</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">q</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">q</tt><tt class="py-op">[</tt><tt class="py-number">2</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">q</tt><tt class="py-op">[</tt><tt class="py-number">3</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"> </tt>
+<a name="numpy_to_imgmsg"></a><div id="numpy_to_imgmsg-def"><a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"><tt class="py-comment">#def test_same_convention():</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"><tt class="py-comment">#    """ Make sure that ROS and I agree on the conventions for rotations. """</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"><tt class="py-comment">#    import tf #@UnresolvedImport</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"><tt class="py-comment">#    import rospy #@UnresolvedImport</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"><tt class="py-comment">#    theta = 0.2</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"><tt class="py-comment">#    q1 = quaternion_from_axis_angle(axis=np.array([0, 0, 1]), angle=theta)</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"><tt class="py-comment">#    q1f = ROS_quaternion_from_my_quaternion(q1)</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"><tt class="py-comment">#    q2 = tf.transformations.quaternion_from_euler(0, 0, theta)</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"><tt class="py-comment">#    rospy.loginfo('q1f: %s' % q1f)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"><tt class="py-comment">#    rospy.loginfo('q2 : %s' % q2)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"><tt class="py-comment"># found somewhere</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt> <a class="py-toggle" href="#" id="numpy_to_imgmsg-toggle" onclick="return toggle('numpy_to_imgmsg');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles_boot.ros_visualization.ros_conversions-module.html#numpy_to_imgmsg">numpy_to_imgmsg</a><tt class="py-op">(</tt><tt class="py-param">image</tt><tt class="py-op">,</tt> <tt class="py-param">stamp</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="numpy_to_imgmsg-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="numpy_to_imgmsg-expanded"><a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt class="py-name">sensor_msgs</tt>  <tt class="py-comment"># @UnresolvedImport</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">    <tt class="py-name">rosimage</tt> <tt class="py-op">=</tt> <tt class="py-name">sensor_msgs</tt><tt class="py-op">.</tt><tt class="py-name">msg</tt><tt class="py-op">.</tt><tt class="py-name">Image</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">    <tt class="py-name">rosimage</tt><tt class="py-op">.</tt><tt class="py-name">height</tt> <tt class="py-op">=</tt> <tt class="py-name">image</tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Module cairo_utils.shape=cairo_utils.shape-module.html"><a title="cairo_utils.shape" class="py-name" href="#" onclick="return doclink('link-2', 'shape', 'link-2');">shape</a></tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">    <tt class="py-name">rosimage</tt><tt class="py-op">.</tt><tt class="py-name">width</tt> <tt class="py-op">=</tt> <tt class="py-name">image</tt><tt class="py-op">.</tt><tt id="link-3" class="py-name"><a title="cairo_utils.shape" class="py-name" href="#" onclick="return doclink('link-3', 'shape', 'link-2');">shape</a></tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">image</tt><tt class="py-op">.</tt><tt class="py-name">dtype</tt> <tt class="py-op">==</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">uint8</tt><tt class="py-op">:</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">        <tt class="py-name">rosimage</tt><tt class="py-op">.</tt><tt class="py-name">encoding</tt> <tt class="py-op">=</tt> <tt class="py-string">'8UC%d'</tt> <tt class="py-op">%</tt> <tt class="py-name">image</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name"><a title="cairo_utils.shape" class="py-name" href="#" onclick="return doclink('link-4', 'shape', 'link-2');">shape</a></tt><tt class="py-op">[</tt><tt class="py-number">2</tt><tt class="py-op">]</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">        <tt class="py-name">rosimage</tt><tt class="py-op">.</tt><tt class="py-name">step</tt> <tt class="py-op">=</tt> <tt class="py-name">image</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name"><a title="cairo_utils.shape" class="py-name" href="#" onclick="return doclink('link-5', 'shape', 'link-2');">shape</a></tt><tt class="py-op">[</tt><tt class="py-number">2</tt><tt class="py-op">]</tt> <tt class="py-op">*</tt> <tt class="py-name">rosimage</tt><tt class="py-op">.</tt><tt class="py-name">width</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">        <tt class="py-name">rosimage</tt><tt class="py-op">.</tt><tt class="py-name">data</tt> <tt class="py-op">=</tt> <tt class="py-name">image</tt><tt class="py-op">.</tt><tt class="py-name">ravel</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">tolist</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">        <tt class="py-name">rosimage</tt><tt class="py-op">.</tt><tt class="py-name">encoding</tt> <tt class="py-op">=</tt> <tt class="py-string">'32FC%d'</tt> <tt class="py-op">%</tt> <tt class="py-name">image</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="cairo_utils.shape" class="py-name" href="#" onclick="return doclink('link-6', 'shape', 'link-2');">shape</a></tt><tt class="py-op">[</tt><tt class="py-number">2</tt><tt class="py-op">]</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">        <tt class="py-name">rosimage</tt><tt class="py-op">.</tt><tt class="py-name">step</tt> <tt class="py-op">=</tt> <tt class="py-name">image</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name"><a title="cairo_utils.shape" class="py-name" href="#" onclick="return doclink('link-7', 'shape', 'link-2');">shape</a></tt><tt class="py-op">[</tt><tt class="py-number">2</tt><tt class="py-op">]</tt> <tt class="py-op">*</tt> <tt class="py-name">rosimage</tt><tt class="py-op">.</tt><tt class="py-name">width</tt> <tt class="py-op">*</tt> <tt class="py-number">4</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">        <tt class="py-name">rosimage</tt><tt class="py-op">.</tt><tt class="py-name">data</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">array</tt><tt class="py-op">(</tt><tt class="py-name">image</tt><tt class="py-op">.</tt><tt class="py-name">flat</tt><tt class="py-op">,</tt> <tt class="py-name">dtype</tt><tt class="py-op">=</tt><tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">float32</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">tostring</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">stamp</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">        <tt class="py-name">rosimage</tt><tt class="py-op">.</tt><tt class="py-name">header</tt><tt class="py-op">.</tt><tt class="py-name">stamp</tt> <tt class="py-op">=</tt> <tt class="py-name">stamp</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">rosimage</tt> </tt>
+</div><a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/vehicles">Vehicles</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Wed Feb  1 14:46:47 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

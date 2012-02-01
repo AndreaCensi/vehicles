@@ -14,9 +14,6 @@
 <table class="navbar" border="0" width="100%" cellpadding="0"
        bgcolor="#a0c0ff" cellspacing="0">
   <tr valign="middle">
-  <!-- Home link -->
-      <th bgcolor="#70b0f0" class="navbar-select"
-          >&nbsp;&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;</th>
 
   <!-- Tree link -->
       <th>&nbsp;&nbsp;&nbsp;<a
@@ -60,6 +57,8 @@
 </table>
 <!-- ==================== PACKAGE DESCRIPTION ==================== -->
 <h1 class="epydoc">Package vehicles</h1><p class="nomargin-top"><span class="codelink"><a href="vehicles-pysrc.html">source&nbsp;code</a></span></p>
+<p>PyVehicles main package: play with your vehicles zoo!</p>
+
 <hr />
 <div class="fields">      <p><strong>Version:</strong>
         1.0
@@ -96,14 +95,6 @@
     </ul>
     </li>
     <li> <strong class="uidlink"><a href="vehicles.constants-module.html">vehicles.constants</a></strong>    </li>
-    <li> <strong class="uidlink"><a href="vehicles.display-module.html">vehicles.display</a></strong>
-    <ul>
-    <li> <strong class="uidlink"><a href="vehicles.display.misc_utils-module.html">vehicles.display.misc_utils</a></strong>    </li>
-    <li> <strong class="uidlink"><a href="vehicles.display.sensors-module.html">vehicles.display.sensors</a></strong>    </li>
-    <li> <strong class="uidlink"><a href="vehicles.display.tests-module.html">vehicles.display.tests</a></strong>    </li>
-    <li> <strong class="uidlink"><a href="vehicles.display.vehicle_display_utils-module.html">vehicles.display.vehicle_display_utils</a></strong>    </li>
-    </ul>
-    </li>
     <li> <strong class="uidlink"><a href="vehicles.interfaces-module.html">vehicles.interfaces</a></strong>
     <ul>
     <li> <strong class="uidlink"><a href="vehicles.interfaces.primitives-module.html">vehicles.interfaces.primitives</a></strong>: <em class="summary">These are the geometric primitives in our simulation that define 
@@ -115,10 +106,11 @@
     </li>
     <li> <strong class="uidlink"><a href="vehicles.programs-module.html">vehicles.programs</a></strong>
     <ul>
-    <li> <strong class="uidlink"><a href="vehicles.programs.display_demo-module.html">vehicles.programs.display_demo</a></strong>
+    <li> <strong class="uidlink"><a href="vehicles.programs.display_demos-module.html">vehicles.programs.display_demos</a></strong>
     <ul>
-    <li> <strong class="uidlink"><a href="vehicles.programs.display_demo.display_demo-module.html">vehicles.programs.display_demo.display_demo</a></strong>    </li>
-    <li> <strong class="uidlink"><a href="vehicles.programs.display_demo.skins_demo-module.html">vehicles.programs.display_demo.skins_demo</a></strong>    </li>
+    <li> <strong class="uidlink"><a href="vehicles.programs.display_demos.simulations-module.html">vehicles.programs.display_demos.simulations</a></strong>    </li>
+    <li> <strong class="uidlink"><a href="vehicles.programs.display_demos.skins-module.html">vehicles.programs.display_demos.skins</a></strong>    </li>
+    <li> <strong class="uidlink"><a href="vehicles.programs.display_demos.vehicles-module.html">vehicles.programs.display_demos.vehicles</a></strong>    </li>
     </ul>
     </li>
     <li> <strong class="uidlink"><a href="vehicles.programs.inspect_textures-module.html">vehicles.programs.inspect_textures</a></strong>
@@ -167,8 +159,10 @@
     <li> <strong class="uidlink"><a href="vehicles.simulation.vsimulation-module.html">vehicles.simulation.vsimulation</a></strong>    </li>
     </ul>
     </li>
+    <li> <strong class="uidlink"><a href="vehicles.utils%27-module.html">vehicles.utils'</a></strong>    </li>
     <li> <strong class="uidlink"><a href="vehicles.worlds-module.html">vehicles.worlds</a></strong>
     <ul>
+    <li> <strong class="uidlink"><a href="vehicles.worlds.bigmama-module.html">vehicles.worlds.bigmama</a></strong>    </li>
     <li> <strong class="uidlink"><a href="vehicles.worlds.boxes-module.html">vehicles.worlds.boxes</a></strong>    </li>
     <li> <strong class="uidlink"><a href="vehicles.worlds.dynamic-module.html">vehicles.worlds.dynamic</a></strong>    </li>
     <li> <strong class="uidlink"><a href="vehicles.worlds.empty_fixed-module.html">vehicles.worlds.empty_fixed</a></strong>    </li>
@@ -176,6 +170,7 @@
     <li> <strong class="uidlink"><a href="vehicles.worlds.stochastic_box-module.html">vehicles.worlds.stochastic_box</a></strong>    </li>
     <li> <strong class="uidlink"><a href="vehicles.worlds.stochastic_box2-module.html">vehicles.worlds.stochastic_box2</a></strong>    </li>
     <li> <strong class="uidlink"><a href="vehicles.worlds.stochastic_box3-module.html">vehicles.worlds.stochastic_box3</a></strong>    </li>
+    <li> <strong class="uidlink"><a href="vehicles.worlds.stochastic_sources-module.html">vehicles.worlds.stochastic_sources</a></strong>    </li>
     <li> <strong class="uidlink"><a href="vehicles.worlds.textures-module.html">vehicles.worlds.textures</a></strong>
     <ul>
     <li> <strong class="uidlink"><a href="vehicles.worlds.textures.checkerboard-module.html">vehicles.worlds.textures.checkerboard</a></strong>    </li>
@@ -228,7 +223,7 @@
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
         <a href="vehicles-module.html#VehiclesConfig" class="summary-name">VehiclesConfig</a> = <code title="&lt;vehicles.configuration.master.VehiclesConfigMaster instance at 0x1031\
-97050&gt;">&lt;vehicles.configuration.master.VehiclesConfig<code class="variable-ellipsis">...</code></code>
+949e0&gt;">&lt;vehicles.configuration.master.VehiclesConfig<code class="variable-ellipsis">...</code></code>
     </td>
   </tr>
 <tr>
@@ -242,7 +237,14 @@
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="logger"></a><span class="summary-name">logger</span> = <code title="&lt;logging.Logger instance at 0x102f79b48&gt;">&lt;logging.Logger instance at 0x102f79b48&gt;</code>
+        <a name="debug_speed"></a><span class="summary-name">debug_speed</span> = <code title="False">False</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="logger"></a><span class="summary-name">logger</span> = <code title="&lt;logging.Logger instance at 0x102f82488&gt;">&lt;logging.Logger instance at 0x102f82488&gt;</code>
     </td>
   </tr>
 </table>
@@ -277,7 +279,7 @@
     <dt>Value:</dt>
       <dd><table><tr><td><pre class="variable">
 &lt;vehicles.configuration.master.VehiclesConfigMaster instance at 0x1031<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
-97050&gt;
+949e0&gt;
 </pre></td></tr></table>
 </dd>
   </dl>
@@ -288,9 +290,6 @@
 <table class="navbar" border="0" width="100%" cellpadding="0"
        bgcolor="#a0c0ff" cellspacing="0">
   <tr valign="middle">
-  <!-- Home link -->
-      <th bgcolor="#70b0f0" class="navbar-select"
-          >&nbsp;&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;</th>
 
   <!-- Tree link -->
       <th>&nbsp;&nbsp;&nbsp;<a
@@ -315,7 +314,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Fri Jan 20 18:29:37 2012
+    Generated by Epydoc 3.0.1 on Wed Feb  1 14:46:41 2012
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
