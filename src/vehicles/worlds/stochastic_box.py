@@ -37,7 +37,6 @@ class StochasticBox(World):
         self.new_episode_called = False
 
     def refresh(self):
-        print('Refreshing world...')
         for c in self.circles:
             c.set_center(self.random_2d_point())
             radius = np.random.uniform(self.circles_size[0],

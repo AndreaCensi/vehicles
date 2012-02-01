@@ -1,3 +1,5 @@
+''' PyVehicles main package: play with your vehicles zoo! '''
+
 __version__ = '1.0'
 
 from contracts import contract

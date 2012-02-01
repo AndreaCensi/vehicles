@@ -2,8 +2,7 @@ from . import (cairo_plot_sensor_data, cairo_plot_sources, cairo_save,
     cairo_show_world_geometry, cairo, CairoConstants, cairo_set_axis, np,
     cairo_rototranslate)
 from contracts import contract
-from geometry import translation_from_SE2, SE2_from_SE3
-from geometry.yaml import from_yaml
+from geometry import translation_from_SE2, SE2_from_SE3, SE3
 from vehicles import VehiclesConfig
 from geometry import angle_from_SE2
 
@@ -38,9 +37,13 @@ def vehicles_cairo_display_svg(filename, width, height, sim_state,
 
 
 def vehicles_cairo_display_all(cr, width, height,
-                            sim_state, grid=1, zoom=0, show_sensor_data=True,
+                            sim_state,
+                            grid=1,
+                            zoom=0,
+                            show_sensor_data=True,
                             extra_draw_world=None,
-                            first_person=True):
+                            first_person=True,
+                            show_sensor_data_compact=False):
     with cairo_save(cr):
         # Paint white
         with cairo_save(cr):
@@ -49,7 +52,7 @@ def vehicles_cairo_display_all(cr, width, height,
             cr.fill()
 
         vehicle_state = sim_state['vehicle']
-        robot_pose = SE2_from_SE3(from_yaml(vehicle_state['pose']))
+        robot_pose = SE2_from_SE3(SE3.from_yaml(vehicle_state['pose']))
 
         robot_radius = vehicle_state['radius']
         world_state = sim_state['world']
@@ -95,14 +98,16 @@ def vehicles_cairo_display_all(cr, width, height,
                           timestamp=sim_state['timestamp'])
 
         if show_sensor_data:
-            cairo_plot_sensor_data(cr, vehicle_state, rho_min=robot_radius,
-                                   scale=robot_radius)
+            cairo_plot_sensor_data(cr, vehicle_state,
+                                   #rho_min=robot_radius,
+                                   scale=robot_radius,
+                                   compact=show_sensor_data_compact)
 
 
 def get_joints_as_TSE3(vehicle_state):
     joints = []
     for js in vehicle_state['joints']:
-        joints.append(from_yaml(js))
+        joints.append(SE3.from_yaml(js))
     return joints
 
 
@@ -123,10 +128,11 @@ def vehicles_cairo_set_coordinates(cr, width, height, world_bounds,
     else:
         t = translation_from_SE2(robot_pose)
         # don't go over the world side
-        t[0] = np.maximum(t[0], bx[0] + zoom)
-        t[0] = np.minimum(t[0], bx[1] - zoom)
-        t[1] = np.maximum(t[1], by[0] + zoom)
-        t[1] = np.minimum(t[1], by[1] - zoom)
+        if not first_person:
+            t[0] = np.maximum(t[0], bx[0] + zoom)
+            t[0] = np.minimum(t[0], bx[1] - zoom)
+            t[1] = np.maximum(t[1], by[0] + zoom)
+            t[1] = np.minimum(t[1], by[1] - zoom)
 
         extents = [t[0] - zoom - m,
                    t[0] + zoom + m,

@@ -1,8 +1,7 @@
-from .. import (roundedrec, cairo_transform, cairo_save, cairo_set_color,
-    CairoConstants, np)
-from vehicles_cairo.cairo_utils import (cairo_plot_rectangle,
-                                        cairo_plot_circle2,
-    cairo_plot_with_style, cairo_stroke_with_style)
+from .. import BLACK, CairoConstants, np
+from cairo_utils import (cairo_plot_rectangle, cairo_plot_circle2,
+    cairo_plot_with_style, cairo_stroke_with_style, roundedrec, cairo_save,
+    cairo_set_color, cairo_transform)
 
 
 def cairo_robot_skin_circular(cr):
@@ -89,7 +88,7 @@ def cairo_robot_skin_brai(cr, w=1.3, h=0.8, sensors=False):
 
         cr.move_to(0, M)
         cr.line_to(0, -M)
-        cairo_set_color(cr, CairoConstants.BLACK)
+        cairo_set_color(cr, BLACK)
         cr.set_line_width(0.05)
         cr.stroke()
 

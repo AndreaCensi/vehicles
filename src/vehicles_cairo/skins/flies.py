@@ -1,7 +1,6 @@
 from . import np
-from vehicles_cairo.cairo_utils import (cairo_plot_circle2, cairo_save,
-    cairo_transform)
-from vehicles_cairo.skins.sensors import BLACK, WHITE
+from .. import BLACK, WHITE
+from cairo_utils import cairo_plot_circle2, cairo_save, cairo_transform
 
 
 def cairo_skin_fly1(cr):

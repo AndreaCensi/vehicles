@@ -7,3 +7,7 @@ class VehiclesConstants:
     SENSOR_TYPE_RANGEFINDER = 'Rangefinder'
     SENSOR_TYPE_FIELDSAMPLER = 'FieldSampler'
     SENSOR_TYPE_PHOTORECEPTORS = 'Photoreceptors'
+
+    PRIMITIVE_SOURCE = 'Source'
+    PRIMITIVE_CIRCLE = 'Circle'
+    PRIMITIVE_POLYLINE = 'PolyLine'

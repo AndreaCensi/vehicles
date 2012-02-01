@@ -1,4 +1,4 @@
-from .. import logger, np, contract
+from vehicles import logger, np, contract
 
 Z_GRID = -1000
 Z_FIELD = -500

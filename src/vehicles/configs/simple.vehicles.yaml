@@ -60,13 +60,24 @@
 
 
 - id: d_SE2_dd_v2-cam360
-  desc: Differential drive with omnidirectional camera (Faster)
+  desc: Differential drive with omnidirectional camera (smooth)
   id_dynamics: d_SE2_dd_v2
   sensors:
       - id_sensor: cam_f360_n180_s
   radius: 0.5
   extra:
     skin: ddrive
+
+
+- id: d_SE2_rb_v-cam360f
+  desc: Differential drive with omnidirectional camera (sharp)
+  id_dynamics: d_SE2_rb_v
+  sensors:
+      - id_sensor: cam_f360_n180
+  radius: 0.5
+  extra:
+    skin: ddrive
+
 
 
 - id: d_SE2_dd_v2-rf360

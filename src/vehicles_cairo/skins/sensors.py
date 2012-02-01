@@ -1,7 +1,7 @@
-from .. import cairo_plot_rectangle, cairo_plot_circle2
-from vehicles_cairo.cairo_utils.contexts import cairo_save
-from vehicles_cairo.cairo_utils.transformations import cairo_transform
-from vehicles_cairo.cairo_utils.colors import cairo_set_color
+
+from . import np
+from cairo_utils import (cairo_save, cairo_set_color, cairo_transform,
+    cairo_plot_rectangle, cairo_plot_circle2)
 
 WHITE = [1, 1, 1]
 BLACK = [0, 0, 0]
@@ -46,7 +46,6 @@ def cairo_skin_eye(cr, size=1.0):
 def cairo_skin_transparent(cr):
     pass
 
-import numpy as np
 
 def cairo_ref_frame(cr, l=1, x_color=[1, 0, 0], y_color=[0, 1, 0]):
     with cairo_save(cr):

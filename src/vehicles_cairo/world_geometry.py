@@ -1,9 +1,8 @@
-from . import (cairo_plot_polyline, cairo_save, cairo_plot_circle, cairo,
-    CairoConstants, cairo_set_color, np)
+from . import cairo, CairoConstants, np
+from cairo_utils import (cairo_transform, cairo_plot_circle, cairo_plot_polyline,
+    cairo_save, cairo_set_color)
 from conf_tools import instantiate_spec
-from vehicles.interfaces import Source
-from vehicles.sensors.field_sampler import get_field_values
-from vehicles_cairo.cairo_utils import cairo_transform
+from vehicles import Source, VehiclesConstants, get_field_values
 
 
 def cairo_plot_sources(cr, world_state):
@@ -12,7 +11,7 @@ def cairo_plot_sources(cr, world_state):
 
     sources = []
     for s in primitives:
-        if s['type'] == 'Source':
+        if s['type'] == VehiclesConstants.PRIMITIVE_SOURCE:
             sources.append(Source.from_yaml(s))
 
     if sources:
@@ -21,10 +20,8 @@ def cairo_plot_sources(cr, world_state):
                        bounds=bounds)
 
 
-def cairo_plot_texture_circle(cr, circle_yaml, resolution, width_inside, width_outside):
-    texture = instantiate_spec(circle_yaml['texture'])
-    radius = circle_yaml['radius']
-    center = circle_yaml['center']
+def cairo_plot_texture_circle(cr, radius, center, texture, resolution,
+                              width_inside, width_outside):
     diameter = np.pi * 2 * radius
     npoints = int(np.ceil(diameter / resolution))
     theta = np.linspace(0, np.pi * 2, npoints)
@@ -32,10 +29,6 @@ def cairo_plot_texture_circle(cr, circle_yaml, resolution, width_inside, width_o
     values = texture(t)
 
     resolution_angle = np.pi * 2 / npoints
-
-#    print('REsolution: %s  w: %s radius: %s points: %s angle: %sdeg' % (resolution, width, radius, npoints,
-#                                                          np.rad2deg(resolution_angle)))
-
 
     theta1 = theta - resolution_angle / 1.9 # 10% overlap
     theta2 = theta + resolution_angle / 1.9
@@ -63,17 +56,108 @@ def cairo_plot_texture_circle(cr, circle_yaml, resolution, width_inside, width_o
             cr.line_to(Ax[i], Ay[i])
             cr.fill()
 
-#            color = [values[i], values[i], values[i]]
-
-#            cairo_plot_circle2(cr, x[i], y[i], resolution, fill_color=color)
-
 
 CC = CairoConstants
+
+from . import contract
+
+@contract(center='seq[2](float)', radius='>0', solid='bool', numpass='int')
+def cairo_plot_circle_primitive(cr, center, radius, solid, texture, numpass):
+    facecolor = (CairoConstants.obstacle_fill_color if solid else None)
+    if numpass == 0:
+        cairo_plot_circle(cr, center=center,
+                      radius=radius,
+                      edgecolor=CC.obstacle_border_color,
+                    facecolor=facecolor,
+                    width=CC.obstacle_border_width)
+
+        if not solid:
+            cairo_plot_circle(cr, center=center,
+                      radius=radius + CC.texture_width,
+                      edgecolor=[0, 0, 0],
+                      width=CC.obstacle_border_width)
+
+        if solid:
+            width_outside = 0
+            width_inside = CC.texture_width
+        else:
+            width_inside = 0
+            width_outside = CC.texture_width
+
+        cairo_plot_texture_circle(cr=cr,
+                                  radius=radius, center=center,
+                                  texture=texture,
+                                  resolution=CC.texture_resolution,
+                                  width_inside=width_inside,
+                                  width_outside=width_outside)
+
+    else:
+        cairo_plot_circle(cr, center=center,
+                      radius=radius - CC.texture_width,
+                      edgecolor=None,
+                      facecolor=facecolor,
+                      width=CC.obstacle_border_width)
+
+
+@contract(points='array[2xN]')
+def cairo_plot_polyline_primitive(cr, points, texture):
+
+    with cairo_save(cr):
+        cr.set_line_width(CC.obstacle_border_width)
+        cairo_set_color(cr,
+                        CC.obstacle_border_color)
+        cairo_plot_polyline(cr, points[0, :], points[1, :])
+
+    cairo_plot_textured_polyline(cr, points=points, texture=texture,
+                                  resolution=CC.texture_resolution,
+                                  width_inside=0.3 * CC.texture_resolution,
+                                  width_outside=CC.texture_resolution)
+
+@contract(points='array[2xN]')
+def cairo_plot_textured_polyline(cr, points, texture,
+                                  resolution,
+                                  width_inside, width_outside):
+    n = points.shape[1]
+    delta_t = 0.0
+    for i in range(n - 1):
+        p1 = points[:, i]
+        p2 = points[:, i + 1]
+        d = p2 - p1
+        segment_len = np.linalg.norm(d)
+        angle = np.arctan2(d[1], d[0])
+
+        with cairo_transform(cr, t=p1, r=angle):
+            cairo_plot_textured_segment(cr=cr,
+                                        length=segment_len, texture=texture,
+                                        resolution=resolution, offset=delta_t,
+                                        width_inside=width_inside,
+                                        width_outside=width_outside)
+
+        delta_t += segment_len
+
+@contract(length='float,>0', resolution='float,>0', offset='float',
+          width_inside='>=0', width_outside='>=0')
+def cairo_plot_textured_segment(cr, texture, length, resolution, offset,
+                          width_inside, width_outside):
+    npoints = int(np.ceil(length / resolution))
+    cell_size = length / npoints
+    t = np.linspace(0, length, npoints) - offset
+    values = texture(t)
+    for i in range(npoints - 1):
+        x0 = i * cell_size
+        x1 = (i + 1) * cell_size
+        if i > 0:
+            x0 -= cell_size * 0.05 # overlap
+        y0 = -width_inside
+        y1 = +width_outside
+
+        cr.set_source_rgb(values[i], values[i], values[i])
+        cr.rectangle(x0, y0, x1 - x0, y1 - y0)
+        cr.fill()
 
 def cairo_show_world_geometry(cr, world_state, plot_sources=False):
     bounds = world_state['bounds']
     primitives = world_state['primitives']
-
 
     with cairo_save(cr):
         xb = bounds[0]
@@ -81,60 +165,32 @@ def cairo_show_world_geometry(cr, world_state, plot_sources=False):
         cr.rectangle(xb[0], yb[0], xb[1] - xb[0], yb[1] - yb[0])
         cr.clip()
 
+        # Draw it twice for special effects
         for i in range(2):
             for p in primitives:
-                if p['type'] == 'PolyLine':
+                ptype = p['type']
+                if ptype == VehiclesConstants.PRIMITIVE_POLYLINE:
                     points = np.array(p['points']).T
+                    texture = instantiate_spec(p['texture'])
+                    cairo_plot_polyline_primitive(cr, points=points,
+                                                  texture=texture)
 
-                    with cairo_save(cr):
-                        cr.set_line_width(CC.obstacle_border_width)
-                        cairo_set_color(cr,
-                                        CC.obstacle_border_color)
-                        cairo_plot_polyline(cr, points[0, :], points[1, :])
+                elif ptype == VehiclesConstants.PRIMITIVE_CIRCLE:
+                    texture = instantiate_spec(p['texture'])
+                    cairo_plot_circle_primitive(cr, center=p['center'],
+                                                texture=texture,
+                                                radius=p['radius'],
+                                                solid=p['solid'],
+                                                numpass=i)
 
-                elif p['type'] == 'Circle':
-
-                    facecolor = (CairoConstants.obstacle_fill_color
-                                 if p['solid'] else None)
-
-                    if i == 0:
-                        cairo_plot_circle(cr, center=p['center'],
-                                      radius=p['radius'],
-                                      edgecolor=CC.obstacle_border_color,
-                                    facecolor=facecolor,
-                                    width=CC.obstacle_border_width)
-
-                        if not p['solid']:
-                            cairo_plot_circle(cr, center=p['center'],
-                                      radius=p['radius'] + CC.texture_width,
-                                      edgecolor=[0, 0, 0],
-                                      width=CC.obstacle_border_width)
-
-                        if p['solid']:
-                            cairo_plot_texture_circle(cr, p,
-                                      resolution=CC.texture_resolution,
-                                      width_inside=CC.texture_width,
-                                      width_outside=0)
-                        else:
-                            cairo_plot_texture_circle(cr, p,
-                                      resolution=CC.texture_resolution,
-                                      width_inside=0,
-                                      width_outside=CC.texture_width)
-
-                    else:
-                        cairo_plot_circle(cr, center=p['center'],
-                                      radius=p['radius'] - CC.texture_width,
-                                      edgecolor=None,
-                                      facecolor=facecolor,
-                                      width=CC.obstacle_border_width)
-
-
-                elif p['type'] == 'Source':
+                elif ptype == VehiclesConstants.PRIMITIVE_SOURCE:
                     if plot_sources:
-                        cairo_plot_circle(cr, center=p['center'], radius=0.05,
+                        cairo_plot_circle(cr, center=p['center'],
+                                          radius=0.05,
                                           edgecolor=[0, 0, 0],
                                           facecolor=[1, 0, 0],
                                           width=0.01)
+                    # TODO: parametrize
                 else:
                     pass # XXX 
 
@@ -161,9 +217,7 @@ def cairo_plot_sources_field(cr, sources, bounds, disc=[100, 100], alpha=0.5,
     data = np.empty((disc[0], disc[1], 4), dtype=np.uint8)
     data.fill(255)
 
-#    data[:, :, 1] = Cscal
     data[:, :, 2] = Cscal
-#    data[:, :, 3] = Cscal
 
     image = cairo.ImageSurface.create_for_data(#@UndefinedVariable
                         data, cairo.FORMAT_ARGB32, #@UndefinedVariable

@@ -2,6 +2,7 @@ from . import TexturedRaytracer, contract, np, get_uniform_directions
 from ..interfaces import VehicleSensor
 from conf_tools import instantiate_spec
 from geometry import SE2_project_from_SE3
+from vehicles.constants import VehiclesConstants
 
 __all__ = ['Photoreceptors', 'PhotoreceptorsUniform']
 
@@ -30,7 +31,7 @@ class Photoreceptors(VehicleSensor, TexturedRaytracer):
         TexturedRaytracer.__init__(self, directions)
 
     def to_yaml(self):
-        return {'type': 'Photoreceptors',
+        return {'type': VehiclesConstants.SENSOR_TYPE_PHOTORECEPTORS,
                 'noise': self.noise_spec,
                 'invalid': self.invalid,
                 'directions': self.directions.tolist()}

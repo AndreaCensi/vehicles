@@ -1,6 +1,6 @@
 from vehicles import VehicleSkin
-import numpy as np
-from contracts import contract
+
+from .. import np, contract
 
 from .robot_skins import *
 from .sensors import *

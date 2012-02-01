@@ -1,7 +1,7 @@
 from . import contract
+from .. import cairo_rototranslate
 from geometry import SE2, SE2_from_SE3
 from vehicles import VehicleSkin, VehiclesConfig
-from vehicles_cairo.utils import cairo_rototranslate
 
 
 class ComplexSkin(VehicleSkin):

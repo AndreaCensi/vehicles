@@ -1,25 +1,25 @@
+from cairo_utils import cairo_pixels, cairo_text_align
 from geometry import SE2_from_SE3
 from geometry.yaml import from_yaml
 from procgraph import BadConfig, Block
 from procgraph.block_utils import make_sure_dir_exists
 from procgraph_images import posneg, scale, reshape2d
 from vehicles_cairo import (cairo_save, cairo_transform,
-    vehicles_cairo_display_all, cairo_pixels, cairo_text_align)
-from vehicles_cairo.skins.sensors import cairo_ref_frame
-from vehicles_cairo.utils import cairo_rototranslate
+    vehicles_cairo_display_all, cairo_rototranslate)
+from vehicles_cairo.skins import cairo_ref_frame
 import numpy as np
 import os
 import subprocess
 
 
 class VehiclesCairoDisplay(Block):
-    ''' Produces a top-down plot of a circular arena.
-    '''
+    ''' Produces a top-down plot of a circular arena. '''
 
     Block.alias('vehicles_cairo_display')
 
     Block.config('format', 'pdf|png', default='pdf')
     Block.config('file', 'Output file (pdf)', default=None)
+    Block.output('rgb', 'RGB data (png)')
 
     Block.config('width', 'Image width in points.', default=768)
     Block.config('height', 'Image height in points.', default=768)
@@ -37,12 +37,13 @@ class VehiclesCairoDisplay(Block):
 
     Block.config('grid', 'Size of the grid (0: turn off)', default=1)
     Block.config('show_sensor_data', 'Show sensor data', default=True)
+    Block.config('show_sensor_data_compact', 'Show compact sensor data',
+                 default=True)
 
     Block.config('swf', 'Converts PDF to SWF using pdf2swf', default=True)
 
     Block.input('boot_obs', '')
 
-    Block.output('rgb', 'RGB data (png)')
 
     def init(self):
 
@@ -148,6 +149,7 @@ class VehiclesCairoDisplay(Block):
                     grid=self.config.grid,
                     zoom=self.config.zoom,
                     show_sensor_data=self.config.show_sensor_data,
+                    show_sensor_data_compact=self.config.show_sensor_data_compact,
                     first_person=self.config.fp,
                     extra_draw_world=extra_draw_world)
 

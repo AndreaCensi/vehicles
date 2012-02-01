@@ -1,5 +1,5 @@
 from . import TexturedRaytracer, contract, np, get_uniform_directions
-from ..interfaces import VehicleSensor
+from .. import VehicleSensor, VehiclesConstants
 from conf_tools import instantiate_spec
 from geometry import SE2_project_from_SE3
 
@@ -51,7 +51,7 @@ class PhotoreceptorsSmooth(VehicleSensor, TexturedRaytracer):
         TexturedRaytracer.__init__(self, np.array(directions2))
 
     def to_yaml(self):
-        return {'type': 'Photoreceptors',
+        return {'type': VehiclesConstants.SENSOR_TYPE_PHOTORECEPTORS,
                 'noise': self.noise_spec,
                 'invalid': self.invalid,
                 'directions': self.directions_o.tolist()}
@@ -72,7 +72,6 @@ class PhotoreceptorsSmooth(VehicleSensor, TexturedRaytracer):
 
         delta_size = len(self.delta)
         n = len(self.directions_o)
-        luminance_smooth = np.zeros(n)
 
         def smooth(what):
             res = np.zeros(n)
@@ -87,15 +86,11 @@ class PhotoreceptorsSmooth(VehicleSensor, TexturedRaytracer):
 
         for i in range(n):
             interval = np.array(range(i * delta_size, (i + 1) * delta_size))
-#            print('%s' % interval)
             if np.any(valid[interval]):
                 valid2[i] = True
-#                print('interval %s' % interval.shape)
-#                print('valid[interval] %s' % valid[interval].shape)
                 subset = interval[valid[interval]]
-#                print('interval %s sub %s' % (interval. subset))
 
-# TODO: there is a bug with infinity, for the readings
+                # TODO: there is a bug with infinity, for the readings
                 which = int((i + 0.5) * delta_size)
                 if valid[which]:
                     readings2[i] = readings[which]
@@ -109,11 +104,16 @@ class PhotoreceptorsSmooth(VehicleSensor, TexturedRaytracer):
         luminance2 = np.maximum(0, np.minimum(1, luminance2))
         luminance2[np.logical_not(valid2)] = self.invalid
 
+
+        sensels = luminance2.copy()
+        # XXX: this step should not be necessary
+        sensels[np.isnan(sensels)] = self.invalid
+
         data = {'luminance': luminance2,
                 'readings': readings2,
                 'directions': self.directions_o,
                 'valid': valid2,
-                VehicleSensor.SENSELS:  luminance_smooth}
+                VehicleSensor.SENSELS:  sensels}
 
         return data
 

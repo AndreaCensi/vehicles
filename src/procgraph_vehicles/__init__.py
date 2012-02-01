@@ -1,8 +1,8 @@
-from vehicles import __version__
+'''
+    Blocks for the visualization of Vehicles logs using Procgraph.
+'''
 
-'''
-    Blocks useful for the visualization of Vehicles logs.
-'''
+from vehicles import __version__
 
 #procgraph_info = {
 #    # List of python packages
@@ -15,7 +15,7 @@ pg_add_this_package_models(__file__, __package__)
 
 
 from .vehiclelog_utils import *
-from .map_display import *
+#from .map_display import *
 from .cairo_map_display import *
 from .yaml_log_reader import *
 from .boot_log_reader import *

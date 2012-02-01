@@ -1,3 +1,5 @@
+''' Some Cairo utils -- not specific to PyVehicles. '''
+
 from contracts import contract
 from contextlib import contextmanager
 import numpy as np

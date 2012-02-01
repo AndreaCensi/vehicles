@@ -2,6 +2,7 @@ from . import Raytracer, contract, np, get_uniform_directions
 from ..interfaces import VehicleSensor
 from conf_tools import instantiate_spec
 from geometry import SE2_project_from_SE3
+from vehicles.constants import VehiclesConstants
 
 __all__ = ['Rangefinder', 'RangefinderUniform']
 
@@ -36,7 +37,7 @@ class Rangefinder(VehicleSensor, Raytracer):
         Raytracer.__init__(self, directions)
 
     def to_yaml(self):
-        return {'type': 'Rangefinder',
+        return {'type': VehiclesConstants.SENSOR_TYPE_RANGEFINDER,
                 'noise_spec': self.noise_spec,
                 'invalid': self.invalid,
                 'min_range': self.min_range,

@@ -5,7 +5,6 @@ from contracts import contract
 from geometry import translation_angle_from_SE2
 from subprocess import Popen, PIPE
 import cjson
-import time
 import warnings
 
 

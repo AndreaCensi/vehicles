@@ -1,7 +1,7 @@
-from . import cairo_transform
 from contextlib import contextmanager
 from contracts import contract
 import geometry
+from cairo_utils import cairo_transform
 
 
 @contract(a='seq[4](number)')

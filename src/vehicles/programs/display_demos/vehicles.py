@@ -1,9 +1,7 @@
 from ... import VehicleSimulation, VehiclesConfig, logger, expand_string
 from optparse import OptionParser
 from reprep import MIME_PNG, MIME_SVG
-from vehicles_cairo import vehicles_has_cairo
 import os
-from vehicles_cairo.cairo_utils import  cairo_plot_circle2
 
 usage = """
 
@@ -13,13 +11,15 @@ usage = """
 
 
 def main():
+    from vehicles_cairo import vehicles_has_cairo
     if not vehicles_has_cairo:
         logger.error('This program cannot be run if Cairo is not installed.')
         return
 
     from vehicles_cairo import (vehicles_cairo_display_pdf,
                                 vehicles_cairo_display_png,
-                                vehicles_cairo_display_svg)
+                                vehicles_cairo_display_svg,
+                                cairo_plot_circle2)
 
     parser = OptionParser(usage=usage)
     parser.disable_interspersed_args()
@@ -85,8 +85,6 @@ def main():
                            width=800, height=800,
                            show_sensor_data=True,
                            extra_draw_world=draw_scale)
-
-
 
         with f.data_file('start_cairo_png', MIME_PNG) as filename:
             vehicles_cairo_display_png(filename,

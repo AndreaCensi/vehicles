@@ -2,6 +2,7 @@ from . import np, contract, logger
 from ..interfaces import Field, VehicleSensor, Source
 from conf_tools import instantiate_spec
 from geometry import SE2_project_from_SE3
+from vehicles.constants import VehiclesConstants
 
 __all__ = ['FieldSampler', 'get_field_values', 'get_field_value']
 
@@ -44,7 +45,7 @@ class FieldSampler(VehicleSensor):
         self.primitives = None
 
     def to_yaml(self):
-        return {'type': 'FieldSampler',
+        return {'type': VehiclesConstants.SENSOR_TYPE_FIELDSAMPLER,
                 'noise_spec': self.noise_spec,
                 'min_value': self.min_value,
                 'max_value': self.max_value,

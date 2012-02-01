@@ -4,9 +4,6 @@ config logdir 'Base log dir'
 config id_robot
 config id_agent = ""
 config id_episode = ""
-config zoom = 0
-config width_map = 600
-config width_right = 200
 config output 'output filename (basename without .avi)'
 config bgcolor = [1,0.7,0.5]
 
@@ -23,30 +20,21 @@ import procgraph_vehicles
     observations -> |extract_sensels| -> sensels
     observations -> |extract_commands| -> commands
     observations -> |extract_timeinfo| -> info
-
-    state -> |world_display width=$width_map zoom=$zoom| -> map_rgb
     
-    # Here we might have put fixed max_value
-    # TODO: boot_spec-guided visualization
-    sensels -> |reshape2d| --> |scale min_value=0| --> |resize width=$width_right| --> \
-            |veh_image_label title="Observations"| --> sensels_rgb
-    commands -> |reshape2d height=1| --> |posneg max_value=1| --> |resize width=$width_right| -->\
-             |veh_image_label title="Commands"| -->  commands_rgb
-    
-#    goal --> |plot width=$width_right| -->  |veh_image_label title="Goal"| -->  goal_rgb
- #   sensels --> |plot width=$width_right| -->  |veh_image_label title="Obs"| -->  obs_rgb
+    observations[boot_obs] -> |plotter:vehicles_cairo_display format=png| --> map_rgb
 
-goal, sensels --> |plot width=450 height=150 title="" y_min=0 y_max=1| -->  |veh_image_label title="Current observations and goal"| -->  servo_rgb
+goal, sensels --> |sync|--> |plot width=450 height=150 title="" y_min=0 y_max=1| -->  |veh_image_label title="Current observations and goal"| -->  servo_rgb
 
     goal -> |array| -> goal_a
     sensels -> |array| -> sensels_a
-    sensels_a, goal_a --> |-| --> |norm ord=1| -> error -> |print|
+    sensels_a, goal_a --> |sync| --> |-| --> |norm ord=1| -> error -> |print|
     error -> |historyt interval=10| --> error_history
     error_history -> |plot title="" width=200 height=150 y_min=0| ->  |veh_image_label bgcolor=$bgcolor  title="Error"| --> error_rgb
 
-    sensels_rgb, commands_rgb --> |grid bgcolor=$bgcolor cols=1| --> right
     
-    map_rgb, right, servo_rgb, error_rgb --> |sync| --> |grid bgcolor=$bgcolor  cols=2| --> out
+    servo_rgb, error_rgb --> |sync| --> |grid bgcolor=$bgcolor  cols=2| --> bottom
+    
+    map_rgb, bottom  --> |sync| -> |grid bgcolor=$bgcolor  cols=1| --> out
 
     out --> |mencoder file="${output}.mp4" timestamps=0|
 
