@@ -34,7 +34,7 @@ class PhotoreceptorsSmooth(VehicleSensor, TexturedRaytracer):
             'shape': [len(directions)],
             'format': 'C',
             'range': [0, +1],
-            'extra': {'directions': directions,
+            'extra': {'directions': list(directions),
                       'noise': self.noise_spec,
                       'spatial_sigma_deg': spatial_sigma_deg},
         }
@@ -111,7 +111,7 @@ class PhotoreceptorsSmooth(VehicleSensor, TexturedRaytracer):
 
         data = {'luminance': luminance2,
                 'readings': readings2,
-                'directions': self.directions_o,
+                'directions': list(self.directions_o),
                 'valid': valid2,
                 VehicleSensor.SENSELS:  sensels}
 

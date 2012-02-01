@@ -11,9 +11,9 @@ import procgraph_vehicles
 
 |boot_log_reader logdir=$logdir id_robot=$id_robot id_agent=$id_agent id_episode=$id_episode| -> observations 
 
-    observations ->  |extract_from_extra fieldname='servoing'| -> extra_servoing
+    observations ->  |extract_from_extra fieldname='servoing_base'| -> extra_servoing
     observations -> |extract_from_extra fieldname='robot_state'| -> state_
-    extra_servoing -> |extract_field field='obs0'| -> goal
+    extra_servoing -> |extract_field field='goal'| -> goal
 
     state_ --> |use_simulation_time| --> state
 
@@ -29,7 +29,7 @@ goal, sensels --> |sync|--> |plot width=450 height=150 title="" y_min=0 y_max=1|
     sensels -> |array| -> sensels_a
     sensels_a, goal_a --> |sync| --> |-| --> |norm ord=1| -> error -> |print|
     error -> |historyt interval=10| --> error_history
-    error_history -> |plot title="" width=200 height=150 y_min=0| ->  |veh_image_label bgcolor=$bgcolor  title="Error"| --> error_rgb
+    error_history -> |plot title="" format='s' width=200 height=150 y_min=0| ->  |veh_image_label bgcolor=$bgcolor  title="Error"| --> error_rgb
 
     
     servo_rgb, error_rgb --> |sync| --> |grid bgcolor=$bgcolor  cols=2| --> bottom

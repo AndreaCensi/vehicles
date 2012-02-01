@@ -112,16 +112,6 @@
   extra:
     skin: omni
 
-# - id: d_SE2_rb_v-cam360s
-#   desc: An omnidirectional robot with a 360deg camera.
-#   id_dynamics: d_SE2_rb_v
-#   sensors:
-#       - id_sensor: cam_f360_n180_s
-#   radius: 0.5
-#   extra:
-#     skin: omni
-
-
 
 - id: d_SE2_rb_v-rf180
   desc: An omnidirectional robot with a 180deg range finder.

@@ -23,12 +23,12 @@ class Vehicle:
                 raise Exception('Observations not computed')
             return {
                 'sensor': self.sensor.to_yaml(),
-                'pose': to_yaml('SE3', self.pose),
+                'pose': SE3.to_yaml(self.pose),
                 'joint': self.joint,
                 'extra': self.extra,
                 'current_observations':
                     dict_to_yaml(self.current_observations),
-                'current_pose': to_yaml('SE3', self.current_pose),
+                'current_pose': SE3.to_yaml(self.current_pose),
             }
 
     def __init__(self, radius=0.5, extra={}):
@@ -62,7 +62,7 @@ class Vehicle:
             'radius': self.radius,
             'id_sensors': self.id_sensors,
             'id_dynamics': self.id_dynamics,
-            'pose': to_yaml('SE3', pose),
+            'pose': SE3.to_yaml(pose),
             'conf': to_yaml('TSE3', configuration),
             'state': self.dynamics.state_to_yaml(self._get_state()),
             'joints': joints,

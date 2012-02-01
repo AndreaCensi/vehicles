@@ -13,6 +13,8 @@
 
 '''
 
+# TODO: plot textures only if there is a camera
+
 from vehicles import __version__, logger
 import numpy as np
 from contracts import contract

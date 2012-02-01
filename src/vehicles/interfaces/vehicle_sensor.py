@@ -1,12 +1,14 @@
+from ..utils import check_yaml_friendly
 from abc import abstractmethod, ABCMeta
-import numpy as np
 from pprint import pformat
+from . import np
 
 
 class VehicleSensor:
     __metaclass__ = ABCMeta
 
     def __init__(self, observations_spec):
+        check_yaml_friendly(observations_spec)
         self.observations_spec = observations_spec
 
     @abstractmethod

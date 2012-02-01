@@ -1,8 +1,7 @@
 from . import Raytracer, contract, np, get_uniform_directions
-from ..interfaces import VehicleSensor
+from .. import VehicleSensor, VehiclesConstants
 from conf_tools import instantiate_spec
 from geometry import SE2_project_from_SE3
-from vehicles.constants import VehiclesConstants
 
 __all__ = ['Rangefinder', 'RangefinderUniform']
 
@@ -30,7 +29,7 @@ class Rangefinder(VehicleSensor, Raytracer):
             'shape': [len(directions)],
             'format': 'C',
             'range': [0, +1],
-            'extra': {'directions': directions.tolist(),
+            'extra': {'directions': list(directions),
                       'noise': noise}
         }
         VehicleSensor.__init__(self, spec)
@@ -42,7 +41,7 @@ class Rangefinder(VehicleSensor, Raytracer):
                 'invalid': self.invalid,
                 'min_range': self.min_range,
                 'max_range': self.max_range,
-                'directions': self.directions.tolist()}
+                'directions': list(self.directions) }
 
     def _compute_observations(self, pose):
         pose = SE2_project_from_SE3(pose)

@@ -39,6 +39,7 @@ def cairo_plot_with_style(cr, shape, border_color=None,
             cairo_set_color(cr, fill_color)
             cr.fill()
 
+        # TODO: fill_preserve
         if border_color is not None:
             if border_width is not None:
                 cr.set_line_width(border_width)

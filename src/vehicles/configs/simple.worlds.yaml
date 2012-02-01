@@ -66,3 +66,16 @@
       - radius: 10
         scale: 3
         
+- id: StocSources_w10_n20_s1
+  desc: "Random disposition of stochastic sources"
+  code: 
+      - vehicles.worlds.StochasticSources
+      - width: 10
+        length: 10
+        scale: 1
+        num_sources: 20
+
+  
+
+
+

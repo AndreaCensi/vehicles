@@ -1,8 +1,7 @@
 from . import TexturedRaytracer, contract, np, get_uniform_directions
-from ..interfaces import VehicleSensor
+from .. import VehicleSensor, VehiclesConstants
 from conf_tools import instantiate_spec
 from geometry import SE2_project_from_SE3
-from vehicles.constants import VehiclesConstants
 
 __all__ = ['Photoreceptors', 'PhotoreceptorsUniform']
 

@@ -1,8 +1,7 @@
 from . import np, contract, logger
-from ..interfaces import Field, VehicleSensor, Source
+from .. import Field, VehicleSensor, Source, VehiclesConstants
 from conf_tools import instantiate_spec
 from geometry import SE2_project_from_SE3
-from vehicles.constants import VehiclesConstants
 
 __all__ = ['FieldSampler', 'get_field_values', 'get_field_value']
 
@@ -36,7 +35,7 @@ class FieldSampler(VehicleSensor):
             'shape': shape,
             'format': 'C',
             'range': [self.min_value, self.max_value],
-            'extra': {'positions': positions,
+            'extra': {'positions': self.positions.tolist(),
                       'noise_spec': self.noise_spec}
         }
 
@@ -78,12 +77,12 @@ class FieldSampler(VehicleSensor):
         return data
 
     def set_world_primitives(self, primitives):
-        # XXX this does not work with changing environments
+        # FIXME this does not work with changing environments
         if primitives:  # FIXME: only find changed things
             sources = [p for p in primitives if isinstance(p, Source)]
             if not sources:
-                logger.debug('Warning: no sources given for field sampler.')
-                logger.debug('I got: %s' % primitives)
+                logger.error('Warning: there no sources given for a field '
+                             'sampler in this world.')
         if self.primitives is None:
             self.primitives = primitives
 

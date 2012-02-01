@@ -1,6 +1,6 @@
 from . import (CairoConstants as CC, cairo_plot_circle, cairo_rototranslate, np,
     logger, contract)
-from cairo_utils import cairo_set_color
+from cairo_utils import cairo_plot_circle2, cairo_set_color
 from geometry import SE2_from_SE3, translation_angle_from_SE2, SE3
 from vehicles import VehiclesConfig, VehiclesConstants
 
@@ -59,7 +59,14 @@ def cairo_plot_sensor_data(cr, vehicle_state, scale=1.0, compact=True):
                         readings=np.array(observations['readings']),
                         luminance=np.array(observations['luminance']))
         elif sensor_type == VehiclesConstants.SENSOR_TYPE_FIELDSAMPLER:
-            plot_fieldsampler(cr=cr,
+
+            if True:
+                with cairo_rototranslate(cr, sensor_pose):
+                    plot_fieldsampler_fancy(cr=cr,
+                        positions=np.array(sensor['positions']),
+                        sensels=np.array(observations['sensels']))
+            else:
+                plot_fieldsampler(cr=cr,
                         pose=sensor_pose,
                         positions=np.array(sensor['positions']),
                         sensels=np.array(observations['sensels']))
@@ -75,7 +82,7 @@ def SE2_act_R2(q, x):
     return np.dot(q, [x[0], x[1], 1])[:2]
 
 
-@contract(pose='SE2', positions='array[Nx2]',
+@contract(pose='SE2', positions='array[Nx2]', radius='None|>0',
           sensels='array[N]|(array[JxK],J*K=N)')
 def plot_fieldsampler(cr, pose, positions, sensels, radius=None):
     # Scale in [0,1] for better contrast
@@ -87,14 +94,7 @@ def plot_fieldsampler(cr, pose, positions, sensels, radius=None):
     # find radius if none given as the minimum distance of the first
     # sensels to the others
     if radius is None:
-        p0 = positions[0, :]
-        pi = positions[1:, :]
-        D = np.hypot(pi[:, 0] - p0[0], pi[:, 1] - p0[1])
-        radius = D.min() / 2
-
-        radius *= 2  # overlap
-
-        radius = 0.05
+        radius = find_radius(positions)
 
     for i, value in enumerate(sensels.flat):
         value = 1 - value
@@ -103,6 +103,58 @@ def plot_fieldsampler(cr, pose, positions, sensels, radius=None):
         #alpha=0.6
         cairo_plot_circle(cr, center=pw, radius=radius, facecolor=facecolor,
                     edgecolor=None)
+
+def find_radius(positions):
+    p0 = positions[0, :]
+    pi = positions[1:, :]
+    D = np.hypot(pi[:, 0] - p0[0], pi[:, 1] - p0[1])
+    radius = D.min() / 2
+
+    radius *= 2  # overlap
+
+    radius = 0.05 # XXX
+    return radius
+
+RANDOM_PERM = np.random.permutation(1000)
+
+@contract(positions='array[Nx2]', sensels='array[N]|(array[JxK],J*K=N)',
+          radius='None|>0')
+def plot_fieldsampler_fancy(cr, positions, sensels, radius=None,
+                            alpha=0.2):
+    # Scale in [0,1] for better contrast
+
+    sensels = sensels - np.min(sensels)
+    if np.max(sensels) > 0:
+        sensels = sensels / np.max(sensels)
+
+    # find radius if none given as the minimum distance of the first
+    # sensels to the others
+    if radius is None:
+        radius = find_radius(positions)
+
+    indices = np.array(range(sensels.size))
+
+    # Use completely random permutation
+    permutation = np.argsort(RANDOM_PERM[:indices.size])
+    # Sort by value
+    # permutation = np.argsort(np.array(sensels.flat))
+
+    indices = indices[permutation]
+
+    for i in indices:
+        value = sensels.flat[i]
+        p = positions[i, :]
+
+        uvalue = value
+        facecolor = [uvalue, uvalue, uvalue, value]
+        border_color = [0, 0, 0, 0.3 + 0.5 * value]
+
+        radius_i = (alpha + (1 - alpha) * value) * radius
+
+        cairo_plot_circle2(cr, x=p[0], y=p[1], radius=radius_i,
+                                fill_color=facecolor,
+                                border_color=border_color,
+                                border_width=radius / 10.0)
 
 
 @contract(pose='SE2', directions='array[N]',

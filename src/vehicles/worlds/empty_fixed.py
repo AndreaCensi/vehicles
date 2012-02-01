@@ -1,8 +1,8 @@
-from ..interfaces import World
 from . import contract, np
-
+from ..interfaces import World
 from geometry import SE2_from_xytheta, SE3_from_SE2
 from vehicles.interfaces.world import unique_timestamp_string
+
 
 __all__ = ['EmptyFixed']
 

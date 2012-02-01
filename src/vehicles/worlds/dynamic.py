@@ -1,5 +1,5 @@
 from . import World, np, random_checkerboard, box, contract
-from ..interfaces import Circle
+from .. import Circle
 
 __all__ = ['DynamicTest']
 
