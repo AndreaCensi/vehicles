@@ -1,12 +1,10 @@
 from cairo_utils import cairo_pixels, cairo_text_align
-from geometry import SE2_from_SE3
-from geometry.yaml import from_yaml
+from geometry import SE2_from_SE3, SE3
 from procgraph import BadConfig, Block
 from procgraph.block_utils import make_sure_dir_exists
 from procgraph_images import posneg, scale, reshape2d
 from vehicles_cairo import (cairo_save, cairo_transform,
-    vehicles_cairo_display_all, cairo_rototranslate)
-from vehicles_cairo.skins import cairo_ref_frame
+    vehicles_cairo_display_all, cairo_rototranslate, cairo_ref_frame)
 import numpy as np
 import os
 import subprocess
@@ -44,9 +42,7 @@ class VehiclesCairoDisplay(Block):
 
     Block.input('boot_obs', '')
 
-
     def init(self):
-
         self.format = self.config.format
 
         self.total_width = self.config.width
@@ -146,12 +142,12 @@ class VehiclesCairoDisplay(Block):
                 plot_servonave(cr, extra['servonav'])
 
         plotting_params = dict(
-                    grid=self.config.grid,
-                    zoom=self.config.zoom,
-                    show_sensor_data=self.config.show_sensor_data,
-                    show_sensor_data_compact=self.config.show_sensor_data_compact,
-                    first_person=self.config.fp,
-                    extra_draw_world=extra_draw_world)
+                grid=self.config.grid,
+                zoom=self.config.zoom,
+                show_sensor_data=self.config.show_sensor_data,
+                show_sensor_data_compact=self.config.show_sensor_data_compact,
+                first_person=self.config.fp,
+                extra_draw_world=extra_draw_world)
 
         # todo: check
         sim_state = extra['robot_state']
@@ -368,15 +364,17 @@ def create_sidebar(cr, width, height, sim_state, id_vehicle, id_episode,
             cr.stroke()
         cr.translate(0, line)
 
+
 def plot_servonave(cr, servonav):
     locations = servonav['locations']
     current_goal = servonav['current_goal']
     for i, loc in enumerate(locations):
-        pose = SE2_from_SE3(from_yaml(loc['pose']))
+        pose = SE2_from_SE3(SE3.from_yaml(loc['pose']))
         with cairo_rototranslate(cr, pose):
             if current_goal == i:
                 cairo_ref_frame(cr, l=0.5)
             else:
-                cairo_ref_frame(cr, l=0.5, x_color=[0, 0, 0], y_color=[0, 0, 0])
+                cairo_ref_frame(cr, l=0.5,
+                                x_color=[0, 0, 0], y_color=[0, 0, 0])
 
 

@@ -46,11 +46,13 @@ class Raytracer:
     def read_answer(self, expected):
         answer = self.child_stream.read_next()
         if answer is None:
-                raise Exception("Could not communicate with child")
+            raise Exception("Could not communicate with child")
+
         if ((not isinstance(answer, dict)) or
             (not 'class' in answer) or
             (answer['class'] != expected)):
             raise Exception('Invalid response %r' % answer)
+
         return answer
 
     def __del__(self):
@@ -65,8 +67,12 @@ class Raytracer:
             self.p.terminate()
             #print "Closing pipe %s, %s" % (self.p.stdin, self.p.stdout)
             self.p.wait()
-            pass
-        except OSError:
+        except (OSError, AttributeError):
+            # Exception AttributeError: AttributeError("'NoneType' object 
+            # has no attribute 'SIGTERM'",) 
+            # in <bound method RangefinderUniform.__del__ 
+            # of RangefinderUniform> ignored
+            # http://stackoverflow.com/questions/2572172/
             pass
         #print " Closed pipe %s, %s" % (self.p.stdin,self.p.stdout)
 
@@ -191,29 +197,3 @@ class TexturedRaytracer(Raytracer):
         answer['luminance'] = luminance
 
         return answer
-
-#
-#    @contract(pose='SE2')
-#    def raytracing_old(self, pose):
-#        answer = Raytracer.raytracing(self, pose)
-#
-#        n = len(answer['surface'])
-#        luminance = np.zeros(n)
-#        # TODO: make this step vectorial
-#        for i, surface_id in enumerate(answer['surface']):
-#            if answer['valid'][i]:
-#                if not surface_id in self.surface2texture:
-#                    raise Exception("Unknown surface %r; I know %r." %
-#                                    (surface_id, self.surface2texture.keys()))
-#                texture = self.surface2texture[surface_id]
-#                coord = answer['curvilinear_coordinate'][i]
-#                # TODO: make this more efficient
-#                luminance[i] = texture(coord)
-#            else:
-#                luminance[i] = np.NaN
-#
-#        answer['luminance'] = luminance
-#
-#        return answer
-
-

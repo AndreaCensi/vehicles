@@ -5,9 +5,11 @@ from geometry.yaml import to_yaml
 
 class Vehicle:
     class Attached:
-        @contract(pose='SE3', joint='int')
+        @contract(pose='SE3', joint='int,>=0', extra='dict')
         def __init__(self, sensor, pose, joint, extra):
             '''
+                Initializes this structure.
+                
                 :param:extra: dict convertible to YAML.
                 :param:extra['skin']: sing for this sensor.
             '''
@@ -33,8 +35,10 @@ class Vehicle:
 
     def __init__(self, radius=0.5, extra={}):
         """ 
-            :param:extra: extra information
-                extra['skin'] id of the skin
+            Initializes an empty vehicle.
+            
+            :param:radius: radius (used for collision detection)
+            :param:extra: extra information (extra['skin'] id of the skin)
         """
         self.radius = radius
         self.sensors = []  # array of Attached

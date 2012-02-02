@@ -41,7 +41,7 @@ class Rangefinder(VehicleSensor, Raytracer):
                 'invalid': self.invalid,
                 'min_range': self.min_range,
                 'max_range': self.max_range,
-                'directions': list(self.directions) }
+                'directions': list(self.directions)}
 
     def _compute_observations(self, pose):
         pose = SE2_project_from_SE3(pose)

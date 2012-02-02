@@ -53,6 +53,7 @@ def cairo_ref_frame(cr, l=1, x_color=[1, 0, 0], y_color=[0, 1, 0]):
         with cairo_transform(cr, r=np.pi / 2):
             cairo_arrow(cr, length=l, border_width=0.05, border_color=y_color)
 
+
 def cairo_arrow(cr, length, caplen=0.05, capwidth=0.05,
                 border_width=0.05, border_color=[0, 0, 0]):
 

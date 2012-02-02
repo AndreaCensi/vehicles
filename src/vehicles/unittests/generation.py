@@ -3,6 +3,7 @@ from . import (all_dynamics, get_dynamics, logger, get_sensor, all_sensors,
 from nose.tools import istest
 import sys
 
+
 def add_to_module(function, module_name):
     module = sys.modules[module_name]
     name = function.__name__
@@ -58,7 +59,8 @@ def add_pair_f(f, id_dynamics, id_sensor):
         sensor = get_sensor(id_sensor)
         wrap_with_desc(f, (id_dynamics, dynamics, id_sensor, sensor),
                        dynamics=dynamics, sensor=sensor)
-    test_caller.__name__ = 'test_%s_%s_%s' % (f.__name__, id_dynamics, id_sensor)
+    test_caller.__name__ = 'test_%s_%s_%s' % (f.__name__,
+                                              id_dynamics, id_sensor)
     test_caller.dynamics = id_dynamics
     test_caller.sensor = id_sensor
     add_to_module(test_caller, f.__module__)

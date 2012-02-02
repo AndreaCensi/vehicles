@@ -139,7 +139,6 @@ def vehicles_cairo_set_coordinates(cr, width, height, world_bounds,
                    t[1] - zoom - m,
                    t[1] + zoom + m]
 
-
     cairo_set_axis(cr, width, height, extents)
 
     if first_person and zoom != 0:
@@ -149,7 +148,6 @@ def vehicles_cairo_set_coordinates(cr, width, height, world_bounds,
         cr.rotate(-angle)
         cr.rotate(+np.pi / 2) # make the robot point "up"
         cr.translate(-t[0], -t[1])
-
 
 
 def show_grid(cr, bx, by, spacing=1, margin=0):

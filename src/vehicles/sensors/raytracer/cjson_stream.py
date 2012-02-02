@@ -3,6 +3,7 @@ import time
 
 debug_speed = False
 
+
 class CJSONStream(object):
 
     def __init__(self, input_stream):

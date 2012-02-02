@@ -4,6 +4,7 @@ from vehicles.worlds.stochastic_box2 import KernelInverse
 
 __all__ = ['StochasticSources']
 
+
 class StochasticSources(World):
     ''' This also includes point sources. '''
 

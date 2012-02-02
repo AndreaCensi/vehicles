@@ -1,6 +1,6 @@
-from . import cairo, CairoConstants, np
-from cairo_utils import (cairo_transform, cairo_plot_circle, cairo_plot_polyline,
-    cairo_save, cairo_set_color)
+from . import cairo, CairoConstants, np, contract
+from cairo_utils import (cairo_transform, cairo_plot_circle,
+                         cairo_plot_polyline, cairo_save, cairo_set_color)
 from conf_tools import instantiate_spec
 from vehicles import Source, VehiclesConstants, get_field_values
 
@@ -59,7 +59,6 @@ def cairo_plot_texture_circle(cr, radius, center, texture, resolution,
 
 CC = CairoConstants
 
-from . import contract
 
 @contract(center='seq[2](float)', radius='>0', solid='bool', numpass='int')
 def cairo_plot_circle_primitive(cr, center, radius, solid, texture, numpass):
@@ -113,6 +112,7 @@ def cairo_plot_polyline_primitive(cr, points, texture):
                                   width_inside=0.3 * CC.texture_resolution,
                                   width_outside=CC.texture_resolution)
 
+
 @contract(points='array[2xN]')
 def cairo_plot_textured_polyline(cr, points, texture,
                                   resolution,
@@ -135,6 +135,7 @@ def cairo_plot_textured_polyline(cr, points, texture,
 
         delta_t += segment_len
 
+
 @contract(length='float,>0', resolution='float,>0', offset='float',
           width_inside='>=0', width_outside='>=0')
 def cairo_plot_textured_segment(cr, texture, length, resolution, offset,
@@ -154,6 +155,7 @@ def cairo_plot_textured_segment(cr, texture, length, resolution, offset,
         cr.set_source_rgb(values[i], values[i], values[i])
         cr.rectangle(x0, y0, x1 - x0, y1 - y0)
         cr.fill()
+
 
 def cairo_show_world_geometry(cr, world_state, plot_sources=False):
     bounds = world_state['bounds']

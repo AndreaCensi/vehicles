@@ -18,14 +18,13 @@ class PhotoreceptorsSmooth(VehicleSensor, TexturedRaytracer):
         self.noise = (None if self.noise_spec is None else
                           instantiate_spec(self.noise_spec))
 
-
-        self.delta = np.linspace(-3, 3, upsample) * np.deg2rad(spatial_sigma_deg)
+        spatial_sigma_rad = np.deg2rad(spatial_sigma_deg)
+        self.delta = np.linspace(-3, 3, upsample) * spatial_sigma_rad
 
         directions2 = []
         for d in directions:
             for s in self.delta:
                 directions2.append(d + s)
-
 
         self.directions_o = np.array(directions)
 
@@ -40,7 +39,6 @@ class PhotoreceptorsSmooth(VehicleSensor, TexturedRaytracer):
         }
 
         VehicleSensor.__init__(self, spec)
-
 
         def kernel(x):
             return np.exp(-(x ** 2))
@@ -80,7 +78,6 @@ class PhotoreceptorsSmooth(VehicleSensor, TexturedRaytracer):
                 res[i] = np.sum(other * self.coeff)
             return res
 
-
         valid2 = np.zeros(n, dtype=bool)
         readings2 = np.zeros(n, dtype='float32')
 
@@ -99,11 +96,9 @@ class PhotoreceptorsSmooth(VehicleSensor, TexturedRaytracer):
             else:
                 valid2[i] = False
 
-
         luminance2 = smooth(data['luminance'])
         luminance2 = np.maximum(0, np.minimum(1, luminance2))
         luminance2[np.logical_not(valid2)] = self.invalid
-
 
         sensels = luminance2.copy()
         # XXX: this step should not be necessary
@@ -113,7 +108,7 @@ class PhotoreceptorsSmooth(VehicleSensor, TexturedRaytracer):
                 'readings': readings2,
                 'directions': list(self.directions_o),
                 'valid': valid2,
-                VehicleSensor.SENSELS:  sensels}
+                VehicleSensor.SENSELS: sensels}
 
         return data
 

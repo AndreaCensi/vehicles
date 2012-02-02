@@ -1,5 +1,5 @@
-from . import (CairoConstants as CC, cairo_plot_circle, cairo_rototranslate, np,
-    logger, contract)
+from . import (CairoConstants as CC, cairo_plot_circle, cairo_rototranslate,
+               np, logger, contract)
 from cairo_utils import cairo_plot_circle2, cairo_set_color
 from geometry import SE2_from_SE3, translation_angle_from_SE2, SE3
 from vehicles import VehiclesConfig, VehiclesConstants
@@ -77,6 +77,7 @@ def cairo_plot_sensor_data(cr, vehicle_state, scale=1.0, compact=True):
             logger.warning('Unknown sensor type %r.' % sensor['type'])
             pass
 
+
 @contract(q='SE2', x='array[2]', returns='array[2]')
 def SE2_act_R2(q, x):
     return np.dot(q, [x[0], x[1], 1])[:2]
@@ -104,6 +105,7 @@ def plot_fieldsampler(cr, pose, positions, sensels, radius=None):
         cairo_plot_circle(cr, center=pw, radius=radius, facecolor=facecolor,
                     edgecolor=None)
 
+
 def find_radius(positions):
     p0 = positions[0, :]
     pi = positions[1:, :]
@@ -116,6 +118,7 @@ def find_radius(positions):
     return radius
 
 RANDOM_PERM = np.random.permutation(1000)
+
 
 @contract(positions='array[Nx2]', sensels='array[N]|(array[JxK],J*K=N)',
           radius='None|>0')
@@ -247,6 +250,7 @@ def plot_ranges_compact(cr, directions, readings, valid,
 
         cairo_set_color(cr, CC.laser_compact_fg)
         cairo_fill_slice(cr, theta1[i], theta2[i], r0[i], r1[i])
+
 
 def cairo_fill_slice(cr, theta1, theta2, r0, r1):
     Ax = np.cos(theta1) * r0

@@ -11,7 +11,6 @@ class RandomCheckerboard(SampledTexture):
         SampledTexture.__init__(self, values, cell_width)
 
 
-
 class BWCheckerboard(SampledTexture):
 
     @contract(num='int,>=1', cell_width='>0')

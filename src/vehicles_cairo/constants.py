@@ -2,6 +2,7 @@ BLACK = [0, 0, 0]
 WHITE = [1, 1, 1]
 YELLOW = [1, 1, 0]
 
+
 class CairoConstants:
     obstacle_border_width = 0.01
     obstacle_border_color = [0, 0, 0]

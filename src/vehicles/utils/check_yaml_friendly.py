@@ -1,6 +1,5 @@
 from contracts import describe_type
 from types import NoneType
-from pprint import pprint
 
 
 def check_yaml_friendly(s):
@@ -9,6 +8,7 @@ def check_yaml_friendly(s):
     except ValueError:
         #pprint(s)
         check_yaml_friendly_detailed(s)
+
 
 def check_yaml_friendly_fast(s):
     if isinstance(s, (str, int, float, NoneType)):

@@ -21,7 +21,8 @@ website: distclean
 	$(webgit) branch -D master
 
 upload:
-	$(webgit) commit -m "updated website" -a 
+	# git --git-dir $(webdir)/.git  add $(find $(webdir) . -type f)
+	-$(webgit) commit -m "updated website" -a 
 	$(webgit) push
 
 distclean:
