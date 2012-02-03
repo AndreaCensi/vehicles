@@ -28,15 +28,12 @@ class VehiclesCairoDisplay(Block):
 
     Block.config('trace', 'Trace the path', default=False)
 
-    Block.config('zoom', 'Either 0 for global map, '
-                 'or a value giving the size of the window', default=0)
-
-    Block.config('fp', 'If true, we use the robot first person', default=True)
-
-    Block.config('grid', 'Size of the grid (0: turn off)', default=1)
-    Block.config('show_sensor_data', 'Show sensor data', default=True)
-    Block.config('show_sensor_data_compact', 'Show compact sensor data',
-                 default=True)
+    Block.config('plotting_params',
+                 'Configuration to pass to vehicles_cairo_display_all()',
+                 default={})
+    Block.config('sidebar_params',
+                 'Configuration to pass to create_sidebar()',
+                 default={})
 
     Block.config('swf', 'Converts PDF to SWF using pdf2swf', default=True)
 
@@ -141,13 +138,11 @@ class VehiclesCairoDisplay(Block):
             if 'servonav' in extra:
                 plot_servonave(cr, extra['servonav'])
 
-        plotting_params = dict(
-                grid=self.config.grid,
-                zoom=self.config.zoom,
-                show_sensor_data=self.config.show_sensor_data,
-                show_sensor_data_compact=self.config.show_sensor_data_compact,
-                first_person=self.config.fp,
-                extra_draw_world=extra_draw_world)
+        plotting_params = self.config.plotting_params
+
+        plotting_params['extra_draw_world'] = extra_draw_world
+
+        sidebar_params = self.config.sidebar_params
 
         # todo: check
         sim_state = extra['robot_state']
@@ -157,9 +152,7 @@ class VehiclesCairoDisplay(Block):
         commands = posneg(reshape2d(boot_obs['commands']), max_value=(+1),
                               nan_color=[1, 1, 1])
         commands_source = boot_obs['commands_source'].item()
-        #timestamp = boot_obs['timestamp'].item()
         timestamp = boot_obs['time_from_episode_start'].item()
-        #id_vehicle = str(boot_obs['commands'])
 
         with cairo_save(cr):
             if self.config.display_sidebar:
@@ -199,7 +192,8 @@ class VehiclesCairoDisplay(Block):
                                timestamp=timestamp,
                                observations=observations,
                                commands=commands,
-                               commands_source=commands_source)
+                               commands_source=commands_source,
+                               **sidebar_params)
 
     def finish(self):
         if self.format == 'pdf':
@@ -238,7 +232,10 @@ class VehiclesCairoDisplay(Block):
 
 def create_sidebar(cr, width, height, sim_state, id_vehicle, id_episode,
                    timestamp, observations, commands, commands_source,
-                   bg_color=None):
+                   bg_color=None,
+                   show_observations=True,
+                    show_commands=True,
+                    show_annotations=True):
     import cairo
     if bg_color is not None:
         cr.rectangle(0, 0, width, height)
@@ -277,92 +274,96 @@ def create_sidebar(cr, width, height, sim_state, id_vehicle, id_episode,
     colorbar_scale = scale(values)
 
     cr.translate(0, 2 * M)
-    with cairo_transform(cr, t=[width / 2, 0]):
-        cr.select_font_face(label_font)
-        cr.set_font_size(M)
-        cairo_text_align(cr, 'observations', halign='center')
 
-    cr.translate(0, M * 0.8)
+    if show_observations:
+        with cairo_transform(cr, t=[width / 2, 0]):
+            cr.select_font_face(label_font)
+            cr.set_font_size(M)
+            cairo_text_align(cr, 'observations', halign='center')
 
-    with cairo_transform(cr, t=[padding, 0]):
-        data_width = width - 2 * padding
-        # Don't draw grid if there are many pixels
-        if max(observations.shape[0], observations.shape[1]) > 15:
-            grid_color = None
-        else:
-            grid_color = [1, .9, .9]
+        cr.translate(0, M * 0.8)
 
-        last_height = cairo_pixels(cr, observations, width=data_width,
-                                   # Force square
-                                   height=data_width,
-                                   grid_color=grid_color)
+        with cairo_transform(cr, t=[padding, 0]):
+            data_width = width - 2 * padding
+            # Don't draw grid if there are many pixels
+            if max(observations.shape[0], observations.shape[1]) > 15:
+                grid_color = None
+            else:
+                grid_color = [1, .9, .9]
 
-    cr.translate(0, last_height)
+            last_height = cairo_pixels(cr, observations, width=data_width,
+                                       # Force square
+                                       height=data_width,
+                                       grid_color=grid_color)
 
-    cr.translate(0, spacer)
+        cr.translate(0, last_height)
 
-    with cairo_transform(cr, t=[width / 2, 0]):
-        with cairo_transform(cr, t=[-bar_width / 2, 0]):
-            last_height = cairo_pixels(cr, colorbar_scale,
-                         bar_width, height=bar_height,
-                          grid_color=None)
+        cr.translate(0, spacer)
 
-        cr.set_font_size(legend_font_size)
-        cr.select_font_face(legend_font)
+        with cairo_transform(cr, t=[width / 2, 0]):
+            with cairo_transform(cr, t=[-bar_width / 2, 0]):
+                last_height = cairo_pixels(cr, colorbar_scale,
+                             bar_width, height=bar_height,
+                              grid_color=None)
 
-        with cairo_transform(cr, t=[0, bar_height / 2]):
-            with cairo_transform(cr, t=[-bar_width / 2 - M / 2, 0]):
-                cairo_text_align(cr, '0', 'right', 'middle')
-            with cairo_transform(cr, t=[+bar_width / 2 + M / 2, 0]):
-                cairo_text_align(cr, '1', 'left', 'middle')
+            cr.set_font_size(legend_font_size)
+            cr.select_font_face(legend_font)
 
-    cr.translate(0, last_height + spacer * 3)
+            with cairo_transform(cr, t=[0, bar_height / 2]):
+                with cairo_transform(cr, t=[-bar_width / 2 - M / 2, 0]):
+                    cairo_text_align(cr, '0', 'right', 'middle')
+                with cairo_transform(cr, t=[+bar_width / 2 + M / 2, 0]):
+                    cairo_text_align(cr, '1', 'left', 'middle')
 
-    with cairo_transform(cr, t=[width / 2, 0]):
-        cr.select_font_face(label_font)
-        cr.set_font_size(M)
-        cairo_text_align(cr, 'commands', halign='center')
-    cr.translate(0, M * 0.8)
+        cr.translate(0, last_height + spacer * 3)
 
-    padding = padding * 2
-    with cairo_transform(cr, t=[padding, 0]):
-        data_width = width - 2 * padding
-        last_height = cairo_pixels(cr, commands, data_width)
-    cr.translate(0, last_height)
+    if show_commands:
+        with cairo_transform(cr, t=[width / 2, 0]):
+            cr.select_font_face(label_font)
+            cr.set_font_size(M)
+            cairo_text_align(cr, 'commands', halign='center')
+        cr.translate(0, M * 0.8)
 
-    cr.translate(0, spacer)
+        padding = padding * 2
+        with cairo_transform(cr, t=[padding, 0]):
+            data_width = width - 2 * padding
+            last_height = cairo_pixels(cr, commands, data_width)
+        cr.translate(0, last_height)
 
-    with cairo_transform(cr, t=[width / 2, 0]):
-        with cairo_transform(cr, t=[-bar_width / 2, 0]):
-            last_height = cairo_pixels(cr, colorbar_posneg,
-                         bar_width, height=bar_width * bar_ratio,
-                          grid_color=None)
+        cr.translate(0, spacer)
 
-        cr.set_font_size(legend_font_size)
-        cr.select_font_face(legend_font)
+        with cairo_transform(cr, t=[width / 2, 0]):
+            with cairo_transform(cr, t=[-bar_width / 2, 0]):
+                last_height = cairo_pixels(cr, colorbar_posneg,
+                             bar_width, height=bar_width * bar_ratio,
+                              grid_color=None)
 
-        with cairo_transform(cr, t=[0, bar_height / 2]):
-            with cairo_transform(cr, t=[-bar_width / 2 - M / 2, 0]):
-                cairo_text_align(cr, '-1', 'right', 'middle')
-            with cairo_transform(cr, t=[+bar_width / 2 + M / 2, 0]):
-                cairo_text_align(cr, '+1', 'left', 'middle')
+            cr.set_font_size(legend_font_size)
+            cr.select_font_face(legend_font)
 
-    cr.translate(0, last_height + spacer * 2)
+            with cairo_transform(cr, t=[0, bar_height / 2]):
+                with cairo_transform(cr, t=[-bar_width / 2 - M / 2, 0]):
+                    cairo_text_align(cr, '-1', 'right', 'middle')
+                with cairo_transform(cr, t=[+bar_width / 2 + M / 2, 0]):
+                    cairo_text_align(cr, '+1', 'left', 'middle')
 
-    cr.translate(width / 10, 0)
-    strings = ['vehicle: %s' % id_vehicle,
-               '  agent: %s' % commands_source,
-               'episode: %s' % id_episode,
-               '   time: %6.2f' % timestamp,
-               ]
-    cr.select_font_face('Mono')
-    cr.set_font_size(details_font_size)
-    line = details_font_size * 1.2
-    for s in strings:
-        with cairo_save(cr):
-            cr.show_text(s)
-            cr.stroke()
-        cr.translate(0, line)
+        cr.translate(0, last_height + spacer * 2)
+
+    if show_annotations:
+        cr.translate(width / 10, 0)
+        strings = ['vehicle: %s' % id_vehicle,
+                   '  agent: %s' % commands_source,
+                   'episode: %s' % id_episode,
+                   '   time: %6.2f' % timestamp,
+                   ]
+        cr.select_font_face('Mono')
+        cr.set_font_size(details_font_size)
+        line = details_font_size * 1.2
+        for s in strings:
+            with cairo_save(cr):
+                cr.show_text(s)
+                cr.stroke()
+            cr.translate(0, line)
 
 
 def plot_servonave(cr, servonav):

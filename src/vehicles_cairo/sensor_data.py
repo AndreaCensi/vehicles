@@ -5,12 +5,10 @@ from geometry import SE2_from_SE3, translation_angle_from_SE2, SE3
 from vehicles import VehiclesConfig, VehiclesConstants
 
 
-def cairo_plot_sensor_data(cr, vehicle_state, scale=1.0, compact=True):
+def cairo_plot_sensor_skins(cr, vehicle_state, scale=1.0):
     for attached in vehicle_state['sensors']:
         sensor = attached['sensor']
-        observations = attached['current_observations']
         sensor_pose = SE2_from_SE3(SE3.from_yaml(attached['current_pose']))
-        sensor_type = sensor['type']
 
         extra = attached.get('extra', {})
         sensor_skin = extra.get('skin', None)
@@ -26,6 +24,14 @@ def cairo_plot_sensor_data(cr, vehicle_state, scale=1.0, compact=True):
             with cairo_rototranslate(cr, sensor_pose):
                 cr.scale(scale, scale)
                 skin.draw(cr)
+
+
+def cairo_plot_sensor_data(cr, vehicle_state, scale=1.0, compact=True):
+    for attached in vehicle_state['sensors']:
+        sensor = attached['sensor']
+        observations = attached['current_observations']
+        sensor_pose = SE2_from_SE3(SE3.from_yaml(attached['current_pose']))
+        sensor_type = sensor['type']
 
         if sensor_type == VehiclesConstants.SENSOR_TYPE_RANGEFINDER:
             if compact:

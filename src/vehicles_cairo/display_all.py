@@ -1,10 +1,9 @@
 from . import (cairo_plot_sensor_data, cairo_plot_sources, cairo_save,
     cairo_show_world_geometry, cairo, CairoConstants, cairo_set_axis, np,
-    cairo_rototranslate)
+    cairo_rototranslate, cairo_plot_sensor_skins)
 from contracts import contract
-from geometry import translation_from_SE2, SE2_from_SE3, SE3
+from geometry import angle_from_SE2, translation_from_SE2, SE2_from_SE3, SE3
 from vehicles import VehiclesConfig
-from geometry import angle_from_SE2
 
 
 def vehicles_cairo_display_png(filename, width, height, sim_state,
@@ -40,9 +39,11 @@ def vehicles_cairo_display_all(cr, width, height,
                             sim_state,
                             grid=1,
                             zoom=0,
-                            show_sensor_data=True,
                             extra_draw_world=None,
                             first_person=True,
+                            show_world=True,
+                            #show_features='relevant',
+                            show_sensor_data=True,
                             show_sensor_data_compact=False):
     with cairo_save(cr):
         # Paint white
@@ -77,9 +78,9 @@ def vehicles_cairo_display_all(cr, width, height,
         if extra_draw_world is not None:
             extra_draw_world(cr)
 
-        cairo_plot_sources(cr, world_state)
-
-        cairo_show_world_geometry(cr, world_state)
+        if show_world:
+            cairo_plot_sources(cr, world_state)
+            cairo_show_world_geometry(cr, world_state)
 
         # XXX: tmp
         if extra_draw_world is not None:
@@ -97,9 +98,12 @@ def vehicles_cairo_display_all(cr, width, height,
                 skin.draw(cr, joints=joints,
                           timestamp=sim_state['timestamp'])
 
+        # don't like it cause it uses global "current_pose"
+        cairo_plot_sensor_skins(cr, vehicle_state,
+                               scale=robot_radius)
+
         if show_sensor_data:
             cairo_plot_sensor_data(cr, vehicle_state,
-                                   #rho_min=robot_radius,
                                    scale=robot_radius,
                                    compact=show_sensor_data_compact)
 
