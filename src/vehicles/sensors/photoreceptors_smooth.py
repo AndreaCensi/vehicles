@@ -29,24 +29,25 @@ class PhotoreceptorsSmooth(VehicleSensor, TexturedRaytracer):
 
         self.directions_o = np.array(directions)
 
-        spec = {
-            'desc': 'Photoreceptors',
-            'shape': [len(directions)],
-            'format': 'C',
-            'range': [0, +1],
-            'extra': {'directions': list(directions),
-                      'noise': self.noise_spec,
-                      'spatial_sigma_deg': spatial_sigma_deg},
-        }
-
-        VehicleSensor.__init__(self, spec)
-
         def kernel(x):
             return np.exp(-(x ** 2))
 
         self.coeff = kernel(self.delta)
         self.coeff = self.coeff / np.sum(self.coeff)
 
+        spec = {
+            'desc': 'Photoreceptors',
+            'shape': [len(directions)],
+            'format': 'C',
+            'range': [0, +1],
+            'extra': {'directions': self.directions_o.tolist(),
+                      'noise': self.noise_spec,
+                      'delta': self.delta.tolist(),
+                      'coeff': self.coeff.tolist(),
+                      'spatial_sigma_deg': spatial_sigma_deg},
+        }
+
+        VehicleSensor.__init__(self, spec)
         TexturedRaytracer.__init__(self, np.array(directions2))
 
     def to_yaml(self):

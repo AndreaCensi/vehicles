@@ -74,6 +74,7 @@ class Vehicle:
             'sensors': [s.to_yaml() for s in self.sensors],
             'extra': self.extra
         }
+        check_yaml_friendly(data)
         return data
 
     def __repr__(self):

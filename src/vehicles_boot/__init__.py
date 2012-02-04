@@ -1,19 +1,19 @@
-''' Interfacing with BootstrappingOlympics. '''
+''' Code interfacing PyVehicles with BootstrappingOlympics. '''
 
-from vehicles import __version__
+from vehicles import __version__, logger
 
 from contracts import contract
 import numpy as np
 
 try:
     import bootstrapping_olympics
-    boot_installed = True
+    vehicles_has_boot_olympics = True
 except ImportError:
-    boot_installed = False
+    logger.error('Package BootOlympics not installed, vehicles_boot cannot '
+                 'work properly.')
+    vehicles_has_boot_olympics = False
 
-if boot_installed:
+if vehicles_has_boot_olympics:
     from .vehicles_simulation import *
     from .ros_visualization import *
-else:
-    import warnings  # @Reimport
-    warnings.warn('Package BootOlympics not installed.')
+

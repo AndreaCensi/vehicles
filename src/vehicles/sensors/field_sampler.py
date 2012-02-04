@@ -34,9 +34,12 @@ class FieldSampler(VehicleSensor):
             'desc': 'Field sampler',
             'shape': shape,
             'format': 'C',
-            'range': [self.min_value, self.max_value],
+            'range': [float(self.min_value), float(self.max_value)],
             'extra': {'positions': self.positions.tolist(),
-                      'noise_spec': self.noise_spec}
+                      'normalize': bool(normalize),
+                      'max_value': float(max_value),
+                      'min_value': float(min_value),
+                      'noise': self.noise_spec}
         }
 
         VehicleSensor.__init__(self, boot_spec)

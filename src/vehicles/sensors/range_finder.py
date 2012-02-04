@@ -29,19 +29,22 @@ class Rangefinder(VehicleSensor, Raytracer):
             'shape': [len(directions)],
             'format': 'C',
             'range': [0, +1],
-            'extra': {'directions': list(directions),
-                      'noise': noise}
+            'extra': {'directions': np.array(directions).tolist(),
+                      'noise': noise,
+                      'invalid': float(invalid),
+                      'max_range': float(max_range),
+                      'min_range': float(min_range)}
         }
         VehicleSensor.__init__(self, spec)
         Raytracer.__init__(self, directions)
 
     def to_yaml(self):
         return {'type': VehiclesConstants.SENSOR_TYPE_RANGEFINDER,
-                'noise_spec': self.noise_spec,
+                'noise': self.noise_spec,
                 'invalid': self.invalid,
                 'min_range': self.min_range,
                 'max_range': self.max_range,
-                'directions': list(self.directions)}
+                'directions': np.array(self.directions).tolist()}
 
     def _compute_observations(self, pose):
         pose = SE2_project_from_SE3(pose)

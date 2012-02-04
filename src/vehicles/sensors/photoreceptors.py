@@ -23,6 +23,8 @@ class Photoreceptors(VehicleSensor, TexturedRaytracer):
             'format': 'C',
             'range': [0, +1],
             'extra': {'directions': directions.tolist(),
+                      'invalid': invalid,
+                      'sono': 'qui',
                       'noise': self.noise_spec}
         }
         VehicleSensor.__init__(self, spec)

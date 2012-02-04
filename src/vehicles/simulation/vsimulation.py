@@ -40,7 +40,8 @@ class VehicleSimulation():
 
         self.vehicle.set_world_primitives(updated)
         if self.vehicle.colliding_pose(self.vehicle.get_pose()).collided:
-            self.info('Collision due to dynamic world at %s.' % self.timestamp)
+            self.info('Collision due to dynamic world at time %.2f.' %
+                       self.timestamp)
             self.vehicle_collided = True
         else:
             self.vehicle.simulate(commands, dt)

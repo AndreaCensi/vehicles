@@ -24,6 +24,7 @@ class BOVehicleSimulation(RobotInterface, VehicleSimulation):
         vehicles = VehiclesConfig.specs['vehicles']
         worlds = VehiclesConfig.specs['worlds']
 
+        # TODO: user shortcuts
         if vehicle is not None:
             id_vehicle = vehicle['id']
             # TODO: check well formed
@@ -57,6 +58,8 @@ class BOVehicleSimulation(RobotInterface, VehicleSimulation):
         # XXX: id, desc, extra?
         self.commands_source = BootOlympicsConstants.CMD_SOURCE_REST
 
+        self.boot_episode_started = False
+
     def __repr__(self):
         return 'BOVehicleSim(%s,%s)' % (self.id_vehicle, self.id_world)
 
@@ -66,14 +69,21 @@ class BOVehicleSimulation(RobotInterface, VehicleSimulation):
         return self._boot_spec
 
     def set_commands(self, commands, commands_source):
+        if not self.boot_episode_started:
+            raise Exception('set_commands() called before new_episode().')
+
         self.commands_source = commands_source
         VehicleSimulation.simulate(self, commands, self.dt)
 
     def get_observations(self):
+        if not self.boot_episode_started:
+            raise Exception('get_observations() called before new_episode().')
+
         observations = VehicleSimulation.compute_observations(self)
         episode_end = True if self.vehicle_collided else False
         if episode_end:
-            self.info("Collision detected.")
+            self.info("Ending boot episode due to collision.")
+            self.boot_episode_started = False
 
         return RobotObservations(timestamp=self.timestamp,
                          observations=observations,
@@ -83,7 +93,9 @@ class BOVehicleSimulation(RobotInterface, VehicleSimulation):
                          episode_end=episode_end)
 
     def new_episode(self):
+        self.boot_episode_started = True
         e = VehicleSimulation.new_episode(self)
+        self.info("New episode started (%s)" % str(e))
         return EpisodeDesc(e.id_episode, self.id_world)
 
     def get_state(self):
