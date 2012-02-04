@@ -36,8 +36,8 @@ class CairoConstants:
 
     sensor_data_plot_compact = True
 
-    laser_compact_bg = [1, 0.6, 0.6]
-    laser_compact_fg = [1, 0, 0]
+    laser_compact_bg = [1, 0.6, 0.6, 0.3]
+    laser_compact_fg = [1, 0, 0, 0.8]
     laser_compact_r = 0.4
     laser_compact_r_width = 0.25
 

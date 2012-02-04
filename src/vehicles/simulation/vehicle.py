@@ -1,6 +1,7 @@
 from . import collides_with, np, compute_collision, contract
 from geometry import SE3, translation_from_SE2, SE2_project_from_SE3
 from geometry.yaml import to_yaml
+from vehicles.utils.check_yaml_friendly import check_yaml_friendly
 
 
 class Vehicle:
@@ -200,4 +201,6 @@ def dict_to_yaml(x):
         v = x[k]
         if isinstance(v, np.ndarray):
             x[k] = array_to_yaml(v)
+
+    check_yaml_friendly(x)
     return x

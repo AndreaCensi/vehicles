@@ -2,6 +2,7 @@ from . import TexturedRaytracer, contract, np, get_uniform_directions
 from .. import VehicleSensor, VehiclesConstants
 from conf_tools import instantiate_spec
 from geometry import SE2_project_from_SE3
+from bootstrapping_olympics.utils.c_yaml import yaml_dump
 
 __all__ = ['PhotoreceptorsSmooth', 'PhotoreceptorsSmoothUniform']
 
@@ -106,7 +107,7 @@ class PhotoreceptorsSmooth(VehicleSensor, TexturedRaytracer):
 
         data = {'luminance': luminance2,
                 'readings': readings2,
-                'directions': list(self.directions_o),
+                'directions': self.directions_o.tolist(),
                 'valid': valid2,
                 VehicleSensor.SENSELS: sensels}
 

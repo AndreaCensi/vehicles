@@ -223,7 +223,7 @@ def plot_photoreceptors_compact(cr, directions, valid, luminance,
 
         r0 = r
         r1 = r + r_width
-        cr.set_source_rgb(*luminance2color(luminance[i]))
+        cairo_set_color(cr, luminance2color(luminance[i]))
         cairo_fill_slice(cr, theta1, theta2, r0, r1)
 
 

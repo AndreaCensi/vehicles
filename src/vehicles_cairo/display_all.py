@@ -39,12 +39,17 @@ def vehicles_cairo_display_all(cr, width, height,
                             sim_state,
                             grid=1,
                             zoom=0,
+                            zoom_scale_radius=False,
                             extra_draw_world=None,
                             first_person=True,
                             show_world=True,
                             #show_features='relevant',
                             show_sensor_data=True,
                             show_sensor_data_compact=False):
+    '''
+        :param zoom_scale_radius: If true, scales the zoom by the robot radius.
+    
+    '''
     with cairo_save(cr):
         # Paint white
         with cairo_save(cr):
@@ -60,6 +65,9 @@ def vehicles_cairo_display_all(cr, width, height,
         bounds = world_state['bounds']
         bx = bounds[0]
         by = bounds[1]
+
+        if zoom_scale_radius and zoom != 0:
+            zoom = zoom * robot_radius
 
         vehicles_cairo_set_coordinates(cr, width, height,
                                        bounds, robot_pose,

@@ -31,13 +31,15 @@ def cairo_skin_eye(cr, size=1.0):
                            border_width=0.05)
 
         # Brown
+        #BROWN1 = [.4, .2, 0]
+        BROWN2 = [.6, .3, 0]
         cairo_plot_circle2(cr, 0.5, 0, 0.5,
-                           fill_color=[.4, .2, 0],
+                           fill_color=BROWN2,
                            border_color=None,
                            border_width=None)
 
         # Black
-        cairo_plot_circle2(cr, 0.6, 0, 0.25,
+        cairo_plot_circle2(cr, 0.6, 0, 0.22, #0.25,
                            fill_color=BLACK,
                            border_color=None,
                            border_width=None)
