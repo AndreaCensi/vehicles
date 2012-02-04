@@ -357,7 +357,11 @@ def create_sidebar(cr, width, height, sim_state, id_vehicle, id_episode,
                    '   time: %6.2f' % timestamp,
                    ]
         cr.select_font_face('Mono')
-        cr.set_font_size(details_font_size)
+
+        max_len = max(len(x) for x in strings)
+        padding = 5
+        font_size = 1.6 * width / (max_len + padding)
+        cr.set_font_size(font_size)
         line = details_font_size * 1.2
         for s in strings:
             with cairo_save(cr):

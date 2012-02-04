@@ -2,7 +2,6 @@ from . import TexturedRaytracer, contract, np, get_uniform_directions
 from .. import VehicleSensor, VehiclesConstants
 from conf_tools import instantiate_spec
 from geometry import SE2_project_from_SE3
-from bootstrapping_olympics.utils.c_yaml import yaml_dump
 
 __all__ = ['PhotoreceptorsSmooth', 'PhotoreceptorsSmoothUniform']
 

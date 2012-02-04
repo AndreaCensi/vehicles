@@ -9,12 +9,20 @@
   code:
   - vehicles_cairo.skins.circular
   - {}
+# 
+# - id: ddrive
+#   desc: "Round differential-drive."
+#   code:
+#   - vehicles_cairo.skins.ddrive
+#   - {}
 
+# Use braiteberg for all differential drive
 - id: ddrive
-  desc: "Round differential-drive."
+  desc: "Braitenberg base + receptors."
   code:
-  - vehicles_cairo.skins.ddrive
-  - {}
+    - vehicles_cairo.skins.brai
+    - sensors: True
+  
 
 - id: omni
   desc: "Round omnidirectinal."

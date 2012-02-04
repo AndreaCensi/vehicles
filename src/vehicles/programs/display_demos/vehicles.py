@@ -81,7 +81,7 @@ def main():
             cairo_plot_circle2(cr, 0, 0, vehicle.radius, fill_color=(1, .7, .7))
 
         plot_params = dict(grid=options.grid,
-                           zoom=vehicle.radius * 1.5,
+                           zoom=vehicle.radius * 1.5, # scale_raidus 
                            width=800, height=800,
                            show_sensor_data=True,
                            extra_draw_world=draw_scale)
@@ -90,16 +90,19 @@ def main():
             vehicles_cairo_display_png(filename,
                         sim_state=sim_state, **plot_params)
 
-        f0.sub(f.last(), caption=id_vehicle)
-
-        with f.data_file('start_cairo_pdf', MIME_PDF) as filename:
-            vehicles_cairo_display_pdf(filename,
-                        sim_state=sim_state, **plot_params)
-
         with f.data_file('start_cairo_svg', MIME_SVG) as filename:
             vehicles_cairo_display_svg(filename,
                         sim_state=sim_state, **plot_params)
 
+        f0.sub(f.last(), caption=id_vehicle)
+        
+        plot_params['grid'] = 0
+        plot_params['extra_draw_world'] = None
+        with sec.data_file('start_cairo_pdf', MIME_PDF) as filename:
+            vehicles_cairo_display_pdf(filename,
+                        sim_state=sim_state, **plot_params)
+
+        
 
     filename = os.path.join(options.outdir, '%s.html' % basename)
     logger.info('Writing to %r.' % filename)
