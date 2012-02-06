@@ -6,9 +6,9 @@ import itertools
           width='>0')
 def cairo_pixels(cr, x, width, height=None, grid_color=[1, .9, .9],
                  border_color=[0, 0, 0], bg_color=[1, 1, 1]):
-    #x = np.transpose(x, [1, 0, 2])
+    x = np.transpose(x, [1, 0, 2]) # I got it wrong below...
 
-    pw = width * 1.0 / x.shape[0]
+    pw = width * 1.0 / x.shape[0] # i = rows and width = x space
     if height is None:
         ph = pw
         height = pw * x.shape[1]

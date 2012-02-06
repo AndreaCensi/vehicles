@@ -29,12 +29,11 @@ def main():
 #                    help="additional config directory [%default]")
 
     (options, args) = parser.parse_args()
-    if args: raise Exception()
-
+    if args:
+        raise Exception()
 
     width = 400
     height = 400
-
 
     r = Report('skins_demo')
     f = r.figure(cols=3)
@@ -53,7 +52,7 @@ def main():
             cr = cairo.Context(surf) #@UndefinedVariable
             cairo_plot_rectangle(cr, 0, 0, width, height, fill_color=[1, 1, 1])
 
-            cairo_set_axis(cr, width, height, [ -2, +2, -2, +2])
+            cairo_set_axis(cr, width, height, [-2, +2, -2, +2])
 
             cairo_plot_circle(cr, center=[0, 0], radius=1, facecolor=None,
                     edgecolor=(1, 0, 0), width=0.1)

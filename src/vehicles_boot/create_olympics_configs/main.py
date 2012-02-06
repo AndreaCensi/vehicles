@@ -26,7 +26,8 @@ def create_olympics_config(pargs):
 
     (options, args) = parser.parse_args()
 
-    if args: raise Exception('Spurious arguments.')
+    if args:
+        raise Exception('Spurious arguments.')
 
     if not os.path.exists(options.outdir):
         os.makedirs(options.outdir)

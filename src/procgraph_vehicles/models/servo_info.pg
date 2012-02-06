@@ -1,0 +1,68 @@
+--- model servo_info
+""" Creates the servoing statistics sidebar. """
+config width = 500
+config plots_height = 150
+config bgcolor = [1,1,1]
+config vspace = 30
+input observations "boot observation structures"
+output rgb "rgb stream"
+    
+    """ Get the extra servoing info """
+    |input name=observations| --> obs
+    
+    obs -> |extract_from_extra fieldname='servoing_base'| -> extra_servoing
+    
+    """ Extract goal, sensels, and commands. """
+    extra_servoing -> |extract_field field='goal'| -> |array|-> goal
+    obs -> |extract_sensels| -> |array| -> sensels
+    obs -> |extract_commands| -> |array| -> commands
+
+    """ Plot comparison of current vs. goal. """
+    goal, sensels --> |sync|--> |plot_cmp:plot| -->  |my_label bgcolor=$bgcolor title="Current observations and goal"| -->  |border color=$bgcolor top=$vspace| -->  cmp_rgb
+
+    plot_cmp.width=$width 
+    plot_cmp.height=$plots_height 
+    # plot_cmp.format='-' 
+    plot_cmp.title="" 
+    plot_cmp.y_min=0 
+    plot_cmp.y_max=1 
+
+    """ Plot history of L2 error """ 
+    sensels, goal --> |sync| --> |-| --> |norm ord=2| -> L2_error 
+    
+    L2_error -> |historyt interval=100| --> L2_error_history
+    
+    L2_error_history -> |plot_err:plot| ->  |my_label bgcolor=$bgcolor title="Error"| --> |border color=$bgcolor top=$vspace| --> error_rgb
+
+    plot_err.title="" 
+    # plot_err.format='-' 
+    plot_err.width=$width
+    plot_err.height=$plots_height 
+    plot_err.y_min=0
+  
+    commands -> |historyt interval=100| --> commands_history
+    commands_history -> |plot_cmd:plot| ->  |my_label bgcolor=$bgcolor title="Commands"| -->  |border color=$bgcolor top=$vspace| --> cmd_rgb
+    plot_cmd.title = ''
+    # plot_cmd.format = '-'
+    # plot_cmd.y_min=+1.1
+    # plot_cmd.y_max=-1.1
+    plot_cmd.width=$width
+    plot_cmd.height=$plots_height 
+ 
+# TODO: commands
+    """ Compose diagrams. """
+    cmp_rgb, error_rgb, cmd_rgb --> |sync| --> |grid bgcolor=[0.4,0.4,0.4] cols=1| --> |output name=rgb|
+ 
+ 
+--- model my_label
+input rgb
+config title
+config bgcolor
+output rgb2
+
+|input name=rgb| --> |veh_image_label| --> |output name=rgb2|
+
+veh_image_label.bgcolor = $bgcolor
+veh_image_label.title =  $title
+veh_image_label.font = 'Mono'
+veh_image_label.size = 16

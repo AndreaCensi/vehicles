@@ -138,6 +138,9 @@ class VehiclesCairoDisplay(Block):
             if 'servonav' in extra:
                 plot_servonave(cr, extra['servonav'])
 
+            if 'servoing_poses' in extra:
+                plot_servoing_poses(cr, extra['servoing_poses'])
+
         plotting_params = self.config.plotting_params
 
         plotting_params['extra_draw_world'] = extra_draw_world
@@ -147,10 +150,10 @@ class VehiclesCairoDisplay(Block):
         # todo: check
         sim_state = extra['robot_state']
 
-        observations = scale(reshape2d(boot_obs['observations']), min_value=0,
-                             nan_color=[1, 1, 1])
-        commands = posneg(reshape2d(boot_obs['commands']), max_value=(+1),
-                              nan_color=[1, 1, 1])
+        observations_values = boot_obs['observations']
+
+        commands = boot_obs['commands']
+
         commands_source = boot_obs['commands_source'].item()
         timestamp = boot_obs['time_from_episode_start'].item()
 
@@ -190,8 +193,8 @@ class VehiclesCairoDisplay(Block):
                                id_vehicle=id_vehicle,
                                id_episode=id_episode,
                                timestamp=timestamp,
-                               observations=observations,
-                               commands=commands,
+                               observations_values=observations_values,
+                               commands_values=commands,
                                commands_source=commands_source,
                                **sidebar_params)
 
@@ -231,11 +234,23 @@ class VehiclesCairoDisplay(Block):
 
 
 def create_sidebar(cr, width, height, sim_state, id_vehicle, id_episode,
-                   timestamp, observations, commands, commands_source,
+                   timestamp, observations_values,
+                   commands_values, commands_source,
                    bg_color=None,
                    show_observations=True,
-                    show_commands=True,
-                    show_annotations=True):
+                   show_commands=True,
+                   show_annotations=True):
+
+    if len(commands_values.shape) == 1:
+        commands_values = np.array([commands_values.tolist()])
+
+    commands_rgb = posneg(commands_values,
+                          max_value=(+1), # not sure +1 
+                          nan_color=[1, 1, 1])
+
+    observations_rgb = scale(reshape2d(observations_values), min_value=0,
+                         nan_color=[1, 1, 1])
+
     import cairo
     if bg_color is not None:
         cr.rectangle(0, 0, width, height)
@@ -267,10 +282,10 @@ def create_sidebar(cr, width, height, sim_state, id_vehicle, id_episode,
     spacer = 0.05 * width
 
     values = np.linspace(-1, +1, nvalues)
-    values = np.vstack([values] * 1).T
+    values = np.vstack([values] * 1)
     colorbar_posneg = posneg(values)
     values = np.linspace(-1, +1, nvalues)
-    values = np.vstack([values] * 1).T
+    values = np.vstack([values] * 1)
     colorbar_scale = scale(values)
 
     cr.translate(0, 2 * M)
@@ -286,12 +301,12 @@ def create_sidebar(cr, width, height, sim_state, id_vehicle, id_episode,
         with cairo_transform(cr, t=[padding, 0]):
             data_width = width - 2 * padding
             # Don't draw grid if there are many pixels
-            if max(observations.shape[0], observations.shape[1]) > 15:
+            if max(observations_rgb.shape[0], observations_rgb.shape[1]) > 15:
                 grid_color = None
             else:
                 grid_color = [1, .9, .9]
 
-            last_height = cairo_pixels(cr, observations, width=data_width,
+            last_height = cairo_pixels(cr, observations_rgb, width=data_width,
                                        # Force square
                                        height=data_width,
                                        grid_color=grid_color)
@@ -327,7 +342,7 @@ def create_sidebar(cr, width, height, sim_state, id_vehicle, id_episode,
         padding = padding * 2
         with cairo_transform(cr, t=[padding, 0]):
             data_width = width - 2 * padding
-            last_height = cairo_pixels(cr, commands, data_width)
+            last_height = cairo_pixels(cr, commands_rgb, data_width)
         cr.translate(0, last_height)
 
         cr.translate(0, spacer)
@@ -370,16 +385,26 @@ def create_sidebar(cr, width, height, sim_state, id_vehicle, id_episode,
             cr.translate(0, line)
 
 
+# extra['servoing_poses'] = dict(goal=pose_to_yaml(pose0),
+#                                       current=pose_to_yaml(current_pose))
+
+def plot_servoing_poses(cr, servoing_poses):
+    # TODO
+    goal = SE3.from_yaml(servoing_poses['goal'])
+    with cairo_rototranslate(cr, goal):
+        cairo_ref_frame(cr, l=0.5)
+
+
 def plot_servonave(cr, servonav):
     locations = servonav['locations']
-    current_goal = servonav['current_goal']
-    for i, loc in enumerate(locations):
+#    current_goal = servonav['current_goal']
+    for _, loc in enumerate(locations):
         pose = SE2_from_SE3(SE3.from_yaml(loc['pose']))
         with cairo_rototranslate(cr, pose):
-            if current_goal == i:
-                cairo_ref_frame(cr, l=0.5)
-            else:
-                cairo_ref_frame(cr, l=0.5,
-                                x_color=[0, 0, 0], y_color=[0, 0, 0])
+#            if current_goal == i:
+#                cairo_ref_frame(cr, l=0.5)
+#            else:
+            grey = [.6, .6, .6]
+            cairo_ref_frame(cr, l=0.5, x_color=grey, y_color=grey)
 
 

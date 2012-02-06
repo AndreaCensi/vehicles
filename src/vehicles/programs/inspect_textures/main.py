@@ -30,7 +30,8 @@ def inspect_textures():
                     help="zoom in meters; 0 for full view [%default]")
 
     (options, args) = parser.parse_args()
-    if args: raise Exception() # XXX
+    if args:
+        raise Exception() # XXX
 
     id_world = options.world
 
@@ -51,7 +52,8 @@ def inspect_textures():
             psec.text('object', pformat(p.to_yaml()))
 
             f = psec.figure(cols=2)
-            if not isinstance(p, GeometricShape): continue
+            if not isinstance(p, GeometricShape):
+                continue
 
             perimeter = p.get_perimeter()
             texture = instantiate_spec(p.texture)
@@ -78,7 +80,8 @@ def inspect_textures():
 #            with f.data_pylab('pdf', mime=MIME_PDF,
 #                              figsize=(options.figsize,
 #                                      options.figsize)) as pylab:
-#                    display_all(pylab, sim_state, grid=1, zoom=0, show_sensor_data=True)
+#                    display_all(pylab, sim_state, grid=1, zoom=0, 
+# show_sensor_data = True)
 #            f.last().add_to(f)
 
     filename = os.path.join(options.outdir, '%s.html' % basename)

@@ -1,4 +1,5 @@
 --- model boot_log2movie_servonav
+""" It sets the fps fixed at 20. """
 config logdir 'Base log dir'
 config id_robot
 config id_agent = ""
@@ -10,6 +11,6 @@ import procgraph_vehicles
 
 |boot_log_reader logdir=$logdir id_robot=$id_robot id_agent=$id_agent id_episode=$id_episode| -> observations 
 
-     observations[boot_obs] -> |plotter:vehicles_cairo_display format=png| --> rgb
+     observations -> |plotter:vehicles_cairo_display format=png| --> rgb
      
-     rgb --> |mencoder file="${output}.mp4" quiet=1 timestamps=0|
+     rgb --> |mencoder file="${output}.mp4" fps=20 quiet=1 timestamps=0|

@@ -1,0 +1,35 @@
+--- model boot_log2movie_servo2
+''' Visualizes the servoing experiments. It sets the fps fixed at 20,
+    unless specified. '''
+
+config logdir 'Base log dir'
+config id_robot 'Robot ID'
+config id_agent = ""   'Agent ID (or empty for all agents)'
+config id_episode = ""  'Episode ID (or empty for all agents)'
+config output 'output filename (basename without .avi)'
+config bgcolor = [1,1,1]
+config fps = 20 
+
+    """ Load required packages. """
+    import procgraph_vehicles
+
+    """ Load BootOlympics log. """
+    |boot_log_reader logdir=$logdir id_robot=$id_robot id_agent=$id_agent id_episode=$id_episode| -> observations 
+
+    observations -> |servo:servo_info bgcolor=$bgcolor|-> servo_rgb
+    observations -> |plotter:vehicles_cairo_display format=png| --> |my_border| --> map_rgb
+    
+    """ Composes the map and the servo info. """
+    map_rgb, servo_rgb  --> |sync| -> |grid bgcolor=$bgcolor cols=2| --> out
+
+    out --> |mencoder file="${output}.mp4" fps=$fps timestamps=0|
+
+
+--- model my_border
+input rgb
+output rgb2
+config outer = 10
+
+|input name=rgb| --> |border left=1 right=1 top=1 bottom=1| --> |border left=$outer right=$outer top=$outer bottom=$outer color=[1,1,1]|  --> |output name=rgb2|
+
+

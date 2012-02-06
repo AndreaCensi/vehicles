@@ -43,7 +43,8 @@ def main():
     parser.add_option("--seed", default=None, type='int')
 
     (options, args) = parser.parse_args()
-    if args: raise Exception()
+    if args:
+        raise Exception()
 
     id_vehicle = options.vehicle
     id_world = options.world
@@ -57,7 +58,6 @@ def main():
     np.random.seed(seed=options.seed)
     logger.info('Using seed %s (your lucky number is %s)' %
                 (options.seed, np.random.randint(1000)))
-
 
     vehicle = VehiclesConfig.vehicles.instance(id_vehicle) #@UndefinedVariable
     world = VehiclesConfig.worlds.instance(id_world) #@UndefinedVariable
@@ -94,7 +94,6 @@ def main():
         with f.data_file('start_cairo_svg', MIME_SVG) as filename:
             vehicles_cairo_display_svg(filename, width=800, height=800,
                         sim_state=sim_state, **plot_params)
-
 
     filename = os.path.join(options.outdir, '%s.html' % basename)
     logger.info('Writing to %r.' % filename)

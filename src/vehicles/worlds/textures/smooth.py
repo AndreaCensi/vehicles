@@ -1,7 +1,8 @@
 from . import SampledTexture, np, contract
 from conf_tools import instantiate_spec
 from geometry import assert_allclose
-import scipy.signal
+from  scipy.signal import gaussian, convolve #@UnresolvedImport
+# TODO: add if/else
 
 
 class Smoothed(SampledTexture):
@@ -27,13 +28,13 @@ class Smoothed(SampledTexture):
         #print('kernel_size: %s' % kernel_size)
         #print kernel
 
-        kernel = scipy.signal.gaussian(kernel_size, sigma / resolution)
+        kernel = gaussian(kernel_size, sigma / resolution)
         kernel = kernel / kernel.sum()
 
         assert kernel.size == kernel_size
         assert_allclose(kernel.sum(), 1)
 
-        smoothed = scipy.signal.convolve(unsmoothed, kernel, 'same')
+        smoothed = convolve(unsmoothed, kernel, 'same')
 
         assert smoothed.size == cell_coord.size
 

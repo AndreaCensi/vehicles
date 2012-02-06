@@ -12,8 +12,8 @@ def add_to_module(function, module_name):
         raise Exception('No "test" in function name %r' % name)
 
     if not 'test' in module_name:
-        raise Exception('While adding %r in %r: module does not have "test"'
-                        ' in it, so nose will not find the test.' %
+        raise Exception('While adding %r in %r: module does not have'
+                        '"test" in it, so nose will not find the test.' %
                         (name, module_name))
 
     if name in module.__dict__:

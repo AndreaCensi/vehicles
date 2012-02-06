@@ -42,7 +42,8 @@ def main():
     # TODO: other config dirs
 
     (options, args) = parser.parse_args()
-    if args: raise Exception() # XXX
+    if args:
+        raise Exception() # XXX
 
     id_world = options.world
 
@@ -70,15 +71,16 @@ def main():
         sec = r.node(id_vehicle)
         f = sec.figure(cols=3)
 
-        world = VehiclesConfig.worlds.instance(id_world) #@UndefinedVariable
-        vehicle = VehiclesConfig.vehicles.instance(id_vehicle) #@UndefinedVariable
+        world = VehiclesConfig.specs['worlds'].instance(id_world)
+        vehicle = VehiclesConfig.specs['vehicles'].instance(id_vehicle)
         simulation = VehicleSimulation(vehicle, world)
         simulation.new_episode()
         simulation.compute_observations()
         sim_state = simulation.to_yaml()
 
         def draw_scale(cr):
-            cairo_plot_circle2(cr, 0, 0, vehicle.radius, fill_color=(1, .7, .7))
+            cairo_plot_circle2(cr, 0, 0,
+                               vehicle.radius, fill_color=(1, .7, .7))
 
         plot_params = dict(grid=options.grid,
                            zoom=vehicle.radius * 1.5, # scale_raidus 
@@ -95,20 +97,16 @@ def main():
                         sim_state=sim_state, **plot_params)
 
         f0.sub(f.last(), caption=id_vehicle)
-        
+
         plot_params['grid'] = 0
         plot_params['extra_draw_world'] = None
         with sec.data_file('start_cairo_pdf', MIME_PDF) as filename:
             vehicles_cairo_display_pdf(filename,
                         sim_state=sim_state, **plot_params)
 
-        
-
     filename = os.path.join(options.outdir, '%s.html' % basename)
     logger.info('Writing to %r.' % filename)
     r.to_html(filename)
-
-
 
 
 if __name__ == '__main__':

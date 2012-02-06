@@ -54,7 +54,7 @@ def main():
         print(stat2str(stats[-1]))
 
     print('---- Sorted:')
-    stats.sort(key=lambda x:-x.fps)
+    stats.sort(key=lambda x: (-x.fps))
     for s in stats:
         print(stat2str(s))
 
