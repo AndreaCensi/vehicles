@@ -22,6 +22,16 @@ def cairo_robot_skin_rectangle(cr, w, h):
                              ** CairoConstants.robot_body_style)
 
 
+# TODO: param color
+def cairo_robot_skin_roundedrec(cr, w, h, r=None):
+    if r is None:
+        r = min(w, h) / 3.0
+    with cairo_save(cr):
+        def shape():
+            roundedrec(cr, -w / 2.0, -h / 2.0, w, h, r=r)
+        cairo_plot_with_style(cr, shape, **CairoConstants.robot_body_style)
+
+
 def cairo_robot_skin_tracked(cr, width=1.0, length=1.0):
     with cairo_save(cr):
         def track():

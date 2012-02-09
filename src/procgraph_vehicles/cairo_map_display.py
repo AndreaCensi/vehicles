@@ -58,6 +58,8 @@ class VehiclesCairoDisplay(Block):
         self.fps = None
         self.t0 = None
 
+        self.tmp_cr = None
+
     def init_pdf(self):
         self.filename = self.config.file
         self.tmp_filename = self.filename + '.active'
@@ -100,6 +102,10 @@ class VehiclesCairoDisplay(Block):
     def update_png(self):
         import cairo
         # If I don't recreate it, it will crash
+#        if self.tmp_cr is None:
+#            self.tmp_cr = cairo.Context(self.surf) #@UndefinedVariable
+#        cr = self.tmp_cr
+
         cr = cairo.Context(self.surf) #@UndefinedVariable
 
         self.draw_everything(cr)

@@ -78,7 +78,9 @@ class VehicleSimulation():
             primitives = self.world.get_primitives()
             check_primitives(primitives)
             self.vehicle.set_world_primitives(primitives)
-            collision = self.vehicle.colliding_pose(pose)
+            safety_margin = 3 # must have 2*radius distant from obstacles
+            collision = self.vehicle.colliding_pose(pose,
+                                    safety_margin=safety_margin)
             if not collision.collided:
                 self.vehicle.set_pose(pose)
                 return episode

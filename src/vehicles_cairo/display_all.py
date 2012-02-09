@@ -1,61 +1,39 @@
 from . import (cairo_plot_sensor_data, cairo_plot_sources, cairo_save,
-    cairo_show_world_geometry, cairo, CairoConstants, cairo_set_axis, np,
+    cairo_show_world_geometry, CairoConstants, cairo_set_axis, np,
     cairo_rototranslate, cairo_plot_sensor_skins)
+from cairo_utils import cairo_set_color
 from contracts import contract
 from geometry import angle_from_SE2, translation_from_SE2, SE2_from_SE3, SE3
-from vehicles import VehiclesConfig
-
-
-def vehicles_cairo_display_png(filename, width, height, sim_state,
-                               **plotting_params):
-    surf = cairo.ImageSurface(cairo.FORMAT_ARGB32, #@UndefinedVariable 
-                              width, height)
-    cr = cairo.Context(surf) #@UndefinedVariable
-
-    vehicles_cairo_display_all(cr, width, height, sim_state, **plotting_params)
-
-    surf.write_to_png(filename) # Output to PNG
-
-
-def vehicles_cairo_display_pdf(filename, width, height, sim_state,
-                                **plotting_params):
-    surf = cairo.PDFSurface(filename, width, height) #@UndefinedVariable
-    cr = cairo.Context(surf) #@UndefinedVariable
-    vehicles_cairo_display_all(cr, width, height, sim_state, **plotting_params)
-    surf.show_page()
-    surf.finish()
-
-
-def vehicles_cairo_display_svg(filename, width, height, sim_state,
-                                **plotting_params):
-    surf = cairo.SVGSurface(filename, width, height) #@UndefinedVariable
-    cr = cairo.Context(surf) #@UndefinedVariable
-    vehicles_cairo_display_all(cr, width, height, sim_state, **plotting_params)
-    surf.show_page()
-    surf.finish()
+from vehicles import VehiclesConfig, VehiclesConstants
 
 
 def vehicles_cairo_display_all(cr, width, height,
                             sim_state,
                             grid=1,
                             zoom=0,
+                            bgcolor=[1, 1, 1],
                             zoom_scale_radius=False,
                             extra_draw_world=None,
                             first_person=True,
                             show_world=True,
                             #show_features='relevant',
                             show_sensor_data=True,
-                            show_sensor_data_compact=False):
+                            show_sensor_data_compact=False,
+                            show_robot_body=True,
+                            show_robot_sensors=True,
+                            plot_sources=False):
     '''
         :param zoom_scale_radius: If true, scales the zoom by the robot radius.
     
     '''
     with cairo_save(cr):
         # Paint white
-        with cairo_save(cr):
-            cr.set_source_rgb(1, 1, 1)
-            cr.rectangle(0, 0, width, height)
-            cr.fill()
+        if bgcolor is not None:
+            with cairo_save(cr):
+                cairo_set_color(cr, bgcolor)
+                cr.set_source_rgb(1, 1, 1)
+                cr.rectangle(0, 0, width, height)
+                cr.fill()
 
         vehicle_state = sim_state['vehicle']
         robot_pose = SE2_from_SE3(SE3.from_yaml(vehicle_state['pose']))
@@ -69,9 +47,11 @@ def vehicles_cairo_display_all(cr, width, height,
         if zoom_scale_radius and zoom != 0:
             zoom = zoom * robot_radius
 
+        world_bounds_pad = 0 # CairoConstants.texture_width
         vehicles_cairo_set_coordinates(cr, width, height,
                                        bounds, robot_pose,
                                        zoom=zoom,
+                                       world_bounds_pad=world_bounds_pad,
                                        first_person=first_person)
 
         if False:
@@ -86,16 +66,28 @@ def vehicles_cairo_display_all(cr, width, height,
         if extra_draw_world is not None:
             extra_draw_world(cr)
 
+        sensor_types = get_sensor_types(vehicle_state)
+
+        has_cameras = (VehiclesConstants.SENSOR_TYPE_PHOTORECEPTORS
+                             in sensor_types)
+        has_field_sampler = (VehiclesConstants.SENSOR_TYPE_FIELDSAMPLER
+                             in sensor_types)
+
         if show_world:
-            cairo_plot_sources(cr, world_state)
-            cairo_show_world_geometry(cr, world_state)
+            if has_field_sampler:
+                cairo_plot_sources(cr, world_state)
+
+            plot_textures = has_cameras
+            cairo_show_world_geometry(cr, world_state,
+                                      plot_textures=plot_textures,
+                                      plot_sources=plot_sources,
+                                      extra_pad=world_bounds_pad)
 
         # XXX: tmp
         if extra_draw_world is not None:
             extra_draw_world(cr)
-#
-        display_robot = True
-        if display_robot:
+
+        if show_robot_body:
             joints = get_joints_as_TSE3(vehicle_state)
             extra = vehicle_state.get('extra', {})
             id_skin = extra.get('skin', 'default_skin')
@@ -106,9 +98,10 @@ def vehicles_cairo_display_all(cr, width, height,
                 skin.draw(cr, joints=joints,
                           timestamp=sim_state['timestamp'])
 
-        # don't like it cause it uses global "current_pose"
-        cairo_plot_sensor_skins(cr, vehicle_state,
-                               scale=robot_radius)
+        if show_robot_sensors:
+            # don't like it cause it uses global "current_pose"
+            cairo_plot_sensor_skins(cr, vehicle_state,
+                                   scale=robot_radius)
 
         if show_sensor_data:
             cairo_plot_sensor_data(cr, vehicle_state,
@@ -126,13 +119,13 @@ def get_joints_as_TSE3(vehicle_state):
 @contract(zoom='>=0')
 def vehicles_cairo_set_coordinates(cr, width, height, world_bounds,
                                         robot_pose, zoom,
+                                        world_bounds_pad=0,
                                         first_person=False):
     bx = world_bounds[0]
     by = world_bounds[1]
 
-    m = 0 # extra space
-
     if zoom == 0:
+        m = world_bounds_pad
         extents = [bx[0] - m,
                    bx[1] + m,
                    by[0] - m,
@@ -146,6 +139,7 @@ def vehicles_cairo_set_coordinates(cr, width, height, world_bounds,
             t[1] = np.maximum(t[1], by[0] + zoom)
             t[1] = np.minimum(t[1], by[1] - zoom)
 
+        m = 0 # extra space
         extents = [t[0] - zoom - m,
                    t[0] + zoom + m,
                    t[1] - zoom - m,
@@ -188,3 +182,10 @@ def show_grid(cr, bx, by, spacing=1, margin=0):
         segment(cr, xmin, xmax, y, y)
 
     cr.restore()
+
+
+def get_sensor_types(vehicle_state):
+    """ Returns the list of sensor types. """
+    return [attached['sensor']['type']
+             for attached in vehicle_state['sensors']]
+

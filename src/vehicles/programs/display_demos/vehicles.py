@@ -6,7 +6,7 @@ import os
 usage = """
 
     %cmd   [--vehicles <pattern>] --world <world> [-o where] 
-           [-n N] [-z ZOOM] [--figsize INCHES] 
+           [-n N] [-z ZOOM] [--scale] [--figsize INCHES] 
 """
 
 
@@ -26,7 +26,8 @@ def main():
 
     parser.add_option("--vehicles", default='*',
                       help="ID vehicle [%default].")
-    parser.add_option("--world", default='empty_fixed',
+    parser.add_option("--world", default='SBox2_10a',
+                      # default='empty_fixed',
                        help="ID world [%default].")
     parser.add_option("--outdir", "-o",
                       default='vehicles_demo_display_vehicles',
@@ -35,11 +36,10 @@ def main():
                     help="figsize (inches) [%default]")
     parser.add_option("-g", "--grid", default=1, type='float',
                     help="grid size in meters; 0 for no grid [%default]")
-
     parser.add_option("-d", dest="config", default=".",
                       help="Config directory")
-
-    # TODO: other config dirs
+    parser.add_option("--scale", default=False, action='store_true',
+                    help="If given, displays the scale with a red circle")
 
     (options, args) = parser.parse_args()
     if args:
@@ -65,11 +65,12 @@ def main():
 
     print('Plotting vehicles: %s' % vehicles)
 
-    f0 = r.figure(cols=4)
+    f0 = r.figure(cols=6)
+    f0_data = r.figure(cols=6)
 
     for id_vehicle in sorted(vehicles):
         sec = r.node(id_vehicle)
-        f = sec.figure(cols=3)
+        f = sec.figure(cols=6)
 
         world = VehiclesConfig.specs['worlds'].instance(id_world)
         vehicle = VehiclesConfig.specs['vehicles'].instance(id_vehicle)
@@ -79,29 +80,47 @@ def main():
         sim_state = simulation.to_yaml()
 
         def draw_scale(cr):
-            cairo_plot_circle2(cr, 0, 0,
+            if options.scale:
+                cairo_plot_circle2(cr, 0, 0,
                                vehicle.radius, fill_color=(1, .7, .7))
 
         plot_params = dict(grid=options.grid,
-                           zoom=vehicle.radius * 1.5, # scale_raidus 
-                           width=800, height=800,
+                           zoom=1.5,
+                           zoom_scale_radius=True,
+                           width=500, height=500,
                            show_sensor_data=True,
-                           extra_draw_world=draw_scale)
+                           show_sensor_data_compact=True,
+                           extra_draw_world=draw_scale,
+                           bgcolor=None,
+                           show_world=False)
 
-        with f.data_file('start_cairo_png', MIME_PNG) as filename:
+        with f.data_file('png_with', MIME_PNG) as filename:
             vehicles_cairo_display_png(filename,
                         sim_state=sim_state, **plot_params)
 
-        with f.data_file('start_cairo_svg', MIME_SVG) as filename:
-            vehicles_cairo_display_svg(filename,
+        f0_data.sub(f.last(), caption=id_vehicle)
+
+        plot_params['show_sensor_data'] = False
+        with f.data_file('png_without', MIME_PNG) as filename:
+            vehicles_cairo_display_png(filename,
                         sim_state=sim_state, **plot_params)
 
         f0.sub(f.last(), caption=id_vehicle)
 
+        with f.data_file('svg', MIME_SVG) as filename:
+            vehicles_cairo_display_svg(filename,
+                        sim_state=sim_state, **plot_params)
+
         plot_params['grid'] = 0
         plot_params['extra_draw_world'] = None
-        with sec.data_file('start_cairo_pdf', MIME_PDF) as filename:
+        with sec.data_file('pdf', MIME_PDF) as filename:
             vehicles_cairo_display_pdf(filename,
+                        sim_state=sim_state, **plot_params)
+
+        plot_params['show_robot_body'] = True
+        plot_params['show_robot_sensors'] = False
+        with f.data_file('png_only_body', MIME_PNG) as filename:
+            vehicles_cairo_display_png(filename,
                         sim_state=sim_state, **plot_params)
 
     filename = os.path.join(options.outdir, '%s.html' % basename)

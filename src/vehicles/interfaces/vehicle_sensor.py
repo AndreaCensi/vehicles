@@ -1,7 +1,8 @@
+from . import np
 from ..utils import check_yaml_friendly
+from .. import logger
 from abc import abstractmethod, ABCMeta
 from pprint import pformat
-from . import np
 
 
 class VehicleSensor:
@@ -19,7 +20,7 @@ class VehicleSensor:
     def to_yaml(self, primitives):
         pass
 
-    SENSELS = 'sensels'
+    SENSELS = 'sensels' # TODO: move away
 
     def compute_observations(self, pose):
         """ Computes the observations for this vehicle         
@@ -49,16 +50,16 @@ class VehicleSensor:
         try:
             notfinite = not np.isfinite(sensels).all()
         except  Exception as e:
-            print('Error is: %s' % e) # XXX: print
-            print('Data is: %s' % sensels.dtype)
-            print((observations))
+            logger.error('Error is: %s' % e) # XXX: print
+            logger.error('Data is: %s' % sensels.dtype)
+            logger.error((observations))
             notfinite = False
 
         if notfinite:
             msg = ('Not all are valid:\n%s\n%s' %
                    (sensels, pformat(observations)))
-            print(msg)
-            print('pose: %s' % pose) # XXX
+            logger.error(msg)
+            logger.error('pose: %s' % pose) # XXX
             # XXX: - we will solve this later.
             sensels[np.logical_not(np.isfinite(sensels))] = 0.5
             raise ValueError(msg)

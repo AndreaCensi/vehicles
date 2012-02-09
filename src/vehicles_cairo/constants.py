@@ -44,7 +44,6 @@ class CairoConstants:
     laser_compact_r_width = 0.25
 
     photoreceptors_compact_r = 0.4
-#    photoreceptors_compact_r_width = 0.07
     photoreceptors_compact_r_width = 0.15
 
     plot_ranges_rho_min = 0.5

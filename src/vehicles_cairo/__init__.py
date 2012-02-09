@@ -35,4 +35,5 @@ else:
     from .world_geometry import *
     from .sensor_data import *
     from .display_all import *
+    from .write_to_file import *
 

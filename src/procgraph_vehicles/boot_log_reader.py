@@ -54,13 +54,14 @@ class BOLogReader(Generator):
                 for obs in index.read_all_robot_streams(id_robot=id_robot,
                                                         id_agent=id_agent,
                                                         read_extra=read_extra):
-                    yield obs['timestamp'], obs
+                    yield obs['timestamp'].item(), obs.copy()
+                    obs['extra'] = {} # Tmp: debugging
             else:
                 for obs in index.read_robot_episode(id_robot=id_robot,
                                                     id_episode=id_episode,
                                                     read_extra=read_extra):
-
-                    yield obs['timestamp'], obs
+                    yield obs['timestamp'].item(), obs.copy()
+                    obs['extra'] = {} # Tmp: debugging
 
         self.iterator = go()
 

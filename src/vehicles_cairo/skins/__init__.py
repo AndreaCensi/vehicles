@@ -32,6 +32,7 @@ make_skin(cairo_robot_skin_brai, 'brai')
 make_skin(cairo_robot_skin_car, 'car')
 make_skin(cairo_robot_skin_tracked, 'tracks')
 
+
 make_skin(wheel, 'wheel')
 
 
@@ -42,4 +43,5 @@ make_skin(cairo_skin_transparent, 'transparent')
 make_skin(cairo_skin_fly1, 'fly1')
 
 make_skin(cairo_robot_skin_rectangle, 'rectangle')
+make_skin(cairo_robot_skin_roundedrec, 'roundedrec')
 

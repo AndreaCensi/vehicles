@@ -31,6 +31,7 @@
   - {}
   
   
+  
 - id: car_with_wheels
   desc: "Car with moving wheels"
   code:
@@ -56,6 +57,13 @@
   - vehicles_cairo.skins.wheel
   - {} # w=0.7, h=0.5):
 
+
+- id: S1
+  desc: "Robot on S1."
+  code:
+  - vehicles_cairo.skins.roundedrec
+  - h: 0.5
+    w: 0.5
 
 
 - id: brai_base

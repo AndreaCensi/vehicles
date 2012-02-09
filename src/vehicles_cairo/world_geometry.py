@@ -76,19 +76,20 @@ def cairo_plot_circle_primitive(cr, center, radius, solid, texture, numpass):
                       edgecolor=[0, 0, 0],
                       width=CC.obstacle_border_width)
 
-        if solid:
-            width_outside = 0
-            width_inside = CC.texture_width
-        else:
-            width_inside = 0
-            width_outside = CC.texture_width
+        if texture is not None:
+            if solid:
+                width_outside = 0
+                width_inside = CC.texture_width
+            else:
+                width_inside = 0
+                width_outside = CC.texture_width
 
-        cairo_plot_texture_circle(cr=cr,
-                                  radius=radius, center=center,
-                                  texture=texture,
-                                  resolution=CC.texture_resolution,
-                                  width_inside=width_inside,
-                                  width_outside=width_outside)
+            cairo_plot_texture_circle(cr=cr,
+                                      radius=radius, center=center,
+                                      texture=texture,
+                                      resolution=CC.texture_resolution,
+                                      width_inside=width_inside,
+                                      width_outside=width_outside)
 
     else:
         cairo_plot_circle(cr, center=center,
@@ -99,7 +100,7 @@ def cairo_plot_circle_primitive(cr, center, radius, solid, texture, numpass):
 
 
 @contract(points='array[2xN]')
-def cairo_plot_polyline_primitive(cr, points, texture):
+def cairo_plot_polyline_primitive(cr, points, texture=None):
 
     with cairo_save(cr):
         cr.set_line_width(CC.obstacle_border_width)
@@ -107,9 +108,10 @@ def cairo_plot_polyline_primitive(cr, points, texture):
                         CC.obstacle_border_color)
         cairo_plot_polyline(cr, points[0, :], points[1, :])
 
-    cairo_plot_textured_polyline(cr, points=points, texture=texture,
+    if texture is not None:
+        cairo_plot_textured_polyline(cr, points=points, texture=texture,
                                   resolution=CC.texture_resolution,
-                                  width_inside=0.3 * CC.texture_resolution,
+                                  width_inside=0,
                                   width_outside=CC.texture_resolution)
 
 
@@ -157,13 +159,19 @@ def cairo_plot_textured_segment(cr, texture, length, resolution, offset,
         cr.fill()
 
 
-def cairo_show_world_geometry(cr, world_state, plot_sources=False):
+def cairo_show_world_geometry(cr, world_state,
+                              plot_sources=False,
+                              plot_textures=False,
+                              extra_pad=0):
     bounds = world_state['bounds']
     primitives = world_state['primitives']
 
     with cairo_save(cr):
         xb = bounds[0]
         yb = bounds[1]
+        xb = [xb[0] - extra_pad, xb[1] + extra_pad]
+        yb = [yb[0] - extra_pad, yb[1] + extra_pad]
+
         cr.rectangle(xb[0], yb[0], xb[1] - xb[0], yb[1] - yb[0])
         cr.clip()
 
@@ -174,11 +182,15 @@ def cairo_show_world_geometry(cr, world_state, plot_sources=False):
                 if ptype == VehiclesConstants.PRIMITIVE_POLYLINE:
                     points = np.array(p['points']).T
                     texture = instantiate_spec(p['texture'])
+                    if not plot_textures:
+                        texture = None
                     cairo_plot_polyline_primitive(cr, points=points,
                                                   texture=texture)
 
                 elif ptype == VehiclesConstants.PRIMITIVE_CIRCLE:
                     texture = instantiate_spec(p['texture'])
+                    if not plot_textures:
+                        texture = None
                     cairo_plot_circle_primitive(cr, center=p['center'],
                                                 texture=texture,
                                                 radius=p['radius'],
@@ -197,8 +209,8 @@ def cairo_show_world_geometry(cr, world_state, plot_sources=False):
                     pass # XXX 
 
 
-def cairo_plot_sources_field(cr, sources, bounds, disc=[100, 100], alpha=0.5,
-                       cmap='Greens'):
+def cairo_plot_sources_field(cr, sources, bounds,
+                             disc=[100, 100], alpha=0.5):
     if not sources:
         return
 

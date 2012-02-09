@@ -7,6 +7,15 @@
   extra:
     skin: transparent
 
+- id: d_fixed-cam180
+  desc: A fixed camera.
+  id_dynamics: d_fixed
+  sensors:
+      - id_sensor: cam_f180_n90_s
+  radius: 0.5
+  extra:
+    skin: transparent
+
 
 - id: d_fixed-rf360
   desc: A fixed range finder.
@@ -17,6 +26,54 @@
   extra:
     skin: transparent
 
+- id: d_fixed-rf180
+  desc: A fixed range finder.
+  id_dynamics: d_fixed
+  sensors:
+      - id_sensor: rf180
+  radius: 0.5
+  extra:
+    skin: transparent
+    
+
+- id: d_fixed-fs_05_12x12
+  desc: A fixed field sampler.
+  id_dynamics: d_fixed
+  sensors:
+      - id_sensor: fs_05_12x12
+  radius: 0.5
+  extra:
+    skin: transparent
+
+- id: d_fixed-fs_05_rand144
+  desc: A fixed field sampler.
+  id_dynamics: d_fixed
+  sensors:
+      - id_sensor: fs_05_rand144
+  radius: 0.5
+  extra:
+    skin: transparent
+
+
+
+- id: d_SE2_car_v-fs_05_rand144
+  desc: ""
+  id_dynamics: d_SE2_car_v_w
+  sensors:
+      - id_sensor: fs_05_rand144
+  radius: 0.5
+  extra:
+      skin: car_with_wheels
+
+
+- id: d_SE2_car_v-fs_05_12x12
+  desc: ""
+  id_dynamics: d_SE2_car_v_w
+  sensors:
+        - id_sensor: fs_05_12x12
+  radius: 0.5
+  extra:
+    skin: car_with_wheels
 
 
 - id: d_SE2_car_v-cam360
@@ -66,6 +123,28 @@
   radius: 0.5
   extra:
     skin: ddrive
+    
+
+- id: d_SE2_dd_v-fs_05_12x12
+  desc: ""
+  id_dynamics: d_SE2_dd_v
+  sensors:
+      - id_sensor: fs_05_12x12
+  radius: 0.5
+  extra:
+    skin: ddrive
+
+
+- id: d_SE2_dd_v-fs_05_rand144
+  desc: ""
+  id_dynamics: d_SE2_dd_v
+  sensors:
+      - id_sensor: fs_05_rand144
+  radius: 0.5
+  extra:
+    skin: ddrive
+
+
 
 
 
@@ -187,15 +266,58 @@
   radius: 0.5
   extra:
     skin: omni
+
+- id: d_SE2_dd_v-random_5
+  desc: An omnidirectional robot with a 5-sensels random sensor.
+  id_dynamics: d_SE2_dd_v
+  sensors:
+      - id_sensor: random_5 
+  radius: 0.5
+  extra:
+    skin: ddrive
+  
+
+- id: d_SE2_car_v-random_5
+  desc: An omnidirectional robot with a 5-sensels random sensor.
+  id_dynamics: d_SE2_car_v_w
+  sensors:
+      - id_sensor: random_5 
+  radius: 0.5
+  extra:
+    skin: car_with_wheels
   
 
 
-- id: orb-1d
+
+- id: d_S1_rb_v-cam60
   desc: "An orb controlled in velocity"
   id_dynamics: d_S1_rb_v
   sensors:
       - id_sensor: cam_f60_n45_s
-  radius: 0.2
+  radius: 0.5
+  extra:
+    skin: S1
+
+- id: d_S1_rb_v-cam180
+  desc: "An orb controlled in velocity"
+  id_dynamics: d_S1_rb_v
+  sensors:
+    - id_sensor: cam_f180_n90_s
+  radius: 0.5
+  extra:
+    skin: S1
+
+
+- id: d_S1_rb_v-rf180
+  desc: "An orb controlled in velocity"
+  id_dynamics: d_S1_rb_v
+  sensors:
+    - id_sensor: rf180
+  radius: 0.5
+  extra:
+    skin: S1
+
+  
 
   
 - id: example_custom_vehicle

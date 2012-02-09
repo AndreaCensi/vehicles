@@ -8,7 +8,8 @@ class Box(World):
     @contract(width='>0', length='>0')
     def __init__(self, width=10, length=10):
         r = 1
-        bounds = [[-width * r, +width * r], [-length * r, +length * r], [0, 5]]
+        bounds = [[-width * r, +width * r],
+                  [-length * r, +length * r], [0, 5]]
         World.__init__(self, bounds)
         self.width = width
         self.length = length

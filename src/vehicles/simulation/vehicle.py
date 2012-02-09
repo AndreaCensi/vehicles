@@ -168,17 +168,19 @@ class Vehicle:
         return np.array(sensel_values, dtype='float32')
 
     @contract(pose='SE3')
-    def colliding_pose(self, pose):
+    def colliding_pose(self, pose, safety_margin=1):
         ''' 
             Checks that the given pose does not give collisions. 
             Returns None or a CollisionInfo structure. 
+            
+            safety_margin: multiplies the radius
         '''
         state = self.dynamics.pose2state(pose)
         j_pose = self.dynamics.joint_state(state, 0)[0]
         center = translation_from_SE2(SE2_project_from_SE3(j_pose))
 
         collision = collides_with(self.primitives,
-                                  center, self.radius)
+                                  center, self.radius * safety_margin)
         return collision
 
     def _get_state(self):
