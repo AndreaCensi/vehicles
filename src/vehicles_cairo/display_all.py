@@ -21,6 +21,7 @@ def vehicles_cairo_display_all(cr, width, height,
                             show_sensor_data_compact=False,
                             show_robot_body=True,
                             show_robot_sensors=True,
+                            show_textures=True,
                             plot_sources=False):
     '''
         :param zoom_scale_radius: If true, scales the zoom by the robot radius.
@@ -31,7 +32,6 @@ def vehicles_cairo_display_all(cr, width, height,
         if bgcolor is not None:
             with cairo_save(cr):
                 cairo_set_color(cr, bgcolor)
-                cr.set_source_rgb(1, 1, 1)
                 cr.rectangle(0, 0, width, height)
                 cr.fill()
 
@@ -77,7 +77,7 @@ def vehicles_cairo_display_all(cr, width, height,
             if has_field_sampler:
                 cairo_plot_sources(cr, world_state)
 
-            plot_textures = has_cameras
+            plot_textures = has_cameras and show_textures
             cairo_show_world_geometry(cr, world_state,
                                       plot_textures=plot_textures,
                                       plot_sources=plot_sources,

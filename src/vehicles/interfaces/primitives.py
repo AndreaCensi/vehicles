@@ -18,6 +18,17 @@ class Primitive:
     def __repr__(self):
         return self.to_yaml().__repr__()
 
+    type2class = {}
+
+    @staticmethod
+    def from_yaml(s):
+        t = s['type']
+        if not t in Primitive.type2class:
+            msg = ('Could not find type %r (I know %s).' %
+                   (t, Primitive.type2class.keys()))
+            raise ValueError(msg)
+        return Primitive.type2class[t].from_yaml(s)
+
 
 class GeometricShape:
 
@@ -55,6 +66,14 @@ class PolyLine(Primitive, GeometricShape):
                 'texture': self.texture,
                 'points': self.points}
 
+    @staticmethod
+    def from_yaml(s):
+        assert s['type'] == 'PolyLine'
+        return PolyLine(id_object=s.get('surface', None),
+                        tags=s.get('tags', []),
+                        texture=s.get('texture', None), # XXX
+                        points=s.get('points'))
+
 
 class Circle(Primitive, GeometricShape):
 
@@ -85,6 +104,16 @@ class Circle(Primitive, GeometricShape):
                 'center': self.center,
                 'radius': self.radius,
                 'solid': self.solid}
+
+    @staticmethod
+    def from_yaml(s):
+        assert s['type'] == 'Circle'
+        return Circle(id_object=s.get('surface', None),
+                        tags=s.get('tags', []),
+                        texture=s.get('texture', None), # XXX
+                        center=s.get('center'),
+                        radius=s.get('radius'),
+                        solid=s.get('solid', False))
 
 
 class Field:
@@ -120,18 +149,6 @@ class Source(Primitive, Field):
     def set_center(self, center):
         self.center = np.array(center)
 
-    def to_yaml(self):
-        return {'type': 'Source',
-                'id_object': self.id_object,
-                'tags': self.tags,
-                'center': self.center.tolist(),
-                'kernel_spec': self.kernel_spec}
-
-    @staticmethod
-    def from_yaml(s):
-        return Source(s['id_object'], s['tags'],
-                      s['center'], s['kernel_spec'])
-
     @contract(point='seq[2](number)')
     def get_intensity_value(self, point):
         distance = np.linalg.norm(np.array(point) - self.center)
@@ -144,3 +161,23 @@ class Source(Primitive, Field):
         D = np.hypot(xc, yc)
         C = self.kernel(D)
         return C
+
+    def to_yaml(self):
+        return {'type': 'Source',
+                'id_object': self.id_object,
+                'tags': self.tags,
+                'center': self.center.tolist(),
+                'kernel_spec': self.kernel_spec}
+
+    @staticmethod
+    def from_yaml(s):
+        assert s['type'] == 'Source'
+        return Source(id_object=s.get('surface', None),
+                      tags=s.get('tags', []),
+                      center=s['center'],
+                      kernel_spec=s['kernel_spec'])
+
+
+Primitive.type2class['PolyLine'] = PolyLine
+Primitive.type2class['Circle'] = Circle
+Primitive.type2class['Source'] = Source

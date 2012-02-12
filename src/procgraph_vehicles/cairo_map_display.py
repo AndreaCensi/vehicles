@@ -18,6 +18,8 @@ class VehiclesCairoDisplay(Block):
     Block.config('format', 'pdf|png', default='pdf')
     Block.config('file', 'Output file (pdf)', default=None)
     Block.output('rgb', 'RGB data (png)')
+    Block.config('transparent', 'Outputs RGB with transparent bg',
+                 default=False)
 
     Block.config('width', 'Image width in points.', default=768)
     Block.config('height', 'Image height in points.', default=768)
@@ -111,10 +113,18 @@ class VehiclesCairoDisplay(Block):
         self.draw_everything(cr)
         self.surf.flush()
 
-        rgb = self.argb_data[:, :, :3].copy()
-        # fix red/blue inversion
-        rgb[:, :, 0] = self.argb_data[:, :, 2]
-        rgb[:, :, 2] = self.argb_data[:, :, 0]
+        if not self.config.transparent:
+            rgb = self.argb_data[:, :, :3].copy()
+            # fix red/blue inversion
+            rgb[:, :, 0] = self.argb_data[:, :, 2]
+            rgb[:, :, 2] = self.argb_data[:, :, 0]
+            assert rgb.shape[2] == 3
+        else:
+            rgb = self.argb_data.copy()
+            # fix red/blue inversion
+            rgb[:, :, 0] = self.argb_data[:, :, 2]
+            rgb[:, :, 2] = self.argb_data[:, :, 0]
+            assert rgb.shape[2] == 4
 
         self.output.rgb = rgb
 
@@ -127,12 +137,17 @@ class VehiclesCairoDisplay(Block):
         self.surf.show_page() # Free memory self.cr?
 
     def draw_everything(self, cr):
-
-        # Set white background
-        bg_color = [1, 1, 1]
-        cr.rectangle(0, 0, self.total_width, self.total_height)
-        cr.set_source_rgb(bg_color[0], bg_color[1], bg_color[2])
-        cr.fill()
+        if not self.config.transparent:
+            # Set white background
+            bg_color = [1, 1, 1]
+            cr.rectangle(0, 0, self.total_width, self.total_height)
+            cr.set_source_rgb(bg_color[0], bg_color[1], bg_color[2])
+            cr.fill()
+        else:
+            # Green screen :-)
+            cr.rectangle(0, 0, self.total_width, self.total_height)
+            cr.set_source_rgba(0, 1, 0, 0)
+            cr.fill()
 
         boot_obs = self.input.boot_obs
 

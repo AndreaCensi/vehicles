@@ -67,6 +67,22 @@
             - vehicles.sensors.AdditiveGaussian
             - std_dev: 0.05
 
+# This is our default camera
+- id: cam360
+  desc: An omnidirectional camera with 180 sensels (smooth).
+  code: 
+      - vehicles.sensors.PhotoreceptorsSmoothUniform
+      - num_sensels: 180
+        fov_deg:     360
+        spatial_sigma_deg: 4
+        upsample: 15
+        noise: 
+            - vehicles.sensors.AdditiveGaussian
+            - std_dev: 0.05
+
+
+
+
 - id: cam_f180_n180_s
   desc: "A camera with 180fov, 180sensels."
   code: 
@@ -78,8 +94,8 @@
             - vehicles.sensors.AdditiveGaussian
             - std_dev: 0.05
         
-- id: cam_f180_n90_s
-  desc: "A camera with 180fov, 90 sensels."
+- id: cam180
+  desc: "A camera with 180fov, 90 sensels, smooth (default)"
   code: 
       - vehicles.sensors.PhotoreceptorsSmoothUniform
       - num_sensels: 90
@@ -88,6 +104,20 @@
         noise: 
             - vehicles.sensors.AdditiveGaussian
             - std_dev: 0.05
+        
+        
+- id: cam_f180_n90_s
+  desc: "A camera with 180fov, 90 sensels, smooth (default)"
+  code: 
+      - vehicles.sensors.PhotoreceptorsSmoothUniform
+      - num_sensels: 90
+        fov_deg:     180
+        spatial_sigma_deg: 4
+        noise: 
+            - vehicles.sensors.AdditiveGaussian
+            - std_dev: 0.05
+
+
 
 - id: cam_f90_n45_s
   desc: "A camera with 90deg fov, 45 sensels."

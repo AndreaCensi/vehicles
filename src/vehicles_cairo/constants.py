@@ -1,3 +1,5 @@
+import numpy as np
+
 BLACK = [0, 0, 0]
 WHITE = [1, 1, 1]
 YELLOW = [1, 1, 0]
@@ -47,3 +49,6 @@ class CairoConstants:
     photoreceptors_compact_r_width = 0.15
 
     plot_ranges_rho_min = 0.5
+
+    delta_single_ray = np.deg2rad(30)
+

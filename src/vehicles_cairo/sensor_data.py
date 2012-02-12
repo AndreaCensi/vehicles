@@ -212,7 +212,11 @@ def luminance2color(lum):
 def plot_photoreceptors_compact(cr, directions, valid, luminance,
                                 r=CC.photoreceptors_compact_r,
                                 r_width=CC.photoreceptors_compact_r_width):
-    delta_theta = np.abs(directions[2] - directions[1])
+    if len(directions) >= 2:
+        delta_theta = np.abs(directions[2] - directions[1])
+    else:
+        delta_theta = CC.delta_single_ray
+
     N = directions.size
     for i in range(N):
         if not valid[i]:
@@ -231,8 +235,11 @@ def plot_photoreceptors_compact(cr, directions, valid, luminance,
 def plot_ranges_compact(cr, directions, readings, valid,
                         r=CC.laser_compact_r,
                         r_width=CC.laser_compact_r_width):
+    if len(directions) >= 2:
+        delta_theta = np.abs(directions[2] - directions[1])
+    else:
+        delta_theta = CC.delta_single_ray
 
-    delta_theta = np.abs(directions[2] - directions[1])
     N = directions.size
 
     vmax = np.nanmax(readings)

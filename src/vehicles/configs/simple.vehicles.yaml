@@ -1,247 +1,298 @@
-- id: d_fixed-cam360
-  desc: A fixed camera.
+- id: "d_fixed-${sensor}"
+  desc: "A fixed robot with one sensor (${sensor})."
   id_dynamics: d_fixed
   sensors:
-      - id_sensor: cam_f360_n180_s
+      - id_sensor: "${sensor}"
   radius: 0.5
   extra:
     skin: transparent
 
-- id: d_fixed-cam180
-  desc: A fixed camera.
-  id_dynamics: d_fixed
-  sensors:
-      - id_sensor: cam_f180_n90_s
-  radius: 0.5
-  extra:
-    skin: transparent
-
-
-- id: d_fixed-rf360
-  desc: A fixed range finder.
-  id_dynamics: d_fixed
-  sensors:
-      - id_sensor: rf360
-  radius: 0.5
-  extra:
-    skin: transparent
-
-- id: d_fixed-rf180
-  desc: A fixed range finder.
-  id_dynamics: d_fixed
-  sensors:
-      - id_sensor: rf180
-  radius: 0.5
-  extra:
-    skin: transparent
-    
-
-- id: d_fixed-fs_05_12x12
-  desc: A fixed field sampler.
-  id_dynamics: d_fixed
-  sensors:
-      - id_sensor: fs_05_12x12
-  radius: 0.5
-  extra:
-    skin: transparent
-
-- id: d_fixed-fs_05_rand144
-  desc: A fixed field sampler.
-  id_dynamics: d_fixed
-  sensors:
-      - id_sensor: fs_05_rand144
-  radius: 0.5
-  extra:
-    skin: transparent
-
-
-
-- id: d_SE2_car_v-fs_05_rand144
-  desc: ""
-  id_dynamics: d_SE2_car_v_w
-  sensors:
-      - id_sensor: fs_05_rand144
-  radius: 0.5
-  extra:
-      skin: car_with_wheels
-
-
-- id: d_SE2_car_v-fs_05_12x12
-  desc: ""
-  id_dynamics: d_SE2_car_v_w
-  sensors:
-        - id_sensor: fs_05_12x12
-  radius: 0.5
-  extra:
-    skin: car_with_wheels
-
-
-- id: d_SE2_car_v-cam360
-  desc: A simple car with an omnidirectional camera.
-  id_dynamics: d_SE2_car_v_w
-  sensors:
-      - id_sensor: cam_f360_n180_s
-  radius: 0.5
-  extra:
-      skin: car_with_wheels
-          
-
-- id: d_SE2_car_v-rf360
-  desc: A simple car with an omnidirectional range-finder.
-  id_dynamics: d_SE2_car_v_w
-  sensors:
-      - id_sensor: rf360
-  radius: 0.5
-  extra:
-      skin: car_with_wheels
-
-- id: d_SE2_car_v_w-cam360
-  desc: A simple car (with wheels joints) and camera
-  id_dynamics: d_SE2_car_v_w
-  sensors:
-      - id_sensor: cam_f360_n180_s
-  radius: 0.5
-  extra:
-    skin: car_with_wheels
-
-
-- id: d_SE2_dd_v-rf360
-  desc: Differential drive with omnidirectional range-finder.
+- id: "d_SE2_dd_v-${sensor}"
+  desc: Differential drive robot
   id_dynamics: d_SE2_dd_v
   sensors:
-      - id_sensor: rf360 
+      - id_sensor: "${sensor}"
   radius: 0.5
   extra:
     skin: ddrive
 
-
-- id: d_SE2_dd_v-cam360
-  desc: Differential drive with omnidirectional camera.
-  id_dynamics: d_SE2_dd_v
-  sensors:
-      - id_sensor: cam_f360_n180 
-  radius: 0.5
-  extra:
-    skin: ddrive
-    
-
-- id: d_SE2_dd_v-fs_05_12x12
-  desc: ""
-  id_dynamics: d_SE2_dd_v
-  sensors:
-      - id_sensor: fs_05_12x12
-  radius: 0.5
-  extra:
-    skin: ddrive
-
-
-- id: d_SE2_dd_v-fs_05_rand144
-  desc: ""
-  id_dynamics: d_SE2_dd_v
-  sensors:
-      - id_sensor: fs_05_rand144
-  radius: 0.5
-  extra:
-    skin: ddrive
-
-
-
-
-
-- id: d_SE2_dd_v2-cam360
-  desc: Differential drive with omnidirectional camera (smooth)
+- id: "d_SE2_dd_v2-${sensor}"
+  desc: "Differential drive (faster) + ${sensor}"
   id_dynamics: d_SE2_dd_v2
   sensors:
-      - id_sensor: cam_f360_n180_s
+      - id_sensor: "${sensor}"
   radius: 0.5
   extra:
     skin: ddrive
 
-
-- id: d_SE2_rb_v-cam360f
-  desc: Differential drive with omnidirectional camera (sharp)
+- id: "d_SE2_rb_v-${sensor}"
+  desc: "An omnidirectional robot + ${sensor}"
   id_dynamics: d_SE2_rb_v
   sensors:
-      - id_sensor: cam_f360_n180
-  radius: 0.5
-  extra:
-    skin: ddrive
-
-
-
-- id: d_SE2_dd_v2-rf360
-  desc: Differential drive with omnidirectional range-finder (faster).
-  id_dynamics: d_SE2_dd_v2
-  sensors:
-      - id_sensor: rf360
-  radius: 0.5
-  extra:
-    skin: ddrive
-
-
-
-- id: d_SE2_rb_v-rf360
-  desc: An omnidirectional robot with a 360deg range finder.
-  id_dynamics: d_SE2_rb_v
-  sensors:
-      - id_sensor: rf360
+      - id_sensor: "${sensor}"
   radius: 0.5
   extra:
     skin: omni
 
-
-
-
-
-
-- id: d_SE2_rb_v-cam360
-  desc: An omnidirectional robot with a 360deg camera.
-  id_dynamics: d_SE2_rb_v
+- id: "d_S1_rb_v-${sensor}"
+  desc: "An orb controlled in velocity + ${sensor}"
+  id_dynamics: d_S1_rb_v
   sensors:
-      - id_sensor: cam_f360_n180_s
+      - id_sensor: "${sensor}"
   radius: 0.5
   extra:
-    skin: omni
+    skin: S1
 
-
-- id: d_SE2_rb_v-rf180
-  desc: An omnidirectional robot with a 180deg range finder.
-  id_dynamics: d_SE2_rb_v
+- id: "d_SE2_car_v-${sensor}"
+  desc: "A car-like with a sensor"
+  id_dynamics: d_SE2_car_v_w
   sensors:
-      - id_sensor: rf180
+      - id_sensor: "${sensor}"
   radius: 0.5
   extra:
-    skin: omni
+      skin: car_with_wheels
 
 
-- id: d_SE2_rb_v-fs12
-  desc: "A robot with a field sampler."
-  id_dynamics: d_SE2_rb_v
-  sensors:
-    - id_sensor: fs_05_12x12
-  radius: 0.5
-  extra:
-    skin: omni
+# - id: d_fixed-cam360
+# - id: d_fixed-cam180
+
+# - id: d_fixed-cam360
+#   desc: A fixed camera.
+#   id_dynamics: d_fixed
+#   sensors:
+#       - id_sensor: cam_f360_n180_s
+#   radius: 0.5
+#   extra:
+#     skin: transparent
+# 
+# - id: d_fixed-cam180
+#   desc: A fixed camera.
+#   id_dynamics: d_fixed
+#   sensors:
+#       - id_sensor: cam_f180_n90_s
+#   radius: 0.5
+#   extra:
+#     skin: transparent
+# 
+# 
+# - id: d_fixed-rf360
+#   desc: A fixed range finder.
+#   id_dynamics: d_fixed
+#   sensors:
+#       - id_sensor: rf360
+#   radius: 0.5
+#   extra:
+#     skin: transparent
+# 
+# - id: d_fixed-rf180
+#   desc: A fixed range finder.
+#   id_dynamics: d_fixed
+#   sensors:
+#       - id_sensor: rf180
+#   radius: 0.5
+#   extra:
+#     skin: transparent
+#     
+# 
+# - id: d_fixed-fs_05_12x12
+#   desc: A fixed field sampler.
+#   id_dynamics: d_fixed
+#   sensors:
+#       - id_sensor: fs_05_12x12
+#   radius: 0.5
+#   extra:
+#     skin: transparent
+# 
+# - id: d_fixed-fs_05_rand144
+#   desc: A fixed field sampler.
+#   id_dynamics: d_fixed
+#   sensors:
+#       - id_sensor: fs_05_rand144
+#   radius: 0.5
+#   extra:
+#     skin: transparent
+# 
+
+# 
+# - id: d_SE2_car_v-fs_05_rand144
+#   desc: ""
+#   id_dynamics: d_SE2_car_v_w
+#   sensors:
+#       - id_sensor: fs_05_rand144
+#   radius: 0.5
+#   extra:
+#       skin: car_with_wheels
+# 
+# 
+# - id: d_SE2_car_v-fs_05_12x12
+#   desc: ""
+#   id_dynamics: d_SE2_car_v_w
+#   sensors:
+#         - id_sensor: fs_05_12x12
+#   radius: 0.5
+#   extra:
+#     skin: car_with_wheels
+# 
+# 
+# - id: d_SE2_car_v-cam360
+#   desc: A simple car with an omnidirectional camera.
+#   id_dynamics: d_SE2_car_v_w
+#   sensors:
+#       - id_sensor: cam_f360_n180_s
+#   radius: 0.5
+#   extra:
+#       skin: car_with_wheels
+#           
+# 
+# - id: d_SE2_car_v-rf360
+#   desc: A simple car with an omnidirectional range-finder.
+#   id_dynamics: d_SE2_car_v_w
+#   sensors:
+#       - id_sensor: rf360
+#   radius: 0.5
+#   extra:
+#       skin: car_with_wheels
+# 
+# - id: d_SE2_car_v_w-cam360
+#   desc: A simple car (with wheels joints) and camera
+#   id_dynamics: d_SE2_car_v_w
+#   sensors:
+#       - id_sensor: cam_f360_n180_s
+#   radius: 0.5
+#   extra:
+#     skin: car_with_wheels
 
 
-- id: d_SE2_rb_v-fs_rand144
-  desc: "A robot with a field sampler."
-  id_dynamics: d_SE2_rb_v
-  sensors:
-    - id_sensor: fs_05_rand144
-  radius: 0.5
-  extra:
-    skin: omni 
-    
 
-- id: d_SE2_rb_v-cam180
-  desc: An omnidirectional robot with a 180deg camera.
-  id_dynamics: d_SE2_rb_v
-  sensors:
-      - id_sensor: cam_f180_n180_s
-  radius: 0.5
-  extra:
-    skin: omni
+# 
+# - id: d_SE2_dd_v-rf360
+#   desc: Differential drive with omnidirectional range-finder.
+#   id_dynamics: d_SE2_dd_v
+#   sensors:
+#       - id_sensor: rf360 
+#   radius: 0.5
+#   extra:
+#     skin: ddrive
+# 
+# 
+# - id: d_SE2_dd_v-cam360
+#   desc: Differential drive with omnidirectional camera.
+#   id_dynamics: d_SE2_dd_v
+#   sensors:
+#       - id_sensor: cam_f360_n180 
+#   radius: 0.5
+#   extra:
+#     skin: ddrive
+#     
+# 
+# - id: d_SE2_dd_v-fs_05_12x12
+#   desc: ""
+#   id_dynamics: d_SE2_dd_v
+#   sensors:
+#       - id_sensor: fs_05_12x12
+#   radius: 0.5
+#   extra:
+#     skin: ddrive
+# 
+# 
+# - id: d_SE2_dd_v-fs_05_rand144
+#   desc: ""
+#   id_dynamics: d_SE2_dd_v
+#   sensors:
+#       - id_sensor: fs_05_rand144
+#   radius: 0.5
+#   extra:
+#     skin: ddrive
+# 
+# 
+# 
+# 
+
+# 
+# - id: d_SE2_rb_v-cam360f
+#   desc: Differential drive with omnidirectional camera (sharp)
+#   id_dynamics: d_SE2_rb_v
+#   sensors:
+#       - id_sensor: cam_f360_n180
+#   radius: 0.5
+#   extra:
+#     skin: ddrive
+# 
+# 
+# 
+# - id: d_SE2_dd_v2-rf360
+#   desc: Differential drive with omnidirectional range-finder (faster).
+#   id_dynamics: d_SE2_dd_v2
+#   sensors:
+#       - id_sensor: rf360
+#   radius: 0.5
+#   extra:
+#     skin: ddrive
+# 
+# 
+# 
+# - id: d_SE2_rb_v-rf360
+#   desc: An omnidirectional robot with a 360deg range finder.
+#   id_dynamics: d_SE2_rb_v
+#   sensors:
+#       - id_sensor: rf360
+#   radius: 0.5
+#   extra:
+#     skin: omni
+# 
+# 
+# 
+# 
+# 
+# 
+# - id: d_SE2_rb_v-cam360
+#   desc: An omnidirectional robot with a 360deg camera.
+#   id_dynamics: d_SE2_rb_v
+#   sensors:
+#       - id_sensor: cam_f360_n180_s
+#   radius: 0.5
+#   extra:
+#     skin: omni
+# 
+# 
+# - id: d_SE2_rb_v-rf180
+#   desc: An omnidirectional robot with a 180deg range finder.
+#   id_dynamics: d_SE2_rb_v
+#   sensors:
+#       - id_sensor: rf180
+#   radius: 0.5
+#   extra:
+#     skin: omni
+
+# 
+# - id: d_SE2_rb_v-fs12
+#   desc: "A robot with a field sampler."
+#   id_dynamics: d_SE2_rb_v
+#   sensors:
+#     - id_sensor: fs_05_12x12
+#   radius: 0.5
+#   extra:
+#     skin: omni
+# 
+# 
+# - id: d_SE2_rb_v-fs_rand144
+#   desc: "A robot with a field sampler."
+#   id_dynamics: d_SE2_rb_v
+#   sensors:
+#     - id_sensor: fs_05_rand144
+#   radius: 0.5
+#   extra:
+#     skin: omni 
+#     
+# 
+# - id: d_SE2_rb_v-cam180
+#   desc: An omnidirectional robot with a 180deg camera.
+#   id_dynamics: d_SE2_rb_v
+#   sensors:
+#       - id_sensor: cam_f180_n180_s
+#   radius: 0.5
+#   extra:
+#     skin: omni
 
 
 - id: d_SE2_rb_v-cam180-stereo
@@ -256,68 +307,69 @@
   extra:
     skin: omni 
     
+# 
+# - id: d_SE2_rb_v-random_5
+#   desc: An omnidirectional robot with a 5-sensels random sensor.
+#   id_dynamics: d_SE2_rb_v
+#   sensors:
+#       - id_sensor: random_5 
+#   radius: 0.5
+#   extra:
+#     skin: omni
+# 
+# - id: d_SE2_dd_v-random_5
+#   desc: An omnidirectional robot with a 5-sensels random sensor.
+#   id_dynamics: d_SE2_dd_v
+#   sensors:
+#       - id_sensor: random_5 
+#   radius: 0.5
+#   extra:
+#     skin: ddrive
+#   
+# 
+# - id: d_SE2_car_v-random_5
+#   desc: An omnidirectional robot with a 5-sensels random sensor.
+#   id_dynamics: d_SE2_car_v_w
+#   sensors:
+#       - id_sensor: random_5 
+#   radius: 0.5
+#   extra:
+#     skin: car_with_wheels
+#   
+# 
+# 
 
 
-- id: d_SE2_rb_v-random_5
-  desc: An omnidirectional robot with a 5-sensels random sensor.
-  id_dynamics: d_SE2_rb_v
-  sensors:
-      - id_sensor: random_5 
-  radius: 0.5
-  extra:
-    skin: omni
-
-- id: d_SE2_dd_v-random_5
-  desc: An omnidirectional robot with a 5-sensels random sensor.
-  id_dynamics: d_SE2_dd_v
-  sensors:
-      - id_sensor: random_5 
-  radius: 0.5
-  extra:
-    skin: ddrive
-  
-
-- id: d_SE2_car_v-random_5
-  desc: An omnidirectional robot with a 5-sensels random sensor.
-  id_dynamics: d_SE2_car_v_w
-  sensors:
-      - id_sensor: random_5 
-  radius: 0.5
-  extra:
-    skin: car_with_wheels
-  
-
-
-
-- id: d_S1_rb_v-cam60
-  desc: "An orb controlled in velocity"
-  id_dynamics: d_S1_rb_v
-  sensors:
-      - id_sensor: cam_f60_n45_s
-  radius: 0.5
-  extra:
-    skin: S1
-
-- id: d_S1_rb_v-cam180
-  desc: "An orb controlled in velocity"
-  id_dynamics: d_S1_rb_v
-  sensors:
-    - id_sensor: cam_f180_n90_s
-  radius: 0.5
-  extra:
-    skin: S1
-
-
-- id: d_S1_rb_v-rf180
-  desc: "An orb controlled in velocity"
-  id_dynamics: d_S1_rb_v
-  sensors:
-    - id_sensor: rf180
-  radius: 0.5
-  extra:
-    skin: S1
-
-  
+# 
+# - id: d_S1_rb_v-cam60
+#   desc: "An orb controlled in velocity"
+#   id_dynamics: d_S1_rb_v
+#   sensors:
+#       - id_sensor: cam_f60_n45_s
+#   radius: 0.5
+#   extra:
+#     skin: S1
+# 
+# - id: d_S1_rb_v-cam180
+#   desc: "An orb controlled in velocity"
+#   id_dynamics: d_S1_rb_v
+#   sensors:
+#     - id_sensor: cam_f180_n90_s
+#   radius: 0.5
+#   extra:
+#     skin: S1
+# 
+# 
+# - id: d_S1_rb_v-rf180
+#   desc: "An orb controlled in velocity"
+#   id_dynamics: d_S1_rb_v
+#   sensors:
+#     - id_sensor: rf180
+#   radius: 0.5
+#   extra:
+#     skin: S1
+# 
+#   
 
   
 - id: example_custom_vehicle

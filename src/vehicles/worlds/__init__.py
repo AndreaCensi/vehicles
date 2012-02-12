@@ -10,3 +10,4 @@ from .stochastic_box3 import *
 from .empty_fixed import *
 from .bigmama import *
 from .stochastic_sources import *
+from .light_box import *
