@@ -6,6 +6,7 @@
 # TODO: remove "tags"
 
 from . import contract, np
+from .. import VehiclesConstants
 from abc import abstractmethod
 from conf_tools import instantiate_spec
 
@@ -60,7 +61,7 @@ class PolyLine(Primitive, GeometricShape):
         return t
 
     def to_yaml(self):
-        return {'type': 'PolyLine',
+        return {'type': VehiclesConstants.PRIMITIVE_POLYLINE,
                 'surface': self.id_object,
                 'tags': self.tags,
                 'texture': self.texture,
@@ -68,7 +69,7 @@ class PolyLine(Primitive, GeometricShape):
 
     @staticmethod
     def from_yaml(s):
-        assert s['type'] == 'PolyLine'
+        assert s['type'] == VehiclesConstants.PRIMITIVE_POLYLINE
         return PolyLine(id_object=s.get('surface', None),
                         tags=s.get('tags', []),
                         texture=s.get('texture', None), # XXX
@@ -97,7 +98,7 @@ class Circle(Primitive, GeometricShape):
         self.center[1] = float(center[1])
 
     def to_yaml(self):
-        return {'type': 'Circle',
+        return {'type': VehiclesConstants.PRIMITIVE_CIRCLE,
                 'surface': self.id_object,
                 'tags': self.tags,
                 'texture': self.texture,
@@ -107,7 +108,7 @@ class Circle(Primitive, GeometricShape):
 
     @staticmethod
     def from_yaml(s):
-        assert s['type'] == 'Circle'
+        assert s['type'] == VehiclesConstants.PRIMITIVE_CIRCLE
         return Circle(id_object=s.get('surface', None),
                         tags=s.get('tags', []),
                         texture=s.get('texture', None), # XXX
@@ -163,7 +164,7 @@ class Source(Primitive, Field):
         return C
 
     def to_yaml(self):
-        return {'type': 'Source',
+        return {'type': VehiclesConstants.PRIMITIVE_SOURCE,
                 'id_object': self.id_object,
                 'tags': self.tags,
                 'center': self.center.tolist(),
@@ -171,13 +172,13 @@ class Source(Primitive, Field):
 
     @staticmethod
     def from_yaml(s):
-        assert s['type'] == 'Source'
+        assert s['type'] == VehiclesConstants.PRIMITIVE_SOURCE
         return Source(id_object=s.get('surface', None),
                       tags=s.get('tags', []),
                       center=s['center'],
                       kernel_spec=s['kernel_spec'])
 
 
-Primitive.type2class['PolyLine'] = PolyLine
-Primitive.type2class['Circle'] = Circle
-Primitive.type2class['Source'] = Source
+Primitive.type2class[VehiclesConstants.PRIMITIVE_POLYLINE] = PolyLine
+Primitive.type2class[VehiclesConstants.PRIMITIVE_CIRCLE] = Circle
+Primitive.type2class[VehiclesConstants.PRIMITIVE_SOURCE] = Source

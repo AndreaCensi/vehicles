@@ -14,8 +14,8 @@ class ComplexSkin(VehicleSkin):
             jointnum = js.get('joint', 0)
 
             if not(0 <= jointnum < len(joints)):
-                msg = ("Invalid joint number #%d. Dynamics has %d joints." %
-                       (jointnum, len(joints)))
+                msg = ('Invalid joint number #%d. Dynamics has '
+                       '%d joints.' % (jointnum, len(joints)))
                 raise ValueError(msg)
 
             skin = js.get('skin')

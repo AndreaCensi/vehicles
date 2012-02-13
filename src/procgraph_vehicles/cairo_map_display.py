@@ -21,12 +21,15 @@ class VehiclesCairoDisplay(Block):
     Block.config('transparent', 'Outputs RGB with transparent bg',
                  default=False)
 
-    Block.config('width', 'Image width in points.', default=768)
-    Block.config('height', 'Image height in points.', default=768)
+#    Block.config('width', 'Image width in points.', default=768)
+#    Block.config('height', 'Image height in points.', default=768)
+#    Block.config('sidebar_width', default=1024 - 768)
+    Block.config('width', 'Image width in points.', default=600)
+    Block.config('height', 'Image height in points.', default=600)
+    Block.config('sidebar_width', default=200)
 
     # Sidebar options
     Block.config('display_sidebar', default=True)
-    Block.config('sidebar_width', default=1024 - 768)
 
     Block.config('trace', 'Trace the path', default=False)
 

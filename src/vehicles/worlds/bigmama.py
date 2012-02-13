@@ -1,6 +1,6 @@
 from . import contract, Counter
 from ..interfaces import Circle, World
-from vehicles.worlds.utils import blackwhite_checkerboard
+from .utils import blackwhite_checkerboard
 
 __all__ = ['BigMamarama']
 

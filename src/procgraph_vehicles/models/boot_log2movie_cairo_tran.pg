@@ -1,5 +1,5 @@
 --- model boot_log2movie_cairo_tran
-""" Tests with transparent video """
+""" Tests with transparent video (not working yet) """
 config logdir 'Base log dir'
 config id_robot
 config id_agent = ""
@@ -13,7 +13,7 @@ import procgraph_vehicles
 
      observations[boot_obs] -> |plotter:vehicles_cairo_display format=png| --> rgb
      
-     rgb --> |mencoder file="${output}.avi" fps=20 quiet=1 timestamps=0|
+     rgb --> |mencoder file="${output}.avi" fps=20 quiet=0 timestamps=0|
      # rgb --> |mencoder file="${output}.mp4" fps=20 quiet=1 timestamps=0|
      # rgb --> |mencoder file="${output}.mpng" fps=20 quiet=1 timestamps=0|
      
