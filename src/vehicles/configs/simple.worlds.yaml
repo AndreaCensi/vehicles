@@ -75,7 +75,22 @@
         scale: 1
         num_sources: 20
 
-  
+- id: BigMama_r10s1_orig
+  desc: "A circular box, starting from the origing"
+  code: 
+    - vehicles.library.LightBox
+    - start_poses: 
+        - [0,0,90] 
+      bounds: [[-1,+2.5],[-2.5,+0.3],[0,+5]]
+      primitives:
+      - type: Circle
+        center: [0,0]
+        radius: 10
+        solid: false
+        texture:
+            - 'vehicles.worlds.textures.BWCheckerboard'
+            - cell_width: 1
+            
 
 
 
