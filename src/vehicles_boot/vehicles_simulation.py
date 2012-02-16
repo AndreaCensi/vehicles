@@ -12,7 +12,8 @@ class BOVehicleSimulation(RobotInterface, VehicleSimulation):
                  id_world=None,
                  vehicle=None,
                  id_vehicle=None,
-                 dt=VehiclesConstants.DEFAULT_SIMULATION_DT):
+                 dt=VehiclesConstants.DEFAULT_SIMULATION_DT,
+                 **kwargs):
         self.dt = dt
 
         if not ((world is not None) ^ (id_world is not None)):
@@ -42,7 +43,7 @@ class BOVehicleSimulation(RobotInterface, VehicleSimulation):
         self.id_world = id_world
         self.id_vehicle = id_vehicle
 
-        VehicleSimulation.__init__(self, vehicle, world)
+        VehicleSimulation.__init__(self, vehicle, world, **kwargs)
 
         cmd_spec = StreamSpec.from_yaml(
                                 self.vehicle.dynamics.get_commands_spec())

@@ -22,7 +22,7 @@ config fps = 20
     """ Composes the map and the servo info. """
     map_rgb, servo_rgb  --> |sync| -> |grid bgcolor=$bgcolor cols=2| --> out
 
-    out --> |mencoder file="${output}.mp4" fps=$fps quiet=0 timestamps=0|
+    out --> |mencoder file="${output}.mp4" fps=$fps  timestamps=0|
 
 
 --- model my_border

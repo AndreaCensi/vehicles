@@ -39,7 +39,7 @@
   id_dynamics: d_S1_rb_v
   sensors:
       - id_sensor: "${sensor}"
-  radius: 0.5
+  radius: 0.5 
   extra:
     skin: S1
 

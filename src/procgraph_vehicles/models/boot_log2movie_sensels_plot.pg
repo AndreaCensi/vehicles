@@ -1,0 +1,29 @@
+--- model boot_log2movie_sensels_plot
+""" Creates a movie from only the sensels (as a plot). """
+# Usual configuration for selecting boot olympics episode
+config logdir 'Base log dir'
+config id_robot
+config id_agent = ""
+config id_episode = ""
+# Output config
+config output 'output basename (without extension)'
+config width = 400 
+config height = 200
+
+import procgraph_vehicles
+    |boot_log_reader logdir=$logdir id_robot=$id_robot id_agent=$id_agent id_episode=$id_episode| -> observations 
+
+     observations --> |extract_sensels| -> sensels
+     
+    sensels -> |plot width=$width height=$height| --> rgb
+    
+    # TODO: normalize everything in [0,1]
+    plot.format = 'k.'
+    plot.y_min = -0.1
+    plot.y_max = +1.05
+    plot.title = ""
+    plot.xlabel = ""
+    plot.fancy_styles = [dickinsonA, noxticks, nobottomaxis]
+     
+    rgb --> |mencoder file="${output}.mp4" fps=20 timestamps=0|
+	 

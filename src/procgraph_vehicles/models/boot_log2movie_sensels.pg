@@ -1,0 +1,18 @@
+--- model boot_log2movie_sensels
+""" Creates a movie from only the sensels. """
+config logdir 'Base log dir'
+config id_robot
+config id_agent = ""
+config id_episode = ""
+config output 'output basename (without extension)'
+config width = 200 
+import procgraph_vehicles
+
+|boot_log_reader logdir=$logdir id_robot=$id_robot id_agent=$id_agent id_episode=$id_episode| -> observations 
+
+     observations --> |extract_sensels| -> sensels
+     
+    sensels -> |reshape2d| --> |scale min_value=0 nan_color=[1,1,1]| --> |resize width=$width| --> rgb
+     
+     rgb --> |mencoder file="${output}.mp4" fps=20 quiet=1 timestamps=0|
+	 

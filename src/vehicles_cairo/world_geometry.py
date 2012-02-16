@@ -92,8 +92,10 @@ def cairo_plot_circle_primitive(cr, center, radius, solid, texture, numpass):
                                       width_outside=width_outside)
 
     else:
-        cairo_plot_circle(cr, center=center,
-                      radius=radius - CC.texture_width,
+        r1 = radius - CC.texture_width
+        if r1 > 0:
+            cairo_plot_circle(cr, center=center,
+                      radius=r1,
                       edgecolor=None,
                       facecolor=facecolor,
                       width=CC.obstacle_border_width)

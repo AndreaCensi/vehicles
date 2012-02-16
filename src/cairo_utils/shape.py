@@ -9,6 +9,7 @@ def cairo_plot_polyline(cr, x, y):
 
 
 # TODO: add deprecations
+#@contract(center='seq[2](float)', radius='>0')
 def cairo_plot_circle(cr, center, radius, edgecolor=None,
                       facecolor=None, width=None):
     with cairo_save(cr):

@@ -6,7 +6,7 @@ import time
 
 class VehicleSimulation():
 
-    def __init__(self, vehicle, world):
+    def __init__(self, vehicle, world, safety_margin=3):
         assert isinstance(vehicle, Vehicle)
         assert isinstance(world, World)
 
@@ -22,6 +22,10 @@ class VehicleSimulation():
         self.last_commands = np.zeros(len(cmd_spec['format']))  # XXX
 
         self.episode_started = False
+
+        self.safety_margin = safety_margin
+        # 3 = must have 2*radius distant from obstacles
+
 
     def __repr__(self):
         return 'VSim(%s;%s)' % (self.vehicle, self.world)
@@ -78,9 +82,8 @@ class VehicleSimulation():
             primitives = self.world.get_primitives()
             check_primitives(primitives)
             self.vehicle.set_world_primitives(primitives)
-            safety_margin = 3 # must have 2*radius distant from obstacles
             collision = self.vehicle.colliding_pose(pose,
-                                    safety_margin=safety_margin)
+                                    safety_margin=self.safety_margin)
             if not collision.collided:
                 self.vehicle.set_pose(pose)
                 return episode
