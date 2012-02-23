@@ -60,8 +60,8 @@
 <!-- ==================== MODULE DESCRIPTION ==================== -->
 <h1 class="epydoc">Module collision_utils</h1><p class="nomargin-top"><span class="codelink"><a href="vehicles.simulation.collision_utils-pysrc.html">source&nbsp;code</a></span></p>
 <p>Simple utilities for 2D intersections.</p>
-  <p>The normal is returned as a 2d numpy array pointing towards the 
-  circle. The penetration is a float, &gt;=0 (=0 if touching).</p>
+<p>The normal is returned as a 2d numpy array pointing towards the circle.
+The penetration is a float, &gt;=0 (=0 if touching).</p>
 
 <!-- ==================== CLASSES ==================== -->
 <a name="section-Classes"></a>
@@ -108,7 +108,7 @@
 </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type"><tt class="rst-docutils literal">None|intersection</tt></span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -129,14 +129,13 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type"><tt class="rst-docutils literal">None|intersection</tt></span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="vehicles.simulation.collision_utils-module.html#circle_polyline_intersection" class="summary-sig-name">circle_polyline_intersection</a>(<span class="summary-sig-arg">c1</span>,
         <span class="summary-sig-arg">r1</span>,
-        <span class="summary-sig-arg">points</span>)</span><br />
-      :param c1: :type c1:  ``point2``</td>
+        <span class="summary-sig-arg">points</span>)</span></td>
           <td align="right" valign="top">
             <span class="codelink"><a href="vehicles.simulation.collision_utils-pysrc.html#circle_polyline_intersection">source&nbsp;code</a></span>
             
@@ -148,15 +147,14 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type"><tt class="rst-docutils literal">None|intersection</tt></span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="vehicles.simulation.collision_utils-module.html#circle_segment_intersection" class="summary-sig-name">circle_segment_intersection</a>(<span class="summary-sig-arg">c1</span>,
         <span class="summary-sig-arg">r1</span>,
         <span class="summary-sig-arg">p1</span>,
-        <span class="summary-sig-arg">p2</span>)</span><br />
-      :param p2: :type p2:  ``point2``</td>
+        <span class="summary-sig-arg">p2</span>)</span></td>
           <td align="right" valign="top">
             <span class="codelink"><a href="vehicles.simulation.collision_utils-pysrc.html#circle_segment_intersection">source&nbsp;code</a></span>
             
@@ -247,14 +245,17 @@
     </td>
   </tr></table>
   
-  <p>The second circle might or might not be solid.</p>
-  <p>:param c2: :type c2:  ``point2``</p>
-  <p>:param c1: :type c1:  ``point2``</p>
-  <p>:param solid2: :type solid2:  ``bool``</p>
-  <p>:param r1: :type r1:  ``&gt;0``</p>
-  <p>:param r2: :type r2:  ``&gt;0``</p>
-  <p>:rtype:  ``None|intersection``</p>
+  The second circle might or might not be solid.
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>c2</code></strong> (<tt class="rst-docutils literal">point2</tt>)</li>
+        <li><strong class="pname"><code>c1</code></strong> (<tt class="rst-docutils literal">point2</tt>)</li>
+        <li><strong class="pname"><code>solid2</code></strong> (<tt class="rst-docutils literal">bool</tt>)</li>
+        <li><strong class="pname"><code>r1</code></strong> (<tt class="rst-docutils literal">&gt;0</tt>)</li>
+        <li><strong class="pname"><code>r2</code></strong> (<tt class="rst-docutils literal">&gt;0</tt>)</li>
+    </ul></dd>
+    <dt>Returns: <tt class="rst-rst-docutils literal rst-docutils literal">None|intersection</tt></dt>
   </dl>
 </td></tr></table>
 </div>
@@ -274,11 +275,15 @@
     </td>
   </tr></table>
   
-  <p>:param c1: :type c1:  ``point2``</p>
-  <p>:param points: :type points:  ``seq[&gt;=2](point2)``</p>
-  <p>:param r1: :type r1:  ``&gt;0``</p>
-  <p>:rtype:  ``None|intersection``</p>
+  
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>c1</code></strong> (<tt class="rst-docutils literal">point2</tt>)</li>
+        <li><strong class="pname"><code>points</code></strong> (<tt class="rst-docutils literal"><span class="pre">seq[&gt;=2](point2)</span></tt>)</li>
+        <li><strong class="pname"><code>r1</code></strong> (<tt class="rst-docutils literal">&gt;0</tt>)</li>
+    </ul></dd>
+    <dt>Returns: <tt class="rst-rst-docutils literal rst-docutils literal">None|intersection</tt></dt>
   </dl>
 </td></tr></table>
 </div>
@@ -299,12 +304,16 @@
     </td>
   </tr></table>
   
-  <p>:param p2: :type p2:  ``point2``</p>
-  <p>:param c1: :type c1:  ``point2``</p>
-  <p>:param p1: :type p1:  ``point2``</p>
-  <p>:param r1: :type r1:  ``&gt;0``</p>
-  <p>:rtype:  ``None|intersection``</p>
+  
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>p2</code></strong> (<tt class="rst-docutils literal">point2</tt>)</li>
+        <li><strong class="pname"><code>c1</code></strong> (<tt class="rst-docutils literal">point2</tt>)</li>
+        <li><strong class="pname"><code>p1</code></strong> (<tt class="rst-docutils literal">point2</tt>)</li>
+        <li><strong class="pname"><code>r1</code></strong> (<tt class="rst-docutils literal">&gt;0</tt>)</li>
+    </ul></dd>
+    <dt>Returns: <tt class="rst-rst-docutils literal rst-docutils literal">None|intersection</tt></dt>
   </dl>
 </td></tr></table>
 </div>
@@ -377,7 +386,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Wed Feb  1 14:51:15 2012
+    Generated by Epydoc 3.0.1 on Wed Feb 22 20:40:17 2012
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

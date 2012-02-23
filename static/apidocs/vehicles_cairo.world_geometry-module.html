@@ -86,8 +86,7 @@
         <span class="summary-sig-arg">radius</span>,
         <span class="summary-sig-arg">solid</span>,
         <span class="summary-sig-arg">texture</span>,
-        <span class="summary-sig-arg">numpass</span>)</span><br />
-      :param solid: :type solid:  ``bool``</td>
+        <span class="summary-sig-arg">numpass</span>)</span></td>
           <td align="right" valign="top">
             <span class="codelink"><a href="vehicles_cairo.world_geometry-pysrc.html#cairo_plot_circle_primitive">source&nbsp;code</a></span>
             
@@ -103,10 +102,9 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="cairo_plot_polyline_primitive"></a><span class="summary-sig-name">cairo_plot_polyline_primitive</span>(<span class="summary-sig-arg">cr</span>,
+          <td><span class="summary-sig"><a href="vehicles_cairo.world_geometry-module.html#cairo_plot_polyline_primitive" class="summary-sig-name">cairo_plot_polyline_primitive</a>(<span class="summary-sig-arg">cr</span>,
         <span class="summary-sig-arg">points</span>,
-        <span class="summary-sig-arg">texture</span>)</span><br />
-      :param points: :type points:  ``array[2xN]``</td>
+        <span class="summary-sig-arg">texture</span>=<span class="summary-sig-default">None</span>)</span></td>
           <td align="right" valign="top">
             <span class="codelink"><a href="vehicles_cairo.world_geometry-pysrc.html#cairo_plot_polyline_primitive">source&nbsp;code</a></span>
             
@@ -143,8 +141,7 @@
         <span class="summary-sig-arg">sources</span>,
         <span class="summary-sig-arg">bounds</span>,
         <span class="summary-sig-arg">disc</span>=<span class="summary-sig-default"><code class="variable-group">[</code>100<code class="variable-op">, </code>100<code class="variable-group">]</code></span>,
-        <span class="summary-sig-arg">alpha</span>=<span class="summary-sig-default">0.5</span>,
-        <span class="summary-sig-arg">cmap</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">Greens</code><code class="variable-quote">'</code></span>)</span></td>
+        <span class="summary-sig-arg">alpha</span>=<span class="summary-sig-default">0.5</span>)</span></td>
           <td align="right" valign="top">
             <span class="codelink"><a href="vehicles_cairo.world_geometry-pysrc.html#cairo_plot_sources_field">source&nbsp;code</a></span>
             
@@ -182,13 +179,12 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="cairo_plot_textured_polyline"></a><span class="summary-sig-name">cairo_plot_textured_polyline</span>(<span class="summary-sig-arg">cr</span>,
+          <td><span class="summary-sig"><a href="vehicles_cairo.world_geometry-module.html#cairo_plot_textured_polyline" class="summary-sig-name">cairo_plot_textured_polyline</a>(<span class="summary-sig-arg">cr</span>,
         <span class="summary-sig-arg">points</span>,
         <span class="summary-sig-arg">texture</span>,
         <span class="summary-sig-arg">resolution</span>,
         <span class="summary-sig-arg">width_inside</span>,
-        <span class="summary-sig-arg">width_outside</span>)</span><br />
-      :param points: :type points:  ``array[2xN]``</td>
+        <span class="summary-sig-arg">width_outside</span>)</span></td>
           <td align="right" valign="top">
             <span class="codelink"><a href="vehicles_cairo.world_geometry-pysrc.html#cairo_plot_textured_polyline">source&nbsp;code</a></span>
             
@@ -210,8 +206,7 @@
         <span class="summary-sig-arg">resolution</span>,
         <span class="summary-sig-arg">offset</span>,
         <span class="summary-sig-arg">width_inside</span>,
-        <span class="summary-sig-arg">width_outside</span>)</span><br />
-      :param length: :type length:  ``float,&gt;0``</td>
+        <span class="summary-sig-arg">width_outside</span>)</span></td>
           <td align="right" valign="top">
             <span class="codelink"><a href="vehicles_cairo.world_geometry-pysrc.html#cairo_plot_textured_segment">source&nbsp;code</a></span>
             
@@ -229,7 +224,9 @@
         <tr>
           <td><span class="summary-sig"><a name="cairo_show_world_geometry"></a><span class="summary-sig-name">cairo_show_world_geometry</span>(<span class="summary-sig-arg">cr</span>,
         <span class="summary-sig-arg">world_state</span>,
-        <span class="summary-sig-arg">plot_sources</span>=<span class="summary-sig-default">False</span>)</span></td>
+        <span class="summary-sig-arg">plot_sources</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">plot_textures</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">extra_pad</span>=<span class="summary-sig-default">0</span>)</span></td>
           <td align="right" valign="top">
             <span class="codelink"><a href="vehicles_cairo.world_geometry-pysrc.html#cairo_show_world_geometry">source&nbsp;code</a></span>
             
@@ -302,11 +299,68 @@
     </td>
   </tr></table>
   
-  <p>:param solid: :type solid:  ``bool``</p>
-  <p>:param numpass: :type numpass:  ``int``</p>
-  <p>:param radius: :type radius:  ``&gt;0``</p>
-  <p>:param center: :type center:  ``seq[2](float)``</p>
+  
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>solid</code></strong> (<tt class="rst-docutils literal">bool</tt>)</li>
+        <li><strong class="pname"><code>numpass</code></strong> (<tt class="rst-docutils literal">int</tt>)</li>
+        <li><strong class="pname"><code>radius</code></strong> (<tt class="rst-docutils literal">&gt;0</tt>)</li>
+        <li><strong class="pname"><code>center</code></strong> (<tt class="rst-docutils literal"><span class="pre">seq[2](float)</span></tt>)</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="cairo_plot_polyline_primitive"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">cairo_plot_polyline_primitive</span>(<span class="sig-arg">cr</span>,
+        <span class="sig-arg">points</span>,
+        <span class="sig-arg">texture</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="vehicles_cairo.world_geometry-pysrc.html#cairo_plot_polyline_primitive">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>points</code></strong> (<tt class="rst-docutils literal">array[2xN]</tt>)</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="cairo_plot_textured_polyline"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">cairo_plot_textured_polyline</span>(<span class="sig-arg">cr</span>,
+        <span class="sig-arg">points</span>,
+        <span class="sig-arg">texture</span>,
+        <span class="sig-arg">resolution</span>,
+        <span class="sig-arg">width_inside</span>,
+        <span class="sig-arg">width_outside</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="vehicles_cairo.world_geometry-pysrc.html#cairo_plot_textured_polyline">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>points</code></strong> (<tt class="rst-docutils literal">array[2xN]</tt>)</li>
+    </ul></dd>
   </dl>
 </td></tr></table>
 </div>
@@ -330,12 +384,16 @@
     </td>
   </tr></table>
   
-  <p>:param length: :type length:  ``float,&gt;0``</p>
-  <p>:param width_inside: :type width_inside:  ``&gt;=0``</p>
-  <p>:param resolution: :type resolution:  ``float,&gt;0``</p>
-  <p>:param width_outside: :type width_outside:  ``&gt;=0``</p>
-  <p>:param offset: :type offset:  ``float``</p>
+  
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>length</code></strong> (<tt class="rst-docutils literal"><span class="pre">float,&gt;0</span></tt>)</li>
+        <li><strong class="pname"><code>width_inside</code></strong> (<tt class="rst-docutils literal">&gt;=0</tt>)</li>
+        <li><strong class="pname"><code>resolution</code></strong> (<tt class="rst-docutils literal"><span class="pre">float,&gt;0</span></tt>)</li>
+        <li><strong class="pname"><code>width_outside</code></strong> (<tt class="rst-docutils literal">&gt;=0</tt>)</li>
+        <li><strong class="pname"><code>offset</code></strong> (<tt class="rst-docutils literal">float</tt>)</li>
+    </ul></dd>
   </dl>
 </td></tr></table>
 </div>
@@ -368,7 +426,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Wed Feb  1 14:51:15 2012
+    Generated by Epydoc 3.0.1 on Wed Feb 22 20:40:17 2012
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

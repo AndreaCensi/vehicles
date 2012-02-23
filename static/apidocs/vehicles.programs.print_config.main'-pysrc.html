@@ -86,10 +86,12 @@ vehicles.programs.print_config.natsort.natsorted" class="py-name" href="#" oncli
 <a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
 <a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"> </tt>
 <a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">basicConfig</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
-<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt id="link-3" class="py-name" targets="Variable vehicles.configuration.logger=vehicles.configuration-module.html#logger,Variable vehicles.configuration.master.logger=vehicles.configuration.master-module.html#logger,Variable vehicles.configuration.vehicles.logger=vehicles.configuration.vehicles-module.html#logger,Variable vehicles.interfaces.logger=vehicles.interfaces-module.html#logger,Variable vehicles.logger=vehicles-module.html#logger,Variable vehicles.programs.display_demos.simulations.logger=vehicles.programs.display_demos.simulations-module.html#logger,Variable vehicles.programs.display_demos.skins.logger=vehicles.programs.display_demos.skins-module.html#logger,Variable vehicles.programs.display_demos.vehicles.logger=vehicles.programs.display_demos.vehicles-module.html#logger,Variable vehicles.programs.inspect_textures.main'.logger=vehicles.programs.inspect_textures.main%27-module.html#logger,Variable vehicles.programs.print_config.logger=vehicles.programs.print_config-module.html#logger,Variable vehicles.programs.print_config.main'.logger=vehicles.programs.print_config.main%27-module.html#logger,Variable vehicles.sensors.field_sampler.logger=vehicles.sensors.field_sampler-module.html#logger,Variable vehicles.sensors.logger=vehicles.sensors-module.html#logger,Variable vehicles.sensors.noises.logger=vehicles.sensors.noises-module.html#logger,Variable vehicles.sensors.raytracer.logger=vehicles.sensors.raytracer-module.html#logger,Variable vehicles.simulation.logger=vehicles.simulation-module.html#logger,Variable vehicles.simulation.vsimulation.logger=vehicles.simulation.vsimulation-module.html#logger,Variable vehicles.worlds.logger=vehicles.worlds-module.html#logger,Variable vehicles_boot.create_olympics_configs.logger=vehicles_boot.create_olympics_configs-module.html#logger,Variable vehicles_boot.create_olympics_configs.main'.logger=vehicles_boot.create_olympics_configs.main%27-module.html#logger,Variable vehicles_cairo.logger=vehicles_cairo-module.html#logger,Variable vehicles_cairo.sensor_data.logger=vehicles_cairo.sensor_data-module.html#logger"><a title="vehicles.configuration.logger
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt id="link-3" class="py-name" targets="Variable vehicles.configuration.logger=vehicles.configuration-module.html#logger,Variable vehicles.configuration.master.logger=vehicles.configuration.master-module.html#logger,Variable vehicles.configuration.vehicles.logger=vehicles.configuration.vehicles-module.html#logger,Variable vehicles.interfaces.logger=vehicles.interfaces-module.html#logger,Variable vehicles.interfaces.vehicle_sensor.logger=vehicles.interfaces.vehicle_sensor-module.html#logger,Variable vehicles.library.logger=vehicles.library-module.html#logger,Variable vehicles.logger=vehicles-module.html#logger,Variable vehicles.programs.display_demos.simulations.logger=vehicles.programs.display_demos.simulations-module.html#logger,Variable vehicles.programs.display_demos.skins.logger=vehicles.programs.display_demos.skins-module.html#logger,Variable vehicles.programs.display_demos.vehicles.logger=vehicles.programs.display_demos.vehicles-module.html#logger,Variable vehicles.programs.inspect_textures.main'.logger=vehicles.programs.inspect_textures.main%27-module.html#logger,Variable vehicles.programs.print_config.logger=vehicles.programs.print_config-module.html#logger,Variable vehicles.programs.print_config.main'.logger=vehicles.programs.print_config.main%27-module.html#logger,Variable vehicles.sensors.field_sampler.logger=vehicles.sensors.field_sampler-module.html#logger,Variable vehicles.sensors.logger=vehicles.sensors-module.html#logger,Variable vehicles.sensors.noises.logger=vehicles.sensors.noises-module.html#logger,Variable vehicles.sensors.raytracer.logger=vehicles.sensors.raytracer-module.html#logger,Variable vehicles.simulation.logger=vehicles.simulation-module.html#logger,Variable vehicles.simulation.vsimulation.logger=vehicles.simulation.vsimulation-module.html#logger,Variable vehicles.worlds.logger=vehicles.worlds-module.html#logger,Variable vehicles_boot.create_olympics_configs.logger=vehicles_boot.create_olympics_configs-module.html#logger,Variable vehicles_boot.create_olympics_configs.main'.logger=vehicles_boot.create_olympics_configs.main%27-module.html#logger,Variable vehicles_boot.logger=vehicles_boot-module.html#logger,Variable vehicles_cairo.logger=vehicles_cairo-module.html#logger,Variable vehicles_cairo.sensor_data.logger=vehicles_cairo.sensor_data-module.html#logger"><a title="vehicles.configuration.logger
 vehicles.configuration.master.logger
 vehicles.configuration.vehicles.logger
 vehicles.interfaces.logger
+vehicles.interfaces.vehicle_sensor.logger
+vehicles.library.logger
 vehicles.logger
 vehicles.programs.display_demos.simulations.logger
 vehicles.programs.display_demos.skins.logger
@@ -106,12 +108,15 @@ vehicles.simulation.vsimulation.logger
 vehicles.worlds.logger
 vehicles_boot.create_olympics_configs.logger
 vehicles_boot.create_olympics_configs.main'.logger
+vehicles_boot.logger
 vehicles_cairo.logger
 vehicles_cairo.sensor_data.logger" class="py-name" href="#" onclick="return doclink('link-3', 'logger', 'link-3');">logger</a></tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">getLogger</tt><tt class="py-op">(</tt><tt class="py-string">"print_config"</tt><tt class="py-op">)</tt> </tt>
 <a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt id="link-4" class="py-name"><a title="vehicles.configuration.logger
 vehicles.configuration.master.logger
 vehicles.configuration.vehicles.logger
 vehicles.interfaces.logger
+vehicles.interfaces.vehicle_sensor.logger
+vehicles.library.logger
 vehicles.logger
 vehicles.programs.display_demos.simulations.logger
 vehicles.programs.display_demos.skins.logger
@@ -128,6 +133,7 @@ vehicles.simulation.vsimulation.logger
 vehicles.worlds.logger
 vehicles_boot.create_olympics_configs.logger
 vehicles_boot.create_olympics_configs.main'.logger
+vehicles_boot.logger
 vehicles_cairo.logger
 vehicles_cairo.sensor_data.logger" class="py-name" href="#" onclick="return doclink('link-4', 'logger', 'link-3');">logger</a></tt><tt class="py-op">.</tt><tt class="py-name">setLevel</tt><tt class="py-op">(</tt><tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">DEBUG</tt><tt class="py-op">)</tt> </tt>
 <a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"> </tt>
@@ -190,6 +196,8 @@ vehicles_cairo.skins.complex_skin.VehiclesConfig" class="py-name" href="#" oncli
 vehicles.configuration.master.logger
 vehicles.configuration.vehicles.logger
 vehicles.interfaces.logger
+vehicles.interfaces.vehicle_sensor.logger
+vehicles.library.logger
 vehicles.logger
 vehicles.programs.display_demos.simulations.logger
 vehicles.programs.display_demos.skins.logger
@@ -206,6 +214,7 @@ vehicles.simulation.vsimulation.logger
 vehicles.worlds.logger
 vehicles_boot.create_olympics_configs.logger
 vehicles_boot.create_olympics_configs.main'.logger
+vehicles_boot.logger
 vehicles_cairo.logger
 vehicles_cairo.sensor_data.logger" class="py-name" href="#" onclick="return doclink('link-8', 'logger', 'link-3');">logger</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Method vehicles.simulation.vsimulation.VehicleSimulation.info()=vehicles.simulation.vsimulation.VehicleSimulation-class.html#info,Method vehicles_boot.ros_visualization.ros_simulation.ROSVehicleSimulation.info()=vehicles_boot.ros_visualization.ros_simulation.ROSVehicleSimulation-class.html#info"><a title="vehicles.simulation.vsimulation.VehicleSimulation.info
 vehicles_boot.ros_visualization.ros_simulation.ROSVehicleSimulation.info" class="py-name" href="#" onclick="return doclink('link-9', 'info', 'link-9');">info</a></tt><tt class="py-op">(</tt><tt class="py-string">'Writing to %r'</tt> <tt class="py-op">%</tt> <tt class="py-name">out</tt><tt class="py-op">)</tt> </tt>
@@ -329,6 +338,8 @@ vehicles.programs.print_config.natsort.natsorted" class="py-name" href="#" oncli
 vehicles.configuration.master.logger
 vehicles.configuration.vehicles.logger
 vehicles.interfaces.logger
+vehicles.interfaces.vehicle_sensor.logger
+vehicles.library.logger
 vehicles.logger
 vehicles.programs.display_demos.simulations.logger
 vehicles.programs.display_demos.skins.logger
@@ -345,6 +356,7 @@ vehicles.simulation.vsimulation.logger
 vehicles.worlds.logger
 vehicles_boot.create_olympics_configs.logger
 vehicles_boot.create_olympics_configs.main'.logger
+vehicles_boot.logger
 vehicles_cairo.logger
 vehicles_cairo.sensor_data.logger" class="py-name" href="#" onclick="return doclink('link-31', 'logger', 'link-3');">logger</a></tt><tt class="py-op">.</tt><tt class="py-name">warn</tt><tt class="py-op">(</tt><tt class="py-string">'warn'</tt><tt class="py-op">,</tt> <tt class="py-string">'Empty %r table'</tt> <tt class="py-op">%</tt> <tt class="py-name">nid</tt><tt class="py-op">)</tt> </tt>
 </div><a name="L86"></a><tt class="py-lineno">86</tt>  <tt class="py-line"> </tt>
@@ -389,7 +401,7 @@ expandto(location.href);
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Wed Feb  1 14:51:21 2012
+    Generated by Epydoc 3.0.1 on Wed Feb 22 20:40:21 2012
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

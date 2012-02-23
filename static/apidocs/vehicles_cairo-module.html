@@ -75,7 +75,7 @@ Use this pattern: ..
 
 <hr />
 <div class="fields">      <p><strong>Version:</strong>
-        1.0
+        1.1
       </p>
 </div><!-- ==================== SUBMODULES ==================== -->
 <a name="section-Submodules"></a>
@@ -98,6 +98,7 @@ Use this pattern: ..
   <ul class="nomargin">
     <li> <strong class="uidlink"><a href="vehicles_cairo.constants-module.html">vehicles_cairo.constants</a></strong>    </li>
     <li> <strong class="uidlink"><a href="vehicles_cairo.display_all-module.html">vehicles_cairo.display_all</a></strong>    </li>
+    <li> <strong class="uidlink"><a href="vehicles_cairo.robot_skins-module.html">vehicles_cairo.robot_skins</a></strong>    </li>
     <li> <strong class="uidlink"><a href="vehicles_cairo.sensor_data-module.html">vehicles_cairo.sensor_data</a></strong>    </li>
     <li> <strong class="uidlink"><a href="vehicles_cairo.skins-module.html">vehicles_cairo.skins</a></strong>
     <ul>
@@ -109,6 +110,7 @@ Use this pattern: ..
     </li>
     <li> <strong class="uidlink"><a href="vehicles_cairo.utils-module.html">vehicles_cairo.utils</a></strong>    </li>
     <li> <strong class="uidlink"><a href="vehicles_cairo.world_geometry-module.html">vehicles_cairo.world_geometry</a></strong>    </li>
+    <li> <strong class="uidlink"><a href="vehicles_cairo.write_to_file-module.html">vehicles_cairo.write_to_file</a></strong>    </li>
   </ul></td></tr>
 </table>
 
@@ -141,15 +143,15 @@ Use this pattern: ..
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="vehicles_cairo-module.html#RANDOM_PERM" class="summary-name">RANDOM_PERM</a> = <code title="array([534, 989, 440, 538, 819,  85, 899, 192, 498,  15, 254, 318, 721\
+        <a href="vehicles_cairo-module.html#RANDOM_PERM" class="summary-name">RANDOM_PERM</a> = <code title="array([219,   7, 649, 256, 910,  34, 127, 579, 813, 416, 689, 774, 833\
 ,
-       680, 606, 240, 151, 367, 403, 662, 105, 501, 697, 165, 654, 991\
+       929, 222,  82, 891, 334, 414, 832, 324, 856, 150, 725, 716, 391\
 ,
-       620, 510, 190, 850, 713, 424,  69, 710, 303, 569, 361, 791, 511\
+       167, 644, 889, 743, 425, 822, 207, 174, 268, 939, 757, 242, 452\
 ,
-        72, 423, 313, 529, 828, 380, 818, 938, 646, 246, 947, 941, 203\
+       369, 820, 895, 798, 971, 288, 520, 453, 156,  56, 672,  58, 960\
 ,
-...">array([534, 989, 440, 538, 819,  85, 899, 192, 4<code class="variable-ellipsis">...</code></code>
+...">array([219,   7, 649, 256, 910,  34, 127, 579, 8<code class="variable-ellipsis">...</code></code>
     </td>
   </tr>
 <tr>
@@ -170,8 +172,8 @@ Use this pattern: ..
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a href="vehicles_cairo-module.html#VehiclesConfig" class="summary-name">VehiclesConfig</a> = <code title="&lt;vehicles.configuration.master.VehiclesConfigMaster instance at 0x1031\
-949e0&gt;">&lt;vehicles.configuration.master.VehiclesConfig<code class="variable-ellipsis">...</code></code>
+        <a href="vehicles_cairo-module.html#VehiclesConfig" class="summary-name">VehiclesConfig</a> = <code title="&lt;vehicles.configuration.master.VehiclesConfigMaster instance at 0x30cd\
+4d0&gt;">&lt;vehicles.configuration.master.VehiclesConfig<code class="variable-ellipsis">...</code></code>
     </td>
   </tr>
 <tr>
@@ -199,7 +201,7 @@ Use this pattern: ..
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="logger"></a><span class="summary-name">logger</span> = <code title="&lt;logging.Logger instance at 0x102f85a28&gt;">&lt;logging.Logger instance at 0x102f85a28&gt;</code>
+        <a name="logger"></a><span class="summary-name">logger</span> = <code title="&lt;logging.Logger object at 0x2e68c10&gt;">&lt;logging.Logger object at 0x2e68c10&gt;</code>
     </td>
   </tr>
 <tr>
@@ -240,13 +242,13 @@ Use this pattern: ..
   <dl class="fields">
     <dt>Value:</dt>
       <dd><table><tr><td><pre class="variable">
-array([534, 989, 440, 538, 819,  85, 899, 192, 498,  15, 254, 318, 721<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+array([219,   7, 649, 256, 910,  34, 127, 579, 813, 416, 689, 774, 833<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
 ,
-       680, 606, 240, 151, 367, 403, 662, 105, 501, 697, 165, 654, 991<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+       929, 222,  82, 891, 334, 414, 832, 324, 856, 150, 725, 716, 391<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
 ,
-       620, 510, 190, 850, 713, 424,  69, 710, 303, 569, 361, 791, 511<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+       167, 644, 889, 743, 425, 822, 207, 174, 268, 939, 757, 242, 452<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
 ,
-        72, 423, 313, 529, 828, 380, 818, 938, 646, 246, 947, 941, 203<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+       369, 820, 895, 798, 971, 288, 520, 453, 156,  56, 672,  58, 960<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
 ,
 <code class="variable-ellipsis">...</code>
 </pre></td></tr></table>
@@ -266,8 +268,8 @@ array([534, 989, 440, 538, 819,  85, 899, 192, 498,  15, 254, 318, 721<span clas
   <dl class="fields">
     <dt>Value:</dt>
       <dd><table><tr><td><pre class="variable">
-&lt;vehicles.configuration.master.VehiclesConfigMaster instance at 0x1031<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
-949e0&gt;
+&lt;vehicles.configuration.master.VehiclesConfigMaster instance at 0x30cd<span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+4d0&gt;
 </pre></td></tr></table>
 </dd>
   </dl>
@@ -302,7 +304,7 @@ array([534, 989, 440, 538, 819,  85, 899, 192, 498,  15, 254, 318, 721<span clas
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Wed Feb  1 14:51:15 2012
+    Generated by Epydoc 3.0.1 on Wed Feb 22 20:40:17 2012
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

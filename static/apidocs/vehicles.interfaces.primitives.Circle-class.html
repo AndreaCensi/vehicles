@@ -62,14 +62,16 @@
 <h1 class="epydoc">Class Circle</h1><p class="nomargin-top"><span class="codelink"><a href="vehicles.interfaces.primitives-pysrc.html#Circle">source&nbsp;code</a></span></p>
 <center>
 <center>  <map id="uml_class_diagram_for_vehicles_2" name="uml_class_diagram_for_vehicles_2">
-<area shape="rect" id="node1_5" href="vehicles.interfaces.primitives.Circle-class.html#__init__" title=":param solid: :type solid: &#160;``bool``" alt="" coords="17,116,404,135"/>
-<area shape="rect" id="node1_6" href="vehicles.interfaces.primitives.Circle-class.html#get_perimeter" title="Returns the total perimeter of this shape." alt="" coords="17,135,404,153"/>
-<area shape="rect" id="node1_7" href="vehicles.interfaces.primitives.Circle-class.html#set_center" title=":param center: :type center: &#160;``seq[2](number)``" alt="" coords="17,153,404,172"/>
-<area shape="rect" id="node1_8" href="vehicles.interfaces.primitives.Circle-class.html#to_yaml" title="vehicles.interfaces.primitives.Circle.to_yaml" alt="" coords="17,172,404,191"/>
-<area shape="rect" id="node1" href="vehicles.interfaces.primitives.Circle-class.html" title="vehicles.interfaces.primitives.Circle" alt="" coords="5,83,416,197"/>
-<area shape="rect" id="node2_9" href="vehicles.interfaces.primitives.Primitive-class.html#__repr__" title="vehicles.interfaces.primitives.Primitive.__repr__" alt="" coords="92,39,181,57"/>
-<area shape="rect" id="node2" href="vehicles.interfaces.primitives.Primitive-class.html" title="vehicles.interfaces.primitives.Primitive" alt="" coords="79,6,193,63"/>
-<area shape="rect" id="node3" href="vehicles.interfaces.primitives.GeometricShape-class.html" title="vehicles.interfaces.primitives.GeometricShape" alt="" coords="223,13,348,57"/>
+<area shape="rect" href="vehicles.interfaces.primitives.Circle-class.html#__init__" title="The texture is a code spec." alt="" coords="17,124,399,143"/>
+<area shape="rect" href="vehicles.interfaces.primitives.Circle-class.html#from_yaml" title="vehicles.interfaces.primitives.Circle.from_yaml" alt="" coords="17,143,399,161"/>
+<area shape="rect" href="vehicles.interfaces.primitives.Circle-class.html#get_perimeter" title="Returns the total perimeter of this shape." alt="" coords="17,161,399,180"/>
+<area shape="rect" href="vehicles.interfaces.primitives.Circle-class.html#set_center" title="vehicles.interfaces.primitives.Circle.set_center" alt="" coords="17,180,399,199"/>
+<area shape="rect" href="vehicles.interfaces.primitives.Circle-class.html#to_yaml" title="vehicles.interfaces.primitives.Circle.to_yaml" alt="" coords="17,199,399,217"/>
+<area shape="rect" href="vehicles.interfaces.primitives.Circle-class.html" title="vehicles.interfaces.primitives.Circle" alt="" coords="16,99,400,219"/>
+<area shape="rect" href="vehicles.interfaces.primitives.Primitive-class.html#type2class" title="vehicles.interfaces.primitives.Primitive.type2class" alt="" coords="93,28,179,47"/>
+<area shape="rect" href="vehicles.interfaces.primitives.Primitive-class.html#__repr__" title="vehicles.interfaces.primitives.Primitive.__repr__" alt="" coords="93,49,179,68"/>
+<area shape="rect" href="vehicles.interfaces.primitives.Primitive-class.html" title="vehicles.interfaces.primitives.Primitive" alt="" coords="92,11,180,69"/>
+<area shape="rect" href="vehicles.interfaces.primitives.GeometricShape-class.html" title="vehicles.interfaces.primitives.GeometricShape" alt="" coords="231,24,332,56"/>
 </map>
   <img src="uml_class_diagram_for_vehicles_2.gif" alt='' usemap="#uml_class_diagram_for_vehicles_2" ismap="ismap" class="graph-without-title" />
 </center>
@@ -105,7 +107,7 @@
         <span class="summary-sig-arg">center</span>,
         <span class="summary-sig-arg">radius</span>,
         <span class="summary-sig-arg">solid</span>=<span class="summary-sig-default">False</span>)</span><br />
-      :param solid: :type solid:  ``bool``</td>
+      The texture is a code spec.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="vehicles.interfaces.primitives-pysrc.html#Circle.__init__">source&nbsp;code</a></span>
             
@@ -138,9 +140,8 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="set_center"></a><span class="summary-sig-name">set_center</span>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">center</span>)</span><br />
-      :param center: :type center:  ``seq[2](number)``</td>
+          <td><span class="summary-sig"><a href="vehicles.interfaces.primitives.Circle-class.html#set_center" class="summary-sig-name">set_center</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">center</span>)</span></td>
           <td align="right" valign="top">
             <span class="codelink"><a href="vehicles.interfaces.primitives-pysrc.html#Circle.set_center">source&nbsp;code</a></span>
             
@@ -170,6 +171,65 @@
     <td colspan="2" class="summary">
     <p class="indent-wrapped-lines"><b>Inherited from <code><a href="vehicles.interfaces.primitives.Primitive-class.html">Primitive</a></code></b>:
       <code><a href="vehicles.interfaces.primitives.Primitive-class.html#__repr__">__repr__</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Static Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-StaticMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="vehicles.interfaces.primitives.Circle-class.html#from_yaml" class="summary-sig-name">from_yaml</a>(<span class="summary-sig-arg">s</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="vehicles.interfaces.primitives-pysrc.html#Circle.from_yaml">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="vehicles.interfaces.primitives.Primitive-class.html">Primitive</a></code></b>:
+      <code><a href="vehicles.interfaces.primitives.Primitive-class.html#type2class">type2class</a></code>
       </p>
     </td>
   </tr>
@@ -213,14 +273,41 @@
     </td>
   </tr></table>
   
-  <p>:param solid: :type solid:  ``bool``</p>
-  <p>:param radius: :type radius:  ``&gt;0``</p>
-  <p>:param center: :type center:  ``seq[2](number)``</p>
-  <p>:param id_object: :type id_object:  ``int``</p>
-  <p>:param tags: :type tags:  ``seq(str)``</p>
+  The texture is a code spec.
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>solid</code></strong> (<tt class="rst-docutils literal">bool</tt>)</li>
+        <li><strong class="pname"><code>radius</code></strong> (<tt class="rst-docutils literal">&gt;0</tt>)</li>
+        <li><strong class="pname"><code>center</code></strong> (<tt class="rst-docutils literal"><span class="pre">seq[2](number)</span></tt>)</li>
+        <li><strong class="pname"><code>id_object</code></strong> (<tt class="rst-docutils literal">int</tt>)</li>
+        <li><strong class="pname"><code>tags</code></strong> (<tt class="rst-docutils literal">seq(str)</tt>)</li>
+    </ul></dd>
     <dt>Overrides:
         <a href="vehicles.interfaces.primitives.GeometricShape-class.html#__init__">GeometricShape.__init__</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="from_yaml"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">from_yaml</span>(<span class="sig-arg">s</span>)</span>
+    <br /><em class="fname">Static Method</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="vehicles.interfaces.primitives-pysrc.html#Circle.from_yaml">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="vehicles.interfaces.primitives.Primitive-class.html#from_yaml">Primitive.from_yaml</a>
     </dt>
   </dl>
 </td></tr></table>
@@ -239,12 +326,36 @@
     </td>
   </tr></table>
   
-  <p>Returns the total perimeter of this shape.</p>
+  Returns the total perimeter of this shape.
   <dl class="fields">
     <dt>Overrides:
         <a href="vehicles.interfaces.primitives.GeometricShape-class.html#get_perimeter">GeometricShape.get_perimeter</a>
         <dd><em class="note">(inherited documentation)</em></dd>
     </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="set_center"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_center</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">center</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="vehicles.interfaces.primitives-pysrc.html#Circle.set_center">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>center</code></strong> (<tt class="rst-docutils literal"><span class="pre">seq[2](number)</span></tt>)</li>
+    </ul></dd>
   </dl>
 </td></tr></table>
 </div>
@@ -277,7 +388,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Wed Feb  1 14:51:16 2012
+    Generated by Epydoc 3.0.1 on Wed Feb 22 20:40:18 2012
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

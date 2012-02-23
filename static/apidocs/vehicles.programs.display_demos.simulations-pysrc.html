@@ -75,10 +75,12 @@ vehicles_cairo.VehiclesConfig
 vehicles_cairo.display_all.VehiclesConfig
 vehicles_cairo.sensor_data.VehiclesConfig
 vehicles_cairo.skins.VehiclesConfig
-vehicles_cairo.skins.complex_skin.VehiclesConfig" class="py-name" href="#" onclick="return doclink('link-1', 'VehiclesConfig', 'link-1');">VehiclesConfig</a></tt><tt class="py-op">,</tt> <tt id="link-2" class="py-name" targets="Variable vehicles.configuration.logger=vehicles.configuration-module.html#logger,Variable vehicles.configuration.master.logger=vehicles.configuration.master-module.html#logger,Variable vehicles.configuration.vehicles.logger=vehicles.configuration.vehicles-module.html#logger,Variable vehicles.interfaces.logger=vehicles.interfaces-module.html#logger,Variable vehicles.logger=vehicles-module.html#logger,Variable vehicles.programs.display_demos.simulations.logger=vehicles.programs.display_demos.simulations-module.html#logger,Variable vehicles.programs.display_demos.skins.logger=vehicles.programs.display_demos.skins-module.html#logger,Variable vehicles.programs.display_demos.vehicles.logger=vehicles.programs.display_demos.vehicles-module.html#logger,Variable vehicles.programs.inspect_textures.main'.logger=vehicles.programs.inspect_textures.main%27-module.html#logger,Variable vehicles.programs.print_config.logger=vehicles.programs.print_config-module.html#logger,Variable vehicles.programs.print_config.main'.logger=vehicles.programs.print_config.main%27-module.html#logger,Variable vehicles.sensors.field_sampler.logger=vehicles.sensors.field_sampler-module.html#logger,Variable vehicles.sensors.logger=vehicles.sensors-module.html#logger,Variable vehicles.sensors.noises.logger=vehicles.sensors.noises-module.html#logger,Variable vehicles.sensors.raytracer.logger=vehicles.sensors.raytracer-module.html#logger,Variable vehicles.simulation.logger=vehicles.simulation-module.html#logger,Variable vehicles.simulation.vsimulation.logger=vehicles.simulation.vsimulation-module.html#logger,Variable vehicles.worlds.logger=vehicles.worlds-module.html#logger,Variable vehicles_boot.create_olympics_configs.logger=vehicles_boot.create_olympics_configs-module.html#logger,Variable vehicles_boot.create_olympics_configs.main'.logger=vehicles_boot.create_olympics_configs.main%27-module.html#logger,Variable vehicles_cairo.logger=vehicles_cairo-module.html#logger,Variable vehicles_cairo.sensor_data.logger=vehicles_cairo.sensor_data-module.html#logger"><a title="vehicles.configuration.logger
+vehicles_cairo.skins.complex_skin.VehiclesConfig" class="py-name" href="#" onclick="return doclink('link-1', 'VehiclesConfig', 'link-1');">VehiclesConfig</a></tt><tt class="py-op">,</tt> <tt id="link-2" class="py-name" targets="Variable vehicles.configuration.logger=vehicles.configuration-module.html#logger,Variable vehicles.configuration.master.logger=vehicles.configuration.master-module.html#logger,Variable vehicles.configuration.vehicles.logger=vehicles.configuration.vehicles-module.html#logger,Variable vehicles.interfaces.logger=vehicles.interfaces-module.html#logger,Variable vehicles.interfaces.vehicle_sensor.logger=vehicles.interfaces.vehicle_sensor-module.html#logger,Variable vehicles.library.logger=vehicles.library-module.html#logger,Variable vehicles.logger=vehicles-module.html#logger,Variable vehicles.programs.display_demos.simulations.logger=vehicles.programs.display_demos.simulations-module.html#logger,Variable vehicles.programs.display_demos.skins.logger=vehicles.programs.display_demos.skins-module.html#logger,Variable vehicles.programs.display_demos.vehicles.logger=vehicles.programs.display_demos.vehicles-module.html#logger,Variable vehicles.programs.inspect_textures.main'.logger=vehicles.programs.inspect_textures.main%27-module.html#logger,Variable vehicles.programs.print_config.logger=vehicles.programs.print_config-module.html#logger,Variable vehicles.programs.print_config.main'.logger=vehicles.programs.print_config.main%27-module.html#logger,Variable vehicles.sensors.field_sampler.logger=vehicles.sensors.field_sampler-module.html#logger,Variable vehicles.sensors.logger=vehicles.sensors-module.html#logger,Variable vehicles.sensors.noises.logger=vehicles.sensors.noises-module.html#logger,Variable vehicles.sensors.raytracer.logger=vehicles.sensors.raytracer-module.html#logger,Variable vehicles.simulation.logger=vehicles.simulation-module.html#logger,Variable vehicles.simulation.vsimulation.logger=vehicles.simulation.vsimulation-module.html#logger,Variable vehicles.worlds.logger=vehicles.worlds-module.html#logger,Variable vehicles_boot.create_olympics_configs.logger=vehicles_boot.create_olympics_configs-module.html#logger,Variable vehicles_boot.create_olympics_configs.main'.logger=vehicles_boot.create_olympics_configs.main%27-module.html#logger,Variable vehicles_boot.logger=vehicles_boot-module.html#logger,Variable vehicles_cairo.logger=vehicles_cairo-module.html#logger,Variable vehicles_cairo.sensor_data.logger=vehicles_cairo.sensor_data-module.html#logger"><a title="vehicles.configuration.logger
 vehicles.configuration.master.logger
 vehicles.configuration.vehicles.logger
 vehicles.interfaces.logger
+vehicles.interfaces.vehicle_sensor.logger
+vehicles.library.logger
 vehicles.logger
 vehicles.programs.display_demos.simulations.logger
 vehicles.programs.display_demos.skins.logger
@@ -95,6 +97,7 @@ vehicles.simulation.vsimulation.logger
 vehicles.worlds.logger
 vehicles_boot.create_olympics_configs.logger
 vehicles_boot.create_olympics_configs.main'.logger
+vehicles_boot.logger
 vehicles_cairo.logger
 vehicles_cairo.sensor_data.logger" class="py-name" href="#" onclick="return doclink('link-2', 'logger', 'link-2');">logger</a></tt> </tt>
 <a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">optparse</tt> <tt class="py-keyword">import</tt> <tt class="py-name">OptionParser</tt> </tt>
@@ -129,6 +132,8 @@ vehicles_cairo.vehicles_has_cairo" class="py-name" href="#" onclick="return docl
 vehicles.configuration.master.logger
 vehicles.configuration.vehicles.logger
 vehicles.interfaces.logger
+vehicles.interfaces.vehicle_sensor.logger
+vehicles.library.logger
 vehicles.logger
 vehicles.programs.display_demos.simulations.logger
 vehicles.programs.display_demos.skins.logger
@@ -145,12 +150,13 @@ vehicles.simulation.vsimulation.logger
 vehicles.worlds.logger
 vehicles_boot.create_olympics_configs.logger
 vehicles_boot.create_olympics_configs.main'.logger
+vehicles_boot.logger
 vehicles_cairo.logger
 vehicles_cairo.sensor_data.logger" class="py-name" href="#" onclick="return doclink('link-9', 'logger', 'link-2');">logger</a></tt><tt class="py-op">.</tt><tt class="py-name">error</tt><tt class="py-op">(</tt><tt class="py-string">'This program cannot be run if Cairo is not installed.'</tt><tt class="py-op">)</tt> </tt>
 <a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> </tt>
-<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt id="link-10" class="py-name"><a title="vehicles_cairo" class="py-name" href="#" onclick="return doclink('link-10', 'vehicles_cairo', 'link-5');">vehicles_cairo</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">(</tt><tt id="link-11" class="py-name" targets="Function vehicles_cairo.display_all.vehicles_cairo_display_pdf()=vehicles_cairo.display_all-module.html#vehicles_cairo_display_pdf"><a title="vehicles_cairo.display_all.vehicles_cairo_display_pdf" class="py-name" href="#" onclick="return doclink('link-11', 'vehicles_cairo_display_pdf', 'link-11');">vehicles_cairo_display_pdf</a></tt><tt class="py-op">,</tt> </tt>
-<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">                                <tt id="link-12" class="py-name" targets="Function vehicles_cairo.display_all.vehicles_cairo_display_png()=vehicles_cairo.display_all-module.html#vehicles_cairo_display_png"><a title="vehicles_cairo.display_all.vehicles_cairo_display_png" class="py-name" href="#" onclick="return doclink('link-12', 'vehicles_cairo_display_png', 'link-12');">vehicles_cairo_display_png</a></tt><tt class="py-op">,</tt> </tt>
-<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line">                                <tt id="link-13" class="py-name" targets="Function vehicles_cairo.display_all.vehicles_cairo_display_svg()=vehicles_cairo.display_all-module.html#vehicles_cairo_display_svg"><a title="vehicles_cairo.display_all.vehicles_cairo_display_svg" class="py-name" href="#" onclick="return doclink('link-13', 'vehicles_cairo_display_svg', 'link-13');">vehicles_cairo_display_svg</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt id="link-10" class="py-name"><a title="vehicles_cairo" class="py-name" href="#" onclick="return doclink('link-10', 'vehicles_cairo', 'link-5');">vehicles_cairo</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">(</tt><tt id="link-11" class="py-name" targets="Function vehicles_cairo.write_to_file.vehicles_cairo_display_pdf()=vehicles_cairo.write_to_file-module.html#vehicles_cairo_display_pdf"><a title="vehicles_cairo.write_to_file.vehicles_cairo_display_pdf" class="py-name" href="#" onclick="return doclink('link-11', 'vehicles_cairo_display_pdf', 'link-11');">vehicles_cairo_display_pdf</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">                                <tt id="link-12" class="py-name" targets="Function vehicles_cairo.write_to_file.vehicles_cairo_display_png()=vehicles_cairo.write_to_file-module.html#vehicles_cairo_display_png"><a title="vehicles_cairo.write_to_file.vehicles_cairo_display_png" class="py-name" href="#" onclick="return doclink('link-12', 'vehicles_cairo_display_png', 'link-12');">vehicles_cairo_display_png</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line">                                <tt id="link-13" class="py-name" targets="Function vehicles_cairo.write_to_file.vehicles_cairo_display_svg()=vehicles_cairo.write_to_file-module.html#vehicles_cairo_display_svg"><a title="vehicles_cairo.write_to_file.vehicles_cairo_display_svg" class="py-name" href="#" onclick="return doclink('link-13', 'vehicles_cairo_display_svg', 'link-13');">vehicles_cairo_display_svg</a></tt><tt class="py-op">)</tt> </tt>
 <a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"> </tt>
 <a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">    <tt class="py-name">parser</tt> <tt class="py-op">=</tt> <tt class="py-name">OptionParser</tt><tt class="py-op">(</tt><tt id="link-14" class="py-name"><a title="vehicles.programs.display_demos.simulations.usage
 vehicles.programs.display_demos.skins.usage
@@ -187,15 +193,18 @@ vehicles_boot.create_olympics_configs.usage" class="py-name" href="#" onclick="r
 <a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">    <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">add_option</tt><tt class="py-op">(</tt><tt class="py-string">"--seed"</tt><tt class="py-op">,</tt> <tt class="py-name">default</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-name">type</tt><tt class="py-op">=</tt><tt class="py-string">'int'</tt><tt class="py-op">)</tt> </tt>
 <a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"> </tt>
 <a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-name">options</tt><tt class="py-op">,</tt> <tt class="py-name">args</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt class="py-name">parser</tt><tt class="py-op">.</tt><tt class="py-name">parse_args</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
-<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">args</tt><tt class="py-op">:</tt> <tt class="py-keyword">raise</tt> <tt class="py-name">Exception</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
-<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"> </tt>
-<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">    <tt class="py-name">id_vehicle</tt> <tt class="py-op">=</tt> <tt class="py-name">options</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Module vehicles.simulation.vehicle=vehicles.simulation.vehicle-module.html"><a title="vehicles.simulation.vehicle" class="py-name" href="#" onclick="return doclink('link-16', 'vehicle', 'link-16');">vehicle</a></tt> </tt>
-<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">    <tt class="py-name">id_world</tt> <tt class="py-op">=</tt> <tt class="py-name">options</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name" targets="Module vehicles.interfaces.world=vehicles.interfaces.world-module.html"><a title="vehicles.interfaces.world" class="py-name" href="#" onclick="return doclink('link-17', 'world', 'link-17');">world</a></tt> </tt>
-<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"> </tt>
-<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">    <tt id="link-18" class="py-name"><a title="vehicles.configuration.logger
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">args</tt><tt class="py-op">:</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">Exception</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">    <tt class="py-name">id_vehicle</tt> <tt class="py-op">=</tt> <tt class="py-name">options</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Module vehicles.simulation.vehicle=vehicles.simulation.vehicle-module.html"><a title="vehicles.simulation.vehicle" class="py-name" href="#" onclick="return doclink('link-16', 'vehicle', 'link-16');">vehicle</a></tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">    <tt class="py-name">id_world</tt> <tt class="py-op">=</tt> <tt class="py-name">options</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name" targets="Module vehicles.interfaces.world=vehicles.interfaces.world-module.html"><a title="vehicles.interfaces.world" class="py-name" href="#" onclick="return doclink('link-17', 'world', 'link-17');">world</a></tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">    <tt id="link-18" class="py-name"><a title="vehicles.configuration.logger
 vehicles.configuration.master.logger
 vehicles.configuration.vehicles.logger
 vehicles.interfaces.logger
+vehicles.interfaces.vehicle_sensor.logger
+vehicles.library.logger
 vehicles.logger
 vehicles.programs.display_demos.simulations.logger
 vehicles.programs.display_demos.skins.logger
@@ -212,13 +221,16 @@ vehicles.simulation.vsimulation.logger
 vehicles.worlds.logger
 vehicles_boot.create_olympics_configs.logger
 vehicles_boot.create_olympics_configs.main'.logger
+vehicles_boot.logger
 vehicles_cairo.logger
 vehicles_cairo.sensor_data.logger" class="py-name" href="#" onclick="return doclink('link-18', 'logger', 'link-2');">logger</a></tt><tt class="py-op">.</tt><tt id="link-19" class="py-name" targets="Method vehicles.simulation.vsimulation.VehicleSimulation.info()=vehicles.simulation.vsimulation.VehicleSimulation-class.html#info,Method vehicles_boot.ros_visualization.ros_simulation.ROSVehicleSimulation.info()=vehicles_boot.ros_visualization.ros_simulation.ROSVehicleSimulation-class.html#info"><a title="vehicles.simulation.vsimulation.VehicleSimulation.info
 vehicles_boot.ros_visualization.ros_simulation.ROSVehicleSimulation.info" class="py-name" href="#" onclick="return doclink('link-19', 'info', 'link-19');">info</a></tt><tt class="py-op">(</tt><tt class="py-string">'id_vehicle: %s'</tt> <tt class="py-op">%</tt> <tt class="py-name">id_vehicle</tt><tt class="py-op">)</tt> </tt>
-<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">    <tt id="link-20" class="py-name"><a title="vehicles.configuration.logger
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">    <tt id="link-20" class="py-name"><a title="vehicles.configuration.logger
 vehicles.configuration.master.logger
 vehicles.configuration.vehicles.logger
 vehicles.interfaces.logger
+vehicles.interfaces.vehicle_sensor.logger
+vehicles.library.logger
 vehicles.logger
 vehicles.programs.display_demos.simulations.logger
 vehicles.programs.display_demos.skins.logger
@@ -235,18 +247,21 @@ vehicles.simulation.vsimulation.logger
 vehicles.worlds.logger
 vehicles_boot.create_olympics_configs.logger
 vehicles_boot.create_olympics_configs.main'.logger
+vehicles_boot.logger
 vehicles_cairo.logger
 vehicles_cairo.sensor_data.logger" class="py-name" href="#" onclick="return doclink('link-20', 'logger', 'link-2');">logger</a></tt><tt class="py-op">.</tt><tt id="link-21" class="py-name"><a title="vehicles.simulation.vsimulation.VehicleSimulation.info
 vehicles_boot.ros_visualization.ros_simulation.ROSVehicleSimulation.info" class="py-name" href="#" onclick="return doclink('link-21', 'info', 'link-19');">info</a></tt><tt class="py-op">(</tt><tt class="py-string">'  id_world: %s'</tt> <tt class="py-op">%</tt> <tt class="py-name">id_world</tt><tt class="py-op">)</tt> </tt>
-<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"> </tt>
-<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">options</tt><tt class="py-op">.</tt><tt class="py-name">seed</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
-<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">        <tt class="py-name">options</tt><tt class="py-op">.</tt><tt class="py-name">seed</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">random</tt><tt class="py-op">.</tt><tt class="py-name">randint</tt><tt class="py-op">(</tt><tt class="py-number">1000000</tt><tt class="py-op">)</tt> </tt>
-<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"> </tt>
-<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">    <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">random</tt><tt class="py-op">.</tt><tt class="py-name">seed</tt><tt class="py-op">(</tt><tt class="py-name">seed</tt><tt class="py-op">=</tt><tt class="py-name">options</tt><tt class="py-op">.</tt><tt class="py-name">seed</tt><tt class="py-op">)</tt> </tt>
-<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">    <tt id="link-22" class="py-name"><a title="vehicles.configuration.logger
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">options</tt><tt class="py-op">.</tt><tt class="py-name">seed</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">        <tt class="py-name">options</tt><tt class="py-op">.</tt><tt class="py-name">seed</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">random</tt><tt class="py-op">.</tt><tt class="py-name">randint</tt><tt class="py-op">(</tt><tt class="py-number">1000000</tt><tt class="py-op">)</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">    <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">random</tt><tt class="py-op">.</tt><tt class="py-name">seed</tt><tt class="py-op">(</tt><tt class="py-name">seed</tt><tt class="py-op">=</tt><tt class="py-name">options</tt><tt class="py-op">.</tt><tt class="py-name">seed</tt><tt class="py-op">)</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">    <tt id="link-22" class="py-name"><a title="vehicles.configuration.logger
 vehicles.configuration.master.logger
 vehicles.configuration.vehicles.logger
 vehicles.interfaces.logger
+vehicles.interfaces.vehicle_sensor.logger
+vehicles.library.logger
 vehicles.logger
 vehicles.programs.display_demos.simulations.logger
 vehicles.programs.display_demos.skins.logger
@@ -263,11 +278,11 @@ vehicles.simulation.vsimulation.logger
 vehicles.worlds.logger
 vehicles_boot.create_olympics_configs.logger
 vehicles_boot.create_olympics_configs.main'.logger
+vehicles_boot.logger
 vehicles_cairo.logger
 vehicles_cairo.sensor_data.logger" class="py-name" href="#" onclick="return doclink('link-22', 'logger', 'link-2');">logger</a></tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="vehicles.simulation.vsimulation.VehicleSimulation.info
 vehicles_boot.ros_visualization.ros_simulation.ROSVehicleSimulation.info" class="py-name" href="#" onclick="return doclink('link-23', 'info', 'link-19');">info</a></tt><tt class="py-op">(</tt><tt class="py-string">'Using seed %s (your lucky number is %s)'</tt> <tt class="py-op">%</tt> </tt>
-<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">                <tt class="py-op">(</tt><tt class="py-name">options</tt><tt class="py-op">.</tt><tt class="py-name">seed</tt><tt class="py-op">,</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">random</tt><tt class="py-op">.</tt><tt class="py-name">randint</tt><tt class="py-op">(</tt><tt class="py-number">1000</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
-<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">                <tt class="py-op">(</tt><tt class="py-name">options</tt><tt class="py-op">.</tt><tt class="py-name">seed</tt><tt class="py-op">,</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">random</tt><tt class="py-op">.</tt><tt class="py-name">randint</tt><tt class="py-op">(</tt><tt class="py-number">1000</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
 <a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"> </tt>
 <a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">    <tt id="link-24" class="py-name"><a title="vehicles.simulation.vehicle" class="py-name" href="#" onclick="return doclink('link-24', 'vehicle', 'link-16');">vehicle</a></tt> <tt class="py-op">=</tt> <tt id="link-25" class="py-name"><a title="vehicles.VehiclesConfig
 vehicles.configuration.VehiclesConfig
@@ -356,24 +371,25 @@ vehicles.simulation.vsimulation.VehicleSimulation.to_yaml" class="py-name" href=
 <a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">        <tt class="py-keyword">with</tt> <tt class="py-name">f</tt><tt class="py-op">.</tt><tt class="py-name">data_file</tt><tt class="py-op">(</tt><tt class="py-string">'start_cairo_png'</tt><tt class="py-op">,</tt> <tt id="link-41" class="py-name"><a title="vehicles.programs.display_demos.simulations.MIME_PNG
 vehicles.programs.display_demos.skins.MIME_PNG
 vehicles.programs.display_demos.vehicles.MIME_PNG" class="py-name" href="#" onclick="return doclink('link-41', 'MIME_PNG', 'link-3');">MIME_PNG</a></tt><tt class="py-op">)</tt> <tt class="py-keyword">as</tt> <tt class="py-name">filename</tt><tt class="py-op">:</tt> </tt>
-<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">            <tt id="link-42" class="py-name"><a title="vehicles_cairo.display_all.vehicles_cairo_display_png" class="py-name" href="#" onclick="return doclink('link-42', 'vehicles_cairo_display_png', 'link-12');">vehicles_cairo_display_png</a></tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">,</tt> <tt class="py-name">width</tt><tt class="py-op">=</tt><tt class="py-number">800</tt><tt class="py-op">,</tt> <tt class="py-name">height</tt><tt class="py-op">=</tt><tt class="py-number">800</tt><tt class="py-op">,</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">            <tt id="link-42" class="py-name"><a title="vehicles_cairo.write_to_file.vehicles_cairo_display_png" class="py-name" href="#" onclick="return doclink('link-42', 'vehicles_cairo_display_png', 'link-12');">vehicles_cairo_display_png</a></tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">,</tt> <tt class="py-name">width</tt><tt class="py-op">=</tt><tt class="py-number">800</tt><tt class="py-op">,</tt> <tt class="py-name">height</tt><tt class="py-op">=</tt><tt class="py-number">800</tt><tt class="py-op">,</tt> </tt>
 <a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">                        <tt class="py-name">sim_state</tt><tt class="py-op">=</tt><tt class="py-name">sim_state</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">plot_params</tt><tt class="py-op">)</tt> </tt>
 <a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"> </tt>
 <a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">        <tt class="py-keyword">with</tt> <tt class="py-name">f</tt><tt class="py-op">.</tt><tt class="py-name">data_file</tt><tt class="py-op">(</tt><tt class="py-string">'start_cairo_pdf'</tt><tt class="py-op">,</tt> <tt class="py-name">MIME_PDF</tt><tt class="py-op">)</tt> <tt class="py-keyword">as</tt> <tt class="py-name">filename</tt><tt class="py-op">:</tt> </tt>
-<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">            <tt id="link-43" class="py-name"><a title="vehicles_cairo.display_all.vehicles_cairo_display_pdf" class="py-name" href="#" onclick="return doclink('link-43', 'vehicles_cairo_display_pdf', 'link-11');">vehicles_cairo_display_pdf</a></tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">,</tt> <tt class="py-name">width</tt><tt class="py-op">=</tt><tt class="py-number">800</tt><tt class="py-op">,</tt> <tt class="py-name">height</tt><tt class="py-op">=</tt><tt class="py-number">800</tt><tt class="py-op">,</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">            <tt id="link-43" class="py-name"><a title="vehicles_cairo.write_to_file.vehicles_cairo_display_pdf" class="py-name" href="#" onclick="return doclink('link-43', 'vehicles_cairo_display_pdf', 'link-11');">vehicles_cairo_display_pdf</a></tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">,</tt> <tt class="py-name">width</tt><tt class="py-op">=</tt><tt class="py-number">800</tt><tt class="py-op">,</tt> <tt class="py-name">height</tt><tt class="py-op">=</tt><tt class="py-number">800</tt><tt class="py-op">,</tt> </tt>
 <a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">                        <tt class="py-name">sim_state</tt><tt class="py-op">=</tt><tt class="py-name">sim_state</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">plot_params</tt><tt class="py-op">)</tt> </tt>
 <a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"> </tt>
 <a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">        <tt class="py-keyword">with</tt> <tt class="py-name">f</tt><tt class="py-op">.</tt><tt class="py-name">data_file</tt><tt class="py-op">(</tt><tt class="py-string">'start_cairo_svg'</tt><tt class="py-op">,</tt> <tt id="link-44" class="py-name"><a title="vehicles.programs.display_demos.simulations.MIME_SVG
 vehicles.programs.display_demos.vehicles.MIME_SVG" class="py-name" href="#" onclick="return doclink('link-44', 'MIME_SVG', 'link-4');">MIME_SVG</a></tt><tt class="py-op">)</tt> <tt class="py-keyword">as</tt> <tt class="py-name">filename</tt><tt class="py-op">:</tt> </tt>
-<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">            <tt id="link-45" class="py-name"><a title="vehicles_cairo.display_all.vehicles_cairo_display_svg" class="py-name" href="#" onclick="return doclink('link-45', 'vehicles_cairo_display_svg', 'link-13');">vehicles_cairo_display_svg</a></tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">,</tt> <tt class="py-name">width</tt><tt class="py-op">=</tt><tt class="py-number">800</tt><tt class="py-op">,</tt> <tt class="py-name">height</tt><tt class="py-op">=</tt><tt class="py-number">800</tt><tt class="py-op">,</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">            <tt id="link-45" class="py-name"><a title="vehicles_cairo.write_to_file.vehicles_cairo_display_svg" class="py-name" href="#" onclick="return doclink('link-45', 'vehicles_cairo_display_svg', 'link-13');">vehicles_cairo_display_svg</a></tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">,</tt> <tt class="py-name">width</tt><tt class="py-op">=</tt><tt class="py-number">800</tt><tt class="py-op">,</tt> <tt class="py-name">height</tt><tt class="py-op">=</tt><tt class="py-number">800</tt><tt class="py-op">,</tt> </tt>
 <a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">                        <tt class="py-name">sim_state</tt><tt class="py-op">=</tt><tt class="py-name">sim_state</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">plot_params</tt><tt class="py-op">)</tt> </tt>
 <a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"> </tt>
-<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"> </tt>
-<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">    <tt class="py-name">filename</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">options</tt><tt class="py-op">.</tt><tt class="py-name">outdir</tt><tt class="py-op">,</tt> <tt class="py-string">'%s.html'</tt> <tt class="py-op">%</tt> <tt class="py-name">basename</tt><tt class="py-op">)</tt> </tt>
-<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">    <tt id="link-46" class="py-name"><a title="vehicles.configuration.logger
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">    <tt class="py-name">filename</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">options</tt><tt class="py-op">.</tt><tt class="py-name">outdir</tt><tt class="py-op">,</tt> <tt class="py-string">'%s.html'</tt> <tt class="py-op">%</tt> <tt class="py-name">basename</tt><tt class="py-op">)</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">    <tt id="link-46" class="py-name"><a title="vehicles.configuration.logger
 vehicles.configuration.master.logger
 vehicles.configuration.vehicles.logger
 vehicles.interfaces.logger
+vehicles.interfaces.vehicle_sensor.logger
+vehicles.library.logger
 vehicles.logger
 vehicles.programs.display_demos.simulations.logger
 vehicles.programs.display_demos.skins.logger
@@ -390,19 +406,20 @@ vehicles.simulation.vsimulation.logger
 vehicles.worlds.logger
 vehicles_boot.create_olympics_configs.logger
 vehicles_boot.create_olympics_configs.main'.logger
+vehicles_boot.logger
 vehicles_cairo.logger
 vehicles_cairo.sensor_data.logger" class="py-name" href="#" onclick="return doclink('link-46', 'logger', 'link-2');">logger</a></tt><tt class="py-op">.</tt><tt id="link-47" class="py-name"><a title="vehicles.simulation.vsimulation.VehicleSimulation.info
 vehicles_boot.ros_visualization.ros_simulation.ROSVehicleSimulation.info" class="py-name" href="#" onclick="return doclink('link-47', 'info', 'link-19');">info</a></tt><tt class="py-op">(</tt><tt class="py-string">'Writing to %r.'</tt> <tt class="py-op">%</tt> <tt class="py-name">filename</tt><tt class="py-op">)</tt> </tt>
-<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">    <tt class="py-name">r</tt><tt class="py-op">.</tt><tt class="py-name">to_html</tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">)</tt> </tt>
-</div><a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"> </tt>
-<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"> </tt>
-<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">'__main__'</tt><tt class="py-op">:</tt> </tt>
-<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">    <tt id="link-48" class="py-name" targets="Function vehicles.programs.display_demos.simulations.main()=vehicles.programs.display_demos.simulations-module.html#main,Function vehicles.programs.display_demos.skins.main()=vehicles.programs.display_demos.skins-module.html#main,Function vehicles.programs.display_demos.vehicles.main()=vehicles.programs.display_demos.vehicles-module.html#main,Function vehicles.programs.print_config.main'.main()=vehicles.programs.print_config.main%27-module.html#main,Function vehicles_boot.create_olympics_configs.main'.main()=vehicles_boot.create_olympics_configs.main%27-module.html#main"><a title="vehicles.programs.display_demos.simulations.main
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">    <tt class="py-name">r</tt><tt class="py-op">.</tt><tt class="py-name">to_html</tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">'__main__'</tt><tt class="py-op">:</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">    <tt id="link-48" class="py-name" targets="Function vehicles.programs.display_demos.simulations.main()=vehicles.programs.display_demos.simulations-module.html#main,Function vehicles.programs.display_demos.skins.main()=vehicles.programs.display_demos.skins-module.html#main,Function vehicles.programs.display_demos.vehicles.main()=vehicles.programs.display_demos.vehicles-module.html#main,Function vehicles.programs.print_config.main'.main()=vehicles.programs.print_config.main%27-module.html#main,Function vehicles_boot.create_olympics_configs.main'.main()=vehicles_boot.create_olympics_configs.main%27-module.html#main"><a title="vehicles.programs.display_demos.simulations.main
 vehicles.programs.display_demos.skins.main
 vehicles.programs.display_demos.vehicles.main
 vehicles.programs.print_config.main'.main
 vehicles_boot.create_olympics_configs.main'.main" class="py-name" href="#" onclick="return doclink('link-48', 'main', 'link-48');">main</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
-<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"> </tt><script type="text/javascript">
 <!--
 expandto(location.href);
 // -->
@@ -437,7 +454,7 @@ expandto(location.href);
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Wed Feb  1 14:51:20 2012
+    Generated by Epydoc 3.0.1 on Wed Feb 22 20:40:22 2012
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

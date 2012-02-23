@@ -144,8 +144,8 @@
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="vehicles.simulation.vehicle.Vehicle-class.html#_get_state" class="summary-sig-name" onclick="show_private();">_get_state</a>(<span class="summary-sig-arg">self</span>)</span><br />
-      Returns the dynamics state or raises an exception if it has not been 
-      set.</td>
+      Returns the dynamics state or raises an exception if it has
+not been set.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="vehicles.simulation.vehicle-pysrc.html#Vehicle._get_state">source&nbsp;code</a></span>
             
@@ -184,8 +184,7 @@
         <span class="summary-sig-arg">sensor</span>,
         <span class="summary-sig-arg">pose</span>,
         <span class="summary-sig-arg">joint</span>,
-        <span class="summary-sig-arg">extra</span>)</span><br />
-      :param id_sensor: :type id_sensor:  ``str``</td>
+        <span class="summary-sig-arg">extra</span>)</span></td>
           <td align="right" valign="top">
             <span class="codelink"><a href="vehicles.simulation.vehicle-pysrc.html#Vehicle.add_sensor">source&nbsp;code</a></span>
             
@@ -202,7 +201,8 @@
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="vehicles.simulation.vehicle.Vehicle-class.html#colliding_pose" class="summary-sig-name">colliding_pose</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">pose</span>)</span><br />
+        <span class="summary-sig-arg">pose</span>,
+        <span class="summary-sig-arg">safety_margin</span>=<span class="summary-sig-default">1</span>)</span><br />
       Checks that the given pose does not give collisions.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="vehicles.simulation.vehicle-pysrc.html#Vehicle.colliding_pose">source&nbsp;code</a></span>
@@ -231,7 +231,7 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type"><tt class="rst-docutils literal">SE3</tt></span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
@@ -252,9 +252,8 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="set_pose"></a><span class="summary-sig-name">set_pose</span>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">pose</span>)</span><br />
-      :param pose: :type pose:  ``SE3``</td>
+          <td><span class="summary-sig"><a href="vehicles.simulation.vehicle.Vehicle-class.html#set_pose" class="summary-sig-name">set_pose</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">pose</span>)</span></td>
           <td align="right" valign="top">
             <span class="codelink"><a href="vehicles.simulation.vehicle-pysrc.html#Vehicle.set_pose">source&nbsp;code</a></span>
             
@@ -351,10 +350,13 @@
     </td>
   </tr></table>
   
-  <p>Initializes an empty vehicle.</p>
-  <p>:param:radius: radius (used for collision detection) :param:extra: 
-  extra information (extra['skin'] id of the skin)</p>
+  Initializes an empty vehicle.
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>radius</code></strong> - radius (used for collision detection)</li>
+        <li><strong class="pname"><code>extra</code></strong> - extra information (extra['skin'] id of the skin)</li>
+    </ul></dd>
   </dl>
 </td></tr></table>
 </div>
@@ -372,8 +374,9 @@
     </td>
   </tr></table>
   
-  <p>Returns the dynamics state or raises an exception if it has not been 
-  set. This is an opaque object interpretable by the Dynamics instance.</p>
+  Returns the dynamics state or raises an exception if it has
+not been set. This is an opaque object interpretable by
+the Dynamics instance.
   <dl class="fields">
   </dl>
 </td></tr></table>
@@ -397,10 +400,14 @@
     </td>
   </tr></table>
   
-  <p>:param id_sensor: :type id_sensor:  ``str``</p>
-  <p>:param pose: :type pose:  ``SE3``</p>
-  <p>:param joint: :type joint:  ``int,&gt;=0``</p>
+  
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>id_sensor</code></strong> (<tt class="rst-docutils literal">str</tt>)</li>
+        <li><strong class="pname"><code>pose</code></strong> (<tt class="rst-docutils literal">SE3</tt>)</li>
+        <li><strong class="pname"><code>joint</code></strong> (<tt class="rst-docutils literal"><span class="pre">int,&gt;=0</span></tt>)</li>
+    </ul></dd>
   </dl>
 </td></tr></table>
 </div>
@@ -412,25 +419,24 @@
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
   <h3 class="epydoc"><span class="sig"><span class="sig-name">colliding_pose</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">pose</span>)</span>
+        <span class="sig-arg">pose</span>,
+        <span class="sig-arg">safety_margin</span>=<span class="sig-default">1</span>)</span>
   </h3>
   </td><td align="right" valign="top"
     ><span class="codelink"><a href="vehicles.simulation.vehicle-pysrc.html#Vehicle.colliding_pose">source&nbsp;code</a></span>&nbsp;
     </td>
   </tr></table>
   
-  <pre class="literalblock">
-
-           Checks that the given pose does not give collisions. 
-           Returns None or a CollisionInfo structure. 
-       
-
-
-:param pose: 
-:type pose:  ``SE3``
-
-</pre>
+  <blockquote>
+<p>Checks that the given pose does not give collisions.
+Returns None or a CollisionInfo structure.</p>
+<p>safety_margin: multiplies the radius</p>
+</blockquote>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>pose</code></strong> (<tt class="rst-docutils literal">SE3</tt>)</li>
+    </ul></dd>
   </dl>
 </td></tr></table>
 </div>
@@ -448,19 +454,38 @@
     </td>
   </tr></table>
   
-  <pre class="literalblock">
-
-           Returns the pose of the robot in SE(3). 
-           This is regardless of the state space.
-           The idea is that all robot spaces are subgroups of SE(3)
-           so this is the most general representation.
-       
-
-
-:rtype:  ``SE3``
-
-</pre>
+  <blockquote>
+<p>Returns the pose of the robot in SE(3).</p>
+<p>This is regardless of the state space.
+The idea is that all robot spaces are subgroups of SE(3)
+so this is the most general representation.</p>
+</blockquote>
   <dl class="fields">
+    <dt>Returns: <tt class="rst-rst-docutils literal rst-docutils literal">SE3</tt></dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="set_pose"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">set_pose</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">pose</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="vehicles.simulation.vehicle-pysrc.html#Vehicle.set_pose">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>pose</code></strong> (<tt class="rst-docutils literal">SE3</tt>)</li>
+    </ul></dd>
   </dl>
 </td></tr></table>
 </div>
@@ -493,7 +518,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Wed Feb  1 14:51:18 2012
+    Generated by Epydoc 3.0.1 on Wed Feb 22 20:40:19 2012
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

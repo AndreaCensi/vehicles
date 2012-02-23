@@ -61,19 +61,19 @@
 <!-- ==================== CLASS DESCRIPTION ==================== -->
 <h1 class="epydoc">Class VehicleSimulation</h1><p class="nomargin-top"><span class="codelink"><a href="vehicles.simulation.vsimulation-pysrc.html#VehicleSimulation">source&nbsp;code</a></span></p>
 <center>
-<center>  <map id="uml_class_diagram_for_vehicles_29" name="uml_class_diagram_for_vehicles_29">
-<area shape="rect" id="node1_7" href="vehicles.simulation.vsimulation.VehicleSimulation-class.html#__init__" title="vehicles.simulation.vsimulation.VehicleSimulation.__init__" alt="" coords="140,39,316,57"/>
-<area shape="rect" id="node1_8" href="vehicles.simulation.vsimulation.VehicleSimulation-class.html#__repr__" title="vehicles.simulation.vsimulation.VehicleSimulation.__repr__" alt="" coords="140,57,316,76"/>
-<area shape="rect" id="node1_9" href="vehicles.simulation.vsimulation.VehicleSimulation-class.html#compute_observations" title="vehicles.simulation.vsimulation.VehicleSimulation.compute_observations" alt="" coords="140,76,316,95"/>
-<area shape="rect" id="node1_10" href="vehicles.simulation.vsimulation.VehicleSimulation-class.html#info" title="vehicles.simulation.vsimulation.VehicleSimulation.info" alt="" coords="140,95,316,113"/>
-<area shape="rect" id="node1_11" href="vehicles.simulation.vsimulation.VehicleSimulation-class.html#new_episode" title="vehicles.simulation.vsimulation.VehicleSimulation.new_episode" alt="" coords="140,113,316,132"/>
-<area shape="rect" id="node1_12" href="vehicles.simulation.vsimulation.VehicleSimulation-class.html#simulate" title="vehicles.simulation.vsimulation.VehicleSimulation.simulate" alt="" coords="140,132,316,151"/>
-<area shape="rect" id="node1_13" href="vehicles.simulation.vsimulation.VehicleSimulation-class.html#to_yaml" title="Returns a YAML&#45;serializable description of the state." alt="" coords="140,151,316,169"/>
-<area shape="rect" id="node1" href="vehicles.simulation.vsimulation.VehicleSimulation-class.html" title="vehicles.simulation.vsimulation.VehicleSimulation" alt="" coords="128,6,328,175"/>
-<area shape="rect" id="node2" href="vehicles_boot.vehicles_simulation.BOVehicleSimulation-class.html" title="vehicles_boot.vehicles_simulation.BOVehicleSimulation" alt="" coords="46,195,410,234"/>
-<area shape="rect" id="node3" href="vehicles_boot.ros_visualization.ros_simulation.ROSVehicleSimulation-class.html" title="vehicles_boot.ros_visualization.ros_simulation.ROSVehicleSimulation" alt="" coords="5,254,451,293"/>
+<center>  <map id="uml_class_diagram_for_vehicles_28" name="uml_class_diagram_for_vehicles_28">
+<area shape="rect" href="vehicles.simulation.vsimulation.VehicleSimulation-class.html#__init__" title="vehicles.simulation.vsimulation.VehicleSimulation.__init__" alt="" coords="88,36,357,55"/>
+<area shape="rect" href="vehicles.simulation.vsimulation.VehicleSimulation-class.html#__repr__" title="vehicles.simulation.vsimulation.VehicleSimulation.__repr__" alt="" coords="88,55,357,73"/>
+<area shape="rect" href="vehicles.simulation.vsimulation.VehicleSimulation-class.html#compute_observations" title="vehicles.simulation.vsimulation.VehicleSimulation.compute_observations" alt="" coords="88,73,357,92"/>
+<area shape="rect" href="vehicles.simulation.vsimulation.VehicleSimulation-class.html#info" title="vehicles.simulation.vsimulation.VehicleSimulation.info" alt="" coords="88,92,357,111"/>
+<area shape="rect" href="vehicles.simulation.vsimulation.VehicleSimulation-class.html#new_episode" title="vehicles.simulation.vsimulation.VehicleSimulation.new_episode" alt="" coords="88,111,357,129"/>
+<area shape="rect" href="vehicles.simulation.vsimulation.VehicleSimulation-class.html#simulate" title="vehicles.simulation.vsimulation.VehicleSimulation.simulate" alt="" coords="88,129,357,148"/>
+<area shape="rect" href="vehicles.simulation.vsimulation.VehicleSimulation-class.html#to_yaml" title="Returns a YAML&#45;serializable description of the state." alt="" coords="88,148,357,167"/>
+<area shape="rect" href="vehicles.simulation.vsimulation.VehicleSimulation-class.html" title="vehicles.simulation.vsimulation.VehicleSimulation" alt="" coords="87,11,359,168"/>
+<area shape="rect" href="vehicles_boot.vehicles_simulation.BOVehicleSimulation-class.html" title="vehicles_boot.vehicles_simulation.BOVehicleSimulation" alt="" coords="56,197,389,224"/>
+<area shape="rect" href="vehicles_boot.ros_visualization.ros_simulation.ROSVehicleSimulation-class.html" title="vehicles_boot.ros_visualization.ros_simulation.ROSVehicleSimulation" alt="" coords="16,253,429,280"/>
 </map>
-  <img src="uml_class_diagram_for_vehicles_29.gif" alt='' usemap="#uml_class_diagram_for_vehicles_29" ismap="ismap" class="graph-without-title" />
+  <img src="uml_class_diagram_for_vehicles_28.gif" alt='' usemap="#uml_class_diagram_for_vehicles_28" ismap="ismap" class="graph-without-title" />
 </center>
 </center>
 <hr />
@@ -102,7 +102,8 @@
         <tr>
           <td><span class="summary-sig"><a name="__init__"></a><span class="summary-sig-name">__init__</span>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">vehicle</span>,
-        <span class="summary-sig-arg">world</span>)</span></td>
+        <span class="summary-sig-arg">world</span>,
+        <span class="summary-sig-arg">safety_margin</span>=<span class="summary-sig-default">3</span>)</span></td>
           <td align="right" valign="top">
             <span class="codelink"><a href="vehicles.simulation.vsimulation-pysrc.html#VehicleSimulation.__init__">source&nbsp;code</a></span>
             
@@ -241,7 +242,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Wed Feb  1 14:51:18 2012
+    Generated by Epydoc 3.0.1 on Wed Feb 22 20:40:19 2012
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

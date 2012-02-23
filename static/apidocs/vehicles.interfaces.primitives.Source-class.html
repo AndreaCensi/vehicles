@@ -62,22 +62,23 @@
 <h1 class="epydoc">Class Source</h1><p class="nomargin-top"><span class="codelink"><a href="vehicles.interfaces.primitives-pysrc.html#Source">source&nbsp;code</a></span></p>
 <center>
 <center>  <map id="uml_class_diagram_for_vehicles_7" name="uml_class_diagram_for_vehicles_7">
-<area shape="rect" id="node1_7" href="vehicles.interfaces.primitives.Source-class.html#__init__" title="Initializes the structure." alt="" coords="17,116,316,135"/>
-<area shape="rect" id="node1_8" href="vehicles.interfaces.primitives.Source-class.html#from_yaml" title="vehicles.interfaces.primitives.Source.from_yaml" alt="" coords="17,135,316,153"/>
-<area shape="rect" id="node1_9" href="vehicles.interfaces.primitives.Source-class.html#get_intensity_value" title=":param point: :type point: &#160;``seq[2](number)``" alt="" coords="17,153,316,172"/>
-<area shape="rect" id="node1_10" href="vehicles.interfaces.primitives.Source-class.html#get_intensity_values" title=":param Y: :type Y: &#160;``array[HxW]``" alt="" coords="17,172,316,191"/>
-<area shape="rect" id="node1_11" href="vehicles.interfaces.primitives.Source-class.html#set_center" title="vehicles.interfaces.primitives.Source.set_center" alt="" coords="17,191,316,209"/>
-<area shape="rect" id="node1_12" href="vehicles.interfaces.primitives.Source-class.html#to_yaml" title="vehicles.interfaces.primitives.Source.to_yaml" alt="" coords="17,209,316,228"/>
-<area shape="rect" id="node1" href="vehicles.interfaces.primitives.Source-class.html" title="A point&#45;source is what field samplers are sensitive to." alt="" coords="5,83,328,234"/>
-<area shape="rect" id="node2_13" href="vehicles.interfaces.primitives.Primitive-class.html#__repr__" title="vehicles.interfaces.primitives.Primitive.__repr__" alt="" coords="65,39,155,57"/>
-<area shape="rect" id="node2" href="vehicles.interfaces.primitives.Primitive-class.html" title="vehicles.interfaces.primitives.Primitive" alt="" coords="53,6,166,63"/>
-<area shape="rect" id="node3" href="vehicles.interfaces.primitives.Field-class.html" title="vehicles.interfaces.primitives.Field" alt="" coords="196,13,249,57"/>
+<area shape="rect" href="vehicles.interfaces.primitives.Source-class.html#__init__" title="Initializes the structure." alt="" coords="17,124,311,143"/>
+<area shape="rect" href="vehicles.interfaces.primitives.Source-class.html#from_yaml" title="vehicles.interfaces.primitives.Source.from_yaml" alt="" coords="17,143,311,161"/>
+<area shape="rect" href="vehicles.interfaces.primitives.Source-class.html#get_intensity_value" title="Returns the intensity at the given point." alt="" coords="17,161,311,180"/>
+<area shape="rect" href="vehicles.interfaces.primitives.Source-class.html#get_intensity_values" title="Returns the intensity values at a series of points." alt="" coords="17,180,311,199"/>
+<area shape="rect" href="vehicles.interfaces.primitives.Source-class.html#set_center" title="vehicles.interfaces.primitives.Source.set_center" alt="" coords="17,199,311,217"/>
+<area shape="rect" href="vehicles.interfaces.primitives.Source-class.html#to_yaml" title="vehicles.interfaces.primitives.Source.to_yaml" alt="" coords="17,217,311,236"/>
+<area shape="rect" href="vehicles.interfaces.primitives.Source-class.html" title="A point&#45;source is what field samplers are sensitive to." alt="" coords="16,99,312,237"/>
+<area shape="rect" href="vehicles.interfaces.primitives.Primitive-class.html#type2class" title="vehicles.interfaces.primitives.Primitive.type2class" alt="" coords="67,28,152,47"/>
+<area shape="rect" href="vehicles.interfaces.primitives.Primitive-class.html#__repr__" title="vehicles.interfaces.primitives.Primitive.__repr__" alt="" coords="67,49,152,68"/>
+<area shape="rect" href="vehicles.interfaces.primitives.Primitive-class.html" title="vehicles.interfaces.primitives.Primitive" alt="" coords="65,11,153,69"/>
+<area shape="rect" href="vehicles.interfaces.primitives.Field-class.html" title="vehicles.interfaces.primitives.Field" alt="" coords="204,24,236,56"/>
 </map>
   <img src="uml_class_diagram_for_vehicles_7.gif" alt='' usemap="#uml_class_diagram_for_vehicles_7" ismap="ismap" class="graph-without-title" />
 </center>
 </center>
 <hr />
-<p>A point-source is what field samplers are sensitive to.</p>
+A point-source is what field samplers are sensitive to.
 
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
@@ -125,7 +126,7 @@
         <tr>
           <td><span class="summary-sig"><a href="vehicles.interfaces.primitives.Source-class.html#get_intensity_value" class="summary-sig-name">get_intensity_value</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">point</span>)</span><br />
-      :param point: :type point:  ``seq[2](number)``</td>
+      Returns the intensity at the given point.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="vehicles.interfaces.primitives-pysrc.html#Source.get_intensity_value">source&nbsp;code</a></span>
             
@@ -137,14 +138,14 @@
   </tr>
 <tr>
     <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
+      <span class="summary-type"><tt class="rst-docutils literal">array[HxW]</tt></span>
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="vehicles.interfaces.primitives.Source-class.html#get_intensity_values" class="summary-sig-name">get_intensity_values</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">X</span>,
         <span class="summary-sig-arg">Y</span>)</span><br />
-      :param Y: :type Y:  ``array[HxW]``</td>
+      Returns the intensity values at a series of points.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="vehicles.interfaces.primitives-pysrc.html#Source.get_intensity_values">source&nbsp;code</a></span>
             
@@ -218,7 +219,7 @@
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><span class="summary-sig"><a name="from_yaml"></a><span class="summary-sig-name">from_yaml</span>(<span class="summary-sig-arg">s</span>)</span></td>
+          <td><span class="summary-sig"><a href="vehicles.interfaces.primitives.Source-class.html#from_yaml" class="summary-sig-name">from_yaml</a>(<span class="summary-sig-arg">s</span>)</span></td>
           <td align="right" valign="top">
             <span class="codelink"><a href="vehicles.interfaces.primitives-pysrc.html#Source.from_yaml">source&nbsp;code</a></span>
             
@@ -226,6 +227,31 @@
         </tr>
       </table>
       
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="vehicles.interfaces.primitives.Primitive-class.html">Primitive</a></code></b>:
+      <code><a href="vehicles.interfaces.primitives.Primitive-class.html#type2class">type2class</a></code>
+      </p>
     </td>
   </tr>
 </table>
@@ -266,23 +292,42 @@
     </td>
   </tr></table>
   
-  <pre class="literalblock">
-
-           Initializes the structure.
-           
-           :param:center: 2D position of the source
-           :param:kernel: Scalar function from distance to intensity.
-                          Described as a code spec.
-       
-
-
-:param center: 
-:type center:  ``seq[2](number)``
-
-</pre>
+  <blockquote>
+<p>Initializes the structure.</p>
+<blockquote>
+Described as a code spec.</blockquote>
+</blockquote>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>kernel</code></strong> - Scalar function from distance to intensity.</li>
+        <li><strong class="pname"><code>center</code></strong> (<tt class="rst-docutils literal"><span class="pre">seq[2](number)</span></tt>) - 2D position of the source</li>
+    </ul></dd>
     <dt>Overrides:
         <a href="vehicles.interfaces.primitives.Primitive-class.html#__init__">Primitive.__init__</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="from_yaml"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">from_yaml</span>(<span class="sig-arg">s</span>)</span>
+    <br /><em class="fname">Static Method</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="vehicles.interfaces.primitives-pysrc.html#Source.from_yaml">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="vehicles.interfaces.primitives.Primitive-class.html#from_yaml">Primitive.from_yaml</a>
     </dt>
   </dl>
 </td></tr></table>
@@ -302,8 +347,12 @@
     </td>
   </tr></table>
   
-  <p>:param point: :type point:  ``seq[2](number)``</p>
+  Returns the intensity at the given point.
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>point</code></strong> (<tt class="rst-docutils literal"><span class="pre">seq[2](number)</span></tt>)</li>
+    </ul></dd>
     <dt>Overrides:
         <a href="vehicles.interfaces.primitives.Field-class.html#get_intensity_value">Field.get_intensity_value</a>
     </dt>
@@ -326,10 +375,14 @@
     </td>
   </tr></table>
   
-  <p>:param Y: :type Y:  ``array[HxW]``</p>
-  <p>:param X: :type X:  ``array[HxW]``</p>
-  <p>:rtype:  ``array[HxW]``</p>
+  Returns the intensity values at a series of points.
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>Y</code></strong> (<tt class="rst-docutils literal">array[HxW]</tt>)</li>
+        <li><strong class="pname"><code>X</code></strong> (<tt class="rst-docutils literal">array[HxW]</tt>)</li>
+    </ul></dd>
+    <dt>Returns: <tt class="rst-rst-docutils literal rst-docutils literal">array[HxW]</tt></dt>
     <dt>Overrides:
         <a href="vehicles.interfaces.primitives.Field-class.html#get_intensity_values">Field.get_intensity_values</a>
     </dt>
@@ -365,7 +418,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Wed Feb  1 14:51:16 2012
+    Generated by Epydoc 3.0.1 on Wed Feb 22 20:40:18 2012
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

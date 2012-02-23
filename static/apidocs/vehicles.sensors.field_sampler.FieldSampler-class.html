@@ -62,24 +62,24 @@
 <h1 class="epydoc">Class FieldSampler</h1><p class="nomargin-top"><span class="codelink"><a href="vehicles.sensors.field_sampler-pysrc.html#FieldSampler">source&nbsp;code</a></span></p>
 <center>
 <center>  <map id="uml_class_diagram_for_vehicles_12" name="uml_class_diagram_for_vehicles_12">
-<area shape="rect" id="node1_8" href="vehicles.sensors.field_sampler.FieldSampler-class.html#__abstractmethods__" title="vehicles.sensors.field_sampler.FieldSampler.__abstractmethods__" alt="" coords="55,159,636,177"/>
-<area shape="rect" id="node1_9" href="vehicles.sensors.field_sampler.FieldSampler-class.html#__init__" title=":param positions: 2D positions of the sensels :type positions: &#160;&#160;``seq[&gt;0](seq[2](number))``" alt="" coords="55,180,636,199"/>
-<area shape="rect" id="node1_10" href="vehicles.sensors.field_sampler.FieldSampler-class.html#set_world_primitives" title="vehicles.sensors.field_sampler.FieldSampler.set_world_primitives" alt="" coords="55,199,636,217"/>
-<area shape="rect" id="node1_11" href="vehicles.sensors.field_sampler.FieldSampler-class.html#to_yaml" title="vehicles.sensors.field_sampler.FieldSampler.to_yaml" alt="" coords="55,217,636,236"/>
-<area shape="rect" id="node1" href="vehicles.sensors.field_sampler.FieldSampler-class.html" title="A sensor that samples an intensity field." alt="" coords="43,134,648,242"/>
-<area shape="rect" id="node3" href="vehicles.sensors.field_sampler_rand_circle.FieldSamplerRandCircle-class.html" title="A field sampler with sensels randomly distributed in a certain radius." alt="" coords="5,262,341,301"/>
-<area shape="rect" id="node4" href="vehicles.sensors.field_sampler_uniform.FieldSamplerUniform-class.html" title="A field sampler with uniform disposition of sensels." alt="" coords="371,262,667,301"/>
-<area shape="rect" id="node2_12" href="vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html#SENSELS" title="vehicles.interfaces.vehicle_sensor.VehicleSensor.SENSELS" alt="" coords="225,31,465,49"/>
-<area shape="rect" id="node2_13" href="abc.ABCMeta-class.html" title="Metaclass for defining Abstract Base Classes (ABCs)." alt="" coords="225,49,465,68"/>
-<area shape="rect" id="node2_14" href="vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html#__repr__" title="repr(x)" alt="" coords="225,71,465,89"/>
-<area shape="rect" id="node2_15" href="vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html#compute_observations" title="Computes the observations for this vehicle &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Args: &#160;&#160;&#160;&#160;&#160;pose: SE2 (world reference frame.)" alt="" coords="225,89,465,108"/>
-<area shape="rect" id="node2" href="vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html" title="vehicles.interfaces.vehicle_sensor.VehicleSensor" alt="" coords="213,6,477,114"/>
+<area shape="rect" href="vehicles.sensors.field_sampler.FieldSampler-class.html#__abstractmethods__" title="vehicles.sensors.field_sampler.FieldSampler.__abstractmethods__" alt="" coords="52,153,617,172"/>
+<area shape="rect" href="vehicles.sensors.field_sampler.FieldSampler-class.html#__init__" title="x.__init__(...) initializes x; see help(type(x)) for signature" alt="" coords="52,175,617,193"/>
+<area shape="rect" href="vehicles.sensors.field_sampler.FieldSampler-class.html#set_world_primitives" title="vehicles.sensors.field_sampler.FieldSampler.set_world_primitives" alt="" coords="52,193,617,212"/>
+<area shape="rect" href="vehicles.sensors.field_sampler.FieldSampler-class.html#to_yaml" title="vehicles.sensors.field_sampler.FieldSampler.to_yaml" alt="" coords="52,212,617,231"/>
+<area shape="rect" href="vehicles.sensors.field_sampler.FieldSampler-class.html" title="A sensor that samples an intensity field." alt="" coords="51,136,619,232"/>
+<area shape="rect" href="vehicles.sensors.field_sampler_rand_circle.FieldSamplerRandCircle-class.html" title="A field sampler with sensels randomly distributed in a certain radius." alt="" coords="16,261,320,288"/>
+<area shape="rect" href="vehicles.sensors.field_sampler_uniform.FieldSamplerUniform-class.html" title="A field sampler with uniform disposition of sensels." alt="" coords="371,261,635,288"/>
+<area shape="rect" href="vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html#SENSELS" title="vehicles.interfaces.vehicle_sensor.VehicleSensor.SENSELS" alt="" coords="219,28,451,47"/>
+<area shape="rect" href="abc.ABCMeta-class.html" title="Metaclass for defining Abstract Base Classes (ABCs)." alt="" coords="219,47,451,65"/>
+<area shape="rect" href="vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html#__repr__" title="repr(x)" alt="" coords="219,68,451,87"/>
+<area shape="rect" href="vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html#compute_observations" title="Computes the observations for this vehicle &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Args: &#160;&#160;&#160;&#160;&#160;pose: SE2 (world reference frame.)" alt="" coords="219,87,451,105"/>
+<area shape="rect" href="vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html" title="vehicles.interfaces.vehicle_sensor.VehicleSensor" alt="" coords="217,11,452,107"/>
 </map>
   <img src="uml_class_diagram_for_vehicles_12.gif" alt='' usemap="#uml_class_diagram_for_vehicles_12" ismap="ismap" class="graph-without-title" />
 </center>
 </center>
 <hr />
-<p>A sensor that samples an intensity field.</p>
+A sensor that samples an intensity field.
 
 <!-- ==================== NESTED CLASSES ==================== -->
 <a name="section-NestedClasses"></a>
@@ -136,8 +136,7 @@
         <span class="summary-sig-arg">normalize</span>=<span class="summary-sig-default">False</span>,
         <span class="summary-sig-arg">noise</span>=<span class="summary-sig-default">None</span>,
         <span class="summary-sig-arg">shape</span>=<span class="summary-sig-default">None</span>)</span><br />
-      :param positions: 2D positions of the sensels :type positions:  
-      ``seq[&gt;0](seq[2](number))``</td>
+      x.__init__(...) initializes x; see help(type(x)) for signature</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="vehicles.sensors.field_sampler-pysrc.html#FieldSampler.__init__">source&nbsp;code</a></span>
             
@@ -154,8 +153,7 @@
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="vehicles.sensors.field_sampler.FieldSampler-class.html#_compute_observations" class="summary-sig-name" onclick="show_private();">_compute_observations</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">pose</span>)</span><br />
-      :param pose: :type pose:  ``SE3``</td>
+        <span class="summary-sig-arg">pose</span>)</span></td>
           <td align="right" valign="top">
             <span class="codelink"><a href="vehicles.sensors.field_sampler-pysrc.html#FieldSampler._compute_observations">source&nbsp;code</a></span>
             
@@ -322,9 +320,12 @@
     </td>
   </tr></table>
   
-  <p>:param positions: 2D positions of the sensels :type positions:  
-  ``seq[&gt;0](seq[2](number))``</p>
+  x.__init__(...) initializes x; see help(type(x)) for signature
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>positions</code></strong> (<tt class="rst-docutils literal"><span class="pre">seq[&gt;0](seq[2](number))</span></tt>) - 2D positions of the sensels</li>
+    </ul></dd>
     <dt>Overrides:
         object.__init__
     </dt>
@@ -346,8 +347,12 @@
     </td>
   </tr></table>
   
-  <p>:param pose: :type pose:  ``SE3``</p>
+  
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>pose</code></strong> (<tt class="rst-docutils literal">SE3</tt>)</li>
+    </ul></dd>
     <dt>Overrides:
         <a href="vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html#_compute_observations" onclick="show_private();">interfaces.vehicle_sensor.VehicleSensor._compute_observations</a>
     </dt>
@@ -428,7 +433,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Wed Feb  1 14:51:17 2012
+    Generated by Epydoc 3.0.1 on Wed Feb 22 20:40:18 2012
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

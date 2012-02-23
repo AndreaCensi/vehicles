@@ -57,28 +57,75 @@
 </table>
 <h1 class="epydoc">Source Code for <a href="vehicles_boot-module.html">Package vehicles_boot</a></h1>
 <pre class="py-src">
-<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-docstring">''' Interfacing with BootstrappingOlympics. '''</tt> </tt>
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-docstring">''' Code interfacing PyVehicles with BootstrappingOlympics. '''</tt> </tt>
 <a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"> </tt>
 <a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package vehicles=vehicles-module.html,Module vehicles.configuration.vehicles=vehicles.configuration.vehicles-module.html,Module vehicles.programs.display_demos.vehicles=vehicles.programs.display_demos.vehicles-module.html"><a title="vehicles
 vehicles.configuration.vehicles
-vehicles.programs.display_demos.vehicles" class="py-name" href="#" onclick="return doclink('link-0', 'vehicles', 'link-0');">vehicles</a></tt> <tt class="py-keyword">import</tt> <tt class="py-name">__version__</tt> </tt>
+vehicles.programs.display_demos.vehicles" class="py-name" href="#" onclick="return doclink('link-0', 'vehicles', 'link-0');">vehicles</a></tt> <tt class="py-keyword">import</tt> <tt class="py-name">__version__</tt><tt class="py-op">,</tt> <tt id="link-1" class="py-name" targets="Variable vehicles.configuration.logger=vehicles.configuration-module.html#logger,Variable vehicles.configuration.master.logger=vehicles.configuration.master-module.html#logger,Variable vehicles.configuration.vehicles.logger=vehicles.configuration.vehicles-module.html#logger,Variable vehicles.interfaces.logger=vehicles.interfaces-module.html#logger,Variable vehicles.interfaces.vehicle_sensor.logger=vehicles.interfaces.vehicle_sensor-module.html#logger,Variable vehicles.library.logger=vehicles.library-module.html#logger,Variable vehicles.logger=vehicles-module.html#logger,Variable vehicles.programs.display_demos.simulations.logger=vehicles.programs.display_demos.simulations-module.html#logger,Variable vehicles.programs.display_demos.skins.logger=vehicles.programs.display_demos.skins-module.html#logger,Variable vehicles.programs.display_demos.vehicles.logger=vehicles.programs.display_demos.vehicles-module.html#logger,Variable vehicles.programs.inspect_textures.main'.logger=vehicles.programs.inspect_textures.main%27-module.html#logger,Variable vehicles.programs.print_config.logger=vehicles.programs.print_config-module.html#logger,Variable vehicles.programs.print_config.main'.logger=vehicles.programs.print_config.main%27-module.html#logger,Variable vehicles.sensors.field_sampler.logger=vehicles.sensors.field_sampler-module.html#logger,Variable vehicles.sensors.logger=vehicles.sensors-module.html#logger,Variable vehicles.sensors.noises.logger=vehicles.sensors.noises-module.html#logger,Variable vehicles.sensors.raytracer.logger=vehicles.sensors.raytracer-module.html#logger,Variable vehicles.simulation.logger=vehicles.simulation-module.html#logger,Variable vehicles.simulation.vsimulation.logger=vehicles.simulation.vsimulation-module.html#logger,Variable vehicles.worlds.logger=vehicles.worlds-module.html#logger,Variable vehicles_boot.create_olympics_configs.logger=vehicles_boot.create_olympics_configs-module.html#logger,Variable vehicles_boot.create_olympics_configs.main'.logger=vehicles_boot.create_olympics_configs.main%27-module.html#logger,Variable vehicles_boot.logger=vehicles_boot-module.html#logger,Variable vehicles_cairo.logger=vehicles_cairo-module.html#logger,Variable vehicles_cairo.sensor_data.logger=vehicles_cairo.sensor_data-module.html#logger"><a title="vehicles.configuration.logger
+vehicles.configuration.master.logger
+vehicles.configuration.vehicles.logger
+vehicles.interfaces.logger
+vehicles.interfaces.vehicle_sensor.logger
+vehicles.library.logger
+vehicles.logger
+vehicles.programs.display_demos.simulations.logger
+vehicles.programs.display_demos.skins.logger
+vehicles.programs.display_demos.vehicles.logger
+vehicles.programs.inspect_textures.main'.logger
+vehicles.programs.print_config.logger
+vehicles.programs.print_config.main'.logger
+vehicles.sensors.field_sampler.logger
+vehicles.sensors.logger
+vehicles.sensors.noises.logger
+vehicles.sensors.raytracer.logger
+vehicles.simulation.logger
+vehicles.simulation.vsimulation.logger
+vehicles.worlds.logger
+vehicles_boot.create_olympics_configs.logger
+vehicles_boot.create_olympics_configs.main'.logger
+vehicles_boot.logger
+vehicles_cairo.logger
+vehicles_cairo.sensor_data.logger" class="py-name" href="#" onclick="return doclink('link-1', 'logger', 'link-1');">logger</a></tt> </tt>
 <a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"> </tt>
 <a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">contracts</tt> <tt class="py-keyword">import</tt> <tt class="py-name">contract</tt> </tt>
 <a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">numpy</tt> <tt class="py-keyword">as</tt> <tt class="py-name">np</tt> </tt>
 <a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"> </tt>
 <a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
 <a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt class="py-name">bootstrapping_olympics</tt> </tt>
-<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line">    <tt id="link-1" class="py-name" targets="Variable vehicles_boot.boot_installed=vehicles_boot-module.html#boot_installed"><a title="vehicles_boot.boot_installed" class="py-name" href="#" onclick="return doclink('link-1', 'boot_installed', 'link-1');">boot_installed</a></tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line">    <tt id="link-2" class="py-name" targets="Variable vehicles_boot.vehicles_has_boot_olympics=vehicles_boot-module.html#vehicles_has_boot_olympics"><a title="vehicles_boot.vehicles_has_boot_olympics" class="py-name" href="#" onclick="return doclink('link-2', 'vehicles_has_boot_olympics', 'link-2');">vehicles_has_boot_olympics</a></tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
 <a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-keyword">except</tt> <tt class="py-name">ImportError</tt><tt class="py-op">:</tt> </tt>
-<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">    <tt id="link-2" class="py-name"><a title="vehicles_boot.boot_installed" class="py-name" href="#" onclick="return doclink('link-2', 'boot_installed', 'link-1');">boot_installed</a></tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
-<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"> </tt>
-<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt id="link-3" class="py-name"><a title="vehicles_boot.boot_installed" class="py-name" href="#" onclick="return doclink('link-3', 'boot_installed', 'link-1');">boot_installed</a></tt><tt class="py-op">:</tt> </tt>
-<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Module vehicles_boot.vehicles_simulation=vehicles_boot.vehicles_simulation-module.html"><a title="vehicles_boot.vehicles_simulation" class="py-name" href="#" onclick="return doclink('link-4', 'vehicles_simulation', 'link-4');">vehicles_simulation</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
-<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Package vehicles_boot.ros_visualization=vehicles_boot.ros_visualization-module.html"><a title="vehicles_boot.ros_visualization" class="py-name" href="#" onclick="return doclink('link-5', 'ros_visualization', 'link-5');">ros_visualization</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
-<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
-<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt class="py-name">warnings</tt>  <tt class="py-comment"># @Reimport</tt> </tt>
-<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">    <tt class="py-name">warnings</tt><tt class="py-op">.</tt><tt class="py-name">warn</tt><tt class="py-op">(</tt><tt class="py-string">'Package BootOlympics not installed.'</tt><tt class="py-op">)</tt> </tt>
-<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">    <tt id="link-3" class="py-name"><a title="vehicles.configuration.logger
+vehicles.configuration.master.logger
+vehicles.configuration.vehicles.logger
+vehicles.interfaces.logger
+vehicles.interfaces.vehicle_sensor.logger
+vehicles.library.logger
+vehicles.logger
+vehicles.programs.display_demos.simulations.logger
+vehicles.programs.display_demos.skins.logger
+vehicles.programs.display_demos.vehicles.logger
+vehicles.programs.inspect_textures.main'.logger
+vehicles.programs.print_config.logger
+vehicles.programs.print_config.main'.logger
+vehicles.sensors.field_sampler.logger
+vehicles.sensors.logger
+vehicles.sensors.noises.logger
+vehicles.sensors.raytracer.logger
+vehicles.simulation.logger
+vehicles.simulation.vsimulation.logger
+vehicles.worlds.logger
+vehicles_boot.create_olympics_configs.logger
+vehicles_boot.create_olympics_configs.main'.logger
+vehicles_boot.logger
+vehicles_cairo.logger
+vehicles_cairo.sensor_data.logger" class="py-name" href="#" onclick="return doclink('link-3', 'logger', 'link-1');">logger</a></tt><tt class="py-op">.</tt><tt class="py-name">error</tt><tt class="py-op">(</tt><tt class="py-string">'Package BootOlympics not installed, vehicles_boot cannot '</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">                 <tt class="py-string">'work properly.'</tt><tt class="py-op">)</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">    <tt id="link-4" class="py-name"><a title="vehicles_boot.vehicles_has_boot_olympics" class="py-name" href="#" onclick="return doclink('link-4', 'vehicles_has_boot_olympics', 'link-2');">vehicles_has_boot_olympics</a></tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt id="link-5" class="py-name"><a title="vehicles_boot.vehicles_has_boot_olympics" class="py-name" href="#" onclick="return doclink('link-5', 'vehicles_has_boot_olympics', 'link-2');">vehicles_has_boot_olympics</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Module vehicles_boot.vehicles_simulation=vehicles_boot.vehicles_simulation-module.html"><a title="vehicles_boot.vehicles_simulation" class="py-name" href="#" onclick="return doclink('link-6', 'vehicles_simulation', 'link-6');">vehicles_simulation</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Package vehicles_boot.ros_visualization=vehicles_boot.ros_visualization-module.html"><a title="vehicles_boot.ros_visualization" class="py-name" href="#" onclick="return doclink('link-7', 'ros_visualization', 'link-7');">ros_visualization</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"> </tt><script type="text/javascript">
 <!--
 expandto(location.href);
 // -->
@@ -113,7 +160,7 @@ expandto(location.href);
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Wed Feb  1 14:51:21 2012
+    Generated by Epydoc 3.0.1 on Wed Feb 22 20:40:21 2012
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
