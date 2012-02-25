@@ -14,6 +14,10 @@ flexible simulations of robotic vehicles.
 
 The documentation is being written; not much is ready yet. Check back soon!
 
+In the mean time, see `some examples of the simulations produced by this package`__.
+
+.. __: http://www.cds.caltech.edu/~ender/pri/vehicles-videos/videos/videos-exz1sb.html
+
 * For reference, see the `API docs`__.
 
 .. __: static/apidocs/index.html

@@ -62,8 +62,8 @@
 <dt id="vehicles.contract">
 <tt class="descclassname">vehicles.</tt><tt class="descname">contract</tt><big>(</big><em>*arg</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#vehicles.contract" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decorator for adding contracts to functions.</p>
-<p>It is smart enough to support functions with variable number of arguments
-and keyword arguments.</p>
+<p>It is smart enough to support functions with variable number of 
+arguments and keyword arguments.</p>
 <p>There are three ways to specify the contracts. In order of precedence:</p>
 <ul>
 <li><p class="first">As arguments to this decorator. For example:</p>
@@ -101,11 +101,12 @@ pass <tt class="docutils literal"><span class="pre">modify_docstring=False</span
 <p><strong>Contracts evaluation</strong>: Note that all contracts for the arguments 
 and the return values
 are evaluated in the same context. This make it possible to use
-common variables in the contract expression. For example, in the example
-above, the return value is constrained to be a list of the same 
+common variables in the contract expression. For example, in the 
+example above, the return value is constrained to be a list of the same 
 length (<tt class="docutils literal"><span class="pre">N</span></tt>) as the parameter <tt class="docutils literal"><span class="pre">b</span></tt>.</p>
 <p><strong>Using docstrings</strong> Note that, by convention, those annotations must 
-be parseable as RestructuredText. This is relevant if you are using Sphinx.
+be parseable as RestructuredText. This is relevant if you are using 
+Sphinx.
 If the contract string has special RST characters in it, like <tt class="docutils literal"><span class="pre">*</span></tt>,
 you can include it in double ticks. <a href="#id1"><span class="problematic" id="id2">|pycontracts|</span></a> will remove
 the double ticks before interpreting the string.</p>
@@ -125,7 +126,7 @@ for <a href="#id3"><span class="problematic" id="id4">|pycontracts|</span></a>, 
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Raise :</th><td class="field-body">ContractException, if arguments are not coherent with the function</td>
+<tr class="field-odd field"><th class="field-name">Raise :</th><td class="field-body">ContractException, if arguments are not coherent</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raise :</th><td class="field-body">ContractSyntaxError</td>
 </tr>
