@@ -73,7 +73,7 @@ class FieldSampler(VehicleSensor):
         if self.noise is not None:
             sensels = self.noise.filter(sensels)
 
-        sensels = np.minimum(self.max_value, sensels)
+        sensels = np.minimum(self.max_value, sensels) # TODO: clip
         sensels = np.maximum(self.min_value, sensels)
 
         data = dict(sensels=sensels)

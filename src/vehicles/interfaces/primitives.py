@@ -138,8 +138,8 @@ class Source(Primitive, Field):
         '''
             Initializes the structure.
             
-            :param:center: 2D position of the source
-            :param:kernel: Scalar function from distance to intensity.
+            :param center: 2D position of the source
+            :param kernel: Scalar function from distance to intensity.
                            Described as a code spec.
         '''
         Primitive.__init__(self, id_object, tags)

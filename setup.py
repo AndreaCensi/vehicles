@@ -28,13 +28,12 @@ setup(name='PyVehicles',
       packages=find_packages('src'),
       install_requires=[
         'ConfTools>=1.0,<2',
-        'PyVehiclesDynamics>=1.0,<2',
         'PyContracts>=1.2,<2',
         'PyYAML',
         'python-cjson'
       ],
       tests_require=['nose'],
-      extras_require={
+      extras_require={ # TODO: reprep?
         'procgraph':  ["procgraph>=1.0,<2"],
         'boot':  ["BootOlympics>=1.0,<2"],
       },

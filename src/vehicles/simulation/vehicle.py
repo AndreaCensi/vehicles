@@ -11,8 +11,8 @@ class Vehicle:
             '''
                 Initializes this structure.
                 
-                :param:extra: dict convertible to YAML.
-                :param:extra['skin']: sing for this sensor.
+                :param extra: dict convertible to YAML.
+                 extra['skin']: sing for this sensor.
             '''
             self.sensor = sensor
             self.pose = pose
@@ -38,8 +38,8 @@ class Vehicle:
         """ 
             Initializes an empty vehicle.
             
-            :param:radius: radius (used for collision detection)
-            :param:extra: extra information (extra['skin'] id of the skin)
+            :param radius: radius (used for collision detection)
+            :param extra: extra information (extra['skin'] id of the skin)
         """
         self.radius = radius
         self.sensors = []  # array of Attached
@@ -103,8 +103,9 @@ class Vehicle:
 
     @contract(returns='SE3')
     def get_pose(self):
-        ''' 
+        '''
             Returns the pose of the robot in SE(3). 
+            
             This is regardless of the state space.
             The idea is that all robot spaces are subgroups of SE(3)
             so this is the most general representation.

@@ -1,6 +1,6 @@
 ''' PyVehicles main package: play with your vehicles zoo! '''
 
-__version__ = '1.0'
+__version__ = '1.1'
 
 from contracts import contract
 import geometry  # loads all geometry contracts
@@ -20,3 +20,4 @@ from .sensors import *
 from .worlds import *
 
 
+__docformat__ = 'restructuredtext' # For Epydoc

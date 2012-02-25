@@ -6,7 +6,7 @@ github_repo=git@github.com:AndreaCensi/vehicles.git
 webdir=website
 webgit=git --git-dir $(webdir)/.git --work-tree=$(webdir)/ 
 
-all: compile-website 
+all: upload
 	
 compile-website: website epydoc
 	PYTHONPATH=`pwd`:$(PYTHONPATH) sphinx-build -E -n -a -b html source website
@@ -20,9 +20,8 @@ website: distclean
 	$(webgit) checkout origin/gh-pages -b gh-pages
 	$(webgit) branch -D master
 
-upload:
-	# git --git-dir $(webdir)/.git  add $(find $(webdir) . -type f)
-	-$(webgit) commit -m "updated website" -a 
+upload: compile-website
+	./gitadd.zsh
 	$(webgit) push
 
 distclean:
