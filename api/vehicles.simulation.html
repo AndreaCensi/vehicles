@@ -1,0 +1,636 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>simulation Package &mdash; Vehicles 1.2 documentation</title>
+    
+    <link rel="stylesheet" href="../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <link rel="top" title="Vehicles 1.2 documentation" href="../index.html" />
+	 
+
+
+   <style type="text/css">
+        span.brand { color: #a00;}
+   </style> 
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Vehicles 1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="simulation-package">
+<h1>simulation Package<a class="headerlink" href="#simulation-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">simulation</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-vehicles.simulation"></span><dl class="class">
+<dt id="vehicles.simulation.VehicleSimulation">
+<em class="property">class </em><tt class="descclassname">vehicles.simulation.</tt><tt class="descname">VehicleSimulation</tt><big>(</big><em>vehicle</em>, <em>world</em>, <em>safety_margin=3</em><big>)</big><a class="headerlink" href="#vehicles.simulation.VehicleSimulation" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="vehicles.simulation.VehicleSimulation.compute_observations">
+<tt class="descname">compute_observations</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.simulation.VehicleSimulation.compute_observations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.simulation.VehicleSimulation.info">
+<tt class="descname">info</tt><big>(</big><em>s</em><big>)</big><a class="headerlink" href="#vehicles.simulation.VehicleSimulation.info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.simulation.VehicleSimulation.new_episode">
+<tt class="descname">new_episode</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.simulation.VehicleSimulation.new_episode" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.simulation.VehicleSimulation.simulate">
+<tt class="descname">simulate</tt><big>(</big><em>commands</em>, <em>dt</em><big>)</big><a class="headerlink" href="#vehicles.simulation.VehicleSimulation.simulate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.simulation.VehicleSimulation.to_yaml">
+<tt class="descname">to_yaml</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.simulation.VehicleSimulation.to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a YAML-serializable description of the state.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.simulation.Vehicle">
+<em class="property">class </em><tt class="descclassname">vehicles.simulation.</tt><tt class="descname">Vehicle</tt><big>(</big><em>radius=0.5</em>, <em>extra={}</em><big>)</big><a class="headerlink" href="#vehicles.simulation.Vehicle" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="vehicles.simulation.Vehicle.add_dynamics">
+<tt class="descname">add_dynamics</tt><big>(</big><em>id_dynamics</em>, <em>dynamics</em><big>)</big><a class="headerlink" href="#vehicles.simulation.Vehicle.add_dynamics" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.simulation.Vehicle.add_sensor">
+<tt class="descname">add_sensor</tt><big>(</big><em>id_sensor</em>, <em>sensor</em>, <em>pose</em>, <em>joint</em>, <em>extra</em><big>)</big><a class="headerlink" href="#vehicles.simulation.Vehicle.add_sensor" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id_sensor</strong> (<tt class="docutils literal"><span class="pre">str</span></tt>) &#8211; </li>
+<li><strong>pose</strong> (<tt class="docutils literal"><span class="pre">SE3</span></tt>) &#8211; </li>
+<li><strong>joint</strong> (<tt class="docutils literal"><span class="pre">int,&gt;=0</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.simulation.Vehicle.colliding_pose">
+<tt class="descname">colliding_pose</tt><big>(</big><em>pose</em>, <em>safety_margin=1</em><big>)</big><a class="headerlink" href="#vehicles.simulation.Vehicle.colliding_pose" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Checks that the given pose does not give collisions. </dt>
+<dd><p class="first">Returns None or a CollisionInfo structure.</p>
+<p class="last">safety_margin: multiplies the radius</p>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pose</strong> (<tt class="docutils literal"><span class="pre">SE3</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.simulation.Vehicle.compute_observations">
+<tt class="descname">compute_observations</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.simulation.Vehicle.compute_observations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.simulation.Vehicle.get_pose">
+<tt class="descname">get_pose</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.simulation.Vehicle.get_pose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the pose of the robot in SE(3).</p>
+<blockquote>
+<div>This is regardless of the state space.
+The idea is that all robot spaces are subgroups of SE(3)
+so this is the most general representation.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">SE3</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.simulation.Vehicle.set_pose">
+<tt class="descname">set_pose</tt><big>(</big><em>pose</em><big>)</big><a class="headerlink" href="#vehicles.simulation.Vehicle.set_pose" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pose</strong> (<tt class="docutils literal"><span class="pre">SE3</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.simulation.Vehicle.set_world_primitives">
+<tt class="descname">set_world_primitives</tt><big>(</big><em>primitives</em><big>)</big><a class="headerlink" href="#vehicles.simulation.Vehicle.set_world_primitives" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.simulation.Vehicle.simulate">
+<tt class="descname">simulate</tt><big>(</big><em>commands</em>, <em>dt</em><big>)</big><a class="headerlink" href="#vehicles.simulation.Vehicle.simulate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.simulation.Vehicle.to_yaml">
+<tt class="descname">to_yaml</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.simulation.Vehicle.to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.simulation.Attached">
+<em class="property">class </em><tt class="descclassname">vehicles.simulation.</tt><tt class="descname">Attached</tt><big>(</big><em>sensor</em>, <em>pose</em>, <em>joint</em>, <em>extra</em><big>)</big><a class="headerlink" href="#vehicles.simulation.Attached" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="vehicles.simulation.Attached.to_yaml">
+<tt class="descname">to_yaml</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.simulation.Attached.to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vehicles.simulation.collision">
+<span id="collision-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">collision</span></tt> Module<a class="headerlink" href="#module-vehicles.simulation.collision" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="vehicles.simulation.collision.CollisionInfo">
+<em class="property">class </em><tt class="descclassname">vehicles.simulation.collision.</tt><tt class="descname">CollisionInfo</tt><a class="headerlink" href="#vehicles.simulation.collision.CollisionInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">tuple</span></tt></p>
+<p>CollisionInfo(collided, time, primitive, normal, penetration)</p>
+<dl class="attribute">
+<dt id="vehicles.simulation.collision.CollisionInfo.collided">
+<tt class="descname">collided</tt><a class="headerlink" href="#vehicles.simulation.collision.CollisionInfo.collided" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vehicles.simulation.collision.CollisionInfo.normal">
+<tt class="descname">normal</tt><a class="headerlink" href="#vehicles.simulation.collision.CollisionInfo.normal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 3</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vehicles.simulation.collision.CollisionInfo.penetration">
+<tt class="descname">penetration</tt><a class="headerlink" href="#vehicles.simulation.collision.CollisionInfo.penetration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 4</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vehicles.simulation.collision.CollisionInfo.primitive">
+<tt class="descname">primitive</tt><a class="headerlink" href="#vehicles.simulation.collision.CollisionInfo.primitive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vehicles.simulation.collision.CollisionInfo.time">
+<tt class="descname">time</tt><a class="headerlink" href="#vehicles.simulation.collision.CollisionInfo.time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="vehicles.simulation.collision.binary_search">
+<tt class="descclassname">vehicles.simulation.collision.</tt><tt class="descname">binary_search</tt><big>(</big><em>f</em>, <em>lower</em>, <em>upper</em>, <em>precision</em><big>)</big><a class="reference internal" href="../modules/vehicles/simulation/collision.html#binary_search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.simulation.collision.binary_search" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="vehicles.simulation.collision.collides_with">
+<tt class="descclassname">vehicles.simulation.collision.</tt><tt class="descname">collides_with</tt><big>(</big><em>primitives</em>, <em>center</em>, <em>radius</em><big>)</big><a class="reference internal" href="../modules/vehicles/simulation/collision.html#collides_with"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.simulation.collision.collides_with" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether a circle collides with other primitives.
+Returns CollisionInfo.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vehicles.simulation.collision.collides_with_primitive">
+<tt class="descclassname">vehicles.simulation.collision.</tt><tt class="descname">collides_with_primitive</tt><big>(</big><em>primitive</em>, <em>center</em>, <em>radius</em><big>)</big><a class="reference internal" href="../modules/vehicles/simulation/collision.html#collides_with_primitive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.simulation.collision.collides_with_primitive" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="vehicles.simulation.collision.compute_collision">
+<tt class="descclassname">vehicles.simulation.collision.</tt><tt class="descname">compute_collision</tt><big>(</big><em>dynamics_function</em>, <em>max_dt</em>, <em>primitives</em>, <em>radius</em><big>)</big><a class="reference internal" href="../modules/vehicles/simulation/collision.html#compute_collision"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.simulation.collision.compute_collision" title="Permalink to this definition">¶</a></dt>
+<dd><p>dynamics_function: returns the center of the circle at time t.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-vehicles.simulation.collision_utils">
+<span id="collision-utils-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">collision_utils</span></tt> Module<a class="headerlink" href="#module-vehicles.simulation.collision_utils" title="Permalink to this headline">¶</a></h2>
+<p>Simple utilities for 2D intersections.</p>
+<p>The normal is returned as a 2d numpy array pointing towards the circle.
+The penetration is a float, &gt;=0 (=0 if touching).</p>
+<dl class="class">
+<dt id="vehicles.simulation.collision_utils.PrimitiveIntersection">
+<em class="property">class </em><tt class="descclassname">vehicles.simulation.collision_utils.</tt><tt class="descname">PrimitiveIntersection</tt><a class="headerlink" href="#vehicles.simulation.collision_utils.PrimitiveIntersection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">tuple</span></tt></p>
+<p>PrimitiveIntersection(normal, penetration)</p>
+<dl class="attribute">
+<dt id="vehicles.simulation.collision_utils.PrimitiveIntersection.normal">
+<tt class="descname">normal</tt><a class="headerlink" href="#vehicles.simulation.collision_utils.PrimitiveIntersection.normal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vehicles.simulation.collision_utils.PrimitiveIntersection.penetration">
+<tt class="descname">penetration</tt><a class="headerlink" href="#vehicles.simulation.collision_utils.PrimitiveIntersection.penetration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="vehicles.simulation.collision_utils.circle_circle_intersection">
+<tt class="descclassname">vehicles.simulation.collision_utils.</tt><tt class="descname">circle_circle_intersection</tt><big>(</big><em>c1</em>, <em>r1</em>, <em>c2</em>, <em>r2</em>, <em>solid2=True</em><big>)</big><a class="reference internal" href="../modules/vehicles/simulation/collision_utils.html#circle_circle_intersection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.simulation.collision_utils.circle_circle_intersection" title="Permalink to this definition">¶</a></dt>
+<dd><p>The second circle might or might not be solid.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>c2</strong> (<tt class="docutils literal"><span class="pre">point2</span></tt>) &#8211; </li>
+<li><strong>c1</strong> (<tt class="docutils literal"><span class="pre">point2</span></tt>) &#8211; </li>
+<li><strong>solid2</strong> (<tt class="docutils literal"><span class="pre">bool</span></tt>) &#8211; </li>
+<li><strong>r1</strong> (<tt class="docutils literal"><span class="pre">&gt;0</span></tt>) &#8211; </li>
+<li><strong>r2</strong> (<tt class="docutils literal"><span class="pre">&gt;0</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">None|intersection</span></tt></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vehicles.simulation.collision_utils.circle_polyline_intersection">
+<tt class="descclassname">vehicles.simulation.collision_utils.</tt><tt class="descname">circle_polyline_intersection</tt><big>(</big><em>c1</em>, <em>r1</em>, <em>points</em><big>)</big><a class="reference internal" href="../modules/vehicles/simulation/collision_utils.html#circle_polyline_intersection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.simulation.collision_utils.circle_polyline_intersection" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>c1</strong> (<tt class="docutils literal"><span class="pre">point2</span></tt>) &#8211; </li>
+<li><strong>points</strong> (<tt class="docutils literal"><span class="pre">seq[&gt;=2](point2)</span></tt>) &#8211; </li>
+<li><strong>r1</strong> (<tt class="docutils literal"><span class="pre">&gt;0</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">None|intersection</span></tt></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vehicles.simulation.collision_utils.circle_segment_intersection">
+<tt class="descclassname">vehicles.simulation.collision_utils.</tt><tt class="descname">circle_segment_intersection</tt><big>(</big><em>c1</em>, <em>r1</em>, <em>p1</em>, <em>p2</em><big>)</big><a class="reference internal" href="../modules/vehicles/simulation/collision_utils.html#circle_segment_intersection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.simulation.collision_utils.circle_segment_intersection" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>p2</strong> (<tt class="docutils literal"><span class="pre">point2</span></tt>) &#8211; </li>
+<li><strong>c1</strong> (<tt class="docutils literal"><span class="pre">point2</span></tt>) &#8211; </li>
+<li><strong>p1</strong> (<tt class="docutils literal"><span class="pre">point2</span></tt>) &#8211; </li>
+<li><strong>r1</strong> (<tt class="docutils literal"><span class="pre">&gt;0</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">None|intersection</span></tt></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vehicles.simulation.collision_utils.projection_on_line">
+<tt class="descclassname">vehicles.simulation.collision_utils.</tt><tt class="descname">projection_on_line</tt><big>(</big><em>p='point2'</em>, <em>a='point2'</em>, <em>b='point2'</em><big>)</big><a class="reference internal" href="../modules/vehicles/simulation/collision_utils.html#projection_on_line"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.simulation.collision_utils.projection_on_line" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Projects a point onto the line containing the segment a-b. </dt>
+<dd><dl class="first last docutils">
+<dt>Returns the projected point, the normal pointing to p,</dt>
+<dd>and the distance of p to the line.</dd>
+</dl>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>a</strong> (<tt class="docutils literal"><span class="pre">point2</span></tt>) &#8211; </li>
+<li><strong>p</strong> (<tt class="docutils literal"><span class="pre">point2</span></tt>) &#8211; </li>
+<li><strong>b</strong> (<tt class="docutils literal"><span class="pre">point2</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">tuple(array[2],(array[2],unit_length),&gt;=0)</span></tt></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-vehicles.simulation.collision_utils_test">
+<span id="collision-utils-test-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">collision_utils_test</span></tt> Module<a class="headerlink" href="#module-vehicles.simulation.collision_utils_test" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="vehicles.simulation.collision_utils_test.CollisionUtilsTest">
+<em class="property">class </em><tt class="descclassname">vehicles.simulation.collision_utils_test.</tt><tt class="descname">CollisionUtilsTest</tt><big>(</big><em>methodName='runTest'</em><big>)</big><a class="reference internal" href="../modules/vehicles/simulation/collision_utils_test.html#CollisionUtilsTest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.simulation.collision_utils_test.CollisionUtilsTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">unittest.case.TestCase</span></tt></p>
+<dl class="attribute">
+<dt id="vehicles.simulation.collision_utils_test.CollisionUtilsTest.all_tests">
+<tt class="descname">all_tests</tt><em class="property"> = [(&lt;function circle_circle_intersection at 0x1d355f0&gt;, ([0, 0], 1, [0, 2.0], 1.0), PrimitiveIntersection(normal=array([ 0, -1]), penetration=0.0)), (&lt;function circle_circle_intersection at 0x1d355f0&gt;, ([0, 0], 1, [0, 1.5], 1.0), PrimitiveIntersection(normal=array([ 0, -1]), penetration=0.5)), (&lt;function circle_circle_intersection at 0x1d355f0&gt;, ([0, 0], 1, [0, -2.0], 1.0), PrimitiveIntersection(normal=array([0, 1]), penetration=0.0)), (&lt;function circle_circle_intersection at 0x1d355f0&gt;, ([0, 0], 1, [0, -1.5], 1.0), PrimitiveIntersection(normal=array([0, 1]), penetration=0.5)), (&lt;function circle_circle_intersection at 0x1d355f0&gt;, ([0, 0], 1, [0, -1.5], 0.2), None), (&lt;function circle_segment_intersection at 0x1d35758&gt;, ([0, 0], 1, [1.0, 1.0], [1.0, -1.0]), PrimitiveIntersection(normal=array([-1,  0]), penetration=0.0)), (&lt;function circle_segment_intersection at 0x1d35758&gt;, ([0, 0], 1, [-1.0, 1.0], [-1.0, -1.0]), PrimitiveIntersection(normal=array([1, 0]), penetration=0.0)), (&lt;function circle_segment_intersection at 0x1d35758&gt;, ([0, 0], 1, [1.0, -1.0], [1.0, 1.0]), PrimitiveIntersection(normal=array([-1,  0]), penetration=0.0)), (&lt;function circle_segment_intersection at 0x1d35758&gt;, ([0, 0], 1, [-1.0, -1.0], [-1.0, 1.0]), PrimitiveIntersection(normal=array([1, 0]), penetration=0.0)), (&lt;function circle_segment_intersection at 0x1d35758&gt;, ([0, 0], 1, [1.1, 1.0], [1.1, -1.0]), None), (&lt;function circle_segment_intersection at 0x1d35758&gt;, ([0, 0], 1, [0.5, 1.0], [0.5, -1.0]), PrimitiveIntersection(normal=array([-1,  0]), penetration=0.5)), (&lt;function circle_segment_intersection at 0x1d35758&gt;, ([0, 0], 1, [-1.0, -1.0], [1.0, -1.0]), PrimitiveIntersection(normal=array([0, 1]), penetration=0.0)), (&lt;function circle_segment_intersection at 0x1d35758&gt;, ([0, 0], 1, [-1.0, 1.0], [1.0, 1.0]), PrimitiveIntersection(normal=array([ 0, -1]), penetration=0.0)), (&lt;function circle_circle_intersection at 0x1d355f0&gt;, ([0, 0], 1, [0, 0], 1.0), PrimitiveIntersection(normal=array([1, 0]), penetration=2.0)), (&lt;function circle_circle_intersection at 0x1d355f0&gt;, ([0, 0], 0.5, [0, 0], 1.0), PrimitiveIntersection(normal=array([1, 0]), penetration=1.5))]</em><a class="headerlink" href="#vehicles.simulation.collision_utils_test.CollisionUtilsTest.all_tests" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.simulation.collision_utils_test.CollisionUtilsTest.test_circle_circle_intersection">
+<tt class="descname">test_circle_circle_intersection</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/simulation/collision_utils_test.html#CollisionUtilsTest.test_circle_circle_intersection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.simulation.collision_utils_test.CollisionUtilsTest.test_circle_circle_intersection" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="vehicles.simulation.collision_utils_test.pi">
+<tt class="descclassname">vehicles.simulation.collision_utils_test.</tt><tt class="descname">pi</tt><big>(</big><em>normal</em>, <em>penetration</em><big>)</big><a class="reference internal" href="../modules/vehicles/simulation/collision_utils_test.html#pi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.simulation.collision_utils_test.pi" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="vehicles.simulation.collision_utils_test.test_solid">
+<tt class="descclassname">vehicles.simulation.collision_utils_test.</tt><tt class="descname">test_solid</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/simulation/collision_utils_test.html#test_solid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.simulation.collision_utils_test.test_solid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-vehicles.simulation.vehicle">
+<span id="vehicle-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">vehicle</span></tt> Module<a class="headerlink" href="#module-vehicles.simulation.vehicle" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="vehicles.simulation.vehicle.Attached">
+<em class="property">class </em><tt class="descclassname">vehicles.simulation.vehicle.</tt><tt class="descname">Attached</tt><big>(</big><em>sensor</em>, <em>pose</em>, <em>joint</em>, <em>extra</em><big>)</big><a class="reference internal" href="../modules/vehicles/simulation/vehicle.html#Attached"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.simulation.vehicle.Attached" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="vehicles.simulation.vehicle.Attached.to_yaml">
+<tt class="descname">to_yaml</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/simulation/vehicle.html#Attached.to_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.simulation.vehicle.Attached.to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.simulation.vehicle.Vehicle">
+<em class="property">class </em><tt class="descclassname">vehicles.simulation.vehicle.</tt><tt class="descname">Vehicle</tt><big>(</big><em>radius=0.5</em>, <em>extra={}</em><big>)</big><a class="reference internal" href="../modules/vehicles/simulation/vehicle.html#Vehicle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.simulation.vehicle.Vehicle" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="vehicles.simulation.vehicle.Vehicle.add_dynamics">
+<tt class="descname">add_dynamics</tt><big>(</big><em>id_dynamics</em>, <em>dynamics</em><big>)</big><a class="reference internal" href="../modules/vehicles/simulation/vehicle.html#Vehicle.add_dynamics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.simulation.vehicle.Vehicle.add_dynamics" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.simulation.vehicle.Vehicle.add_sensor">
+<tt class="descname">add_sensor</tt><big>(</big><em>id_sensor</em>, <em>sensor</em>, <em>pose</em>, <em>joint</em>, <em>extra</em><big>)</big><a class="reference internal" href="../modules/vehicles/simulation/vehicle.html#Vehicle.add_sensor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.simulation.vehicle.Vehicle.add_sensor" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>id_sensor</strong> (<tt class="docutils literal"><span class="pre">str</span></tt>) &#8211; </li>
+<li><strong>pose</strong> (<tt class="docutils literal"><span class="pre">SE3</span></tt>) &#8211; </li>
+<li><strong>joint</strong> (<tt class="docutils literal"><span class="pre">int,&gt;=0</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.simulation.vehicle.Vehicle.colliding_pose">
+<tt class="descname">colliding_pose</tt><big>(</big><em>pose</em>, <em>safety_margin=1</em><big>)</big><a class="reference internal" href="../modules/vehicles/simulation/vehicle.html#Vehicle.colliding_pose"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.simulation.vehicle.Vehicle.colliding_pose" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Checks that the given pose does not give collisions. </dt>
+<dd><p class="first">Returns None or a CollisionInfo structure.</p>
+<p class="last">safety_margin: multiplies the radius</p>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pose</strong> (<tt class="docutils literal"><span class="pre">SE3</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.simulation.vehicle.Vehicle.compute_observations">
+<tt class="descname">compute_observations</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/simulation/vehicle.html#Vehicle.compute_observations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.simulation.vehicle.Vehicle.compute_observations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.simulation.vehicle.Vehicle.get_pose">
+<tt class="descname">get_pose</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/simulation/vehicle.html#Vehicle.get_pose"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.simulation.vehicle.Vehicle.get_pose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the pose of the robot in SE(3).</p>
+<blockquote>
+<div>This is regardless of the state space.
+The idea is that all robot spaces are subgroups of SE(3)
+so this is the most general representation.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">SE3</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.simulation.vehicle.Vehicle.set_pose">
+<tt class="descname">set_pose</tt><big>(</big><em>pose</em><big>)</big><a class="reference internal" href="../modules/vehicles/simulation/vehicle.html#Vehicle.set_pose"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.simulation.vehicle.Vehicle.set_pose" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pose</strong> (<tt class="docutils literal"><span class="pre">SE3</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.simulation.vehicle.Vehicle.set_world_primitives">
+<tt class="descname">set_world_primitives</tt><big>(</big><em>primitives</em><big>)</big><a class="reference internal" href="../modules/vehicles/simulation/vehicle.html#Vehicle.set_world_primitives"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.simulation.vehicle.Vehicle.set_world_primitives" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.simulation.vehicle.Vehicle.simulate">
+<tt class="descname">simulate</tt><big>(</big><em>commands</em>, <em>dt</em><big>)</big><a class="reference internal" href="../modules/vehicles/simulation/vehicle.html#Vehicle.simulate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.simulation.vehicle.Vehicle.simulate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.simulation.vehicle.Vehicle.to_yaml">
+<tt class="descname">to_yaml</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/simulation/vehicle.html#Vehicle.to_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.simulation.vehicle.Vehicle.to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vehicles.simulation.vsimulation">
+<span id="vsimulation-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">vsimulation</span></tt> Module<a class="headerlink" href="#module-vehicles.simulation.vsimulation" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="vehicles.simulation.vsimulation.VehicleSimulation">
+<em class="property">class </em><tt class="descclassname">vehicles.simulation.vsimulation.</tt><tt class="descname">VehicleSimulation</tt><big>(</big><em>vehicle</em>, <em>world</em>, <em>safety_margin=3</em><big>)</big><a class="reference internal" href="../modules/vehicles/simulation/vsimulation.html#VehicleSimulation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.simulation.vsimulation.VehicleSimulation" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="vehicles.simulation.vsimulation.VehicleSimulation.compute_observations">
+<tt class="descname">compute_observations</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/simulation/vsimulation.html#VehicleSimulation.compute_observations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.simulation.vsimulation.VehicleSimulation.compute_observations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.simulation.vsimulation.VehicleSimulation.info">
+<tt class="descname">info</tt><big>(</big><em>s</em><big>)</big><a class="reference internal" href="../modules/vehicles/simulation/vsimulation.html#VehicleSimulation.info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.simulation.vsimulation.VehicleSimulation.info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.simulation.vsimulation.VehicleSimulation.new_episode">
+<tt class="descname">new_episode</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/simulation/vsimulation.html#VehicleSimulation.new_episode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.simulation.vsimulation.VehicleSimulation.new_episode" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.simulation.vsimulation.VehicleSimulation.simulate">
+<tt class="descname">simulate</tt><big>(</big><em>commands</em>, <em>dt</em><big>)</big><a class="reference internal" href="../modules/vehicles/simulation/vsimulation.html#VehicleSimulation.simulate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.simulation.vsimulation.VehicleSimulation.simulate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.simulation.vsimulation.VehicleSimulation.to_yaml">
+<tt class="descname">to_yaml</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/simulation/vsimulation.html#VehicleSimulation.to_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.simulation.vsimulation.VehicleSimulation.to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a YAML-serializable description of the state.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">simulation Package</a><ul>
+<li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">simulation</span></tt> Package</a></li>
+<li><a class="reference internal" href="#module-vehicles.simulation.collision"><tt class="docutils literal"><span class="pre">collision</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vehicles.simulation.collision_utils"><tt class="docutils literal"><span class="pre">collision_utils</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vehicles.simulation.collision_utils_test"><tt class="docutils literal"><span class="pre">collision_utils_test</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vehicles.simulation.vehicle"><tt class="docutils literal"><span class="pre">vehicle</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vehicles.simulation.vsimulation"><tt class="docutils literal"><span class="pre">vsimulation</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../sources/api/vehicles.simulation.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Vehicles 1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer">
+        &copy; Copyright 2010, Andrea Censi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+	
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-155626-14']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+
+  </body>
+</html>

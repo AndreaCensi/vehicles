@@ -1,0 +1,661 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vehicles_cairo Package &mdash; Vehicles 1.2 documentation</title>
+    
+    <link rel="stylesheet" href="../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <link rel="top" title="Vehicles 1.2 documentation" href="../index.html" />
+	 
+
+
+   <style type="text/css">
+        span.brand { color: #a00;}
+   </style> 
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Vehicles 1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="vehicles-cairo-package">
+<h1>vehicles_cairo Package<a class="headerlink" href="#vehicles-cairo-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><a class="reference internal" href="#module-vehicles_cairo" title="vehicles_cairo"><tt class="xref py py-mod docutils literal"><span class="pre">vehicles_cairo</span></tt></a> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-vehicles_cairo"></span><p>Plotting Vehicles using the Cairo library.</p>
+<p>Use this pattern: ..</p>
+<blockquote>
+<div><p># Check for Cairo support
+from vehicles_cairo import vehicles_has_cairo
+if not vehicles_has_cairo:</p>
+<blockquote>
+<div>logger.error(&#8216;This program cannot run if Cairo is not installed.&#8217;)
+return</div></blockquote>
+<p>from vehicles_cairo import ...</p>
+</div></blockquote>
+</div>
+<div class="section" id="module-vehicles_cairo.constants">
+<span id="constants-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">constants</span></tt> Module<a class="headerlink" href="#module-vehicles_cairo.constants" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="vehicles_cairo.constants.CairoConstants">
+<em class="property">class </em><tt class="descclassname">vehicles_cairo.constants.</tt><tt class="descname">CairoConstants</tt><a class="reference internal" href="../modules/vehicles_cairo/constants.html#CairoConstants"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_cairo.constants.CairoConstants" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="vehicles_cairo.constants.CairoConstants.delta_single_ray">
+<tt class="descname">delta_single_ray</tt><em class="property"> = 0.52359877559829882</em><a class="headerlink" href="#vehicles_cairo.constants.CairoConstants.delta_single_ray" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vehicles_cairo.constants.CairoConstants.grid_color">
+<tt class="descname">grid_color</tt><em class="property"> = [0.8, 0.8, 0.8]</em><a class="headerlink" href="#vehicles_cairo.constants.CairoConstants.grid_color" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vehicles_cairo.constants.CairoConstants.grid_width">
+<tt class="descname">grid_width</tt><em class="property"> = 0.005</em><a class="headerlink" href="#vehicles_cairo.constants.CairoConstants.grid_width" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vehicles_cairo.constants.CairoConstants.laser_compact_bg">
+<tt class="descname">laser_compact_bg</tt><em class="property"> = [1, 0.6, 0.6, 0.3]</em><a class="headerlink" href="#vehicles_cairo.constants.CairoConstants.laser_compact_bg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vehicles_cairo.constants.CairoConstants.laser_compact_fg">
+<tt class="descname">laser_compact_fg</tt><em class="property"> = [1, 0, 0, 0.8]</em><a class="headerlink" href="#vehicles_cairo.constants.CairoConstants.laser_compact_fg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vehicles_cairo.constants.CairoConstants.laser_compact_r">
+<tt class="descname">laser_compact_r</tt><em class="property"> = 0.4</em><a class="headerlink" href="#vehicles_cairo.constants.CairoConstants.laser_compact_r" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vehicles_cairo.constants.CairoConstants.laser_compact_r_width">
+<tt class="descname">laser_compact_r_width</tt><em class="property"> = 0.25</em><a class="headerlink" href="#vehicles_cairo.constants.CairoConstants.laser_compact_r_width" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vehicles_cairo.constants.CairoConstants.obstacle_border_color">
+<tt class="descname">obstacle_border_color</tt><em class="property"> = [0, 0, 0]</em><a class="headerlink" href="#vehicles_cairo.constants.CairoConstants.obstacle_border_color" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vehicles_cairo.constants.CairoConstants.obstacle_border_width">
+<tt class="descname">obstacle_border_width</tt><em class="property"> = 0.01</em><a class="headerlink" href="#vehicles_cairo.constants.CairoConstants.obstacle_border_width" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vehicles_cairo.constants.CairoConstants.obstacle_fill_color">
+<tt class="descname">obstacle_fill_color</tt><em class="property"> = [0.7, 0.7, 0.8]</em><a class="headerlink" href="#vehicles_cairo.constants.CairoConstants.obstacle_fill_color" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vehicles_cairo.constants.CairoConstants.omni_wheel_style">
+<tt class="descname">omni_wheel_style</tt><em class="property"> = {'border_color': [0, 0, 0], 'border_width': 0.01, 'fill_color': [0.3, 0.3, 0.3]}</em><a class="headerlink" href="#vehicles_cairo.constants.CairoConstants.omni_wheel_style" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vehicles_cairo.constants.CairoConstants.photoreceptors_compact_r">
+<tt class="descname">photoreceptors_compact_r</tt><em class="property"> = 0.4</em><a class="headerlink" href="#vehicles_cairo.constants.CairoConstants.photoreceptors_compact_r" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vehicles_cairo.constants.CairoConstants.photoreceptors_compact_r_width">
+<tt class="descname">photoreceptors_compact_r_width</tt><em class="property"> = 0.15</em><a class="headerlink" href="#vehicles_cairo.constants.CairoConstants.photoreceptors_compact_r_width" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vehicles_cairo.constants.CairoConstants.plot_ranges_rho_min">
+<tt class="descname">plot_ranges_rho_min</tt><em class="property"> = 0.5</em><a class="headerlink" href="#vehicles_cairo.constants.CairoConstants.plot_ranges_rho_min" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vehicles_cairo.constants.CairoConstants.robot_body_style">
+<tt class="descname">robot_body_style</tt><em class="property"> = {'border_color': [0, 0, 0], 'border_width': 0.01, 'fill_color': [0.8, 0.8, 0.8]}</em><a class="headerlink" href="#vehicles_cairo.constants.CairoConstants.robot_body_style" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vehicles_cairo.constants.CairoConstants.robot_border_color">
+<tt class="descname">robot_border_color</tt><em class="property"> = [0, 0, 0]</em><a class="headerlink" href="#vehicles_cairo.constants.CairoConstants.robot_border_color" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vehicles_cairo.constants.CairoConstants.robot_border_width">
+<tt class="descname">robot_border_width</tt><em class="property"> = 0.01</em><a class="headerlink" href="#vehicles_cairo.constants.CairoConstants.robot_border_width" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vehicles_cairo.constants.CairoConstants.robot_fill_color">
+<tt class="descname">robot_fill_color</tt><em class="property"> = [0.8, 0.8, 0.8]</em><a class="headerlink" href="#vehicles_cairo.constants.CairoConstants.robot_fill_color" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vehicles_cairo.constants.CairoConstants.robot_wheel_border_color">
+<tt class="descname">robot_wheel_border_color</tt><em class="property"> = [0, 0, 0]</em><a class="headerlink" href="#vehicles_cairo.constants.CairoConstants.robot_wheel_border_color" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vehicles_cairo.constants.CairoConstants.robot_wheel_border_width">
+<tt class="descname">robot_wheel_border_width</tt><em class="property"> = 0.04</em><a class="headerlink" href="#vehicles_cairo.constants.CairoConstants.robot_wheel_border_width" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vehicles_cairo.constants.CairoConstants.robot_wheel_fill_color">
+<tt class="descname">robot_wheel_fill_color</tt><em class="property"> = [0.2, 0.2, 0.2]</em><a class="headerlink" href="#vehicles_cairo.constants.CairoConstants.robot_wheel_fill_color" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vehicles_cairo.constants.CairoConstants.robot_wheel_style">
+<tt class="descname">robot_wheel_style</tt><em class="property"> = {'border_color': [0, 0, 0], 'border_width': 0.04, 'fill_color': [0.3, 0.3, 0.3]}</em><a class="headerlink" href="#vehicles_cairo.constants.CairoConstants.robot_wheel_style" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vehicles_cairo.constants.CairoConstants.sensor_data_plot_compact">
+<tt class="descname">sensor_data_plot_compact</tt><em class="property"> = True</em><a class="headerlink" href="#vehicles_cairo.constants.CairoConstants.sensor_data_plot_compact" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vehicles_cairo.constants.CairoConstants.texture_resolution">
+<tt class="descname">texture_resolution</tt><em class="property"> = 0.05</em><a class="headerlink" href="#vehicles_cairo.constants.CairoConstants.texture_resolution" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vehicles_cairo.constants.CairoConstants.texture_width">
+<tt class="descname">texture_width</tt><em class="property"> = 0.2</em><a class="headerlink" href="#vehicles_cairo.constants.CairoConstants.texture_width" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vehicles_cairo.display_all">
+<span id="display-all-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">display_all</span></tt> Module<a class="headerlink" href="#module-vehicles_cairo.display_all" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="vehicles_cairo.display_all.get_joints_as_TSE3">
+<tt class="descclassname">vehicles_cairo.display_all.</tt><tt class="descname">get_joints_as_TSE3</tt><big>(</big><em>vehicle_state</em><big>)</big><a class="reference internal" href="../modules/vehicles_cairo/display_all.html#get_joints_as_TSE3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_cairo.display_all.get_joints_as_TSE3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="vehicles_cairo.display_all.get_sensor_types">
+<tt class="descclassname">vehicles_cairo.display_all.</tt><tt class="descname">get_sensor_types</tt><big>(</big><em>vehicle_state</em><big>)</big><a class="reference internal" href="../modules/vehicles_cairo/display_all.html#get_sensor_types"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_cairo.display_all.get_sensor_types" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the list of sensor types.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vehicles_cairo.display_all.show_grid">
+<tt class="descclassname">vehicles_cairo.display_all.</tt><tt class="descname">show_grid</tt><big>(</big><em>cr</em>, <em>bx</em>, <em>by</em>, <em>spacing=1</em>, <em>margin=0</em><big>)</big><a class="reference internal" href="../modules/vehicles_cairo/display_all.html#show_grid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_cairo.display_all.show_grid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="vehicles_cairo.display_all.vehicles_cairo_display_all">
+<tt class="descclassname">vehicles_cairo.display_all.</tt><tt class="descname">vehicles_cairo_display_all</tt><big>(</big><em>cr, width, height, sim_state, grid=1, zoom=0, bgcolor=[1, 1, 1], zoom_scale_radius=False, extra_draw_world=None, first_person=True, show_world=True, show_sensor_data=True, show_sensor_data_compact=False, show_robot_body=True, show_robot_sensors=True, show_textures=True, plot_sources=False</em><big>)</big><a class="reference internal" href="../modules/vehicles_cairo/display_all.html#vehicles_cairo_display_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_cairo.display_all.vehicles_cairo_display_all" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>zoom_scale_radius</strong> &#8211; If true, scales the zoom by the robot radius.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vehicles_cairo.display_all.vehicles_cairo_set_coordinates">
+<tt class="descclassname">vehicles_cairo.display_all.</tt><tt class="descname">vehicles_cairo_set_coordinates</tt><big>(</big><em>cr</em>, <em>width</em>, <em>height</em>, <em>world_bounds</em>, <em>robot_pose</em>, <em>zoom</em>, <em>world_bounds_pad=0</em>, <em>first_person=False</em><big>)</big><a class="reference internal" href="../modules/vehicles_cairo/display_all.html#vehicles_cairo_set_coordinates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_cairo.display_all.vehicles_cairo_set_coordinates" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>zoom</strong> (<tt class="docutils literal"><span class="pre">&gt;=0</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-vehicles_cairo.sensor_data">
+<span id="sensor-data-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">sensor_data</span></tt> Module<a class="headerlink" href="#module-vehicles_cairo.sensor_data" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="vehicles_cairo.sensor_data.SE2_act_R2">
+<tt class="descclassname">vehicles_cairo.sensor_data.</tt><tt class="descname">SE2_act_R2</tt><big>(</big><em>q</em>, <em>x</em><big>)</big><a class="reference internal" href="../modules/vehicles_cairo/sensor_data.html#SE2_act_R2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_cairo.sensor_data.SE2_act_R2" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>q</strong> (<tt class="docutils literal"><span class="pre">SE2</span></tt>) &#8211; </li>
+<li><strong>x</strong> (<tt class="docutils literal"><span class="pre">array[2]</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">array[2]</span></tt></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vehicles_cairo.sensor_data.cairo_fill_slice">
+<tt class="descclassname">vehicles_cairo.sensor_data.</tt><tt class="descname">cairo_fill_slice</tt><big>(</big><em>cr</em>, <em>theta1</em>, <em>theta2</em>, <em>r0</em>, <em>r1</em><big>)</big><a class="reference internal" href="../modules/vehicles_cairo/sensor_data.html#cairo_fill_slice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_cairo.sensor_data.cairo_fill_slice" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="vehicles_cairo.sensor_data.cairo_plot_sensor_data">
+<tt class="descclassname">vehicles_cairo.sensor_data.</tt><tt class="descname">cairo_plot_sensor_data</tt><big>(</big><em>cr</em>, <em>vehicle_state</em>, <em>scale=1.0</em>, <em>compact=True</em><big>)</big><a class="reference internal" href="../modules/vehicles_cairo/sensor_data.html#cairo_plot_sensor_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_cairo.sensor_data.cairo_plot_sensor_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="vehicles_cairo.sensor_data.cairo_plot_sensor_skins">
+<tt class="descclassname">vehicles_cairo.sensor_data.</tt><tt class="descname">cairo_plot_sensor_skins</tt><big>(</big><em>cr</em>, <em>vehicle_state</em>, <em>scale=1.0</em><big>)</big><a class="reference internal" href="../modules/vehicles_cairo/sensor_data.html#cairo_plot_sensor_skins"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_cairo.sensor_data.cairo_plot_sensor_skins" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="vehicles_cairo.sensor_data.find_radius">
+<tt class="descclassname">vehicles_cairo.sensor_data.</tt><tt class="descname">find_radius</tt><big>(</big><em>positions</em><big>)</big><a class="reference internal" href="../modules/vehicles_cairo/sensor_data.html#find_radius"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_cairo.sensor_data.find_radius" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="vehicles_cairo.sensor_data.luminance2color">
+<tt class="descclassname">vehicles_cairo.sensor_data.</tt><tt class="descname">luminance2color</tt><big>(</big><em>lum</em><big>)</big><a class="reference internal" href="../modules/vehicles_cairo/sensor_data.html#luminance2color"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_cairo.sensor_data.luminance2color" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="vehicles_cairo.sensor_data.plot_fieldsampler">
+<tt class="descclassname">vehicles_cairo.sensor_data.</tt><tt class="descname">plot_fieldsampler</tt><big>(</big><em>cr</em>, <em>pose</em>, <em>positions</em>, <em>sensels</em>, <em>radius=None</em><big>)</big><a class="reference internal" href="../modules/vehicles_cairo/sensor_data.html#plot_fieldsampler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_cairo.sensor_data.plot_fieldsampler" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>positions</strong> (<tt class="docutils literal"><span class="pre">array[Nx2]</span></tt>) &#8211; </li>
+<li><strong>sensels</strong> (<tt class="docutils literal"><span class="pre">array[N]|array[JxK],J*K=N</span></tt>) &#8211; </li>
+<li><strong>pose</strong> (<tt class="docutils literal"><span class="pre">SE2</span></tt>) &#8211; </li>
+<li><strong>radius</strong> (<tt class="docutils literal"><span class="pre">None|&gt;0</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vehicles_cairo.sensor_data.plot_fieldsampler_fancy">
+<tt class="descclassname">vehicles_cairo.sensor_data.</tt><tt class="descname">plot_fieldsampler_fancy</tt><big>(</big><em>cr</em>, <em>positions</em>, <em>sensels</em>, <em>radius=None</em>, <em>alpha=0.2</em><big>)</big><a class="reference internal" href="../modules/vehicles_cairo/sensor_data.html#plot_fieldsampler_fancy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_cairo.sensor_data.plot_fieldsampler_fancy" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>positions</strong> (<tt class="docutils literal"><span class="pre">array[Nx2]</span></tt>) &#8211; </li>
+<li><strong>sensels</strong> (<tt class="docutils literal"><span class="pre">array[N]|array[JxK],J*K=N</span></tt>) &#8211; </li>
+<li><strong>radius</strong> (<tt class="docutils literal"><span class="pre">None|&gt;0</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vehicles_cairo.sensor_data.plot_photoreceptors">
+<tt class="descclassname">vehicles_cairo.sensor_data.</tt><tt class="descname">plot_photoreceptors</tt><big>(</big><em>cr</em>, <em>pose</em>, <em>directions</em>, <em>valid</em>, <em>readings</em>, <em>luminance</em>, <em>rho_min=0.5</em><big>)</big><a class="reference internal" href="../modules/vehicles_cairo/sensor_data.html#plot_photoreceptors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_cairo.sensor_data.plot_photoreceptors" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>directions</strong> (<tt class="docutils literal"><span class="pre">array[N]</span></tt>) &#8211; </li>
+<li><strong>luminance</strong> (<tt class="docutils literal"><span class="pre">array[N]</span></tt>) &#8211; </li>
+<li><strong>valid</strong> (<tt class="docutils literal"><span class="pre">array[N]</span></tt>) &#8211; </li>
+<li><strong>pose</strong> (<tt class="docutils literal"><span class="pre">SE2</span></tt>) &#8211; </li>
+<li><strong>readings</strong> (<tt class="docutils literal"><span class="pre">array[N]</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vehicles_cairo.sensor_data.plot_photoreceptors_compact">
+<tt class="descclassname">vehicles_cairo.sensor_data.</tt><tt class="descname">plot_photoreceptors_compact</tt><big>(</big><em>cr</em>, <em>directions</em>, <em>valid</em>, <em>luminance</em>, <em>r=0.4</em>, <em>r_width=0.15</em><big>)</big><a class="reference internal" href="../modules/vehicles_cairo/sensor_data.html#plot_photoreceptors_compact"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_cairo.sensor_data.plot_photoreceptors_compact" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>directions</strong> (<tt class="docutils literal"><span class="pre">array[N]</span></tt>) &#8211; </li>
+<li><strong>luminance</strong> (<tt class="docutils literal"><span class="pre">array[N]</span></tt>) &#8211; </li>
+<li><strong>valid</strong> (<tt class="docutils literal"><span class="pre">array[N]</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vehicles_cairo.sensor_data.plot_ranges">
+<tt class="descclassname">vehicles_cairo.sensor_data.</tt><tt class="descname">plot_ranges</tt><big>(</big><em>cr</em>, <em>pose</em>, <em>directions</em>, <em>valid</em>, <em>readings</em>, <em>rho_min=0.5</em><big>)</big><a class="reference internal" href="../modules/vehicles_cairo/sensor_data.html#plot_ranges"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_cairo.sensor_data.plot_ranges" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>directions</strong> (<tt class="docutils literal"><span class="pre">array[N]</span></tt>) &#8211; </li>
+<li><strong>pose</strong> (<tt class="docutils literal"><span class="pre">SE2</span></tt>) &#8211; </li>
+<li><strong>valid</strong> (<tt class="docutils literal"><span class="pre">array[N]</span></tt>) &#8211; </li>
+<li><strong>readings</strong> (<tt class="docutils literal"><span class="pre">array[N]</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vehicles_cairo.sensor_data.plot_ranges_compact">
+<tt class="descclassname">vehicles_cairo.sensor_data.</tt><tt class="descname">plot_ranges_compact</tt><big>(</big><em>cr</em>, <em>directions</em>, <em>readings</em>, <em>valid</em>, <em>r=0.4</em>, <em>r_width=0.25</em><big>)</big><a class="reference internal" href="../modules/vehicles_cairo/sensor_data.html#plot_ranges_compact"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_cairo.sensor_data.plot_ranges_compact" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>directions</strong> (<tt class="docutils literal"><span class="pre">array[N]</span></tt>) &#8211; </li>
+<li><strong>valid</strong> (<tt class="docutils literal"><span class="pre">array[N]</span></tt>) &#8211; </li>
+<li><strong>readings</strong> (<tt class="docutils literal"><span class="pre">array[N]</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vehicles_cairo.sensor_data.plot_ray">
+<tt class="descclassname">vehicles_cairo.sensor_data.</tt><tt class="descname">plot_ray</tt><big>(</big><em>cr, origin, direction, rho1, rho2, color=[0, 0, 0]</em><big>)</big><a class="reference internal" href="../modules/vehicles_cairo/sensor_data.html#plot_ray"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_cairo.sensor_data.plot_ray" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>origin</strong> (<tt class="docutils literal"><span class="pre">seq[2](number)</span></tt>) &#8211; </li>
+<li><strong>rho2</strong> (<tt class="docutils literal"><span class="pre">&gt;=x</span></tt>) &#8211; </li>
+<li><strong>direction</strong> (<tt class="docutils literal"><span class="pre">number</span></tt>) &#8211; </li>
+<li><strong>rho1</strong> (<tt class="docutils literal"><span class="pre">x</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-vehicles_cairo.utils">
+<span id="utils-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">utils</span></tt> Module<a class="headerlink" href="#module-vehicles_cairo.utils" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="vehicles_cairo.utils.cairo_rototranslate">
+<tt class="descclassname">vehicles_cairo.utils.</tt><tt class="descname">cairo_rototranslate</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="reference internal" href="../modules/vehicles_cairo/utils.html#cairo_rototranslate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_cairo.utils.cairo_rototranslate" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pose</strong> (<tt class="docutils literal"><span class="pre">SE2</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vehicles_cairo.utils.cairo_set_axis">
+<tt class="descclassname">vehicles_cairo.utils.</tt><tt class="descname">cairo_set_axis</tt><big>(</big><em>cr</em>, <em>width</em>, <em>height</em>, <em>a</em><big>)</big><a class="reference internal" href="../modules/vehicles_cairo/utils.html#cairo_set_axis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_cairo.utils.cairo_set_axis" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>a</strong> (<tt class="docutils literal"><span class="pre">seq[4](number)</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-vehicles_cairo.world_geometry">
+<span id="world-geometry-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">world_geometry</span></tt> Module<a class="headerlink" href="#module-vehicles_cairo.world_geometry" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="vehicles_cairo.world_geometry.cairo_plot_circle_primitive">
+<tt class="descclassname">vehicles_cairo.world_geometry.</tt><tt class="descname">cairo_plot_circle_primitive</tt><big>(</big><em>cr</em>, <em>center</em>, <em>radius</em>, <em>solid</em>, <em>texture</em>, <em>numpass</em><big>)</big><a class="reference internal" href="../modules/vehicles_cairo/world_geometry.html#cairo_plot_circle_primitive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_cairo.world_geometry.cairo_plot_circle_primitive" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>solid</strong> (<tt class="docutils literal"><span class="pre">bool</span></tt>) &#8211; </li>
+<li><strong>numpass</strong> (<tt class="docutils literal"><span class="pre">int</span></tt>) &#8211; </li>
+<li><strong>radius</strong> (<tt class="docutils literal"><span class="pre">&gt;0</span></tt>) &#8211; </li>
+<li><strong>center</strong> (<tt class="docutils literal"><span class="pre">seq[2](float)</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vehicles_cairo.world_geometry.cairo_plot_polyline_primitive">
+<tt class="descclassname">vehicles_cairo.world_geometry.</tt><tt class="descname">cairo_plot_polyline_primitive</tt><big>(</big><em>cr</em>, <em>points</em>, <em>texture=None</em><big>)</big><a class="reference internal" href="../modules/vehicles_cairo/world_geometry.html#cairo_plot_polyline_primitive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_cairo.world_geometry.cairo_plot_polyline_primitive" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>points</strong> (<tt class="docutils literal"><span class="pre">array[2xN]</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vehicles_cairo.world_geometry.cairo_plot_sources">
+<tt class="descclassname">vehicles_cairo.world_geometry.</tt><tt class="descname">cairo_plot_sources</tt><big>(</big><em>cr</em>, <em>world_state</em><big>)</big><a class="reference internal" href="../modules/vehicles_cairo/world_geometry.html#cairo_plot_sources"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_cairo.world_geometry.cairo_plot_sources" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="vehicles_cairo.world_geometry.cairo_plot_sources_field">
+<tt class="descclassname">vehicles_cairo.world_geometry.</tt><tt class="descname">cairo_plot_sources_field</tt><big>(</big><em>cr, sources, bounds, disc=[100, 100], alpha=0.5</em><big>)</big><a class="reference internal" href="../modules/vehicles_cairo/world_geometry.html#cairo_plot_sources_field"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_cairo.world_geometry.cairo_plot_sources_field" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="vehicles_cairo.world_geometry.cairo_plot_texture_circle">
+<tt class="descclassname">vehicles_cairo.world_geometry.</tt><tt class="descname">cairo_plot_texture_circle</tt><big>(</big><em>cr</em>, <em>radius</em>, <em>center</em>, <em>texture</em>, <em>resolution</em>, <em>width_inside</em>, <em>width_outside</em><big>)</big><a class="reference internal" href="../modules/vehicles_cairo/world_geometry.html#cairo_plot_texture_circle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_cairo.world_geometry.cairo_plot_texture_circle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="vehicles_cairo.world_geometry.cairo_plot_textured_polyline">
+<tt class="descclassname">vehicles_cairo.world_geometry.</tt><tt class="descname">cairo_plot_textured_polyline</tt><big>(</big><em>cr</em>, <em>points</em>, <em>texture</em>, <em>resolution</em>, <em>width_inside</em>, <em>width_outside</em><big>)</big><a class="reference internal" href="../modules/vehicles_cairo/world_geometry.html#cairo_plot_textured_polyline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_cairo.world_geometry.cairo_plot_textured_polyline" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>points</strong> (<tt class="docutils literal"><span class="pre">array[2xN]</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vehicles_cairo.world_geometry.cairo_plot_textured_segment">
+<tt class="descclassname">vehicles_cairo.world_geometry.</tt><tt class="descname">cairo_plot_textured_segment</tt><big>(</big><em>cr</em>, <em>texture</em>, <em>length</em>, <em>resolution</em>, <em>offset</em>, <em>width_inside</em>, <em>width_outside</em><big>)</big><a class="reference internal" href="../modules/vehicles_cairo/world_geometry.html#cairo_plot_textured_segment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_cairo.world_geometry.cairo_plot_textured_segment" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>length</strong> (<tt class="docutils literal"><span class="pre">float,&gt;0</span></tt>) &#8211; </li>
+<li><strong>width_inside</strong> (<tt class="docutils literal"><span class="pre">&gt;=0</span></tt>) &#8211; </li>
+<li><strong>resolution</strong> (<tt class="docutils literal"><span class="pre">float,&gt;0</span></tt>) &#8211; </li>
+<li><strong>width_outside</strong> (<tt class="docutils literal"><span class="pre">&gt;=0</span></tt>) &#8211; </li>
+<li><strong>offset</strong> (<tt class="docutils literal"><span class="pre">float</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vehicles_cairo.world_geometry.cairo_show_world_geometry">
+<tt class="descclassname">vehicles_cairo.world_geometry.</tt><tt class="descname">cairo_show_world_geometry</tt><big>(</big><em>cr</em>, <em>world_state</em>, <em>plot_sources=False</em>, <em>plot_textures=False</em>, <em>extra_pad=0</em><big>)</big><a class="reference internal" href="../modules/vehicles_cairo/world_geometry.html#cairo_show_world_geometry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_cairo.world_geometry.cairo_show_world_geometry" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-vehicles_cairo.write_to_file">
+<span id="write-to-file-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">write_to_file</span></tt> Module<a class="headerlink" href="#module-vehicles_cairo.write_to_file" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="vehicles_cairo.write_to_file.vehicles_cairo_display_pdf">
+<tt class="descclassname">vehicles_cairo.write_to_file.</tt><tt class="descname">vehicles_cairo_display_pdf</tt><big>(</big><em>filename</em>, <em>width</em>, <em>height</em>, <em>sim_state</em>, <em>**plotting_params</em><big>)</big><a class="reference internal" href="../modules/vehicles_cairo/write_to_file.html#vehicles_cairo_display_pdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_cairo.write_to_file.vehicles_cairo_display_pdf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="vehicles_cairo.write_to_file.vehicles_cairo_display_png">
+<tt class="descclassname">vehicles_cairo.write_to_file.</tt><tt class="descname">vehicles_cairo_display_png</tt><big>(</big><em>filename</em>, <em>width</em>, <em>height</em>, <em>sim_state</em>, <em>trim=True</em>, <em>**plotting_params</em><big>)</big><a class="reference internal" href="../modules/vehicles_cairo/write_to_file.html#vehicles_cairo_display_png"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_cairo.write_to_file.vehicles_cairo_display_png" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="vehicles_cairo.write_to_file.vehicles_cairo_display_svg">
+<tt class="descclassname">vehicles_cairo.write_to_file.</tt><tt class="descname">vehicles_cairo_display_svg</tt><big>(</big><em>filename</em>, <em>width</em>, <em>height</em>, <em>sim_state</em>, <em>**plotting_params</em><big>)</big><a class="reference internal" href="../modules/vehicles_cairo/write_to_file.html#vehicles_cairo_display_svg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_cairo.write_to_file.vehicles_cairo_display_svg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="vehicles_cairo.skins.html">skins Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vehicles_cairo.skins.html#id1"><tt class="docutils literal"><span class="pre">skins</span></tt> Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vehicles_cairo.skins.html#module-vehicles_cairo.skins.complex_skin"><tt class="docutils literal"><span class="pre">complex_skin</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vehicles_cairo.skins.html#module-vehicles_cairo.skins.flies"><tt class="docutils literal"><span class="pre">flies</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vehicles_cairo.skins.html#module-vehicles_cairo.skins.robot_skins"><tt class="docutils literal"><span class="pre">robot_skins</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vehicles_cairo.skins.html#module-vehicles_cairo.skins.sensors"><tt class="docutils literal"><span class="pre">sensors</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">vehicles_cairo Package</a><ul>
+<li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">vehicles_cairo</span></tt> Package</a></li>
+<li><a class="reference internal" href="#module-vehicles_cairo.constants"><tt class="docutils literal"><span class="pre">constants</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vehicles_cairo.display_all"><tt class="docutils literal"><span class="pre">display_all</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vehicles_cairo.sensor_data"><tt class="docutils literal"><span class="pre">sensor_data</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vehicles_cairo.utils"><tt class="docutils literal"><span class="pre">utils</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vehicles_cairo.world_geometry"><tt class="docutils literal"><span class="pre">world_geometry</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vehicles_cairo.write_to_file"><tt class="docutils literal"><span class="pre">write_to_file</span></tt> Module</a></li>
+<li><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../sources/api/vehicles_cairo.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Vehicles 1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer">
+        &copy; Copyright 2010, Andrea Censi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+	
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-155626-14']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+
+  </body>
+</html>

@@ -1,0 +1,154 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vehicles.Dynamics &mdash; Vehicles 1.2 documentation</title>
+    
+    <link rel="stylesheet" href="../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <link rel="top" title="Vehicles 1.2 documentation" href="../index.html" />
+	 
+
+
+   <style type="text/css">
+        span.brand { color: #a00;}
+   </style> 
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Vehicles 1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="vehicles-dynamics">
+<h1>vehicles.Dynamics<a class="headerlink" href="#vehicles-dynamics" title="Permalink to this headline">¶</a></h1>
+<dl class="data">
+<dt id="vehicles.Dynamics">
+<tt class="descclassname">vehicles.</tt><tt class="descname">Dynamics</tt><em class="property"> = &lt;class 'vehicles.interfaces.dynamics.Dynamics'&gt;</em><a class="headerlink" href="#vehicles.Dynamics" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the interface for the various dynamics implemented.</p>
+<p>We make the following assumptions:</p>
+<ol class="arabic simple">
+<li>The state space is the product of a pose space and a shape_space.</li>
+<li>No assumptions on shape_space, except that it is a 
+DifferentiableManifold.</li>
+<li>It is assumed that state_space is homeomorphic 
+to a subgroup of TSE(3).</li>
+</ol>
+<p>In general, &#8220;state&#8221; is an opaque variable from outside.</p>
+<p>The function:</p>
+<blockquote>
+<div>state2 = dynamics.integrate(state, commands, dt)</div></blockquote>
+<p>integrates the dynamics. Here state and state2 are opaque variables.</p>
+<p>The function:</p>
+<blockquote>
+<div>state = dynamics.pose2state(pose)</div></blockquote>
+<p>creates a state from a pose (SE3), by embedding/projecting 
+appropriately. The semantics is to get the closest state to the pose, 
+with the dynamics &#8220;at rest&#8221;; for example, the velocity should be set 
+to 0, and the shape space to a resting position.</p>
+<p>The function:</p>
+<blockquote>
+<div>pose, vel = dynamics.joint_state(state, joint=0)</div></blockquote>
+<p>where SE3.belongs(pose) and se3.belongs(vel) returns the pos/vel
+of a joint for the given state.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../sources/api/vehicles.Dynamics.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Vehicles 1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer">
+        &copy; Copyright 2010, Andrea Censi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+	
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-155626-14']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+
+  </body>
+</html>

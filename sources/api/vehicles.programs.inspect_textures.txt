@@ -1,0 +1,19 @@
+inspect_textures Package
+========================
+
+:mod:`inspect_textures` Package
+-------------------------------
+
+.. automodule:: vehicles.programs.inspect_textures
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`main` Module
+------------------
+
+.. automodule:: vehicles.programs.inspect_textures.main
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

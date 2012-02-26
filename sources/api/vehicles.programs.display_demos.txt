@@ -1,0 +1,27 @@
+display_demos Package
+=====================
+
+:mod:`simulations` Module
+-------------------------
+
+.. automodule:: vehicles.programs.display_demos.simulations
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`skins` Module
+-------------------
+
+.. automodule:: vehicles.programs.display_demos.skins
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`vehicles` Module
+----------------------
+
+.. automodule:: vehicles.programs.display_demos.vehicles
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

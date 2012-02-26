@@ -1,0 +1,158 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>procgraph_vehicles.vehiclelog_utils &mdash; Vehicles 1.2 documentation</title>
+    
+    <link rel="stylesheet" href="../../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../static/doctools.js"></script>
+    <link rel="top" title="Vehicles 1.2 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" />
+	 
+
+
+   <style type="text/css">
+        span.brand { color: #a00;}
+   </style> 
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Vehicles 1.2 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for procgraph_vehicles.vehiclelog_utils</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">procgraph</span> <span class="kn">import</span> <span class="n">Block</span><span class="p">,</span> <span class="n">simple_block</span><span class="p">,</span> <span class="n">COMPULSORY</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+
+<span class="nd">@simple_block</span>
+<div class="viewcode-block" id="extract_sensels"><a class="viewcode-back" href="../../api/procgraph_vehicles.html#procgraph_vehicles.vehiclelog_utils.extract_sensels">[docs]</a><span class="k">def</span> <span class="nf">extract_sensels</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s">&#39;observations&#39;</span><span class="p">])</span>
+
+</div>
+<span class="nd">@simple_block</span>
+<div class="viewcode-block" id="extract_commands"><a class="viewcode-back" href="../../api/procgraph_vehicles.html#procgraph_vehicles.vehiclelog_utils.extract_commands">[docs]</a><span class="k">def</span> <span class="nf">extract_commands</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s">&#39;commands&#39;</span><span class="p">])</span>
+
+</div>
+<span class="nd">@simple_block</span>
+<div class="viewcode-block" id="extract_field"><a class="viewcode-back" href="../../api/procgraph_vehicles.html#procgraph_vehicles.vehiclelog_utils.extract_field">[docs]</a><span class="k">def</span> <span class="nf">extract_field</span><span class="p">(</span><span class="n">dictionary</span><span class="p">,</span> <span class="n">field</span><span class="o">=</span><span class="n">COMPULSORY</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Could not find field </span><span class="si">%r</span><span class="s">; I know </span><span class="si">%s</span><span class="s">.&#39;</span>
+               <span class="o">%</span> <span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">dictionary</span><span class="p">[</span><span class="n">field</span><span class="p">]</span>
+
+</div>
+<span class="nd">@simple_block</span>
+<div class="viewcode-block" id="extract_timeinfo"><a class="viewcode-back" href="../../api/procgraph_vehicles.html#procgraph_vehicles.vehiclelog_utils.extract_timeinfo">[docs]</a><span class="k">def</span> <span class="nf">extract_timeinfo</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+    <span class="n">timestamp</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s">&#39;timestamp&#39;</span><span class="p">]</span>
+    <span class="n">id_episode</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s">&#39;id_episode&#39;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="s">&quot;Episode </span><span class="si">%20s</span><span class="s"> </span><span class="si">%6.2f</span><span class="s">s&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">id_episode</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="use_simulation_time"><a class="viewcode-back" href="../../api/procgraph_vehicles.html#procgraph_vehicles.vehiclelog_utils.use_simulation_time">[docs]</a><span class="k">class</span> <span class="nc">use_simulation_time</span><span class="p">(</span><span class="n">Block</span><span class="p">):</span>
+    <span class="n">Block</span><span class="o">.</span><span class="n">input</span><span class="p">(</span><span class="s">&#39;state&#39;</span><span class="p">)</span>
+    <span class="n">Block</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="s">&#39;state&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="use_simulation_time.update"><a class="viewcode-back" href="../../api/procgraph_vehicles.html#procgraph_vehicles.vehiclelog_utils.use_simulation_time.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">state</span>
+        <span class="n">timestamp</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s">&#39;timestamp&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_output</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Vehicles 1.2 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer">
+        &copy; Copyright 2010, Andrea Censi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+	
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-155626-14']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+
+  </body>
+</html>

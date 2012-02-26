@@ -54,86 +54,71 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="module-vehicles">
-<span id="vehicles-public-api-reference"></span><span id="api-reference"></span><h1>Vehicles public API reference<a class="headerlink" href="#module-vehicles" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="example-function">
-<h2>Example function<a class="headerlink" href="#example-function" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="vehicles.contract">
-<tt class="descclassname">vehicles.</tt><tt class="descname">contract</tt><big>(</big><em>*arg</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#vehicles.contract" title="Permalink to this definition">¶</a></dt>
-<dd><p>Decorator for adding contracts to functions.</p>
-<p>It is smart enough to support functions with variable number of 
-arguments and keyword arguments.</p>
-<p>There are three ways to specify the contracts. In order of precedence:</p>
-<ul>
-<li><p class="first">As arguments to this decorator. For example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="nd">@contract</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s">&#39;int,&gt;0&#39;</span><span class="p">,</span><span class="n">b</span><span class="o">=</span><span class="s">&#39;list[N],N&gt;0&#39;</span><span class="p">,</span><span class="n">returns</span><span class="o">=</span><span class="s">&#39;list[N]&#39;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">my_function</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="c"># ...</span>
-    <span class="k">pass</span>
-</pre></div>
-</div>
-</li>
-<li><p class="first">As annotations (supported only in Python 3):</p>
-<div class="highlight-python"><pre>@contract
-def my_function(a:'int,&gt;0', b:'list[N],N&gt;0') -&gt; 'list[N]': 
-    # ...
-    pass</pre>
-</div>
-</li>
-<li><p class="first">Using <tt class="docutils literal"><span class="pre">:type:</span></tt> and <tt class="docutils literal"><span class="pre">:rtype:</span></tt> tags in the function&#8217;s docstring:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="nd">@contract</span>
-<span class="k">def</span> <span class="nf">my_function</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span> 
-    <span class="sd">&quot;&quot;&quot; Function description.</span>
-<span class="sd">        :type a: int,&gt;0</span>
-<span class="sd">        :type b: list[N],N&gt;0</span>
-<span class="sd">        :rtype: list[N]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">pass</span>
-</pre></div>
-</div>
-</li>
-</ul>
-<p><strong>Signature and docstrings</strong>: The signature of the decorated
-function is conserved. By default, the docstring is modified
-by adding <tt class="docutils literal"><span class="pre">:type:</span></tt> and <tt class="docutils literal"><span class="pre">:rtype:</span></tt> definitions. To avoid that,
-pass <tt class="docutils literal"><span class="pre">modify_docstring=False</span></tt> as a parameter.</p>
-<p><strong>Contracts evaluation</strong>: Note that all contracts for the arguments 
-and the return values
-are evaluated in the same context. This make it possible to use
-common variables in the contract expression. For example, in the 
-example above, the return value is constrained to be a list of the same 
-length (<tt class="docutils literal"><span class="pre">N</span></tt>) as the parameter <tt class="docutils literal"><span class="pre">b</span></tt>.</p>
-<p><strong>Using docstrings</strong> Note that, by convention, those annotations must 
-be parseable as RestructuredText. This is relevant if you are using 
-Sphinx.
-If the contract string has special RST characters in it, like <tt class="docutils literal"><span class="pre">*</span></tt>,
-you can include it in double ticks. <a href="#id1"><span class="problematic" id="id2">|pycontracts|</span></a> will remove
-the double ticks before interpreting the string.</p>
-<p>For example, the two annotations in this docstring are equivalent
-for <a href="#id3"><span class="problematic" id="id4">|pycontracts|</span></a>, but the latter is better for Sphinx:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="sd">&quot;&quot;&quot; My function </span>
-
-<span class="sd">    :param a: First parameter</span>
-<span class="sd">    :type a: list(tuple(str,*))</span>
-<span class="sd">    </span>
-<span class="sd">    :param b: First parameter</span>
-<span class="sd">    :type b: ``list(tuple(str,*))``</span>
-<span class="sd">&quot;&quot;&quot;</span>
-</pre></div>
-</div>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+  <div class="section" id="vehicles-public-api-reference">
+<span id="api-reference"></span><h1>Vehicles public API reference<a class="headerlink" href="#vehicles-public-api-reference" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="interfaces">
+<h2>Interfaces<a class="headerlink" href="#interfaces" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Raise :</th><td class="field-body">ContractException, if arguments are not coherent</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/vehicles.Dynamics.html#vehicles.Dynamics" title="vehicles.Dynamics"><tt class="xref py py-obj docutils literal"><span class="pre">vehicles.Dynamics</span></tt></a>(state_space,&nbsp;commands_spec)</td>
+<td>This is the interface for the various dynamics implemented.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raise :</th><td class="field-body">ContractSyntaxError</td>
+<tr class="row-even"><td><a class="reference internal" href="api/vehicles.html#vehicles.VehicleSensor" title="vehicles.VehicleSensor"><tt class="xref py py-obj docutils literal"><span class="pre">VehicleSensor</span></tt></a>(observations_spec)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/vehicles.html#vehicles.World" title="vehicles.World"><tt class="xref py py-obj docutils literal"><span class="pre">World</span></tt></a>(bounds[,&nbsp;start_poses])</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/vehicles.html#vehicles.VehicleSkin" title="vehicles.VehicleSkin"><tt class="xref py py-obj docutils literal"><span class="pre">VehicleSkin</span></tt></a></td>
+<td></td>
 </tr>
 </tbody>
 </table>
-</dd></dl>
-
+</div>
+<div class="section" id="geometric-primitives">
+<h2>Geometric primitives<a class="headerlink" href="#geometric-primitives" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="api/vehicles.html#vehicles.Circle" title="vehicles.Circle"><tt class="xref py py-obj docutils literal"><span class="pre">Circle</span></tt></a>(id_object,&nbsp;tags,&nbsp;texture,&nbsp;center,&nbsp;radius)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/vehicles.html#vehicles.Field" title="vehicles.Field"><tt class="xref py py-obj docutils literal"><span class="pre">Field</span></tt></a></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/vehicles.html#vehicles.GeometricShape" title="vehicles.GeometricShape"><tt class="xref py py-obj docutils literal"><span class="pre">GeometricShape</span></tt></a>(texture)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/vehicles.html#vehicles.PolyLine" title="vehicles.PolyLine"><tt class="xref py py-obj docutils literal"><span class="pre">PolyLine</span></tt></a>(id_object,&nbsp;tags,&nbsp;texture,&nbsp;points)</td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/vehicles.html#vehicles.Primitive" title="vehicles.Primitive"><tt class="xref py py-obj docutils literal"><span class="pre">Primitive</span></tt></a>(id_object,&nbsp;tags)</td>
+<td></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/vehicles.html#vehicles.Source" title="vehicles.Source"><tt class="xref py py-obj docutils literal"><span class="pre">Source</span></tt></a>(id_object,&nbsp;tags,&nbsp;center,&nbsp;kernel_spec)</td>
+<td>A point-source is what field samplers are sensitive to.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="module-vehicles.library.worlds">
+<span id="library-worlds"></span><h2>Library: worlds<a class="headerlink" href="#module-vehicles.library.worlds" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-vehicles.library.sensors">
+<span id="library-sensors"></span><h2>Library: sensors<a class="headerlink" href="#module-vehicles.library.sensors" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-vehicles.library.dynamics">
+<span id="library-dynamics"></span><h2>Library: dynamics<a class="headerlink" href="#module-vehicles.library.dynamics" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-vehicles.library.textures">
+<span id="library-textures"></span><h2>Library: textures<a class="headerlink" href="#module-vehicles.library.textures" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -146,7 +131,16 @@ for <a href="#id3"><span class="problematic" id="id4">|pycontracts|</span></a>, 
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Vehicles public API reference</a><ul>
-<li><a class="reference internal" href="#example-function">Example function</a></li>
+<li><a class="reference internal" href="#interfaces">Interfaces</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#geometric-primitives">Geometric primitives</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-vehicles.library.worlds">Library: worlds</a></li>
+<li><a class="reference internal" href="#module-vehicles.library.sensors">Library: sensors</a></li>
+<li><a class="reference internal" href="#module-vehicles.library.dynamics">Library: dynamics</a></li>
+<li><a class="reference internal" href="#module-vehicles.library.textures">Library: textures</a></li>
 </ul>
 </li>
 </ul>

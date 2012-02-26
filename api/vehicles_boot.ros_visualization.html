@@ -1,0 +1,189 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ros_visualization Package &mdash; Vehicles 1.2 documentation</title>
+    
+    <link rel="stylesheet" href="../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <link rel="top" title="Vehicles 1.2 documentation" href="../index.html" />
+	 
+
+
+   <style type="text/css">
+        span.brand { color: #a00;}
+   </style> 
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Vehicles 1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ros-visualization-package">
+<h1>ros_visualization Package<a class="headerlink" href="#ros-visualization-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">ros_visualization</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-vehicles_boot.ros_visualization"></span></div>
+<div class="section" id="module-vehicles_boot.ros_visualization.ros_conversions">
+<span id="ros-conversions-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">ros_conversions</span></tt> Module<a class="headerlink" href="#module-vehicles_boot.ros_visualization.ros_conversions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="vehicles_boot.ros_visualization.ros_conversions.ROS_Pose_from_SE3">
+<tt class="descclassname">vehicles_boot.ros_visualization.ros_conversions.</tt><tt class="descname">ROS_Pose_from_SE3</tt><big>(</big><em>pose</em>, <em>z=0</em><big>)</big><a class="reference internal" href="../modules/vehicles_boot/ros_visualization/ros_conversions.html#ROS_Pose_from_SE3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_boot.ros_visualization.ros_conversions.ROS_Pose_from_SE3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts an element of SE3 (as a 4x4 matrix) into the ROS format.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pose</strong> (<tt class="docutils literal"><span class="pre">SE3</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vehicles_boot.ros_visualization.ros_conversions.ROS_quaternion_from_my_quaternion">
+<tt class="descclassname">vehicles_boot.ros_visualization.ros_conversions.</tt><tt class="descname">ROS_quaternion_from_my_quaternion</tt><big>(</big><em>q</em><big>)</big><a class="reference internal" href="../modules/vehicles_boot/ros_visualization/ros_conversions.html#ROS_quaternion_from_my_quaternion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_boot.ros_visualization.ros_conversions.ROS_quaternion_from_my_quaternion" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="vehicles_boot.ros_visualization.ros_conversions.ROS_quaternion_order">
+<tt class="descclassname">vehicles_boot.ros_visualization.ros_conversions.</tt><tt class="descname">ROS_quaternion_order</tt><big>(</big><em>q</em><big>)</big><a class="reference internal" href="../modules/vehicles_boot/ros_visualization/ros_conversions.html#ROS_quaternion_order"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_boot.ros_visualization.ros_conversions.ROS_quaternion_order" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="vehicles_boot.ros_visualization.ros_conversions.numpy_to_imgmsg">
+<tt class="descclassname">vehicles_boot.ros_visualization.ros_conversions.</tt><tt class="descname">numpy_to_imgmsg</tt><big>(</big><em>image</em>, <em>stamp=None</em><big>)</big><a class="reference internal" href="../modules/vehicles_boot/ros_visualization/ros_conversions.html#numpy_to_imgmsg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_boot.ros_visualization.ros_conversions.numpy_to_imgmsg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="ros-plot-vehicle-module">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">ros_plot_vehicle</span></tt> Module<a class="headerlink" href="#ros-plot-vehicle-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-vehicles_boot.ros_visualization.ros_plot_world">
+<span id="ros-plot-world-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">ros_plot_world</span></tt> Module<a class="headerlink" href="#module-vehicles_boot.ros_visualization.ros_plot_world" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="vehicles_boot.ros_visualization.ros_plot_world.get_marker_for_world_extent">
+<tt class="descclassname">vehicles_boot.ros_visualization.ros_plot_world.</tt><tt class="descname">get_marker_for_world_extent</tt><big>(</big><em>bounds</em>, <em>frame_id</em>, <em>stamp</em><big>)</big><a class="reference internal" href="../modules/vehicles_boot/ros_visualization/ros_plot_world.html#get_marker_for_world_extent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_boot.ros_visualization.ros_plot_world.get_marker_for_world_extent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="vehicles_boot.ros_visualization.ros_plot_world.publish_world">
+<tt class="descclassname">vehicles_boot.ros_visualization.ros_plot_world.</tt><tt class="descname">publish_world</tt><big>(</big><em>publisher</em>, <em>params</em>, <em>world</em><big>)</big><a class="reference internal" href="../modules/vehicles_boot/ros_visualization/ros_plot_world.html#publish_world"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_boot.ros_visualization.ros_plot_world.publish_world" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="ros-simulation-module">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">ros_simulation</span></tt> Module<a class="headerlink" href="#ros-simulation-module" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">ros_visualization Package</a><ul>
+<li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">ros_visualization</span></tt> Package</a></li>
+<li><a class="reference internal" href="#module-vehicles_boot.ros_visualization.ros_conversions"><tt class="docutils literal"><span class="pre">ros_conversions</span></tt> Module</a></li>
+<li><a class="reference internal" href="#ros-plot-vehicle-module"><tt class="docutils literal"><span class="pre">ros_plot_vehicle</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vehicles_boot.ros_visualization.ros_plot_world"><tt class="docutils literal"><span class="pre">ros_plot_world</span></tt> Module</a></li>
+<li><a class="reference internal" href="#ros-simulation-module"><tt class="docutils literal"><span class="pre">ros_simulation</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../sources/api/vehicles_boot.ros_visualization.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Vehicles 1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer">
+        &copy; Copyright 2010, Andrea Censi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+	
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-155626-14']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+
+  </body>
+</html>

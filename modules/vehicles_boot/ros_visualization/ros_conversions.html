@@ -1,0 +1,172 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vehicles_boot.ros_visualization.ros_conversions &mdash; Vehicles 1.2 documentation</title>
+    
+    <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../../static/doctools.js"></script>
+    <link rel="top" title="Vehicles 1.2 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" />
+	 
+
+
+   <style type="text/css">
+        span.brand { color: #a00;}
+   </style> 
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Vehicles 1.2 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vehicles_boot.ros_visualization.ros_conversions</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">contracts</span> <span class="kn">import</span> <span class="n">contract</span>
+<span class="kn">from</span> <span class="nn">geometry</span> <span class="kn">import</span> <span class="n">quaternion_from_rotation</span><span class="p">,</span> <span class="n">rotation_translation_from_pose</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+
+<span class="nd">@contract</span><span class="p">(</span><span class="n">pose</span><span class="o">=</span><span class="s">&#39;SE3&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="ROS_Pose_from_SE3"><a class="viewcode-back" href="../../../api/vehicles_boot.ros_visualization.html#vehicles_boot.ros_visualization.ros_conversions.ROS_Pose_from_SE3">[docs]</a><span class="k">def</span> <span class="nf">ROS_Pose_from_SE3</span><span class="p">(</span><span class="n">pose</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Converts an element of SE3 (as a 4x4 matrix) into the ROS format. &#39;&#39;&#39;</span>
+    <span class="kn">from</span> <span class="nn">geometry_msgs.msg</span> <span class="kn">import</span> <span class="n">Pose</span><span class="p">,</span> <span class="n">Point</span>  <span class="c"># @UnresolvedImport</span>
+    <span class="n">R</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">rotation_translation_from_pose</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>
+    <span class="n">q1</span> <span class="o">=</span> <span class="n">quaternion_from_rotation</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">ROS_quaternion_from_my_quaternion</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Pose</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="n">q</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="ROS_quaternion_order"><a class="viewcode-back" href="../../../api/vehicles_boot.ros_visualization.html#vehicles_boot.ros_visualization.ros_conversions.ROS_quaternion_order">[docs]</a><span class="k">def</span> <span class="nf">ROS_quaternion_order</span><span class="p">(</span><span class="n">q</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+
+</div>
+<div class="viewcode-block" id="ROS_quaternion_from_my_quaternion"><a class="viewcode-back" href="../../../api/vehicles_boot.ros_visualization.html#vehicles_boot.ros_visualization.ros_conversions.ROS_quaternion_from_my_quaternion">[docs]</a><span class="k">def</span> <span class="nf">ROS_quaternion_from_my_quaternion</span><span class="p">(</span><span class="n">q</span><span class="p">):</span>
+    <span class="kn">from</span> <span class="nn">geometry_msgs.msg</span> <span class="kn">import</span> <span class="n">Quaternion</span>  <span class="c"># @UnresolvedImport</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">ROS_quaternion_order</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Quaternion</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">q</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+
+<span class="c">#def test_same_convention():</span>
+<span class="c">#    &quot;&quot;&quot; Make sure that ROS and I agree on the conventions for rotations. &quot;&quot;&quot;</span>
+<span class="c">#    import tf #@UnresolvedImport</span>
+<span class="c">#    import rospy #@UnresolvedImport</span>
+<span class="c">#    theta = 0.2</span>
+<span class="c">#    q1 = quaternion_from_axis_angle(axis=np.array([0, 0, 1]), angle=theta)</span>
+<span class="c">#    q1f = ROS_quaternion_from_my_quaternion(q1)</span>
+<span class="c">#    q2 = tf.transformations.quaternion_from_euler(0, 0, theta)</span>
+<span class="c">#    rospy.loginfo(&#39;q1f: %s&#39; % q1f)</span>
+<span class="c">#    rospy.loginfo(&#39;q2 : %s&#39; % q2)</span>
+
+
+<span class="c"># found somewhere</span></div>
+<div class="viewcode-block" id="numpy_to_imgmsg"><a class="viewcode-back" href="../../../api/vehicles_boot.ros_visualization.html#vehicles_boot.ros_visualization.ros_conversions.numpy_to_imgmsg">[docs]</a><span class="k">def</span> <span class="nf">numpy_to_imgmsg</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">stamp</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">sensor_msgs</span>  <span class="c"># @UnresolvedImport</span>
+    <span class="n">rosimage</span> <span class="o">=</span> <span class="n">sensor_msgs</span><span class="o">.</span><span class="n">msg</span><span class="o">.</span><span class="n">Image</span><span class="p">()</span>
+    <span class="n">rosimage</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">rosimage</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">image</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">:</span>
+        <span class="n">rosimage</span><span class="o">.</span><span class="n">encoding</span> <span class="o">=</span> <span class="s">&#39;8UC</span><span class="si">%d</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">rosimage</span><span class="o">.</span><span class="n">step</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">rosimage</span><span class="o">.</span><span class="n">width</span>
+        <span class="n">rosimage</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">rosimage</span><span class="o">.</span><span class="n">encoding</span> <span class="o">=</span> <span class="s">&#39;32FC</span><span class="si">%d</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">rosimage</span><span class="o">.</span><span class="n">step</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">rosimage</span><span class="o">.</span><span class="n">width</span> <span class="o">*</span> <span class="mi">4</span>
+        <span class="n">rosimage</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">flat</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">tostring</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">stamp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">rosimage</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">stamp</span> <span class="o">=</span> <span class="n">stamp</span>
+    <span class="k">return</span> <span class="n">rosimage</span>
+</pre></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Vehicles 1.2 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer">
+        &copy; Copyright 2010, Andrea Censi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+	
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-155626-14']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+
+  </body>
+</html>

@@ -61,6 +61,12 @@
 
 <span class="n">__version__</span> <span class="o">=</span> <span class="s">&#39;1.2&#39;</span>
 
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;VehicleSensor&#39;</span><span class="p">,</span> <span class="s">&#39;Field&#39;</span><span class="p">,</span> <span class="s">&#39;PolyLine&#39;</span><span class="p">,</span> <span class="s">&#39;Vehicle&#39;</span><span class="p">,</span> <span class="s">&#39;Circle&#39;</span><span class="p">,</span>
+           <span class="s">&#39;GeometricShape&#39;</span><span class="p">,</span> <span class="s">&#39;VehiclesConstants&#39;</span><span class="p">,</span> <span class="s">&#39;VehicleSimulation&#39;</span><span class="p">,</span>
+            <span class="s">&#39;VehiclesConfig&#39;</span><span class="p">,</span> <span class="s">&#39;World&#39;</span><span class="p">,</span>
+             <span class="s">&#39;Attached&#39;</span><span class="p">,</span> <span class="s">&#39;Primitive&#39;</span><span class="p">,</span> <span class="s">&#39;Source&#39;</span><span class="p">,</span> <span class="s">&#39;VehicleSkin&#39;</span><span class="p">,</span> <span class="s">&#39;Dynamics&#39;</span><span class="p">,</span>
+             <span class="s">&#39;library&#39;</span><span class="p">]</span>
+
 <span class="kn">from</span> <span class="nn">contracts</span> <span class="kn">import</span> <span class="n">contract</span>
 <span class="kn">import</span> <span class="nn">geometry</span>  <span class="c"># loads all geometry contracts</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
@@ -70,14 +76,12 @@
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&quot;Vehicles&quot;</span><span class="p">)</span>
 <span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">.constants</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">.configuration</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">.interfaces</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">.simulation</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">.sensors</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">.worlds</span> <span class="kn">import</span> <span class="o">*</span>
 
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">library</span>
 
 <span class="n">__docformat__</span> <span class="o">=</span> <span class="s">&#39;restructuredtext&#39;</span> <span class="c"># For Epydoc</span>
 </pre></div>

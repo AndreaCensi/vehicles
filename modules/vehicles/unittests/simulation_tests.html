@@ -1,0 +1,202 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vehicles.unittests.simulation_tests &mdash; Vehicles 1.2 documentation</title>
+    
+    <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../../static/doctools.js"></script>
+    <link rel="top" title="Vehicles 1.2 documentation" href="../../../index.html" />
+    <link rel="up" title="vehicles" href="../../vehicles.html" />
+	 
+
+
+   <style type="text/css">
+        span.brand { color: #a00;}
+   </style> 
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Vehicles 1.2 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../../vehicles.html" accesskey="U">vehicles</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vehicles.unittests.simulation_tests</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">VehicleSimulation</span><span class="p">,</span> <span class="n">logger</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">for_all_world_vehicle_pairs</span><span class="p">,</span> <span class="n">np</span>
+
+
+<div class="viewcode-block" id="random_commands"><a class="viewcode-back" href="../../../api/vehicles.unittests.html#vehicles.unittests.simulation_tests.random_commands">[docs]</a><span class="k">def</span> <span class="nf">random_commands</span><span class="p">(</span><span class="n">commands_spec</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Gets random commands for the given spec. Note that it works</span>
+<span class="sd">        only for simple specs, but it is enough to not depend on boot_olympics</span>
+<span class="sd">        proper routines (see StreamSpec). </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">shape</span> <span class="o">=</span> <span class="n">commands_spec</span><span class="p">[</span><span class="s">&#39;shape&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Sorry, I can do this only for simple specs.&#39;</span><span class="p">)</span>
+
+    <span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">commands_spec</span><span class="p">[</span><span class="s">&#39;format&#39;</span><span class="p">],</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">kind</span> <span class="o">=</span> <span class="n">commands_spec</span><span class="p">[</span><span class="s">&#39;format&#39;</span><span class="p">]</span>
+            <span class="n">vrange</span> <span class="o">=</span> <span class="n">commands_spec</span><span class="p">[</span><span class="s">&#39;range&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">kind</span> <span class="o">=</span> <span class="n">commands_spec</span><span class="p">[</span><span class="s">&#39;format&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">vrange</span> <span class="o">=</span> <span class="n">commands_spec</span><span class="p">[</span><span class="s">&#39;range&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+
+        <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span> <span class="o">=</span> <span class="n">vrange</span>
+
+        <span class="k">if</span> <span class="n">kind</span> <span class="o">==</span> <span class="s">&#39;C&#39;</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">lower</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span> <span class="o">*</span> <span class="p">(</span><span class="n">upper</span> <span class="o">-</span> <span class="n">lower</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s">&#39;D&#39;</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Invalid kind </span><span class="si">%r</span><span class="s"> in </span><span class="si">%s</span><span class="s">.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">kind</span><span class="p">,</span> <span class="n">commands_spec</span><span class="p">))</span>
+        <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">values</span>
+
+</div>
+<div class="viewcode-block" id="check_simulation"><a class="viewcode-back" href="../../../api/vehicles.unittests.html#vehicles.unittests.simulation_tests.check_simulation">[docs]</a><span class="k">def</span> <span class="nf">check_simulation</span><span class="p">(</span><span class="n">sim</span><span class="p">,</span> <span class="n">num_episodes</span><span class="p">,</span> <span class="n">num_instants</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_episodes</span><span class="p">):</span>
+        <span class="n">sim</span><span class="o">.</span><span class="n">new_episode</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_instants</span><span class="p">):</span>
+            <span class="n">cmds</span> <span class="o">=</span> <span class="n">random_commands</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">dynamics</span><span class="o">.</span><span class="n">get_commands_spec</span><span class="p">())</span>
+            <span class="n">sim</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">cmds</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+            <span class="n">sim</span><span class="o">.</span><span class="n">compute_observations</span><span class="p">()</span>
+<span class="c">#</span>
+<span class="c">#@attr(&#39;simulation&#39;)</span>
+<span class="c">#def test_simulation():</span>
+<span class="c">#    VehiclesConfig.load()</span>
+<span class="c">#        </span>
+<span class="c">#    worlds = VehiclesConfig.worlds</span>
+<span class="c">#    vehicles = VehiclesConfig.vehicles</span>
+<span class="c">#    for id_world, id_vehicle in itertools.product(worlds, vehicles):</span>
+<span class="c">#        # XXX: check compatible</span>
+<span class="c">#        # if compatible</span>
+<span class="c">#        vehicle = VehiclesConfig.vehicles.instance(id_vehicle) </span>
+<span class="c">#        world = VehiclesConfig.worlds.instance(id_world) #@UndefinedVariable</span>
+<span class="c">#        simulation = VehicleSimulation(vehicle, world)</span>
+<span class="c">#        num_episodes = 3</span>
+<span class="c">#        num_instants = 100</span>
+<span class="c">#        dt = 0.1</span>
+<span class="c">#        yield check_simulation, simulation, num_episodes, num_instants, dt</span>
+<span class="c">#</span>
+<span class="c">#def check_simulation_one_step(sim, dt):</span>
+<span class="c">#    &#39;&#39;&#39; Tries to run one step of the simulation. &#39;&#39;&#39;</span>
+<span class="c">#    sim.new_episode()    </span>
+<span class="c">#    cmds = random_commands(sim.vehicle.commands_spec)</span>
+<span class="c">#    sim.simulate(cmds, dt)</span>
+<span class="c">#    sim.compute_observations()</span>
+
+</div>
+<span class="nd">@for_all_world_vehicle_pairs</span>
+<span class="k">def</span> <span class="nf">check_simulation_one_step_conf</span><span class="p">(</span><span class="n">id_world</span><span class="p">,</span> <span class="n">world</span><span class="p">,</span> <span class="n">id_vehicle</span><span class="p">,</span> <span class="n">vehicle</span><span class="p">):</span>
+    <span class="n">sim</span> <span class="o">=</span> <span class="n">VehicleSimulation</span><span class="p">(</span><span class="n">vehicle</span><span class="p">,</span> <span class="n">world</span><span class="p">)</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">sim</span><span class="o">.</span><span class="n">new_episode</span><span class="p">()</span>
+        <span class="n">cmds</span> <span class="o">=</span> <span class="n">random_commands</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">dynamics</span><span class="o">.</span><span class="n">get_commands_spec</span><span class="p">())</span>
+        <span class="n">sim</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">cmds</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+        <span class="n">sim</span><span class="o">.</span><span class="n">compute_observations</span><span class="p">()</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&#39;Error for vehicle=</span><span class="si">%s</span><span class="s"> world=</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">id_vehicle</span><span class="p">,</span> <span class="n">id_world</span><span class="p">))</span>
+        <span class="k">raise</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Vehicles 1.2 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../../vehicles.html" >vehicles</a> &raquo;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer">
+        &copy; Copyright 2010, Andrea Censi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+	
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-155626-14']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+
+  </body>
+</html>

@@ -1,0 +1,59 @@
+cairo_utils Package
+===================
+
+:mod:`cairo_utils` Package
+--------------------------
+
+.. automodule:: cairo_utils
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`colors` Module
+--------------------
+
+.. automodule:: cairo_utils.colors
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`contexts` Module
+----------------------
+
+.. automodule:: cairo_utils.contexts
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`pixels` Module
+--------------------
+
+.. automodule:: cairo_utils.pixels
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`shape` Module
+-------------------
+
+.. automodule:: cairo_utils.shape
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`text` Module
+------------------
+
+.. automodule:: cairo_utils.text
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`transformations` Module
+-----------------------------
+
+.. automodule:: cairo_utils.transformations
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

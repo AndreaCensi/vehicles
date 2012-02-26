@@ -1,0 +1,251 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vehicles.simulation.vsimulation &mdash; Vehicles 1.2 documentation</title>
+    
+    <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../../static/doctools.js"></script>
+    <link rel="top" title="Vehicles 1.2 documentation" href="../../../index.html" />
+    <link rel="up" title="vehicles.simulation" href="../simulation.html" />
+	 
+
+
+   <style type="text/css">
+        span.brand { color: #a00;}
+   </style> 
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Vehicles 1.2 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../../vehicles.html" >vehicles</a> &raquo;</li>
+          <li><a href="../simulation.html" accesskey="U">vehicles.simulation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vehicles.simulation.vsimulation</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">Vehicle</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">..interfaces</span> <span class="kn">import</span> <span class="n">World</span>
+<span class="kn">from</span> <span class="nn">geometry</span> <span class="kn">import</span> <span class="n">SE3</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;VehicleSimulation&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="VehicleSimulation"><a class="viewcode-back" href="../../../api/vehicles.simulation.html#vehicles.simulation.vsimulation.VehicleSimulation">[docs]</a><span class="k">class</span> <span class="nc">VehicleSimulation</span><span class="p">():</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vehicle</span><span class="p">,</span> <span class="n">world</span><span class="p">,</span> <span class="n">safety_margin</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">vehicle</span><span class="p">,</span> <span class="n">Vehicle</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">world</span><span class="p">,</span> <span class="n">World</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">vehicle</span> <span class="o">=</span> <span class="n">vehicle</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">world</span> <span class="o">=</span> <span class="n">world</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_vehicle_observations</span> <span class="o">=</span> <span class="bp">None</span>  <span class="c"># used for to_yaml()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_vehicle_observations_timestamp</span> <span class="o">=</span> <span class="bp">None</span>  <span class="c"># used for to_yaml()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">vehicle_collided</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="n">cmd_spec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">dynamics</span><span class="o">.</span><span class="n">get_commands_spec</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_commands</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cmd_spec</span><span class="p">[</span><span class="s">&#39;format&#39;</span><span class="p">]))</span>  <span class="c"># XXX</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">episode_started</span> <span class="o">=</span> <span class="bp">False</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">safety_margin</span> <span class="o">=</span> <span class="n">safety_margin</span>
+        <span class="c"># 3 = must have 2*radius distant from obstacles</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;VSim(</span><span class="si">%s</span><span class="s">;</span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vehicle</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">world</span><span class="p">)</span>
+
+<div class="viewcode-block" id="VehicleSimulation.info"><a class="viewcode-back" href="../../../api/vehicles.simulation.html#vehicles.simulation.vsimulation.VehicleSimulation.info">[docs]</a>    <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>  <span class="c"># XXX</span>
+</div>
+<div class="viewcode-block" id="VehicleSimulation.simulate"><a class="viewcode-back" href="../../../api/vehicles.simulation.html#vehicles.simulation.vsimulation.VehicleSimulation.simulate">[docs]</a>    <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">commands</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">episode_started</span><span class="p">:</span>
+            <span class="c"># XXX better exception?</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Episode not started yet.&#39;</span><span class="p">)</span>
+
+        <span class="n">commands</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">commands</span><span class="p">)</span>
+        <span class="n">updated</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vehicle</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">+=</span> <span class="n">dt</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">set_world_primitives</span><span class="p">(</span><span class="n">updated</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">colliding_pose</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">get_pose</span><span class="p">())</span><span class="o">.</span><span class="n">collided</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Collision due to dynamic world at time </span><span class="si">%.2f</span><span class="s">.&#39;</span> <span class="o">%</span>
+                       <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vehicle_collided</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">commands</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vehicle_collided</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">collision</span><span class="o">.</span><span class="n">collided</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">vehicle_collided</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Collision with object at time </span><span class="si">%.2f</span><span class="s">.&#39;</span> <span class="o">%</span>
+                          <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">timestamp0</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_commands</span> <span class="o">=</span> <span class="n">commands</span>
+</div>
+<div class="viewcode-block" id="VehicleSimulation.compute_observations"><a class="viewcode-back" href="../../../api/vehicles.simulation.html#vehicles.simulation.vsimulation.VehicleSimulation.compute_observations">[docs]</a>    <span class="k">def</span> <span class="nf">compute_observations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">episode_started</span><span class="p">:</span>
+            <span class="c"># XXX better exception?</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Episode not started yet.&#39;</span><span class="p">)</span>
+
+        <span class="n">observations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">compute_observations</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_vehicle_observations</span> <span class="o">=</span> <span class="n">observations</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_vehicle_observations_timestamp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span>
+        <span class="c"># TODO: more than one?</span>
+        <span class="k">return</span> <span class="n">observations</span>
+</div>
+<div class="viewcode-block" id="VehicleSimulation.new_episode"><a class="viewcode-back" href="../../../api/vehicles.simulation.html#vehicles.simulation.vsimulation.VehicleSimulation.new_episode">[docs]</a>    <span class="k">def</span> <span class="nf">new_episode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vehicle_collided</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">episode_started</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timestamp0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span>
+
+        <span class="n">max_tries</span> <span class="o">=</span> <span class="mi">100</span>
+        <span class="k">for</span> <span class="n">_</span>  <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_tries</span><span class="p">):</span>
+            <span class="n">episode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">new_episode</span><span class="p">()</span>
+            <span class="c"># TODO: change name</span>
+            <span class="n">pose</span> <span class="o">=</span> <span class="n">episode</span><span class="o">.</span><span class="n">vehicle_state</span>
+            <span class="n">SE3</span><span class="o">.</span><span class="n">belongs</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>
+            <span class="n">primitives</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">get_primitives</span><span class="p">()</span>
+            <span class="n">check_primitives</span><span class="p">(</span><span class="n">primitives</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">set_world_primitives</span><span class="p">(</span><span class="n">primitives</span><span class="p">)</span>
+            <span class="n">collision</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">colliding_pose</span><span class="p">(</span><span class="n">pose</span><span class="p">,</span>
+                                    <span class="n">safety_margin</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">safety_margin</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">collision</span><span class="o">.</span><span class="n">collided</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">set_pose</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">episode</span>
+            <span class="c">#print(&#39;Bad random: collision  %s&#39; % str(collision))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Cannot find a non-colliding state after </span><span class="si">%d</span><span class="s"> tries.&#39;</span>
+                    <span class="o">%</span> <span class="n">max_tries</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="VehicleSimulation.to_yaml"><a class="viewcode-back" href="../../../api/vehicles.simulation.html#vehicles.simulation.vsimulation.VehicleSimulation.to_yaml">[docs]</a>    <span class="k">def</span> <span class="nf">to_yaml</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Returns a YAML-serializable description of the state. &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">episode_started</span><span class="p">:</span>
+            <span class="c"># XXX better exception?</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Episode not started yet.&#39;</span><span class="p">)</span>
+
+        <span class="c"># make sure we computed the observations at least once </span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_vehicle_observations</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">compute_observations</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_vehicle_observations_timestamp</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;Warning: state is at time </span><span class="si">%s</span><span class="s">, observations at </span><span class="si">%s</span><span class="s">.&#39;</span> <span class="o">%</span>
+                         <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="p">,</span>
+                          <span class="bp">self</span><span class="o">.</span><span class="n">last_vehicle_observations_timestamp</span><span class="p">))</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">&#39;version&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+            <span class="s">&#39;vehicle&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">to_yaml</span><span class="p">(),</span>
+            <span class="s">&#39;world&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">to_yaml</span><span class="p">(),</span>
+            <span class="s">&#39;timestamp&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="p">,</span>
+            <span class="s">&#39;observations&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_vehicle_observations</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+            <span class="s">&#39;last_commands&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_commands</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">data</span>
+
+</div></div>
+<span class="k">def</span> <span class="nf">check_primitives</span><span class="p">(</span><span class="n">primitives</span><span class="p">):</span>
+    <span class="n">ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">id_object</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">primitives</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">ids</span><span class="p">))</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ids</span><span class="p">):</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;Repeated IDs: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">ids</span>
+        <span class="n">msg</span> <span class="o">+=</span> <span class="s">&#39; Each primitive must have a different id_object. &#39;</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Vehicles 1.2 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../../vehicles.html" >vehicles</a> &raquo;</li>
+          <li><a href="../simulation.html" >vehicles.simulation</a> &raquo;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer">
+        &copy; Copyright 2010, Andrea Censi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+	
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-155626-14']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+
+  </body>
+</html>

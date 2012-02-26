@@ -1,0 +1,43 @@
+skins Package
+=============
+
+:mod:`skins` Package
+--------------------
+
+.. automodule:: vehicles_cairo.skins
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`complex_skin` Module
+--------------------------
+
+.. automodule:: vehicles_cairo.skins.complex_skin
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`flies` Module
+-------------------
+
+.. automodule:: vehicles_cairo.skins.flies
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`robot_skins` Module
+-------------------------
+
+.. automodule:: vehicles_cairo.skins.robot_skins
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`sensors` Module
+---------------------
+
+.. automodule:: vehicles_cairo.skins.sensors
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

@@ -1,0 +1,323 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>sensors Package &mdash; Vehicles 1.2 documentation</title>
+    
+    <link rel="stylesheet" href="../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <link rel="top" title="Vehicles 1.2 documentation" href="../index.html" />
+	 
+
+
+   <style type="text/css">
+        span.brand { color: #a00;}
+   </style> 
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Vehicles 1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="sensors-package">
+<h1>sensors Package<a class="headerlink" href="#sensors-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">sensors</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-vehicles.sensors"></span></div>
+<div class="section" id="module-vehicles.sensors.field_sampler">
+<span id="field-sampler-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">field_sampler</span></tt> Module<a class="headerlink" href="#module-vehicles.sensors.field_sampler" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="vehicles.sensors.field_sampler.FieldSampler">
+<em class="property">class </em><tt class="descclassname">vehicles.sensors.field_sampler.</tt><tt class="descname">FieldSampler</tt><big>(</big><em>positions</em>, <em>min_value=0</em>, <em>max_value=1</em>, <em>normalize=False</em>, <em>noise=None</em>, <em>shape=None</em><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/field_sampler.html#FieldSampler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.field_sampler.FieldSampler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vehicles.interfaces.html#vehicles.interfaces.vehicle_sensor.VehicleSensor" title="vehicles.interfaces.vehicle_sensor.VehicleSensor"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.vehicle_sensor.VehicleSensor</span></tt></a></p>
+<p>A sensor that samples an intensity field.</p>
+<dl class="method">
+<dt id="vehicles.sensors.field_sampler.FieldSampler.set_world_primitives">
+<tt class="descname">set_world_primitives</tt><big>(</big><em>primitives</em><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/field_sampler.html#FieldSampler.set_world_primitives"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.field_sampler.FieldSampler.set_world_primitives" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.sensors.field_sampler.FieldSampler.to_yaml">
+<tt class="descname">to_yaml</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/field_sampler.html#FieldSampler.to_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.field_sampler.FieldSampler.to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="vehicles.sensors.field_sampler.get_field_values">
+<tt class="descclassname">vehicles.sensors.field_sampler.</tt><tt class="descname">get_field_values</tt><big>(</big><em>primitives</em>, <em>X</em>, <em>Y</em><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/field_sampler.html#get_field_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.field_sampler.get_field_values" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="vehicles.sensors.field_sampler.get_field_value">
+<tt class="descclassname">vehicles.sensors.field_sampler.</tt><tt class="descname">get_field_value</tt><big>(</big><em>primitives</em>, <em>point</em><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/field_sampler.html#get_field_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.field_sampler.get_field_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-vehicles.sensors.field_sampler_rand_circle">
+<span id="field-sampler-rand-circle-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">field_sampler_rand_circle</span></tt> Module<a class="headerlink" href="#module-vehicles.sensors.field_sampler_rand_circle" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="vehicles.sensors.field_sampler_rand_circle.FieldSamplerRandCircle">
+<em class="property">class </em><tt class="descclassname">vehicles.sensors.field_sampler_rand_circle.</tt><tt class="descname">FieldSamplerRandCircle</tt><big>(</big><em>n</em>, <em>radius</em>, <em>normalize=False</em>, <em>min_value=0</em>, <em>max_value=1</em>, <em>noise=None</em><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/field_sampler_rand_circle.html#FieldSamplerRandCircle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.field_sampler_rand_circle.FieldSamplerRandCircle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.sensors.field_sampler.FieldSampler" title="vehicles.sensors.field_sampler.FieldSampler"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.sensors.field_sampler.FieldSampler</span></tt></a></p>
+<p>A field sampler with sensels randomly 
+distributed in a certain radius.</p>
+<dl class="method">
+<dt id="vehicles.sensors.field_sampler_rand_circle.FieldSamplerRandCircle.to_yaml">
+<tt class="descname">to_yaml</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/field_sampler_rand_circle.html#FieldSamplerRandCircle.to_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.field_sampler_rand_circle.FieldSamplerRandCircle.to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vehicles.sensors.field_sampler_uniform">
+<span id="field-sampler-uniform-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">field_sampler_uniform</span></tt> Module<a class="headerlink" href="#module-vehicles.sensors.field_sampler_uniform" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="vehicles.sensors.field_sampler_uniform.FieldSamplerUniform">
+<em class="property">class </em><tt class="descclassname">vehicles.sensors.field_sampler_uniform.</tt><tt class="descname">FieldSamplerUniform</tt><big>(</big><em>shape</em>, <em>sides</em>, <em>normalize=False</em>, <em>min_value=0</em>, <em>max_value=1</em>, <em>noise=None</em><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/field_sampler_uniform.html#FieldSamplerUniform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.field_sampler_uniform.FieldSamplerUniform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.sensors.field_sampler.FieldSampler" title="vehicles.sensors.field_sampler.FieldSampler"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.sensors.field_sampler.FieldSampler</span></tt></a></p>
+<p>A field sampler with uniform disposition of sensels.</p>
+<dl class="method">
+<dt id="vehicles.sensors.field_sampler_uniform.FieldSamplerUniform.to_yaml">
+<tt class="descname">to_yaml</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/field_sampler_uniform.html#FieldSamplerUniform.to_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.field_sampler_uniform.FieldSamplerUniform.to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vehicles.sensors.misc">
+<span id="misc-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">misc</span></tt> Module<a class="headerlink" href="#module-vehicles.sensors.misc" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="vehicles.sensors.misc.get_uniform_directions">
+<tt class="descclassname">vehicles.sensors.misc.</tt><tt class="descname">get_uniform_directions</tt><big>(</big><em>fov_deg</em>, <em>num_sensels</em><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/misc.html#get_uniform_directions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.misc.get_uniform_directions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-vehicles.sensors.photoreceptors">
+<span id="photoreceptors-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">photoreceptors</span></tt> Module<a class="headerlink" href="#module-vehicles.sensors.photoreceptors" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="vehicles.sensors.photoreceptors.Photoreceptors">
+<em class="property">class </em><tt class="descclassname">vehicles.sensors.photoreceptors.</tt><tt class="descname">Photoreceptors</tt><big>(</big><em>directions</em>, <em>noise=None</em>, <em>invalid=0.5</em><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/photoreceptors.html#Photoreceptors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.photoreceptors.Photoreceptors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vehicles.interfaces.html#vehicles.interfaces.vehicle_sensor.VehicleSensor" title="vehicles.interfaces.vehicle_sensor.VehicleSensor"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.vehicle_sensor.VehicleSensor</span></tt></a>, <a class="reference internal" href="vehicles.sensors.raytracer.html#vehicles.sensors.raytracer.textured_raytracer.TexturedRaytracer" title="vehicles.sensors.raytracer.textured_raytracer.TexturedRaytracer"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.sensors.raytracer.textured_raytracer.TexturedRaytracer</span></tt></a></p>
+<p>This is a very shallow wrap around ImageRangeSensor</p>
+<dl class="method">
+<dt id="vehicles.sensors.photoreceptors.Photoreceptors.set_world_primitives">
+<tt class="descname">set_world_primitives</tt><big>(</big><em>primitives</em><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/photoreceptors.html#Photoreceptors.set_world_primitives"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.photoreceptors.Photoreceptors.set_world_primitives" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.sensors.photoreceptors.Photoreceptors.to_yaml">
+<tt class="descname">to_yaml</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/photoreceptors.html#Photoreceptors.to_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.photoreceptors.Photoreceptors.to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.sensors.photoreceptors.PhotoreceptorsUniform">
+<em class="property">class </em><tt class="descclassname">vehicles.sensors.photoreceptors.</tt><tt class="descname">PhotoreceptorsUniform</tt><big>(</big><em>fov_deg</em>, <em>num_sensels</em>, <em>noise=None</em><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/photoreceptors.html#PhotoreceptorsUniform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.photoreceptors.PhotoreceptorsUniform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.sensors.photoreceptors.Photoreceptors" title="vehicles.sensors.photoreceptors.Photoreceptors"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.sensors.photoreceptors.Photoreceptors</span></tt></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-vehicles.sensors.photoreceptors_smooth">
+<span id="photoreceptors-smooth-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">photoreceptors_smooth</span></tt> Module<a class="headerlink" href="#module-vehicles.sensors.photoreceptors_smooth" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth">
+<em class="property">class </em><tt class="descclassname">vehicles.sensors.photoreceptors_smooth.</tt><tt class="descname">PhotoreceptorsSmooth</tt><big>(</big><em>directions</em>, <em>spatial_sigma_deg</em>, <em>upsample=10</em>, <em>noise=None</em>, <em>invalid=0.5</em><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/photoreceptors_smooth.html#PhotoreceptorsSmooth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vehicles.interfaces.html#vehicles.interfaces.vehicle_sensor.VehicleSensor" title="vehicles.interfaces.vehicle_sensor.VehicleSensor"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.vehicle_sensor.VehicleSensor</span></tt></a>, <a class="reference internal" href="vehicles.sensors.raytracer.html#vehicles.sensors.raytracer.textured_raytracer.TexturedRaytracer" title="vehicles.sensors.raytracer.textured_raytracer.TexturedRaytracer"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.sensors.raytracer.textured_raytracer.TexturedRaytracer</span></tt></a></p>
+<p>Implements</p>
+<dl class="method">
+<dt id="vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth.set_world_primitives">
+<tt class="descname">set_world_primitives</tt><big>(</big><em>primitives</em><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/photoreceptors_smooth.html#PhotoreceptorsSmooth.set_world_primitives"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth.set_world_primitives" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth.to_yaml">
+<tt class="descname">to_yaml</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/photoreceptors_smooth.html#PhotoreceptorsSmooth.to_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth.to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmoothUniform">
+<em class="property">class </em><tt class="descclassname">vehicles.sensors.photoreceptors_smooth.</tt><tt class="descname">PhotoreceptorsSmoothUniform</tt><big>(</big><em>fov_deg</em>, <em>num_sensels</em>, <em>spatial_sigma_deg=10</em>, <em>upsample=5</em>, <em>noise=None</em><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/photoreceptors_smooth.html#PhotoreceptorsSmoothUniform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmoothUniform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth" title="vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth</span></tt></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-vehicles.sensors.random_sensor">
+<span id="random-sensor-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">random_sensor</span></tt> Module<a class="headerlink" href="#module-vehicles.sensors.random_sensor" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="vehicles.sensors.random_sensor.RandomSensor">
+<em class="property">class </em><tt class="descclassname">vehicles.sensors.random_sensor.</tt><tt class="descname">RandomSensor</tt><big>(</big><em>num_sensels</em><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/random_sensor.html#RandomSensor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.random_sensor.RandomSensor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vehicles.interfaces.html#vehicles.interfaces.vehicle_sensor.VehicleSensor" title="vehicles.interfaces.vehicle_sensor.VehicleSensor"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.vehicle_sensor.VehicleSensor</span></tt></a></p>
+<dl class="method">
+<dt id="vehicles.sensors.random_sensor.RandomSensor.set_world_primitives">
+<tt class="descname">set_world_primitives</tt><big>(</big><em>primitives</em><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/random_sensor.html#RandomSensor.set_world_primitives"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.random_sensor.RandomSensor.set_world_primitives" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.sensors.random_sensor.RandomSensor.to_yaml">
+<tt class="descname">to_yaml</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/random_sensor.html#RandomSensor.to_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.random_sensor.RandomSensor.to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vehicles.sensors.range_finder">
+<span id="range-finder-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">range_finder</span></tt> Module<a class="headerlink" href="#module-vehicles.sensors.range_finder" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="vehicles.sensors.range_finder.Rangefinder">
+<em class="property">class </em><tt class="descclassname">vehicles.sensors.range_finder.</tt><tt class="descname">Rangefinder</tt><big>(</big><em>directions</em>, <em>invalid=10</em>, <em>min_range=0.2</em>, <em>max_range=10</em>, <em>noise=None</em><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/range_finder.html#Rangefinder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.range_finder.Rangefinder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vehicles.interfaces.html#vehicles.interfaces.vehicle_sensor.VehicleSensor" title="vehicles.interfaces.vehicle_sensor.VehicleSensor"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.vehicle_sensor.VehicleSensor</span></tt></a>, <a class="reference internal" href="vehicles.sensors.raytracer.html#vehicles.sensors.raytracer.textured_raytracer.Raytracer" title="vehicles.sensors.raytracer.textured_raytracer.Raytracer"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.sensors.raytracer.textured_raytracer.Raytracer</span></tt></a></p>
+<dl class="method">
+<dt id="vehicles.sensors.range_finder.Rangefinder.set_world_primitives">
+<tt class="descname">set_world_primitives</tt><big>(</big><em>primitives</em><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/range_finder.html#Rangefinder.set_world_primitives"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.range_finder.Rangefinder.set_world_primitives" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.sensors.range_finder.Rangefinder.to_yaml">
+<tt class="descname">to_yaml</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/range_finder.html#Rangefinder.to_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.range_finder.Rangefinder.to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.sensors.range_finder.RangefinderUniform">
+<em class="property">class </em><tt class="descclassname">vehicles.sensors.range_finder.</tt><tt class="descname">RangefinderUniform</tt><big>(</big><em>fov_deg</em>, <em>num_sensels</em>, <em>noise=None</em><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/range_finder.html#RangefinderUniform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.range_finder.RangefinderUniform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.sensors.range_finder.Rangefinder" title="vehicles.sensors.range_finder.Rangefinder"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.sensors.range_finder.Rangefinder</span></tt></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="vehicles.sensors.raytracer.html">raytracer Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vehicles.sensors.raytracer.html#id1"><tt class="docutils literal"><span class="pre">raytracer</span></tt> Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vehicles.sensors.raytracer.html#module-vehicles.sensors.raytracer.cjson_stream"><tt class="docutils literal"><span class="pre">cjson_stream</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vehicles.sensors.raytracer.html#module-vehicles.sensors.raytracer.textured_raytracer"><tt class="docutils literal"><span class="pre">textured_raytracer</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">sensors Package</a><ul>
+<li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">sensors</span></tt> Package</a></li>
+<li><a class="reference internal" href="#module-vehicles.sensors.field_sampler"><tt class="docutils literal"><span class="pre">field_sampler</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vehicles.sensors.field_sampler_rand_circle"><tt class="docutils literal"><span class="pre">field_sampler_rand_circle</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vehicles.sensors.field_sampler_uniform"><tt class="docutils literal"><span class="pre">field_sampler_uniform</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vehicles.sensors.misc"><tt class="docutils literal"><span class="pre">misc</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vehicles.sensors.photoreceptors"><tt class="docutils literal"><span class="pre">photoreceptors</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vehicles.sensors.photoreceptors_smooth"><tt class="docutils literal"><span class="pre">photoreceptors_smooth</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vehicles.sensors.random_sensor"><tt class="docutils literal"><span class="pre">random_sensor</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vehicles.sensors.range_finder"><tt class="docutils literal"><span class="pre">range_finder</span></tt> Module</a></li>
+<li><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../sources/api/vehicles.sensors.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Vehicles 1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer">
+        &copy; Copyright 2010, Andrea Censi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+	
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-155626-14']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+
+  </body>
+</html>

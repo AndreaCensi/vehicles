@@ -1,0 +1,368 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vehicles_cairo.world_geometry &mdash; Vehicles 1.2 documentation</title>
+    
+    <link rel="stylesheet" href="../../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../static/doctools.js"></script>
+    <link rel="top" title="Vehicles 1.2 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" />
+	 
+
+
+   <style type="text/css">
+        span.brand { color: #a00;}
+   </style> 
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Vehicles 1.2 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vehicles_cairo.world_geometry</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">cairo</span><span class="p">,</span> <span class="n">CairoConstants</span><span class="p">,</span> <span class="n">np</span><span class="p">,</span> <span class="n">contract</span>
+<span class="kn">from</span> <span class="nn">cairo_utils</span> <span class="kn">import</span> <span class="p">(</span><span class="n">cairo_transform</span><span class="p">,</span> <span class="n">cairo_plot_circle</span><span class="p">,</span>
+                         <span class="n">cairo_plot_polyline</span><span class="p">,</span> <span class="n">cairo_save</span><span class="p">,</span> <span class="n">cairo_set_color</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">conf_tools</span> <span class="kn">import</span> <span class="n">instantiate_spec</span>
+<span class="kn">from</span> <span class="nn">vehicles</span> <span class="kn">import</span> <span class="n">Source</span><span class="p">,</span> <span class="n">VehiclesConstants</span>
+<span class="kn">from</span> <span class="nn">vehicles.sensors.field_sampler</span> <span class="kn">import</span> <span class="n">get_field_values</span>
+
+
+<div class="viewcode-block" id="cairo_plot_sources"><a class="viewcode-back" href="../../api/vehicles_cairo.html#vehicles_cairo.world_geometry.cairo_plot_sources">[docs]</a><span class="k">def</span> <span class="nf">cairo_plot_sources</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">world_state</span><span class="p">):</span>
+    <span class="n">bounds</span> <span class="o">=</span> <span class="n">world_state</span><span class="p">[</span><span class="s">&#39;bounds&#39;</span><span class="p">]</span>
+    <span class="n">primitives</span> <span class="o">=</span> <span class="n">world_state</span><span class="p">[</span><span class="s">&#39;primitives&#39;</span><span class="p">]</span>
+
+    <span class="n">sources</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">primitives</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="s">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">VehiclesConstants</span><span class="o">.</span><span class="n">PRIMITIVE_SOURCE</span><span class="p">:</span>
+            <span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Source</span><span class="o">.</span><span class="n">from_yaml</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">sources</span><span class="p">:</span>
+        <span class="n">cairo_plot_sources_field</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span>
+                       <span class="n">sources</span><span class="o">=</span><span class="n">sources</span><span class="p">,</span>
+                       <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="cairo_plot_texture_circle"><a class="viewcode-back" href="../../api/vehicles_cairo.html#vehicles_cairo.world_geometry.cairo_plot_texture_circle">[docs]</a><span class="k">def</span> <span class="nf">cairo_plot_texture_circle</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">center</span><span class="p">,</span> <span class="n">texture</span><span class="p">,</span> <span class="n">resolution</span><span class="p">,</span>
+                              <span class="n">width_inside</span><span class="p">,</span> <span class="n">width_outside</span><span class="p">):</span>
+    <span class="n">diameter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">radius</span>
+    <span class="n">npoints</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">diameter</span> <span class="o">/</span> <span class="n">resolution</span><span class="p">))</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">npoints</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">theta</span> <span class="o">*</span> <span class="n">radius</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">texture</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+    <span class="n">resolution_angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">npoints</span>
+
+    <span class="n">theta1</span> <span class="o">=</span> <span class="n">theta</span> <span class="o">-</span> <span class="n">resolution_angle</span> <span class="o">/</span> <span class="mf">1.9</span> <span class="c"># 10% overlap</span>
+    <span class="n">theta2</span> <span class="o">=</span> <span class="n">theta</span> <span class="o">+</span> <span class="n">resolution_angle</span> <span class="o">/</span> <span class="mf">1.9</span>
+
+    <span class="n">r0</span> <span class="o">=</span> <span class="n">radius</span> <span class="o">-</span> <span class="n">width_inside</span>
+    <span class="n">r1</span> <span class="o">=</span> <span class="n">radius</span> <span class="o">+</span> <span class="n">width_outside</span>
+
+    <span class="k">with</span> <span class="n">cairo_transform</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">center</span><span class="p">):</span>
+        <span class="n">Ax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta1</span><span class="p">)</span> <span class="o">*</span> <span class="n">r0</span>
+        <span class="n">Ay</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta1</span><span class="p">)</span> <span class="o">*</span> <span class="n">r0</span>
+        <span class="n">Bx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta1</span><span class="p">)</span> <span class="o">*</span> <span class="n">r1</span>
+        <span class="n">By</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta1</span><span class="p">)</span> <span class="o">*</span> <span class="n">r1</span>
+        <span class="n">Cx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta2</span><span class="p">)</span> <span class="o">*</span> <span class="n">r1</span>
+        <span class="n">Cy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta2</span><span class="p">)</span> <span class="o">*</span> <span class="n">r1</span>
+        <span class="n">Dx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta2</span><span class="p">)</span> <span class="o">*</span> <span class="n">r0</span>
+        <span class="n">Dy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta2</span><span class="p">)</span> <span class="o">*</span> <span class="n">r0</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)):</span>
+            <span class="n">cr</span><span class="o">.</span><span class="n">set_source_rgb</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+            <span class="n">cr</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="n">Ax</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">Ay</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">cr</span><span class="o">.</span><span class="n">line_to</span><span class="p">(</span><span class="n">Bx</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">By</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">cr</span><span class="o">.</span><span class="n">line_to</span><span class="p">(</span><span class="n">Cx</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">Cy</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">cr</span><span class="o">.</span><span class="n">line_to</span><span class="p">(</span><span class="n">Dx</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">Dy</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">cr</span><span class="o">.</span><span class="n">line_to</span><span class="p">(</span><span class="n">Ax</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">Ay</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">cr</span><span class="o">.</span><span class="n">fill</span><span class="p">()</span>
+
+</div>
+<span class="n">CC</span> <span class="o">=</span> <span class="n">CairoConstants</span>
+
+
+<span class="nd">@contract</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="s">&#39;seq[2](float)&#39;</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="s">&#39;&gt;0&#39;</span><span class="p">,</span> <span class="n">solid</span><span class="o">=</span><span class="s">&#39;bool&#39;</span><span class="p">,</span> <span class="n">numpass</span><span class="o">=</span><span class="s">&#39;int&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="cairo_plot_circle_primitive"><a class="viewcode-back" href="../../api/vehicles_cairo.html#vehicles_cairo.world_geometry.cairo_plot_circle_primitive">[docs]</a><span class="k">def</span> <span class="nf">cairo_plot_circle_primitive</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">center</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">solid</span><span class="p">,</span> <span class="n">texture</span><span class="p">,</span> <span class="n">numpass</span><span class="p">):</span>
+    <span class="n">facecolor</span> <span class="o">=</span> <span class="p">(</span><span class="n">CairoConstants</span><span class="o">.</span><span class="n">obstacle_fill_color</span> <span class="k">if</span> <span class="n">solid</span> <span class="k">else</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">numpass</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">cairo_plot_circle</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="n">center</span><span class="p">,</span>
+                      <span class="n">radius</span><span class="o">=</span><span class="n">radius</span><span class="p">,</span>
+                      <span class="n">edgecolor</span><span class="o">=</span><span class="n">CC</span><span class="o">.</span><span class="n">obstacle_border_color</span><span class="p">,</span>
+                    <span class="n">facecolor</span><span class="o">=</span><span class="n">facecolor</span><span class="p">,</span>
+                    <span class="n">width</span><span class="o">=</span><span class="n">CC</span><span class="o">.</span><span class="n">obstacle_border_width</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">solid</span><span class="p">:</span>
+            <span class="n">cairo_plot_circle</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="n">center</span><span class="p">,</span>
+                      <span class="n">radius</span><span class="o">=</span><span class="n">radius</span> <span class="o">+</span> <span class="n">CC</span><span class="o">.</span><span class="n">texture_width</span><span class="p">,</span>
+                      <span class="n">edgecolor</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                      <span class="n">width</span><span class="o">=</span><span class="n">CC</span><span class="o">.</span><span class="n">obstacle_border_width</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">texture</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">solid</span><span class="p">:</span>
+                <span class="n">width_outside</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">width_inside</span> <span class="o">=</span> <span class="n">CC</span><span class="o">.</span><span class="n">texture_width</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">width_inside</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">width_outside</span> <span class="o">=</span> <span class="n">CC</span><span class="o">.</span><span class="n">texture_width</span>
+
+            <span class="n">cairo_plot_texture_circle</span><span class="p">(</span><span class="n">cr</span><span class="o">=</span><span class="n">cr</span><span class="p">,</span>
+                                      <span class="n">radius</span><span class="o">=</span><span class="n">radius</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="n">center</span><span class="p">,</span>
+                                      <span class="n">texture</span><span class="o">=</span><span class="n">texture</span><span class="p">,</span>
+                                      <span class="n">resolution</span><span class="o">=</span><span class="n">CC</span><span class="o">.</span><span class="n">texture_resolution</span><span class="p">,</span>
+                                      <span class="n">width_inside</span><span class="o">=</span><span class="n">width_inside</span><span class="p">,</span>
+                                      <span class="n">width_outside</span><span class="o">=</span><span class="n">width_outside</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">r1</span> <span class="o">=</span> <span class="n">radius</span> <span class="o">-</span> <span class="n">CC</span><span class="o">.</span><span class="n">texture_width</span>
+        <span class="k">if</span> <span class="n">r1</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">cairo_plot_circle</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="n">center</span><span class="p">,</span>
+                      <span class="n">radius</span><span class="o">=</span><span class="n">r1</span><span class="p">,</span>
+                      <span class="n">edgecolor</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                      <span class="n">facecolor</span><span class="o">=</span><span class="n">facecolor</span><span class="p">,</span>
+                      <span class="n">width</span><span class="o">=</span><span class="n">CC</span><span class="o">.</span><span class="n">obstacle_border_width</span><span class="p">)</span>
+
+</div>
+<span class="nd">@contract</span><span class="p">(</span><span class="n">points</span><span class="o">=</span><span class="s">&#39;array[2xN]&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="cairo_plot_polyline_primitive"><a class="viewcode-back" href="../../api/vehicles_cairo.html#vehicles_cairo.world_geometry.cairo_plot_polyline_primitive">[docs]</a><span class="k">def</span> <span class="nf">cairo_plot_polyline_primitive</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">texture</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+
+    <span class="k">with</span> <span class="n">cairo_save</span><span class="p">(</span><span class="n">cr</span><span class="p">):</span>
+        <span class="n">cr</span><span class="o">.</span><span class="n">set_line_width</span><span class="p">(</span><span class="n">CC</span><span class="o">.</span><span class="n">obstacle_border_width</span><span class="p">)</span>
+        <span class="n">cairo_set_color</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span>
+                        <span class="n">CC</span><span class="o">.</span><span class="n">obstacle_border_color</span><span class="p">)</span>
+        <span class="n">cairo_plot_polyline</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">points</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:],</span> <span class="n">points</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
+
+    <span class="k">if</span> <span class="n">texture</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">cairo_plot_textured_polyline</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">points</span><span class="o">=</span><span class="n">points</span><span class="p">,</span> <span class="n">texture</span><span class="o">=</span><span class="n">texture</span><span class="p">,</span>
+                                  <span class="n">resolution</span><span class="o">=</span><span class="n">CC</span><span class="o">.</span><span class="n">texture_resolution</span><span class="p">,</span>
+                                  <span class="n">width_inside</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                                  <span class="n">width_outside</span><span class="o">=</span><span class="n">CC</span><span class="o">.</span><span class="n">texture_resolution</span><span class="p">)</span>
+
+</div>
+<span class="nd">@contract</span><span class="p">(</span><span class="n">points</span><span class="o">=</span><span class="s">&#39;array[2xN]&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="cairo_plot_textured_polyline"><a class="viewcode-back" href="../../api/vehicles_cairo.html#vehicles_cairo.world_geometry.cairo_plot_textured_polyline">[docs]</a><span class="k">def</span> <span class="nf">cairo_plot_textured_polyline</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">texture</span><span class="p">,</span>
+                                  <span class="n">resolution</span><span class="p">,</span>
+                                  <span class="n">width_inside</span><span class="p">,</span> <span class="n">width_outside</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">points</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">delta_t</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">p1</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span>
+        <span class="n">p2</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">p2</span> <span class="o">-</span> <span class="n">p1</span>
+        <span class="n">segment_len</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+        <span class="n">angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="k">with</span> <span class="n">cairo_transform</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">p1</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">angle</span><span class="p">):</span>
+            <span class="n">cairo_plot_textured_segment</span><span class="p">(</span><span class="n">cr</span><span class="o">=</span><span class="n">cr</span><span class="p">,</span>
+                                        <span class="n">length</span><span class="o">=</span><span class="n">segment_len</span><span class="p">,</span> <span class="n">texture</span><span class="o">=</span><span class="n">texture</span><span class="p">,</span>
+                                        <span class="n">resolution</span><span class="o">=</span><span class="n">resolution</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="n">delta_t</span><span class="p">,</span>
+                                        <span class="n">width_inside</span><span class="o">=</span><span class="n">width_inside</span><span class="p">,</span>
+                                        <span class="n">width_outside</span><span class="o">=</span><span class="n">width_outside</span><span class="p">)</span>
+
+        <span class="n">delta_t</span> <span class="o">+=</span> <span class="n">segment_len</span>
+
+</div>
+<span class="nd">@contract</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="s">&#39;float,&gt;0&#39;</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="s">&#39;float,&gt;0&#39;</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="s">&#39;float&#39;</span><span class="p">,</span>
+          <span class="n">width_inside</span><span class="o">=</span><span class="s">&#39;&gt;=0&#39;</span><span class="p">,</span> <span class="n">width_outside</span><span class="o">=</span><span class="s">&#39;&gt;=0&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="cairo_plot_textured_segment"><a class="viewcode-back" href="../../api/vehicles_cairo.html#vehicles_cairo.world_geometry.cairo_plot_textured_segment">[docs]</a><span class="k">def</span> <span class="nf">cairo_plot_textured_segment</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">texture</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">resolution</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span>
+                          <span class="n">width_inside</span><span class="p">,</span> <span class="n">width_outside</span><span class="p">):</span>
+    <span class="n">npoints</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">length</span> <span class="o">/</span> <span class="n">resolution</span><span class="p">))</span>
+    <span class="n">cell_size</span> <span class="o">=</span> <span class="n">length</span> <span class="o">/</span> <span class="n">npoints</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">npoints</span><span class="p">)</span> <span class="o">-</span> <span class="n">offset</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">texture</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">npoints</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">x0</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">cell_size</span>
+        <span class="n">x1</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">cell_size</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">x0</span> <span class="o">-=</span> <span class="n">cell_size</span> <span class="o">*</span> <span class="mf">0.05</span> <span class="c"># overlap</span>
+        <span class="n">y0</span> <span class="o">=</span> <span class="o">-</span><span class="n">width_inside</span>
+        <span class="n">y1</span> <span class="o">=</span> <span class="o">+</span><span class="n">width_outside</span>
+
+        <span class="n">cr</span><span class="o">.</span><span class="n">set_source_rgb</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">cr</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">x1</span> <span class="o">-</span> <span class="n">x0</span><span class="p">,</span> <span class="n">y1</span> <span class="o">-</span> <span class="n">y0</span><span class="p">)</span>
+        <span class="n">cr</span><span class="o">.</span><span class="n">fill</span><span class="p">()</span>
+
+</div>
+<div class="viewcode-block" id="cairo_show_world_geometry"><a class="viewcode-back" href="../../api/vehicles_cairo.html#vehicles_cairo.world_geometry.cairo_show_world_geometry">[docs]</a><span class="k">def</span> <span class="nf">cairo_show_world_geometry</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">world_state</span><span class="p">,</span>
+                              <span class="n">plot_sources</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                              <span class="n">plot_textures</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                              <span class="n">extra_pad</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="n">bounds</span> <span class="o">=</span> <span class="n">world_state</span><span class="p">[</span><span class="s">&#39;bounds&#39;</span><span class="p">]</span>
+    <span class="n">primitives</span> <span class="o">=</span> <span class="n">world_state</span><span class="p">[</span><span class="s">&#39;primitives&#39;</span><span class="p">]</span>
+
+    <span class="k">with</span> <span class="n">cairo_save</span><span class="p">(</span><span class="n">cr</span><span class="p">):</span>
+        <span class="n">xb</span> <span class="o">=</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">yb</span> <span class="o">=</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">xb</span> <span class="o">=</span> <span class="p">[</span><span class="n">xb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">extra_pad</span><span class="p">,</span> <span class="n">xb</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">extra_pad</span><span class="p">]</span>
+        <span class="n">yb</span> <span class="o">=</span> <span class="p">[</span><span class="n">yb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">extra_pad</span><span class="p">,</span> <span class="n">yb</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">extra_pad</span><span class="p">]</span>
+
+        <span class="n">cr</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">xb</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">yb</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xb</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">xb</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">yb</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">yb</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">cr</span><span class="o">.</span><span class="n">clip</span><span class="p">()</span>
+
+        <span class="c"># Draw it twice for special effects</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">primitives</span><span class="p">:</span>
+                <span class="n">ptype</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="s">&#39;type&#39;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">ptype</span> <span class="o">==</span> <span class="n">VehiclesConstants</span><span class="o">.</span><span class="n">PRIMITIVE_POLYLINE</span><span class="p">:</span>
+                    <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="s">&#39;points&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+                    <span class="n">texture</span> <span class="o">=</span> <span class="n">instantiate_spec</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="s">&#39;texture&#39;</span><span class="p">])</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">plot_textures</span><span class="p">:</span>
+                        <span class="n">texture</span> <span class="o">=</span> <span class="bp">None</span>
+                    <span class="n">cairo_plot_polyline_primitive</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">points</span><span class="o">=</span><span class="n">points</span><span class="p">,</span>
+                                                  <span class="n">texture</span><span class="o">=</span><span class="n">texture</span><span class="p">)</span>
+
+                <span class="k">elif</span> <span class="n">ptype</span> <span class="o">==</span> <span class="n">VehiclesConstants</span><span class="o">.</span><span class="n">PRIMITIVE_CIRCLE</span><span class="p">:</span>
+                    <span class="n">texture</span> <span class="o">=</span> <span class="n">instantiate_spec</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="s">&#39;texture&#39;</span><span class="p">])</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">plot_textures</span><span class="p">:</span>
+                        <span class="n">texture</span> <span class="o">=</span> <span class="bp">None</span>
+                    <span class="n">cairo_plot_circle_primitive</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="s">&#39;center&#39;</span><span class="p">],</span>
+                                                <span class="n">texture</span><span class="o">=</span><span class="n">texture</span><span class="p">,</span>
+                                                <span class="n">radius</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="s">&#39;radius&#39;</span><span class="p">],</span>
+                                                <span class="n">solid</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="s">&#39;solid&#39;</span><span class="p">],</span>
+                                                <span class="n">numpass</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
+
+                <span class="k">elif</span> <span class="n">ptype</span> <span class="o">==</span> <span class="n">VehiclesConstants</span><span class="o">.</span><span class="n">PRIMITIVE_SOURCE</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">plot_sources</span><span class="p">:</span>
+                        <span class="n">cairo_plot_circle</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="s">&#39;center&#39;</span><span class="p">],</span>
+                                          <span class="n">radius</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+                                          <span class="n">edgecolor</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                                          <span class="n">facecolor</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                                          <span class="n">width</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+                    <span class="c"># TODO: parametrize</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">pass</span> <span class="c"># XXX </span>
+
+</div>
+<div class="viewcode-block" id="cairo_plot_sources_field"><a class="viewcode-back" href="../../api/vehicles_cairo.html#vehicles_cairo.world_geometry.cairo_plot_sources_field">[docs]</a><span class="k">def</span> <span class="nf">cairo_plot_sources_field</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">sources</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span>
+                             <span class="n">disc</span><span class="o">=</span><span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">sources</span><span class="p">:</span>
+        <span class="k">return</span>
+
+    <span class="n">xb</span> <span class="o">=</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">yb</span> <span class="o">=</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xb</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xb</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">disc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">yb</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">yb</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">disc</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+    <span class="n">C</span> <span class="o">=</span> <span class="n">get_field_values</span><span class="p">(</span><span class="n">sources</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="n">C</span> <span class="o">-</span> <span class="n">C</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="n">C</span> <span class="o">/</span> <span class="n">C</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">C</span>
+
+    <span class="n">Cscal</span> <span class="o">=</span> <span class="p">((</span><span class="n">C</span><span class="p">)</span> <span class="o">*</span> <span class="mi">255</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s">&#39;uint8&#39;</span><span class="p">)</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">disc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">disc</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span>
+
+    <span class="n">data</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">Cscal</span>
+
+    <span class="n">image</span> <span class="o">=</span> <span class="n">cairo</span><span class="o">.</span><span class="n">ImageSurface</span><span class="o">.</span><span class="n">create_for_data</span><span class="p">(</span><span class="c">#@UndefinedVariable</span>
+                        <span class="n">data</span><span class="p">,</span> <span class="n">cairo</span><span class="o">.</span><span class="n">FORMAT_ARGB32</span><span class="p">,</span> <span class="c">#@UndefinedVariable</span>
+                         <span class="n">disc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">disc</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">disc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">cairo_save</span><span class="p">(</span><span class="n">cr</span><span class="p">):</span>
+        <span class="n">Z</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">disc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">xb</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">xb</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">zoom</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">Z</span>
+        <span class="n">cr</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">zoom</span><span class="p">,</span> <span class="n">zoom</span><span class="p">)</span>
+        <span class="n">cr</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="o">-</span><span class="n">disc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="n">disc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">cr</span><span class="o">.</span><span class="n">set_source_surface</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+        <span class="n">cr</span><span class="o">.</span><span class="n">paint_with_alpha</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Vehicles 1.2 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer">
+        &copy; Copyright 2010, Andrea Censi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+	
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-155626-14']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+
+  </body>
+</html>

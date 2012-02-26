@@ -1,0 +1,309 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vehicles_cairo.display_all &mdash; Vehicles 1.2 documentation</title>
+    
+    <link rel="stylesheet" href="../../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../static/doctools.js"></script>
+    <link rel="top" title="Vehicles 1.2 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" />
+	 
+
+
+   <style type="text/css">
+        span.brand { color: #a00;}
+   </style> 
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Vehicles 1.2 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vehicles_cairo.display_all</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="p">(</span><span class="n">cairo_plot_sensor_data</span><span class="p">,</span> <span class="n">cairo_plot_sources</span><span class="p">,</span> <span class="n">cairo_save</span><span class="p">,</span>
+    <span class="n">cairo_show_world_geometry</span><span class="p">,</span> <span class="n">CairoConstants</span><span class="p">,</span> <span class="n">cairo_set_axis</span><span class="p">,</span> <span class="n">np</span><span class="p">,</span>
+    <span class="n">cairo_rototranslate</span><span class="p">,</span> <span class="n">cairo_plot_sensor_skins</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">cairo_utils</span> <span class="kn">import</span> <span class="n">cairo_set_color</span>
+<span class="kn">from</span> <span class="nn">contracts</span> <span class="kn">import</span> <span class="n">contract</span>
+<span class="kn">from</span> <span class="nn">geometry</span> <span class="kn">import</span> <span class="n">angle_from_SE2</span><span class="p">,</span> <span class="n">translation_from_SE2</span><span class="p">,</span> <span class="n">SE2_from_SE3</span><span class="p">,</span> <span class="n">SE3</span>
+<span class="kn">from</span> <span class="nn">vehicles</span> <span class="kn">import</span> <span class="n">VehiclesConfig</span><span class="p">,</span> <span class="n">VehiclesConstants</span>
+
+
+<div class="viewcode-block" id="vehicles_cairo_display_all"><a class="viewcode-back" href="../../api/vehicles_cairo.html#vehicles_cairo.display_all.vehicles_cairo_display_all">[docs]</a><span class="k">def</span> <span class="nf">vehicles_cairo_display_all</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span>
+                            <span class="n">sim_state</span><span class="p">,</span>
+                            <span class="n">grid</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                            <span class="n">zoom</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                            <span class="n">bgcolor</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                            <span class="n">zoom_scale_radius</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                            <span class="n">extra_draw_world</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                            <span class="n">first_person</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                            <span class="n">show_world</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                            <span class="c">#show_features=&#39;relevant&#39;,</span>
+                            <span class="n">show_sensor_data</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                            <span class="n">show_sensor_data_compact</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                            <span class="n">show_robot_body</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                            <span class="n">show_robot_sensors</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                            <span class="n">show_textures</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                            <span class="n">plot_sources</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        :param zoom_scale_radius: If true, scales the zoom by the robot radius.</span>
+<span class="sd">    </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">with</span> <span class="n">cairo_save</span><span class="p">(</span><span class="n">cr</span><span class="p">):</span>
+        <span class="c"># Paint white</span>
+        <span class="k">if</span> <span class="n">bgcolor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cairo_save</span><span class="p">(</span><span class="n">cr</span><span class="p">):</span>
+                <span class="n">cairo_set_color</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">bgcolor</span><span class="p">)</span>
+                <span class="n">cr</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+                <span class="n">cr</span><span class="o">.</span><span class="n">fill</span><span class="p">()</span>
+
+        <span class="n">vehicle_state</span> <span class="o">=</span> <span class="n">sim_state</span><span class="p">[</span><span class="s">&#39;vehicle&#39;</span><span class="p">]</span>
+        <span class="n">robot_pose</span> <span class="o">=</span> <span class="n">SE2_from_SE3</span><span class="p">(</span><span class="n">SE3</span><span class="o">.</span><span class="n">from_yaml</span><span class="p">(</span><span class="n">vehicle_state</span><span class="p">[</span><span class="s">&#39;pose&#39;</span><span class="p">]))</span>
+
+        <span class="n">robot_radius</span> <span class="o">=</span> <span class="n">vehicle_state</span><span class="p">[</span><span class="s">&#39;radius&#39;</span><span class="p">]</span>
+        <span class="n">world_state</span> <span class="o">=</span> <span class="n">sim_state</span><span class="p">[</span><span class="s">&#39;world&#39;</span><span class="p">]</span>
+        <span class="n">bounds</span> <span class="o">=</span> <span class="n">world_state</span><span class="p">[</span><span class="s">&#39;bounds&#39;</span><span class="p">]</span>
+        <span class="n">bx</span> <span class="o">=</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">by</span> <span class="o">=</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">zoom_scale_radius</span> <span class="ow">and</span> <span class="n">zoom</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">zoom</span> <span class="o">=</span> <span class="n">zoom</span> <span class="o">*</span> <span class="n">robot_radius</span>
+
+        <span class="n">world_bounds_pad</span> <span class="o">=</span> <span class="mi">0</span> <span class="c"># CairoConstants.texture_width</span>
+        <span class="n">vehicles_cairo_set_coordinates</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span>
+                                       <span class="n">bounds</span><span class="p">,</span> <span class="n">robot_pose</span><span class="p">,</span>
+                                       <span class="n">zoom</span><span class="o">=</span><span class="n">zoom</span><span class="p">,</span>
+                                       <span class="n">world_bounds_pad</span><span class="o">=</span><span class="n">world_bounds_pad</span><span class="p">,</span>
+                                       <span class="n">first_person</span><span class="o">=</span><span class="n">first_person</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">False</span><span class="p">:</span>
+            <span class="n">cr</span><span class="o">.</span><span class="n">set_source_rgb</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">cr</span><span class="o">.</span><span class="n">set_line_width</span><span class="p">(</span><span class="mf">0.05</span><span class="p">)</span>
+            <span class="n">cr</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">bx</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">by</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">bx</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">bx</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">by</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">by</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">cr</span><span class="o">.</span><span class="n">stroke</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">grid</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">show_grid</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">bx</span><span class="p">,</span> <span class="n">by</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span> <span class="n">margin</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">extra_draw_world</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">extra_draw_world</span><span class="p">(</span><span class="n">cr</span><span class="p">)</span>
+
+        <span class="n">sensor_types</span> <span class="o">=</span> <span class="n">get_sensor_types</span><span class="p">(</span><span class="n">vehicle_state</span><span class="p">)</span>
+
+        <span class="n">has_cameras</span> <span class="o">=</span> <span class="p">(</span><span class="n">VehiclesConstants</span><span class="o">.</span><span class="n">SENSOR_TYPE_PHOTORECEPTORS</span>
+                             <span class="ow">in</span> <span class="n">sensor_types</span><span class="p">)</span>
+        <span class="n">has_field_sampler</span> <span class="o">=</span> <span class="p">(</span><span class="n">VehiclesConstants</span><span class="o">.</span><span class="n">SENSOR_TYPE_FIELDSAMPLER</span>
+                             <span class="ow">in</span> <span class="n">sensor_types</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">show_world</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">has_field_sampler</span><span class="p">:</span>
+                <span class="n">cairo_plot_sources</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">world_state</span><span class="p">)</span>
+
+            <span class="n">plot_textures</span> <span class="o">=</span> <span class="n">has_cameras</span> <span class="ow">and</span> <span class="n">show_textures</span>
+            <span class="n">cairo_show_world_geometry</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">world_state</span><span class="p">,</span>
+                                      <span class="n">plot_textures</span><span class="o">=</span><span class="n">plot_textures</span><span class="p">,</span>
+                                      <span class="n">plot_sources</span><span class="o">=</span><span class="n">plot_sources</span><span class="p">,</span>
+                                      <span class="n">extra_pad</span><span class="o">=</span><span class="n">world_bounds_pad</span><span class="p">)</span>
+
+        <span class="c"># XXX: tmp</span>
+        <span class="k">if</span> <span class="n">extra_draw_world</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">extra_draw_world</span><span class="p">(</span><span class="n">cr</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">show_robot_body</span><span class="p">:</span>
+            <span class="n">joints</span> <span class="o">=</span> <span class="n">get_joints_as_TSE3</span><span class="p">(</span><span class="n">vehicle_state</span><span class="p">)</span>
+            <span class="n">extra</span> <span class="o">=</span> <span class="n">vehicle_state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;extra&#39;</span><span class="p">,</span> <span class="p">{})</span>
+            <span class="n">id_skin</span> <span class="o">=</span> <span class="n">extra</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;skin&#39;</span><span class="p">,</span> <span class="s">&#39;default_skin&#39;</span><span class="p">)</span>
+            <span class="n">skin</span> <span class="o">=</span> <span class="n">VehiclesConfig</span><span class="o">.</span><span class="n">skins</span><span class="o">.</span><span class="n">instance</span><span class="p">(</span><span class="n">id_skin</span><span class="p">)</span> <span class="c">#@UndefinedVariable</span>
+
+            <span class="k">with</span> <span class="n">cairo_rototranslate</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">robot_pose</span><span class="p">):</span>
+                <span class="n">cr</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">robot_radius</span><span class="p">,</span> <span class="n">robot_radius</span><span class="p">)</span>
+                <span class="n">skin</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">joints</span><span class="o">=</span><span class="n">joints</span><span class="p">,</span>
+                          <span class="n">timestamp</span><span class="o">=</span><span class="n">sim_state</span><span class="p">[</span><span class="s">&#39;timestamp&#39;</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">show_robot_sensors</span><span class="p">:</span>
+            <span class="c"># don&#39;t like it cause it uses global &quot;current_pose&quot;</span>
+            <span class="n">cairo_plot_sensor_skins</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">vehicle_state</span><span class="p">,</span>
+                                   <span class="n">scale</span><span class="o">=</span><span class="n">robot_radius</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">show_sensor_data</span><span class="p">:</span>
+            <span class="n">cairo_plot_sensor_data</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">vehicle_state</span><span class="p">,</span>
+                                   <span class="n">scale</span><span class="o">=</span><span class="n">robot_radius</span><span class="p">,</span>
+                                   <span class="n">compact</span><span class="o">=</span><span class="n">show_sensor_data_compact</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="get_joints_as_TSE3"><a class="viewcode-back" href="../../api/vehicles_cairo.html#vehicles_cairo.display_all.get_joints_as_TSE3">[docs]</a><span class="k">def</span> <span class="nf">get_joints_as_TSE3</span><span class="p">(</span><span class="n">vehicle_state</span><span class="p">):</span>
+    <span class="n">joints</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">js</span> <span class="ow">in</span> <span class="n">vehicle_state</span><span class="p">[</span><span class="s">&#39;joints&#39;</span><span class="p">]:</span>
+        <span class="n">joints</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">SE3</span><span class="o">.</span><span class="n">from_yaml</span><span class="p">(</span><span class="n">js</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">joints</span>
+
+</div>
+<span class="nd">@contract</span><span class="p">(</span><span class="n">zoom</span><span class="o">=</span><span class="s">&#39;&gt;=0&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="vehicles_cairo_set_coordinates"><a class="viewcode-back" href="../../api/vehicles_cairo.html#vehicles_cairo.display_all.vehicles_cairo_set_coordinates">[docs]</a><span class="k">def</span> <span class="nf">vehicles_cairo_set_coordinates</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">world_bounds</span><span class="p">,</span>
+                                        <span class="n">robot_pose</span><span class="p">,</span> <span class="n">zoom</span><span class="p">,</span>
+                                        <span class="n">world_bounds_pad</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                                        <span class="n">first_person</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="n">bx</span> <span class="o">=</span> <span class="n">world_bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">by</span> <span class="o">=</span> <span class="n">world_bounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">zoom</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">world_bounds_pad</span>
+        <span class="n">extents</span> <span class="o">=</span> <span class="p">[</span><span class="n">bx</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">m</span><span class="p">,</span>
+                   <span class="n">bx</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">m</span><span class="p">,</span>
+                   <span class="n">by</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">m</span><span class="p">,</span>
+                   <span class="n">by</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">m</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">translation_from_SE2</span><span class="p">(</span><span class="n">robot_pose</span><span class="p">)</span>
+        <span class="c"># don&#39;t go over the world side</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">first_person</span><span class="p">:</span>
+            <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">bx</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">zoom</span><span class="p">)</span>
+            <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">bx</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">zoom</span><span class="p">)</span>
+            <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">by</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">zoom</span><span class="p">)</span>
+            <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">by</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">zoom</span><span class="p">)</span>
+
+        <span class="n">m</span> <span class="o">=</span> <span class="mi">0</span> <span class="c"># extra space</span>
+        <span class="n">extents</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">zoom</span> <span class="o">-</span> <span class="n">m</span><span class="p">,</span>
+                   <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">zoom</span> <span class="o">+</span> <span class="n">m</span><span class="p">,</span>
+                   <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">zoom</span> <span class="o">-</span> <span class="n">m</span><span class="p">,</span>
+                   <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">zoom</span> <span class="o">+</span> <span class="n">m</span><span class="p">]</span>
+
+    <span class="n">cairo_set_axis</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">extents</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">first_person</span> <span class="ow">and</span> <span class="n">zoom</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">angle</span> <span class="o">=</span> <span class="n">angle_from_SE2</span><span class="p">(</span><span class="n">robot_pose</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">translation_from_SE2</span><span class="p">(</span><span class="n">robot_pose</span><span class="p">)</span>
+        <span class="n">cr</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">cr</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="o">-</span><span class="n">angle</span><span class="p">)</span>
+        <span class="n">cr</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="c"># make the robot point &quot;up&quot;</span>
+        <span class="n">cr</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+</div>
+<div class="viewcode-block" id="show_grid"><a class="viewcode-back" href="../../api/vehicles_cairo.html#vehicles_cairo.display_all.show_grid">[docs]</a><span class="k">def</span> <span class="nf">show_grid</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">bx</span><span class="p">,</span> <span class="n">by</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">margin</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="n">cr</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+    <span class="n">cr</span><span class="o">.</span><span class="n">set_source_rgb</span><span class="p">(</span><span class="o">*</span><span class="n">CairoConstants</span><span class="o">.</span><span class="n">grid_color</span><span class="p">)</span>
+    <span class="n">cr</span><span class="o">.</span><span class="n">set_line_width</span><span class="p">(</span><span class="n">CairoConstants</span><span class="o">.</span><span class="n">grid_width</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">segment</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">y1</span><span class="p">):</span>
+        <span class="n">cr</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">)</span>
+        <span class="n">cr</span><span class="o">.</span><span class="n">line_to</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span>
+        <span class="n">cr</span><span class="o">.</span><span class="n">stroke</span><span class="p">()</span>
+
+    <span class="n">S</span> <span class="o">=</span> <span class="n">spacing</span>
+    <span class="c">#M = margin  # margin (cells)</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">xmin</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">bx</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">S</span><span class="p">)</span> <span class="o">-</span> <span class="n">M</span><span class="p">)</span> <span class="o">*</span> <span class="n">S</span>
+    <span class="n">xmax</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">bx</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">S</span><span class="p">)</span> <span class="o">+</span> <span class="n">M</span><span class="p">)</span> <span class="o">*</span> <span class="n">S</span>
+    <span class="n">ymin</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">by</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">S</span><span class="p">)</span> <span class="o">-</span> <span class="n">M</span><span class="p">)</span> <span class="o">*</span> <span class="n">S</span>
+    <span class="n">ymax</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">by</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">S</span><span class="p">)</span> <span class="o">+</span> <span class="n">M</span><span class="p">)</span> <span class="o">*</span> <span class="n">S</span>
+
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">((</span><span class="n">xmax</span> <span class="o">-</span> <span class="n">xmin</span><span class="p">)</span> <span class="o">/</span> <span class="n">S</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">segment</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">((</span><span class="n">ymax</span> <span class="o">-</span> <span class="n">ymin</span><span class="p">)</span> <span class="o">/</span> <span class="n">S</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">segment</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+    <span class="n">cr</span><span class="o">.</span><span class="n">restore</span><span class="p">()</span>
+
+</div>
+<div class="viewcode-block" id="get_sensor_types"><a class="viewcode-back" href="../../api/vehicles_cairo.html#vehicles_cairo.display_all.get_sensor_types">[docs]</a><span class="k">def</span> <span class="nf">get_sensor_types</span><span class="p">(</span><span class="n">vehicle_state</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Returns the list of sensor types. &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">attached</span><span class="p">[</span><span class="s">&#39;sensor&#39;</span><span class="p">][</span><span class="s">&#39;type&#39;</span><span class="p">]</span>
+             <span class="k">for</span> <span class="n">attached</span> <span class="ow">in</span> <span class="n">vehicle_state</span><span class="p">[</span><span class="s">&#39;sensors&#39;</span><span class="p">]]</span>
+</pre></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Vehicles 1.2 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer">
+        &copy; Copyright 2010, Andrea Censi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+	
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-155626-14']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+
+  </body>
+</html>

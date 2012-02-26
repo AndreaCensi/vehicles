@@ -1,0 +1,11 @@
+dynamics Package
+================
+
+:mod:`dynamics` Package
+-----------------------
+
+.. automodule:: vehicles.library.dynamics
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

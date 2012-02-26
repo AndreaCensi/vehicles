@@ -1,0 +1,19 @@
+create_olympics_configs Package
+===============================
+
+:mod:`create_olympics_configs` Package
+--------------------------------------
+
+.. automodule:: vehicles_boot.create_olympics_configs
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`main` Module
+------------------
+
+.. automodule:: vehicles_boot.create_olympics_configs.main
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

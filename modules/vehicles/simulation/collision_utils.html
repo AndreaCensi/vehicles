@@ -1,0 +1,229 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vehicles.simulation.collision_utils &mdash; Vehicles 1.2 documentation</title>
+    
+    <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../../static/doctools.js"></script>
+    <link rel="top" title="Vehicles 1.2 documentation" href="../../../index.html" />
+    <link rel="up" title="vehicles.simulation" href="../simulation.html" />
+	 
+
+
+   <style type="text/css">
+        span.brand { color: #a00;}
+   </style> 
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Vehicles 1.2 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../../vehicles.html" >vehicles</a> &raquo;</li>
+          <li><a href="../simulation.html" accesskey="U">vehicles.simulation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vehicles.simulation.collision_utils</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">    Simple utilities for 2D intersections.</span>
+
+<span class="sd">    The normal is returned as a 2d numpy array pointing towards the circle.</span>
+<span class="sd">    The penetration is a float, &gt;=0 (=0 if touching).</span>
+<span class="sd">     </span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">contract</span><span class="p">,</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">contracts</span> <span class="kn">import</span> <span class="n">new_contract</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+
+
+<span class="n">PrimitiveIntersection</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s">&#39;PrimitiveIntersection&#39;</span><span class="p">,</span>
+                                   <span class="s">&#39;normal penetration&#39;</span><span class="p">)</span>
+
+<span class="n">new_contract</span><span class="p">(</span><span class="s">&#39;point2&#39;</span><span class="p">,</span> <span class="s">&#39;seq[2](number)&#39;</span><span class="p">)</span>
+<span class="n">new_contract</span><span class="p">(</span><span class="s">&#39;intersection&#39;</span><span class="p">,</span> <span class="s">&#39;tuple((array[2],unit_length), &gt;=0)&#39;</span><span class="p">)</span>
+
+
+<span class="nd">@contract</span><span class="p">(</span><span class="n">c1</span><span class="o">=</span><span class="s">&#39;point2&#39;</span><span class="p">,</span> <span class="n">r1</span><span class="o">=</span><span class="s">&#39;&gt;0&#39;</span><span class="p">,</span> <span class="n">c2</span><span class="o">=</span><span class="s">&#39;point2&#39;</span><span class="p">,</span> <span class="n">r2</span><span class="o">=</span><span class="s">&#39;&gt;0&#39;</span><span class="p">,</span> <span class="n">solid2</span><span class="o">=</span><span class="s">&#39;bool&#39;</span><span class="p">,</span>
+          <span class="n">returns</span><span class="o">=</span><span class="s">&#39;None|intersection&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="circle_circle_intersection"><a class="viewcode-back" href="../../../api/vehicles.simulation.html#vehicles.simulation.collision_utils.circle_circle_intersection">[docs]</a><span class="k">def</span> <span class="nf">circle_circle_intersection</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">r1</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="n">r2</span><span class="p">,</span> <span class="n">solid2</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; The second circle might or might not be solid. &#39;&#39;&#39;</span>
+    <span class="n">c1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span>
+    <span class="n">c2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span>
+
+    <span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">c1</span> <span class="o">-</span> <span class="n">c2</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">dist</span> <span class="o">&gt;</span> <span class="n">r1</span> <span class="o">+</span> <span class="n">r2</span><span class="p">:</span>
+        <span class="c"># The two solid circle do not touch</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c"># The two solid circle DO touch</span>
+        <span class="n">normal</span> <span class="o">=</span> <span class="n">c1</span> <span class="o">-</span> <span class="n">c2</span>
+        <span class="n">nn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">normal</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">nn</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">normal</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">normal</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">normal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">dist</span> <span class="o">&lt;</span> <span class="n">r2</span> <span class="o">-</span> <span class="n">r1</span><span class="p">:</span>
+            <span class="c"># The first circle is completely inside the second</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">solid2</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">None</span>
+        <span class="n">penetration</span> <span class="o">=</span> <span class="p">(</span><span class="n">r1</span> <span class="o">+</span> <span class="n">r2</span><span class="p">)</span> <span class="o">-</span> <span class="n">dist</span>
+        <span class="k">assert</span> <span class="n">penetration</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="n">PrimitiveIntersection</span><span class="p">(</span><span class="n">normal</span><span class="p">,</span> <span class="n">penetration</span><span class="p">)</span>
+
+</div>
+<span class="nd">@contract</span><span class="p">(</span><span class="n">c1</span><span class="o">=</span><span class="s">&#39;point2&#39;</span><span class="p">,</span> <span class="n">r1</span><span class="o">=</span><span class="s">&#39;&gt;0&#39;</span><span class="p">,</span> <span class="n">p1</span><span class="o">=</span><span class="s">&#39;point2&#39;</span><span class="p">,</span> <span class="n">p2</span><span class="o">=</span><span class="s">&#39;point2&#39;</span><span class="p">,</span>
+          <span class="n">returns</span><span class="o">=</span><span class="s">&#39;None|intersection&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="circle_segment_intersection"><a class="viewcode-back" href="../../../api/vehicles.simulation.html#vehicles.simulation.collision_utils.circle_segment_intersection">[docs]</a><span class="k">def</span> <span class="nf">circle_segment_intersection</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">r1</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">):</span>
+    <span class="n">c1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span>
+    <span class="n">p1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
+    <span class="n">p2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
+    <span class="c"># projection of c1 onto the line containing p1-p2</span>
+    <span class="n">projection</span><span class="p">,</span> <span class="n">normal</span><span class="p">,</span> <span class="n">distance</span> <span class="o">=</span> <span class="n">projection_on_line</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="n">c1</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">p1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">p2</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">distance</span> <span class="o">&gt;</span> <span class="n">r1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="c"># check that the projection is inside the segment</span>
+    <span class="n">inside</span> <span class="o">=</span> <span class="p">((</span><span class="n">projection</span> <span class="o">-</span> <span class="n">p1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">projection</span> <span class="o">-</span> <span class="n">p2</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">inside</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+
+    <span class="n">penetration</span> <span class="o">=</span> <span class="n">r1</span> <span class="o">-</span> <span class="n">distance</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">PrimitiveIntersection</span><span class="p">(</span><span class="n">normal</span><span class="p">,</span> <span class="n">penetration</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">res</span>
+
+</div>
+<span class="nd">@contract</span><span class="p">(</span><span class="n">c1</span><span class="o">=</span><span class="s">&#39;point2&#39;</span><span class="p">,</span> <span class="n">r1</span><span class="o">=</span><span class="s">&#39;&gt;0&#39;</span><span class="p">,</span> <span class="n">points</span><span class="o">=</span><span class="s">&#39;seq[&gt;=2](point2)&#39;</span><span class="p">,</span>
+          <span class="n">returns</span><span class="o">=</span><span class="s">&#39;None|intersection&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="circle_polyline_intersection"><a class="viewcode-back" href="../../../api/vehicles.simulation.html#vehicles.simulation.collision_utils.circle_polyline_intersection">[docs]</a><span class="k">def</span> <span class="nf">circle_polyline_intersection</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">r1</span><span class="p">,</span> <span class="n">points</span><span class="p">):</span>
+    <span class="n">closest</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">p1</span> <span class="o">=</span> <span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">p2</span> <span class="o">=</span> <span class="n">points</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">collision</span> <span class="o">=</span> <span class="n">circle_segment_intersection</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">r1</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">collision</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">closest</span> <span class="ow">is</span> <span class="bp">None</span>
+                                         <span class="ow">or</span> <span class="n">collision</span><span class="o">.</span><span class="n">penetration</span> <span class="o">&gt;</span>
+                                          <span class="n">closest</span><span class="o">.</span><span class="n">penetration</span><span class="p">):</span>
+            <span class="n">closest</span> <span class="o">=</span> <span class="n">collision</span>
+    <span class="k">return</span> <span class="n">closest</span>
+
+</div>
+<span class="nd">@contract</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="s">&#39;point2&#39;</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="s">&#39;point2&#39;</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="s">&#39;point2&#39;</span><span class="p">,</span>
+           <span class="n">returns</span><span class="o">=</span><span class="s">&#39;tuple(array[2], (array[2], unit_length), &gt;=0)&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="projection_on_line"><a class="viewcode-back" href="../../../api/vehicles.simulation.html#vehicles.simulation.collision_utils.projection_on_line">[docs]</a><span class="k">def</span> <span class="nf">projection_on_line</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="s">&#39;point2&#39;</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="s">&#39;point2&#39;</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="s">&#39;point2&#39;</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        Projects a point onto the line containing the segment a-b. </span>
+<span class="sd">        Returns the projected point, the normal pointing to p,</span>
+<span class="sd">             and the distance of p to the line.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">t1</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">one_on_r</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">t0</span> <span class="o">*</span> <span class="n">t0</span> <span class="o">+</span> <span class="n">t1</span> <span class="o">*</span> <span class="n">t1</span><span class="p">)</span>
+    <span class="c"># normal </span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">t1</span> <span class="o">*</span> <span class="n">one_on_r</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="o">-</span><span class="n">t0</span> <span class="o">*</span> <span class="n">one_on_r</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">c</span> <span class="o">*</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">s</span> <span class="o">*</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">px</span> <span class="o">=</span> <span class="n">c</span> <span class="o">*</span> <span class="n">rho</span> <span class="o">+</span> <span class="n">s</span> <span class="o">*</span> <span class="n">s</span> <span class="o">*</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">c</span> <span class="o">*</span> <span class="n">s</span> <span class="o">*</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">py</span> <span class="o">=</span> <span class="n">s</span> <span class="o">*</span> <span class="n">rho</span> <span class="o">-</span> <span class="n">c</span> <span class="o">*</span> <span class="n">s</span> <span class="o">*</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">c</span> <span class="o">*</span> <span class="n">c</span> <span class="o">*</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">distance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">rho</span> <span class="o">-</span> <span class="p">(</span><span class="n">c</span> <span class="o">*</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">s</span> <span class="o">*</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="n">proj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">px</span><span class="p">,</span> <span class="n">py</span><span class="p">])</span>
+    <span class="n">normal</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">c</span><span class="p">,</span> <span class="n">s</span><span class="p">])</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">rho</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">proj</span><span class="p">,</span> <span class="n">normal</span><span class="p">,</span> <span class="n">distance</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Vehicles 1.2 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../../vehicles.html" >vehicles</a> &raquo;</li>
+          <li><a href="../simulation.html" >vehicles.simulation</a> &raquo;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer">
+        &copy; Copyright 2010, Andrea Censi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+	
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-155626-14']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+
+  </body>
+</html>

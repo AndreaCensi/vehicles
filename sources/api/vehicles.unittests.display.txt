@@ -1,0 +1,19 @@
+display Package
+===============
+
+:mod:`display` Package
+----------------------
+
+.. automodule:: vehicles.unittests.display
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`vehicle_plot_test` Module
+-------------------------------
+
+.. automodule:: vehicles.unittests.display.vehicle_plot_test
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

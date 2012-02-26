@@ -1,0 +1,233 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vehicles.configuration.vehicles &mdash; Vehicles 1.2 documentation</title>
+    
+    <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../../static/doctools.js"></script>
+    <link rel="top" title="Vehicles 1.2 documentation" href="../../../index.html" />
+    <link rel="up" title="vehicles" href="../../vehicles.html" />
+	 
+
+
+   <style type="text/css">
+        span.brand { color: #a00;}
+   </style> 
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Vehicles 1.2 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../../vehicles.html" accesskey="U">vehicles</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vehicles.configuration.vehicles</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="p">(</span><span class="n">check_valid_dynamics_config</span><span class="p">,</span> <span class="n">np</span><span class="p">,</span>
+               <span class="n">check_valid_sensor_config</span><span class="p">,</span> <span class="n">logger</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">conf_tools</span> <span class="kn">import</span> <span class="p">(</span><span class="n">BadConfig</span><span class="p">,</span> <span class="n">check_necessary</span><span class="p">,</span> <span class="n">check_has_exactly_one</span><span class="p">,</span>
+    <span class="n">wrap_check</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">contracts</span> <span class="kn">import</span> <span class="n">describe_type</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">from</span> <span class="nn">geometry</span> <span class="kn">import</span> <span class="n">SE3_from_SE2</span><span class="p">,</span> <span class="n">SE2_from_translation_angle</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pformat</span>
+
+
+<div class="viewcode-block" id="check_valid_vehicle_config"><a class="viewcode-back" href="../../../api/vehicles.configuration.html#vehicles.configuration.vehicles.check_valid_vehicle_config">[docs]</a><span class="k">def</span> <span class="nf">check_valid_vehicle_config</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Must be a dictionary.&#39;</span><span class="p">)</span>
+    <span class="n">necessary</span> <span class="o">=</span> <span class="p">[(</span><span class="s">&#39;id&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">),</span>
+                  <span class="p">(</span><span class="s">&#39;sensors&#39;</span><span class="p">,</span> <span class="nb">list</span><span class="p">),</span>
+                  <span class="p">(</span><span class="s">&#39;radius&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">))]</span>
+    <span class="n">check_necessary</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">necessary</span><span class="p">)</span>
+
+    <span class="n">dynamics_alt</span> <span class="o">=</span> <span class="p">[(</span><span class="s">&#39;dynamics&#39;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;id_dynamics&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">)]</span>
+    <span class="n">check_has_exactly_one</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dynamics_alt</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="s">&#39;dynamics&#39;</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>
+        <span class="n">wrap_check</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s">&#39;checking &quot;dynamics&quot; field&#39;</span><span class="p">,</span>
+                   <span class="n">check_valid_dynamics_config</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="s">&#39;dynamics&#39;</span><span class="p">])</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s">&#39;sensors&#39;</span><span class="p">]):</span>
+        <span class="n">wrap_check</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s">&#39;checking #</span><span class="si">%d</span><span class="s"> sensors entry&#39;</span> <span class="o">%</span> <span class="n">i</span><span class="p">,</span>
+                   <span class="n">check_vehicle_sensor_entry</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="check_vehicle_sensor_entry"><a class="viewcode-back" href="../../../api/vehicles.configuration.html#vehicles.configuration.vehicles.check_vehicle_sensor_entry">[docs]</a><span class="k">def</span> <span class="nf">check_vehicle_sensor_entry</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">BadConfig</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s">&#39;I expect this to be a dictionary, not </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span>
+                        <span class="n">describe_type</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+    <span class="k">if</span> <span class="s">&#39;pose&#39;</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+        <span class="n">check_valid_pose_spec</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="s">&#39;pose&#39;</span><span class="p">])</span>
+
+    <span class="n">alternatives</span> <span class="o">=</span> <span class="p">[(</span><span class="s">&#39;sensor&#39;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;id_sensor&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">)]</span>
+    <span class="n">check_has_exactly_one</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">alternatives</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s">&#39;sensor&#39;</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+        <span class="n">wrap_check</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="s">&#39;checking &quot;sensor&quot; entry&#39;</span><span class="p">,</span>
+                   <span class="n">check_valid_sensor_config</span><span class="p">,</span> <span class="n">s</span><span class="p">[</span><span class="s">&#39;sensor&#39;</span><span class="p">])</span>
+
+</div>
+<div class="viewcode-block" id="instance_vehicle_spec"><a class="viewcode-back" href="../../../api/vehicles.configuration.html#vehicles.configuration.vehicles.instance_vehicle_spec">[docs]</a><span class="k">def</span> <span class="nf">instance_vehicle_spec</span><span class="p">(</span><span class="n">entry</span><span class="p">):</span>
+    <span class="kn">from</span> <span class="nn">..simulation</span> <span class="kn">import</span> <span class="n">Vehicle</span>
+    <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">VehiclesConfig</span>
+    <span class="kn">from</span> <span class="nn">vehicles_dynamics</span> <span class="kn">import</span> <span class="n">Dynamics</span>
+    <span class="kn">from</span> <span class="nn">..interfaces</span> <span class="kn">import</span> <span class="n">VehicleSensor</span>
+
+    <span class="n">check_valid_vehicle_config</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">master</span> <span class="o">=</span> <span class="n">VehiclesConfig</span><span class="o">.</span><span class="n">specs</span><span class="p">[</span><span class="s">&#39;dynamics&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s">&#39;id_dynamics&#39;</span> <span class="ow">in</span> <span class="n">entry</span><span class="p">:</span>
+            <span class="n">id_dynamics</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="s">&#39;id_dynamics&#39;</span><span class="p">]</span>
+            <span class="n">dynamics</span> <span class="o">=</span> <span class="n">master</span><span class="o">.</span><span class="n">instance</span><span class="p">(</span><span class="n">id_dynamics</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">id_dynamics</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="s">&#39;dynamics&#39;</span><span class="p">][</span><span class="s">&#39;id&#39;</span><span class="p">]</span>
+            <span class="n">dynamics</span> <span class="o">=</span> <span class="n">master</span><span class="o">.</span><span class="n">instance_spec</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s">&#39;dynamics&#39;</span><span class="p">])</span>
+
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dynamics</span><span class="p">,</span> <span class="n">Dynamics</span><span class="p">)</span>
+
+        <span class="n">sensors</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="s">&#39;sensors&#39;</span><span class="p">]</span>
+        <span class="n">radius</span> <span class="o">=</span> <span class="n">entry</span><span class="p">[</span><span class="s">&#39;radius&#39;</span><span class="p">]</span>
+        <span class="n">extra</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;extra&#39;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="n">vehicle</span> <span class="o">=</span> <span class="n">Vehicle</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="n">radius</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="n">extra</span><span class="p">)</span>
+        <span class="n">vehicle</span><span class="o">.</span><span class="n">add_dynamics</span><span class="p">(</span><span class="n">id_dynamics</span><span class="p">,</span> <span class="n">dynamics</span><span class="p">)</span>
+        <span class="n">master</span> <span class="o">=</span> <span class="n">VehiclesConfig</span><span class="o">.</span><span class="n">specs</span><span class="p">[</span><span class="s">&#39;sensors&#39;</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">sensor</span> <span class="ow">in</span> <span class="n">sensors</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s">&#39;id_sensor&#39;</span> <span class="ow">in</span> <span class="n">sensor</span><span class="p">:</span>
+                <span class="n">id_sensor</span> <span class="o">=</span> <span class="n">sensor</span><span class="p">[</span><span class="s">&#39;id_sensor&#39;</span><span class="p">]</span>
+                <span class="n">sensor_instance</span> <span class="o">=</span> <span class="n">master</span><span class="o">.</span><span class="n">instance</span><span class="p">(</span><span class="n">id_sensor</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">id_sensor</span> <span class="o">=</span> <span class="n">sensor</span><span class="p">[</span><span class="s">&#39;sensor&#39;</span><span class="p">][</span><span class="s">&#39;id&#39;</span><span class="p">]</span>
+                <span class="n">sensor_instance</span> <span class="o">=</span> <span class="n">master</span><span class="o">.</span><span class="n">instance_spec</span><span class="p">(</span><span class="n">sensor</span><span class="p">[</span><span class="s">&#39;sensor&#39;</span><span class="p">])</span>
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sensor_instance</span><span class="p">,</span> <span class="n">VehicleSensor</span><span class="p">)</span>
+
+            <span class="c"># TODO: document this</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">theta_deg</span> <span class="o">=</span> <span class="n">sensor</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;pose&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+            <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">theta_deg</span><span class="p">)</span>
+            <span class="n">pose</span> <span class="o">=</span> <span class="n">SE2_from_translation_angle</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">],</span> <span class="n">theta</span><span class="p">)</span>
+            <span class="n">pose</span> <span class="o">=</span> <span class="n">SE3_from_SE2</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>
+            <span class="n">joint</span> <span class="o">=</span> <span class="n">sensor</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;joint&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">extra</span> <span class="o">=</span> <span class="n">sensor</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;extra&#39;</span><span class="p">,</span> <span class="p">{})</span>
+            <span class="n">vehicle</span><span class="o">.</span><span class="n">add_sensor</span><span class="p">(</span><span class="n">id_sensor</span><span class="o">=</span><span class="n">id_sensor</span><span class="p">,</span>
+                               <span class="n">sensor</span><span class="o">=</span><span class="n">sensor_instance</span><span class="p">,</span>
+                               <span class="n">pose</span><span class="o">=</span><span class="n">pose</span><span class="p">,</span> <span class="n">joint</span><span class="o">=</span><span class="n">joint</span><span class="p">,</span>
+                               <span class="n">extra</span><span class="o">=</span><span class="n">extra</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">vehicle</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&#39;Error while trying to instantiate vehicle. Entry:</span><span class="se">\n</span><span class="si">%s</span><span class="s">&#39;</span>
+                     <span class="o">%</span> <span class="p">(</span><span class="n">pformat</span><span class="p">(</span><span class="n">entry</span><span class="p">)))</span>
+        <span class="k">raise</span>
+
+</div>
+<div class="viewcode-block" id="dereference_vehicle_spec"><a class="viewcode-back" href="../../../api/vehicles.configuration.html#vehicles.configuration.vehicles.dereference_vehicle_spec">[docs]</a><span class="k">def</span> <span class="nf">dereference_vehicle_spec</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">VehiclesConfig</span>
+    <span class="sd">&#39;&#39;&#39; substitutes all references; modifies x. &#39;&#39;&#39;</span>
+    <span class="n">check_valid_vehicle_config</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s">&#39;id_dynamics&#39;</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>
+        <span class="n">id_dynamics</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;id_dynamics&#39;</span><span class="p">)</span>
+        <span class="n">x</span><span class="p">[</span><span class="s">&#39;dynamics&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">VehiclesConfig</span><span class="o">.</span><span class="n">dynamics</span><span class="p">[</span><span class="n">id_dynamics</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">x</span><span class="p">[</span><span class="s">&#39;sensors&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="s">&#39;id_sensor&#39;</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+            <span class="n">id_sensor</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;id_sensor&#39;</span><span class="p">)</span>
+            <span class="n">s</span><span class="p">[</span><span class="s">&#39;sensor&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">VehiclesConfig</span><span class="o">.</span><span class="n">sensors</span><span class="p">[</span><span class="n">id_sensor</span><span class="p">])</span>
+    <span class="n">check_valid_vehicle_config</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="check_valid_pose_spec"><a class="viewcode-back" href="../../../api/vehicles.configuration.html#vehicles.configuration.vehicles.check_valid_pose_spec">[docs]</a><span class="k">def</span> <span class="nf">check_valid_pose_spec</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="k">pass</span>  <span class="c"># XXX</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Vehicles 1.2 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../../vehicles.html" >vehicles</a> &raquo;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer">
+        &copy; Copyright 2010, Andrea Censi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+	
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-155626-14']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+
+  </body>
+</html>

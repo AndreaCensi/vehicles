@@ -1,0 +1,214 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vehicles.worlds.stochastic_box2 &mdash; Vehicles 1.2 documentation</title>
+    
+    <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../../static/doctools.js"></script>
+    <link rel="top" title="Vehicles 1.2 documentation" href="../../../index.html" />
+    <link rel="up" title="vehicles" href="../../vehicles.html" />
+	 
+
+
+   <style type="text/css">
+        span.brand { color: #a00;}
+   </style> 
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Vehicles 1.2 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../../vehicles.html" accesskey="U">vehicles</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vehicles.worlds.stochastic_box2</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">Counter</span><span class="p">,</span> <span class="n">random_checkerboard</span><span class="p">,</span> <span class="n">box</span><span class="p">,</span> <span class="n">np</span><span class="p">,</span> <span class="n">contract</span>
+<span class="kn">from</span> <span class="nn">..interfaces</span> <span class="kn">import</span> <span class="n">Circle</span><span class="p">,</span> <span class="n">World</span><span class="p">,</span> <span class="n">Source</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;StochasticBox2&#39;</span><span class="p">,</span> <span class="s">&#39;KernelExponential&#39;</span><span class="p">,</span> <span class="s">&#39;KernelInverse&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="StochasticBox2"><a class="viewcode-back" href="../../../api/vehicles.worlds.html#vehicles.worlds.stochastic_box2.StochasticBox2">[docs]</a><span class="k">class</span> <span class="nc">StochasticBox2</span><span class="p">(</span><span class="n">World</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; This also includes point sources. &#39;&#39;&#39;</span>
+
+    <span class="nd">@contract</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s">&#39;&gt;0&#39;</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="s">&#39;&gt;0&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                 <span class="n">num_circles</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">circles_size</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+                 <span class="n">num_sources</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">source_width</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">=</span> <span class="n">length</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">circles_size</span> <span class="o">=</span> <span class="n">circles_size</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">bounds</span> <span class="o">=</span> <span class="p">[[</span><span class="o">-</span><span class="n">width</span> <span class="o">*</span> <span class="n">r</span><span class="p">,</span> <span class="o">+</span><span class="n">width</span> <span class="o">*</span> <span class="n">r</span><span class="p">],</span>
+                  <span class="p">[</span><span class="o">-</span><span class="n">length</span> <span class="o">*</span> <span class="n">r</span><span class="p">,</span> <span class="o">+</span><span class="n">length</span> <span class="o">*</span> <span class="n">r</span><span class="p">],</span>
+                  <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]</span>
+        <span class="n">World</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bounds</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bounds</span> <span class="o">=</span> <span class="n">bounds</span>
+
+        <span class="n">id_object</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">box</span> <span class="o">=</span> <span class="n">box</span><span class="p">(</span><span class="n">id_object</span><span class="p">(),</span> <span class="n">random_checkerboard</span><span class="p">(</span><span class="mf">0.5</span><span class="p">),</span> <span class="n">width</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">circles</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_circles</span><span class="p">):</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">Circle</span><span class="p">(</span><span class="n">id_object</span><span class="o">=</span><span class="n">id_object</span><span class="p">(),</span> <span class="n">tags</span><span class="o">=</span><span class="p">[],</span>
+                     <span class="n">texture</span><span class="o">=</span><span class="n">random_checkerboard</span><span class="p">(</span><span class="mf">0.5</span><span class="p">),</span>
+                     <span class="n">center</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                     <span class="n">radius</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                     <span class="n">solid</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">circles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">sources</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_sources</span><span class="p">):</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">Source</span><span class="p">(</span><span class="n">id_object</span><span class="o">=</span><span class="n">id_object</span><span class="p">(),</span> <span class="n">tags</span><span class="o">=</span><span class="p">[],</span>
+                     <span class="n">center</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                     <span class="n">kernel_spec</span><span class="o">=</span><span class="n">KernelInverse</span><span class="o">.</span><span class="n">spec</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sources</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span>
+
+<div class="viewcode-block" id="StochasticBox2.refresh"><a class="viewcode-back" href="../../../api/vehicles.worlds.html#vehicles.worlds.stochastic_box2.StochasticBox2.refresh">[docs]</a>    <span class="k">def</span> <span class="nf">refresh</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">circles</span><span class="p">:</span>
+            <span class="n">c</span><span class="o">.</span><span class="n">set_center</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">random_2d_point</span><span class="p">())</span>
+            <span class="n">c</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">circles_size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                         <span class="bp">self</span><span class="o">.</span><span class="n">circles_size</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sources</span><span class="p">:</span>
+            <span class="n">s</span><span class="o">.</span><span class="n">set_center</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">random_2d_point</span><span class="p">())</span>
+</div>
+<div class="viewcode-block" id="StochasticBox2.get_primitives"><a class="viewcode-back" href="../../../api/vehicles.worlds.html#vehicles.worlds.stochastic_box2.StochasticBox2.get_primitives">[docs]</a>    <span class="k">def</span> <span class="nf">get_primitives</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">circles</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">sources</span>
+</div>
+<div class="viewcode-block" id="StochasticBox2.new_episode"><a class="viewcode-back" href="../../../api/vehicles.worlds.html#vehicles.worlds.stochastic_box2.StochasticBox2.new_episode">[docs]</a>    <span class="k">def</span> <span class="nf">new_episode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">World</span><span class="o">.</span><span class="n">new_episode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="StochasticBox2.simulate"><a class="viewcode-back" href="../../../api/vehicles.worlds.html#vehicles.worlds.stochastic_box2.StochasticBox2.simulate">[docs]</a>    <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">vehicle_pose</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[]</span>  <span class="c"># no changes</span>
+
+</div></div>
+<div class="viewcode-block" id="KernelExponential"><a class="viewcode-back" href="../../../api/vehicles.worlds.html#vehicles.worlds.stochastic_box2.KernelExponential">[docs]</a><span class="k">class</span> <span class="nc">KernelExponential</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">L</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; L is the size of 99% area &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">L</span> <span class="o">=</span> <span class="n">L</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">d</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="KernelExponential.spec"><a class="viewcode-back" href="../../../api/vehicles.worlds.html#vehicles.worlds.stochastic_box2.KernelExponential.spec">[docs]</a>    <span class="k">def</span> <span class="nf">spec</span><span class="p">(</span><span class="n">L</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s">&#39;vehicles.worlds.KernelExponential&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;L&#39;</span><span class="p">:</span> <span class="n">L</span><span class="p">}]</span>
+
+</div></div>
+<div class="viewcode-block" id="KernelInverse"><a class="viewcode-back" href="../../../api/vehicles.worlds.html#vehicles.worlds.stochastic_box2.KernelInverse">[docs]</a><span class="k">class</span> <span class="nc">KernelInverse</span><span class="p">():</span>
+    <span class="nd">@contract</span><span class="p">(</span><span class="n">var</span><span class="o">=</span><span class="s">&#39;&gt;0&#39;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="s">&#39;&gt;0&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scale</span> <span class="o">=</span> <span class="n">scale</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var</span> <span class="o">=</span> <span class="n">var</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">distances</span><span class="p">):</span>
+        <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
+        <span class="n">D</span> <span class="o">=</span> <span class="n">D</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">var</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">D</span>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="KernelInverse.spec"><a class="viewcode-back" href="../../../api/vehicles.worlds.html#vehicles.worlds.stochastic_box2.KernelInverse.spec">[docs]</a>    <span class="k">def</span> <span class="nf">spec</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s">&#39;vehicles.worlds.KernelInverse&#39;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span> <span class="n">var</span><span class="o">=</span><span class="n">var</span><span class="p">)]</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Vehicles 1.2 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../../vehicles.html" >vehicles</a> &raquo;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer">
+        &copy; Copyright 2010, Andrea Censi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+	
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-155626-14']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+
+  </body>
+</html>

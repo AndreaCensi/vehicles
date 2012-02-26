@@ -1,0 +1,388 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>procgraph_vehicles Package &mdash; Vehicles 1.2 documentation</title>
+    
+    <link rel="stylesheet" href="../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <link rel="top" title="Vehicles 1.2 documentation" href="../index.html" />
+	 
+
+
+   <style type="text/css">
+        span.brand { color: #a00;}
+   </style> 
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Vehicles 1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="procgraph-vehicles-package">
+<h1>procgraph_vehicles Package<a class="headerlink" href="#procgraph-vehicles-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><a class="reference internal" href="#module-procgraph_vehicles" title="procgraph_vehicles"><tt class="xref py py-mod docutils literal"><span class="pre">procgraph_vehicles</span></tt></a> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-procgraph_vehicles"></span><p>Blocks for the visualization of Vehicles logs using Procgraph.</p>
+</div>
+<div class="section" id="module-procgraph_vehicles.boot_log_reader">
+<span id="boot-log-reader-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">boot_log_reader</span></tt> Module<a class="headerlink" href="#module-procgraph_vehicles.boot_log_reader" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="procgraph_vehicles.boot_log_reader.BOLogReader">
+<em class="property">class </em><tt class="descclassname">procgraph_vehicles.boot_log_reader.</tt><tt class="descname">BOLogReader</tt><big>(</big><em>name</em>, <em>config</em>, <em>library</em><big>)</big><a class="reference internal" href="../modules/procgraph_vehicles/boot_log_reader.html#BOLogReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#procgraph_vehicles.boot_log_reader.BOLogReader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">procgraph.core.block.Generator</span></tt></p>
+<p>Reads the Vehicles log format (YAML)</p>
+<dl class="attribute">
+<dt id="procgraph_vehicles.boot_log_reader.BOLogReader.config">
+<tt class="descname">config</tt><em class="property"> = [BlockConfig('logdir',False,'not-given','BootOlympics logdir',''), BlockConfig('id_robot',False,'not-given','Name of the robot',''), BlockConfig('id_agent',True,'','If given, selects those for the agent',''), BlockConfig('id_episode',True,'','If given, select a specific episode',''), BlockConfig('read_extra',True,True,'Load the extra information.','')]</em><a class="headerlink" href="#procgraph_vehicles.boot_log_reader.BOLogReader.config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="procgraph_vehicles.boot_log_reader.BOLogReader.defined_in">
+<tt class="descname">defined_in</tt><em class="property"> = 'procgraph_vehicles.boot_log_reader'</em><a class="headerlink" href="#procgraph_vehicles.boot_log_reader.BOLogReader.defined_in" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="procgraph_vehicles.boot_log_reader.BOLogReader.finish">
+<tt class="descname">finish</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/procgraph_vehicles/boot_log_reader.html#BOLogReader.finish"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#procgraph_vehicles.boot_log_reader.BOLogReader.finish" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="procgraph_vehicles.boot_log_reader.BOLogReader.init">
+<tt class="descname">init</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/procgraph_vehicles/boot_log_reader.html#BOLogReader.init"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#procgraph_vehicles.boot_log_reader.BOLogReader.init" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="procgraph_vehicles.boot_log_reader.BOLogReader.input">
+<tt class="descname">input</tt><em class="property"> = []</em><a class="headerlink" href="#procgraph_vehicles.boot_log_reader.BOLogReader.input" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="procgraph_vehicles.boot_log_reader.BOLogReader.next_data_status">
+<tt class="descname">next_data_status</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/procgraph_vehicles/boot_log_reader.html#BOLogReader.next_data_status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#procgraph_vehicles.boot_log_reader.BOLogReader.next_data_status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="procgraph_vehicles.boot_log_reader.BOLogReader.output">
+<tt class="descname">output</tt><em class="property"> = [BlockOutput(fixed-signal,observations)]</em><a class="headerlink" href="#procgraph_vehicles.boot_log_reader.BOLogReader.output" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="procgraph_vehicles.boot_log_reader.BOLogReader.update">
+<tt class="descname">update</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/procgraph_vehicles/boot_log_reader.html#BOLogReader.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#procgraph_vehicles.boot_log_reader.BOLogReader.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="procgraph_vehicles.boot_log_reader.extract_from_extra">
+<tt class="descclassname">procgraph_vehicles.boot_log_reader.</tt><tt class="descname">extract_from_extra</tt><big>(</big><em>observations</em>, <em>fieldname='compulsory-param'</em><big>)</big><a class="reference internal" href="../modules/procgraph_vehicles/boot_log_reader.html#extract_from_extra"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#procgraph_vehicles.boot_log_reader.extract_from_extra" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-procgraph_vehicles.cairo_map_display">
+<span id="cairo-map-display-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">cairo_map_display</span></tt> Module<a class="headerlink" href="#module-procgraph_vehicles.cairo_map_display" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay">
+<em class="property">class </em><tt class="descclassname">procgraph_vehicles.cairo_map_display.</tt><tt class="descname">VehiclesCairoDisplay</tt><big>(</big><em>name</em>, <em>config</em>, <em>library</em><big>)</big><a class="reference internal" href="../modules/procgraph_vehicles/cairo_map_display.html#VehiclesCairoDisplay"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">procgraph.core.block.Block</span></tt></p>
+<p>Produces a top-down plot of a circular arena.</p>
+<dl class="attribute">
+<dt id="procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.config">
+<tt class="descname">config</tt><em class="property"> = [BlockConfig('format',True,'pdf','pdf|png',''), BlockConfig('file',True,None,'Output file (pdf)',''), BlockConfig('transparent',True,False,'Outputs RGB with transparent bg',''), BlockConfig('width',True,600,'Image width in points.',''), BlockConfig('height',True,600,'Image height in points.',''), BlockConfig('sidebar_width',True,200,None,None), BlockConfig('display_sidebar',True,True,None,None), BlockConfig('trace',True,False,'Trace the path',''), BlockConfig('plotting_params',True,{},'Configuration to pass to vehicles_cairo_display_all()',''), BlockConfig('sidebar_params',True,{},'Configuration to pass to create_sidebar()',''), BlockConfig('swf',True,True,'Converts PDF to SWF using pdf2swf','')]</em><a class="headerlink" href="#procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.defined_in">
+<tt class="descname">defined_in</tt><em class="property"> = 'procgraph_vehicles.cairo_map_display'</em><a class="headerlink" href="#procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.defined_in" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.draw_everything">
+<tt class="descname">draw_everything</tt><big>(</big><em>cr</em><big>)</big><a class="reference internal" href="../modules/procgraph_vehicles/cairo_map_display.html#VehiclesCairoDisplay.draw_everything"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.draw_everything" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.finish">
+<tt class="descname">finish</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/procgraph_vehicles/cairo_map_display.html#VehiclesCairoDisplay.finish"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.finish" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.finish_pdf">
+<tt class="descname">finish_pdf</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/procgraph_vehicles/cairo_map_display.html#VehiclesCairoDisplay.finish_pdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.finish_pdf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.init">
+<tt class="descname">init</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/procgraph_vehicles/cairo_map_display.html#VehiclesCairoDisplay.init"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.init" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.init_pdf">
+<tt class="descname">init_pdf</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/procgraph_vehicles/cairo_map_display.html#VehiclesCairoDisplay.init_pdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.init_pdf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.init_png">
+<tt class="descname">init_png</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/procgraph_vehicles/cairo_map_display.html#VehiclesCairoDisplay.init_png"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.init_png" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.input">
+<tt class="descname">input</tt><em class="property"> = [&lt;procgraph.core.block_meta.BlockInput instance at 0x1d3c098&gt;]</em><a class="headerlink" href="#procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.input" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.output">
+<tt class="descname">output</tt><em class="property"> = [BlockOutput(fixed-signal,rgb)]</em><a class="headerlink" href="#procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.output" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.update">
+<tt class="descname">update</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/procgraph_vehicles/cairo_map_display.html#VehiclesCairoDisplay.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.update_pdf">
+<tt class="descname">update_pdf</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/procgraph_vehicles/cairo_map_display.html#VehiclesCairoDisplay.update_pdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.update_pdf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.update_png">
+<tt class="descname">update_png</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/procgraph_vehicles/cairo_map_display.html#VehiclesCairoDisplay.update_png"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.update_png" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="procgraph_vehicles.cairo_map_display.create_sidebar">
+<tt class="descclassname">procgraph_vehicles.cairo_map_display.</tt><tt class="descname">create_sidebar</tt><big>(</big><em>cr</em>, <em>width</em>, <em>height</em>, <em>sim_state</em>, <em>id_vehicle</em>, <em>id_episode</em>, <em>timestamp</em>, <em>observations_values</em>, <em>commands_values</em>, <em>commands_source</em>, <em>bg_color=None</em>, <em>show_observations=True</em>, <em>show_commands=True</em>, <em>show_annotations=True</em><big>)</big><a class="reference internal" href="../modules/procgraph_vehicles/cairo_map_display.html#create_sidebar"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#procgraph_vehicles.cairo_map_display.create_sidebar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="procgraph_vehicles.cairo_map_display.plot_servoing_poses">
+<tt class="descclassname">procgraph_vehicles.cairo_map_display.</tt><tt class="descname">plot_servoing_poses</tt><big>(</big><em>cr</em>, <em>servoing_poses</em><big>)</big><a class="reference internal" href="../modules/procgraph_vehicles/cairo_map_display.html#plot_servoing_poses"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#procgraph_vehicles.cairo_map_display.plot_servoing_poses" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="procgraph_vehicles.cairo_map_display.plot_servonave">
+<tt class="descclassname">procgraph_vehicles.cairo_map_display.</tt><tt class="descname">plot_servonave</tt><big>(</big><em>cr</em>, <em>servonav</em><big>)</big><a class="reference internal" href="../modules/procgraph_vehicles/cairo_map_display.html#plot_servonave"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#procgraph_vehicles.cairo_map_display.plot_servonave" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-procgraph_vehicles.vehiclelog_utils">
+<span id="vehiclelog-utils-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">vehiclelog_utils</span></tt> Module<a class="headerlink" href="#module-procgraph_vehicles.vehiclelog_utils" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="procgraph_vehicles.vehiclelog_utils.extract_commands">
+<tt class="descclassname">procgraph_vehicles.vehiclelog_utils.</tt><tt class="descname">extract_commands</tt><big>(</big><em>state</em><big>)</big><a class="reference internal" href="../modules/procgraph_vehicles/vehiclelog_utils.html#extract_commands"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#procgraph_vehicles.vehiclelog_utils.extract_commands" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="procgraph_vehicles.vehiclelog_utils.extract_field">
+<tt class="descclassname">procgraph_vehicles.vehiclelog_utils.</tt><tt class="descname">extract_field</tt><big>(</big><em>dictionary</em>, <em>field='compulsory-param'</em><big>)</big><a class="reference internal" href="../modules/procgraph_vehicles/vehiclelog_utils.html#extract_field"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#procgraph_vehicles.vehiclelog_utils.extract_field" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="procgraph_vehicles.vehiclelog_utils.extract_sensels">
+<tt class="descclassname">procgraph_vehicles.vehiclelog_utils.</tt><tt class="descname">extract_sensels</tt><big>(</big><em>state</em><big>)</big><a class="reference internal" href="../modules/procgraph_vehicles/vehiclelog_utils.html#extract_sensels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#procgraph_vehicles.vehiclelog_utils.extract_sensels" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="procgraph_vehicles.vehiclelog_utils.extract_timeinfo">
+<tt class="descclassname">procgraph_vehicles.vehiclelog_utils.</tt><tt class="descname">extract_timeinfo</tt><big>(</big><em>state</em><big>)</big><a class="reference internal" href="../modules/procgraph_vehicles/vehiclelog_utils.html#extract_timeinfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#procgraph_vehicles.vehiclelog_utils.extract_timeinfo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="procgraph_vehicles.vehiclelog_utils.use_simulation_time">
+<em class="property">class </em><tt class="descclassname">procgraph_vehicles.vehiclelog_utils.</tt><tt class="descname">use_simulation_time</tt><big>(</big><em>name</em>, <em>config</em>, <em>library</em><big>)</big><a class="reference internal" href="../modules/procgraph_vehicles/vehiclelog_utils.html#use_simulation_time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#procgraph_vehicles.vehiclelog_utils.use_simulation_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">procgraph.core.block.Block</span></tt></p>
+<dl class="attribute">
+<dt id="procgraph_vehicles.vehiclelog_utils.use_simulation_time.config">
+<tt class="descname">config</tt><em class="property"> = []</em><a class="headerlink" href="#procgraph_vehicles.vehiclelog_utils.use_simulation_time.config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="procgraph_vehicles.vehiclelog_utils.use_simulation_time.defined_in">
+<tt class="descname">defined_in</tt><em class="property"> = 'procgraph_vehicles.vehiclelog_utils'</em><a class="headerlink" href="#procgraph_vehicles.vehiclelog_utils.use_simulation_time.defined_in" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="procgraph_vehicles.vehiclelog_utils.use_simulation_time.input">
+<tt class="descname">input</tt><em class="property"> = [&lt;procgraph.core.block_meta.BlockInput instance at 0x328f290&gt;]</em><a class="headerlink" href="#procgraph_vehicles.vehiclelog_utils.use_simulation_time.input" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="procgraph_vehicles.vehiclelog_utils.use_simulation_time.output">
+<tt class="descname">output</tt><em class="property"> = [BlockOutput(fixed-signal,state)]</em><a class="headerlink" href="#procgraph_vehicles.vehiclelog_utils.use_simulation_time.output" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="procgraph_vehicles.vehiclelog_utils.use_simulation_time.update">
+<tt class="descname">update</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/procgraph_vehicles/vehiclelog_utils.html#use_simulation_time.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#procgraph_vehicles.vehiclelog_utils.use_simulation_time.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-procgraph_vehicles.yaml_log_reader">
+<span id="yaml-log-reader-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">yaml_log_reader</span></tt> Module<a class="headerlink" href="#module-procgraph_vehicles.yaml_log_reader" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="procgraph_vehicles.yaml_log_reader.YAMLLogReader">
+<em class="property">class </em><tt class="descclassname">procgraph_vehicles.yaml_log_reader.</tt><tt class="descname">YAMLLogReader</tt><big>(</big><em>name</em>, <em>config</em>, <em>library</em><big>)</big><a class="reference internal" href="../modules/procgraph_vehicles/yaml_log_reader.html#YAMLLogReader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#procgraph_vehicles.yaml_log_reader.YAMLLogReader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">procgraph.core.block.Generator</span></tt></p>
+<p>Reads the Vehicles log format (YAML)</p>
+<dl class="attribute">
+<dt id="procgraph_vehicles.yaml_log_reader.YAMLLogReader.config">
+<tt class="descname">config</tt><em class="property"> = [BlockConfig('file',False,'not-given','YAML file to read','')]</em><a class="headerlink" href="#procgraph_vehicles.yaml_log_reader.YAMLLogReader.config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="procgraph_vehicles.yaml_log_reader.YAMLLogReader.defined_in">
+<tt class="descname">defined_in</tt><em class="property"> = 'procgraph_vehicles.yaml_log_reader'</em><a class="headerlink" href="#procgraph_vehicles.yaml_log_reader.YAMLLogReader.defined_in" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="procgraph_vehicles.yaml_log_reader.YAMLLogReader.finish">
+<tt class="descname">finish</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/procgraph_vehicles/yaml_log_reader.html#YAMLLogReader.finish"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#procgraph_vehicles.yaml_log_reader.YAMLLogReader.finish" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="procgraph_vehicles.yaml_log_reader.YAMLLogReader.init">
+<tt class="descname">init</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/procgraph_vehicles/yaml_log_reader.html#YAMLLogReader.init"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#procgraph_vehicles.yaml_log_reader.YAMLLogReader.init" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="procgraph_vehicles.yaml_log_reader.YAMLLogReader.input">
+<tt class="descname">input</tt><em class="property"> = []</em><a class="headerlink" href="#procgraph_vehicles.yaml_log_reader.YAMLLogReader.input" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="procgraph_vehicles.yaml_log_reader.YAMLLogReader.next_data_status">
+<tt class="descname">next_data_status</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/procgraph_vehicles/yaml_log_reader.html#YAMLLogReader.next_data_status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#procgraph_vehicles.yaml_log_reader.YAMLLogReader.next_data_status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="procgraph_vehicles.yaml_log_reader.YAMLLogReader.output">
+<tt class="descname">output</tt><em class="property"> = [BlockOutput(fixed-signal,state)]</em><a class="headerlink" href="#procgraph_vehicles.yaml_log_reader.YAMLLogReader.output" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="procgraph_vehicles.yaml_log_reader.YAMLLogReader.update">
+<tt class="descname">update</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/procgraph_vehicles/yaml_log_reader.html#YAMLLogReader.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#procgraph_vehicles.yaml_log_reader.YAMLLogReader.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">procgraph_vehicles Package</a><ul>
+<li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">procgraph_vehicles</span></tt> Package</a></li>
+<li><a class="reference internal" href="#module-procgraph_vehicles.boot_log_reader"><tt class="docutils literal"><span class="pre">boot_log_reader</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-procgraph_vehicles.cairo_map_display"><tt class="docutils literal"><span class="pre">cairo_map_display</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-procgraph_vehicles.vehiclelog_utils"><tt class="docutils literal"><span class="pre">vehiclelog_utils</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-procgraph_vehicles.yaml_log_reader"><tt class="docutils literal"><span class="pre">yaml_log_reader</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../sources/api/procgraph_vehicles.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Vehicles 1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer">
+        &copy; Copyright 2010, Andrea Censi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+	
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-155626-14']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+
+  </body>
+</html>

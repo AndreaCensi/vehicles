@@ -1,0 +1,51 @@
+simulation Package
+==================
+
+:mod:`simulation` Package
+-------------------------
+
+.. automodule:: vehicles.simulation
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`collision` Module
+-----------------------
+
+.. automodule:: vehicles.simulation.collision
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`collision_utils` Module
+-----------------------------
+
+.. automodule:: vehicles.simulation.collision_utils
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`collision_utils_test` Module
+----------------------------------
+
+.. automodule:: vehicles.simulation.collision_utils_test
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`vehicle` Module
+---------------------
+
+.. automodule:: vehicles.simulation.vehicle
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`vsimulation` Module
+-------------------------
+
+.. automodule:: vehicles.simulation.vsimulation
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

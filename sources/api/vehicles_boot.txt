@@ -1,0 +1,27 @@
+vehicles_boot Package
+=====================
+
+:mod:`vehicles_boot` Package
+----------------------------
+
+.. automodule:: vehicles_boot
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`vehicles_simulation` Module
+---------------------------------
+
+.. automodule:: vehicles_boot.vehicles_simulation
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    vehicles_boot.create_olympics_configs
+    vehicles_boot.ros_visualization
+

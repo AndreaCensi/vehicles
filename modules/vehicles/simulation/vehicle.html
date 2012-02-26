@@ -1,0 +1,337 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vehicles.simulation.vehicle &mdash; Vehicles 1.2 documentation</title>
+    
+    <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../../static/doctools.js"></script>
+    <link rel="top" title="Vehicles 1.2 documentation" href="../../../index.html" />
+    <link rel="up" title="vehicles.simulation" href="../simulation.html" />
+	 
+
+
+   <style type="text/css">
+        span.brand { color: #a00;}
+   </style> 
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Vehicles 1.2 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../../vehicles.html" >vehicles</a> &raquo;</li>
+          <li><a href="../simulation.html" accesskey="U">vehicles.simulation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vehicles.simulation.vehicle</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">collides_with</span><span class="p">,</span> <span class="n">np</span><span class="p">,</span> <span class="n">compute_collision</span><span class="p">,</span> <span class="n">contract</span>
+<span class="kn">from</span> <span class="nn">geometry</span> <span class="kn">import</span> <span class="n">SE3</span><span class="p">,</span> <span class="n">translation_from_SE2</span><span class="p">,</span> <span class="n">SE2_project_from_SE3</span>
+<span class="kn">from</span> <span class="nn">geometry.yaml</span> <span class="kn">import</span> <span class="n">to_yaml</span>
+<span class="kn">from</span> <span class="nn">vehicles.utils.check_yaml_friendly</span> <span class="kn">import</span> <span class="n">check_yaml_friendly</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;Attached&#39;</span><span class="p">,</span> <span class="s">&#39;Vehicle&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="Attached"><a class="viewcode-back" href="../../../api/vehicles.simulation.html#vehicles.simulation.vehicle.Attached">[docs]</a><span class="k">class</span> <span class="nc">Attached</span><span class="p">:</span>
+    <span class="nd">@contract</span><span class="p">(</span><span class="n">pose</span><span class="o">=</span><span class="s">&#39;SE3&#39;</span><span class="p">,</span> <span class="n">joint</span><span class="o">=</span><span class="s">&#39;int,&gt;=0&#39;</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="s">&#39;dict&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sensor</span><span class="p">,</span> <span class="n">pose</span><span class="p">,</span> <span class="n">joint</span><span class="p">,</span> <span class="n">extra</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Initializes this structure.</span>
+<span class="sd">            </span>
+<span class="sd">            :param extra: dict convertible to YAML.</span>
+<span class="sd">             extra[&#39;skin&#39;]: sing for this sensor.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span> <span class="o">=</span> <span class="n">sensor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pose</span> <span class="o">=</span> <span class="n">pose</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">joint</span> <span class="o">=</span> <span class="n">joint</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_observations</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_pose</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">extra</span> <span class="o">=</span> <span class="n">extra</span>
+
+<div class="viewcode-block" id="Attached.to_yaml"><a class="viewcode-back" href="../../../api/vehicles.simulation.html#vehicles.simulation.vehicle.Attached.to_yaml">[docs]</a>    <span class="k">def</span> <span class="nf">to_yaml</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_observations</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&#39;Observations not computed&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s">&#39;sensor&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">to_yaml</span><span class="p">(),</span>
+            <span class="s">&#39;pose&#39;</span><span class="p">:</span> <span class="n">SE3</span><span class="o">.</span><span class="n">to_yaml</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pose</span><span class="p">),</span>
+            <span class="s">&#39;joint&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">joint</span><span class="p">,</span>
+            <span class="s">&#39;extra&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra</span><span class="p">,</span>
+            <span class="s">&#39;current_observations&#39;</span><span class="p">:</span>
+                <span class="n">dict_to_yaml</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_observations</span><span class="p">),</span>
+            <span class="s">&#39;current_pose&#39;</span><span class="p">:</span> <span class="n">SE3</span><span class="o">.</span><span class="n">to_yaml</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_pose</span><span class="p">),</span>
+        <span class="p">}</span>
+
+</div></div>
+<div class="viewcode-block" id="Vehicle"><a class="viewcode-back" href="../../../api/vehicles.simulation.html#vehicles.simulation.vehicle.Vehicle">[docs]</a><span class="k">class</span> <span class="nc">Vehicle</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="p">{}):</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">            Initializes an empty vehicle.</span>
+<span class="sd">            </span>
+<span class="sd">            :param radius: radius (used for collision detection)</span>
+<span class="sd">            :param extra: extra information (extra[&#39;skin&#39;] id of the skin)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">radius</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensors</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c"># array of Attached</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id_sensors</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id_dynamics</span> <span class="o">=</span> <span class="bp">None</span>  <span class="c"># XXX</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dynamics</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">extra</span> <span class="o">=</span> <span class="n">extra</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">primitives</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+        <span class="c"># Needs to be initialized before calling certain functions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">=</span> <span class="bp">None</span>
+
+<div class="viewcode-block" id="Vehicle.to_yaml"><a class="viewcode-back" href="../../../api/vehicles.simulation.html#vehicles.simulation.vehicle.Vehicle.to_yaml">[docs]</a>    <span class="k">def</span> <span class="nf">to_yaml</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c"># pose, velocity</span>
+        <span class="n">configuration</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics</span><span class="o">.</span><span class="n">joint_state</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_state</span><span class="p">(),</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">pose</span> <span class="o">=</span> <span class="n">configuration</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">joints</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dynamics</span><span class="o">.</span><span class="n">num_joints</span><span class="p">()):</span>
+            <span class="n">jc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics</span><span class="o">.</span><span class="n">joint_state</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_state</span><span class="p">(),</span> <span class="n">i</span><span class="p">)</span>
+            <span class="n">joints</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">to_yaml</span><span class="p">(</span><span class="s">&quot;TSE3&quot;</span><span class="p">,</span> <span class="n">jc</span><span class="p">))</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">&#39;radius&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span>
+            <span class="s">&#39;id_sensors&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id_sensors</span><span class="p">,</span>
+            <span class="s">&#39;id_dynamics&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id_dynamics</span><span class="p">,</span>
+            <span class="s">&#39;pose&#39;</span><span class="p">:</span> <span class="n">SE3</span><span class="o">.</span><span class="n">to_yaml</span><span class="p">(</span><span class="n">pose</span><span class="p">),</span>
+            <span class="s">&#39;conf&#39;</span><span class="p">:</span> <span class="n">to_yaml</span><span class="p">(</span><span class="s">&#39;TSE3&#39;</span><span class="p">,</span> <span class="n">configuration</span><span class="p">),</span>
+            <span class="s">&#39;state&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics</span><span class="o">.</span><span class="n">state_to_yaml</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_state</span><span class="p">()),</span>
+            <span class="s">&#39;joints&#39;</span><span class="p">:</span> <span class="n">joints</span><span class="p">,</span>
+            <span class="s">&#39;sensors&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">to_yaml</span><span class="p">()</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensors</span><span class="p">],</span>
+            <span class="s">&#39;extra&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">extra</span>
+        <span class="p">}</span>
+        <span class="n">check_yaml_friendly</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span>
+</div>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;V(</span><span class="si">%s</span><span class="s">;</span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id_dynamics</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">id_sensors</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Vehicle.add_dynamics"><a class="viewcode-back" href="../../../api/vehicles.simulation.html#vehicles.simulation.vehicle.Vehicle.add_dynamics">[docs]</a>    <span class="k">def</span> <span class="nf">add_dynamics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">id_dynamics</span><span class="p">,</span> <span class="n">dynamics</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&#39;not sure if this will be implemented&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dynamics</span> <span class="o">=</span> <span class="n">dynamics</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id_dynamics</span> <span class="o">=</span> <span class="n">id_dynamics</span>
+</div>
+    <span class="nd">@contract</span><span class="p">(</span><span class="n">id_sensor</span><span class="o">=</span><span class="s">&#39;str&#39;</span><span class="p">,</span> <span class="n">pose</span><span class="o">=</span><span class="s">&#39;SE3&#39;</span><span class="p">,</span> <span class="n">joint</span><span class="o">=</span><span class="s">&#39;int,&gt;=0&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="Vehicle.add_sensor"><a class="viewcode-back" href="../../../api/vehicles.simulation.html#vehicles.simulation.vehicle.Vehicle.add_sensor">[docs]</a>    <span class="k">def</span> <span class="nf">add_sensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">id_sensor</span><span class="p">,</span> <span class="n">sensor</span><span class="p">,</span> <span class="n">pose</span><span class="p">,</span> <span class="n">joint</span><span class="p">,</span> <span class="n">extra</span><span class="p">):</span>
+        <span class="n">attached</span> <span class="o">=</span> <span class="n">Attached</span><span class="p">(</span><span class="n">sensor</span><span class="o">=</span><span class="n">sensor</span><span class="p">,</span> <span class="n">pose</span><span class="o">=</span><span class="n">pose</span><span class="p">,</span>
+                                    <span class="n">joint</span><span class="o">=</span><span class="n">joint</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="n">extra</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">attached</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">id_sensors</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">id_sensors</span> <span class="o">=</span> <span class="n">id_sensor</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">id_sensors</span> <span class="o">+=</span> <span class="s">&#39;+</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">id_sensor</span>
+</div>
+<div class="viewcode-block" id="Vehicle.set_world_primitives"><a class="viewcode-back" href="../../../api/vehicles.simulation.html#vehicles.simulation.vehicle.Vehicle.set_world_primitives">[docs]</a>    <span class="k">def</span> <span class="nf">set_world_primitives</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">primitives</span><span class="p">):</span>
+        <span class="c"># These are used for collision checking</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">primitives</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">primitives</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">attached</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensors</span><span class="p">:</span>
+            <span class="n">attached</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">set_world_primitives</span><span class="p">(</span><span class="n">primitives</span><span class="p">)</span>
+</div>
+    <span class="nd">@contract</span><span class="p">(</span><span class="n">returns</span><span class="o">=</span><span class="s">&#39;SE3&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="Vehicle.get_pose"><a class="viewcode-back" href="../../../api/vehicles.simulation.html#vehicles.simulation.vehicle.Vehicle.get_pose">[docs]</a>    <span class="k">def</span> <span class="nf">get_pose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Returns the pose of the robot in SE(3). </span>
+<span class="sd">            </span>
+<span class="sd">            This is regardless of the state space.</span>
+<span class="sd">            The idea is that all robot spaces are subgroups of SE(3)</span>
+<span class="sd">            so this is the most general representation.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">pose</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics</span><span class="o">.</span><span class="n">joint_state</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_state</span><span class="p">(),</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">j_pose</span><span class="p">,</span> <span class="n">j_vel</span> <span class="o">=</span> <span class="n">pose</span>  <span class="c"># @UnusedVariable</span>
+        <span class="k">return</span> <span class="n">j_pose</span>
+</div>
+    <span class="nd">@contract</span><span class="p">(</span><span class="n">pose</span><span class="o">=</span><span class="s">&#39;SE3&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="Vehicle.set_pose"><a class="viewcode-back" href="../../../api/vehicles.simulation.html#vehicles.simulation.vehicle.Vehicle.set_pose">[docs]</a>    <span class="k">def</span> <span class="nf">set_pose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pose</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">primitives</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s">&#39;Please call set_world_primitives() before set_pose().&#39;</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="c"># TODO: check compatibility</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics</span><span class="o">.</span><span class="n">pose2state</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>
+
+        <span class="n">collision</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">colliding_pose</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>  <span class="c"># XXX</span>
+        <span class="k">if</span> <span class="n">collision</span><span class="o">.</span><span class="n">collided</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Cannot put the robot in a colliding state.&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">=</span> <span class="n">state</span>
+
+        <span class="c"># TODO: invalidate observations?</span>
+</div>
+<div class="viewcode-block" id="Vehicle.simulate"><a class="viewcode-back" href="../../../api/vehicles.simulation.html#vehicles.simulation.vehicle.Vehicle.simulate">[docs]</a>    <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">commands</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+        <span class="c"># TODO: collisions</span>
+        <span class="k">def</span> <span class="nf">dynamics_function</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+            <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_state</span><span class="p">(),</span> <span class="n">commands</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+            <span class="c"># compute center of robot</span>
+            <span class="n">j_pose</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics</span><span class="o">.</span><span class="n">joint_state</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">center</span> <span class="o">=</span> <span class="n">translation_from_SE2</span><span class="p">(</span><span class="n">SE2_project_from_SE3</span><span class="p">(</span><span class="n">j_pose</span><span class="p">))</span>
+            <span class="c">#print(&#39;t=%f, center=%s&#39; % (t, center))</span>
+            <span class="k">return</span> <span class="n">center</span>
+
+        <span class="n">collision</span> <span class="o">=</span> <span class="n">compute_collision</span><span class="p">(</span><span class="n">dynamics_function</span><span class="o">=</span><span class="n">dynamics_function</span><span class="p">,</span>
+                                      <span class="n">max_dt</span><span class="o">=</span><span class="n">dt</span><span class="p">,</span>
+                                      <span class="n">primitives</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">primitives</span><span class="p">,</span>
+                                      <span class="n">radius</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">collision</span><span class="o">.</span><span class="n">collided</span><span class="p">:</span>
+            <span class="c">#print(&#39;Collision at time %s&#39; % collision.time)</span>
+            <span class="n">next_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_state</span><span class="p">(),</span> <span class="n">commands</span><span class="p">,</span>
+                                                 <span class="n">collision</span><span class="o">.</span><span class="n">time</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">next_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_state</span><span class="p">(),</span> <span class="n">commands</span><span class="p">,</span>
+                                                 <span class="n">dt</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">=</span> <span class="n">next_state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">collision</span> <span class="o">=</span> <span class="n">collision</span>
+</div>
+<div class="viewcode-block" id="Vehicle.compute_observations"><a class="viewcode-back" href="../../../api/vehicles.simulation.html#vehicles.simulation.vehicle.Vehicle.compute_observations">[docs]</a>    <span class="k">def</span> <span class="nf">compute_observations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c"># TODO: add dynamics observations</span>
+        <span class="n">sensel_values</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">attached</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensors</span><span class="p">:</span>
+            <span class="n">pose</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics</span><span class="o">.</span><span class="n">joint_state</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_state</span><span class="p">(),</span> <span class="n">attached</span><span class="o">.</span><span class="n">joint</span><span class="p">)</span>
+            <span class="n">j_pose</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">pose</span>
+            <span class="n">attached</span><span class="o">.</span><span class="n">current_pose</span> <span class="o">=</span> <span class="n">SE3</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">j_pose</span><span class="p">,</span> <span class="n">attached</span><span class="o">.</span><span class="n">pose</span><span class="p">)</span>
+            <span class="n">attached</span><span class="o">.</span><span class="n">current_observations</span> <span class="o">=</span> \
+                <span class="n">attached</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">compute_observations</span><span class="p">(</span><span class="n">attached</span><span class="o">.</span><span class="n">current_pose</span><span class="p">)</span>
+            <span class="n">sensels</span> <span class="o">=</span> <span class="n">attached</span><span class="o">.</span><span class="n">current_observations</span><span class="p">[</span><span class="s">&#39;sensels&#39;</span><span class="p">]</span>
+            <span class="n">sensel_values</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">sensels</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sensel_values</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s">&#39;float32&#39;</span><span class="p">)</span>
+</div>
+    <span class="nd">@contract</span><span class="p">(</span><span class="n">pose</span><span class="o">=</span><span class="s">&#39;SE3&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="Vehicle.colliding_pose"><a class="viewcode-back" href="../../../api/vehicles.simulation.html#vehicles.simulation.vehicle.Vehicle.colliding_pose">[docs]</a>    <span class="k">def</span> <span class="nf">colliding_pose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pose</span><span class="p">,</span> <span class="n">safety_margin</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">            Checks that the given pose does not give collisions. </span>
+<span class="sd">            Returns None or a CollisionInfo structure. </span>
+<span class="sd">            </span>
+<span class="sd">            safety_margin: multiplies the radius</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics</span><span class="o">.</span><span class="n">pose2state</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>
+        <span class="n">j_pose</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamics</span><span class="o">.</span><span class="n">joint_state</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">center</span> <span class="o">=</span> <span class="n">translation_from_SE2</span><span class="p">(</span><span class="n">SE2_project_from_SE3</span><span class="p">(</span><span class="n">j_pose</span><span class="p">))</span>
+
+        <span class="n">collision</span> <span class="o">=</span> <span class="n">collides_with</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">primitives</span><span class="p">,</span>
+                                  <span class="n">center</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="n">safety_margin</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">collision</span>
+</div>
+    <span class="k">def</span> <span class="nf">_get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Returns the dynamics state or raises an exception if it has</span>
+<span class="sd">            not been set. This is an opaque object interpretable by </span>
+<span class="sd">            the Dynamics instance. &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;The vehicle state has not been set yet.&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span>
+
+
+<span class="c"># TODO: move somewhere</span></div>
+<span class="k">def</span> <span class="nf">array_to_yaml</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">dict_to_yaml</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Sanitizes the values in the dictionary. &#39;&#39;&#39;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="n">x</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">array_to_yaml</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="n">check_yaml_friendly</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Vehicles 1.2 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../../vehicles.html" >vehicles</a> &raquo;</li>
+          <li><a href="../simulation.html" >vehicles.simulation</a> &raquo;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer">
+        &copy; Copyright 2010, Andrea Censi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+	
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-155626-14']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+
+  </body>
+</html>

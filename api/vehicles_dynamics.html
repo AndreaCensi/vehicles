@@ -1,0 +1,269 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vehicles_dynamics Package &mdash; Vehicles 1.2 documentation</title>
+    
+    <link rel="stylesheet" href="../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <link rel="top" title="Vehicles 1.2 documentation" href="../index.html" />
+	 
+
+
+   <style type="text/css">
+        span.brand { color: #a00;}
+   </style> 
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Vehicles 1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="vehicles-dynamics-package">
+<h1>vehicles_dynamics Package<a class="headerlink" href="#vehicles-dynamics-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><a class="reference internal" href="#module-vehicles_dynamics" title="vehicles_dynamics"><tt class="xref py py-mod docutils literal"><span class="pre">vehicles_dynamics</span></tt></a> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-vehicles_dynamics"></span></div>
+<div class="section" id="module-vehicles_dynamics.exceptions">
+<span id="exceptions-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">exceptions</span></tt> Module<a class="headerlink" href="#module-vehicles_dynamics.exceptions" title="Permalink to this headline">¶</a></h2>
+<dl class="exception">
+<dt id="vehicles_dynamics.exceptions.DynamicsException">
+<em class="property">exception </em><tt class="descclassname">vehicles_dynamics.exceptions.</tt><tt class="descname">DynamicsException</tt><big>(</big><em>dynamics</em>, <em>msg</em><big>)</big><a class="reference internal" href="../modules/vehicles_dynamics/exceptions.html#DynamicsException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_dynamics.exceptions.DynamicsException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="vehicles_dynamics.exceptions.InvalidCommands">
+<em class="property">exception </em><tt class="descclassname">vehicles_dynamics.exceptions.</tt><tt class="descname">InvalidCommands</tt><big>(</big><em>dynamics</em>, <em>commands</em><big>)</big><a class="reference internal" href="../modules/vehicles_dynamics/exceptions.html#InvalidCommands"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_dynamics.exceptions.InvalidCommands" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles_dynamics.exceptions.DynamicsException" title="vehicles_dynamics.exceptions.DynamicsException"><tt class="xref py py-class docutils literal"><span class="pre">vehicles_dynamics.exceptions.DynamicsException</span></tt></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="vehicles_dynamics.exceptions.InvalidState">
+<em class="property">exception </em><tt class="descclassname">vehicles_dynamics.exceptions.</tt><tt class="descname">InvalidState</tt><big>(</big><em>dynamics</em>, <em>state</em><big>)</big><a class="reference internal" href="../modules/vehicles_dynamics/exceptions.html#InvalidState"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_dynamics.exceptions.InvalidState" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles_dynamics.exceptions.DynamicsException" title="vehicles_dynamics.exceptions.DynamicsException"><tt class="xref py py-class docutils literal"><span class="pre">vehicles_dynamics.exceptions.DynamicsException</span></tt></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-vehicles_dynamics.lie_dynamics">
+<span id="lie-dynamics-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">lie_dynamics</span></tt> Module<a class="headerlink" href="#module-vehicles_dynamics.lie_dynamics" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="vehicles_dynamics.lie_dynamics.SimpleDynamics">
+<em class="property">class </em><tt class="descclassname">vehicles_dynamics.lie_dynamics.</tt><tt class="descname">SimpleDynamics</tt><big>(</big><em>pose_space</em>, <em>commands_spec</em>, <em>mass</em>, <em>damping</em><big>)</big><a class="reference internal" href="../modules/vehicles_dynamics/lie_dynamics.html#SimpleDynamics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_dynamics.lie_dynamics.SimpleDynamics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles_dynamics.lie_kinematics.SimpleKinematics" title="vehicles_dynamics.lie_kinematics.SimpleKinematics"><tt class="xref py py-class docutils literal"><span class="pre">vehicles_dynamics.lie_kinematics.SimpleKinematics</span></tt></a></p>
+<dl class="method">
+<dt id="vehicles_dynamics.lie_dynamics.SimpleDynamics.compute_forces">
+<tt class="descname">compute_forces</tt><big>(</big><em>commands</em><big>)</big><a class="reference internal" href="../modules/vehicles_dynamics/lie_dynamics.html#SimpleDynamics.compute_forces"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_dynamics.lie_dynamics.SimpleDynamics.compute_forces" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles_dynamics.lie_dynamics.SimpleDynamics.compute_velocities">
+<tt class="descname">compute_velocities</tt><big>(</big><em>commands</em><big>)</big><a class="reference internal" href="../modules/vehicles_dynamics/lie_dynamics.html#SimpleDynamics.compute_velocities"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_dynamics.lie_dynamics.SimpleDynamics.compute_velocities" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vehicles_dynamics.lie_kinematics">
+<span id="lie-kinematics-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">lie_kinematics</span></tt> Module<a class="headerlink" href="#module-vehicles_dynamics.lie_kinematics" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="vehicles_dynamics.lie_kinematics.SimpleKinematics">
+<em class="property">class </em><tt class="descclassname">vehicles_dynamics.lie_kinematics.</tt><tt class="descname">SimpleKinematics</tt><big>(</big><em>pose_space</em>, <em>commands_spec</em>, <em>noise_drift=None</em>, <em>noise_mult=None</em><big>)</big><a class="reference internal" href="../modules/vehicles_dynamics/lie_kinematics.html#SimpleKinematics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_dynamics.lie_kinematics.SimpleKinematics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">vehicles_dynamics.interface.Dynamics</span></tt></p>
+<p>A subclass for dynamics which have only a kinematic component.
+Here pose_space is assumed to be a subgroup of SE3,
+and the state is (pose, vel) where vel is a subalgebra of se3.</p>
+<p>The model includes stochastic noise, containing two terms:
+1) drift Gaussian noise - of fixed covariance.
+2) proportional to the velocities.</p>
+<p>More in detail, let algebra2vector(.) be the isomorphism from
+the algebra to R^n.</p>
+<p>Suppose that <em>v0</em> are the &#8220;intentional&#8221; velocities (element of the
+Lie algebra). Then let:</p>
+<div class="highlight-python"><pre>w0 = algebra2vector(v0)
+w = w0 + Normal(M0 + M1*|w|)
+v = vector2algebra(w)</pre>
+</div>
+<p>For simplicity, both M0 and M1 are assumed to be diagonal matrices.
+They are called, respectively, noise_drift and noise_mult below.</p>
+<p>configuration = (pose, vel)</p>
+<dl class="method">
+<dt id="vehicles_dynamics.lie_kinematics.SimpleKinematics.compute_velocities">
+<tt class="descname">compute_velocities</tt><big>(</big><em>commands</em><big>)</big><a class="reference internal" href="../modules/vehicles_dynamics/lie_kinematics.html#SimpleKinematics.compute_velocities"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_dynamics.lie_kinematics.SimpleKinematics.compute_velocities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Subclasses should implement this and return an element 
+of the algebra.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles_dynamics.lie_kinematics.SimpleKinematics.joint_state">
+<tt class="descname">joint_state</tt><big>(</big><em>state</em>, <em>joint=0</em><big>)</big><a class="reference internal" href="../modules/vehicles_dynamics/lie_kinematics.html#SimpleKinematics.joint_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_dynamics.lie_kinematics.SimpleKinematics.joint_state" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>state</strong> (<tt class="docutils literal"><span class="pre">tuple(*,*)</span></tt>) &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">tuple(SE3,se3)</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles_dynamics.lie_kinematics.SimpleKinematics.pose2state">
+<tt class="descname">pose2state</tt><big>(</big><em>pose</em><big>)</big><a class="reference internal" href="../modules/vehicles_dynamics/lie_kinematics.html#SimpleKinematics.pose2state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_dynamics.lie_kinematics.SimpleKinematics.pose2state" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Projects the pose to our subgroup, and sets the </dt>
+<dd>velocity to zero.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pose</strong> (<tt class="docutils literal"><span class="pre">SE3</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles_dynamics.lie_kinematics.SimpleKinematics.state_to_yaml">
+<tt class="descname">state_to_yaml</tt><big>(</big><em>state</em><big>)</big><a class="reference internal" href="../modules/vehicles_dynamics/lie_kinematics.html#SimpleKinematics.state_to_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles_dynamics.lie_kinematics.SimpleKinematics.state_to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="vehicles_dynamics.specializations.html">specializations Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="vehicles_dynamics.specializations.html#id1"><tt class="docutils literal"><span class="pre">specializations</span></tt> Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vehicles_dynamics.specializations.html#module-vehicles_dynamics.specializations.cars"><tt class="docutils literal"><span class="pre">cars</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vehicles_dynamics.specializations.html#module-vehicles_dynamics.specializations.circle"><tt class="docutils literal"><span class="pre">circle</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vehicles_dynamics.specializations.html#module-vehicles_dynamics.specializations.differential_drive"><tt class="docutils literal"><span class="pre">differential_drive</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vehicles_dynamics.specializations.html#module-vehicles_dynamics.specializations.euclidean"><tt class="docutils literal"><span class="pre">euclidean</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vehicles_dynamics.specializations.html#module-vehicles_dynamics.specializations.se2"><tt class="docutils literal"><span class="pre">se2</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vehicles_dynamics.specializations.html#module-vehicles_dynamics.specializations.se2forward"><tt class="docutils literal"><span class="pre">se2forward</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vehicles_dynamics.specializations.html#module-vehicles_dynamics.specializations.se3"><tt class="docutils literal"><span class="pre">se3</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vehicles_dynamics.specializations.html#module-vehicles_dynamics.specializations.so3"><tt class="docutils literal"><span class="pre">so3</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">vehicles_dynamics Package</a><ul>
+<li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">vehicles_dynamics</span></tt> Package</a></li>
+<li><a class="reference internal" href="#module-vehicles_dynamics.exceptions"><tt class="docutils literal"><span class="pre">exceptions</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vehicles_dynamics.lie_dynamics"><tt class="docutils literal"><span class="pre">lie_dynamics</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vehicles_dynamics.lie_kinematics"><tt class="docutils literal"><span class="pre">lie_kinematics</span></tt> Module</a></li>
+<li><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../sources/api/vehicles_dynamics.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Vehicles 1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer">
+        &copy; Copyright 2010, Andrea Censi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+	
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-155626-14']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+
+  </body>
+</html>

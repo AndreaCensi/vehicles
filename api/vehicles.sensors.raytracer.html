@@ -1,0 +1,269 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>raytracer Package &mdash; Vehicles 1.2 documentation</title>
+    
+    <link rel="stylesheet" href="../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <link rel="top" title="Vehicles 1.2 documentation" href="../index.html" />
+	 
+
+
+   <style type="text/css">
+        span.brand { color: #a00;}
+   </style> 
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Vehicles 1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="raytracer-package">
+<h1>raytracer Package<a class="headerlink" href="#raytracer-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">raytracer</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-vehicles.sensors.raytracer"></span></div>
+<div class="section" id="module-vehicles.sensors.raytracer.cjson_stream">
+<span id="cjson-stream-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">cjson_stream</span></tt> Module<a class="headerlink" href="#module-vehicles.sensors.raytracer.cjson_stream" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="vehicles.sensors.raytracer.cjson_stream.CJSONStream">
+<em class="property">class </em><tt class="descclassname">vehicles.sensors.raytracer.cjson_stream.</tt><tt class="descname">CJSONStream</tt><big>(</big><em>input_stream</em><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/raytracer/cjson_stream.html#CJSONStream"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.raytracer.cjson_stream.CJSONStream" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="method">
+<dt id="vehicles.sensors.raytracer.cjson_stream.CJSONStream.read_next">
+<tt class="descname">read_next</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/raytracer/cjson_stream.html#CJSONStream.read_next"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.raytracer.cjson_stream.CJSONStream.read_next" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vehicles.sensors.raytracer.textured_raytracer">
+<span id="textured-raytracer-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">textured_raytracer</span></tt> Module<a class="headerlink" href="#module-vehicles.sensors.raytracer.textured_raytracer" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="vehicles.sensors.raytracer.textured_raytracer.Raytracer">
+<em class="property">class </em><tt class="descclassname">vehicles.sensors.raytracer.textured_raytracer.</tt><tt class="descname">Raytracer</tt><big>(</big><em>directions=None</em>, <em>raytracer='raytracer2'</em><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/raytracer/textured_raytracer.html#Raytracer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.raytracer.textured_raytracer.Raytracer" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="vehicles.sensors.raytracer.textured_raytracer.Raytracer.add_circle">
+<tt class="descname">add_circle</tt><big>(</big><em>surface_id</em>, <em>center</em>, <em>radius</em>, <em>solid</em><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/raytracer/textured_raytracer.html#Raytracer.add_circle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.raytracer.textured_raytracer.Raytracer.add_circle" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>solid</strong> (<tt class="docutils literal"><span class="pre">bool</span></tt>) &#8211; </li>
+<li><strong>surface_id</strong> (<tt class="docutils literal"><span class="pre">int</span></tt>) &#8211; </li>
+<li><strong>radius</strong> (<tt class="docutils literal"><span class="pre">&gt;0</span></tt>) &#8211; </li>
+<li><strong>center</strong> (<tt class="docutils literal"><span class="pre">seq[2](number)</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.sensors.raytracer.textured_raytracer.Raytracer.add_polyline">
+<tt class="descname">add_polyline</tt><big>(</big><em>surface_id</em>, <em>points</em><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/raytracer/textured_raytracer.html#Raytracer.add_polyline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.raytracer.textured_raytracer.Raytracer.add_polyline" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>surface_id</strong> (<tt class="docutils literal"><span class="pre">int</span></tt>) &#8211; </li>
+<li><strong>points</strong> (<tt class="docutils literal"><span class="pre">list(seq[2](number))</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.sensors.raytracer.textured_raytracer.Raytracer.init_connection">
+<tt class="descname">init_connection</tt><big>(</big><em>raytracer</em><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/raytracer/textured_raytracer.html#Raytracer.init_connection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.raytracer.textured_raytracer.Raytracer.init_connection" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.sensors.raytracer.textured_raytracer.Raytracer.query_circle">
+<tt class="descname">query_circle</tt><big>(</big><em>center</em>, <em>radius</em><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/raytracer/textured_raytracer.html#Raytracer.query_circle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.raytracer.textured_raytracer.Raytracer.query_circle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns tuple (hit, surface_id)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>radius</strong> (<tt class="docutils literal"><span class="pre">&gt;0</span></tt>) &#8211; </li>
+<li><strong>center</strong> (<tt class="docutils literal"><span class="pre">seq[2](number)</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.sensors.raytracer.textured_raytracer.Raytracer.raytracing">
+<tt class="descname">raytracing</tt><big>(</big><em>pose</em><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/raytracer/textured_raytracer.html#Raytracer.raytracing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.raytracer.textured_raytracer.Raytracer.raytracing" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pose</strong> (<tt class="docutils literal"><span class="pre">SE2</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.sensors.raytracer.textured_raytracer.Raytracer.read_answer">
+<tt class="descname">read_answer</tt><big>(</big><em>expected</em><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/raytracer/textured_raytracer.html#Raytracer.read_answer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.raytracer.textured_raytracer.Raytracer.read_answer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.sensors.raytracer.textured_raytracer.Raytracer.set_world_primitives">
+<tt class="descname">set_world_primitives</tt><big>(</big><em>primitives</em><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/raytracer/textured_raytracer.html#Raytracer.set_world_primitives"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.raytracer.textured_raytracer.Raytracer.set_world_primitives" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.sensors.raytracer.textured_raytracer.Raytracer.write_to_connection">
+<tt class="descname">write_to_connection</tt><big>(</big><em>ob</em><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/raytracer/textured_raytracer.html#Raytracer.write_to_connection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.raytracer.textured_raytracer.Raytracer.write_to_connection" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.sensors.raytracer.textured_raytracer.TexturedRaytracer">
+<em class="property">class </em><tt class="descclassname">vehicles.sensors.raytracer.textured_raytracer.</tt><tt class="descname">TexturedRaytracer</tt><big>(</big><em>directions</em>, <em>raytracer='raytracer2'</em><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/raytracer/textured_raytracer.html#TexturedRaytracer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.raytracer.textured_raytracer.TexturedRaytracer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.sensors.raytracer.textured_raytracer.Raytracer" title="vehicles.sensors.raytracer.textured_raytracer.Raytracer"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.sensors.raytracer.textured_raytracer.Raytracer</span></tt></a></p>
+<dl class="method">
+<dt id="vehicles.sensors.raytracer.textured_raytracer.TexturedRaytracer.raytracing">
+<tt class="descname">raytracing</tt><big>(</big><em>pose</em><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/raytracer/textured_raytracer.html#TexturedRaytracer.raytracing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.raytracer.textured_raytracer.TexturedRaytracer.raytracing" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pose</strong> (<tt class="docutils literal"><span class="pre">SE2</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.sensors.raytracer.textured_raytracer.TexturedRaytracer.set_world_primitives">
+<tt class="descname">set_world_primitives</tt><big>(</big><em>primitives</em><big>)</big><a class="reference internal" href="../modules/vehicles/sensors/raytracer/textured_raytracer.html#TexturedRaytracer.set_world_primitives"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.sensors.raytracer.textured_raytracer.TexturedRaytracer.set_world_primitives" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">raytracer Package</a><ul>
+<li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">raytracer</span></tt> Package</a></li>
+<li><a class="reference internal" href="#module-vehicles.sensors.raytracer.cjson_stream"><tt class="docutils literal"><span class="pre">cjson_stream</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vehicles.sensors.raytracer.textured_raytracer"><tt class="docutils literal"><span class="pre">textured_raytracer</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../sources/api/vehicles.sensors.raytracer.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Vehicles 1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer">
+        &copy; Copyright 2010, Andrea Censi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+	
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-155626-14']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+
+  </body>
+</html>

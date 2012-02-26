@@ -1,0 +1,6 @@
+vehicles.Dynamics
+=================
+
+.. currentmodule:: vehicles
+
+.. autodata:: Dynamics

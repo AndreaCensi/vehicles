@@ -1,0 +1,1058 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>interfaces Package &mdash; Vehicles 1.2 documentation</title>
+    
+    <link rel="stylesheet" href="../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <link rel="top" title="Vehicles 1.2 documentation" href="../index.html" />
+	 
+
+
+   <style type="text/css">
+        span.brand { color: #a00;}
+   </style> 
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Vehicles 1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="interfaces-package">
+<h1>interfaces Package<a class="headerlink" href="#interfaces-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">interfaces</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-vehicles.interfaces"></span><dl class="class">
+<dt id="vehicles.interfaces.Circle">
+<em class="property">class </em><tt class="descclassname">vehicles.interfaces.</tt><tt class="descname">Circle</tt><big>(</big><em>id_object</em>, <em>tags</em>, <em>texture</em>, <em>center</em>, <em>radius</em>, <em>solid=False</em><big>)</big><a class="headerlink" href="#vehicles.interfaces.Circle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.interfaces.primitives.Primitive" title="vehicles.interfaces.primitives.Primitive"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.primitives.Primitive</span></tt></a>, <a class="reference internal" href="#vehicles.interfaces.primitives.GeometricShape" title="vehicles.interfaces.primitives.GeometricShape"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.primitives.GeometricShape</span></tt></a></p>
+<dl class="staticmethod">
+<dt id="vehicles.interfaces.Circle.from_yaml">
+<em class="property">static </em><tt class="descname">from_yaml</tt><big>(</big><em>s</em><big>)</big><a class="headerlink" href="#vehicles.interfaces.Circle.from_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.Circle.get_perimeter">
+<tt class="descname">get_perimeter</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.interfaces.Circle.get_perimeter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.Circle.set_center">
+<tt class="descname">set_center</tt><big>(</big><em>center</em><big>)</big><a class="headerlink" href="#vehicles.interfaces.Circle.set_center" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>center</strong> (<tt class="docutils literal"><span class="pre">seq[2](number)</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.Circle.to_yaml">
+<tt class="descname">to_yaml</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.interfaces.Circle.to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.interfaces.Dynamics">
+<em class="property">class </em><tt class="descclassname">vehicles.interfaces.</tt><tt class="descname">Dynamics</tt><big>(</big><em>state_space</em>, <em>commands_spec</em><big>)</big><a class="headerlink" href="#vehicles.interfaces.Dynamics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>This is the interface for the various dynamics implemented.</p>
+<p>We make the following assumptions:</p>
+<ol class="arabic simple">
+<li>The state space is the product of a pose space and a shape_space.</li>
+<li>No assumptions on shape_space, except that it is a 
+DifferentiableManifold.</li>
+<li>It is assumed that state_space is homeomorphic 
+to a subgroup of TSE(3).</li>
+</ol>
+<p>In general, &#8220;state&#8221; is an opaque variable from outside.</p>
+<p>The function:</p>
+<blockquote>
+<div>state2 = dynamics.integrate(state, commands, dt)</div></blockquote>
+<p>integrates the dynamics. Here state and state2 are opaque variables.</p>
+<p>The function:</p>
+<blockquote>
+<div>state = dynamics.pose2state(pose)</div></blockquote>
+<p>creates a state from a pose (SE3), by embedding/projecting 
+appropriately. The semantics is to get the closest state to the pose, 
+with the dynamics &#8220;at rest&#8221;; for example, the velocity should be set 
+to 0, and the shape space to a resting position.</p>
+<p>The function:</p>
+<blockquote>
+<div>pose, vel = dynamics.joint_state(state, joint=0)</div></blockquote>
+<p>where SE3.belongs(pose) and se3.belongs(vel) returns the pos/vel
+of a joint for the given state.</p>
+<dl class="method">
+<dt id="vehicles.interfaces.Dynamics.check_commands">
+<tt class="descname">check_commands</tt><big>(</big><em>commands</em><big>)</big><a class="headerlink" href="#vehicles.interfaces.Dynamics.check_commands" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Raises an exception (InvalidCommands) if the commands </dt>
+<dd>are not valid.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>commands</strong> (<tt class="docutils literal"><span class="pre">array</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.Dynamics.get_commands_spec">
+<tt class="descname">get_commands_spec</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.interfaces.Dynamics.get_commands_spec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the commands specification.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">dict</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.Dynamics.get_state_space">
+<tt class="descname">get_state_space</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.interfaces.Dynamics.get_state_space" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Returns a DifferentiableManifold instance </dt>
+<dd>describing the state space.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">DifferentiableManifold</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.Dynamics.integrate">
+<tt class="descname">integrate</tt><big>(</big><em>state</em>, <em>commands</em>, <em>dt</em><big>)</big><a class="headerlink" href="#vehicles.interfaces.Dynamics.integrate" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>dt</strong> (<tt class="docutils literal"><span class="pre">&gt;=0</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.Dynamics.joint_state">
+<tt class="descname">joint_state</tt><big>(</big><em>state</em>, <em>joint=0</em><big>)</big><a class="headerlink" href="#vehicles.interfaces.Dynamics.joint_state" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">tuple(SE3,se3)</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.Dynamics.num_joints">
+<tt class="descname">num_joints</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.interfaces.Dynamics.num_joints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of joints. At least 1.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">int,&gt;=1</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.Dynamics.pose2state">
+<tt class="descname">pose2state</tt><big>(</big><em>pose</em><big>)</big><a class="headerlink" href="#vehicles.interfaces.Dynamics.pose2state" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Returns the state that best approximates the given </dt>
+<dd>pose (in SE3).</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pose</strong> (<tt class="docutils literal"><span class="pre">SE3</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.Dynamics.state_to_yaml">
+<tt class="descname">state_to_yaml</tt><big>(</big><em>state</em><big>)</big><a class="headerlink" href="#vehicles.interfaces.Dynamics.state_to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the state to a YAML representation.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.interfaces.Field">
+<em class="property">class </em><tt class="descclassname">vehicles.interfaces.</tt><tt class="descname">Field</tt><a class="headerlink" href="#vehicles.interfaces.Field" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="vehicles.interfaces.Field.get_intensity_value">
+<tt class="descname">get_intensity_value</tt><big>(</big><em>point</em><big>)</big><a class="headerlink" href="#vehicles.interfaces.Field.get_intensity_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the intensity at the given point.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.Field.get_intensity_values">
+<tt class="descname">get_intensity_values</tt><big>(</big><em>X</em>, <em>Y</em><big>)</big><a class="headerlink" href="#vehicles.interfaces.Field.get_intensity_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the intensity values at a series of points.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>Y</strong> (<tt class="docutils literal"><span class="pre">array[HxW]</span></tt>) &#8211; </li>
+<li><strong>X</strong> (<tt class="docutils literal"><span class="pre">array[HxW]</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">array[HxW]</span></tt></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.interfaces.GeometricShape">
+<em class="property">class </em><tt class="descclassname">vehicles.interfaces.</tt><tt class="descname">GeometricShape</tt><big>(</big><em>texture</em><big>)</big><a class="headerlink" href="#vehicles.interfaces.GeometricShape" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="vehicles.interfaces.GeometricShape.get_perimeter">
+<tt class="descname">get_perimeter</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.interfaces.GeometricShape.get_perimeter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the total perimeter of this shape.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.interfaces.PolyLine">
+<em class="property">class </em><tt class="descclassname">vehicles.interfaces.</tt><tt class="descname">PolyLine</tt><big>(</big><em>id_object</em>, <em>tags</em>, <em>texture</em>, <em>points</em><big>)</big><a class="headerlink" href="#vehicles.interfaces.PolyLine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.interfaces.primitives.Primitive" title="vehicles.interfaces.primitives.Primitive"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.primitives.Primitive</span></tt></a>, <a class="reference internal" href="#vehicles.interfaces.primitives.GeometricShape" title="vehicles.interfaces.primitives.GeometricShape"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.primitives.GeometricShape</span></tt></a></p>
+<dl class="staticmethod">
+<dt id="vehicles.interfaces.PolyLine.from_yaml">
+<em class="property">static </em><tt class="descname">from_yaml</tt><big>(</big><em>s</em><big>)</big><a class="headerlink" href="#vehicles.interfaces.PolyLine.from_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.PolyLine.get_perimeter">
+<tt class="descname">get_perimeter</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.interfaces.PolyLine.get_perimeter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.PolyLine.to_yaml">
+<tt class="descname">to_yaml</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.interfaces.PolyLine.to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.interfaces.Primitive">
+<em class="property">class </em><tt class="descclassname">vehicles.interfaces.</tt><tt class="descname">Primitive</tt><big>(</big><em>id_object</em>, <em>tags</em><big>)</big><a class="headerlink" href="#vehicles.interfaces.Primitive" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="staticmethod">
+<dt id="vehicles.interfaces.Primitive.from_yaml">
+<em class="property">static </em><tt class="descname">from_yaml</tt><big>(</big><em>s</em><big>)</big><a class="headerlink" href="#vehicles.interfaces.Primitive.from_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vehicles.interfaces.Primitive.type2class">
+<tt class="descname">type2class</tt><em class="property"> = {'Source': &lt;class vehicles.interfaces.primitives.Source at 0x1c5c460&gt;, 'Circle': &lt;class vehicles.interfaces.primitives.Circle at 0x1c5c188&gt;, 'PolyLine': &lt;class vehicles.interfaces.primitives.PolyLine at 0x1c5c0b8&gt;}</em><a class="headerlink" href="#vehicles.interfaces.Primitive.type2class" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.interfaces.Source">
+<em class="property">class </em><tt class="descclassname">vehicles.interfaces.</tt><tt class="descname">Source</tt><big>(</big><em>id_object</em>, <em>tags</em>, <em>center</em>, <em>kernel_spec</em><big>)</big><a class="headerlink" href="#vehicles.interfaces.Source" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.interfaces.primitives.Primitive" title="vehicles.interfaces.primitives.Primitive"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.primitives.Primitive</span></tt></a>, <a class="reference internal" href="#vehicles.interfaces.primitives.Field" title="vehicles.interfaces.primitives.Field"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.primitives.Field</span></tt></a></p>
+<p>A point-source is what field samplers are sensitive to.</p>
+<dl class="staticmethod">
+<dt id="vehicles.interfaces.Source.from_yaml">
+<em class="property">static </em><tt class="descname">from_yaml</tt><big>(</big><em>s</em><big>)</big><a class="headerlink" href="#vehicles.interfaces.Source.from_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.Source.get_intensity_value">
+<tt class="descname">get_intensity_value</tt><big>(</big><em>point</em><big>)</big><a class="headerlink" href="#vehicles.interfaces.Source.get_intensity_value" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>point</strong> (<tt class="docutils literal"><span class="pre">seq[2](number)</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.Source.get_intensity_values">
+<tt class="descname">get_intensity_values</tt><big>(</big><em>X</em>, <em>Y</em><big>)</big><a class="headerlink" href="#vehicles.interfaces.Source.get_intensity_values" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>Y</strong> (<tt class="docutils literal"><span class="pre">array[HxW]</span></tt>) &#8211; </li>
+<li><strong>X</strong> (<tt class="docutils literal"><span class="pre">array[HxW]</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">array[HxW]</span></tt></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.Source.set_center">
+<tt class="descname">set_center</tt><big>(</big><em>center</em><big>)</big><a class="headerlink" href="#vehicles.interfaces.Source.set_center" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.Source.to_yaml">
+<tt class="descname">to_yaml</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.interfaces.Source.to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.interfaces.VehicleSensor">
+<em class="property">class </em><tt class="descclassname">vehicles.interfaces.</tt><tt class="descname">VehicleSensor</tt><big>(</big><em>observations_spec</em><big>)</big><a class="headerlink" href="#vehicles.interfaces.VehicleSensor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="attribute">
+<dt id="vehicles.interfaces.VehicleSensor.SENSELS">
+<tt class="descname">SENSELS</tt><em class="property"> = 'sensels'</em><a class="headerlink" href="#vehicles.interfaces.VehicleSensor.SENSELS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.VehicleSensor.compute_observations">
+<tt class="descname">compute_observations</tt><big>(</big><em>pose</em><big>)</big><a class="headerlink" href="#vehicles.interfaces.VehicleSensor.compute_observations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the observations for this vehicle         
+Args:</p>
+<blockquote>
+<div>pose: SE2 (world reference frame.)</div></blockquote>
+<dl class="docutils">
+<dt>Returns: </dt>
+<dd><p class="first">a dictionary, containing as many data fields as desired. This data
+is eventually passed to the client as a OpenStruct.</p>
+<p>There is, however, one necessary field.
+* data[SENSELS] should be the declared sensel for the sensor.</p>
+<blockquote class="last">
+<div>This should be a numpy.ndarray, or a list of numbers.
+No NANs allowed.</div></blockquote>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.VehicleSensor.set_world_primitives">
+<tt class="descname">set_world_primitives</tt><big>(</big><em>primitives</em><big>)</big><a class="headerlink" href="#vehicles.interfaces.VehicleSensor.set_world_primitives" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.VehicleSensor.to_yaml">
+<tt class="descname">to_yaml</tt><big>(</big><em>primitives</em><big>)</big><a class="headerlink" href="#vehicles.interfaces.VehicleSensor.to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.interfaces.VehicleSkin">
+<em class="property">class </em><tt class="descclassname">vehicles.interfaces.</tt><tt class="descname">VehicleSkin</tt><a class="headerlink" href="#vehicles.interfaces.VehicleSkin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="method">
+<dt id="vehicles.interfaces.VehicleSkin.draw">
+<tt class="descname">draw</tt><big>(</big><em>cr</em>, <em>joints=None</em>, <em>timestamp=None</em><big>)</big><a class="headerlink" href="#vehicles.interfaces.VehicleSkin.draw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draws the vehicle to the given context.</p>
+<blockquote>
+<div><p>:param:cr: Cairo context
+:param:joints: list of joints configuration, relative to robot</p>
+<blockquote>
+<div>coordinates (joints[0] == Identity)</div></blockquote>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>joints</strong> (<tt class="docutils literal"><span class="pre">list</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.interfaces.World">
+<em class="property">class </em><tt class="descclassname">vehicles.interfaces.</tt><tt class="descname">World</tt><big>(</big><em>bounds</em>, <em>start_poses=None</em><big>)</big><a class="headerlink" href="#vehicles.interfaces.World" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="class">
+<dt id="vehicles.interfaces.World.Episode">
+<em class="property">class </em><tt class="descname">Episode</tt><a class="headerlink" href="#vehicles.interfaces.World.Episode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">tuple</span></tt></p>
+<p>Episode(id_episode, vehicle_state)</p>
+<dl class="attribute">
+<dt id="vehicles.interfaces.World.Episode.id_episode">
+<tt class="descname">id_episode</tt><a class="headerlink" href="#vehicles.interfaces.World.Episode.id_episode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vehicles.interfaces.World.Episode.vehicle_state">
+<tt class="descname">vehicle_state</tt><a class="headerlink" href="#vehicles.interfaces.World.Episode.vehicle_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.World.get_primitives">
+<tt class="descclassname">World.</tt><tt class="descname">get_primitives</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.interfaces.World.get_primitives" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the list of primitives that compose the geometry
+of the world.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.World.new_episode">
+<tt class="descclassname">World.</tt><tt class="descname">new_episode</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.interfaces.World.new_episode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an episode tuple. By default it just
+samples a random pose for the robot.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.World.random_2d_point">
+<tt class="descclassname">World.</tt><tt class="descname">random_2d_point</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.interfaces.World.random_2d_point" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a random 2d point in the world bounds.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.World.simulate">
+<tt class="descclassname">World.</tt><tt class="descname">simulate</tt><big>(</big><em>dt</em>, <em>vehicle_pose</em><big>)</big><a class="headerlink" href="#vehicles.interfaces.World.simulate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simulates the world for dt.</p>
+<blockquote>
+<div>Returns a list of the updated ids. (XXX: or not?)</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>dt</strong> (<tt class="docutils literal"><span class="pre">&gt;0</span></tt>) &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">list(int)</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.World.to_yaml">
+<tt class="descclassname">World.</tt><tt class="descname">to_yaml</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.interfaces.World.to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vehicles.interfaces.dynamics">
+<span id="dynamics-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">dynamics</span></tt> Module<a class="headerlink" href="#module-vehicles.interfaces.dynamics" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="vehicles.interfaces.dynamics.Dynamics">
+<em class="property">class </em><tt class="descclassname">vehicles.interfaces.dynamics.</tt><tt class="descname">Dynamics</tt><big>(</big><em>state_space</em>, <em>commands_spec</em><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/dynamics.html#Dynamics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.dynamics.Dynamics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>This is the interface for the various dynamics implemented.</p>
+<p>We make the following assumptions:</p>
+<ol class="arabic simple">
+<li>The state space is the product of a pose space and a shape_space.</li>
+<li>No assumptions on shape_space, except that it is a 
+DifferentiableManifold.</li>
+<li>It is assumed that state_space is homeomorphic 
+to a subgroup of TSE(3).</li>
+</ol>
+<p>In general, &#8220;state&#8221; is an opaque variable from outside.</p>
+<p>The function:</p>
+<blockquote>
+<div>state2 = dynamics.integrate(state, commands, dt)</div></blockquote>
+<p>integrates the dynamics. Here state and state2 are opaque variables.</p>
+<p>The function:</p>
+<blockquote>
+<div>state = dynamics.pose2state(pose)</div></blockquote>
+<p>creates a state from a pose (SE3), by embedding/projecting 
+appropriately. The semantics is to get the closest state to the pose, 
+with the dynamics &#8220;at rest&#8221;; for example, the velocity should be set 
+to 0, and the shape space to a resting position.</p>
+<p>The function:</p>
+<blockquote>
+<div>pose, vel = dynamics.joint_state(state, joint=0)</div></blockquote>
+<p>where SE3.belongs(pose) and se3.belongs(vel) returns the pos/vel
+of a joint for the given state.</p>
+<dl class="method">
+<dt id="vehicles.interfaces.dynamics.Dynamics.check_commands">
+<tt class="descname">check_commands</tt><big>(</big><em>commands</em><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/dynamics.html#Dynamics.check_commands"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.dynamics.Dynamics.check_commands" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Raises an exception (InvalidCommands) if the commands </dt>
+<dd>are not valid.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>commands</strong> (<tt class="docutils literal"><span class="pre">array</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.dynamics.Dynamics.get_commands_spec">
+<tt class="descname">get_commands_spec</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/dynamics.html#Dynamics.get_commands_spec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.dynamics.Dynamics.get_commands_spec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the commands specification.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">dict</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.dynamics.Dynamics.get_state_space">
+<tt class="descname">get_state_space</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/dynamics.html#Dynamics.get_state_space"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.dynamics.Dynamics.get_state_space" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Returns a DifferentiableManifold instance </dt>
+<dd>describing the state space.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">DifferentiableManifold</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.dynamics.Dynamics.integrate">
+<tt class="descname">integrate</tt><big>(</big><em>state</em>, <em>commands</em>, <em>dt</em><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/dynamics.html#Dynamics.integrate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.dynamics.Dynamics.integrate" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>dt</strong> (<tt class="docutils literal"><span class="pre">&gt;=0</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.dynamics.Dynamics.joint_state">
+<tt class="descname">joint_state</tt><big>(</big><em>state</em>, <em>joint=0</em><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/dynamics.html#Dynamics.joint_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.dynamics.Dynamics.joint_state" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">tuple(SE3,se3)</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.dynamics.Dynamics.num_joints">
+<tt class="descname">num_joints</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/dynamics.html#Dynamics.num_joints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.dynamics.Dynamics.num_joints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of joints. At least 1.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">int,&gt;=1</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.dynamics.Dynamics.pose2state">
+<tt class="descname">pose2state</tt><big>(</big><em>pose</em><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/dynamics.html#Dynamics.pose2state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.dynamics.Dynamics.pose2state" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Returns the state that best approximates the given </dt>
+<dd>pose (in SE3).</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pose</strong> (<tt class="docutils literal"><span class="pre">SE3</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.dynamics.Dynamics.state_to_yaml">
+<tt class="descname">state_to_yaml</tt><big>(</big><em>state</em><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/dynamics.html#Dynamics.state_to_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.dynamics.Dynamics.state_to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the state to a YAML representation.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vehicles.interfaces.primitives">
+<span id="primitives-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">primitives</span></tt> Module<a class="headerlink" href="#module-vehicles.interfaces.primitives" title="Permalink to this headline">¶</a></h2>
+<p>These are the geometric primitives in our simulation that define
+the world.</p>
+<dl class="class">
+<dt id="vehicles.interfaces.primitives.Circle">
+<em class="property">class </em><tt class="descclassname">vehicles.interfaces.primitives.</tt><tt class="descname">Circle</tt><big>(</big><em>id_object</em>, <em>tags</em>, <em>texture</em>, <em>center</em>, <em>radius</em>, <em>solid=False</em><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/primitives.html#Circle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.primitives.Circle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.interfaces.primitives.Primitive" title="vehicles.interfaces.primitives.Primitive"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.primitives.Primitive</span></tt></a>, <a class="reference internal" href="#vehicles.interfaces.primitives.GeometricShape" title="vehicles.interfaces.primitives.GeometricShape"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.primitives.GeometricShape</span></tt></a></p>
+<dl class="staticmethod">
+<dt id="vehicles.interfaces.primitives.Circle.from_yaml">
+<em class="property">static </em><tt class="descname">from_yaml</tt><big>(</big><em>s</em><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/primitives.html#Circle.from_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.primitives.Circle.from_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.primitives.Circle.get_perimeter">
+<tt class="descname">get_perimeter</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/primitives.html#Circle.get_perimeter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.primitives.Circle.get_perimeter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.primitives.Circle.set_center">
+<tt class="descname">set_center</tt><big>(</big><em>center</em><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/primitives.html#Circle.set_center"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.primitives.Circle.set_center" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>center</strong> (<tt class="docutils literal"><span class="pre">seq[2](number)</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.primitives.Circle.to_yaml">
+<tt class="descname">to_yaml</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/primitives.html#Circle.to_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.primitives.Circle.to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.interfaces.primitives.Field">
+<em class="property">class </em><tt class="descclassname">vehicles.interfaces.primitives.</tt><tt class="descname">Field</tt><a class="reference internal" href="../modules/vehicles/interfaces/primitives.html#Field"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.primitives.Field" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="vehicles.interfaces.primitives.Field.get_intensity_value">
+<tt class="descname">get_intensity_value</tt><big>(</big><em>point</em><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/primitives.html#Field.get_intensity_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.primitives.Field.get_intensity_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the intensity at the given point.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.primitives.Field.get_intensity_values">
+<tt class="descname">get_intensity_values</tt><big>(</big><em>X</em>, <em>Y</em><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/primitives.html#Field.get_intensity_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.primitives.Field.get_intensity_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the intensity values at a series of points.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>Y</strong> (<tt class="docutils literal"><span class="pre">array[HxW]</span></tt>) &#8211; </li>
+<li><strong>X</strong> (<tt class="docutils literal"><span class="pre">array[HxW]</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">array[HxW]</span></tt></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.interfaces.primitives.GeometricShape">
+<em class="property">class </em><tt class="descclassname">vehicles.interfaces.primitives.</tt><tt class="descname">GeometricShape</tt><big>(</big><em>texture</em><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/primitives.html#GeometricShape"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.primitives.GeometricShape" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="vehicles.interfaces.primitives.GeometricShape.get_perimeter">
+<tt class="descname">get_perimeter</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/primitives.html#GeometricShape.get_perimeter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.primitives.GeometricShape.get_perimeter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the total perimeter of this shape.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.interfaces.primitives.PolyLine">
+<em class="property">class </em><tt class="descclassname">vehicles.interfaces.primitives.</tt><tt class="descname">PolyLine</tt><big>(</big><em>id_object</em>, <em>tags</em>, <em>texture</em>, <em>points</em><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/primitives.html#PolyLine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.primitives.PolyLine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.interfaces.primitives.Primitive" title="vehicles.interfaces.primitives.Primitive"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.primitives.Primitive</span></tt></a>, <a class="reference internal" href="#vehicles.interfaces.primitives.GeometricShape" title="vehicles.interfaces.primitives.GeometricShape"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.primitives.GeometricShape</span></tt></a></p>
+<dl class="staticmethod">
+<dt id="vehicles.interfaces.primitives.PolyLine.from_yaml">
+<em class="property">static </em><tt class="descname">from_yaml</tt><big>(</big><em>s</em><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/primitives.html#PolyLine.from_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.primitives.PolyLine.from_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.primitives.PolyLine.get_perimeter">
+<tt class="descname">get_perimeter</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/primitives.html#PolyLine.get_perimeter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.primitives.PolyLine.get_perimeter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.primitives.PolyLine.to_yaml">
+<tt class="descname">to_yaml</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/primitives.html#PolyLine.to_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.primitives.PolyLine.to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.interfaces.primitives.Primitive">
+<em class="property">class </em><tt class="descclassname">vehicles.interfaces.primitives.</tt><tt class="descname">Primitive</tt><big>(</big><em>id_object</em>, <em>tags</em><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/primitives.html#Primitive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.primitives.Primitive" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="staticmethod">
+<dt id="vehicles.interfaces.primitives.Primitive.from_yaml">
+<em class="property">static </em><tt class="descname">from_yaml</tt><big>(</big><em>s</em><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/primitives.html#Primitive.from_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.primitives.Primitive.from_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="vehicles.interfaces.primitives.Primitive.type2class">
+<tt class="descname">type2class</tt><em class="property"> = {'Source': &lt;class vehicles.interfaces.primitives.Source at 0x1c5c460&gt;, 'Circle': &lt;class vehicles.interfaces.primitives.Circle at 0x1c5c188&gt;, 'PolyLine': &lt;class vehicles.interfaces.primitives.PolyLine at 0x1c5c0b8&gt;}</em><a class="headerlink" href="#vehicles.interfaces.primitives.Primitive.type2class" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.interfaces.primitives.Source">
+<em class="property">class </em><tt class="descclassname">vehicles.interfaces.primitives.</tt><tt class="descname">Source</tt><big>(</big><em>id_object</em>, <em>tags</em>, <em>center</em>, <em>kernel_spec</em><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/primitives.html#Source"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.primitives.Source" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.interfaces.primitives.Primitive" title="vehicles.interfaces.primitives.Primitive"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.primitives.Primitive</span></tt></a>, <a class="reference internal" href="#vehicles.interfaces.primitives.Field" title="vehicles.interfaces.primitives.Field"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.primitives.Field</span></tt></a></p>
+<p>A point-source is what field samplers are sensitive to.</p>
+<dl class="staticmethod">
+<dt id="vehicles.interfaces.primitives.Source.from_yaml">
+<em class="property">static </em><tt class="descname">from_yaml</tt><big>(</big><em>s</em><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/primitives.html#Source.from_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.primitives.Source.from_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.primitives.Source.get_intensity_value">
+<tt class="descname">get_intensity_value</tt><big>(</big><em>point</em><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/primitives.html#Source.get_intensity_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.primitives.Source.get_intensity_value" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>point</strong> (<tt class="docutils literal"><span class="pre">seq[2](number)</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.primitives.Source.get_intensity_values">
+<tt class="descname">get_intensity_values</tt><big>(</big><em>X</em>, <em>Y</em><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/primitives.html#Source.get_intensity_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.primitives.Source.get_intensity_values" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>Y</strong> (<tt class="docutils literal"><span class="pre">array[HxW]</span></tt>) &#8211; </li>
+<li><strong>X</strong> (<tt class="docutils literal"><span class="pre">array[HxW]</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><tt class="docutils literal"><span class="pre">array[HxW]</span></tt></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.primitives.Source.set_center">
+<tt class="descname">set_center</tt><big>(</big><em>center</em><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/primitives.html#Source.set_center"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.primitives.Source.set_center" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.primitives.Source.to_yaml">
+<tt class="descname">to_yaml</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/primitives.html#Source.to_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.primitives.Source.to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vehicles.interfaces.skins">
+<span id="skins-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">skins</span></tt> Module<a class="headerlink" href="#module-vehicles.interfaces.skins" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="vehicles.interfaces.skins.VehicleSkin">
+<em class="property">class </em><tt class="descclassname">vehicles.interfaces.skins.</tt><tt class="descname">VehicleSkin</tt><a class="reference internal" href="../modules/vehicles/interfaces/skins.html#VehicleSkin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.skins.VehicleSkin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="method">
+<dt id="vehicles.interfaces.skins.VehicleSkin.draw">
+<tt class="descname">draw</tt><big>(</big><em>cr</em>, <em>joints=None</em>, <em>timestamp=None</em><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/skins.html#VehicleSkin.draw"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.skins.VehicleSkin.draw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draws the vehicle to the given context.</p>
+<blockquote>
+<div><p>:param:cr: Cairo context
+:param:joints: list of joints configuration, relative to robot</p>
+<blockquote>
+<div>coordinates (joints[0] == Identity)</div></blockquote>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>joints</strong> (<tt class="docutils literal"><span class="pre">list</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vehicles.interfaces.vehicle_sensor">
+<span id="vehicle-sensor-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">vehicle_sensor</span></tt> Module<a class="headerlink" href="#module-vehicles.interfaces.vehicle_sensor" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="vehicles.interfaces.vehicle_sensor.VehicleSensor">
+<em class="property">class </em><tt class="descclassname">vehicles.interfaces.vehicle_sensor.</tt><tt class="descname">VehicleSensor</tt><big>(</big><em>observations_spec</em><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/vehicle_sensor.html#VehicleSensor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.vehicle_sensor.VehicleSensor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="attribute">
+<dt id="vehicles.interfaces.vehicle_sensor.VehicleSensor.SENSELS">
+<tt class="descname">SENSELS</tt><em class="property"> = 'sensels'</em><a class="headerlink" href="#vehicles.interfaces.vehicle_sensor.VehicleSensor.SENSELS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.vehicle_sensor.VehicleSensor.compute_observations">
+<tt class="descname">compute_observations</tt><big>(</big><em>pose</em><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/vehicle_sensor.html#VehicleSensor.compute_observations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.vehicle_sensor.VehicleSensor.compute_observations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the observations for this vehicle         
+Args:</p>
+<blockquote>
+<div>pose: SE2 (world reference frame.)</div></blockquote>
+<dl class="docutils">
+<dt>Returns: </dt>
+<dd><p class="first">a dictionary, containing as many data fields as desired. This data
+is eventually passed to the client as a OpenStruct.</p>
+<p>There is, however, one necessary field.
+* data[SENSELS] should be the declared sensel for the sensor.</p>
+<blockquote class="last">
+<div>This should be a numpy.ndarray, or a list of numbers.
+No NANs allowed.</div></blockquote>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.vehicle_sensor.VehicleSensor.set_world_primitives">
+<tt class="descname">set_world_primitives</tt><big>(</big><em>primitives</em><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/vehicle_sensor.html#VehicleSensor.set_world_primitives"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.vehicle_sensor.VehicleSensor.set_world_primitives" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.vehicle_sensor.VehicleSensor.to_yaml">
+<tt class="descname">to_yaml</tt><big>(</big><em>primitives</em><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/vehicle_sensor.html#VehicleSensor.to_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.vehicle_sensor.VehicleSensor.to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vehicles.interfaces.world">
+<span id="world-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">world</span></tt> Module<a class="headerlink" href="#module-vehicles.interfaces.world" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="vehicles.interfaces.world.World">
+<em class="property">class </em><tt class="descclassname">vehicles.interfaces.world.</tt><tt class="descname">World</tt><big>(</big><em>bounds</em>, <em>start_poses=None</em><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/world.html#World"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.world.World" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="class">
+<dt id="vehicles.interfaces.world.World.Episode">
+<em class="property">class </em><tt class="descname">Episode</tt><a class="headerlink" href="#vehicles.interfaces.world.World.Episode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">tuple</span></tt></p>
+<p>Episode(id_episode, vehicle_state)</p>
+<dl class="attribute">
+<dt id="vehicles.interfaces.world.World.Episode.id_episode">
+<tt class="descname">id_episode</tt><a class="headerlink" href="#vehicles.interfaces.world.World.Episode.id_episode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vehicles.interfaces.world.World.Episode.vehicle_state">
+<tt class="descname">vehicle_state</tt><a class="headerlink" href="#vehicles.interfaces.world.World.Episode.vehicle_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.world.World.get_primitives">
+<tt class="descclassname">World.</tt><tt class="descname">get_primitives</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/world.html#World.get_primitives"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.world.World.get_primitives" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the list of primitives that compose the geometry
+of the world.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.world.World.new_episode">
+<tt class="descclassname">World.</tt><tt class="descname">new_episode</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/world.html#World.new_episode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.world.World.new_episode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an episode tuple. By default it just
+samples a random pose for the robot.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.world.World.random_2d_point">
+<tt class="descclassname">World.</tt><tt class="descname">random_2d_point</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/world.html#World.random_2d_point"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.world.World.random_2d_point" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a random 2d point in the world bounds.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.world.World.simulate">
+<tt class="descclassname">World.</tt><tt class="descname">simulate</tt><big>(</big><em>dt</em>, <em>vehicle_pose</em><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/world.html#World.simulate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.world.World.simulate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simulates the world for dt.</p>
+<blockquote>
+<div>Returns a list of the updated ids. (XXX: or not?)</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>dt</strong> (<tt class="docutils literal"><span class="pre">&gt;0</span></tt>) &#8211; </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">list(int)</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.interfaces.world.World.to_yaml">
+<tt class="descclassname">World.</tt><tt class="descname">to_yaml</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/world.html#World.to_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.world.World.to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="vehicles.interfaces.world.isodate">
+<tt class="descclassname">vehicles.interfaces.world.</tt><tt class="descname">isodate</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/world.html#isodate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.world.isodate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="vehicles.interfaces.world.unique_timestamp_string">
+<tt class="descclassname">vehicles.interfaces.world.</tt><tt class="descname">unique_timestamp_string</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/interfaces/world.html#unique_timestamp_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.interfaces.world.unique_timestamp_string" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">interfaces Package</a><ul>
+<li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">interfaces</span></tt> Package</a></li>
+<li><a class="reference internal" href="#module-vehicles.interfaces.dynamics"><tt class="docutils literal"><span class="pre">dynamics</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vehicles.interfaces.primitives"><tt class="docutils literal"><span class="pre">primitives</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vehicles.interfaces.skins"><tt class="docutils literal"><span class="pre">skins</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vehicles.interfaces.vehicle_sensor"><tt class="docutils literal"><span class="pre">vehicle_sensor</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vehicles.interfaces.world"><tt class="docutils literal"><span class="pre">world</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../sources/api/vehicles.interfaces.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Vehicles 1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer">
+        &copy; Copyright 2010, Andrea Censi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+	
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-155626-14']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+
+  </body>
+</html>

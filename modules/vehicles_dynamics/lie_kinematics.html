@@ -1,0 +1,251 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vehicles_dynamics.lie_kinematics &mdash; Vehicles 1.2 documentation</title>
+    
+    <link rel="stylesheet" href="../../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../static/doctools.js"></script>
+    <link rel="top" title="Vehicles 1.2 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" />
+	 
+
+
+   <style type="text/css">
+        span.brand { color: #a00;}
+   </style> 
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Vehicles 1.2 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vehicles_dynamics.lie_kinematics</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">Dynamics</span><span class="p">,</span> <span class="n">contract</span><span class="p">,</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span> <span class="nn">geometry</span> <span class="kn">import</span> <span class="n">SE3</span><span class="p">,</span> <span class="n">se3</span>
+<span class="kn">from</span> <span class="nn">geometry.yaml</span> <span class="kn">import</span> <span class="n">to_yaml</span>
+
+
+<div class="viewcode-block" id="SimpleKinematics"><a class="viewcode-back" href="../../api/vehicles_dynamics.html#vehicles_dynamics.lie_kinematics.SimpleKinematics">[docs]</a><span class="k">class</span> <span class="nc">SimpleKinematics</span><span class="p">(</span><span class="n">Dynamics</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">        A subclass for dynamics which have only a kinematic component.</span>
+<span class="sd">        Here pose_space is assumed to be a subgroup of SE3,</span>
+<span class="sd">        and the state is (pose, vel) where vel is a subalgebra of se3.</span>
+<span class="sd">        </span>
+<span class="sd">        The model includes stochastic noise, containing two terms:</span>
+<span class="sd">        1) drift Gaussian noise - of fixed covariance.</span>
+<span class="sd">        2) proportional to the velocities.</span>
+<span class="sd">        </span>
+<span class="sd">        More in detail, let algebra2vector(.) be the isomorphism from</span>
+<span class="sd">        the algebra to R^n. </span>
+<span class="sd">        </span>
+<span class="sd">        Suppose that *v0* are the &quot;intentional&quot; velocities (element of the</span>
+<span class="sd">        Lie algebra). Then let: ::</span>
+<span class="sd">        </span>
+<span class="sd">            w0 = algebra2vector(v0)</span>
+<span class="sd">            w = w0 + Normal(M0 + M1*|w|)</span>
+<span class="sd">            v = vector2algebra(w)</span>
+<span class="sd">            </span>
+<span class="sd">        For simplicity, both M0 and M1 are assumed to be diagonal matrices.</span>
+<span class="sd">        They are called, respectively, noise_drift and noise_mult below.</span>
+<span class="sd">        </span>
+<span class="sd">        configuration = (pose, vel)</span>
+<span class="sd">        </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="nd">@contract</span><span class="p">(</span><span class="n">pose_space</span><span class="o">=</span><span class="s">&#39;DifferentiableManifold&#39;</span><span class="p">,</span>
+              <span class="n">noise_drift</span><span class="o">=</span><span class="s">&#39;None|seq[K](&gt;=0)&#39;</span><span class="p">,</span>
+              <span class="n">noise_mult</span><span class="o">=</span><span class="s">&#39;None|seq[K](&gt;=0)&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pose_space</span><span class="p">,</span> <span class="n">commands_spec</span><span class="p">,</span>
+                 <span class="n">noise_drift</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">noise_mult</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">pose_space</span><span class="o">.</span><span class="n">embeddable_in</span><span class="p">(</span><span class="n">SE3</span><span class="p">):</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s">&#39;I expect a subgroup of SE3.&#39;</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="n">algebra</span> <span class="o">=</span> <span class="n">pose_space</span><span class="o">.</span><span class="n">get_algebra</span><span class="p">()</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">algebra</span><span class="o">.</span><span class="n">get_dimension</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">noise_drift</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">noise_drift</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">noise_mult</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">noise_mult</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+        <span class="n">noise_drift</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">noise_drift</span><span class="p">)</span>
+        <span class="n">noise_mult</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">noise_mult</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">noise_mult</span><span class="o">.</span><span class="n">size</span> <span class="o">!=</span> <span class="n">n</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s">&#39;Wrong size for noise_mult: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">noise_mult</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">noise_drift</span><span class="o">.</span><span class="n">size</span> <span class="o">!=</span> <span class="n">n</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s">&#39;Wrong size for noise_mult: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">noise_mult</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">noise_drift</span> <span class="o">=</span> <span class="n">noise_drift</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">noise_mult</span> <span class="o">=</span> <span class="n">noise_mult</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pose_space</span> <span class="o">=</span> <span class="n">pose_space</span>
+
+        <span class="n">conf_space</span> <span class="o">=</span> <span class="n">pose_space</span><span class="o">.</span><span class="n">tangent_bundle</span><span class="p">()</span>
+
+        <span class="n">Dynamics</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state_space</span><span class="o">=</span><span class="n">conf_space</span><span class="p">,</span>
+                          <span class="n">commands_spec</span><span class="o">=</span><span class="n">commands_spec</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&quot;LieKinematics(</span><span class="si">%s</span><span class="s">)&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">pose_space</span>
+
+<div class="viewcode-block" id="SimpleKinematics.state_to_yaml"><a class="viewcode-back" href="../../api/vehicles_dynamics.html#vehicles_dynamics.lie_kinematics.SimpleKinematics.state_to_yaml">[docs]</a>    <span class="k">def</span> <span class="nf">state_to_yaml</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="n">my_pose</span><span class="p">,</span> <span class="n">my_vel</span> <span class="o">=</span> <span class="n">state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pose_space</span><span class="o">.</span><span class="n">belongs</span><span class="p">(</span><span class="n">my_pose</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pose_space</span><span class="o">.</span><span class="n">algebra</span><span class="o">.</span><span class="n">belongs</span><span class="p">(</span><span class="n">my_vel</span><span class="p">)</span>
+        <span class="n">pose</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pose_space</span><span class="o">.</span><span class="n">embed_in</span><span class="p">(</span><span class="n">SE3</span><span class="p">,</span> <span class="n">my_pose</span><span class="p">)</span>
+        <span class="n">vel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pose_space</span><span class="o">.</span><span class="n">algebra</span><span class="o">.</span><span class="n">embed_in</span><span class="p">(</span><span class="n">se3</span><span class="p">,</span> <span class="n">my_vel</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">to_yaml</span><span class="p">(</span><span class="s">&#39;TSE3&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">pose</span><span class="p">,</span> <span class="n">vel</span><span class="p">))</span>
+</div>
+    <span class="nd">@contract</span><span class="p">(</span><span class="n">pose</span><span class="o">=</span><span class="s">&#39;SE3&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="SimpleKinematics.pose2state"><a class="viewcode-back" href="../../api/vehicles_dynamics.html#vehicles_dynamics.lie_kinematics.SimpleKinematics.pose2state">[docs]</a>    <span class="k">def</span> <span class="nf">pose2state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pose</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">            Projects the pose to our subgroup, and sets the </span>
+<span class="sd">            velocity to zero. </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">my_pose</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pose_space</span><span class="o">.</span><span class="n">project_from</span><span class="p">(</span><span class="n">SE3</span><span class="p">,</span> <span class="n">pose</span><span class="p">)</span>
+        <span class="n">my_vel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pose_space</span><span class="o">.</span><span class="n">algebra</span><span class="o">.</span><span class="n">zero</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="n">my_pose</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">my_vel</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">configuration</span> <span class="o">=</span> <span class="p">(</span><span class="n">my_pose</span><span class="p">,</span> <span class="n">my_vel</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">configuration</span>
+</div>
+    <span class="nd">@contract</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="s">&#39;tuple(*,*)&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s">&#39;tuple(SE3, se3)&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="SimpleKinematics.joint_state"><a class="viewcode-back" href="../../api/vehicles_dynamics.html#vehicles_dynamics.lie_kinematics.SimpleKinematics.joint_state">[docs]</a>    <span class="k">def</span> <span class="nf">joint_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">joint</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">joint</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Must be implemented by subclasses.&#39;</span><span class="p">)</span>
+        <span class="n">my_pose</span><span class="p">,</span> <span class="n">my_vel</span> <span class="o">=</span> <span class="n">state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pose_space</span><span class="o">.</span><span class="n">belongs</span><span class="p">(</span><span class="n">my_pose</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pose_space</span><span class="o">.</span><span class="n">algebra</span><span class="o">.</span><span class="n">belongs</span><span class="p">(</span><span class="n">my_vel</span><span class="p">)</span>
+        <span class="n">pose</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pose_space</span><span class="o">.</span><span class="n">embed_in</span><span class="p">(</span><span class="n">SE3</span><span class="p">,</span> <span class="n">my_pose</span><span class="p">)</span>
+        <span class="n">vel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pose_space</span><span class="o">.</span><span class="n">algebra</span><span class="o">.</span><span class="n">embed_in</span><span class="p">(</span><span class="n">se3</span><span class="p">,</span> <span class="n">my_vel</span><span class="p">)</span>
+        <span class="n">configuration</span> <span class="o">=</span> <span class="p">(</span><span class="n">pose</span><span class="p">,</span> <span class="n">vel</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">configuration</span>
+</div>
+    <span class="nd">@abstractmethod</span>
+<div class="viewcode-block" id="SimpleKinematics.compute_velocities"><a class="viewcode-back" href="../../api/vehicles_dynamics.html#vehicles_dynamics.lie_kinematics.SimpleKinematics.compute_velocities">[docs]</a>    <span class="k">def</span> <span class="nf">compute_velocities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">commands</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">            Subclasses should implement this and return an element </span>
+<span class="sd">            of the algebra. </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+</div>
+    <span class="k">def</span> <span class="nf">_integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">commands</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+        <span class="n">pose1</span><span class="p">,</span> <span class="n">unused_vel1</span> <span class="o">=</span> <span class="n">state</span> <span class="c">#@UnusedVariable</span>
+        <span class="c"># This is the noiseless part of the dynamics</span>
+        <span class="n">noiseless_vel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_velocities</span><span class="p">(</span><span class="n">commands</span><span class="p">)</span>
+        <span class="c"># Convert them to the vector representation</span>
+        <span class="c"># TODO: do not do any of this if the noise is 0</span>
+        <span class="n">algebra</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pose_space</span><span class="o">.</span><span class="n">get_algebra</span><span class="p">()</span>
+        <span class="n">w0</span> <span class="o">=</span> <span class="n">algebra</span><span class="o">.</span><span class="n">vector_from_algebra</span><span class="p">(</span><span class="n">noiseless_vel</span><span class="p">)</span>
+        <span class="c"># w = w0 + Normal(M0 + M1*|w|)</span>
+        <span class="c"># Variance of the noise</span>
+        <span class="n">variance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">noise_drift</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">noise_mult</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">w0</span><span class="p">)</span>
+        <span class="c"># Noise contribution</span>
+        <span class="n">wN</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">variance</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">variance</span><span class="p">)</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">w0</span> <span class="o">+</span> <span class="n">wN</span>
+        <span class="c"># Convert back to algebra</span>
+        <span class="n">vel2</span> <span class="o">=</span> <span class="n">algebra</span><span class="o">.</span><span class="n">algebra_from_vector</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+        <span class="n">step</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pose_space</span><span class="o">.</span><span class="n">group_from_algebra</span><span class="p">(</span><span class="n">vel2</span> <span class="o">*</span> <span class="n">dt</span><span class="p">)</span>
+        <span class="n">pose2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">pose1</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+        <span class="n">config2</span> <span class="o">=</span> <span class="n">pose2</span><span class="p">,</span> <span class="n">vel2</span>
+        <span class="k">return</span> <span class="n">config2</span>
+</pre></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Vehicles 1.2 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer">
+        &copy; Copyright 2010, Andrea Censi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+	
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-155626-14']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+
+  </body>
+</html>

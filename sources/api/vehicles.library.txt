@@ -1,0 +1,22 @@
+library Package
+===============
+
+:mod:`library` Package
+----------------------
+
+.. automodule:: vehicles.library
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    vehicles.library.dynamics
+    vehicles.library.noises
+    vehicles.library.sensors
+    vehicles.library.textures
+    vehicles.library.worlds
+

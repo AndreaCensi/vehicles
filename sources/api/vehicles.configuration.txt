@@ -1,0 +1,75 @@
+configuration Package
+=====================
+
+:mod:`configuration` Package
+----------------------------
+
+.. automodule:: vehicles.configuration
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`dynamics` Module
+----------------------
+
+.. automodule:: vehicles.configuration.dynamics
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`load_all` Module
+----------------------
+
+.. automodule:: vehicles.configuration.load_all
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`master` Module
+--------------------
+
+.. automodule:: vehicles.configuration.master
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`natsort` Module
+---------------------
+
+.. automodule:: vehicles.configuration.natsort
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`sensors` Module
+---------------------
+
+.. automodule:: vehicles.configuration.sensors
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`simulation` Module
+------------------------
+
+.. automodule:: vehicles.configuration.simulation
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`vehicles` Module
+----------------------
+
+.. automodule:: vehicles.configuration.vehicles
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`worlds` Module
+--------------------
+
+.. automodule:: vehicles.configuration.worlds
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

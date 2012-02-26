@@ -1,0 +1,82 @@
+sensors Package
+===============
+
+:mod:`sensors` Package
+----------------------
+
+.. automodule:: vehicles.sensors
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`field_sampler` Module
+---------------------------
+
+.. automodule:: vehicles.sensors.field_sampler
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`field_sampler_rand_circle` Module
+---------------------------------------
+
+.. automodule:: vehicles.sensors.field_sampler_rand_circle
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`field_sampler_uniform` Module
+-----------------------------------
+
+.. automodule:: vehicles.sensors.field_sampler_uniform
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`misc` Module
+------------------
+
+.. automodule:: vehicles.sensors.misc
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`photoreceptors` Module
+----------------------------
+
+.. automodule:: vehicles.sensors.photoreceptors
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`photoreceptors_smooth` Module
+-----------------------------------
+
+.. automodule:: vehicles.sensors.photoreceptors_smooth
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`random_sensor` Module
+---------------------------
+
+.. automodule:: vehicles.sensors.random_sensor
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`range_finder` Module
+--------------------------
+
+.. automodule:: vehicles.sensors.range_finder
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    vehicles.sensors.raytracer
+

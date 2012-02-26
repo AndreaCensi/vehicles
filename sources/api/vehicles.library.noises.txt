@@ -1,0 +1,19 @@
+noises Package
+==============
+
+:mod:`noises` Package
+---------------------
+
+.. automodule:: vehicles.library.noises
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`additive_gaussian` Module
+-------------------------------
+
+.. automodule:: vehicles.library.noises.additive_gaussian
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

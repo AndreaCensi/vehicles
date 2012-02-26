@@ -1,0 +1,414 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vehicles_cairo.sensor_data &mdash; Vehicles 1.2 documentation</title>
+    
+    <link rel="stylesheet" href="../../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../static/doctools.js"></script>
+    <link rel="top" title="Vehicles 1.2 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" />
+	 
+
+
+   <style type="text/css">
+        span.brand { color: #a00;}
+   </style> 
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Vehicles 1.2 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vehicles_cairo.sensor_data</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="p">(</span><span class="n">CairoConstants</span> <span class="k">as</span> <span class="n">CC</span><span class="p">,</span> <span class="n">cairo_plot_circle</span><span class="p">,</span> <span class="n">cairo_rototranslate</span><span class="p">,</span>
+               <span class="n">np</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="n">contract</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">cairo_utils</span> <span class="kn">import</span> <span class="n">cairo_plot_circle2</span><span class="p">,</span> <span class="n">cairo_set_color</span>
+<span class="kn">from</span> <span class="nn">geometry</span> <span class="kn">import</span> <span class="n">SE2_from_SE3</span><span class="p">,</span> <span class="n">translation_angle_from_SE2</span><span class="p">,</span> <span class="n">SE3</span>
+<span class="kn">from</span> <span class="nn">vehicles</span> <span class="kn">import</span> <span class="n">VehiclesConfig</span><span class="p">,</span> <span class="n">VehiclesConstants</span>
+
+
+<div class="viewcode-block" id="cairo_plot_sensor_skins"><a class="viewcode-back" href="../../api/vehicles_cairo.html#vehicles_cairo.sensor_data.cairo_plot_sensor_skins">[docs]</a><span class="k">def</span> <span class="nf">cairo_plot_sensor_skins</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">vehicle_state</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">attached</span> <span class="ow">in</span> <span class="n">vehicle_state</span><span class="p">[</span><span class="s">&#39;sensors&#39;</span><span class="p">]:</span>
+        <span class="n">sensor</span> <span class="o">=</span> <span class="n">attached</span><span class="p">[</span><span class="s">&#39;sensor&#39;</span><span class="p">]</span>
+        <span class="n">sensor_pose</span> <span class="o">=</span> <span class="n">SE2_from_SE3</span><span class="p">(</span><span class="n">SE3</span><span class="o">.</span><span class="n">from_yaml</span><span class="p">(</span><span class="n">attached</span><span class="p">[</span><span class="s">&#39;current_pose&#39;</span><span class="p">]))</span>
+
+        <span class="n">extra</span> <span class="o">=</span> <span class="n">attached</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;extra&#39;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="n">sensor_skin</span> <span class="o">=</span> <span class="n">extra</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;skin&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">sensor_skin</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">sensor_skin</span> <span class="o">=</span> <span class="n">sensor</span><span class="p">[</span><span class="s">&#39;type&#39;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">sensor_skin</span> <span class="ow">in</span> <span class="n">VehiclesConfig</span><span class="o">.</span><span class="n">skins</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&#39;Could not find skin </span><span class="si">%r</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">sensor_skin</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">skin</span> <span class="o">=</span> <span class="n">VehiclesConfig</span><span class="o">.</span><span class="n">specs</span><span class="p">[</span><span class="s">&#39;skins&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">instance</span><span class="p">(</span><span class="n">sensor_skin</span><span class="p">)</span>
+
+            <span class="k">with</span> <span class="n">cairo_rototranslate</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">sensor_pose</span><span class="p">):</span>
+                <span class="n">cr</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="n">scale</span><span class="p">)</span>
+                <span class="n">skin</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">cr</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="cairo_plot_sensor_data"><a class="viewcode-back" href="../../api/vehicles_cairo.html#vehicles_cairo.sensor_data.cairo_plot_sensor_data">[docs]</a><span class="k">def</span> <span class="nf">cairo_plot_sensor_data</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">vehicle_state</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">compact</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">attached</span> <span class="ow">in</span> <span class="n">vehicle_state</span><span class="p">[</span><span class="s">&#39;sensors&#39;</span><span class="p">]:</span>
+        <span class="n">sensor</span> <span class="o">=</span> <span class="n">attached</span><span class="p">[</span><span class="s">&#39;sensor&#39;</span><span class="p">]</span>
+        <span class="n">observations</span> <span class="o">=</span> <span class="n">attached</span><span class="p">[</span><span class="s">&#39;current_observations&#39;</span><span class="p">]</span>
+        <span class="n">sensor_pose</span> <span class="o">=</span> <span class="n">SE2_from_SE3</span><span class="p">(</span><span class="n">SE3</span><span class="o">.</span><span class="n">from_yaml</span><span class="p">(</span><span class="n">attached</span><span class="p">[</span><span class="s">&#39;current_pose&#39;</span><span class="p">]))</span>
+        <span class="n">sensor_type</span> <span class="o">=</span> <span class="n">sensor</span><span class="p">[</span><span class="s">&#39;type&#39;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">sensor_type</span> <span class="o">==</span> <span class="n">VehiclesConstants</span><span class="o">.</span><span class="n">SENSOR_TYPE_RANGEFINDER</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">compact</span><span class="p">:</span>
+                <span class="k">with</span> <span class="n">cairo_rototranslate</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">sensor_pose</span><span class="p">):</span>
+                    <span class="n">cr</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="n">scale</span><span class="p">)</span>
+                    <span class="n">plot_ranges_compact</span><span class="p">(</span><span class="n">cr</span><span class="o">=</span><span class="n">cr</span><span class="p">,</span>
+                        <span class="n">directions</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sensor</span><span class="p">[</span><span class="s">&#39;directions&#39;</span><span class="p">]),</span>
+                        <span class="n">valid</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">observations</span><span class="p">[</span><span class="s">&#39;valid&#39;</span><span class="p">]),</span>
+                        <span class="n">readings</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">observations</span><span class="p">[</span><span class="s">&#39;readings&#39;</span><span class="p">])</span>
+                        <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">plot_ranges</span><span class="p">(</span><span class="n">cr</span><span class="o">=</span><span class="n">cr</span><span class="p">,</span>
+                        <span class="n">pose</span><span class="o">=</span><span class="n">sensor_pose</span><span class="p">,</span>
+                        <span class="n">directions</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sensor</span><span class="p">[</span><span class="s">&#39;directions&#39;</span><span class="p">]),</span>
+                        <span class="n">valid</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">observations</span><span class="p">[</span><span class="s">&#39;valid&#39;</span><span class="p">]),</span>
+                        <span class="n">readings</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">observations</span><span class="p">[</span><span class="s">&#39;readings&#39;</span><span class="p">])</span>
+                        <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">sensor_type</span> <span class="o">==</span> <span class="n">VehiclesConstants</span><span class="o">.</span><span class="n">SENSOR_TYPE_PHOTORECEPTORS</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">compact</span><span class="p">:</span>
+                <span class="k">with</span> <span class="n">cairo_rototranslate</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">sensor_pose</span><span class="p">):</span>
+                    <span class="n">cr</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="n">scale</span><span class="p">)</span>
+                    <span class="n">plot_photoreceptors_compact</span><span class="p">(</span><span class="n">cr</span><span class="o">=</span><span class="n">cr</span><span class="p">,</span>
+                        <span class="n">directions</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sensor</span><span class="p">[</span><span class="s">&#39;directions&#39;</span><span class="p">]),</span>
+                        <span class="n">valid</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">observations</span><span class="p">[</span><span class="s">&#39;valid&#39;</span><span class="p">]),</span>
+                        <span class="n">luminance</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">observations</span><span class="p">[</span><span class="s">&#39;luminance&#39;</span><span class="p">]))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">plot_photoreceptors</span><span class="p">(</span><span class="n">cr</span><span class="o">=</span><span class="n">cr</span><span class="p">,</span>
+                        <span class="n">pose</span><span class="o">=</span><span class="n">sensor_pose</span><span class="p">,</span>
+                        <span class="n">directions</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sensor</span><span class="p">[</span><span class="s">&#39;directions&#39;</span><span class="p">]),</span>
+                        <span class="n">valid</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">observations</span><span class="p">[</span><span class="s">&#39;valid&#39;</span><span class="p">]),</span>
+                        <span class="n">readings</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">observations</span><span class="p">[</span><span class="s">&#39;readings&#39;</span><span class="p">]),</span>
+                        <span class="n">luminance</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">observations</span><span class="p">[</span><span class="s">&#39;luminance&#39;</span><span class="p">]))</span>
+        <span class="k">elif</span> <span class="n">sensor_type</span> <span class="o">==</span> <span class="n">VehiclesConstants</span><span class="o">.</span><span class="n">SENSOR_TYPE_FIELDSAMPLER</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="bp">True</span><span class="p">:</span>
+                <span class="k">with</span> <span class="n">cairo_rototranslate</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">sensor_pose</span><span class="p">):</span>
+                    <span class="n">plot_fieldsampler_fancy</span><span class="p">(</span><span class="n">cr</span><span class="o">=</span><span class="n">cr</span><span class="p">,</span>
+                        <span class="n">positions</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sensor</span><span class="p">[</span><span class="s">&#39;positions&#39;</span><span class="p">]),</span>
+                        <span class="n">sensels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">observations</span><span class="p">[</span><span class="s">&#39;sensels&#39;</span><span class="p">]))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">plot_fieldsampler</span><span class="p">(</span><span class="n">cr</span><span class="o">=</span><span class="n">cr</span><span class="p">,</span>
+                        <span class="n">pose</span><span class="o">=</span><span class="n">sensor_pose</span><span class="p">,</span>
+                        <span class="n">positions</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sensor</span><span class="p">[</span><span class="s">&#39;positions&#39;</span><span class="p">]),</span>
+                        <span class="n">sensels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">observations</span><span class="p">[</span><span class="s">&#39;sensels&#39;</span><span class="p">]))</span>
+        <span class="k">elif</span> <span class="n">sensor_type</span> <span class="o">==</span> <span class="s">&#39;RandomSensor&#39;</span><span class="p">:</span>
+            <span class="c"># XXX: how can we visualize this?</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&#39;Unknown sensor type </span><span class="si">%r</span><span class="s">.&#39;</span> <span class="o">%</span> <span class="n">sensor</span><span class="p">[</span><span class="s">&#39;type&#39;</span><span class="p">])</span>
+            <span class="k">pass</span>
+
+</div>
+<span class="nd">@contract</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="s">&#39;SE2&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s">&#39;array[2]&#39;</span><span class="p">,</span> <span class="n">returns</span><span class="o">=</span><span class="s">&#39;array[2]&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="SE2_act_R2"><a class="viewcode-back" href="../../api/vehicles_cairo.html#vehicles_cairo.sensor_data.SE2_act_R2">[docs]</a><span class="k">def</span> <span class="nf">SE2_act_R2</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">])[:</span><span class="mi">2</span><span class="p">]</span>
+
+</div>
+<span class="nd">@contract</span><span class="p">(</span><span class="n">pose</span><span class="o">=</span><span class="s">&#39;SE2&#39;</span><span class="p">,</span> <span class="n">positions</span><span class="o">=</span><span class="s">&#39;array[Nx2]&#39;</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="s">&#39;None|&gt;0&#39;</span><span class="p">,</span>
+          <span class="n">sensels</span><span class="o">=</span><span class="s">&#39;array[N]|(array[JxK],J*K=N)&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="plot_fieldsampler"><a class="viewcode-back" href="../../api/vehicles_cairo.html#vehicles_cairo.sensor_data.plot_fieldsampler">[docs]</a><span class="k">def</span> <span class="nf">plot_fieldsampler</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">pose</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="n">sensels</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="c"># Scale in [0,1] for better contrast</span>
+
+    <span class="n">sensels</span> <span class="o">=</span> <span class="n">sensels</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">sensels</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">sensels</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">sensels</span> <span class="o">=</span> <span class="n">sensels</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">sensels</span><span class="p">)</span>
+
+    <span class="c"># find radius if none given as the minimum distance of the first</span>
+    <span class="c"># sensels to the others</span>
+    <span class="k">if</span> <span class="n">radius</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">radius</span> <span class="o">=</span> <span class="n">find_radius</span><span class="p">(</span><span class="n">positions</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sensels</span><span class="o">.</span><span class="n">flat</span><span class="p">):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">value</span>
+        <span class="n">facecolor</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">value</span><span class="p">]</span>
+        <span class="n">pw</span> <span class="o">=</span> <span class="n">SE2_act_R2</span><span class="p">(</span><span class="n">pose</span><span class="p">,</span> <span class="n">positions</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:])</span>
+        <span class="c">#alpha=0.6</span>
+        <span class="n">cairo_plot_circle</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="n">pw</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="n">radius</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">facecolor</span><span class="p">,</span>
+                    <span class="n">edgecolor</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="find_radius"><a class="viewcode-back" href="../../api/vehicles_cairo.html#vehicles_cairo.sensor_data.find_radius">[docs]</a><span class="k">def</span> <span class="nf">find_radius</span><span class="p">(</span><span class="n">positions</span><span class="p">):</span>
+    <span class="n">p0</span> <span class="o">=</span> <span class="n">positions</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">pi</span> <span class="o">=</span> <span class="n">positions</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:]</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hypot</span><span class="p">(</span><span class="n">pi</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">p0</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pi</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">p0</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">radius</span> <span class="o">=</span> <span class="n">D</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span>
+
+    <span class="n">radius</span> <span class="o">*=</span> <span class="mi">2</span>  <span class="c"># overlap</span>
+
+    <span class="n">radius</span> <span class="o">=</span> <span class="mf">0.05</span> <span class="c"># XXX</span>
+    <span class="k">return</span> <span class="n">radius</span>
+</div>
+<span class="n">RANDOM_PERM</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+
+
+<span class="nd">@contract</span><span class="p">(</span><span class="n">positions</span><span class="o">=</span><span class="s">&#39;array[Nx2]&#39;</span><span class="p">,</span> <span class="n">sensels</span><span class="o">=</span><span class="s">&#39;array[N]|(array[JxK],J*K=N)&#39;</span><span class="p">,</span>
+          <span class="n">radius</span><span class="o">=</span><span class="s">&#39;None|&gt;0&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="plot_fieldsampler_fancy"><a class="viewcode-back" href="../../api/vehicles_cairo.html#vehicles_cairo.sensor_data.plot_fieldsampler_fancy">[docs]</a><span class="k">def</span> <span class="nf">plot_fieldsampler_fancy</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="n">sensels</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">):</span>
+    <span class="c"># Scale in [0,1] for better contrast</span>
+
+    <span class="n">sensels</span> <span class="o">=</span> <span class="n">sensels</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">sensels</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">sensels</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">sensels</span> <span class="o">=</span> <span class="n">sensels</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">sensels</span><span class="p">)</span>
+
+    <span class="c"># find radius if none given as the minimum distance of the first</span>
+    <span class="c"># sensels to the others</span>
+    <span class="k">if</span> <span class="n">radius</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">radius</span> <span class="o">=</span> <span class="n">find_radius</span><span class="p">(</span><span class="n">positions</span><span class="p">)</span>
+
+    <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">sensels</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
+
+    <span class="c"># Use completely random permutation</span>
+    <span class="n">permutation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">RANDOM_PERM</span><span class="p">[:</span><span class="n">indices</span><span class="o">.</span><span class="n">size</span><span class="p">])</span>
+    <span class="c"># Sort by value</span>
+    <span class="c"># permutation = np.argsort(np.array(sensels.flat))</span>
+
+    <span class="n">indices</span> <span class="o">=</span> <span class="n">indices</span><span class="p">[</span><span class="n">permutation</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">:</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">sensels</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">positions</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span>
+
+        <span class="n">uvalue</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="n">facecolor</span> <span class="o">=</span> <span class="p">[</span><span class="n">uvalue</span><span class="p">,</span> <span class="n">uvalue</span><span class="p">,</span> <span class="n">uvalue</span><span class="p">,</span> <span class="n">value</span><span class="p">]</span>
+        <span class="n">border_color</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.3</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">value</span><span class="p">]</span>
+
+        <span class="n">radius_i</span> <span class="o">=</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">)</span> <span class="o">*</span> <span class="n">value</span><span class="p">)</span> <span class="o">*</span> <span class="n">radius</span>
+
+        <span class="n">cairo_plot_circle2</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">radius</span><span class="o">=</span><span class="n">radius_i</span><span class="p">,</span>
+                                <span class="n">fill_color</span><span class="o">=</span><span class="n">facecolor</span><span class="p">,</span>
+                                <span class="n">border_color</span><span class="o">=</span><span class="n">border_color</span><span class="p">,</span>
+                                <span class="n">border_width</span><span class="o">=</span><span class="n">radius</span> <span class="o">/</span> <span class="mf">10.0</span><span class="p">)</span>
+
+</div>
+<span class="nd">@contract</span><span class="p">(</span><span class="n">pose</span><span class="o">=</span><span class="s">&#39;SE2&#39;</span><span class="p">,</span> <span class="n">directions</span><span class="o">=</span><span class="s">&#39;array[N]&#39;</span><span class="p">,</span>
+          <span class="n">valid</span><span class="o">=</span><span class="s">&#39;array[N]&#39;</span><span class="p">,</span> <span class="n">readings</span><span class="o">=</span><span class="s">&#39;array[N]&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="plot_ranges"><a class="viewcode-back" href="../../api/vehicles_cairo.html#vehicles_cairo.sensor_data.plot_ranges">[docs]</a><span class="k">def</span> <span class="nf">plot_ranges</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">pose</span><span class="p">,</span> <span class="n">directions</span><span class="p">,</span> <span class="n">valid</span><span class="p">,</span> <span class="n">readings</span><span class="p">,</span>
+                <span class="n">rho_min</span><span class="o">=</span><span class="n">CC</span><span class="o">.</span><span class="n">plot_ranges_rho_min</span><span class="p">):</span>
+    <span class="n">sensor_t</span><span class="p">,</span> <span class="n">sensor_theta</span> <span class="o">=</span> <span class="n">translation_angle_from_SE2</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>
+    <span class="n">directions</span> <span class="o">=</span> <span class="n">directions</span><span class="p">[</span><span class="n">valid</span><span class="p">]</span>
+    <span class="n">readings</span> <span class="o">=</span> <span class="n">readings</span><span class="p">[</span><span class="n">valid</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">theta_i</span><span class="p">,</span> <span class="n">rho_i</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">directions</span><span class="p">,</span> <span class="n">readings</span><span class="p">):</span>
+        <span class="n">plot_ray</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">sensor_t</span><span class="p">,</span> <span class="n">sensor_theta</span> <span class="o">+</span> <span class="n">theta_i</span><span class="p">,</span>
+                 <span class="n">rho1</span><span class="o">=</span><span class="n">rho_min</span><span class="p">,</span>
+                 <span class="n">rho2</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">rho_i</span><span class="p">,</span> <span class="n">rho_min</span><span class="p">),</span>
+                 <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="c"># XXX</span>
+
+</div>
+<span class="nd">@contract</span><span class="p">(</span><span class="n">pose</span><span class="o">=</span><span class="s">&#39;SE2&#39;</span><span class="p">,</span> <span class="n">directions</span><span class="o">=</span><span class="s">&#39;array[N]&#39;</span><span class="p">,</span> <span class="n">valid</span><span class="o">=</span><span class="s">&#39;array[N]&#39;</span><span class="p">,</span>
+          <span class="n">readings</span><span class="o">=</span><span class="s">&#39;array[N]&#39;</span><span class="p">,</span> <span class="n">luminance</span><span class="o">=</span><span class="s">&#39;array[N]&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="plot_photoreceptors"><a class="viewcode-back" href="../../api/vehicles_cairo.html#vehicles_cairo.sensor_data.plot_photoreceptors">[docs]</a><span class="k">def</span> <span class="nf">plot_photoreceptors</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">pose</span><span class="p">,</span> <span class="n">directions</span><span class="p">,</span> <span class="n">valid</span><span class="p">,</span> <span class="n">readings</span><span class="p">,</span> <span class="n">luminance</span><span class="p">,</span>
+                        <span class="n">rho_min</span><span class="o">=</span><span class="n">CC</span><span class="o">.</span><span class="n">plot_ranges_rho_min</span><span class="p">):</span>
+    <span class="n">sensor_t</span><span class="p">,</span> <span class="n">sensor_theta</span> <span class="o">=</span> <span class="n">translation_angle_from_SE2</span><span class="p">(</span><span class="n">pose</span><span class="p">)</span>
+
+    <span class="n">directions</span> <span class="o">=</span> <span class="n">directions</span><span class="p">[</span><span class="n">valid</span><span class="p">]</span>
+    <span class="n">readings</span> <span class="o">=</span> <span class="n">readings</span><span class="p">[</span><span class="n">valid</span><span class="p">]</span>
+    <span class="n">luminance</span> <span class="o">=</span> <span class="n">luminance</span><span class="p">[</span><span class="n">valid</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">theta_i</span><span class="p">,</span> <span class="n">rho_i</span><span class="p">,</span> <span class="n">lum</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">directions</span><span class="p">,</span> <span class="n">readings</span><span class="p">,</span> <span class="n">luminance</span><span class="p">):</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="n">luminance2color</span><span class="p">(</span><span class="n">lum</span><span class="p">)</span>
+        <span class="n">plot_ray</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">sensor_t</span><span class="p">,</span> <span class="n">sensor_theta</span> <span class="o">+</span> <span class="n">theta_i</span><span class="p">,</span>
+                 <span class="n">rho1</span><span class="o">=</span><span class="n">rho_min</span><span class="p">,</span>
+                 <span class="n">rho2</span><span class="o">=</span><span class="nb">max</span><span class="p">(</span><span class="n">rho_i</span><span class="p">,</span> <span class="n">rho_min</span><span class="p">),</span>
+                 <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="luminance2color"><a class="viewcode-back" href="../../api/vehicles_cairo.html#vehicles_cairo.sensor_data.luminance2color">[docs]</a><span class="k">def</span> <span class="nf">luminance2color</span><span class="p">(</span><span class="n">lum</span><span class="p">):</span>
+    <span class="c"># color = (lum, lum, 1) # bluish</span>
+    <span class="c"># color = (lum, lum, lum) # normal</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.2</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">+</span> <span class="n">lum</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">alpha</span><span class="p">)</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">color</span>
+
+</div>
+<span class="nd">@contract</span><span class="p">(</span><span class="n">directions</span><span class="o">=</span><span class="s">&#39;array[N]&#39;</span><span class="p">,</span> <span class="n">valid</span><span class="o">=</span><span class="s">&#39;array[N]&#39;</span><span class="p">,</span> <span class="n">luminance</span><span class="o">=</span><span class="s">&#39;array[N]&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="plot_photoreceptors_compact"><a class="viewcode-back" href="../../api/vehicles_cairo.html#vehicles_cairo.sensor_data.plot_photoreceptors_compact">[docs]</a><span class="k">def</span> <span class="nf">plot_photoreceptors_compact</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">directions</span><span class="p">,</span> <span class="n">valid</span><span class="p">,</span> <span class="n">luminance</span><span class="p">,</span>
+                                <span class="n">r</span><span class="o">=</span><span class="n">CC</span><span class="o">.</span><span class="n">photoreceptors_compact_r</span><span class="p">,</span>
+                                <span class="n">r_width</span><span class="o">=</span><span class="n">CC</span><span class="o">.</span><span class="n">photoreceptors_compact_r_width</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">directions</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">delta_theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">directions</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">directions</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">delta_theta</span> <span class="o">=</span> <span class="n">CC</span><span class="o">.</span><span class="n">delta_single_ray</span>
+
+    <span class="n">N</span> <span class="o">=</span> <span class="n">directions</span><span class="o">.</span><span class="n">size</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">valid</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+            <span class="k">continue</span>
+
+        <span class="n">theta1</span> <span class="o">=</span> <span class="n">directions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">delta_theta</span> <span class="o">/</span> <span class="mf">1.9</span>
+        <span class="n">theta2</span> <span class="o">=</span> <span class="n">directions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">delta_theta</span> <span class="o">/</span> <span class="mf">1.9</span>
+
+        <span class="n">r0</span> <span class="o">=</span> <span class="n">r</span>
+        <span class="n">r1</span> <span class="o">=</span> <span class="n">r</span> <span class="o">+</span> <span class="n">r_width</span>
+        <span class="n">cairo_set_color</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">luminance2color</span><span class="p">(</span><span class="n">luminance</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+        <span class="n">cairo_fill_slice</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="n">r1</span><span class="p">)</span>
+
+</div>
+<span class="nd">@contract</span><span class="p">(</span><span class="n">directions</span><span class="o">=</span><span class="s">&#39;array[N]&#39;</span><span class="p">,</span> <span class="n">valid</span><span class="o">=</span><span class="s">&#39;array[N]&#39;</span><span class="p">,</span> <span class="n">readings</span><span class="o">=</span><span class="s">&#39;array[N]&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="plot_ranges_compact"><a class="viewcode-back" href="../../api/vehicles_cairo.html#vehicles_cairo.sensor_data.plot_ranges_compact">[docs]</a><span class="k">def</span> <span class="nf">plot_ranges_compact</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">directions</span><span class="p">,</span> <span class="n">readings</span><span class="p">,</span> <span class="n">valid</span><span class="p">,</span>
+                        <span class="n">r</span><span class="o">=</span><span class="n">CC</span><span class="o">.</span><span class="n">laser_compact_r</span><span class="p">,</span>
+                        <span class="n">r_width</span><span class="o">=</span><span class="n">CC</span><span class="o">.</span><span class="n">laser_compact_r_width</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">directions</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">delta_theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">directions</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">directions</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">delta_theta</span> <span class="o">=</span> <span class="n">CC</span><span class="o">.</span><span class="n">delta_single_ray</span>
+
+    <span class="n">N</span> <span class="o">=</span> <span class="n">directions</span><span class="o">.</span><span class="n">size</span>
+
+    <span class="n">vmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">readings</span><span class="p">)</span>
+    <span class="n">readings</span> <span class="o">=</span> <span class="n">readings</span> <span class="o">/</span> <span class="n">vmax</span>
+
+    <span class="n">theta1</span> <span class="o">=</span> <span class="n">directions</span> <span class="o">-</span> <span class="n">delta_theta</span> <span class="o">/</span> <span class="mf">1.9</span>
+    <span class="n">theta2</span> <span class="o">=</span> <span class="n">directions</span> <span class="o">+</span> <span class="n">delta_theta</span> <span class="o">/</span> <span class="mf">1.9</span>
+    <span class="n">r0</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">readings</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">r1</span> <span class="o">=</span> <span class="n">r</span> <span class="o">+</span> <span class="n">readings</span> <span class="o">*</span> <span class="n">r_width</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">valid</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+            <span class="k">continue</span>
+
+        <span class="n">cairo_set_color</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">CC</span><span class="o">.</span><span class="n">laser_compact_bg</span><span class="p">)</span>
+        <span class="n">cairo_fill_slice</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">theta1</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">theta2</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">r</span><span class="p">,</span> <span class="n">r</span> <span class="o">+</span> <span class="n">r_width</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">valid</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+            <span class="k">continue</span>
+
+        <span class="n">cairo_set_color</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">CC</span><span class="o">.</span><span class="n">laser_compact_fg</span><span class="p">)</span>
+        <span class="n">cairo_fill_slice</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">theta1</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">theta2</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">r0</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">r1</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+</div>
+<div class="viewcode-block" id="cairo_fill_slice"><a class="viewcode-back" href="../../api/vehicles_cairo.html#vehicles_cairo.sensor_data.cairo_fill_slice">[docs]</a><span class="k">def</span> <span class="nf">cairo_fill_slice</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="n">r1</span><span class="p">):</span>
+    <span class="n">Ax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta1</span><span class="p">)</span> <span class="o">*</span> <span class="n">r0</span>
+    <span class="n">Ay</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta1</span><span class="p">)</span> <span class="o">*</span> <span class="n">r0</span>
+    <span class="n">Bx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta1</span><span class="p">)</span> <span class="o">*</span> <span class="n">r1</span>
+    <span class="n">By</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta1</span><span class="p">)</span> <span class="o">*</span> <span class="n">r1</span>
+    <span class="n">Cx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta2</span><span class="p">)</span> <span class="o">*</span> <span class="n">r1</span>
+    <span class="n">Cy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta2</span><span class="p">)</span> <span class="o">*</span> <span class="n">r1</span>
+    <span class="n">Dx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta2</span><span class="p">)</span> <span class="o">*</span> <span class="n">r0</span>
+    <span class="n">Dy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta2</span><span class="p">)</span> <span class="o">*</span> <span class="n">r0</span>
+    <span class="n">cr</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="n">Ax</span><span class="p">,</span> <span class="n">Ay</span><span class="p">)</span>
+    <span class="n">cr</span><span class="o">.</span><span class="n">line_to</span><span class="p">(</span><span class="n">Bx</span><span class="p">,</span> <span class="n">By</span><span class="p">)</span>
+    <span class="n">cr</span><span class="o">.</span><span class="n">line_to</span><span class="p">(</span><span class="n">Cx</span><span class="p">,</span> <span class="n">Cy</span><span class="p">)</span>
+    <span class="n">cr</span><span class="o">.</span><span class="n">line_to</span><span class="p">(</span><span class="n">Dx</span><span class="p">,</span> <span class="n">Dy</span><span class="p">)</span>
+    <span class="n">cr</span><span class="o">.</span><span class="n">line_to</span><span class="p">(</span><span class="n">Ax</span><span class="p">,</span> <span class="n">Ay</span><span class="p">)</span>
+    <span class="n">cr</span><span class="o">.</span><span class="n">fill</span><span class="p">()</span>
+
+</div>
+<span class="nd">@contract</span><span class="p">(</span><span class="n">origin</span><span class="o">=</span><span class="s">&#39;seq[2](number)&#39;</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s">&#39;number&#39;</span><span class="p">,</span> <span class="n">rho1</span><span class="o">=</span><span class="s">&#39;x&#39;</span><span class="p">,</span> <span class="n">rho2</span><span class="o">=</span><span class="s">&#39;&gt;=x&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="plot_ray"><a class="viewcode-back" href="../../api/vehicles_cairo.html#vehicles_cairo.sensor_data.plot_ray">[docs]</a><span class="k">def</span> <span class="nf">plot_ray</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">origin</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">rho1</span><span class="p">,</span> <span class="n">rho2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">origin</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">direction</span><span class="p">)</span> <span class="o">*</span> <span class="n">rho1</span><span class="p">,</span>
+         <span class="n">origin</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">direction</span><span class="p">)</span> <span class="o">*</span> <span class="n">rho2</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">origin</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">direction</span><span class="p">)</span> <span class="o">*</span> <span class="n">rho1</span><span class="p">,</span>
+         <span class="n">origin</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">direction</span><span class="p">)</span> <span class="o">*</span> <span class="n">rho2</span><span class="p">]</span>
+    <span class="n">cr</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">cr</span><span class="o">.</span><span class="n">line_to</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">cr</span><span class="o">.</span><span class="n">set_line_width</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span> <span class="c"># XXX</span>
+    <span class="n">cr</span><span class="o">.</span><span class="n">set_source_rgb</span><span class="p">(</span><span class="o">*</span><span class="n">color</span><span class="p">)</span>
+    <span class="n">cr</span><span class="o">.</span><span class="n">stroke</span><span class="p">()</span>
+</pre></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Vehicles 1.2 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer">
+        &copy; Copyright 2010, Andrea Censi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+	
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-155626-14']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+
+  </body>
+</html>

@@ -1,0 +1,253 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vehicles.interfaces.dynamics &mdash; Vehicles 1.2 documentation</title>
+    
+    <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../../static/doctools.js"></script>
+    <link rel="top" title="Vehicles 1.2 documentation" href="../../../index.html" />
+    <link rel="up" title="vehicles.interfaces" href="../interfaces.html" />
+	 
+
+
+   <style type="text/css">
+        span.brand { color: #a00;}
+   </style> 
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Vehicles 1.2 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../../vehicles.html" >vehicles</a> &raquo;</li>
+          <li><a href="../interfaces.html" accesskey="U">vehicles.interfaces</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vehicles.interfaces.dynamics</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">logger</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABCMeta</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span> <span class="nn">contracts</span> <span class="kn">import</span> <span class="n">contract</span><span class="p">,</span> <span class="n">new_contract</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+<span class="kn">import</span> <span class="nn">geometry</span> <span class="c"># For its contracts @UnusedImport</span>
+<span class="n">new_contract</span><span class="p">(</span><span class="s">&#39;interval&#39;</span><span class="p">,</span> <span class="s">&#39;tuple((number,x),(number,&gt;x))&#39;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Dynamics"><a class="viewcode-back" href="../../../api/vehicles.interfaces.html#vehicles.interfaces.dynamics.Dynamics">[docs]</a><span class="k">class</span> <span class="nc">Dynamics</span><span class="p">:</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This is the interface for the various dynamics implemented.</span>
+<span class="sd">        </span>
+<span class="sd">        We make the following assumptions:</span>
+<span class="sd">        </span>
+<span class="sd">        1) The state space is the product of a pose space and a shape_space.</span>
+<span class="sd">        2) No assumptions on shape_space, except that it is a </span>
+<span class="sd">           DifferentiableManifold.</span>
+<span class="sd">        3) It is assumed that state_space is homeomorphic </span>
+<span class="sd">           to a subgroup of TSE(3). </span>
+<span class="sd">    </span>
+<span class="sd">    </span>
+<span class="sd">        In general, &quot;state&quot; is an opaque variable from outside.</span>
+<span class="sd">        </span>
+<span class="sd">        The function:</span>
+<span class="sd">        </span>
+<span class="sd">            state2 = dynamics.integrate(state, commands, dt)</span>
+<span class="sd">            </span>
+<span class="sd">        integrates the dynamics. Here state and state2 are opaque variables.</span>
+<span class="sd">        </span>
+<span class="sd">        The function:</span>
+<span class="sd">        </span>
+<span class="sd">            state = dynamics.pose2state(pose)</span>
+<span class="sd">            </span>
+<span class="sd">        creates a state from a pose (SE3), by embedding/projecting </span>
+<span class="sd">        appropriately. The semantics is to get the closest state to the pose, </span>
+<span class="sd">        with the dynamics &quot;at rest&quot;; for example, the velocity should be set </span>
+<span class="sd">        to 0, and the shape space to a resting position.</span>
+<span class="sd">        </span>
+<span class="sd">        </span>
+<span class="sd">        The function:</span>
+<span class="sd">        </span>
+<span class="sd">            pose, vel = dynamics.joint_state(state, joint=0)</span>
+<span class="sd">            </span>
+<span class="sd">        where SE3.belongs(pose) and se3.belongs(vel) returns the pos/vel</span>
+<span class="sd">        of a joint for the given state.</span>
+<span class="sd">            </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">__metaclass__</span> <span class="o">=</span> <span class="n">ABCMeta</span>
+
+    <span class="nd">@contract</span><span class="p">(</span><span class="n">commands_spec</span><span class="o">=</span><span class="s">&#39;dict&#39;</span><span class="p">,</span>
+              <span class="n">state_space</span><span class="o">=</span><span class="s">&#39;DifferentiableManifold&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state_space</span><span class="p">,</span> <span class="n">commands_spec</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_commands_spec</span> <span class="o">=</span> <span class="n">commands_spec</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_state_space</span> <span class="o">=</span> <span class="n">state_space</span>
+
+    <span class="nd">@contract</span><span class="p">(</span><span class="n">commands</span><span class="o">=</span><span class="s">&#39;array&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="Dynamics.check_commands"><a class="viewcode-back" href="../../../api/vehicles.interfaces.html#vehicles.interfaces.dynamics.Dynamics.check_commands">[docs]</a>    <span class="k">def</span> <span class="nf">check_commands</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">commands</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">            Raises an exception (InvalidCommands) if the commands </span>
+<span class="sd">            are not valid. </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c"># TODO: not implemented</span>
+        <span class="k">pass</span>
+</div>
+    <span class="nd">@contract</span><span class="p">(</span><span class="n">returns</span><span class="o">=</span><span class="s">&#39;DifferentiableManifold&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="Dynamics.get_state_space"><a class="viewcode-back" href="../../../api/vehicles.interfaces.html#vehicles.interfaces.dynamics.Dynamics.get_state_space">[docs]</a>    <span class="k">def</span> <span class="nf">get_state_space</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">            Returns a DifferentiableManifold instance </span>
+<span class="sd">            describing the state space.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state_space</span>
+</div>
+    <span class="nd">@contract</span><span class="p">(</span><span class="n">returns</span><span class="o">=</span><span class="s">&#39;dict&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="Dynamics.get_commands_spec"><a class="viewcode-back" href="../../../api/vehicles.interfaces.html#vehicles.interfaces.dynamics.Dynamics.get_commands_spec">[docs]</a>    <span class="k">def</span> <span class="nf">get_commands_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Returns the commands specification. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_commands_spec</span>
+</div>
+    <span class="nd">@contract</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="s">&#39;&gt;=0&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="Dynamics.integrate"><a class="viewcode-back" href="../../../api/vehicles.interfaces.html#vehicles.interfaces.dynamics.Dynamics.integrate">[docs]</a>    <span class="k">def</span> <span class="nf">integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">commands</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+        <span class="c">#self._state_space.belongs(state)    </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_commands</span><span class="p">(</span><span class="n">commands</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">new_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_integrate</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">commands</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s">&#39;Error while integrating.&#39;</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">msg</span> <span class="o">+=</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">   state: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state_space</span><span class="o">.</span><span class="n">friendly</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span> <span class="c"># XXX</span>
+                <span class="n">msg</span> <span class="o">+=</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">   state: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">state</span><span class="o">.</span><span class="n">__repr__</span><span class="p">()</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">commands: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">commands</span><span class="o">.</span><span class="n">__repr__</span><span class="p">()</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&#39;</span><span class="se">\n</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">()</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="k">raise</span>
+
+        <span class="c">#self._state_space.belongs(new_state)</span>
+        <span class="k">return</span> <span class="n">new_state</span>
+</div>
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span>
+
+    <span class="c"># Interface that must be implemented</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="nd">@contract</span><span class="p">(</span><span class="n">pose</span><span class="o">=</span><span class="s">&#39;SE3&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="Dynamics.pose2state"><a class="viewcode-back" href="../../../api/vehicles.interfaces.html#vehicles.interfaces.dynamics.Dynamics.pose2state">[docs]</a>    <span class="k">def</span> <span class="nf">pose2state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pose</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; </span>
+<span class="sd">            Returns the state that best approximates the given </span>
+<span class="sd">            pose (in SE3).</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">pass</span>
+</div>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">_integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">commands</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+<div class="viewcode-block" id="Dynamics.state_to_yaml"><a class="viewcode-back" href="../../../api/vehicles.interfaces.html#vehicles.interfaces.dynamics.Dynamics.state_to_yaml">[docs]</a>    <span class="k">def</span> <span class="nf">state_to_yaml</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Converts the state to a YAML representation.&#39;&#39;&#39;</span>
+        <span class="k">pass</span>
+</div>
+    <span class="nd">@abstractmethod</span>
+    <span class="nd">@contract</span><span class="p">(</span><span class="n">returns</span><span class="o">=</span><span class="s">&#39;tuple(SE3, se3)&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="Dynamics.joint_state"><a class="viewcode-back" href="../../../api/vehicles.interfaces.html#vehicles.interfaces.dynamics.Dynamics.joint_state">[docs]</a>    <span class="k">def</span> <span class="nf">joint_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">joint</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="k">pass</span>
+</div>
+    <span class="nd">@contract</span><span class="p">(</span><span class="n">returns</span><span class="o">=</span><span class="s">&#39;int,&gt;=1&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="Dynamics.num_joints"><a class="viewcode-back" href="../../../api/vehicles.interfaces.html#vehicles.interfaces.dynamics.Dynamics.num_joints">[docs]</a>    <span class="k">def</span> <span class="nf">num_joints</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Returns the number of joints. At least 1. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">1</span>
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Vehicles 1.2 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../../vehicles.html" >vehicles</a> &raquo;</li>
+          <li><a href="../interfaces.html" >vehicles.interfaces</a> &raquo;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer">
+        &copy; Copyright 2010, Andrea Censi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+	
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-155626-14']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+
+  </body>
+</html>

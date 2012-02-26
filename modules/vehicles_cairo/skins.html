@@ -1,0 +1,165 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vehicles_cairo.skins &mdash; Vehicles 1.2 documentation</title>
+    
+    <link rel="stylesheet" href="../../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../static/doctools.js"></script>
+    <link rel="top" title="Vehicles 1.2 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" />
+	 
+
+
+   <style type="text/css">
+        span.brand { color: #a00;}
+   </style> 
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Vehicles 1.2 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vehicles_cairo.skins</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">vehicles</span> <span class="kn">import</span> <span class="n">VehicleSkin</span>
+
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">np</span><span class="p">,</span> <span class="n">contract</span>
+
+<span class="kn">from</span> <span class="nn">.robot_skins</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.sensors</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.flies</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.complex_skin</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+
+
+<div class="viewcode-block" id="make_skin"><a class="viewcode-back" href="../../api/vehicles_cairo.skins.html#vehicles_cairo.skins.make_skin">[docs]</a><span class="k">def</span> <span class="nf">make_skin</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Skin</span><span class="p">(</span><span class="n">VehicleSkin</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
+
+        <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cr</span><span class="p">,</span> <span class="n">joints</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">timestamp</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+            <span class="n">f</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="n">module</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="s">&#39;vehicles_cairo.skins&#39;</span><span class="p">]</span>
+
+    <span class="n">module</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">Skin</span>
+
+    <span class="c">#print(&#39;Added %s . %s&#39; % (module, name))</span>
+
+</div>
+<span class="n">make_skin</span><span class="p">(</span><span class="n">cairo_robot_skin_circular</span><span class="p">,</span> <span class="s">&#39;circular&#39;</span><span class="p">)</span>
+<span class="n">make_skin</span><span class="p">(</span><span class="n">cairo_robot_skin_ddrive</span><span class="p">,</span> <span class="s">&#39;ddrive&#39;</span><span class="p">)</span>
+<span class="n">make_skin</span><span class="p">(</span><span class="n">cairo_robot_skin_omni</span><span class="p">,</span> <span class="s">&#39;omni&#39;</span><span class="p">)</span>
+<span class="n">make_skin</span><span class="p">(</span><span class="n">cairo_robot_skin_brai</span><span class="p">,</span> <span class="s">&#39;brai&#39;</span><span class="p">)</span>
+<span class="n">make_skin</span><span class="p">(</span><span class="n">cairo_robot_skin_car</span><span class="p">,</span> <span class="s">&#39;car&#39;</span><span class="p">)</span>
+<span class="n">make_skin</span><span class="p">(</span><span class="n">cairo_robot_skin_tracked</span><span class="p">,</span> <span class="s">&#39;tracks&#39;</span><span class="p">)</span>
+
+
+<span class="n">make_skin</span><span class="p">(</span><span class="n">wheel</span><span class="p">,</span> <span class="s">&#39;wheel&#39;</span><span class="p">)</span>
+
+
+<span class="n">make_skin</span><span class="p">(</span><span class="n">cairo_skin_eye</span><span class="p">,</span> <span class="s">&#39;eye&#39;</span><span class="p">)</span>
+<span class="n">make_skin</span><span class="p">(</span><span class="n">cairo_skin_sick</span><span class="p">,</span> <span class="s">&#39;sick&#39;</span><span class="p">)</span>
+<span class="n">make_skin</span><span class="p">(</span><span class="n">cairo_skin_transparent</span><span class="p">,</span> <span class="s">&#39;transparent&#39;</span><span class="p">)</span>
+
+<span class="n">make_skin</span><span class="p">(</span><span class="n">cairo_skin_fly1</span><span class="p">,</span> <span class="s">&#39;fly1&#39;</span><span class="p">)</span>
+
+<span class="n">make_skin</span><span class="p">(</span><span class="n">cairo_robot_skin_rectangle</span><span class="p">,</span> <span class="s">&#39;rectangle&#39;</span><span class="p">)</span>
+<span class="n">make_skin</span><span class="p">(</span><span class="n">cairo_robot_skin_roundedrec</span><span class="p">,</span> <span class="s">&#39;roundedrec&#39;</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Vehicles 1.2 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer">
+        &copy; Copyright 2010, Andrea Censi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+	
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-155626-14']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+
+  </body>
+</html>

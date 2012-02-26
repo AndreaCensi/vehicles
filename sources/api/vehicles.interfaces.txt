@@ -1,0 +1,51 @@
+interfaces Package
+==================
+
+:mod:`interfaces` Package
+-------------------------
+
+.. automodule:: vehicles.interfaces
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`dynamics` Module
+----------------------
+
+.. automodule:: vehicles.interfaces.dynamics
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`primitives` Module
+------------------------
+
+.. automodule:: vehicles.interfaces.primitives
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`skins` Module
+-------------------
+
+.. automodule:: vehicles.interfaces.skins
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`vehicle_sensor` Module
+----------------------------
+
+.. automodule:: vehicles.interfaces.vehicle_sensor
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`world` Module
+-------------------
+
+.. automodule:: vehicles.interfaces.world
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

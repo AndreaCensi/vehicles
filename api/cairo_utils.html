@@ -1,0 +1,240 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>cairo_utils Package &mdash; Vehicles 1.2 documentation</title>
+    
+    <link rel="stylesheet" href="../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <link rel="top" title="Vehicles 1.2 documentation" href="../index.html" />
+	 
+
+
+   <style type="text/css">
+        span.brand { color: #a00;}
+   </style> 
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Vehicles 1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="cairo-utils-package">
+<h1>cairo_utils Package<a class="headerlink" href="#cairo-utils-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><a class="reference internal" href="#module-cairo_utils" title="cairo_utils"><tt class="xref py py-mod docutils literal"><span class="pre">cairo_utils</span></tt></a> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-cairo_utils"></span><p>Some Cairo utils &#8211; not specific to PyVehicles.</p>
+</div>
+<div class="section" id="module-cairo_utils.colors">
+<span id="colors-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">colors</span></tt> Module<a class="headerlink" href="#module-cairo_utils.colors" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="cairo_utils.colors.cairo_set_color">
+<tt class="descclassname">cairo_utils.colors.</tt><tt class="descname">cairo_set_color</tt><big>(</big><em>cr</em>, <em>col</em><big>)</big><a class="reference internal" href="../modules/cairo_utils/colors.html#cairo_set_color"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cairo_utils.colors.cairo_set_color" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>col</strong> (<tt class="docutils literal"><span class="pre">seq[3]|seq[4]</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-cairo_utils.contexts">
+<span id="contexts-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">contexts</span></tt> Module<a class="headerlink" href="#module-cairo_utils.contexts" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="cairo_utils.contexts.cairo_save">
+<tt class="descclassname">cairo_utils.contexts.</tt><tt class="descname">cairo_save</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="reference internal" href="../modules/cairo_utils/contexts.html#cairo_save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cairo_utils.contexts.cairo_save" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-cairo_utils.pixels">
+<span id="pixels-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">pixels</span></tt> Module<a class="headerlink" href="#module-cairo_utils.pixels" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="cairo_utils.pixels.cairo_pixels">
+<tt class="descclassname">cairo_utils.pixels.</tt><tt class="descname">cairo_pixels</tt><big>(</big><em>cr, x, width, height=None, grid_color=[1, 0.9, 0.9], border_color=[0, 0, 0], bg_color=[1, 1, 1]</em><big>)</big><a class="reference internal" href="../modules/cairo_utils/pixels.html#cairo_pixels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cairo_utils.pixels.cairo_pixels" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> (<tt class="docutils literal"><span class="pre">array[HxWx3](uint8)</span></tt>) &#8211; </li>
+<li><strong>width</strong> (<tt class="docutils literal"><span class="pre">&gt;0</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-cairo_utils.shape">
+<span id="shape-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">shape</span></tt> Module<a class="headerlink" href="#module-cairo_utils.shape" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="cairo_utils.shape.cairo_plot_circle">
+<tt class="descclassname">cairo_utils.shape.</tt><tt class="descname">cairo_plot_circle</tt><big>(</big><em>cr</em>, <em>center</em>, <em>radius</em>, <em>edgecolor=None</em>, <em>facecolor=None</em>, <em>width=None</em><big>)</big><a class="reference internal" href="../modules/cairo_utils/shape.html#cairo_plot_circle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cairo_utils.shape.cairo_plot_circle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="cairo_utils.shape.cairo_plot_circle2">
+<tt class="descclassname">cairo_utils.shape.</tt><tt class="descname">cairo_plot_circle2</tt><big>(</big><em>cr</em>, <em>x</em>, <em>y</em>, <em>radius</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../modules/cairo_utils/shape.html#cairo_plot_circle2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cairo_utils.shape.cairo_plot_circle2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="cairo_utils.shape.cairo_plot_polyline">
+<tt class="descclassname">cairo_utils.shape.</tt><tt class="descname">cairo_plot_polyline</tt><big>(</big><em>cr</em>, <em>x</em>, <em>y</em><big>)</big><a class="reference internal" href="../modules/cairo_utils/shape.html#cairo_plot_polyline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cairo_utils.shape.cairo_plot_polyline" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="cairo_utils.shape.cairo_plot_rectangle">
+<tt class="descclassname">cairo_utils.shape.</tt><tt class="descname">cairo_plot_rectangle</tt><big>(</big><em>cr</em>, <em>x</em>, <em>y</em>, <em>w</em>, <em>h</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../modules/cairo_utils/shape.html#cairo_plot_rectangle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cairo_utils.shape.cairo_plot_rectangle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="cairo_utils.shape.cairo_plot_with_style">
+<tt class="descclassname">cairo_utils.shape.</tt><tt class="descname">cairo_plot_with_style</tt><big>(</big><em>cr</em>, <em>shape</em>, <em>border_color=None</em>, <em>border_width=None</em>, <em>fill_color=None</em><big>)</big><a class="reference internal" href="../modules/cairo_utils/shape.html#cairo_plot_with_style"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cairo_utils.shape.cairo_plot_with_style" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="cairo_utils.shape.cairo_stroke_with_style">
+<tt class="descclassname">cairo_utils.shape.</tt><tt class="descname">cairo_stroke_with_style</tt><big>(</big><em>cr</em>, <em>shape</em>, <em>border_color=None</em>, <em>border_width=None</em>, <em>fill_color=None</em><big>)</big><a class="reference internal" href="../modules/cairo_utils/shape.html#cairo_stroke_with_style"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cairo_utils.shape.cairo_stroke_with_style" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="cairo_utils.shape.roundedrec">
+<tt class="descclassname">cairo_utils.shape.</tt><tt class="descname">roundedrec</tt><big>(</big><em>context</em>, <em>x</em>, <em>y</em>, <em>w</em>, <em>h</em>, <em>r=10</em><big>)</big><a class="reference internal" href="../modules/cairo_utils/shape.html#roundedrec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cairo_utils.shape.roundedrec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw a rounded rectangle</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-cairo_utils.text">
+<span id="text-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">text</span></tt> Module<a class="headerlink" href="#module-cairo_utils.text" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="cairo_utils.text.cairo_text_align">
+<tt class="descclassname">cairo_utils.text.</tt><tt class="descname">cairo_text_align</tt><big>(</big><em>cr</em>, <em>text</em>, <em>halign='left'</em>, <em>valign='bottom'</em><big>)</big><a class="reference internal" href="../modules/cairo_utils/text.html#cairo_text_align"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cairo_utils.text.cairo_text_align" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-cairo_utils.transformations">
+<span id="transformations-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">transformations</span></tt> Module<a class="headerlink" href="#module-cairo_utils.transformations" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="cairo_utils.transformations.cairo_transform">
+<tt class="descclassname">cairo_utils.transformations.</tt><tt class="descname">cairo_transform</tt><big>(</big><em>*args</em>, <em>**kwds</em><big>)</big><a class="reference internal" href="../modules/cairo_utils/transformations.html#cairo_transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#cairo_utils.transformations.cairo_transform" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">cairo_utils Package</a><ul>
+<li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">cairo_utils</span></tt> Package</a></li>
+<li><a class="reference internal" href="#module-cairo_utils.colors"><tt class="docutils literal"><span class="pre">colors</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-cairo_utils.contexts"><tt class="docutils literal"><span class="pre">contexts</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-cairo_utils.pixels"><tt class="docutils literal"><span class="pre">pixels</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-cairo_utils.shape"><tt class="docutils literal"><span class="pre">shape</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-cairo_utils.text"><tt class="docutils literal"><span class="pre">text</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-cairo_utils.transformations"><tt class="docutils literal"><span class="pre">transformations</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../sources/api/cairo_utils.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Vehicles 1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer">
+        &copy; Copyright 2010, Andrea Censi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+	
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-155626-14']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+
+  </body>
+</html>

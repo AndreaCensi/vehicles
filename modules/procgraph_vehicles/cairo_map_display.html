@@ -1,0 +1,551 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>procgraph_vehicles.cairo_map_display &mdash; Vehicles 1.2 documentation</title>
+    
+    <link rel="stylesheet" href="../../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../static/doctools.js"></script>
+    <link rel="top" title="Vehicles 1.2 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" />
+	 
+
+
+   <style type="text/css">
+        span.brand { color: #a00;}
+   </style> 
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Vehicles 1.2 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for procgraph_vehicles.cairo_map_display</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">cairo_utils</span> <span class="kn">import</span> <span class="n">cairo_pixels</span><span class="p">,</span> <span class="n">cairo_text_align</span>
+<span class="kn">from</span> <span class="nn">geometry</span> <span class="kn">import</span> <span class="n">SE2_from_SE3</span><span class="p">,</span> <span class="n">SE3</span>
+<span class="kn">from</span> <span class="nn">procgraph</span> <span class="kn">import</span> <span class="n">BadConfig</span><span class="p">,</span> <span class="n">Block</span>
+<span class="kn">from</span> <span class="nn">procgraph.block_utils</span> <span class="kn">import</span> <span class="n">make_sure_dir_exists</span>
+<span class="kn">from</span> <span class="nn">procgraph_images</span> <span class="kn">import</span> <span class="n">posneg</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">reshape2d</span>
+<span class="kn">from</span> <span class="nn">vehicles_cairo</span> <span class="kn">import</span> <span class="p">(</span><span class="n">cairo_save</span><span class="p">,</span> <span class="n">cairo_transform</span><span class="p">,</span>
+    <span class="n">vehicles_cairo_display_all</span><span class="p">,</span> <span class="n">cairo_rototranslate</span><span class="p">,</span> <span class="n">cairo_ref_frame</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+
+
+<div class="viewcode-block" id="VehiclesCairoDisplay"><a class="viewcode-back" href="../../api/procgraph_vehicles.html#procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay">[docs]</a><span class="k">class</span> <span class="nc">VehiclesCairoDisplay</span><span class="p">(</span><span class="n">Block</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Produces a top-down plot of a circular arena. &#39;&#39;&#39;</span>
+
+    <span class="n">Block</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s">&#39;vehicles_cairo_display&#39;</span><span class="p">)</span>
+
+    <span class="n">Block</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s">&#39;format&#39;</span><span class="p">,</span> <span class="s">&#39;pdf|png&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s">&#39;pdf&#39;</span><span class="p">)</span>
+    <span class="n">Block</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s">&#39;file&#39;</span><span class="p">,</span> <span class="s">&#39;Output file (pdf)&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+    <span class="n">Block</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="s">&#39;rgb&#39;</span><span class="p">,</span> <span class="s">&#39;RGB data (png)&#39;</span><span class="p">)</span>
+    <span class="n">Block</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s">&#39;transparent&#39;</span><span class="p">,</span> <span class="s">&#39;Outputs RGB with transparent bg&#39;</span><span class="p">,</span>
+                 <span class="n">default</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="c">#    Block.config(&#39;width&#39;, &#39;Image width in points.&#39;, default=768)</span>
+<span class="c">#    Block.config(&#39;height&#39;, &#39;Image height in points.&#39;, default=768)</span>
+<span class="c">#    Block.config(&#39;sidebar_width&#39;, default=1024 - 768)</span>
+    <span class="n">Block</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s">&#39;width&#39;</span><span class="p">,</span> <span class="s">&#39;Image width in points.&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+    <span class="n">Block</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s">&#39;height&#39;</span><span class="p">,</span> <span class="s">&#39;Image height in points.&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+    <span class="n">Block</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s">&#39;sidebar_width&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+
+    <span class="c"># Sidebar options</span>
+    <span class="n">Block</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s">&#39;display_sidebar&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="n">Block</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s">&#39;trace&#39;</span><span class="p">,</span> <span class="s">&#39;Trace the path&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+    <span class="n">Block</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s">&#39;plotting_params&#39;</span><span class="p">,</span>
+                 <span class="s">&#39;Configuration to pass to vehicles_cairo_display_all()&#39;</span><span class="p">,</span>
+                 <span class="n">default</span><span class="o">=</span><span class="p">{})</span>
+    <span class="n">Block</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s">&#39;sidebar_params&#39;</span><span class="p">,</span>
+                 <span class="s">&#39;Configuration to pass to create_sidebar()&#39;</span><span class="p">,</span>
+                 <span class="n">default</span><span class="o">=</span><span class="p">{})</span>
+
+    <span class="n">Block</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s">&#39;swf&#39;</span><span class="p">,</span> <span class="s">&#39;Converts PDF to SWF using pdf2swf&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="n">Block</span><span class="o">.</span><span class="n">input</span><span class="p">(</span><span class="s">&#39;boot_obs&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="VehiclesCairoDisplay.init"><a class="viewcode-back" href="../../api/procgraph_vehicles.html#procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.init">[docs]</a>    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">format</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">format</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">total_width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">width</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">display_sidebar</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">total_width</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sidebar_width</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">total_height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">height</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frame</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span> <span class="o">==</span> <span class="s">&#39;pdf&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">init_pdf</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span> <span class="o">==</span> <span class="s">&#39;png&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">init_png</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">BadConfig</span><span class="p">(</span><span class="s">&#39;Invalid format </span><span class="si">%r</span><span class="s">.&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="s">&#39;format&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fps</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">t0</span> <span class="o">=</span> <span class="bp">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">tmp_cr</span> <span class="o">=</span> <span class="bp">None</span>
+</div>
+<div class="viewcode-block" id="VehiclesCairoDisplay.init_pdf"><a class="viewcode-back" href="../../api/procgraph_vehicles.html#procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.init_pdf">[docs]</a>    <span class="k">def</span> <span class="nf">init_pdf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tmp_filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">+</span> <span class="s">&#39;.active&#39;</span>
+        <span class="n">make_sure_dir_exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Creating file </span><span class="si">%r</span><span class="s">.&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+        <span class="kn">import</span> <span class="nn">cairo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">surf</span> <span class="o">=</span> <span class="n">cairo</span><span class="o">.</span><span class="n">PDFSurface</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tmp_filename</span><span class="p">,</span> <span class="c">#@UndefinedVariable</span>
+                                     <span class="bp">self</span><span class="o">.</span><span class="n">total_width</span><span class="p">,</span>
+                                     <span class="bp">self</span><span class="o">.</span><span class="n">total_height</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="VehiclesCairoDisplay.init_png"><a class="viewcode-back" href="../../api/procgraph_vehicles.html#procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.init_png">[docs]</a>    <span class="k">def</span> <span class="nf">init_png</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">cairo</span>
+        <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_height</span>
+        <span class="c"># note (w,h) here and (h,w,h*4) below; I&#39;m not sure but it works</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">argb_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">argb_data</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">surf</span> <span class="o">=</span> <span class="n">cairo</span><span class="o">.</span><span class="n">ImageSurface</span><span class="o">.</span><span class="n">create_for_data</span><span class="p">(</span><span class="c">#@UndefinedVariable</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">argb_data</span><span class="p">,</span>
+                        <span class="n">cairo</span><span class="o">.</span><span class="n">FORMAT_ARGB32</span><span class="p">,</span> <span class="c">#@UndefinedVariable</span>
+                         <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">w</span> <span class="o">*</span> <span class="mi">4</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="VehiclesCairoDisplay.update"><a class="viewcode-back" href="../../api/procgraph_vehicles.html#procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c"># Estimate fps</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">t0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_input_timestamp</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">delta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_input_timestamp</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">t0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fps</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">/</span> <span class="n">delta</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span> <span class="o">==</span> <span class="s">&#39;pdf&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update_pdf</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span> <span class="o">==</span> <span class="s">&#39;png&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update_png</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="bp">False</span>
+</div>
+<div class="viewcode-block" id="VehiclesCairoDisplay.update_png"><a class="viewcode-back" href="../../api/procgraph_vehicles.html#procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.update_png">[docs]</a>    <span class="k">def</span> <span class="nf">update_png</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">cairo</span>
+        <span class="c"># If I don&#39;t recreate it, it will crash</span>
+<span class="c">#        if self.tmp_cr is None:</span>
+<span class="c">#            self.tmp_cr = cairo.Context(self.surf) #@UndefinedVariable</span>
+<span class="c">#        cr = self.tmp_cr</span>
+
+        <span class="n">cr</span> <span class="o">=</span> <span class="n">cairo</span><span class="o">.</span><span class="n">Context</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">surf</span><span class="p">)</span> <span class="c">#@UndefinedVariable</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">draw_everything</span><span class="p">(</span><span class="n">cr</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">surf</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">transparent</span><span class="p">:</span>
+            <span class="n">rgb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">argb_data</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="c"># fix red/blue inversion</span>
+            <span class="n">rgb</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">argb_data</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">2</span><span class="p">]</span>
+            <span class="n">rgb</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">argb_data</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+            <span class="k">assert</span> <span class="n">rgb</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">rgb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">argb_data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="c"># fix red/blue inversion</span>
+            <span class="n">rgb</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">argb_data</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">2</span><span class="p">]</span>
+            <span class="n">rgb</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">argb_data</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+            <span class="k">assert</span> <span class="n">rgb</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">4</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="n">rgb</span>
+</div>
+<div class="viewcode-block" id="VehiclesCairoDisplay.update_pdf"><a class="viewcode-back" href="../../api/procgraph_vehicles.html#procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.update_pdf">[docs]</a>    <span class="k">def</span> <span class="nf">update_pdf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">cairo</span>
+        <span class="c"># If I don&#39;t recreate it, it will crash</span>
+        <span class="n">cr</span> <span class="o">=</span> <span class="n">cairo</span><span class="o">.</span><span class="n">Context</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">surf</span><span class="p">)</span> <span class="c">#@UndefinedVariable</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">draw_everything</span><span class="p">(</span><span class="n">cr</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">surf</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">surf</span><span class="o">.</span><span class="n">show_page</span><span class="p">()</span> <span class="c"># Free memory self.cr?</span>
+</div>
+<div class="viewcode-block" id="VehiclesCairoDisplay.draw_everything"><a class="viewcode-back" href="../../api/procgraph_vehicles.html#procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.draw_everything">[docs]</a>    <span class="k">def</span> <span class="nf">draw_everything</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cr</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">transparent</span><span class="p">:</span>
+            <span class="c"># Set white background</span>
+            <span class="n">bg_color</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="n">cr</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_height</span><span class="p">)</span>
+            <span class="n">cr</span><span class="o">.</span><span class="n">set_source_rgb</span><span class="p">(</span><span class="n">bg_color</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">bg_color</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">bg_color</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+            <span class="n">cr</span><span class="o">.</span><span class="n">fill</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c"># Green screen :-)</span>
+            <span class="n">cr</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_height</span><span class="p">)</span>
+            <span class="n">cr</span><span class="o">.</span><span class="n">set_source_rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">cr</span><span class="o">.</span><span class="n">fill</span><span class="p">()</span>
+
+        <span class="n">boot_obs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">boot_obs</span>
+
+        <span class="n">id_episode</span> <span class="o">=</span> <span class="n">boot_obs</span><span class="p">[</span><span class="s">&#39;id_episode&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="n">id_vehicle</span> <span class="o">=</span> <span class="n">boot_obs</span><span class="p">[</span><span class="s">&#39;id_robot&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="n">extra</span> <span class="o">=</span> <span class="n">boot_obs</span><span class="p">[</span><span class="s">&#39;extra&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+        <span class="k">def</span> <span class="nf">extra_draw_world</span><span class="p">(</span><span class="n">cr</span><span class="p">):</span>
+            <span class="k">if</span> <span class="s">&#39;servonav&#39;</span> <span class="ow">in</span> <span class="n">extra</span><span class="p">:</span>
+                <span class="n">plot_servonave</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">extra</span><span class="p">[</span><span class="s">&#39;servonav&#39;</span><span class="p">])</span>
+
+            <span class="k">if</span> <span class="s">&#39;servoing_poses&#39;</span> <span class="ow">in</span> <span class="n">extra</span><span class="p">:</span>
+                <span class="n">plot_servoing_poses</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">extra</span><span class="p">[</span><span class="s">&#39;servoing_poses&#39;</span><span class="p">])</span>
+
+        <span class="n">plotting_params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">plotting_params</span>
+
+        <span class="n">plotting_params</span><span class="p">[</span><span class="s">&#39;extra_draw_world&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">extra_draw_world</span>
+
+        <span class="n">sidebar_params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sidebar_params</span>
+
+        <span class="c"># todo: check</span>
+        <span class="n">sim_state</span> <span class="o">=</span> <span class="n">extra</span><span class="p">[</span><span class="s">&#39;robot_state&#39;</span><span class="p">]</span>
+
+        <span class="n">observations_values</span> <span class="o">=</span> <span class="n">boot_obs</span><span class="p">[</span><span class="s">&#39;observations&#39;</span><span class="p">]</span>
+
+        <span class="n">commands</span> <span class="o">=</span> <span class="n">boot_obs</span><span class="p">[</span><span class="s">&#39;commands&#39;</span><span class="p">]</span>
+
+        <span class="n">commands_source</span> <span class="o">=</span> <span class="n">boot_obs</span><span class="p">[</span><span class="s">&#39;commands_source&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="n">timestamp</span> <span class="o">=</span> <span class="n">boot_obs</span><span class="p">[</span><span class="s">&#39;time_from_episode_start&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+        <span class="k">with</span> <span class="n">cairo_save</span><span class="p">(</span><span class="n">cr</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">display_sidebar</span><span class="p">:</span>
+                <span class="n">padding</span> <span class="o">=</span> <span class="mf">0.03</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">width</span>
+                <span class="n">map_width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">width</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">padding</span>
+                <span class="n">map_height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">height</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">padding</span>
+                <span class="n">cr</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">padding</span><span class="p">,</span> <span class="n">padding</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">map_width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">width</span>
+                <span class="n">map_height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">height</span>
+
+            <span class="k">with</span> <span class="n">cairo_save</span><span class="p">(</span><span class="n">cr</span><span class="p">):</span>
+                <span class="n">cr</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">map_width</span><span class="p">,</span> <span class="n">map_height</span><span class="p">)</span>
+                <span class="n">cr</span><span class="o">.</span><span class="n">clip</span><span class="p">()</span>
+
+                <span class="c"># TODO: implement trace</span>
+
+                <span class="n">vehicles_cairo_display_all</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span>
+                                       <span class="n">map_width</span><span class="p">,</span>
+                                       <span class="n">map_height</span><span class="p">,</span>
+                                       <span class="n">sim_state</span><span class="p">,</span>
+                                       <span class="o">**</span><span class="n">plotting_params</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">display_sidebar</span><span class="p">:</span>
+                <span class="n">cr</span><span class="o">.</span><span class="n">set_line_width</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">cr</span><span class="o">.</span><span class="n">set_source_rgb</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="n">cr</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">map_width</span><span class="p">,</span> <span class="n">map_height</span><span class="p">)</span>
+                <span class="n">cr</span><span class="o">.</span><span class="n">stroke</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">display_sidebar</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cairo_transform</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="mi">0</span><span class="p">]):</span>
+                <span class="n">create_sidebar</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">sidebar_width</span><span class="p">,</span>
+                               <span class="n">height</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">height</span><span class="p">,</span>
+                               <span class="n">sim_state</span><span class="o">=</span><span class="n">sim_state</span><span class="p">,</span>
+                               <span class="n">id_vehicle</span><span class="o">=</span><span class="n">id_vehicle</span><span class="p">,</span>
+                               <span class="n">id_episode</span><span class="o">=</span><span class="n">id_episode</span><span class="p">,</span>
+                               <span class="n">timestamp</span><span class="o">=</span><span class="n">timestamp</span><span class="p">,</span>
+                               <span class="n">observations_values</span><span class="o">=</span><span class="n">observations_values</span><span class="p">,</span>
+                               <span class="n">commands_values</span><span class="o">=</span><span class="n">commands</span><span class="p">,</span>
+                               <span class="n">commands_source</span><span class="o">=</span><span class="n">commands_source</span><span class="p">,</span>
+                               <span class="o">**</span><span class="n">sidebar_params</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="VehiclesCairoDisplay.finish"><a class="viewcode-back" href="../../api/procgraph_vehicles.html#procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.finish">[docs]</a>    <span class="k">def</span> <span class="nf">finish</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span> <span class="o">==</span> <span class="s">&#39;pdf&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">finish_pdf</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="VehiclesCairoDisplay.finish_pdf"><a class="viewcode-back" href="../../api/procgraph_vehicles.html#procgraph_vehicles.cairo_map_display.VehiclesCairoDisplay.finish_pdf">[docs]</a>    <span class="k">def</span> <span class="nf">finish_pdf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">surf</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tmp_filename</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tmp_filename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">swf</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fps</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&#39;Only one frame seen?&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">basename</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+                <span class="n">swf</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">.swf&#39;</span> <span class="o">%</span> <span class="n">basename</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">command</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;pdf2swf&#39;</span><span class="p">,</span>
+                                           <span class="c">#&quot;-b&quot;, # --defaultviewer</span>
+                                           <span class="c">#&quot;-l&quot;, # --defaultloader</span>
+                                           <span class="s">&#39;-G&#39;</span><span class="p">,</span> <span class="c"># flatten</span>
+                                           <span class="s">&#39;-s&#39;</span><span class="p">,</span> <span class="s">&#39;framerate=</span><span class="si">%d</span><span class="s">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">fps</span><span class="p">,</span>
+                                            <span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span>
+                                            <span class="s">&#39;-o&#39;</span><span class="p">,</span> <span class="n">swf</span><span class="p">]</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">command</span><span class="p">))</span>
+                    <span class="n">subprocess</span><span class="o">.</span><span class="n">check_call</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&#39;Could not convert to swf: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">swf</span><span class="p">):</span>
+                        <span class="n">os</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="n">swf</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;Completed </span><span class="si">%r</span><span class="s">.&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+
+</div></div>
+<div class="viewcode-block" id="create_sidebar"><a class="viewcode-back" href="../../api/procgraph_vehicles.html#procgraph_vehicles.cairo_map_display.create_sidebar">[docs]</a><span class="k">def</span> <span class="nf">create_sidebar</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">sim_state</span><span class="p">,</span> <span class="n">id_vehicle</span><span class="p">,</span> <span class="n">id_episode</span><span class="p">,</span>
+                   <span class="n">timestamp</span><span class="p">,</span> <span class="n">observations_values</span><span class="p">,</span>
+                   <span class="n">commands_values</span><span class="p">,</span> <span class="n">commands_source</span><span class="p">,</span>
+                   <span class="n">bg_color</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                   <span class="n">show_observations</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                   <span class="n">show_commands</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                   <span class="n">show_annotations</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">commands_values</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">commands_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">commands_values</span><span class="o">.</span><span class="n">tolist</span><span class="p">()])</span>
+
+    <span class="n">commands_rgb</span> <span class="o">=</span> <span class="n">posneg</span><span class="p">(</span><span class="n">commands_values</span><span class="p">,</span>
+                          <span class="n">max_value</span><span class="o">=</span><span class="p">(</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="c"># not sure +1 </span>
+                          <span class="n">nan_color</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+    <span class="n">observations_rgb</span> <span class="o">=</span> <span class="n">scale</span><span class="p">(</span><span class="n">reshape2d</span><span class="p">(</span><span class="n">observations_values</span><span class="p">),</span> <span class="n">min_value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                         <span class="n">nan_color</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+    <span class="kn">import</span> <span class="nn">cairo</span>
+    <span class="k">if</span> <span class="n">bg_color</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">cr</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+        <span class="n">cr</span><span class="o">.</span><span class="n">set_source_rgb</span><span class="p">(</span><span class="n">bg_color</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">bg_color</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">bg_color</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="n">cr</span><span class="o">.</span><span class="n">fill</span><span class="p">()</span>
+
+    <span class="n">fo</span> <span class="o">=</span> <span class="n">cairo</span><span class="o">.</span><span class="n">FontOptions</span><span class="p">()</span> <span class="c">#@UndefinedVariable</span>
+    <span class="n">fo</span><span class="o">.</span><span class="n">set_hint_style</span><span class="p">(</span><span class="n">cairo</span><span class="o">.</span><span class="n">HINT_STYLE_FULL</span><span class="p">)</span> <span class="c">#@UndefinedVariable</span>
+    <span class="n">fo</span><span class="o">.</span><span class="n">set_antialias</span><span class="p">(</span><span class="n">cairo</span><span class="o">.</span><span class="n">ANTIALIAS_GRAY</span><span class="p">)</span> <span class="c">#@UndefinedVariable</span>
+    <span class="n">cr</span><span class="o">.</span><span class="n">set_font_options</span><span class="p">(</span><span class="n">fo</span><span class="p">)</span>
+
+    <span class="c">#M = width / 20.0</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">width</span> <span class="o">/</span> <span class="mf">15.0</span>
+
+    <span class="n">legend_font_size</span> <span class="o">=</span> <span class="n">M</span> <span class="o">*</span> <span class="mf">0.75</span>
+    <span class="n">details_font_size</span> <span class="o">=</span> <span class="n">M</span>
+
+    <span class="n">label_font</span> <span class="o">=</span> <span class="s">&#39;Mono&#39;</span>
+    <span class="n">legend_font</span> <span class="o">=</span> <span class="s">&#39;Serif&#39;</span>
+
+    <span class="n">cr</span><span class="o">.</span><span class="n">set_source_rgb</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">padding_fraction</span> <span class="o">=</span> <span class="mf">0.1</span>
+    <span class="n">padding</span> <span class="o">=</span> <span class="n">width</span> <span class="o">*</span> <span class="n">padding_fraction</span>
+    <span class="n">nvalues</span> <span class="o">=</span> <span class="mi">128</span>
+    <span class="n">bar_width</span> <span class="o">=</span> <span class="mf">0.4</span> <span class="o">*</span> <span class="n">width</span>
+    <span class="n">bar_ratio</span> <span class="o">=</span> <span class="mf">0.15</span>
+    <span class="n">bar_height</span> <span class="o">=</span> <span class="n">bar_width</span> <span class="o">*</span> <span class="n">bar_ratio</span>
+    <span class="n">spacer</span> <span class="o">=</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="n">width</span>
+
+    <span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">nvalues</span><span class="p">)</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">values</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">colorbar_posneg</span> <span class="o">=</span> <span class="n">posneg</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">nvalues</span><span class="p">)</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">values</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">colorbar_scale</span> <span class="o">=</span> <span class="n">scale</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+
+    <span class="n">cr</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">M</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">show_observations</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">cairo_transform</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]):</span>
+            <span class="n">cr</span><span class="o">.</span><span class="n">select_font_face</span><span class="p">(</span><span class="n">label_font</span><span class="p">)</span>
+            <span class="n">cr</span><span class="o">.</span><span class="n">set_font_size</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+            <span class="n">cairo_text_align</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="s">&#39;observations&#39;</span><span class="p">,</span> <span class="n">halign</span><span class="o">=</span><span class="s">&#39;center&#39;</span><span class="p">)</span>
+
+        <span class="n">cr</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">M</span> <span class="o">*</span> <span class="mf">0.8</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">cairo_transform</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="n">padding</span><span class="p">,</span> <span class="mi">0</span><span class="p">]):</span>
+            <span class="n">data_width</span> <span class="o">=</span> <span class="n">width</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">padding</span>
+            <span class="c"># Don&#39;t draw grid if there are many pixels</span>
+            <span class="k">if</span> <span class="nb">max</span><span class="p">(</span><span class="n">observations_rgb</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">observations_rgb</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">15</span><span class="p">:</span>
+                <span class="n">grid_color</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">grid_color</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">.</span><span class="mi">9</span><span class="p">,</span> <span class="o">.</span><span class="mi">9</span><span class="p">]</span>
+
+            <span class="n">last_height</span> <span class="o">=</span> <span class="n">cairo_pixels</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">observations_rgb</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">data_width</span><span class="p">,</span>
+                                       <span class="c"># Force square</span>
+                                       <span class="n">height</span><span class="o">=</span><span class="n">data_width</span><span class="p">,</span>
+                                       <span class="n">grid_color</span><span class="o">=</span><span class="n">grid_color</span><span class="p">)</span>
+
+        <span class="n">cr</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">last_height</span><span class="p">)</span>
+
+        <span class="n">cr</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">spacer</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">cairo_transform</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]):</span>
+            <span class="k">with</span> <span class="n">cairo_transform</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="n">bar_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]):</span>
+                <span class="n">last_height</span> <span class="o">=</span> <span class="n">cairo_pixels</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">colorbar_scale</span><span class="p">,</span>
+                             <span class="n">bar_width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">bar_height</span><span class="p">,</span>
+                              <span class="n">grid_color</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+
+            <span class="n">cr</span><span class="o">.</span><span class="n">set_font_size</span><span class="p">(</span><span class="n">legend_font_size</span><span class="p">)</span>
+            <span class="n">cr</span><span class="o">.</span><span class="n">select_font_face</span><span class="p">(</span><span class="n">legend_font</span><span class="p">)</span>
+
+            <span class="k">with</span> <span class="n">cairo_transform</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">bar_height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">]):</span>
+                <span class="k">with</span> <span class="n">cairo_transform</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="n">bar_width</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">M</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]):</span>
+                    <span class="n">cairo_text_align</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="s">&#39;0&#39;</span><span class="p">,</span> <span class="s">&#39;right&#39;</span><span class="p">,</span> <span class="s">&#39;middle&#39;</span><span class="p">)</span>
+                <span class="k">with</span> <span class="n">cairo_transform</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="o">+</span><span class="n">bar_width</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">M</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]):</span>
+                    <span class="n">cairo_text_align</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="s">&#39;1&#39;</span><span class="p">,</span> <span class="s">&#39;left&#39;</span><span class="p">,</span> <span class="s">&#39;middle&#39;</span><span class="p">)</span>
+
+        <span class="n">cr</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">last_height</span> <span class="o">+</span> <span class="n">spacer</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">show_commands</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">cairo_transform</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]):</span>
+            <span class="n">cr</span><span class="o">.</span><span class="n">select_font_face</span><span class="p">(</span><span class="n">label_font</span><span class="p">)</span>
+            <span class="n">cr</span><span class="o">.</span><span class="n">set_font_size</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+            <span class="n">cairo_text_align</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="s">&#39;commands&#39;</span><span class="p">,</span> <span class="n">halign</span><span class="o">=</span><span class="s">&#39;center&#39;</span><span class="p">)</span>
+        <span class="n">cr</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">M</span> <span class="o">*</span> <span class="mf">0.8</span><span class="p">)</span>
+
+        <span class="n">padding</span> <span class="o">=</span> <span class="n">padding</span> <span class="o">*</span> <span class="mi">2</span>
+        <span class="k">with</span> <span class="n">cairo_transform</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="n">padding</span><span class="p">,</span> <span class="mi">0</span><span class="p">]):</span>
+            <span class="n">data_width</span> <span class="o">=</span> <span class="n">width</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">padding</span>
+            <span class="n">last_height</span> <span class="o">=</span> <span class="n">cairo_pixels</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">commands_rgb</span><span class="p">,</span> <span class="n">data_width</span><span class="p">)</span>
+        <span class="n">cr</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">last_height</span><span class="p">)</span>
+
+        <span class="n">cr</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">spacer</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">cairo_transform</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]):</span>
+            <span class="k">with</span> <span class="n">cairo_transform</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="n">bar_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]):</span>
+                <span class="n">last_height</span> <span class="o">=</span> <span class="n">cairo_pixels</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">colorbar_posneg</span><span class="p">,</span>
+                             <span class="n">bar_width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">bar_width</span> <span class="o">*</span> <span class="n">bar_ratio</span><span class="p">,</span>
+                              <span class="n">grid_color</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+
+            <span class="n">cr</span><span class="o">.</span><span class="n">set_font_size</span><span class="p">(</span><span class="n">legend_font_size</span><span class="p">)</span>
+            <span class="n">cr</span><span class="o">.</span><span class="n">select_font_face</span><span class="p">(</span><span class="n">legend_font</span><span class="p">)</span>
+
+            <span class="k">with</span> <span class="n">cairo_transform</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">bar_height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">]):</span>
+                <span class="k">with</span> <span class="n">cairo_transform</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="n">bar_width</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">M</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]):</span>
+                    <span class="n">cairo_text_align</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="s">&#39;-1&#39;</span><span class="p">,</span> <span class="s">&#39;right&#39;</span><span class="p">,</span> <span class="s">&#39;middle&#39;</span><span class="p">)</span>
+                <span class="k">with</span> <span class="n">cairo_transform</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="o">+</span><span class="n">bar_width</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">M</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]):</span>
+                    <span class="n">cairo_text_align</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="s">&#39;+1&#39;</span><span class="p">,</span> <span class="s">&#39;left&#39;</span><span class="p">,</span> <span class="s">&#39;middle&#39;</span><span class="p">)</span>
+
+        <span class="n">cr</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">last_height</span> <span class="o">+</span> <span class="n">spacer</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">show_annotations</span><span class="p">:</span>
+        <span class="n">cr</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">width</span> <span class="o">/</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">strings</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;vehicle: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">id_vehicle</span><span class="p">,</span>
+                   <span class="s">&#39;  agent: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">commands_source</span><span class="p">,</span>
+                   <span class="s">&#39;episode: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">id_episode</span><span class="p">,</span>
+                   <span class="s">&#39;   time: </span><span class="si">%6.2f</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">timestamp</span><span class="p">,</span>
+                   <span class="p">]</span>
+        <span class="n">cr</span><span class="o">.</span><span class="n">select_font_face</span><span class="p">(</span><span class="s">&#39;Mono&#39;</span><span class="p">)</span>
+
+        <span class="n">max_len</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">strings</span><span class="p">)</span>
+        <span class="n">padding</span> <span class="o">=</span> <span class="mi">5</span>
+        <span class="n">font_size</span> <span class="o">=</span> <span class="mf">1.6</span> <span class="o">*</span> <span class="n">width</span> <span class="o">/</span> <span class="p">(</span><span class="n">max_len</span> <span class="o">+</span> <span class="n">padding</span><span class="p">)</span>
+        <span class="n">cr</span><span class="o">.</span><span class="n">set_font_size</span><span class="p">(</span><span class="n">font_size</span><span class="p">)</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">details_font_size</span> <span class="o">*</span> <span class="mf">1.2</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strings</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cairo_save</span><span class="p">(</span><span class="n">cr</span><span class="p">):</span>
+                <span class="n">cr</span><span class="o">.</span><span class="n">show_text</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+                <span class="n">cr</span><span class="o">.</span><span class="n">stroke</span><span class="p">()</span>
+            <span class="n">cr</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+
+
+<span class="c"># extra[&#39;servoing_poses&#39;] = dict(goal=pose_to_yaml(pose0),</span>
+<span class="c">#                                       current=pose_to_yaml(current_pose))</span>
+</div>
+<div class="viewcode-block" id="plot_servoing_poses"><a class="viewcode-back" href="../../api/procgraph_vehicles.html#procgraph_vehicles.cairo_map_display.plot_servoing_poses">[docs]</a><span class="k">def</span> <span class="nf">plot_servoing_poses</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">servoing_poses</span><span class="p">):</span>
+    <span class="c"># TODO</span>
+    <span class="n">goal</span> <span class="o">=</span> <span class="n">SE3</span><span class="o">.</span><span class="n">from_yaml</span><span class="p">(</span><span class="n">servoing_poses</span><span class="p">[</span><span class="s">&#39;goal&#39;</span><span class="p">])</span>
+    <span class="k">with</span> <span class="n">cairo_rototranslate</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">goal</span><span class="p">):</span>
+        <span class="n">cairo_ref_frame</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">l</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="plot_servonave"><a class="viewcode-back" href="../../api/procgraph_vehicles.html#procgraph_vehicles.cairo_map_display.plot_servonave">[docs]</a><span class="k">def</span> <span class="nf">plot_servonave</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">servonav</span><span class="p">):</span>
+    <span class="n">locations</span> <span class="o">=</span> <span class="n">servonav</span><span class="p">[</span><span class="s">&#39;locations&#39;</span><span class="p">]</span>
+<span class="c">#    current_goal = servonav[&#39;current_goal&#39;]</span>
+    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">loc</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">locations</span><span class="p">):</span>
+        <span class="n">pose</span> <span class="o">=</span> <span class="n">SE2_from_SE3</span><span class="p">(</span><span class="n">SE3</span><span class="o">.</span><span class="n">from_yaml</span><span class="p">(</span><span class="n">loc</span><span class="p">[</span><span class="s">&#39;pose&#39;</span><span class="p">]))</span>
+        <span class="k">with</span> <span class="n">cairo_rototranslate</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">pose</span><span class="p">):</span>
+<span class="c">#            if current_goal == i:</span>
+<span class="c">#                cairo_ref_frame(cr, l=0.5)</span>
+<span class="c">#            else:</span>
+            <span class="n">grey</span> <span class="o">=</span> <span class="p">[</span><span class="o">.</span><span class="mi">6</span><span class="p">,</span> <span class="o">.</span><span class="mi">6</span><span class="p">,</span> <span class="o">.</span><span class="mi">6</span><span class="p">]</span>
+            <span class="n">cairo_ref_frame</span><span class="p">(</span><span class="n">cr</span><span class="p">,</span> <span class="n">l</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">x_color</span><span class="o">=</span><span class="n">grey</span><span class="p">,</span> <span class="n">y_color</span><span class="o">=</span><span class="n">grey</span><span class="p">)</span>
+</pre></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">Vehicles 1.2 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer">
+        &copy; Copyright 2010, Andrea Censi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+	
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-155626-14']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+
+  </body>
+</html>

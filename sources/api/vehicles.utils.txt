@@ -1,0 +1,27 @@
+utils Package
+=============
+
+:mod:`utils` Package
+--------------------
+
+.. automodule:: vehicles.utils
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`check_yaml_friendly` Module
+---------------------------------
+
+.. automodule:: vehicles.utils.check_yaml_friendly
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`wildcards` Module
+-----------------------
+
+.. automodule:: vehicles.utils.wildcards
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

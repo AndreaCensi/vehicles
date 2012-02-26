@@ -1,0 +1,195 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vehicles.unittests.fps_test &mdash; Vehicles 1.2 documentation</title>
+    
+    <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../../static/doctools.js"></script>
+    <link rel="top" title="Vehicles 1.2 documentation" href="../../../index.html" />
+    <link rel="up" title="vehicles" href="../../vehicles.html" />
+	 
+
+
+   <style type="text/css">
+        span.brand { color: #a00;}
+   </style> 
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Vehicles 1.2 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../../vehicles.html" accesskey="U">vehicles</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vehicles.unittests.fps_test</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+<span class="kn">from</span> <span class="nn">vehicles</span> <span class="kn">import</span> <span class="n">VehiclesConfig</span><span class="p">,</span> <span class="n">VehicleSimulation</span>
+<span class="kn">from</span> <span class="nn">vehicles.unittests.simulation_tests</span> <span class="kn">import</span> <span class="n">random_commands</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+
+<div class="viewcode-block" id="check_simulation"><a class="viewcode-back" href="../../../api/vehicles.unittests.html#vehicles.unittests.fps_test.check_simulation">[docs]</a><span class="k">def</span> <span class="nf">check_simulation</span><span class="p">(</span><span class="n">sim</span><span class="p">,</span> <span class="n">num_instants</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+    <span class="n">sim</span><span class="o">.</span><span class="n">new_episode</span><span class="p">()</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">commands_spec</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">vehicle</span><span class="o">.</span><span class="n">dynamics</span><span class="o">.</span><span class="n">get_commands_spec</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_instants</span><span class="p">):</span>  <span class="c"># @UnusedVariable</span>
+        <span class="n">cmds</span> <span class="o">=</span> <span class="n">random_commands</span><span class="p">(</span><span class="n">commands_spec</span><span class="p">)</span>
+        <span class="n">sim</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">cmds</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+        <span class="n">sim</span><span class="o">.</span><span class="n">compute_observations</span><span class="p">()</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="c">#        if count % 10 == 0:</span>
+<span class="c">#            sys.stderr.write(&#39;.&#39;)</span>
+<span class="c">#    sys.stderr.write(&#39;\n&#39;)</span>
+    <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span>
+    <span class="n">fps</span> <span class="o">=</span> <span class="n">count</span> <span class="o">/</span> <span class="p">(</span><span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span>
+    <span class="c">#print(&#39;%s  fps: %4d  (%d frames)&#39; % (sim.vehicle, fps, count))</span>
+    <span class="k">return</span> <span class="n">fps</span>
+
+</div>
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../../api/vehicles.unittests.html#vehicles.unittests.fps_test.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="kn">import</span> <span class="nn">contracts</span>
+    <span class="n">contracts</span><span class="o">.</span><span class="n">disable_all</span><span class="p">()</span>
+
+    <span class="n">VehiclesConfig</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+
+    <span class="n">id_world</span> <span class="o">=</span> <span class="s">&#39;box10&#39;</span>
+    <span class="n">world</span> <span class="o">=</span> <span class="n">VehiclesConfig</span><span class="o">.</span><span class="n">worlds</span><span class="o">.</span><span class="n">instance</span><span class="p">(</span><span class="n">id_world</span><span class="p">)</span>  <span class="c"># @UndefinedVariable</span>
+    <span class="n">stats</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">Stat</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s">&#39;Stat&#39;</span><span class="p">,</span> <span class="s">&#39;id_vehicle id_world fps&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">stat2str</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&quot;v: </span><span class="si">%-25s</span><span class="s"> w: </span><span class="si">%-25s</span><span class="s"> </span><span class="si">%5d</span><span class="s">fps&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">id_vehicle</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">id_world</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">fps</span><span class="p">)</span>
+
+    <span class="n">vehicles</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">VehiclesConfig</span><span class="o">.</span><span class="n">vehicles</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="k">print</span> <span class="n">vehicles</span>
+    <span class="n">vehicles</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;d_SE2_rb_v-rf180&#39;</span><span class="p">,</span> <span class="s">&#39;d_SE2_rb_v-cam180&#39;</span><span class="p">]</span>
+<span class="c">#    vehicles = [&#39;d_SE2_rb_v-rf180&#39;]</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="mi">200</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="mf">0.05</span>
+    <span class="k">for</span> <span class="n">id_vehicle</span> <span class="ow">in</span> <span class="n">vehicles</span><span class="p">:</span>
+        <span class="n">instance</span> <span class="o">=</span> <span class="n">VehiclesConfig</span><span class="o">.</span><span class="n">vehicles</span><span class="o">.</span><span class="n">instance</span>  <span class="c"># @UndefinedVariable</span>
+        <span class="n">vehicle</span> <span class="o">=</span> <span class="n">instance</span><span class="p">(</span><span class="n">id_vehicle</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&#39;vehicle: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">vehicle</span><span class="p">)</span>
+        <span class="n">sim</span> <span class="o">=</span> <span class="n">VehicleSimulation</span><span class="p">(</span><span class="n">vehicle</span><span class="p">,</span> <span class="n">world</span><span class="p">)</span>
+        <span class="n">fps</span> <span class="o">=</span> <span class="n">check_simulation</span><span class="p">(</span><span class="n">sim</span><span class="p">,</span> <span class="n">num_instants</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="n">dt</span><span class="p">)</span>
+        <span class="n">stats</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Stat</span><span class="p">(</span><span class="n">id_vehicle</span><span class="o">=</span><span class="n">id_vehicle</span><span class="p">,</span> <span class="n">id_world</span><span class="o">=</span><span class="n">id_world</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="n">fps</span><span class="p">))</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">stat2str</span><span class="p">(</span><span class="n">stats</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;---- Sorted:&#39;</span><span class="p">)</span>
+    <span class="n">stats</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">.</span><span class="n">fps</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">stats</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">stat2str</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+
+    <span class="k">pass</span>
+</div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">profile</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="c">#    profile = False</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">profile</span><span class="p">:</span>
+        <span class="n">main</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">cProfile</span>
+        <span class="n">cProfile</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s">&#39;main()&#39;</span><span class="p">,</span> <span class="s">&#39;fps_prof&#39;</span><span class="p">)</span>
+        <span class="kn">import</span> <span class="nn">pstats</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">pstats</span><span class="o">.</span><span class="n">Stats</span><span class="p">(</span><span class="s">&#39;fps_prof&#39;</span><span class="p">)</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">sort_stats</span><span class="p">(</span><span class="s">&#39;cumulative&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">print_stats</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">sort_stats</span><span class="p">(</span><span class="s">&#39;time&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">print_stats</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Vehicles 1.2 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../../vehicles.html" >vehicles</a> &raquo;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer">
+        &copy; Copyright 2010, Andrea Censi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+	
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-155626-14']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+
+  </body>
+</html>

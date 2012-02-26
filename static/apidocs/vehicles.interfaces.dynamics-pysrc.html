@@ -40,7 +40,7 @@
     <td width="100%">
       <span class="breadcrumbs">
         <a href="vehicles-module.html">Package&nbsp;vehicles</a> ::
-        <a href="vehicles.interfaces-module.html">Package&nbsp;interfaces</a> ::
+        <a href="vehicles.interfaces-module.html" onclick="show_private();">Package&nbsp;interfaces</a> ::
         Module&nbsp;dynamics
       </span>
     </td>
@@ -57,9 +57,9 @@
     </td>
   </tr>
 </table>
-<h1 class="epydoc">Source Code for <a href="vehicles.interfaces.dynamics-module.html">Module vehicles.interfaces.dynamics</a></h1>
+<h1 class="epydoc">Source Code for <a href="vehicles.interfaces.dynamics-module.html" onclick="show_private();">Module vehicles.interfaces.dynamics</a></h1>
 <pre class="py-src">
-<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt> <tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Variable vehicles.configuration.logger=vehicles.configuration-module.html#logger,Variable vehicles.configuration.master.logger=vehicles.configuration.master-module.html#logger,Variable vehicles.configuration.vehicles.logger=vehicles.configuration.vehicles-module.html#logger,Variable vehicles.interfaces.dynamics.logger=vehicles.interfaces.dynamics-module.html#logger,Variable vehicles.interfaces.logger=vehicles.interfaces-module.html#logger,Variable vehicles.interfaces.vehicle_sensor.logger=vehicles.interfaces.vehicle_sensor-module.html#logger,Variable vehicles.library.dynamics.logger=vehicles.library.dynamics-module.html#logger,Variable vehicles.library.logger=vehicles.library-module.html#logger,Variable vehicles.library.noises.logger=vehicles.library.noises-module.html#logger,Variable vehicles.library.sensors.logger=vehicles.library.sensors-module.html#logger,Variable vehicles.library.textures.logger=vehicles.library.textures-module.html#logger,Variable vehicles.library.worlds.logger=vehicles.library.worlds-module.html#logger,Variable vehicles.logger=vehicles-module.html#logger,Variable vehicles.programs.display_demos.simulations.logger=vehicles.programs.display_demos.simulations-module.html#logger,Variable vehicles.programs.display_demos.skins.logger=vehicles.programs.display_demos.skins-module.html#logger,Variable vehicles.programs.display_demos.vehicles.logger=vehicles.programs.display_demos.vehicles-module.html#logger,Variable vehicles.programs.inspect_textures.main'.logger=vehicles.programs.inspect_textures.main%27-module.html#logger,Variable vehicles.programs.print_config.logger=vehicles.programs.print_config-module.html#logger,Variable vehicles.programs.print_config.main'.logger=vehicles.programs.print_config.main%27-module.html#logger,Variable vehicles.sensors.field_sampler.logger=vehicles.sensors.field_sampler-module.html#logger,Variable vehicles.sensors.logger=vehicles.sensors-module.html#logger,Variable vehicles.sensors.raytracer.logger=vehicles.sensors.raytracer-module.html#logger,Variable vehicles.simulation.logger=vehicles.simulation-module.html#logger,Variable vehicles.simulation.vsimulation.logger=vehicles.simulation.vsimulation-module.html#logger,Variable vehicles.worlds.logger=vehicles.worlds-module.html#logger,Variable vehicles_boot.create_olympics_configs.logger=vehicles_boot.create_olympics_configs-module.html#logger,Variable vehicles_boot.create_olympics_configs.main'.logger=vehicles_boot.create_olympics_configs.main%27-module.html#logger,Variable vehicles_boot.logger=vehicles_boot-module.html#logger,Variable vehicles_cairo.logger=vehicles_cairo-module.html#logger,Variable vehicles_cairo.sensor_data.logger=vehicles_cairo.sensor_data-module.html#logger"><a title="vehicles.configuration.logger
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt> <tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Variable vehicles.configuration.logger=vehicles.configuration-module.html#logger,Variable vehicles.configuration.master.logger=vehicles.configuration.master-module.html#logger,Variable vehicles.configuration.vehicles.logger=vehicles.configuration.vehicles-module.html#logger,Variable vehicles.interfaces.dynamics.logger=vehicles.interfaces.dynamics-module.html#logger,Variable vehicles.interfaces.logger=vehicles.interfaces-module.html#logger,Variable vehicles.interfaces.vehicle_sensor.logger=vehicles.interfaces.vehicle_sensor-module.html#logger,Variable vehicles.library.dynamics.logger=vehicles.library.dynamics-module.html#logger,Variable vehicles.library.logger=vehicles.library-module.html#logger,Variable vehicles.library.noises.logger=vehicles.library.noises-module.html#logger,Variable vehicles.library.sensors.logger=vehicles.library.sensors-module.html#logger,Variable vehicles.library.textures.logger=vehicles.library.textures-module.html#logger,Variable vehicles.library.worlds.logger=vehicles.library.worlds-module.html#logger,Variable vehicles.logger=vehicles-module.html#logger,Variable vehicles.programs.display_demos.simulations.logger=vehicles.programs.display_demos.simulations-module.html#logger,Variable vehicles.programs.inspect_textures.main'.logger=vehicles.programs.inspect_textures.main%27-module.html#logger,Variable vehicles.programs.print_config.logger=vehicles.programs.print_config-module.html#logger,Variable vehicles.programs.print_config.main'.logger=vehicles.programs.print_config.main%27-module.html#logger,Variable vehicles.sensors.field_sampler.logger=vehicles.sensors.field_sampler-module.html#logger,Variable vehicles.sensors.logger=vehicles.sensors-module.html#logger,Variable vehicles.sensors.raytracer.logger=vehicles.sensors.raytracer-module.html#logger,Variable vehicles.simulation.logger=vehicles.simulation-module.html#logger,Variable vehicles.simulation.vsimulation.logger=vehicles.simulation.vsimulation-module.html#logger,Variable vehicles.worlds.logger=vehicles.worlds-module.html#logger,Variable vehicles_boot.create_olympics_configs.logger=vehicles_boot.create_olympics_configs-module.html#logger,Variable vehicles_boot.create_olympics_configs.main'.logger=vehicles_boot.create_olympics_configs.main%27-module.html#logger,Variable vehicles_boot.logger=vehicles_boot-module.html#logger,Variable vehicles_cairo.logger=vehicles_cairo-module.html#logger,Variable vehicles_cairo.sensor_data.logger=vehicles_cairo.sensor_data-module.html#logger"><a title="vehicles.configuration.logger
 vehicles.configuration.master.logger
 vehicles.configuration.vehicles.logger
 vehicles.interfaces.dynamics.logger
@@ -73,8 +73,6 @@ vehicles.library.textures.logger
 vehicles.library.worlds.logger
 vehicles.logger
 vehicles.programs.display_demos.simulations.logger
-vehicles.programs.display_demos.skins.logger
-vehicles.programs.display_demos.vehicles.logger
 vehicles.programs.inspect_textures.main'.logger
 vehicles.programs.print_config.logger
 vehicles.programs.print_config.main'.logger
@@ -173,11 +171,14 @@ vehicles_cairo.sensor_data.logger" class="py-name" href="#" onclick="return docl
 <a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
 <a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">            <tt class="py-name">new_state</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Method vehicles.interfaces.dynamics.Dynamics._integrate()=vehicles.interfaces.dynamics.Dynamics-class.html#_integrate"><a title="vehicles.interfaces.dynamics.Dynamics._integrate" class="py-name" href="#" onclick="return doclink('link-4', '_integrate', 'link-4');">_integrate</a></tt><tt class="py-op">(</tt><tt class="py-name">state</tt><tt class="py-op">,</tt> <tt class="py-name">commands</tt><tt class="py-op">,</tt> <tt class="py-name">dt</tt><tt class="py-op">)</tt> </tt>
 <a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt><tt class="py-op">:</tt> </tt>
-<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">            <tt class="py-name">msg</tt> <tt class="py-op">=</tt> <tt class="py-string">'Error while integrating.'</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">            <tt id="link-5" class="py-name" targets="Variable vehicles_boot.msg=vehicles_boot-module.html#msg,Variable vehicles_boot.ros_visualization.msg=vehicles_boot.ros_visualization-module.html#msg"><a title="vehicles_boot.msg
+vehicles_boot.ros_visualization.msg" class="py-name" href="#" onclick="return doclink('link-5', 'msg', 'link-5');">msg</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'Error while integrating.'</tt> </tt>
 <a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">            <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
-<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">                <tt class="py-name">msg</tt> <tt class="py-op">+=</tt> <tt class="py-string">'\n   state: %s'</tt> <tt class="py-op">%</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_state_space</tt><tt class="py-op">.</tt><tt class="py-name">friendly</tt><tt class="py-op">(</tt><tt class="py-name">state</tt><tt class="py-op">)</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">                <tt id="link-6" class="py-name"><a title="vehicles_boot.msg
+vehicles_boot.ros_visualization.msg" class="py-name" href="#" onclick="return doclink('link-6', 'msg', 'link-5');">msg</a></tt> <tt class="py-op">+=</tt> <tt class="py-string">'\n   state: %s'</tt> <tt class="py-op">%</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_state_space</tt><tt class="py-op">.</tt><tt class="py-name">friendly</tt><tt class="py-op">(</tt><tt class="py-name">state</tt><tt class="py-op">)</tt> </tt>
 <a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">            <tt class="py-keyword">except</tt><tt class="py-op">:</tt> <tt class="py-comment"># XXX</tt> </tt>
-<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">                <tt class="py-name">msg</tt> <tt class="py-op">+=</tt> <tt class="py-string">'\n   state: %s'</tt> <tt class="py-op">%</tt> <tt class="py-name">state</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Method vehicles.interfaces.primitives.Primitive.__repr__()=vehicles.interfaces.primitives.Primitive-class.html#__repr__,Method vehicles.interfaces.vehicle_sensor.VehicleSensor.__repr__()=vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html#__repr__,Method vehicles.interfaces.world.World.Episode.__repr__()=vehicles.interfaces.world.World.Episode-class.html#__repr__,Method vehicles.interfaces.world.World.__repr__()=vehicles.interfaces.world.World-class.html#__repr__,Method vehicles.simulation.collision.CollisionInfo.__repr__()=vehicles.simulation.collision.CollisionInfo-class.html#__repr__,Method vehicles.simulation.collision_utils.PrimitiveIntersection.__repr__()=vehicles.simulation.collision_utils.PrimitiveIntersection-class.html#__repr__,Method vehicles.simulation.vehicle.Vehicle.__repr__()=vehicles.simulation.vehicle.Vehicle-class.html#__repr__,Method vehicles.simulation.vsimulation.VehicleSimulation.__repr__()=vehicles.simulation.vsimulation.VehicleSimulation-class.html#__repr__,Method vehicles_boot.vehicles_simulation.BOVehicleSimulation.__repr__()=vehicles_boot.vehicles_simulation.BOVehicleSimulation-class.html#__repr__"><a title="vehicles.interfaces.primitives.Primitive.__repr__
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">                <tt id="link-7" class="py-name"><a title="vehicles_boot.msg
+vehicles_boot.ros_visualization.msg" class="py-name" href="#" onclick="return doclink('link-7', 'msg', 'link-5');">msg</a></tt> <tt class="py-op">+=</tt> <tt class="py-string">'\n   state: %s'</tt> <tt class="py-op">%</tt> <tt class="py-name">state</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Method vehicles.interfaces.primitives.Primitive.__repr__()=vehicles.interfaces.primitives.Primitive-class.html#__repr__,Method vehicles.interfaces.vehicle_sensor.VehicleSensor.__repr__()=vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html#__repr__,Method vehicles.interfaces.world.World.Episode.__repr__()=vehicles.interfaces.world.World.Episode-class.html#__repr__,Method vehicles.interfaces.world.World.__repr__()=vehicles.interfaces.world.World-class.html#__repr__,Method vehicles.simulation.collision.CollisionInfo.__repr__()=vehicles.simulation.collision.CollisionInfo-class.html#__repr__,Method vehicles.simulation.collision_utils.PrimitiveIntersection.__repr__()=vehicles.simulation.collision_utils.PrimitiveIntersection-class.html#__repr__,Method vehicles.simulation.vehicle.Vehicle.__repr__()=vehicles.simulation.vehicle.Vehicle-class.html#__repr__,Method vehicles.simulation.vsimulation.VehicleSimulation.__repr__()=vehicles.simulation.vsimulation.VehicleSimulation-class.html#__repr__,Method vehicles_boot.vehicles_simulation.BOVehicleSimulation.__repr__()=vehicles_boot.vehicles_simulation.BOVehicleSimulation-class.html#__repr__"><a title="vehicles.interfaces.primitives.Primitive.__repr__
 vehicles.interfaces.vehicle_sensor.VehicleSensor.__repr__
 vehicles.interfaces.world.World.Episode.__repr__
 vehicles.interfaces.world.World.__repr__
@@ -185,8 +186,9 @@ vehicles.simulation.collision.CollisionInfo.__repr__
 vehicles.simulation.collision_utils.PrimitiveIntersection.__repr__
 vehicles.simulation.vehicle.Vehicle.__repr__
 vehicles.simulation.vsimulation.VehicleSimulation.__repr__
-vehicles_boot.vehicles_simulation.BOVehicleSimulation.__repr__" class="py-name" href="#" onclick="return doclink('link-5', '__repr__', 'link-5');">__repr__</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
-<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">            <tt class="py-name">msg</tt> <tt class="py-op">+=</tt> <tt class="py-string">'\ncommands: %s'</tt> <tt class="py-op">%</tt> <tt class="py-name">commands</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="vehicles.interfaces.primitives.Primitive.__repr__
+vehicles_boot.vehicles_simulation.BOVehicleSimulation.__repr__" class="py-name" href="#" onclick="return doclink('link-8', '__repr__', 'link-8');">__repr__</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">            <tt id="link-9" class="py-name"><a title="vehicles_boot.msg
+vehicles_boot.ros_visualization.msg" class="py-name" href="#" onclick="return doclink('link-9', 'msg', 'link-5');">msg</a></tt> <tt class="py-op">+=</tt> <tt class="py-string">'\ncommands: %s'</tt> <tt class="py-op">%</tt> <tt class="py-name">commands</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name"><a title="vehicles.interfaces.primitives.Primitive.__repr__
 vehicles.interfaces.vehicle_sensor.VehicleSensor.__repr__
 vehicles.interfaces.world.World.Episode.__repr__
 vehicles.interfaces.world.World.__repr__
@@ -194,9 +196,10 @@ vehicles.simulation.collision.CollisionInfo.__repr__
 vehicles.simulation.collision_utils.PrimitiveIntersection.__repr__
 vehicles.simulation.vehicle.Vehicle.__repr__
 vehicles.simulation.vsimulation.VehicleSimulation.__repr__
-vehicles_boot.vehicles_simulation.BOVehicleSimulation.__repr__" class="py-name" href="#" onclick="return doclink('link-6', '__repr__', 'link-5');">__repr__</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
-<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">            <tt class="py-name">msg</tt> <tt class="py-op">+=</tt> <tt class="py-string">'\n%s'</tt> <tt class="py-op">%</tt> <tt class="py-name">traceback</tt><tt class="py-op">.</tt><tt class="py-name">format_exc</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
-<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">            <tt id="link-7" class="py-name"><a title="vehicles.configuration.logger
+vehicles_boot.vehicles_simulation.BOVehicleSimulation.__repr__" class="py-name" href="#" onclick="return doclink('link-10', '__repr__', 'link-8');">__repr__</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">            <tt id="link-11" class="py-name"><a title="vehicles_boot.msg
+vehicles_boot.ros_visualization.msg" class="py-name" href="#" onclick="return doclink('link-11', 'msg', 'link-5');">msg</a></tt> <tt class="py-op">+=</tt> <tt class="py-string">'\n%s'</tt> <tt class="py-op">%</tt> <tt class="py-name">traceback</tt><tt class="py-op">.</tt><tt class="py-name">format_exc</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">            <tt id="link-12" class="py-name"><a title="vehicles.configuration.logger
 vehicles.configuration.master.logger
 vehicles.configuration.vehicles.logger
 vehicles.interfaces.dynamics.logger
@@ -210,8 +213,6 @@ vehicles.library.textures.logger
 vehicles.library.worlds.logger
 vehicles.logger
 vehicles.programs.display_demos.simulations.logger
-vehicles.programs.display_demos.skins.logger
-vehicles.programs.display_demos.vehicles.logger
 vehicles.programs.inspect_textures.main'.logger
 vehicles.programs.print_config.logger
 vehicles.programs.print_config.main'.logger
@@ -225,7 +226,8 @@ vehicles_boot.create_olympics_configs.logger
 vehicles_boot.create_olympics_configs.main'.logger
 vehicles_boot.logger
 vehicles_cairo.logger
-vehicles_cairo.sensor_data.logger" class="py-name" href="#" onclick="return doclink('link-7', 'logger', 'link-0');">logger</a></tt><tt class="py-op">.</tt><tt class="py-name">error</tt><tt class="py-op">(</tt><tt class="py-name">msg</tt><tt class="py-op">)</tt> </tt>
+vehicles_cairo.sensor_data.logger" class="py-name" href="#" onclick="return doclink('link-12', 'logger', 'link-0');">logger</a></tt><tt class="py-op">.</tt><tt class="py-name">error</tt><tt class="py-op">(</tt><tt id="link-13" class="py-name"><a title="vehicles_boot.msg
+vehicles_boot.ros_visualization.msg" class="py-name" href="#" onclick="return doclink('link-13', 'msg', 'link-5');">msg</a></tt><tt class="py-op">)</tt> </tt>
 <a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> </tt>
 <a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"> </tt>
 <a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">        <tt class="py-comment">#self._state_space.belongs(new_state)</tt> </tt>
@@ -298,7 +300,7 @@ expandto(location.href);
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Sat Feb 25 23:30:42 2012
+    Generated by Epydoc 3.0.1 on Sun Feb 26 11:44:34 2012
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
