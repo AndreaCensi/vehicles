@@ -5,7 +5,7 @@ from ..interfaces import PolyLine
 @contract(cell_width='>0')
 def random_checkerboard(cell_width):
     ''' Utility function to obtain a random checker board. '''
-    texture = ['vehicles.worlds.textures.RandomCheckerboard',
+    texture = ['vehicles.library.textures.RandomCheckerboard',
                dict(cell_width=cell_width, seed=np.random.randint(100000))]
     return texture
 
@@ -13,14 +13,14 @@ def random_checkerboard(cell_width):
 @contract(cell_width='>0', sigma='>0')
 def random_checkerboard_smooth(cell_width, sigma):
     ''' Utility function to obtain a smoothed random checker board. '''
-    texture = ['vehicles.worlds.textures.RandomCheckerboard',
+    texture = ['vehicles.library.textures.RandomCheckerboard',
                dict(cell_width=cell_width, seed=np.random.randint(100000))]
-    return ['vehicles.worlds.textures.Smoothed',
+    return ['vehicles.library.textures.Smoothed',
             dict(sigma=sigma, texture=texture)]
 
 
 def blackwhite_checkerboard(cell_width):
-    texture = ['vehicles.worlds.textures.BWCheckerboard',
+    texture = ['vehicles.library.textures.BWCheckerboard',
                dict(cell_width=cell_width)]
     return texture
 

@@ -96,7 +96,7 @@ class BOVehicleSimulation(RobotInterface, VehicleSimulation):
     def new_episode(self):
         self.boot_episode_started = True
         e = VehicleSimulation.new_episode(self)
-        self.info("New episode started (%s)" % str(e))
+        self.info("New episode started.")
         return EpisodeDesc(e.id_episode, self.id_world)
 
     def get_state(self):

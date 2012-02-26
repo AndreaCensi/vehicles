@@ -6,6 +6,8 @@ develop:
 docs: 
 	make -C docs
 
+.PHONY: docs
+
 coverage_dir=coverage_information
 nose=nosetests --with-id
 nose_parallel=--processes=16 --process-timeout=30 --process-restartworker

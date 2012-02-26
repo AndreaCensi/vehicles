@@ -1,7 +1,7 @@
 - id: d_SE2_fwd_v_n1
   desc: 'Planar vehicle with fixed forward velocity, controlled in angular vel, with noise added'
   code:
-      - vehicles_dynamics.SE2Forward
+      - vehicles.library.dynamics.SE2Forward
       - max_angular_velocity: 2 
         linear_velocity: 1
         noise_drift: [0.1,0,0]
@@ -11,7 +11,7 @@
 - id: d_SE2_rb_v_n1
   desc: 'Planar vehicle with fixed forward velocity, controlled in angular vel.'
   code:
-      - vehicles_dynamics.SE2Dynamics
+      - vehicles.library.dynamics.SE2Dynamics
       - max_angular_velocity: 2 
         max_linear_velocity: [1, 1]
         noise_drift: [0.1,0.1,0.1]

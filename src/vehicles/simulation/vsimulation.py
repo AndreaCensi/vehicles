@@ -26,7 +26,6 @@ class VehicleSimulation():
         self.safety_margin = safety_margin
         # 3 = must have 2*radius distant from obstacles
 
-
     def __repr__(self):
         return 'VSim(%s;%s)' % (self.vehicle, self.world)
 

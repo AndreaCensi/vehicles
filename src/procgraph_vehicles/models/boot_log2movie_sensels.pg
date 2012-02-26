@@ -12,7 +12,7 @@ import procgraph_vehicles
 
      observations --> |extract_sensels| -> sensels
      
-    sensels -> |reshape2d| --> |scale min_value=0 nan_color=[1,1,1]| --> |resize width=$width| --> rgb
+    sensels -> |reshape_rectangular| --> |scale min_value=0 nan_color=[1,1,1]| --> |resize width=$width| --> rgb
      
      rgb --> |mencoder file="${output}.mp4" fps=20 quiet=1 timestamps=0|
 	 

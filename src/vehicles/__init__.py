@@ -1,6 +1,6 @@
 ''' PyVehicles main package: play with your vehicles zoo! '''
 
-__version__ = '1.1'
+__version__ = '1.2'
 
 from contracts import contract
 import geometry  # loads all geometry contracts
