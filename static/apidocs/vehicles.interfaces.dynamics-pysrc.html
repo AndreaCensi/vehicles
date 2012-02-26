@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>vehicles.interfaces.dynamics</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/vehicles">Vehicles</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="vehicles-module.html">Package&nbsp;vehicles</a> ::
+        <a href="vehicles.interfaces-module.html">Package&nbsp;interfaces</a> ::
+        Module&nbsp;dynamics
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="vehicles.interfaces.dynamics-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="vehicles.interfaces.dynamics-module.html">Module vehicles.interfaces.dynamics</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt> <tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Variable vehicles.configuration.logger=vehicles.configuration-module.html#logger,Variable vehicles.configuration.master.logger=vehicles.configuration.master-module.html#logger,Variable vehicles.configuration.vehicles.logger=vehicles.configuration.vehicles-module.html#logger,Variable vehicles.interfaces.dynamics.logger=vehicles.interfaces.dynamics-module.html#logger,Variable vehicles.interfaces.logger=vehicles.interfaces-module.html#logger,Variable vehicles.interfaces.vehicle_sensor.logger=vehicles.interfaces.vehicle_sensor-module.html#logger,Variable vehicles.library.dynamics.logger=vehicles.library.dynamics-module.html#logger,Variable vehicles.library.logger=vehicles.library-module.html#logger,Variable vehicles.library.noises.logger=vehicles.library.noises-module.html#logger,Variable vehicles.library.sensors.logger=vehicles.library.sensors-module.html#logger,Variable vehicles.library.textures.logger=vehicles.library.textures-module.html#logger,Variable vehicles.library.worlds.logger=vehicles.library.worlds-module.html#logger,Variable vehicles.logger=vehicles-module.html#logger,Variable vehicles.programs.display_demos.simulations.logger=vehicles.programs.display_demos.simulations-module.html#logger,Variable vehicles.programs.display_demos.skins.logger=vehicles.programs.display_demos.skins-module.html#logger,Variable vehicles.programs.display_demos.vehicles.logger=vehicles.programs.display_demos.vehicles-module.html#logger,Variable vehicles.programs.inspect_textures.main'.logger=vehicles.programs.inspect_textures.main%27-module.html#logger,Variable vehicles.programs.print_config.logger=vehicles.programs.print_config-module.html#logger,Variable vehicles.programs.print_config.main'.logger=vehicles.programs.print_config.main%27-module.html#logger,Variable vehicles.sensors.field_sampler.logger=vehicles.sensors.field_sampler-module.html#logger,Variable vehicles.sensors.logger=vehicles.sensors-module.html#logger,Variable vehicles.sensors.raytracer.logger=vehicles.sensors.raytracer-module.html#logger,Variable vehicles.simulation.logger=vehicles.simulation-module.html#logger,Variable vehicles.simulation.vsimulation.logger=vehicles.simulation.vsimulation-module.html#logger,Variable vehicles.worlds.logger=vehicles.worlds-module.html#logger,Variable vehicles_boot.create_olympics_configs.logger=vehicles_boot.create_olympics_configs-module.html#logger,Variable vehicles_boot.create_olympics_configs.main'.logger=vehicles_boot.create_olympics_configs.main%27-module.html#logger,Variable vehicles_boot.logger=vehicles_boot-module.html#logger,Variable vehicles_cairo.logger=vehicles_cairo-module.html#logger,Variable vehicles_cairo.sensor_data.logger=vehicles_cairo.sensor_data-module.html#logger"><a title="vehicles.configuration.logger
+vehicles.configuration.master.logger
+vehicles.configuration.vehicles.logger
+vehicles.interfaces.dynamics.logger
+vehicles.interfaces.logger
+vehicles.interfaces.vehicle_sensor.logger
+vehicles.library.dynamics.logger
+vehicles.library.logger
+vehicles.library.noises.logger
+vehicles.library.sensors.logger
+vehicles.library.textures.logger
+vehicles.library.worlds.logger
+vehicles.logger
+vehicles.programs.display_demos.simulations.logger
+vehicles.programs.display_demos.skins.logger
+vehicles.programs.display_demos.vehicles.logger
+vehicles.programs.inspect_textures.main'.logger
+vehicles.programs.print_config.logger
+vehicles.programs.print_config.main'.logger
+vehicles.sensors.field_sampler.logger
+vehicles.sensors.logger
+vehicles.sensors.raytracer.logger
+vehicles.simulation.logger
+vehicles.simulation.vsimulation.logger
+vehicles.worlds.logger
+vehicles_boot.create_olympics_configs.logger
+vehicles_boot.create_olympics_configs.main'.logger
+vehicles_boot.logger
+vehicles_cairo.logger
+vehicles_cairo.sensor_data.logger" class="py-name" href="#" onclick="return doclink('link-0', 'logger', 'link-0');">logger</a></tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">abc</tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Class abc.ABCMeta=abc.ABCMeta-class.html"><a title="abc.ABCMeta" class="py-name" href="#" onclick="return doclink('link-1', 'ABCMeta', 'link-1');">ABCMeta</a></tt><tt class="py-op">,</tt> <tt class="py-name">abstractmethod</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">contracts</tt> <tt class="py-keyword">import</tt> <tt class="py-name">contract</tt><tt class="py-op">,</tt> <tt class="py-name">new_contract</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">traceback</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">geometry</tt> <tt class="py-comment"># For its contracts @UnusedImport</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-name">new_contract</tt><tt class="py-op">(</tt><tt class="py-string">'interval'</tt><tt class="py-op">,</tt> <tt class="py-string">'tuple((number,x),(number,&gt;x))'</tt><tt class="py-op">)</tt> </tt>
+<a name="Dynamics"></a><div id="Dynamics-def"><a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt> <a class="py-toggle" href="#" id="Dynamics-toggle" onclick="return toggle('Dynamics');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="vehicles.interfaces.dynamics.Dynamics-class.html">Dynamics</a><tt class="py-op">:</tt> </tt>
+</div><div id="Dynamics-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Dynamics-expanded"><a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line">    <tt class="py-docstring">'''</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring">        This is the interface for the various dynamics implemented.</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-docstring">        We make the following assumptions:</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-docstring">        1) The state space is the product of a pose space and a shape_space.</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-docstring">        2) No assumptions on shape_space, except that it is a </tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-docstring">           DifferentiableManifold.</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-docstring">        3) It is assumed that state_space is homeomorphic </tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-docstring">           to a subgroup of TSE(3). </tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-docstring">    </tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-docstring">        In general, "state" is an opaque variable from outside.</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-docstring">        The function:</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-docstring">            state2 = dynamics.integrate(state, commands, dt)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-docstring">            </tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-docstring">        integrates the dynamics. Here state and state2 are opaque variables.</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-docstring">        The function:</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-docstring">            state = dynamics.pose2state(pose)</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-docstring">            </tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-docstring">        creates a state from a pose (SE3), by embedding/projecting </tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-docstring">        appropriately. The semantics is to get the closest state to the pose, </tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-docstring">        with the dynamics "at rest"; for example, the velocity should be set </tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-docstring">        to 0, and the shape space to a resting position.</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-docstring">        The function:</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt class="py-docstring">        </tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-docstring">            pose, vel = dynamics.joint_state(state, joint=0)</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"><tt class="py-docstring">            </tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"><tt class="py-docstring">        where SE3.belongs(pose) and se3.belongs(vel) returns the pos/vel</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt class="py-docstring">        of a joint for the given state.</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt class="py-docstring">            </tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"><tt class="py-docstring">    '''</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">    <tt class="py-name">__metaclass__</tt> <tt class="py-op">=</tt> <tt id="link-2" class="py-name"><a title="abc.ABCMeta" class="py-name" href="#" onclick="return doclink('link-2', 'ABCMeta', 'link-1');">ABCMeta</a></tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">commands_spec</tt><tt class="py-op">=</tt><tt class="py-string">'dict'</tt><tt class="py-op">,</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">              <tt class="py-name">state_space</tt><tt class="py-op">=</tt><tt class="py-string">'DifferentiableManifold'</tt><tt class="py-op">)</tt> </tt>
+<a name="Dynamics.__init__"></a><div id="Dynamics.__init__-def"><a name="L52"></a><tt class="py-lineno"> 52</tt> <a class="py-toggle" href="#" id="Dynamics.__init__-toggle" onclick="return toggle('Dynamics.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.interfaces.dynamics.Dynamics-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">state_space</tt><tt class="py-op">,</tt> <tt class="py-param">commands_spec</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Dynamics.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Dynamics.__init__-expanded"><a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_commands_spec</tt> <tt class="py-op">=</tt> <tt class="py-name">commands_spec</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_state_space</tt> <tt class="py-op">=</tt> <tt class="py-name">state_space</tt> </tt>
+</div><a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">commands</tt><tt class="py-op">=</tt><tt class="py-string">'array'</tt><tt class="py-op">)</tt> </tt>
+<a name="Dynamics.check_commands"></a><div id="Dynamics.check_commands-def"><a name="L57"></a><tt class="py-lineno"> 57</tt> <a class="py-toggle" href="#" id="Dynamics.check_commands-toggle" onclick="return toggle('Dynamics.check_commands');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.interfaces.dynamics.Dynamics-class.html#check_commands">check_commands</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">commands</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Dynamics.check_commands-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Dynamics.check_commands-expanded"><a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">        <tt class="py-docstring">''' </tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"><tt class="py-docstring">            Raises an exception (InvalidCommands) if the commands </tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"><tt class="py-docstring">            are not valid. </tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">        <tt class="py-comment"># TODO: not implemented</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">returns</tt><tt class="py-op">=</tt><tt class="py-string">'DifferentiableManifold'</tt><tt class="py-op">)</tt> </tt>
+<a name="Dynamics.get_state_space"></a><div id="Dynamics.get_state_space-def"><a name="L66"></a><tt class="py-lineno"> 66</tt> <a class="py-toggle" href="#" id="Dynamics.get_state_space-toggle" onclick="return toggle('Dynamics.get_state_space');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.interfaces.dynamics.Dynamics-class.html#get_state_space">get_state_space</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Dynamics.get_state_space-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Dynamics.get_state_space-expanded"><a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">        <tt class="py-docstring">""" </tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"><tt class="py-docstring">            Returns a DifferentiableManifold instance </tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-docstring">            describing the state space.</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_state_space</tt> </tt>
+</div><a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">returns</tt><tt class="py-op">=</tt><tt class="py-string">'dict'</tt><tt class="py-op">)</tt> </tt>
+<a name="Dynamics.get_commands_spec"></a><div id="Dynamics.get_commands_spec-def"><a name="L74"></a><tt class="py-lineno"> 74</tt> <a class="py-toggle" href="#" id="Dynamics.get_commands_spec-toggle" onclick="return toggle('Dynamics.get_commands_spec');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.interfaces.dynamics.Dynamics-class.html#get_commands_spec">get_commands_spec</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Dynamics.get_commands_spec-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Dynamics.get_commands_spec-expanded"><a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">        <tt class="py-docstring">""" Returns the commands specification. """</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_commands_spec</tt> </tt>
+</div><a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">dt</tt><tt class="py-op">=</tt><tt class="py-string">'&gt;=0'</tt><tt class="py-op">)</tt> </tt>
+<a name="Dynamics.integrate"></a><div id="Dynamics.integrate-def"><a name="L79"></a><tt class="py-lineno"> 79</tt> <a class="py-toggle" href="#" id="Dynamics.integrate-toggle" onclick="return toggle('Dynamics.integrate');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.interfaces.dynamics.Dynamics-class.html#integrate">integrate</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">state</tt><tt class="py-op">,</tt> <tt class="py-param">commands</tt><tt class="py-op">,</tt> <tt class="py-param">dt</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Dynamics.integrate-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Dynamics.integrate-expanded"><a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">        <tt class="py-comment">#self._state_space.belongs(state)    </tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Method vehicles.interfaces.dynamics.Dynamics.check_commands()=vehicles.interfaces.dynamics.Dynamics-class.html#check_commands"><a title="vehicles.interfaces.dynamics.Dynamics.check_commands" class="py-name" href="#" onclick="return doclink('link-3', 'check_commands', 'link-3');">check_commands</a></tt><tt class="py-op">(</tt><tt class="py-name">commands</tt><tt class="py-op">)</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">            <tt class="py-name">new_state</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Method vehicles.interfaces.dynamics.Dynamics._integrate()=vehicles.interfaces.dynamics.Dynamics-class.html#_integrate"><a title="vehicles.interfaces.dynamics.Dynamics._integrate" class="py-name" href="#" onclick="return doclink('link-4', '_integrate', 'link-4');">_integrate</a></tt><tt class="py-op">(</tt><tt class="py-name">state</tt><tt class="py-op">,</tt> <tt class="py-name">commands</tt><tt class="py-op">,</tt> <tt class="py-name">dt</tt><tt class="py-op">)</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt><tt class="py-op">:</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">            <tt class="py-name">msg</tt> <tt class="py-op">=</tt> <tt class="py-string">'Error while integrating.'</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">            <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">                <tt class="py-name">msg</tt> <tt class="py-op">+=</tt> <tt class="py-string">'\n   state: %s'</tt> <tt class="py-op">%</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_state_space</tt><tt class="py-op">.</tt><tt class="py-name">friendly</tt><tt class="py-op">(</tt><tt class="py-name">state</tt><tt class="py-op">)</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">            <tt class="py-keyword">except</tt><tt class="py-op">:</tt> <tt class="py-comment"># XXX</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">                <tt class="py-name">msg</tt> <tt class="py-op">+=</tt> <tt class="py-string">'\n   state: %s'</tt> <tt class="py-op">%</tt> <tt class="py-name">state</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Method vehicles.interfaces.primitives.Primitive.__repr__()=vehicles.interfaces.primitives.Primitive-class.html#__repr__,Method vehicles.interfaces.vehicle_sensor.VehicleSensor.__repr__()=vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html#__repr__,Method vehicles.interfaces.world.World.Episode.__repr__()=vehicles.interfaces.world.World.Episode-class.html#__repr__,Method vehicles.interfaces.world.World.__repr__()=vehicles.interfaces.world.World-class.html#__repr__,Method vehicles.simulation.collision.CollisionInfo.__repr__()=vehicles.simulation.collision.CollisionInfo-class.html#__repr__,Method vehicles.simulation.collision_utils.PrimitiveIntersection.__repr__()=vehicles.simulation.collision_utils.PrimitiveIntersection-class.html#__repr__,Method vehicles.simulation.vehicle.Vehicle.__repr__()=vehicles.simulation.vehicle.Vehicle-class.html#__repr__,Method vehicles.simulation.vsimulation.VehicleSimulation.__repr__()=vehicles.simulation.vsimulation.VehicleSimulation-class.html#__repr__,Method vehicles_boot.vehicles_simulation.BOVehicleSimulation.__repr__()=vehicles_boot.vehicles_simulation.BOVehicleSimulation-class.html#__repr__"><a title="vehicles.interfaces.primitives.Primitive.__repr__
+vehicles.interfaces.vehicle_sensor.VehicleSensor.__repr__
+vehicles.interfaces.world.World.Episode.__repr__
+vehicles.interfaces.world.World.__repr__
+vehicles.simulation.collision.CollisionInfo.__repr__
+vehicles.simulation.collision_utils.PrimitiveIntersection.__repr__
+vehicles.simulation.vehicle.Vehicle.__repr__
+vehicles.simulation.vsimulation.VehicleSimulation.__repr__
+vehicles_boot.vehicles_simulation.BOVehicleSimulation.__repr__" class="py-name" href="#" onclick="return doclink('link-5', '__repr__', 'link-5');">__repr__</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">            <tt class="py-name">msg</tt> <tt class="py-op">+=</tt> <tt class="py-string">'\ncommands: %s'</tt> <tt class="py-op">%</tt> <tt class="py-name">commands</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="vehicles.interfaces.primitives.Primitive.__repr__
+vehicles.interfaces.vehicle_sensor.VehicleSensor.__repr__
+vehicles.interfaces.world.World.Episode.__repr__
+vehicles.interfaces.world.World.__repr__
+vehicles.simulation.collision.CollisionInfo.__repr__
+vehicles.simulation.collision_utils.PrimitiveIntersection.__repr__
+vehicles.simulation.vehicle.Vehicle.__repr__
+vehicles.simulation.vsimulation.VehicleSimulation.__repr__
+vehicles_boot.vehicles_simulation.BOVehicleSimulation.__repr__" class="py-name" href="#" onclick="return doclink('link-6', '__repr__', 'link-5');">__repr__</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">            <tt class="py-name">msg</tt> <tt class="py-op">+=</tt> <tt class="py-string">'\n%s'</tt> <tt class="py-op">%</tt> <tt class="py-name">traceback</tt><tt class="py-op">.</tt><tt class="py-name">format_exc</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">            <tt id="link-7" class="py-name"><a title="vehicles.configuration.logger
+vehicles.configuration.master.logger
+vehicles.configuration.vehicles.logger
+vehicles.interfaces.dynamics.logger
+vehicles.interfaces.logger
+vehicles.interfaces.vehicle_sensor.logger
+vehicles.library.dynamics.logger
+vehicles.library.logger
+vehicles.library.noises.logger
+vehicles.library.sensors.logger
+vehicles.library.textures.logger
+vehicles.library.worlds.logger
+vehicles.logger
+vehicles.programs.display_demos.simulations.logger
+vehicles.programs.display_demos.skins.logger
+vehicles.programs.display_demos.vehicles.logger
+vehicles.programs.inspect_textures.main'.logger
+vehicles.programs.print_config.logger
+vehicles.programs.print_config.main'.logger
+vehicles.sensors.field_sampler.logger
+vehicles.sensors.logger
+vehicles.sensors.raytracer.logger
+vehicles.simulation.logger
+vehicles.simulation.vsimulation.logger
+vehicles.worlds.logger
+vehicles_boot.create_olympics_configs.logger
+vehicles_boot.create_olympics_configs.main'.logger
+vehicles_boot.logger
+vehicles_cairo.logger
+vehicles_cairo.sensor_data.logger" class="py-name" href="#" onclick="return doclink('link-7', 'logger', 'link-0');">logger</a></tt><tt class="py-op">.</tt><tt class="py-name">error</tt><tt class="py-op">(</tt><tt class="py-name">msg</tt><tt class="py-op">)</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">        <tt class="py-comment">#self._state_space.belongs(new_state)</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">new_state</tt> </tt>
+</div><a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"> </tt>
+<a name="Dynamics.__str__"></a><div id="Dynamics.__str__-def"><a name="L99"></a><tt class="py-lineno"> 99</tt> <a class="py-toggle" href="#" id="Dynamics.__str__-toggle" onclick="return toggle('Dynamics.__str__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.interfaces.dynamics.Dynamics-class.html#__str__">__str__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Dynamics.__str__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Dynamics.__str__-expanded"><a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__class__</tt><tt class="py-op">.</tt><tt class="py-name">__name__</tt> </tt>
+</div><a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">    <tt class="py-comment"># Interface that must be implemented</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">abstractmethod</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">pose</tt><tt class="py-op">=</tt><tt class="py-string">'SE3'</tt><tt class="py-op">)</tt> </tt>
+<a name="Dynamics.pose2state"></a><div id="Dynamics.pose2state-def"><a name="L106"></a><tt class="py-lineno">106</tt> <a class="py-toggle" href="#" id="Dynamics.pose2state-toggle" onclick="return toggle('Dynamics.pose2state');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.interfaces.dynamics.Dynamics-class.html#pose2state">pose2state</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">pose</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Dynamics.pose2state-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Dynamics.pose2state-expanded"><a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">        <tt class="py-docstring">''' </tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"><tt class="py-docstring">            Returns the state that best approximates the given </tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"><tt class="py-docstring">            pose (in SE3).</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">abstractmethod</tt> </tt>
+<a name="Dynamics._integrate"></a><div id="Dynamics._integrate-def"><a name="L114"></a><tt class="py-lineno">114</tt> <a class="py-toggle" href="#" id="Dynamics._integrate-toggle" onclick="return toggle('Dynamics._integrate');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.interfaces.dynamics.Dynamics-class.html#_integrate">_integrate</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">state</tt><tt class="py-op">,</tt> <tt class="py-param">commands</tt><tt class="py-op">,</tt> <tt class="py-param">dt</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Dynamics._integrate-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Dynamics._integrate-expanded"><a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">abstractmethod</tt> </tt>
+<a name="Dynamics.state_to_yaml"></a><div id="Dynamics.state_to_yaml-def"><a name="L118"></a><tt class="py-lineno">118</tt> <a class="py-toggle" href="#" id="Dynamics.state_to_yaml-toggle" onclick="return toggle('Dynamics.state_to_yaml');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.interfaces.dynamics.Dynamics-class.html#state_to_yaml">state_to_yaml</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">state</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Dynamics.state_to_yaml-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Dynamics.state_to_yaml-expanded"><a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">        <tt class="py-docstring">''' Converts the state to a YAML representation.'''</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line"> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">abstractmethod</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">returns</tt><tt class="py-op">=</tt><tt class="py-string">'tuple(SE3, se3)'</tt><tt class="py-op">)</tt> </tt>
+<a name="Dynamics.joint_state"></a><div id="Dynamics.joint_state-def"><a name="L124"></a><tt class="py-lineno">124</tt> <a class="py-toggle" href="#" id="Dynamics.joint_state-toggle" onclick="return toggle('Dynamics.joint_state');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.interfaces.dynamics.Dynamics-class.html#joint_state">joint_state</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">state</tt><tt class="py-op">,</tt> <tt class="py-param">joint</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Dynamics.joint_state-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Dynamics.joint_state-expanded"><a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line"> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">returns</tt><tt class="py-op">=</tt><tt class="py-string">'int,&gt;=1'</tt><tt class="py-op">)</tt> </tt>
+<a name="Dynamics.num_joints"></a><div id="Dynamics.num_joints-def"><a name="L128"></a><tt class="py-lineno">128</tt> <a class="py-toggle" href="#" id="Dynamics.num_joints-toggle" onclick="return toggle('Dynamics.num_joints');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.interfaces.dynamics.Dynamics-class.html#num_joints">num_joints</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Dynamics.num_joints-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Dynamics.num_joints-expanded"><a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">        <tt class="py-docstring">""" Returns the number of joints. At least 1. """</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-number">1</tt> </tt>
+</div></div><a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/vehicles">Vehicles</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Sat Feb 25 19:54:05 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

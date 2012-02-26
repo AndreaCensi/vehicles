@@ -58,13 +58,50 @@
 </table>
 <h1 class="epydoc">Source Code for <a href="vehicles.library-module.html">Package vehicles.library</a></h1>
 <pre class="py-src">
-<a name="L1"></a><tt class="py-lineno">1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Module vehicles.configuration.worlds=vehicles.configuration.worlds-module.html,Package vehicles.worlds=vehicles.worlds-module.html"><a title="vehicles.configuration.worlds
-vehicles.worlds" class="py-name" href="#" onclick="return doclink('link-0', 'worlds', 'link-0');">worlds</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
-<a name="L2"></a><tt class="py-lineno">2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Module vehicles.configuration.sensors=vehicles.configuration.sensors-module.html,Package vehicles.sensors=vehicles.sensors-module.html,Module vehicles_cairo.skins.sensors=vehicles_cairo.skins.sensors-module.html"><a title="vehicles.configuration.sensors
+<a name="L1"></a><tt class="py-lineno">1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt class="py-op">.</tt> <tt class="py-keyword">import</tt> <tt class="py-name">np</tt><tt class="py-op">,</tt> <tt class="py-name">contract</tt><tt class="py-op">,</tt> <tt id="link-0" class="py-name" targets="Variable vehicles.configuration.logger=vehicles.configuration-module.html#logger,Variable vehicles.configuration.master.logger=vehicles.configuration.master-module.html#logger,Variable vehicles.configuration.vehicles.logger=vehicles.configuration.vehicles-module.html#logger,Variable vehicles.interfaces.dynamics.logger=vehicles.interfaces.dynamics-module.html#logger,Variable vehicles.interfaces.logger=vehicles.interfaces-module.html#logger,Variable vehicles.interfaces.vehicle_sensor.logger=vehicles.interfaces.vehicle_sensor-module.html#logger,Variable vehicles.library.dynamics.logger=vehicles.library.dynamics-module.html#logger,Variable vehicles.library.logger=vehicles.library-module.html#logger,Variable vehicles.library.noises.logger=vehicles.library.noises-module.html#logger,Variable vehicles.library.sensors.logger=vehicles.library.sensors-module.html#logger,Variable vehicles.library.textures.logger=vehicles.library.textures-module.html#logger,Variable vehicles.library.worlds.logger=vehicles.library.worlds-module.html#logger,Variable vehicles.logger=vehicles-module.html#logger,Variable vehicles.programs.display_demos.simulations.logger=vehicles.programs.display_demos.simulations-module.html#logger,Variable vehicles.programs.display_demos.skins.logger=vehicles.programs.display_demos.skins-module.html#logger,Variable vehicles.programs.display_demos.vehicles.logger=vehicles.programs.display_demos.vehicles-module.html#logger,Variable vehicles.programs.inspect_textures.main'.logger=vehicles.programs.inspect_textures.main%27-module.html#logger,Variable vehicles.programs.print_config.logger=vehicles.programs.print_config-module.html#logger,Variable vehicles.programs.print_config.main'.logger=vehicles.programs.print_config.main%27-module.html#logger,Variable vehicles.sensors.field_sampler.logger=vehicles.sensors.field_sampler-module.html#logger,Variable vehicles.sensors.logger=vehicles.sensors-module.html#logger,Variable vehicles.sensors.raytracer.logger=vehicles.sensors.raytracer-module.html#logger,Variable vehicles.simulation.logger=vehicles.simulation-module.html#logger,Variable vehicles.simulation.vsimulation.logger=vehicles.simulation.vsimulation-module.html#logger,Variable vehicles.worlds.logger=vehicles.worlds-module.html#logger,Variable vehicles_boot.create_olympics_configs.logger=vehicles_boot.create_olympics_configs-module.html#logger,Variable vehicles_boot.create_olympics_configs.main'.logger=vehicles_boot.create_olympics_configs.main%27-module.html#logger,Variable vehicles_boot.logger=vehicles_boot-module.html#logger,Variable vehicles_cairo.logger=vehicles_cairo-module.html#logger,Variable vehicles_cairo.sensor_data.logger=vehicles_cairo.sensor_data-module.html#logger"><a title="vehicles.configuration.logger
+vehicles.configuration.master.logger
+vehicles.configuration.vehicles.logger
+vehicles.interfaces.dynamics.logger
+vehicles.interfaces.logger
+vehicles.interfaces.vehicle_sensor.logger
+vehicles.library.dynamics.logger
+vehicles.library.logger
+vehicles.library.noises.logger
+vehicles.library.sensors.logger
+vehicles.library.textures.logger
+vehicles.library.worlds.logger
+vehicles.logger
+vehicles.programs.display_demos.simulations.logger
+vehicles.programs.display_demos.skins.logger
+vehicles.programs.display_demos.vehicles.logger
+vehicles.programs.inspect_textures.main'.logger
+vehicles.programs.print_config.logger
+vehicles.programs.print_config.main'.logger
+vehicles.sensors.field_sampler.logger
+vehicles.sensors.logger
+vehicles.sensors.raytracer.logger
+vehicles.simulation.logger
+vehicles.simulation.vsimulation.logger
+vehicles.worlds.logger
+vehicles_boot.create_olympics_configs.logger
+vehicles_boot.create_olympics_configs.main'.logger
+vehicles_boot.logger
+vehicles_cairo.logger
+vehicles_cairo.sensor_data.logger" class="py-name" href="#" onclick="return doclink('link-0', 'logger', 'link-0');">logger</a></tt> </tt>
+<a name="L2"></a><tt class="py-lineno">2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package vehicles.library.noises=vehicles.library.noises-module.html"><a title="vehicles.library.noises" class="py-name" href="#" onclick="return doclink('link-1', 'noises', 'link-1');">noises</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Module vehicles.configuration.sensors=vehicles.configuration.sensors-module.html,Package vehicles.library.sensors=vehicles.library.sensors-module.html,Package vehicles.sensors=vehicles.sensors-module.html,Module vehicles_cairo.skins.sensors=vehicles_cairo.skins.sensors-module.html"><a title="vehicles.configuration.sensors
+vehicles.library.sensors
 vehicles.sensors
-vehicles_cairo.skins.sensors" class="py-name" href="#" onclick="return doclink('link-1', 'sensors', 'link-1');">sensors</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
-<a name="L3"></a><tt class="py-lineno">3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">vehicles_dynamics</tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
-<a name="L4"></a><tt class="py-lineno">4</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+vehicles_cairo.skins.sensors" class="py-name" href="#" onclick="return doclink('link-2', 'sensors', 'link-2');">sensors</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">4</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Module vehicles.configuration.dynamics=vehicles.configuration.dynamics-module.html,Module vehicles.interfaces.dynamics=vehicles.interfaces.dynamics-module.html,Package vehicles.library.dynamics=vehicles.library.dynamics-module.html"><a title="vehicles.configuration.dynamics
+vehicles.interfaces.dynamics
+vehicles.library.dynamics" class="py-name" href="#" onclick="return doclink('link-3', 'dynamics', 'link-3');">dynamics</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">5</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Package vehicles.library.textures=vehicles.library.textures-module.html,Module vehicles.library.textures.textures=vehicles.library.textures.textures-module.html"><a title="vehicles.library.textures
+vehicles.library.textures.textures" class="py-name" href="#" onclick="return doclink('link-4', 'textures', 'link-4');">textures</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">6</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Module vehicles.configuration.worlds=vehicles.configuration.worlds-module.html,Package vehicles.library.worlds=vehicles.library.worlds-module.html,Package vehicles.worlds=vehicles.worlds-module.html"><a title="vehicles.configuration.worlds
+vehicles.library.worlds
+vehicles.worlds" class="py-name" href="#" onclick="return doclink('link-5', 'worlds', 'link-5');">worlds</a></tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">7</tt>  <tt class="py-line"> </tt><script type="text/javascript">
 <!--
 expandto(location.href);
 // -->
@@ -99,7 +136,7 @@ expandto(location.href);
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Sat Feb 25 10:38:10 2012
+    Generated by Epydoc 3.0.1 on Sat Feb 25 19:54:05 2012
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
