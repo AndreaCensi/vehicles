@@ -3,6 +3,8 @@ from ..interfaces import World
 from geometry import SE3
 import time
 
+__all__ = ['VehicleSimulation']
+
 
 class VehicleSimulation():
 

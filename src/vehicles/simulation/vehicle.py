@@ -3,36 +3,40 @@ from geometry import SE3, translation_from_SE2, SE2_project_from_SE3
 from geometry.yaml import to_yaml
 from vehicles.utils.check_yaml_friendly import check_yaml_friendly
 
+__all__ = ['Attached', 'Vehicle']
+
+
+class Attached:
+    @contract(pose='SE3', joint='int,>=0', extra='dict')
+    def __init__(self, sensor, pose, joint, extra):
+        '''
+            Initializes this structure.
+            
+            :param extra: dict convertible to YAML.
+             extra['skin']: sing for this sensor.
+        '''
+        self.sensor = sensor
+        self.pose = pose
+        self.joint = joint
+        self.current_observations = None
+        self.current_pose = None
+        self.extra = extra
+
+    def to_yaml(self):
+        if self.current_observations is None:
+            raise Exception('Observations not computed')
+        return {
+            'sensor': self.sensor.to_yaml(),
+            'pose': SE3.to_yaml(self.pose),
+            'joint': self.joint,
+            'extra': self.extra,
+            'current_observations':
+                dict_to_yaml(self.current_observations),
+            'current_pose': SE3.to_yaml(self.current_pose),
+        }
+
 
 class Vehicle:
-    class Attached:
-        @contract(pose='SE3', joint='int,>=0', extra='dict')
-        def __init__(self, sensor, pose, joint, extra):
-            '''
-                Initializes this structure.
-                
-                :param extra: dict convertible to YAML.
-                 extra['skin']: sing for this sensor.
-            '''
-            self.sensor = sensor
-            self.pose = pose
-            self.joint = joint
-            self.current_observations = None
-            self.current_pose = None
-            self.extra = extra
-
-        def to_yaml(self):
-            if self.current_observations is None:
-                raise Exception('Observations not computed')
-            return {
-                'sensor': self.sensor.to_yaml(),
-                'pose': SE3.to_yaml(self.pose),
-                'joint': self.joint,
-                'extra': self.extra,
-                'current_observations':
-                    dict_to_yaml(self.current_observations),
-                'current_pose': SE3.to_yaml(self.current_pose),
-            }
 
     def __init__(self, radius=0.5, extra={}):
         """ 
@@ -87,7 +91,7 @@ class Vehicle:
 
     @contract(id_sensor='str', pose='SE3', joint='int,>=0')
     def add_sensor(self, id_sensor, sensor, pose, joint, extra):
-        attached = Vehicle.Attached(sensor=sensor, pose=pose,
+        attached = Attached(sensor=sensor, pose=pose,
                                     joint=joint, extra=extra)
         self.sensors.append(attached)
         if not self.id_sensors:

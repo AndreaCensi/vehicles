@@ -2,7 +2,8 @@ from . import cairo, CairoConstants, np, contract
 from cairo_utils import (cairo_transform, cairo_plot_circle,
                          cairo_plot_polyline, cairo_save, cairo_set_color)
 from conf_tools import instantiate_spec
-from vehicles import Source, VehiclesConstants, get_field_values
+from vehicles import Source, VehiclesConstants
+from vehicles.sensors.field_sampler import get_field_values
 
 
 def cairo_plot_sources(cr, world_state):

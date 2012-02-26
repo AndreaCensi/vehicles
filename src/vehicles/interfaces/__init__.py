@@ -1,4 +1,9 @@
 from .. import contract, np, logger
+
+__all__ = ['Circle', 'Dynamics', 'Field', 'GeometricShape',
+           'PolyLine', 'Primitive', 'Source', 'VehicleSensor',
+           'VehicleSkin', 'World']
+
 from .primitives import *
 from .world import *
 from .vehicle_sensor import *

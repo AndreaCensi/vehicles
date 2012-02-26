@@ -2,6 +2,12 @@
 
 __version__ = '1.2'
 
+__all__ = ['VehicleSensor', 'Field', 'PolyLine', 'Vehicle', 'Circle',
+           'GeometricShape', 'VehiclesConstants', 'VehicleSimulation',
+            'VehiclesConfig', 'World',
+             'Attached', 'Primitive', 'Source', 'VehicleSkin', 'Dynamics',
+             'library']
+
 from contracts import contract
 import geometry  # loads all geometry contracts
 import numpy as np
@@ -11,13 +17,11 @@ logging.basicConfig()
 logger = logging.getLogger("Vehicles")
 logger.setLevel(logging.DEBUG)
 
-from .utils import *
 from .constants import *
 from .configuration import *
 from .interfaces import *
 from .simulation import *
-from .sensors import *
-from .worlds import *
 
+from . import library
 
 __docformat__ = 'restructuredtext' # For Epydoc

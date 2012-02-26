@@ -1,6 +1,8 @@
 from geometry import SE2_from_translation_angle
-from vehicles import TexturedRaytracer, Raytracer, Box
 import numpy as np
+from vehicles.worlds.boxes import Box
+from vehicles.sensors.raytracer.textured_raytracer import Raytracer, \
+    TexturedRaytracer
 
 
 def test_raytracer_box():

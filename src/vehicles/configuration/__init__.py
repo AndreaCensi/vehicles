@@ -1,5 +1,7 @@
 from .. import contract, np, logger
 
+__all__ = ['VehiclesConfig']
+
 from .worlds import *
 from .sensors import *
 from .dynamics import *
