@@ -1,13 +1,13 @@
 from geometry import SE2_from_translation_angle
-import numpy as np
+from vehicles.sensors.raytracer.textured_raytracer import (MyRaytracer,
+    TexturedRaytracer)
 from vehicles.worlds.boxes import Box
-from vehicles.sensors.raytracer.textured_raytracer import Raytracer, \
-    TexturedRaytracer
+import numpy as np
 
 
 def test_raytracer_box():
     world = Box(10, 10)
-    sensor = Raytracer(directions=np.linspace(0, np.pi * 2, 181))
+    sensor = MyRaytracer(directions=np.linspace(0, np.pi * 2, 181))
     sensor.set_world_primitives(world.get_primitives())
     pose = SE2_from_translation_angle([0, 0], 0)
     observations = sensor.raytracing(pose)

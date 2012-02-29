@@ -1,10 +1,9 @@
-from bootstrapping_olympics import StreamSpec
+from .. import CircleVel, Dynamics, SE2Dynamics
 from contracts import contract
 from geometry import (SE3, se3, SE3_from_SE2, angle_from_SE2,
     SE2_from_translation_angle, SE2_from_SE3, ProductManifold)
-from vehicles_dynamics import CircleVel, Dynamics, SE2Dynamics
+from vehicles import VehiclesConfig
 import numpy as np
-from vehicles.configuration.master import VehiclesConfig
 
 
 class BaseTopDynamics(Dynamics):
@@ -16,6 +15,8 @@ class BaseTopDynamics(Dynamics):
         self.base = base
         self.top = top
 
+        # XXX: remove dependency
+        from bootstrapping_olympics import StreamSpec
         cmd1 = StreamSpec.from_yaml(self.base.get_commands_spec())
         cmd2 = StreamSpec.from_yaml(self.top.get_commands_spec())
 

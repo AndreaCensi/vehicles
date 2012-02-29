@@ -1,4 +1,4 @@
-from . import Raytracer, contract, np, get_uniform_directions
+from . import MyRaytracer, contract, np, get_uniform_directions
 from .. import VehicleSensor, VehiclesConstants
 from conf_tools import instantiate_spec
 from geometry import SE2_project_from_SE3
@@ -6,7 +6,7 @@ from geometry import SE2_project_from_SE3
 __all__ = ['Rangefinder', 'RangefinderUniform']
 
 
-class Rangefinder(VehicleSensor, Raytracer):
+class Rangefinder(VehicleSensor, MyRaytracer):
 
     @contract(directions='seq[>0](number)', invalid='number',
               min_range='>=0,x', max_range='>=0,>x')
@@ -36,7 +36,7 @@ class Rangefinder(VehicleSensor, Raytracer):
                       'min_range': float(min_range)}
         }
         VehicleSensor.__init__(self, spec)
-        Raytracer.__init__(self, directions)
+        MyRaytracer.__init__(self, directions)
 
     def to_yaml(self):
         return {'type': VehiclesConstants.SENSOR_TYPE_RANGEFINDER,
@@ -67,7 +67,7 @@ class Rangefinder(VehicleSensor, Raytracer):
         return data
 
     def set_world_primitives(self, primitives):
-        Raytracer.set_world_primitives(self, primitives)
+        MyRaytracer.set_world_primitives(self, primitives)
 
 
 class RangefinderUniform(Rangefinder):

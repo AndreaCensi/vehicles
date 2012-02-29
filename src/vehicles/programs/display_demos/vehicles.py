@@ -1,7 +1,8 @@
-from ... import VehicleSimulation, VehiclesConfig, logger, expand_string
+from ... import VehicleSimulation, VehiclesConfig, logger
 from optparse import OptionParser
 from reprep import MIME_PNG, MIME_SVG
 import os
+from vehicles.utils import expand_string
 
 usage = """
 

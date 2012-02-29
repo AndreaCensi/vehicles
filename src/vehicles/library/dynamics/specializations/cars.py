@@ -1,7 +1,7 @@
 from . import np, contract, SimpleKinematics
 from geometry import (R1, ProductManifold, SE2, se2_from_linear_angular,
     SE2_from_translation_angle, SE3_from_SE2, SE3)
-from vehicles_dynamics import Dynamics
+from vehicles.interfaces.dynamics import Dynamics
 
 
 class SimpleCar(SimpleKinematics):

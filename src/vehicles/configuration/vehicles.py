@@ -45,8 +45,7 @@ def check_vehicle_sensor_entry(s):
 def instance_vehicle_spec(entry):
     from ..simulation import Vehicle
     from . import VehiclesConfig
-    from vehicles_dynamics import Dynamics
-    from ..interfaces import VehicleSensor
+    from ..interfaces import VehicleSensor, Dynamics
 
     check_valid_vehicle_config(entry)
     try:

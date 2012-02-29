@@ -1,3 +1,4 @@
+__all__ = ['MyRaytracer', 'TexturedRaytracer']
 from .. import contract, np, logger
-from .cjson_stream import *
+from .myraytracer import *
 from .textured_raytracer import *

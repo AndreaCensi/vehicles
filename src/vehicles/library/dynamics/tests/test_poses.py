@@ -1,13 +1,12 @@
 from geometry import SE2, SE2_from_translation_angle, SE3_from_SE2
-
-import unittest
+from vehicles.library.dynamics.specializations.se2 import SE2Dynamics
 import numpy as np
+import unittest
 
 
 class PoseTest(unittest.TestCase):
 
     def test_poses_SE2(self):
-        from vehicles_dynamics import SE2Dynamics
 
         dynamics = SE2Dynamics(max_linear_velocity=[1, 1],
                                max_angular_velocity=1)
