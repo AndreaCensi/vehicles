@@ -39,7 +39,9 @@ Geometric primitives
 Library: worlds
 ---------------------
 
-.. automodule:: library.worlds
+.. py:currentmodule:: vehicles.library.worlds
+
+.. automodule::  vehicles.library.worlds
    :members:
    :undoc-members:
    
@@ -47,7 +49,7 @@ Library: worlds
 Library: sensors
 ---------------------
 
-.. automodule:: library.sensors
+.. automodule:: vehicles.library.sensors
    :members:
    :undoc-members:
    
