@@ -1,0 +1,236 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vehicles_boot.ros_visualization.ros_plot_vehicle &mdash; Vehicles 2.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../../static/doctools.js"></script>
+    <link rel="top" title="Vehicles 2.0 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" />
+	 
+
+
+   <style type="text/css">
+        span.brand { color: #a00;}
+   </style> 
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Vehicles 2.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vehicles_boot.ros_visualization.ros_plot_vehicle</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">Marker</span><span class="p">,</span> <span class="n">ColorRGBA</span><span class="p">,</span> <span class="n">Point</span><span class="p">,</span> <span class="n">ROS_Pose_from_SE3</span>
+<span class="kn">from</span> <span class="nn">geometry</span> <span class="kn">import</span> <span class="n">SE3_from_rotation_translation</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">vehicles.library.sensors</span> <span class="kn">import</span> <span class="n">MyRaytracer</span>
+
+
+<div class="viewcode-block" id="publish_vehicle"><a class="viewcode-back" href="../../../api/vehicles_boot.ros_visualization.html#vehicles_boot.ros_visualization.ros_plot_vehicle.publish_vehicle">[docs]</a><span class="k">def</span> <span class="nf">publish_vehicle</span><span class="p">(</span><span class="n">publisher</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">vehicle</span><span class="p">):</span>
+    <span class="n">frame_id</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s">&#39;world_frame&#39;</span><span class="p">]</span>
+    <span class="n">stamp</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s">&#39;stamp&#39;</span><span class="p">]</span>
+    <span class="n">robot_height</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s">&#39;robot_height&#39;</span><span class="p">]</span>
+
+    <span class="n">marker</span> <span class="o">=</span> <span class="n">Marker</span><span class="p">()</span>
+    <span class="n">marker</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">frame_id</span> <span class="o">=</span> <span class="n">frame_id</span>
+    <span class="n">marker</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">stamp</span> <span class="o">=</span> <span class="n">stamp</span>
+    <span class="n">marker</span><span class="o">.</span><span class="n">ns</span> <span class="o">=</span> <span class="s">&quot;vehicle&quot;</span>
+    <span class="n">marker</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">marker</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">Marker</span><span class="o">.</span><span class="n">CUBE</span>  <span class="c"># @UndefinedVariable</span>
+    <span class="n">marker</span><span class="o">.</span><span class="n">action</span> <span class="o">=</span> <span class="n">Marker</span><span class="o">.</span><span class="n">ADD</span>       <span class="c"># @UndefinedVariable</span>
+    <span class="n">pose_marker</span> <span class="o">=</span> <span class="n">SE3_from_rotation_translation</span><span class="p">(</span>
+                            <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
+                            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">robot_height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">]))</span>
+    <span class="n">vehicle_pose</span> <span class="o">=</span> <span class="n">vehicle</span><span class="o">.</span><span class="n">get_pose</span><span class="p">()</span>
+    <span class="n">marker</span><span class="o">.</span><span class="n">pose</span> <span class="o">=</span> <span class="n">ROS_Pose_from_SE3</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">vehicle_pose</span><span class="p">,</span> <span class="n">pose_marker</span><span class="p">))</span>
+    <span class="n">marker</span><span class="o">.</span><span class="n">scale</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">marker</span><span class="o">.</span><span class="n">scale</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">marker</span><span class="o">.</span><span class="n">scale</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="n">robot_height</span>
+    <span class="n">marker</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">ColorRGBA</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+    <span class="n">publisher</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">marker</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">params</span><span class="p">[</span><span class="s">&#39;visualize_sensors&#39;</span><span class="p">]:</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">attached</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">vehicle</span><span class="o">.</span><span class="n">sensors</span><span class="p">):</span>
+            <span class="n">sensor</span> <span class="o">=</span> <span class="n">attached</span><span class="o">.</span><span class="n">sensor</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sensor</span><span class="p">,</span> <span class="n">MyRaytracer</span><span class="p">):</span> <span class="c"># XXX</span>
+                <span class="n">visualize_raytracer</span><span class="p">(</span><span class="n">publisher</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">attached</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="visualize_raytracer"><a class="viewcode-back" href="../../../api/vehicles_boot.ros_visualization.html#vehicles_boot.ros_visualization.ros_plot_vehicle.visualize_raytracer">[docs]</a><span class="k">def</span> <span class="nf">visualize_raytracer</span><span class="p">(</span><span class="n">publisher</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">attached</span><span class="p">):</span>
+    <span class="n">points_width</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s">&#39;points_width&#39;</span><span class="p">]</span>
+    <span class="n">z_sensor_width</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s">&#39;z_sensor_width&#39;</span><span class="p">]</span>
+    <span class="n">stamp</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s">&#39;stamp&#39;</span><span class="p">]</span>
+    <span class="n">frame_id</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s">&#39;world_frame&#39;</span><span class="p">]</span>
+    <span class="n">z_sensor</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s">&#39;z_sensor&#39;</span><span class="p">]</span>
+    <span class="n">epsilon</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s">&#39;points_width&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1.5</span>
+
+    <span class="n">sensor</span> <span class="o">=</span> <span class="n">attached</span><span class="o">.</span><span class="n">sensor</span>
+    <span class="n">observations</span> <span class="o">=</span> <span class="n">attached</span><span class="o">.</span><span class="n">current_observations</span>
+    <span class="n">world_pose</span> <span class="o">=</span> <span class="n">attached</span><span class="o">.</span><span class="n">current_pose</span>
+    <span class="n">directions</span> <span class="o">=</span> <span class="n">sensor</span><span class="o">.</span><span class="n">directions</span>
+    <span class="n">readings</span> <span class="o">=</span> <span class="n">observations</span><span class="p">[</span><span class="s">&#39;readings&#39;</span><span class="p">]</span>
+    <span class="n">luminance</span> <span class="o">=</span> <span class="n">observations</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;luminance&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+
+    <span class="n">points_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">theta</span><span class="p">,</span> <span class="n">reading</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">directions</span><span class="p">,</span> <span class="n">readings</span><span class="p">):</span>
+        <span class="n">r0</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">*</span> <span class="n">r0</span>
+        <span class="n">y0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">*</span> <span class="n">r0</span>
+        <span class="n">points_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">z_sensor</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">reading</span> <span class="o">-</span> <span class="n">epsilon</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">reading</span> <span class="o">-</span> <span class="n">epsilon</span><span class="p">)</span>
+        <span class="n">points_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">params</span><span class="p">[</span><span class="s">&#39;z_sensor&#39;</span><span class="p">]))</span>
+
+    <span class="n">points</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">theta</span><span class="p">,</span> <span class="n">reading</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">directions</span><span class="p">,</span> <span class="n">readings</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">reading</span> <span class="o">-</span> <span class="n">epsilon</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">reading</span> <span class="o">-</span> <span class="n">epsilon</span><span class="p">)</span>
+        <span class="n">points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z_sensor</span><span class="p">))</span>
+    <span class="n">points_circle</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">points_circle_radius</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">theta</span> <span class="ow">in</span> <span class="n">directions</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">*</span> <span class="n">points_circle_radius</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">*</span> <span class="n">points_circle_radius</span>
+        <span class="n">points_circle</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z_sensor</span><span class="p">))</span>
+
+    <span class="n">marker</span> <span class="o">=</span> <span class="n">Marker</span><span class="p">()</span>
+    <span class="n">marker</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">frame_id</span> <span class="o">=</span> <span class="n">frame_id</span>
+    <span class="n">marker</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">stamp</span> <span class="o">=</span> <span class="n">stamp</span>
+    <span class="n">marker</span><span class="o">.</span><span class="n">ns</span> <span class="o">=</span> <span class="s">&quot;sensor</span><span class="si">%s</span><span class="s">-ranges&quot;</span> <span class="o">%</span> <span class="n">i</span>
+    <span class="n">marker</span><span class="o">.</span><span class="n">pose</span> <span class="o">=</span> <span class="n">ROS_Pose_from_SE3</span><span class="p">(</span><span class="n">world_pose</span><span class="p">)</span>
+    <span class="n">marker</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">Marker</span><span class="o">.</span><span class="n">LINE_LIST</span>  <span class="c"># @UndefinedVariable</span>
+    <span class="n">marker</span><span class="o">.</span><span class="n">action</span> <span class="o">=</span> <span class="n">Marker</span><span class="o">.</span><span class="n">ADD</span>  <span class="c"># @UndefinedVariable</span>
+    <span class="n">marker</span><span class="o">.</span><span class="n">points</span> <span class="o">=</span> <span class="n">points_list</span>
+    <span class="n">marker</span><span class="o">.</span><span class="n">scale</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mf">0.03</span>
+    <span class="n">marker</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">ColorRGBA</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">publisher</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">marker</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">luminance</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">colors</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">luminance</span><span class="p">:</span>
+            <span class="n">colors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ColorRGBA</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+        <span class="n">marker</span> <span class="o">=</span> <span class="n">Marker</span><span class="p">()</span>
+        <span class="n">marker</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">frame_id</span> <span class="o">=</span> <span class="n">frame_id</span>
+        <span class="n">marker</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">stamp</span> <span class="o">=</span> <span class="n">stamp</span>
+        <span class="n">marker</span><span class="o">.</span><span class="n">ns</span> <span class="o">=</span> <span class="s">&quot;sensor</span><span class="si">%s</span><span class="s">-luminance&quot;</span> <span class="o">%</span> <span class="n">i</span>
+        <span class="n">marker</span><span class="o">.</span><span class="n">pose</span> <span class="o">=</span> <span class="n">ROS_Pose_from_SE3</span><span class="p">(</span><span class="n">world_pose</span><span class="p">)</span>
+        <span class="n">marker</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">Marker</span><span class="o">.</span><span class="n">POINTS</span>  <span class="c"># @UndefinedVariable</span>
+        <span class="n">marker</span><span class="o">.</span><span class="n">action</span> <span class="o">=</span> <span class="n">Marker</span><span class="o">.</span><span class="n">ADD</span>  <span class="c"># @UndefinedVariable</span>
+        <span class="n">marker</span><span class="o">.</span><span class="n">points</span> <span class="o">=</span> <span class="n">points</span>
+        <span class="n">marker</span><span class="o">.</span><span class="n">scale</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">points_width</span>
+        <span class="n">marker</span><span class="o">.</span><span class="n">scale</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">z_sensor_width</span>
+        <span class="n">marker</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">ColorRGBA</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">marker</span><span class="o">.</span><span class="n">colors</span> <span class="o">=</span> <span class="n">colors</span>
+        <span class="n">publisher</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">marker</span><span class="p">)</span>
+
+        <span class="n">marker</span> <span class="o">=</span> <span class="n">Marker</span><span class="p">()</span>
+        <span class="n">marker</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">frame_id</span> <span class="o">=</span> <span class="n">frame_id</span>
+        <span class="n">marker</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">stamp</span> <span class="o">=</span> <span class="n">stamp</span>
+        <span class="n">marker</span><span class="o">.</span><span class="n">ns</span> <span class="o">=</span> <span class="s">&quot;sensor</span><span class="si">%s</span><span class="s">-luminance-circle&quot;</span> <span class="o">%</span> <span class="n">i</span>
+        <span class="n">marker</span><span class="o">.</span><span class="n">pose</span> <span class="o">=</span> <span class="n">ROS_Pose_from_SE3</span><span class="p">(</span><span class="n">world_pose</span><span class="p">)</span>
+        <span class="n">marker</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">Marker</span><span class="o">.</span><span class="n">POINTS</span>  <span class="c"># @UndefinedVariable</span>
+        <span class="n">marker</span><span class="o">.</span><span class="n">action</span> <span class="o">=</span> <span class="n">Marker</span><span class="o">.</span><span class="n">ADD</span>  <span class="c"># @UndefinedVariable</span>
+        <span class="n">marker</span><span class="o">.</span><span class="n">points</span> <span class="o">=</span> <span class="n">points_circle</span>
+        <span class="n">marker</span><span class="o">.</span><span class="n">scale</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">points_width</span>
+        <span class="n">marker</span><span class="o">.</span><span class="n">scale</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">z_sensor_width</span>
+        <span class="n">marker</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">ColorRGBA</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">marker</span><span class="o">.</span><span class="n">colors</span> <span class="o">=</span> <span class="n">colors</span>
+        <span class="n">publisher</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">marker</span><span class="p">)</span>
+</pre></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">Vehicles 2.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer">
+        &copy; Copyright 2010, Andrea Censi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+	
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-155626-14']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+
+  </body>
+</html>

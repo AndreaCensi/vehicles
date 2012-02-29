@@ -7,7 +7,8 @@
     <!-- Use imagezoom plugin --> 
     <script type="text/javascript" 
         src="images/static/jquery/jquery.imageZoom.js"></script>
-    <link rel="stylesheet" href="images/static/jquery/jquery.imageZoom.css"/>
+    <link rel="stylesheet" 
+          href="images/static/jquery/jquery.imageZoom.css"/>
     <script type="text/javascript"> 
         $(document).ready( function () {
             $('.zoomable').imageZoom();
@@ -19,10 +20,31 @@
         
     </style>
 
-    <link rel="stylesheet" href="images/static/reprep/default_style.css"/>
+    <link rel="stylesheet" 
+          href="images/static/reprep/default_style.css"/>
 
     <title> vehicles </title>
 <body>
+
+<p id="reprep-head"> 
+    Report created on 2012-02-29-12:17:20
+    by <a href="http://purl.org/censi/2010/RepRep">RepRep</a>.
+    Show:
+    <input type="submit" name="datanode_toggle" 
+           value="data nodes" id="datanode_toggle" /> 
+</p>
+
+
+<script type="text/javascript">
+ $(document).ready(function() {
+   $('.datanode').hide();
+   $('#datanode_toggle').click(function(){
+     $('.datanode').toggle();
+   });
+ });
+</script>
+
+
 
     <div class='report-node' id="vehicles">
     <h>vehicles</h><section> 
@@ -36,134 +58,59 @@
 	<th>sensors</th>
 </tr>
 <tr class="even">
-<th>d_SE2_car_v-cam360</th>
-	<td>A simple car with an omnidirectional camera.</td>
-	<td>d_SE2_car_v</td>
-	<td>[{'id_sensor': 'cam_f360_n180'}]</td>
-</tr>
-<tr class="odd">
-<th>d_SE2_car_v-rf360</th>
-	<td>A simple car with an omnidirectional range-finder.</td>
-	<td>d_SE2_car_v</td>
-	<td>[{'id_sensor': 'rf360'}]</td>
-</tr>
-<tr class="even">
-<th>d_SE2_dd_v2-cam360</th>
-	<td>Differential drive with omnidirectional camera (Faster)</td>
-	<td>d_SE2_dd_v2</td>
-	<td>[{'id_sensor': 'cam_f360_n180', 'pose': [0, 0, 0]}]</td>
-</tr>
-<tr class="odd">
-<th>d_SE2_dd_v2-rf360</th>
-	<td>Differential drive with omnidirectional range-finder (faster).</td>
-	<td>d_SE2_dd_v2</td>
-	<td>[{'id_sensor': 'rf360'}]</td>
-</tr>
-<tr class="even">
-<th>d_SE2_dd_v-cam360</th>
-	<td>Differential drive with omnidirectional camera</td>
+<th>d_SE2_dd_v-cam_f180_n90_s</th>
+	<td>Differential drive robot</td>
 	<td>d_SE2_dd_v</td>
-	<td>[{'id_sensor': 'cam_f360_n180', 'pose': [0, 0, 0]}]</td>
-</tr>
-<tr class="odd">
-<th>d_SE2_dd_v-rf360</th>
-	<td>Differential drive with omnidirectional range-finder.</td>
-	<td>d_SE2_dd_v</td>
-	<td>[{'id_sensor': 'rf360', 'pose': [0, 0, 0]}]</td>
-</tr>
-<tr class="even">
-<th>d_SE2_rb_v-cam180</th>
-	<td>An omnidirectional robot with a 180deg camera.</td>
-	<td>d_SE2_rb_v</td>
-	<td>[{'id_sensor': 'cam_f180_n180'}]</td>
+	<td>[{'id_sensor': 'cam_f180_n90_s'}]</td>
 </tr>
 <tr class="odd">
 <th>d_SE2_rb_v-cam180-stereo</th>
 	<td>An omnidirectional robot with two 180deg camera.</td>
 	<td>d_SE2_rb_v</td>
-	<td>[{'id_sensor': 'cam_f180_n90', 'pose': [0, 0.29999999999999999, 0]}, {'id_sensor': 'cam_f180_n90', 'pose': [0, -0.29999999999999999, 0]}]</td>
+	<td>[{'id_sensor': 'cam_f180_n90_s', 'pose': [0, 0.2, 0]}, {'id_sensor': 'cam_f180_n90_s', 'pose': [0, -0.2, 0]}]</td>
 </tr>
 <tr class="even">
-<th>d_SE2_rb_v-cam360</th>
-	<td>An omnidirectional robot with a 360deg camera.</td>
-	<td>d_SE2_rb_v</td>
-	<td>[{'id_sensor': 'cam_f360_n180'}]</td>
-</tr>
-<tr class="odd">
-<th>d_SE2_rb_v-fs12</th>
-	<td>A robot with a field sampler.</td>
-	<td>d_SE2_rb_v</td>
-	<td>[{'id_sensor': 'fs_05_12x12'}]</td>
-</tr>
-<tr class="even">
-<th>d_SE2_rb_v-random_5</th>
-	<td>An omnidirectional robot with a 5-sensels random sensor.</td>
-	<td>d_SE2_rb_v</td>
-	<td>[{'id_sensor': 'random_5', 'pose': [0, 0, 0]}]</td>
-</tr>
-<tr class="odd">
-<th>d_SE2_rb_v-rf180</th>
-	<td>An omnidirectional robot with a 180deg range finder.</td>
-	<td>d_SE2_rb_v</td>
-	<td>[{'id_sensor': 'rf180'}]</td>
-</tr>
-<tr class="even">
-<th>d_SE2_rb_v-rf360</th>
-	<td>An omnidirectional robot with a 360deg range finder.</td>
-	<td>d_SE2_rb_v</td>
-	<td>[{'id_sensor': 'rf360'}]</td>
-</tr>
-<tr class="odd">
-<th>d_fixed-cam360</th>
-	<td>A fixed camera.</td>
-	<td>d_fixed</td>
-	<td>[{'id_sensor': 'cam_f360_n180'}]</td>
-</tr>
-<tr class="even">
-<th>d_fixed-rf360</th>
-	<td>A fixed range finder.</td>
-	<td>d_fixed</td>
-	<td>[{'id_sensor': 'rf360'}]</td>
-</tr>
-<tr class="odd">
 <th>example_custom_vehicle</th>
 	<td>Specifies everything explicitly</td>
-	<td>{'code': ['vehicles_dynamics.CircleForce', {'max_force': 1, 'mass': 1, 'damping': 2}], 'id': 'example_custom_dynamics', 'desc': 'Particle on S1 controlled in force.'}</td>
-	<td>[{'pose': [0, 0, 0], 'sensor': {'code': ['vehicles.sensors.PhotoreceptorsUniform', {'num_sensels': 180, 'fov_deg': 180}], 'id': 'my_cam', 'desc': 'A camera with 180fov.'}}]</td>
+	<td>{'code': ['vehicles.library.dynamics.CircleForce', {'max_force': 1, 'mass': 1, 'damping': 2}], 'id': 'example_custom_dynamics', 'desc': 'Particle on S1 controlled in force.'}</td>
+	<td>[{'pose': [0, 0, 0], 'sensor': {'code': ['vehicles.library.sensors.PhotoreceptorsUniform', {'num_sensels': 180, 'fov_deg': 180}], 'id': 'my_cam', 'desc': 'A camera with 180fov.'}}]</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <th>landroid-4cam</th>
 	<td>Model for the landroid; only cam</td>
 	<td>d_SE2_car_v</td>
-	<td>[{'id_sensor': 'cam_f60_n45', 'pose': [0, 0, 0]}, {'id_sensor': 'cam_f60_n45', 'pose': [0, 0, 90]}, {'id_sensor': 'cam_f60_n45', 'pose': [0, 0, -90]}, {'id_sensor': 'cam_f60_n45', 'pose': [0, 0, 180]}]</td>
+	<td>[{'id_sensor': 'cam_f60_n45', 'pose': [0.15, 0, 0]}, {'id_sensor': 'cam_f60_n45', 'pose': [-0.05, 0.075, 90]}, {'id_sensor': 'cam_f60_n45', 'pose': [-0.05, -0.075, -90]}, {'id_sensor': 'cam_f60_n45', 'pose': [-0.15, 0, 180]}]</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <th>landroid-hokuyo</th>
 	<td>Model for the landroid; only Hokuyo.</td>
 	<td>d_SE2_car_v</td>
-	<td>[{'id_sensor': 'rf_f270_n180', 'pose': [0, 0, 0]}]</td>
+	<td>[{'id_sensor': 'rf_f270_n180', 'pose': [0.03, 0, 0]}]</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <th>landroid-hokuyo-4cam</th>
 	<td>Model for the landroid; Hokuyo + cams</td>
 	<td>d_SE2_car_v</td>
-	<td>[{'id_sensor': 'rf_f270_n180', 'pose': [0.10000000000000001, 0, 0]}, {'id_sensor': 'cam_f60_n45', 'pose': [0, 0, 0]}, {'id_sensor': 'cam_f60_n45', 'pose': [0, 0, 90]}, {'id_sensor': 'cam_f60_n45', 'pose': [0, 0, -90]}, {'id_sensor': 'cam_f60_n45', 'pose': [0, 0, 180]}]</td>
+	<td>[{'id_sensor': 'rf_f270_n180', 'pose': [0.03, 0, 0]}, {'id_sensor': 'cam_f60_n45', 'pose': [0.15, 0, 0]}, {'id_sensor': 'cam_f60_n45', 'pose': [-0.05, 0.075, 90]}, {'id_sensor': 'cam_f60_n45', 'pose': [-0.05, -0.075, -90]}, {'id_sensor': 'cam_f60_n45', 'pose': [-0.15, 0, 180]}]</td>
+</tr>
+<tr class="even">
+<th>v_se2_k_cam360</th>
+	<td>Kinematic Fly, controlled in velocity, 3DOF, 360 photoreceptors</td>
+	<td>d_SE2_rb_v_n1</td>
+	<td>[{'id_sensor': 'photo_f360_n180', 'extra': {'skin': 'transparent'}}]</td>
 </tr>
 <tr class="odd">
-<th>orb-1d</th>
-	<td>An orb controlled in velocity</td>
-	<td>d_S1_rb_v</td>
-	<td>[{'id_sensor': 'cam_f60_n45'}]</td>
+<th>v_se2_k_fwd_cam360</th>
+	<td>Kinematic Fly, controlled in velocity, fixed linear vel, 360 photoreceptors</td>
+	<td>d_SE2_fwd_v_n1</td>
+	<td>[{'id_sensor': 'photo_f360_n180', 'extra': {'skin': 'transparent'}}]</td>
 </tr>
 </tbody>
 </table>
 </section> 
 </div> 
 
-
-<p id="reprep-credits"> 
-    Created by <a href="http://purl.org/censi/2010/RepRep">RepRep</a>. 
-</p>
+ 
 
 </body>
 </html>

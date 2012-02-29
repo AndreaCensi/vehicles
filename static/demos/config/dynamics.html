@@ -7,7 +7,8 @@
     <!-- Use imagezoom plugin --> 
     <script type="text/javascript" 
         src="images/static/jquery/jquery.imageZoom.js"></script>
-    <link rel="stylesheet" href="images/static/jquery/jquery.imageZoom.css"/>
+    <link rel="stylesheet" 
+          href="images/static/jquery/jquery.imageZoom.css"/>
     <script type="text/javascript"> 
         $(document).ready( function () {
             $('.zoomable').imageZoom();
@@ -19,10 +20,31 @@
         
     </style>
 
-    <link rel="stylesheet" href="images/static/reprep/default_style.css"/>
+    <link rel="stylesheet" 
+          href="images/static/reprep/default_style.css"/>
 
     <title> dynamics </title>
 <body>
+
+<p id="reprep-head"> 
+    Report created on 2012-02-29-12:17:20
+    by <a href="http://purl.org/censi/2010/RepRep">RepRep</a>.
+    Show:
+    <input type="submit" name="datanode_toggle" 
+           value="data nodes" id="datanode_toggle" /> 
+</p>
+
+
+<script type="text/javascript">
+ $(document).ready(function() {
+   $('.datanode').hide();
+   $('#datanode_toggle').click(function(){
+     $('.datanode').toggle();
+   });
+ });
+</script>
+
+
 
     <div class='report-node' id="dynamics">
     <h>dynamics</h><section> 
@@ -36,102 +58,124 @@
 <tr class="even">
 <th>d_R1_rb_f</th>
 	<td>Rigid body on R1, controlled in force.</td>
-	<td>['vehicles_dynamics.EuclideanForce', {'ndim': 1, 'max_force': [2], 'mass': 1, 'damping': 1}]</td>
+	<td>['vehicles.library.dynamics.EuclideanForce', {'ndim': 1, 'max_force': [2], 'mass': 1, 'damping': 1}]</td>
 </tr>
 <tr class="odd">
 <th>d_R1_rb_v</th>
 	<td>Rigid body on R1, controlled in velocity.</td>
-	<td>['vehicles_dynamics.EuclideanVel', {'ndim': 1, 'max_velocity': [1]}]</td>
+	<td>['vehicles.library.dynamics.EuclideanVel', {'ndim': 1, 'max_velocity': [1]}]</td>
 </tr>
 <tr class="even">
 <th>d_R2_rb_f</th>
 	<td>Rigid body on R2, controlled in force.</td>
-	<td>['vehicles_dynamics.EuclideanForce', {'ndim': 2, 'max_force': [2, 2], 'mass': 1, 'damping': 1}]</td>
+	<td>['vehicles.library.dynamics.EuclideanForce', {'ndim': 2, 'max_force': [2, 2], 'mass': 1, 'damping': 1}]</td>
 </tr>
 <tr class="odd">
 <th>d_R2_rb_v</th>
 	<td>Rigid body on R2, controlled in velocity.</td>
-	<td>['vehicles_dynamics.EuclideanVel', {'ndim': 2, 'max_velocity': [1, 1]}]</td>
+	<td>['vehicles.library.dynamics.EuclideanVel', {'ndim': 2, 'max_velocity': [1, 1]}]</td>
 </tr>
 <tr class="even">
 <th>d_R3_rb_f</th>
 	<td>Rigid body on R2, controlled in force.</td>
-	<td>['vehicles_dynamics.EuclideanForce', {'ndim': 3, 'max_force': [2, 2, 2], 'mass': 1, 'damping': 1}]</td>
+	<td>['vehicles.library.dynamics.EuclideanForce', {'ndim': 3, 'max_force': [2, 2, 2], 'mass': 1, 'damping': 1}]</td>
 </tr>
 <tr class="odd">
 <th>d_R3_rb_v</th>
 	<td>Rigid body on R2, controlled in velocity.</td>
-	<td>['vehicles_dynamics.EuclideanVel', {'ndim': 3, 'max_velocity': [1, 1, 1]}]</td>
+	<td>['vehicles.library.dynamics.EuclideanVel', {'ndim': 3, 'max_velocity': [1, 1, 1]}]</td>
 </tr>
 <tr class="even">
 <th>d_S1_rb_f</th>
 	<td>Particle on S1 controlled in force.</td>
-	<td>['vehicles_dynamics.CircleForce', {'max_force': 2, 'mass': 1, 'damping': 1}]</td>
+	<td>['vehicles.library.dynamics.CircleForce', {'max_force': 2, 'mass': 1, 'damping': 1}]</td>
 </tr>
 <tr class="odd">
 <th>d_S1_rb_v</th>
 	<td>Particle on S1 controlled in velocity.</td>
-	<td>['vehicles_dynamics.CircleVel', {'max_velocity': 1}]</td>
+	<td>['vehicles.library.dynamics.CircleVel', {'max_velocity': 1}]</td>
 </tr>
 <tr class="even">
 <th>d_SE2_car_v</th>
 	<td>The simple car</td>
-	<td>['vehicles_dynamics.SimpleCar', {'max_steering_angle': 0.52359876999999999, 'L': 0.5, 'max_linear_velocity': 1}]</td>
+	<td>['vehicles.library.dynamics.SimpleCar', {'max_steering_angle': 0.52359877, 'axis_dist': 0.7, 'L': 0.5, 'max_linear_velocity': 1}]</td>
 </tr>
 <tr class="odd">
-<th>d_SE2_dd_v</th>
-	<td>Differential drive robot on SE2</td>
-	<td>['vehicles_dynamics.DifferentialDrive', {'max_angular_velocity': 0.20000000000000001, 'max_linear_velocity': 1}]</td>
+<th>d_SE2_car_v_w</th>
+	<td>The simple car (with wheels joints)</td>
+	<td>['vehicles.library.dynamics.CarWithWheels', {'max_steering_angle': 0.52359877, 'axis_dist': 0.7, 'L': 0.5, 'max_linear_velocity': 1}]</td>
 </tr>
 <tr class="even">
-<th>d_SE2_dd_v2</th>
-	<td>Differential drive robot on SE2 (faster angular velocity)</td>
-	<td>['vehicles_dynamics.DifferentialDrive', {'max_angular_velocity': 1, 'max_linear_velocity': 1}]</td>
+<th>d_SE2_dd_v</th>
+	<td>Differential drive robot on SE2</td>
+	<td>['vehicles.library.dynamics.DifferentialDrive', {'max_angular_velocity': 0.2, 'max_linear_velocity': 1.0}]</td>
 </tr>
 <tr class="odd">
+<th>d_SE2_dd_v2</th>
+	<td>Differential drive robot on SE2 (faster angular velocity)</td>
+	<td>['vehicles.library.dynamics.DifferentialDrive', {'max_angular_velocity': 1.0, 'max_linear_velocity': 1.0}]</td>
+</tr>
+<tr class="even">
 <th>d_SE2_dubins</th>
 	<td>Dubins car</td>
-	<td>['vehicles_dynamics.DubinsCar', {'max_steering_angle': 0.52359876999999999, 'L': 0.5, 'max_linear_velocity': 1}]</td>
+	<td>['vehicles.library.dynamics.DubinsCar', {'max_steering_angle': 0.52359877, 'axis_dist': 0.7, 'L': 0.5, 'max_linear_velocity': 1}]</td>
+</tr>
+<tr class="odd">
+<th>d_SE2_dubins_w</th>
+	<td>Dubins car (with wheels)</td>
+	<td>['vehicles.library.dynamics.DubinsCarWithWheels', {'max_steering_angle': 0.52359877, 'axis_dist': 0.7, 'L': 0.5, 'max_linear_velocity': 1}]</td>
 </tr>
 <tr class="even">
 <th>d_SE2_fwd_v</th>
-	<td>Planar vehicle with fixed forward velocity, controlled in angular vel.</td>
-	<td>['vehicles_dynamics.SE2Forward', {'linear_velocity': 1, 'max_angular_velocity': 0.20000000000000001}]</td>
+	<td>Planar vehicle with fixed forward velocity, controlled in angular velocity.</td>
+	<td>['vehicles.library.dynamics.SE2Forward', {'linear_velocity': 1, 'max_angular_velocity': 0.2}]</td>
 </tr>
 <tr class="odd">
+<th>d_SE2_fwd_v_n1</th>
+	<td>Planar vehicle with fixed forward velocity, controlled in angular vel, with noise added</td>
+	<td>['vehicles.library.dynamics.SE2Forward', {'noise_mult': [0, 0, 0], 'linear_velocity': 1, 'max_angular_velocity': 2, 'noise_drift': [0.1, 0, 0]}]</td>
+</tr>
+<tr class="even">
 <th>d_SE2_rb_v</th>
 	<td>Planar robot on SE2</td>
-	<td>['vehicles_dynamics.SE2Dynamics', {'max_angular_velocity': 1, 'max_linear_velocity': [1, 1]}]</td>
+	<td>['vehicles.library.dynamics.SE2Dynamics', {'max_angular_velocity': 1, 'max_linear_velocity': [1, 1]}]</td>
+</tr>
+<tr class="odd">
+<th>d_SE2_rb_v_n1</th>
+	<td>Planar vehicle with fixed forward velocity, controlled in angular vel.</td>
+	<td>['vehicles.library.dynamics.SE2Dynamics', {'noise_mult': [0, 0, 0], 'max_linear_velocity': [1, 1], 'max_angular_velocity': 2, 'noise_drift': [0.1, 0.1, 0.1]}]</td>
 </tr>
 <tr class="even">
 <th>d_SE2_reeds_sheep</th>
 	<td>Reeds-Sheep car</td>
-	<td>['vehicles_dynamics.ReedsSheepCar', {'max_steering_angle': 0.52359876999999999, 'L': 0.5, 'max_linear_velocity': 1}]</td>
+	<td>['vehicles.library.dynamics.ReedsSheepCar', {'max_steering_angle': 0.52359877, 'axis_dist': 0.7, 'L': 0.5, 'max_linear_velocity': 1}]</td>
 </tr>
 <tr class="odd">
-<th>d_SO3_rb_f</th>
-	<td>Rigid body in SO3, controlled in force.</td>
-	<td>['vehicles_dynamics.SO3Force', {'max_force': [2, 2, 2], 'mass': 1, 'damping': 1}]</td>
+<th>d_SE2_reeds_sheep_w</th>
+	<td>Reeds-Sheep car (with wheels)</td>
+	<td>['vehicles.library.dynamics.ReedsSheepCarWithWheels', {'max_steering_angle': 0.52359877, 'axis_dist': 0.7, 'L': 0.5, 'max_linear_velocity': 1}]</td>
 </tr>
 <tr class="even">
-<th>d_SO3_rb_v</th>
-	<td>Rigid body on SO3, controlled in velocity.</td>
-	<td>['vehicles_dynamics.SO3Vel', {'max_angular_velocity': [1, 1, 1]}]</td>
+<th>d_SO3_rb_f</th>
+	<td>Rigid body in SO3, controlled in force.</td>
+	<td>['vehicles.library.dynamics.SO3Force', {'max_force': [2, 2, 2], 'mass': 1, 'damping': 1}]</td>
 </tr>
 <tr class="odd">
+<th>d_SO3_rb_v</th>
+	<td>Rigid body on SO3, controlled in velocity.</td>
+	<td>['vehicles.library.dynamics.SO3Vel', {'max_angular_velocity': [1, 1, 1]}]</td>
+</tr>
+<tr class="even">
 <th>d_fixed</th>
 	<td>A robot that is out of battery.</td>
-	<td>['vehicles_dynamics.SE2Dynamics', {'max_angular_velocity': 0, 'max_linear_velocity': [0, 0]}]</td>
+	<td>['vehicles.library.dynamics.SE2Dynamics', {'max_angular_velocity': 0, 'max_linear_velocity': [0, 0]}]</td>
 </tr>
 </tbody>
 </table>
 </section> 
 </div> 
 
-
-<p id="reprep-credits"> 
-    Created by <a href="http://purl.org/censi/2010/RepRep">RepRep</a>. 
-</p>
+ 
 
 </body>
 </html>

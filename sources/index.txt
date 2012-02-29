@@ -18,12 +18,14 @@ In the mean time, see `some examples of the simulations produced by this package
 
 .. __: http://www.cds.caltech.edu/~ender/pri/vehicles-videos/videos/videos-exz1sb.html
 
-* For reference, see the `API docs`__.
+* For reference, see the API doc created by EpyDoc_ or by Sphinx_.
 
-.. __: static/apidocs/index.html
+.. _epydoc: static/apidocs/index.html
+.. _sphinx: api_reference.html
 
 
-* `Misc demos`__.
+
+* `Misc visualization demos`__.
 
 .. __: static/demos/
 
