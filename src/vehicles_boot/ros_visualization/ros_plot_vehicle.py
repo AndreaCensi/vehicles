@@ -1,7 +1,7 @@
 from . import Marker, ColorRGBA, Point, ROS_Pose_from_SE3
 from geometry import SE3_from_rotation_translation
-from vehicles import Raytracer
 import numpy as np
+from vehicles.sensors.raytracer.textured_raytracer import Raytracer
 
 
 def publish_vehicle(publisher, params, vehicle):

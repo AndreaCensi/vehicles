@@ -1,5 +1,5 @@
 def constant_texture(color):
-    return ['vehicles.worlds.textures.ConstantTexture', dict(value=color)]
+    return ['vehicles.library.textures.ConstantTexture', dict(value=color)]
 
 
 class ConstantTexture:
