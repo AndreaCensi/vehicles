@@ -1,6 +1,6 @@
 from . import Counter, contract
-from ..interfaces import World, Source
-from vehicles.worlds.stochastic_box2 import KernelInverse
+from . import World, Source
+from vehicles.library.worlds.stochastic_box2 import KernelInverse
 
 __all__ = ['StochasticSources']
 

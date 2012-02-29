@@ -1,5 +1,5 @@
 from . import contract, np
-from .. import VehicleSensor
+from vehicles import VehicleSensor
 
 
 class RandomSensor(VehicleSensor):

@@ -2,7 +2,7 @@ from . import np
 from geometry import SE2_from_SE3, translation_from_SE2, SE3
 from nose.plugins.attrib import attr
 from vehicles import  VehiclesConfig
-from vehicles.worlds.boxes import Box
+from vehicles.library.worlds import Box
 
 
 @attr('simulation')

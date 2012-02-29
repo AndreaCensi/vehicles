@@ -1,5 +1,6 @@
-from . import Counter, random_checkerboard, box, np, contract
-from ..interfaces import Circle, World, Source
+
+from . import (Circle, World, Source, Counter, random_checkerboard, box, np,
+    contract)
 
 __all__ = ['StochasticBox2', 'KernelExponential', 'KernelInverse']
 
@@ -63,6 +64,7 @@ class StochasticBox2(World):
         return []  # no changes
 
 
+# TODO: move away
 class KernelExponential():
     def __init__(self, L):
         ''' L is the size of 99% area '''
@@ -74,7 +76,7 @@ class KernelExponential():
 
     @staticmethod
     def spec(L):
-        return ['vehicles.worlds.KernelExponential', {'L': L}]
+        return ['vehicles.library.worlds.KernelExponential', {'L': L}]
 
 
 class KernelInverse():
@@ -90,4 +92,5 @@ class KernelInverse():
 
     @staticmethod
     def spec(scale, var):
-        return ['vehicles.worlds.KernelInverse', dict(scale=scale, var=var)]
+        return ['vehicles.library.worlds.KernelInverse',
+                dict(scale=scale, var=var)]

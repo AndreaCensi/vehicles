@@ -1,4 +1,4 @@
-from ..interfaces import World
+from . import World
 
 __all__ = ['Empty']
 

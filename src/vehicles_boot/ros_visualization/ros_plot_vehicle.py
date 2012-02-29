@@ -1,7 +1,7 @@
 from . import Marker, ColorRGBA, Point, ROS_Pose_from_SE3
 from geometry import SE3_from_rotation_translation
 import numpy as np
-from vehicles.sensors.raytracer.textured_raytracer import Raytracer
+from vehicles.library.sensors import MyRaytracer
 
 
 def publish_vehicle(publisher, params, vehicle):
@@ -30,7 +30,7 @@ def publish_vehicle(publisher, params, vehicle):
     if params['visualize_sensors']:
         for i, attached in enumerate(vehicle.sensors):
             sensor = attached.sensor
-            if isinstance(sensor, Raytracer):
+            if isinstance(sensor, MyRaytracer): # XXX
                 visualize_raytracer(publisher, params, i, attached)
 
 

@@ -84,7 +84,7 @@ def inspect_textures():
 # show_sensor_data = True)
 #            f.last().add_to(f)
 
-    filename = os.path.join(options.outdir, '%s.html' % basename)
+    filename = os.path.join(options.outdir, 'index.html')
     logger.info('Writing to %r.' % filename)
     r.to_html(filename)
 

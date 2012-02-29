@@ -2,7 +2,7 @@ from . import np, contract
 from abc import abstractmethod, ABCMeta
 from collections import namedtuple
 from geometry import SE2_from_xytheta, SE3_from_SE2
-import datetime
+from ..utils import unique_timestamp_string
 
 
 class World:
@@ -69,17 +69,3 @@ class World:
         y = np.random.uniform(self.bounds[1][0], self.bounds[1][1])
         return [x, y]
 
-
-# TODO: move away
-def unique_timestamp_string():
-    now = datetime.datetime.now()
-    s = now.isoformat()
-    s = s.replace('-', '').replace(':', '')
-    s = s.replace('T', '_').replace('.', '_')
-    return s
-
-
-def isodate():
-    now = datetime.datetime.now()
-    date = now.isoformat('-')[:19]
-    return date

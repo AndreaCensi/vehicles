@@ -2,7 +2,7 @@ from ... import VehicleSimulation, VehiclesConfig, logger
 from optparse import OptionParser
 from reprep import MIME_PNG, MIME_SVG
 import os
-from vehicles.utils import expand_string
+from ...utils import expand_string
 
 usage = """
 
@@ -124,7 +124,7 @@ def main():
             vehicles_cairo_display_png(filename,
                         sim_state=sim_state, **plot_params)
 
-    filename = os.path.join(options.outdir, '%s.html' % basename)
+    filename = os.path.join(options.outdir, 'index.html')
     logger.info('Writing to %r.' % filename)
     r.to_html(filename)
 

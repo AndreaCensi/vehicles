@@ -95,7 +95,7 @@ def main():
             vehicles_cairo_display_svg(filename, width=800, height=800,
                         sim_state=sim_state, **plot_params)
 
-    filename = os.path.join(options.outdir, '%s.html' % basename)
+    filename = os.path.join(options.outdir, 'index.html')
     logger.info('Writing to %r.' % filename)
     r.to_html(filename)
 

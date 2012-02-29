@@ -13,9 +13,12 @@ Interfaces
 .. autosummary::  
    :toctree: api
    
-   vehicles.Dynamics                 
+   Dynamics                 
    VehicleSensor            
    World                    
+   Vehicle
+   VehicleSimulation
+
    VehicleSkin              
 
 
@@ -36,7 +39,9 @@ Geometric primitives
 Library: worlds
 ---------------------
 
-.. automodule:: vehicles.library.worlds
+.. py:currentmodule:: vehicles.library.worlds
+
+.. automodule::  vehicles.library.worlds
    :members:
    :undoc-members:
    

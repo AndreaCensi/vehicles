@@ -1,5 +1,4 @@
-from . import contract, Counter
-from ..interfaces import Circle, World
+from . import Circle, World, contract, Counter
 from .utils import blackwhite_checkerboard
 
 __all__ = ['BigMamarama']

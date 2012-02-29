@@ -1,5 +1,4 @@
-from . import contract, np
-from ..interfaces import PolyLine
+from . import PolyLine, contract, np
 
 
 @contract(cell_width='>0')

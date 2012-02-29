@@ -11,7 +11,10 @@ class VehicleSkin:
         '''
             Draws the vehicle to the given context.
             
-            :param:cr: Cairo context
-            :param:joints: list of joints configuration, relative to robot
+            :param cr: Cairo context
+            :param joints: list of joints configuration, relative to robot
                 coordinates (joints[0] == Identity)
         '''
+
+    def njoints_required(self):
+        return 1

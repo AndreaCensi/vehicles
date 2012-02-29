@@ -1,6 +1,6 @@
 ''' PyVehicles main package: play with your vehicles zoo! '''
 
-__version__ = '1.2'
+__version__ = '2.0'
 
 __all__ = ['VehicleSensor', 'Field', 'PolyLine', 'Vehicle', 'Circle',
            'GeometricShape', 'VehiclesConstants', 'VehicleSimulation',
@@ -11,8 +11,8 @@ __all__ = ['VehicleSensor', 'Field', 'PolyLine', 'Vehicle', 'Circle',
 from contracts import contract
 import geometry  # loads all geometry contracts
 import numpy as np
-import logging
 
+import logging
 logging.basicConfig()
 logger = logging.getLogger("Vehicles")
 logger.setLevel(logging.DEBUG)

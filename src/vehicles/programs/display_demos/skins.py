@@ -59,11 +59,19 @@ def main():
 
             show_grid(cr, bx=[-3, +3], by=[-3, +3], spacing=1.0)
 
-            skin.draw_vehicle(cr, joints=[])
+            if skin.njoints_required() > 1:
+                logger.warning('Skipping skin %r' % id_skin)
+                continue
+
+            try:
+                skin.draw(cr, joints=[])
+            except Exception:
+                logger.error('Error for skin %r' % id_skin)
+                raise
 
             surf.write_to_png(filename) # Output to PNG
 
-    filename = os.path.join(options.outdir, 'skins_demo.html')
+    filename = os.path.join(options.outdir, 'index.html')
     logger.info('Writing to %r.' % filename)
     r.to_html(filename)
 

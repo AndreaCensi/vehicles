@@ -6,7 +6,17 @@ from vehicles import VehicleSkin, VehiclesConfig
 
 class ComplexSkin(VehicleSkin):
     def __init__(self, skins):
+        '''
+            skins:
+            - skin:
+              pose:  (unused)
+              joint:
+              
+        '''
         self.joint_skins = skins
+
+    def njoints_required(self):
+        return 1 + max(x['joint'] for x in self.joint_skins)
 
     @contract(joints='list(tuple(SE3,se3))')
     def draw(self, cr, joints=None, timestamp=None):

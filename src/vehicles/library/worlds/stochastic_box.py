@@ -1,5 +1,5 @@
 from . import random_checkerboard, box, np, contract, Counter
-from ..interfaces import Circle, World
+from . import Circle, World
 
 __all__ = ['StochasticBox']
 

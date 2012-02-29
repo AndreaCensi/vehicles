@@ -1,5 +1,5 @@
 from . import MyRaytracer, np
-from ...interfaces import PolyLine, Circle
+from vehicles import PolyLine, Circle
 from conf_tools import instantiate_spec
 from contracts import contract
 import warnings

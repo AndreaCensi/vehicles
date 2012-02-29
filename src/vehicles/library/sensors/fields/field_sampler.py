@@ -1,5 +1,5 @@
 from . import np, contract, logger
-from .. import Field, VehicleSensor, Source, VehiclesConstants
+from vehicles import Field, VehicleSensor, Source, VehiclesConstants
 from conf_tools import instantiate_spec
 from geometry import SE2_project_from_SE3
 

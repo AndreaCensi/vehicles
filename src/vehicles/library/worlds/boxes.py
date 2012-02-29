@@ -1,5 +1,4 @@
-from . import random_checkerboard, np, contract
-from ..interfaces import World, PolyLine
+from . import World, PolyLine, random_checkerboard, np, contract
 
 
 class Box(World):

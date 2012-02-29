@@ -1,10 +1,11 @@
-from . import publish_world, publish_vehicle, numpy_to_imgmsg
+from . import publish_vehicle, numpy_to_imgmsg
+from .. import BOVehicleSimulation
 from contracts import contract
 import contracts
 import numpy as np
-import rospy  # @UnresolvedImport
+import rospy # @UnresolvedImport
 import yaml
-from .. import BOVehicleSimulation
+from vehicles_boot.ros_visualization.ros_plot_world import publish_world
 
 
 class VizLevel:

@@ -1,6 +1,6 @@
 from ... import Vehicle, VehicleSimulation
-from ...worlds import Empty
 from ..fps_test import check_simulation
+from vehicles.library.worlds import Empty
 
 
 def check_blind_robot(id_dynamics, dynamics):

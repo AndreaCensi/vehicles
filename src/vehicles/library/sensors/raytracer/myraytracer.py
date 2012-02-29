@@ -1,4 +1,4 @@
-from ...interfaces import PolyLine, Circle
+from vehicles import PolyLine, Circle
 from contracts import contract
 from geometry import translation_angle_from_SE2
 import raytracer

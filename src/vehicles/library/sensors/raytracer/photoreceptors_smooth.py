@@ -1,5 +1,6 @@
-from . import TexturedRaytracer, contract, np, get_uniform_directions
-from .. import VehicleSensor, VehiclesConstants
+from . import TexturedRaytracer, contract, np
+from .. import  get_uniform_directions
+from vehicles import VehicleSensor, VehiclesConstants
 from conf_tools import instantiate_spec
 from geometry import SE2_project_from_SE3
 

@@ -1,6 +1,5 @@
-from . import np
+from . import np, logger
 from ..utils import check_yaml_friendly
-from .. import logger
 from abc import abstractmethod, ABCMeta
 from pprint import pformat
 

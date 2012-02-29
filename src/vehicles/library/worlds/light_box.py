@@ -1,5 +1,4 @@
-from . import contract
-from ..interfaces import Primitive, World
+from . import Primitive, World, contract
 
 __all__ = ['LightBox']
 
