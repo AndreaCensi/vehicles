@@ -9,3 +9,27 @@ sensors Package
     :undoc-members:
     :show-inheritance:
 
+:mod:`random_sensor` Module
+---------------------------
+
+.. automodule:: vehicles.library.sensors.random_sensor
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`utils` Module
+-------------------
+
+.. automodule:: vehicles.library.sensors.utils
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    vehicles.library.sensors.fields
+    vehicles.library.sensors.raytracer
+

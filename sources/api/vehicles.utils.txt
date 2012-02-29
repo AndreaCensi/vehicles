@@ -17,6 +17,14 @@ utils Package
     :undoc-members:
     :show-inheritance:
 
+:mod:`timestamps` Module
+------------------------
+
+.. automodule:: vehicles.utils.timestamps
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 :mod:`wildcards` Module
 -----------------------
 

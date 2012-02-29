@@ -1,0 +1,19 @@
+artic Package
+=============
+
+:mod:`artic` Package
+--------------------
+
+.. automodule:: vehicles.library.dynamics.artic
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`basetop` Module
+---------------------
+
+.. automodule:: vehicles.library.dynamics.artic.basetop
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

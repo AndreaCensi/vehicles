@@ -60,11 +60,10 @@
   <h1>Source code for vehicles.configuration.master</h1><div class="highlight"><pre>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="p">(</span><span class="n">check_valid_vehicle_config</span><span class="p">,</span> <span class="n">check_valid_world_config</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span>
     <span class="n">check_valid_dynamics_config</span><span class="p">,</span> <span class="n">check_valid_sensor_config</span><span class="p">,</span>
-    <span class="n">instance_vehicle_spec</span><span class="p">)</span>
+     <span class="n">instance_vehicle_spec</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">VehiclesConstants</span>
-<span class="kn">from</span> <span class="nn">..interfaces</span> <span class="kn">import</span> <span class="n">VehicleSensor</span><span class="p">,</span> <span class="n">World</span><span class="p">,</span> <span class="n">VehicleSkin</span>
+<span class="kn">from</span> <span class="nn">..interfaces</span> <span class="kn">import</span> <span class="n">VehicleSensor</span><span class="p">,</span> <span class="n">World</span><span class="p">,</span> <span class="n">VehicleSkin</span><span class="p">,</span> <span class="n">Dynamics</span>
 <span class="kn">from</span> <span class="nn">conf_tools</span> <span class="kn">import</span> <span class="n">ConfigMaster</span><span class="p">,</span> <span class="n">GenericInstance</span><span class="p">,</span> <span class="n">check_generic_code_desc</span>
-<span class="kn">from</span> <span class="nn">vehicles_dynamics</span> <span class="kn">import</span> <span class="n">Dynamics</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
 

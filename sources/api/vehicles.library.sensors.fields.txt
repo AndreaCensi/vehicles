@@ -1,0 +1,35 @@
+fields Package
+==============
+
+:mod:`fields` Package
+---------------------
+
+.. automodule:: vehicles.library.sensors.fields
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`field_sampler` Module
+---------------------------
+
+.. automodule:: vehicles.library.sensors.fields.field_sampler
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`field_sampler_rand_circle` Module
+---------------------------------------
+
+.. automodule:: vehicles.library.sensors.fields.field_sampler_rand_circle
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`field_sampler_uniform` Module
+-----------------------------------
+
+.. automodule:: vehicles.library.sensors.fields.field_sampler_uniform
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

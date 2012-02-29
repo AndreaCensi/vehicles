@@ -1,0 +1,266 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vehicles.library.dynamics.specializations.cars &mdash; Vehicles 1.2 documentation</title>
+    
+    <link rel="stylesheet" href="../../../../../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../../',
+        VERSION:     '1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../../static/doctools.js"></script>
+    <link rel="top" title="Vehicles 1.2 documentation" href="../../../../../index.html" />
+    <link rel="up" title="vehicles" href="../../../../vehicles.html" />
+	 
+
+
+   <style type="text/css">
+        span.brand { color: #a00;}
+   </style> 
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">Vehicles 1.2 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../../../../vehicles.html" accesskey="U">vehicles</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for vehicles.library.dynamics.specializations.cars</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">np</span><span class="p">,</span> <span class="n">contract</span><span class="p">,</span> <span class="n">SimpleKinematics</span>
+<span class="kn">from</span> <span class="nn">geometry</span> <span class="kn">import</span> <span class="p">(</span><span class="n">R1</span><span class="p">,</span> <span class="n">ProductManifold</span><span class="p">,</span> <span class="n">SE2</span><span class="p">,</span> <span class="n">se2_from_linear_angular</span><span class="p">,</span>
+    <span class="n">SE2_from_translation_angle</span><span class="p">,</span> <span class="n">SE3_from_SE2</span><span class="p">,</span> <span class="n">SE3</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">vehicles.interfaces.dynamics</span> <span class="kn">import</span> <span class="n">Dynamics</span>
+
+
+<div class="viewcode-block" id="SimpleCar"><a class="viewcode-back" href="../../../../../api/vehicles.library.dynamics.specializations.html#vehicles.library.dynamics.specializations.cars.SimpleCar">[docs]</a><span class="k">class</span> <span class="nc">SimpleCar</span><span class="p">(</span><span class="n">SimpleKinematics</span><span class="p">):</span>
+
+    <span class="nd">@contract</span><span class="p">(</span><span class="n">max_linear_velocity</span><span class="o">=</span><span class="s">&#39;&gt;0&#39;</span><span class="p">,</span>
+              <span class="n">max_steering_angle</span><span class="o">=</span><span class="s">&#39;&gt;0,&lt;pi*0.5&#39;</span><span class="p">,</span>
+              <span class="n">L</span><span class="o">=</span><span class="s">&#39;&gt;0&#39;</span><span class="p">,</span>
+              <span class="n">axis_dist</span><span class="o">=</span><span class="s">&#39;&gt;0&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_linear_velocity</span><span class="p">,</span> <span class="n">max_steering_angle</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span>
+                       <span class="n">axis_dist</span><span class="p">,</span>
+                       <span class="n">commands_format</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;C&#39;</span><span class="p">,</span> <span class="s">&#39;C&#39;</span><span class="p">],</span>
+                       <span class="n">commands_range</span><span class="o">=</span><span class="p">[[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">+</span><span class="mi">1</span><span class="p">]],</span>
+                       <span class="n">desc</span><span class="o">=</span><span class="s">&#39;Simple car dynamics&#39;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_linear_velocity</span> <span class="o">=</span> <span class="n">max_linear_velocity</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_steering_angle</span> <span class="o">=</span> <span class="n">max_steering_angle</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">L</span> <span class="o">=</span> <span class="n">L</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">axis_dist</span> <span class="o">=</span> <span class="n">axis_dist</span>
+        <span class="n">spec</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">&#39;desc&#39;</span><span class="p">:</span> <span class="n">desc</span><span class="p">,</span>
+            <span class="s">&#39;shape&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+            <span class="s">&#39;format&#39;</span><span class="p">:</span> <span class="n">commands_format</span><span class="p">,</span>
+            <span class="s">&#39;range&#39;</span><span class="p">:</span> <span class="n">commands_range</span><span class="p">,</span>
+            <span class="s">&#39;names&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;driving velocity&#39;</span><span class="p">,</span>
+                      <span class="s">&#39;steering angle&#39;</span><span class="p">],</span>
+            <span class="s">&#39;default&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+            <span class="s">&#39;extra&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;max_linear_velocity&#39;</span><span class="p">:</span> <span class="n">max_linear_velocity</span><span class="p">,</span>
+                      <span class="s">&#39;max_steering_angle&#39;</span><span class="p">:</span> <span class="n">max_steering_angle</span><span class="p">,</span>
+                      <span class="s">&#39;L&#39;</span><span class="p">:</span> <span class="n">L</span><span class="p">,</span>
+                      <span class="s">&#39;pose_space&#39;</span><span class="p">:</span> <span class="s">&#39;SE2&#39;</span><span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="n">SimpleKinematics</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                          <span class="n">pose_space</span><span class="o">=</span><span class="n">SE2</span><span class="p">,</span>
+                          <span class="n">commands_spec</span><span class="o">=</span><span class="n">spec</span><span class="p">)</span>
+
+<div class="viewcode-block" id="SimpleCar.compute_velocities"><a class="viewcode-back" href="../../../../../api/vehicles.library.dynamics.specializations.html#vehicles.library.dynamics.specializations.cars.SimpleCar.compute_velocities">[docs]</a>    <span class="k">def</span> <span class="nf">compute_velocities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">commands</span><span class="p">):</span>
+        <span class="n">steering_angle</span> <span class="o">=</span> <span class="n">commands</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_steering_angle</span>
+        <span class="n">linear_velocity</span> <span class="o">=</span> <span class="n">commands</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_linear_velocity</span>
+        <span class="n">angular_velocity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">steering_angle</span><span class="p">)</span> <span class="o">*</span> <span class="n">linear_velocity</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span>
+        <span class="n">vel</span> <span class="o">=</span> <span class="n">se2_from_linear_angular</span><span class="p">([</span><span class="n">linear_velocity</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">angular_velocity</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">vel</span>
+
+</div></div>
+<div class="viewcode-block" id="CarWithWheels"><a class="viewcode-back" href="../../../../../api/vehicles.library.dynamics.specializations.html#vehicles.library.dynamics.specializations.cars.CarWithWheels">[docs]</a><span class="k">class</span> <span class="nc">CarWithWheels</span><span class="p">(</span><span class="n">Dynamics</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">car</span> <span class="o">=</span> <span class="n">SimpleCar</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="n">state_space</span> <span class="o">=</span> <span class="n">ProductManifold</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">car</span><span class="o">.</span><span class="n">get_state_space</span><span class="p">(),</span> <span class="n">R1</span><span class="p">))</span>
+        <span class="n">commands_spec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">car</span><span class="o">.</span><span class="n">get_commands_spec</span><span class="p">()</span>
+        <span class="n">Dynamics</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state_space</span><span class="o">=</span><span class="n">state_space</span><span class="p">,</span>
+                                <span class="n">commands_spec</span><span class="o">=</span><span class="n">commands_spec</span><span class="p">)</span>
+
+<div class="viewcode-block" id="CarWithWheels.pose2state"><a class="viewcode-back" href="../../../../../api/vehicles.library.dynamics.specializations.html#vehicles.library.dynamics.specializations.cars.CarWithWheels.pose2state">[docs]</a>    <span class="k">def</span> <span class="nf">pose2state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pose</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">compose_state</span><span class="p">(</span><span class="n">car_state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">car</span><span class="o">.</span><span class="n">pose2state</span><span class="p">(</span><span class="n">pose</span><span class="p">),</span>
+                                  <span class="n">steering</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</div>
+    <span class="k">def</span> <span class="nf">_integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">commands</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+        <span class="n">car_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">car_state_from_big_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+        <span class="n">car_state2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">car</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="n">car_state</span><span class="p">,</span> <span class="n">commands</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+        <span class="n">steering</span> <span class="o">=</span> <span class="n">commands</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">car</span><span class="o">.</span><span class="n">max_steering_angle</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">compose_state</span><span class="p">(</span><span class="n">car_state</span><span class="o">=</span><span class="n">car_state2</span><span class="p">,</span> <span class="n">steering</span><span class="o">=</span><span class="n">steering</span><span class="p">)</span>
+
+<div class="viewcode-block" id="CarWithWheels.state_to_yaml"><a class="viewcode-back" href="../../../../../api/vehicles.library.dynamics.specializations.html#vehicles.library.dynamics.specializations.cars.CarWithWheels.state_to_yaml">[docs]</a>    <span class="k">def</span> <span class="nf">state_to_yaml</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="n">car_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">car_state_from_big_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+        <span class="n">steering</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">steering_from_big_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">car</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">car</span><span class="o">.</span><span class="n">state_to_yaml</span><span class="p">(</span><span class="n">car_state</span><span class="p">),</span>
+                    <span class="n">steering</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">steering</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="CarWithWheels.car_state_from_big_state"><a class="viewcode-back" href="../../../../../api/vehicles.library.dynamics.specializations.html#vehicles.library.dynamics.specializations.cars.CarWithWheels.car_state_from_big_state">[docs]</a>    <span class="k">def</span> <span class="nf">car_state_from_big_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">state</span><span class="p">[</span><span class="s">&#39;car&#39;</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="CarWithWheels.steering_from_big_state"><a class="viewcode-back" href="../../../../../api/vehicles.library.dynamics.specializations.html#vehicles.library.dynamics.specializations.cars.CarWithWheels.steering_from_big_state">[docs]</a>    <span class="k">def</span> <span class="nf">steering_from_big_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">state</span><span class="p">[</span><span class="s">&#39;steering&#39;</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="CarWithWheels.compose_state"><a class="viewcode-back" href="../../../../../api/vehicles.library.dynamics.specializations.html#vehicles.library.dynamics.specializations.cars.CarWithWheels.compose_state">[docs]</a>    <span class="k">def</span> <span class="nf">compose_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">car_state</span><span class="p">,</span> <span class="n">steering</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">car</span><span class="o">=</span><span class="n">car_state</span><span class="p">,</span> <span class="n">steering</span><span class="o">=</span><span class="n">steering</span><span class="p">)</span>
+</div>
+    <span class="nd">@contract</span><span class="p">(</span><span class="n">returns</span><span class="o">=</span><span class="s">&#39;tuple(SE3, se3)&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="CarWithWheels.joint_state"><a class="viewcode-back" href="../../../../../api/vehicles.library.dynamics.specializations.html#vehicles.library.dynamics.specializations.cars.CarWithWheels.joint_state">[docs]</a>    <span class="k">def</span> <span class="nf">joint_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">joint</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="n">car_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">car_state_from_big_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+        <span class="n">steering</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">steering_from_big_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+        <span class="n">car_position</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">car</span><span class="o">.</span><span class="n">joint_state</span><span class="p">(</span><span class="n">car_state</span><span class="p">,</span> <span class="n">joint</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">joint</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">car_position</span>
+        <span class="k">elif</span> <span class="n">joint</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">car</span><span class="o">.</span><span class="n">axis_dist</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">car</span><span class="o">.</span><span class="n">L</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">joint</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">car</span><span class="o">.</span><span class="n">axis_dist</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">car</span><span class="o">.</span><span class="n">L</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Invalid joint ID </span><span class="si">%r</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">joint</span><span class="p">)</span>
+
+        <span class="n">pose</span><span class="p">,</span> <span class="n">vel</span> <span class="o">=</span> <span class="n">car_position</span>
+        <span class="n">rel_pose</span> <span class="o">=</span> <span class="n">SE3_from_SE2</span><span class="p">(</span><span class="n">SE2_from_translation_angle</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">steering</span><span class="p">))</span>
+        <span class="n">wpose</span> <span class="o">=</span> <span class="n">SE3</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">pose</span><span class="p">,</span> <span class="n">rel_pose</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">wpose</span><span class="p">,</span> <span class="n">vel</span> <span class="c"># XXX: vel</span>
+</div>
+<div class="viewcode-block" id="CarWithWheels.num_joints"><a class="viewcode-back" href="../../../../../api/vehicles.library.dynamics.specializations.html#vehicles.library.dynamics.specializations.cars.CarWithWheels.num_joints">[docs]</a>    <span class="k">def</span> <span class="nf">num_joints</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">3</span>
+
+</div></div>
+<div class="viewcode-block" id="ReedsSheepCar"><a class="viewcode-back" href="../../../../../api/vehicles.library.dynamics.specializations.html#vehicles.library.dynamics.specializations.cars.ReedsSheepCar">[docs]</a><span class="k">class</span> <span class="nc">ReedsSheepCar</span><span class="p">(</span><span class="n">SimpleCar</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">SimpleCar</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                           <span class="n">desc</span><span class="o">=</span><span class="s">&#39;Reeds-Sheep car (discretize velocity)&#39;</span><span class="p">,</span>
+                           <span class="n">commands_format</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;D&#39;</span><span class="p">,</span> <span class="s">&#39;C&#39;</span><span class="p">],</span>
+                           <span class="n">commands_range</span><span class="o">=</span><span class="p">[[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">+</span><span class="mi">1</span><span class="p">]],</span>
+                           <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="DubinsCar"><a class="viewcode-back" href="../../../../../api/vehicles.library.dynamics.specializations.html#vehicles.library.dynamics.specializations.cars.DubinsCar">[docs]</a><span class="k">class</span> <span class="nc">DubinsCar</span><span class="p">(</span><span class="n">SimpleCar</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">SimpleCar</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                           <span class="n">desc</span><span class="o">=</span><span class="s">&#39;Dubins Car dynamics (no reverse)&#39;</span><span class="p">,</span>
+                           <span class="n">commands_format</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;D&#39;</span><span class="p">,</span> <span class="s">&#39;C&#39;</span><span class="p">],</span>
+                           <span class="n">commands_range</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">+</span><span class="mi">1</span><span class="p">]],</span>
+                           <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="ReedsSheepCarWithWheels"><a class="viewcode-back" href="../../../../../api/vehicles.library.dynamics.specializations.html#vehicles.library.dynamics.specializations.cars.ReedsSheepCarWithWheels">[docs]</a><span class="k">class</span> <span class="nc">ReedsSheepCarWithWheels</span><span class="p">(</span><span class="n">CarWithWheels</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">CarWithWheels</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                           <span class="n">desc</span><span class="o">=</span><span class="s">&#39;Reeds-Sheep car (discretize velocity)&#39;</span><span class="p">,</span>
+                           <span class="n">commands_format</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;D&#39;</span><span class="p">,</span> <span class="s">&#39;C&#39;</span><span class="p">],</span>
+                           <span class="n">commands_range</span><span class="o">=</span><span class="p">[[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">+</span><span class="mi">1</span><span class="p">]],</span>
+                           <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="DubinsCarWithWheels"><a class="viewcode-back" href="../../../../../api/vehicles.library.dynamics.specializations.html#vehicles.library.dynamics.specializations.cars.DubinsCarWithWheels">[docs]</a><span class="k">class</span> <span class="nc">DubinsCarWithWheels</span><span class="p">(</span><span class="n">CarWithWheels</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">CarWithWheels</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                           <span class="n">desc</span><span class="o">=</span><span class="s">&#39;Dubins Car dynamics (no reverse)&#39;</span><span class="p">,</span>
+                           <span class="n">commands_format</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;D&#39;</span><span class="p">,</span> <span class="s">&#39;C&#39;</span><span class="p">],</span>
+                           <span class="n">commands_range</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">+</span><span class="mi">1</span><span class="p">]],</span>
+                           <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../../../index.html">Vehicles 1.2 documentation</a> &raquo;</li>
+          <li><a href="../../../../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../../../../vehicles.html" >vehicles</a> &raquo;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer">
+        &copy; Copyright 2010, Andrea Censi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+	
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-155626-14']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+
+  </body>
+</html>

@@ -59,9 +59,14 @@
 <h1 class="epydoc">Source Code for <a href="procgraph_vehicles.cairo_map_display-module.html">Module procgraph_vehicles.cairo_map_display</a></h1>
 <pre class="py-src">
 <a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package cairo_utils=cairo_utils-module.html"><a title="cairo_utils" class="py-name" href="#" onclick="return doclink('link-0', 'cairo_utils', 'link-0');">cairo_utils</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Function cairo_utils.pixels.cairo_pixels()=cairo_utils.pixels-module.html#cairo_pixels"><a title="cairo_utils.pixels.cairo_pixels" class="py-name" href="#" onclick="return doclink('link-1', 'cairo_pixels', 'link-1');">cairo_pixels</a></tt><tt class="py-op">,</tt> <tt id="link-2" class="py-name" targets="Function cairo_utils.text.cairo_text_align()=cairo_utils.text-module.html#cairo_text_align"><a title="cairo_utils.text.cairo_text_align" class="py-name" href="#" onclick="return doclink('link-2', 'cairo_text_align', 'link-2');">cairo_text_align</a></tt> </tt>
-<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">geometry</tt> <tt class="py-keyword">import</tt> <tt class="py-name">SE2_from_SE3</tt><tt class="py-op">,</tt> <tt id="link-3" class="py-name" targets="Variable procgraph_vehicles.SE3=procgraph_vehicles-module.html#SE3,Variable procgraph_vehicles.cairo_map_display.SE3=procgraph_vehicles.cairo_map_display-module.html#SE3,Variable vehicles.library.dynamics.SE3=vehicles.library.dynamics-module.html#SE3,Variable vehicles.simulation.vehicle.SE3=vehicles.simulation.vehicle-module.html#SE3,Variable vehicles.simulation.vsimulation.SE3=vehicles.simulation.vsimulation-module.html#SE3,Variable vehicles_cairo.SE3=vehicles_cairo-module.html#SE3,Variable vehicles_cairo.display_all.SE3=vehicles_cairo.display_all-module.html#SE3,Variable vehicles_cairo.sensor_data.SE3=vehicles_cairo.sensor_data-module.html#SE3"><a title="procgraph_vehicles.SE3
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">geometry</tt> <tt class="py-keyword">import</tt> <tt class="py-name">SE2_from_SE3</tt><tt class="py-op">,</tt> <tt id="link-3" class="py-name" targets="Variable procgraph_vehicles.SE3=procgraph_vehicles-module.html#SE3,Variable procgraph_vehicles.cairo_map_display.SE3=procgraph_vehicles.cairo_map_display-module.html#SE3,Variable vehicles.library.dynamics.SE3=vehicles.library.dynamics-module.html#SE3,Variable vehicles.library.dynamics.artic.SE3=vehicles.library.dynamics.artic-module.html#SE3,Variable vehicles.library.dynamics.artic.basetop.SE3=vehicles.library.dynamics.artic.basetop-module.html#SE3,Variable vehicles.library.dynamics.lie_kinematics.SE3=vehicles.library.dynamics.lie_kinematics-module.html#SE3,Variable vehicles.library.dynamics.specializations.SE3=vehicles.library.dynamics.specializations-module.html#SE3,Variable vehicles.library.dynamics.specializations.cars.SE3=vehicles.library.dynamics.specializations.cars-module.html#SE3,Variable vehicles.simulation.vehicle.SE3=vehicles.simulation.vehicle-module.html#SE3,Variable vehicles.simulation.vsimulation.SE3=vehicles.simulation.vsimulation-module.html#SE3,Variable vehicles_cairo.SE3=vehicles_cairo-module.html#SE3,Variable vehicles_cairo.display_all.SE3=vehicles_cairo.display_all-module.html#SE3,Variable vehicles_cairo.sensor_data.SE3=vehicles_cairo.sensor_data-module.html#SE3"><a title="procgraph_vehicles.SE3
 procgraph_vehicles.cairo_map_display.SE3
 vehicles.library.dynamics.SE3
+vehicles.library.dynamics.artic.SE3
+vehicles.library.dynamics.artic.basetop.SE3
+vehicles.library.dynamics.lie_kinematics.SE3
+vehicles.library.dynamics.specializations.SE3
+vehicles.library.dynamics.specializations.cars.SE3
 vehicles.simulation.vehicle.SE3
 vehicles.simulation.vsimulation.SE3
 vehicles_cairo.SE3
@@ -599,6 +604,11 @@ vehicles_boot.ros_visualization.e" class="py-name" href="#" onclick="return docl
 <a name="L417"></a><tt class="py-lineno">417</tt>  <tt class="py-line">    <tt class="py-name">goal</tt> <tt class="py-op">=</tt> <tt id="link-114" class="py-name"><a title="procgraph_vehicles.SE3
 procgraph_vehicles.cairo_map_display.SE3
 vehicles.library.dynamics.SE3
+vehicles.library.dynamics.artic.SE3
+vehicles.library.dynamics.artic.basetop.SE3
+vehicles.library.dynamics.lie_kinematics.SE3
+vehicles.library.dynamics.specializations.SE3
+vehicles.library.dynamics.specializations.cars.SE3
 vehicles.simulation.vehicle.SE3
 vehicles.simulation.vsimulation.SE3
 vehicles_cairo.SE3
@@ -618,6 +628,11 @@ vehicles.interfaces.primitives.Source.from_yaml" class="py-name" href="#" onclic
 <a name="L426"></a><tt class="py-lineno">426</tt>  <tt class="py-line">        <tt class="py-name">pose</tt> <tt class="py-op">=</tt> <tt class="py-name">SE2_from_SE3</tt><tt class="py-op">(</tt><tt id="link-118" class="py-name"><a title="procgraph_vehicles.SE3
 procgraph_vehicles.cairo_map_display.SE3
 vehicles.library.dynamics.SE3
+vehicles.library.dynamics.artic.SE3
+vehicles.library.dynamics.artic.basetop.SE3
+vehicles.library.dynamics.lie_kinematics.SE3
+vehicles.library.dynamics.specializations.SE3
+vehicles.library.dynamics.specializations.cars.SE3
 vehicles.simulation.vehicle.SE3
 vehicles.simulation.vsimulation.SE3
 vehicles_cairo.SE3
@@ -667,7 +682,7 @@ expandto(location.href);
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Sun Feb 26 11:44:34 2012
+    Generated by Epydoc 3.0.1 on Wed Feb 29 11:48:43 2012
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

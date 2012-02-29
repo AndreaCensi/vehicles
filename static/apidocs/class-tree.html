@@ -72,7 +72,7 @@
     </li>
     <li> <strong class="uidlink"><a href="vehicles.library.textures.constant.ConstantTexture-class.html">vehicles.library.textures.constant.ConstantTexture</a></strong>
     </li>
-    <li> <strong class="uidlink"><a href="vehicles.worlds.utils.Counter-class.html">vehicles.worlds.utils.Counter</a></strong>
+    <li> <strong class="uidlink"><a href="vehicles.library.worlds.utils.Counter-class.html">vehicles.library.worlds.utils.Counter</a></strong>
     </li>
     <li> <strong class="uidlink"><a href="vehicles.interfaces.primitives.Field-class.html">vehicles.interfaces.primitives.Field</a></strong>
     <ul>
@@ -89,9 +89,9 @@
     </li>
     </ul>
     </li>
-    <li> <strong class="uidlink"><a href="vehicles.worlds.stochastic_box2.KernelExponential-class.html">vehicles.worlds.stochastic_box2.KernelExponential</a></strong>
+    <li> <strong class="uidlink"><a href="vehicles.library.worlds.stochastic_box2.KernelExponential-class.html">vehicles.library.worlds.stochastic_box2.KernelExponential</a></strong>
     </li>
-    <li> <strong class="uidlink"><a href="vehicles.worlds.stochastic_box2.KernelInverse-class.html">vehicles.worlds.stochastic_box2.KernelInverse</a></strong>
+    <li> <strong class="uidlink"><a href="vehicles.library.worlds.stochastic_box2.KernelInverse-class.html">vehicles.library.worlds.stochastic_box2.KernelInverse</a></strong>
     </li>
     <li> <strong class="uidlink"><a href="vehicles.interfaces.primitives.Primitive-class.html">vehicles.interfaces.primitives.Primitive</a></strong>
     <ul>
@@ -101,34 +101,6 @@
     </li>
     <li> <strong class="uidlink"><a href="vehicles.interfaces.primitives.Source-class.html">vehicles.interfaces.primitives.Source</a></strong>:
       <em class="summary">A point-source is what field samplers are sensitive to.</em>
-    </li>
-    </ul>
-    </li>
-    <li> <strong class="uidlink"><a href="vehicles.sensors.raytracer.textured_raytracer.Raytracer-class.html">vehicles.sensors.raytracer.textured_raytracer.Raytracer</a></strong>
-    <ul>
-    <li> <strong class="uidlink"><a href="vehicles.sensors.range_finder.Rangefinder-class.html">vehicles.sensors.range_finder.Rangefinder</a></strong>
-    <ul>
-    <li> <strong class="uidlink"><a href="vehicles.sensors.range_finder.RangefinderUniform-class.html">vehicles.sensors.range_finder.RangefinderUniform</a></strong>
-    </li>
-    </ul>
-    </li>
-    <li> <strong class="uidlink"><a href="vehicles.sensors.raytracer.textured_raytracer.TexturedRaytracer-class.html">vehicles.sensors.raytracer.textured_raytracer.TexturedRaytracer</a></strong>
-    <ul>
-    <li> <strong class="uidlink"><a href="vehicles.sensors.photoreceptors.Photoreceptors-class.html">vehicles.sensors.photoreceptors.Photoreceptors</a></strong>:
-      <em class="summary">This is a very shallow wrap around ImageRangeSensor</em>
-    <ul>
-    <li> <strong class="uidlink"><a href="vehicles.sensors.photoreceptors.PhotoreceptorsUniform-class.html">vehicles.sensors.photoreceptors.PhotoreceptorsUniform</a></strong>
-    </li>
-    </ul>
-    </li>
-    <li> <strong class="uidlink"><a href="vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth-class.html">vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth</a></strong>:
-      <em class="summary">Implements</em>
-    <ul>
-    <li> <strong class="uidlink"><a href="vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmoothUniform-class.html">vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmoothUniform</a></strong>
-    </li>
-    </ul>
-    </li>
-    </ul>
     </li>
     </ul>
     </li>
@@ -164,6 +136,14 @@
     <li> <strong class="uidlink">exceptions.Exception</strong>:
       <em class="summary">Common base class for all non-exit exceptions.</em>
     <ul>
+    <li> <strong class="uidlink"><a href="vehicles.library.dynamics.exceptions.DynamicsException-class.html">vehicles.library.dynamics.exceptions.DynamicsException</a></strong>
+    <ul>
+    <li> <strong class="uidlink"><a href="vehicles.library.dynamics.exceptions.InvalidCommands-class.html">vehicles.library.dynamics.exceptions.InvalidCommands</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="vehicles.library.dynamics.exceptions.InvalidState-class.html">vehicles.library.dynamics.exceptions.InvalidState</a></strong>
+    </li>
+    </ul>
+    </li>
     <li> <strong class="uidlink">exceptions.StandardError</strong>:
       <em class="summary">Base class for all standard Python exceptions that do not represent
 interpreter exiting.</em>
@@ -200,13 +180,68 @@ interpreter exiting.</em>
     </li>
     </ul>
     </li>
-    <li> <strong class="uidlink"><a href="vehicles.sensors.raytracer.cjson_stream.CJSONStream-class.html">vehicles.sensors.raytracer.cjson_stream.CJSONStream</a></strong>
-    </li>
     <li> <strong class="uidlink"><a href="vehicles.interfaces.dynamics.Dynamics-class.html">vehicles.interfaces.dynamics.Dynamics</a></strong>:
       <em class="summary">This is the interface for the various dynamics implemented.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="vehicles.library.dynamics.artic.basetop.BaseTopDynamics-class.html">vehicles.library.dynamics.artic.basetop.BaseTopDynamics</a></strong>
+    <ul>
+    <li> <strong class="uidlink"><a href="vehicles.library.dynamics.artic.basetop.BaseTop-class.html">vehicles.library.dynamics.artic.basetop.BaseTop</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="vehicles.library.dynamics.artic.basetop.Turret-class.html">vehicles.library.dynamics.artic.basetop.Turret</a></strong>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="vehicles.library.dynamics.specializations.cars.CarWithWheels-class.html">vehicles.library.dynamics.specializations.cars.CarWithWheels</a></strong>
+    <ul>
+    <li> <strong class="uidlink"><a href="vehicles.library.dynamics.specializations.cars.DubinsCarWithWheels-class.html">vehicles.library.dynamics.specializations.cars.DubinsCarWithWheels</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="vehicles.library.dynamics.specializations.cars.ReedsSheepCarWithWheels-class.html">vehicles.library.dynamics.specializations.cars.ReedsSheepCarWithWheels</a></strong>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="vehicles.library.dynamics.lie_kinematics.SimpleKinematics-class.html">vehicles.library.dynamics.lie_kinematics.SimpleKinematics</a></strong>:
+      <em class="summary">A subclass for dynamics which have only a kinematic component.</em>
+    <ul>
+    <li> <strong class="uidlink"><a href="vehicles.library.dynamics.specializations.circle.CircleVel-class.html">vehicles.library.dynamics.specializations.circle.CircleVel</a></strong>:
+      <em class="summary">Particle on SO(2) controlled in velocity.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="vehicles.library.dynamics.specializations.differential_drive.DifferentialDrive-class.html">vehicles.library.dynamics.specializations.differential_drive.DifferentialDrive</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="vehicles.library.dynamics.specializations.euclidean.EuclideanVel-class.html">vehicles.library.dynamics.specializations.euclidean.EuclideanVel</a></strong>:
+      <em class="summary">Particle in Euclidean space controlled in velocity.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="vehicles.library.dynamics.specializations.se2.SE2Dynamics-class.html">vehicles.library.dynamics.specializations.se2.SE2Dynamics</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="vehicles.library.dynamics.specializations.se2forward.SE2Forward-class.html">vehicles.library.dynamics.specializations.se2forward.SE2Forward</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="vehicles.library.dynamics.specializations.so3.SO3Vel-class.html">vehicles.library.dynamics.specializations.so3.SO3Vel</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="vehicles.library.dynamics.specializations.cars.SimpleCar-class.html">vehicles.library.dynamics.specializations.cars.SimpleCar</a></strong>
+    <ul>
+    <li> <strong class="uidlink"><a href="vehicles.library.dynamics.specializations.cars.DubinsCar-class.html">vehicles.library.dynamics.specializations.cars.DubinsCar</a></strong>
+    </li>
+    <li> <strong class="uidlink"><a href="vehicles.library.dynamics.specializations.cars.ReedsSheepCar-class.html">vehicles.library.dynamics.specializations.cars.ReedsSheepCar</a></strong>
+    </li>
+    </ul>
+    </li>
+    <li> <strong class="uidlink"><a href="vehicles.library.dynamics.lie_dynamics.SimpleDynamics-class.html">vehicles.library.dynamics.lie_dynamics.SimpleDynamics</a></strong>
+    <ul>
+    <li> <strong class="uidlink"><a href="vehicles.library.dynamics.specializations.circle.CircleForce-class.html">vehicles.library.dynamics.specializations.circle.CircleForce</a></strong>:
+      <em class="summary">Particle on SO(2) controlled in force.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="vehicles.library.dynamics.specializations.euclidean.EuclideanForce-class.html">vehicles.library.dynamics.specializations.euclidean.EuclideanForce</a></strong>:
+      <em class="summary">Particle in Euclidean space controlled in force.</em>
+    </li>
+    <li> <strong class="uidlink"><a href="vehicles.library.dynamics.specializations.so3.SO3Force-class.html">vehicles.library.dynamics.specializations.so3.SO3Force</a></strong>
+    </li>
+    </ul>
+    </li>
+    </ul>
+    </li>
+    </ul>
     </li>
     <li> <strong class="uidlink">bootstrapping_olympics.interfaces.robot.RobotInterface</strong>:
-      <em class="summary">This is the basic class for robot simulators.</em>
+      <em class="summary">This is the basic class for robots.</em>
     <ul>
     <li> <strong class="uidlink"><a href="vehicles_boot.vehicles_simulation.BOVehicleSimulation-class.html">vehicles_boot.vehicles_simulation.BOVehicleSimulation</a></strong>
     </li>
@@ -221,39 +256,19 @@ interpreter exiting.</em>
     </li>
     <li> <strong class="uidlink"><a href="vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html">vehicles.interfaces.vehicle_sensor.VehicleSensor</a></strong>
     <ul>
-    <li> <strong class="uidlink"><a href="vehicles.sensors.field_sampler.FieldSampler-class.html">vehicles.sensors.field_sampler.FieldSampler</a></strong>:
+    <li> <strong class="uidlink"><a href="vehicles.library.sensors.fields.field_sampler.FieldSampler-class.html">vehicles.library.sensors.fields.field_sampler.FieldSampler</a></strong>:
       <em class="summary">A sensor that samples an intensity field.</em>
     <ul>
-    <li> <strong class="uidlink"><a href="vehicles.sensors.field_sampler_rand_circle.FieldSamplerRandCircle-class.html">vehicles.sensors.field_sampler_rand_circle.FieldSamplerRandCircle</a></strong>:
+    <li> <strong class="uidlink"><a href="vehicles.library.sensors.fields.field_sampler_rand_circle.FieldSamplerRandCircle-class.html">vehicles.library.sensors.fields.field_sampler_rand_circle.FieldSamplerRandCircle</a></strong>:
       <em class="summary">A field sampler with sensels randomly
 distributed in a certain radius.</em>
     </li>
-    <li> <strong class="uidlink"><a href="vehicles.sensors.field_sampler_uniform.FieldSamplerUniform-class.html">vehicles.sensors.field_sampler_uniform.FieldSamplerUniform</a></strong>:
+    <li> <strong class="uidlink"><a href="vehicles.library.sensors.fields.field_sampler_uniform.FieldSamplerUniform-class.html">vehicles.library.sensors.fields.field_sampler_uniform.FieldSamplerUniform</a></strong>:
       <em class="summary">A field sampler with uniform disposition of sensels.</em>
     </li>
     </ul>
     </li>
-    <li> <strong class="uidlink"><a href="vehicles.sensors.photoreceptors.Photoreceptors-class.html">vehicles.sensors.photoreceptors.Photoreceptors</a></strong>:
-      <em class="summary">This is a very shallow wrap around ImageRangeSensor</em>
-    <ul>
-    <li> <strong class="uidlink"><a href="vehicles.sensors.photoreceptors.PhotoreceptorsUniform-class.html">vehicles.sensors.photoreceptors.PhotoreceptorsUniform</a></strong>
-    </li>
-    </ul>
-    </li>
-    <li> <strong class="uidlink"><a href="vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth-class.html">vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth</a></strong>:
-      <em class="summary">Implements</em>
-    <ul>
-    <li> <strong class="uidlink"><a href="vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmoothUniform-class.html">vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmoothUniform</a></strong>
-    </li>
-    </ul>
-    </li>
-    <li> <strong class="uidlink"><a href="vehicles.sensors.random_sensor.RandomSensor-class.html">vehicles.sensors.random_sensor.RandomSensor</a></strong>
-    </li>
-    <li> <strong class="uidlink"><a href="vehicles.sensors.range_finder.Rangefinder-class.html">vehicles.sensors.range_finder.Rangefinder</a></strong>
-    <ul>
-    <li> <strong class="uidlink"><a href="vehicles.sensors.range_finder.RangefinderUniform-class.html">vehicles.sensors.range_finder.RangefinderUniform</a></strong>
-    </li>
-    </ul>
+    <li> <strong class="uidlink"><a href="vehicles.library.sensors.random_sensor.RandomSensor-class.html">vehicles.library.sensors.random_sensor.RandomSensor</a></strong>
     </li>
     </ul>
     </li>
@@ -291,30 +306,30 @@ distributed in a certain radius.</em>
     </li>
     <li> <strong class="uidlink"><a href="vehicles.interfaces.world.World-class.html">vehicles.interfaces.world.World</a></strong>
     <ul>
-    <li> <strong class="uidlink"><a href="vehicles.worlds.bigmama.BigMamarama-class.html">vehicles.worlds.bigmama.BigMamarama</a></strong>
+    <li> <strong class="uidlink"><a href="vehicles.library.worlds.bigmama.BigMamarama-class.html">vehicles.library.worlds.bigmama.BigMamarama</a></strong>
     </li>
-    <li> <strong class="uidlink"><a href="vehicles.worlds.boxes.Box-class.html">vehicles.worlds.boxes.Box</a></strong>:
+    <li> <strong class="uidlink"><a href="vehicles.library.worlds.boxes.Box-class.html">vehicles.library.worlds.boxes.Box</a></strong>:
       <em class="summary">A simple box.</em>
     </li>
-    <li> <strong class="uidlink"><a href="vehicles.worlds.dynamic.DynamicTest-class.html">vehicles.worlds.dynamic.DynamicTest</a></strong>:
+    <li> <strong class="uidlink"><a href="vehicles.library.worlds.dynamic.DynamicTest-class.html">vehicles.library.worlds.dynamic.DynamicTest</a></strong>:
       <em class="summary">A simple example of a dynamic world.</em>
     </li>
-    <li> <strong class="uidlink"><a href="vehicles.worlds.empty_world.Empty-class.html">vehicles.worlds.empty_world.Empty</a></strong>
+    <li> <strong class="uidlink"><a href="vehicles.library.worlds.empty_world.Empty-class.html">vehicles.library.worlds.empty_world.Empty</a></strong>
     </li>
-    <li> <strong class="uidlink"><a href="vehicles.worlds.empty_fixed.EmptyFixed-class.html">vehicles.worlds.empty_fixed.EmptyFixed</a></strong>:
+    <li> <strong class="uidlink"><a href="vehicles.library.worlds.empty_fixed.EmptyFixed-class.html">vehicles.library.worlds.empty_fixed.EmptyFixed</a></strong>:
       <em class="summary">Empty world; vehicle starts always at the same pose.</em>
     </li>
-    <li> <strong class="uidlink"><a href="vehicles.worlds.light_box.LightBox-class.html">vehicles.worlds.light_box.LightBox</a></strong>:
+    <li> <strong class="uidlink"><a href="vehicles.library.worlds.light_box.LightBox-class.html">vehicles.library.worlds.light_box.LightBox</a></strong>:
       <em class="summary">Parametric world</em>
     </li>
-    <li> <strong class="uidlink"><a href="vehicles.worlds.stochastic_box.StochasticBox-class.html">vehicles.worlds.stochastic_box.StochasticBox</a></strong>
+    <li> <strong class="uidlink"><a href="vehicles.library.worlds.stochastic_box.StochasticBox-class.html">vehicles.library.worlds.stochastic_box.StochasticBox</a></strong>
     </li>
-    <li> <strong class="uidlink"><a href="vehicles.worlds.stochastic_box2.StochasticBox2-class.html">vehicles.worlds.stochastic_box2.StochasticBox2</a></strong>:
+    <li> <strong class="uidlink"><a href="vehicles.library.worlds.stochastic_box2.StochasticBox2-class.html">vehicles.library.worlds.stochastic_box2.StochasticBox2</a></strong>:
       <em class="summary">This also includes point sources.</em>
     </li>
-    <li> <strong class="uidlink"><a href="vehicles.worlds.stochastic_box3.StochasticBox3-class.html">vehicles.worlds.stochastic_box3.StochasticBox3</a></strong>
+    <li> <strong class="uidlink"><a href="vehicles.library.worlds.stochastic_box3.StochasticBox3-class.html">vehicles.library.worlds.stochastic_box3.StochasticBox3</a></strong>
     </li>
-    <li> <strong class="uidlink"><a href="vehicles.worlds.stochastic_sources.StochasticSources-class.html">vehicles.worlds.stochastic_sources.StochasticSources</a></strong>:
+    <li> <strong class="uidlink"><a href="vehicles.library.worlds.stochastic_sources.StochasticSources-class.html">vehicles.library.worlds.stochastic_sources.StochasticSources</a></strong>:
       <em class="summary">This also includes point sources.</em>
     </li>
     </ul>
@@ -376,7 +391,7 @@ type(name, bases, dict) -&gt; a new type</em>
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Sun Feb 26 11:44:30 2012
+    Generated by Epydoc 3.0.1 on Wed Feb 29 11:48:38 2012
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

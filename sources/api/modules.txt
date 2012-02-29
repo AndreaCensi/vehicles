@@ -6,7 +6,7 @@ src
 
    cairo_utils
    procgraph_vehicles
+   raytracer
    vehicles
    vehicles_boot
    vehicles_cairo
-   vehicles_dynamics

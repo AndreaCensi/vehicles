@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>vehicles.library.sensors.fields.field_sampler_uniform</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/vehicles">Vehicles</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="vehicles-module.html">Package&nbsp;vehicles</a> ::
+        <a href="vehicles.library-module.html">Package&nbsp;library</a> ::
+        <a href="vehicles.library.sensors-module.html">Package&nbsp;sensors</a> ::
+        <a href="vehicles.library.sensors.fields-module.html">Package&nbsp;fields</a> ::
+        Module&nbsp;field_sampler_uniform
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="vehicles.library.sensors.fields.field_sampler_uniform-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="vehicles.library.sensors.fields.field_sampler_uniform-module.html">Module vehicles.library.sensors.fields.field_sampler_uniform</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt> <tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Class vehicles.library.sensors.fields.field_sampler.FieldSampler=vehicles.library.sensors.fields.field_sampler.FieldSampler-class.html"><a title="vehicles.library.sensors.fields.field_sampler.FieldSampler" class="py-name" href="#" onclick="return doclink('link-0', 'FieldSampler', 'link-0');">FieldSampler</a></tt><tt class="py-op">,</tt> <tt class="py-name">contract</tt><tt class="py-op">,</tt> <tt class="py-name">np</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">itertools</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-name">__all__</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">'FieldSamplerUniform'</tt><tt class="py-op">]</tt> </tt>
+<a name="FieldSamplerUniform"></a><div id="FieldSamplerUniform-def"><a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt> <a class="py-toggle" href="#" id="FieldSamplerUniform-toggle" onclick="return toggle('FieldSamplerUniform');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="vehicles.library.sensors.fields.field_sampler_uniform.FieldSamplerUniform-class.html">FieldSamplerUniform</a><tt class="py-op">(</tt><tt class="py-base-class">FieldSampler</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FieldSamplerUniform-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="FieldSamplerUniform-expanded"><a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line">    <tt class="py-docstring">''' A field sampler with uniform disposition of sensels. '''</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt id="link-1" class="py-name" targets="Module cairo_utils.shape=cairo_utils.shape-module.html"><a title="cairo_utils.shape" class="py-name" href="#" onclick="return doclink('link-1', 'shape', 'link-1');">shape</a></tt><tt class="py-op">=</tt><tt class="py-string">'seq[2](number,&gt;1)'</tt><tt class="py-op">,</tt> <tt class="py-name">sides</tt><tt class="py-op">=</tt><tt class="py-string">'seq[2](number)'</tt><tt class="py-op">)</tt> </tt>
+<a name="FieldSamplerUniform.__init__"></a><div id="FieldSamplerUniform.__init__-def"><a name="L11"></a><tt class="py-lineno">11</tt> <a class="py-toggle" href="#" id="FieldSamplerUniform.__init__-toggle" onclick="return toggle('FieldSamplerUniform.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.library.sensors.fields.field_sampler_uniform.FieldSamplerUniform-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">shape</tt><tt class="py-op">,</tt> <tt class="py-param">sides</tt><tt class="py-op">,</tt> <tt class="py-param">normalize</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-param">min_value</tt><tt class="py-op">=</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-param">max_value</tt><tt class="py-op">=</tt><tt class="py-number">1</tt><tt class="py-op">,</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">                 <tt class="py-param">noise</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FieldSamplerUniform.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="FieldSamplerUniform.__init__-expanded"><a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">        <tt class="py-docstring">''' </tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-docstring">            :param sides: sides of the rectangle comprising the sensels</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-docstring">            :param shape: 2D shape of the sensels </tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-docstring">            :param noise_spec: code spec for the noise added </tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-2" class="py-name"><a title="cairo_utils.shape" class="py-name" href="#" onclick="return doclink('link-2', 'shape', 'link-1');">shape</a></tt> <tt class="py-op">=</tt> <tt class="py-name">list</tt><tt class="py-op">(</tt><tt id="link-3" class="py-name"><a title="cairo_utils.shape" class="py-name" href="#" onclick="return doclink('link-3', 'shape', 'link-1');">shape</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">sides</tt> <tt class="py-op">=</tt> <tt class="py-name">list</tt><tt class="py-op">(</tt><tt class="py-name">sides</tt><tt class="py-op">)</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cell2index</tt> <tt class="py-op">=</tt> <tt class="py-name">np</tt><tt class="py-op">.</tt><tt class="py-name">zeros</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name"><a title="cairo_utils.shape" class="py-name" href="#" onclick="return doclink('link-4', 'shape', 'link-1');">shape</a></tt><tt class="py-op">,</tt> <tt class="py-string">'int'</tt><tt class="py-op">)</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">        <tt class="py-name">positions</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">        <tt class="py-name">k</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">i</tt><tt class="py-op">,</tt> <tt class="py-name">j</tt> <tt class="py-keyword">in</tt> <tt class="py-name">itertools</tt><tt class="py-op">.</tt><tt class="py-name">product</tt><tt class="py-op">(</tt><tt class="py-name">range</tt><tt class="py-op">(</tt><tt id="link-5" class="py-name"><a title="cairo_utils.shape" class="py-name" href="#" onclick="return doclink('link-5', 'shape', 'link-1');">shape</a></tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">                                      <tt class="py-name">range</tt><tt class="py-op">(</tt><tt id="link-6" class="py-name"><a title="cairo_utils.shape" class="py-name" href="#" onclick="return doclink('link-6', 'shape', 'link-1');">shape</a></tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">            <tt class="py-name">u</tt> <tt class="py-op">=</tt> <tt class="py-number">2</tt> <tt class="py-op">*</tt> <tt class="py-op">(</tt><tt class="py-name">i</tt> <tt class="py-op">-</tt> <tt id="link-7" class="py-name"><a title="cairo_utils.shape" class="py-name" href="#" onclick="return doclink('link-7', 'shape', 'link-1');">shape</a></tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">/</tt> <tt class="py-number">2.0</tt><tt class="py-op">)</tt> <tt class="py-op">/</tt> <tt id="link-8" class="py-name"><a title="cairo_utils.shape" class="py-name" href="#" onclick="return doclink('link-8', 'shape', 'link-1');">shape</a></tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">            <tt class="py-name">v</tt> <tt class="py-op">=</tt> <tt class="py-number">2</tt> <tt class="py-op">*</tt> <tt class="py-op">(</tt><tt class="py-name">j</tt> <tt class="py-op">-</tt> <tt id="link-9" class="py-name"><a title="cairo_utils.shape" class="py-name" href="#" onclick="return doclink('link-9', 'shape', 'link-1');">shape</a></tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-op">/</tt> <tt class="py-number">2.0</tt><tt class="py-op">)</tt> <tt class="py-op">/</tt> <tt id="link-10" class="py-name"><a title="cairo_utils.shape" class="py-name" href="#" onclick="return doclink('link-10', 'shape', 'link-1');">shape</a></tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">            <tt class="py-name">x</tt> <tt class="py-op">=</tt> <tt class="py-op">-</tt><tt class="py-name">u</tt> <tt class="py-op">*</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">sides</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">            <tt class="py-name">y</tt> <tt class="py-op">=</tt> <tt class="py-op">-</tt><tt class="py-name">v</tt> <tt class="py-op">*</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">sides</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">            <tt class="py-name">positions</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">x</tt><tt class="py-op">,</tt> <tt class="py-name">y</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cell2index</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">,</tt> <tt class="py-name">j</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">k</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">            <tt class="py-name">k</tt> <tt class="py-op">+=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">        <tt id="link-11" class="py-name"><a title="vehicles.library.sensors.fields.field_sampler.FieldSampler" class="py-name" href="#" onclick="return doclink('link-11', 'FieldSampler', 'link-0');">FieldSampler</a></tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Method vehicles.configuration.master.VehiclesConfigMaster.__init__()=vehicles.configuration.master.VehiclesConfigMaster-class.html#__init__,Method vehicles.interfaces.dynamics.Dynamics.__init__()=vehicles.interfaces.dynamics.Dynamics-class.html#__init__,Method vehicles.interfaces.primitives.Circle.__init__()=vehicles.interfaces.primitives.Circle-class.html#__init__,Method vehicles.interfaces.primitives.GeometricShape.__init__()=vehicles.interfaces.primitives.GeometricShape-class.html#__init__,Method vehicles.interfaces.primitives.PolyLine.__init__()=vehicles.interfaces.primitives.PolyLine-class.html#__init__,Method vehicles.interfaces.primitives.Primitive.__init__()=vehicles.interfaces.primitives.Primitive-class.html#__init__,Method vehicles.interfaces.primitives.Source.__init__()=vehicles.interfaces.primitives.Source-class.html#__init__,Method vehicles.interfaces.vehicle_sensor.VehicleSensor.__init__()=vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html#__init__,Method vehicles.interfaces.world.World.__init__()=vehicles.interfaces.world.World-class.html#__init__,Method vehicles.library.dynamics.artic.basetop.BaseTop.__init__()=vehicles.library.dynamics.artic.basetop.BaseTop-class.html#__init__,Method vehicles.library.dynamics.artic.basetop.BaseTopDynamics.__init__()=vehicles.library.dynamics.artic.basetop.BaseTopDynamics-class.html#__init__,Method vehicles.library.dynamics.artic.basetop.Turret.__init__()=vehicles.library.dynamics.artic.basetop.Turret-class.html#__init__,Method vehicles.library.dynamics.exceptions.DynamicsException.__init__()=vehicles.library.dynamics.exceptions.DynamicsException-class.html#__init__,Method vehicles.library.dynamics.exceptions.InvalidCommands.__init__()=vehicles.library.dynamics.exceptions.InvalidCommands-class.html#__init__,Method vehicles.library.dynamics.exceptions.InvalidState.__init__()=vehicles.library.dynamics.exceptions.InvalidState-class.html#__init__,Method vehicles.library.dynamics.lie_dynamics.SimpleDynamics.__init__()=vehicles.library.dynamics.lie_dynamics.SimpleDynamics-class.html#__init__,Method vehicles.library.dynamics.lie_kinematics.SimpleKinematics.__init__()=vehicles.library.dynamics.lie_kinematics.SimpleKinematics-class.html#__init__,Method vehicles.library.dynamics.specializations.cars.CarWithWheels.__init__()=vehicles.library.dynamics.specializations.cars.CarWithWheels-class.html#__init__,Method vehicles.library.dynamics.specializations.cars.DubinsCar.__init__()=vehicles.library.dynamics.specializations.cars.DubinsCar-class.html#__init__,Method vehicles.library.dynamics.specializations.cars.DubinsCarWithWheels.__init__()=vehicles.library.dynamics.specializations.cars.DubinsCarWithWheels-class.html#__init__,Method vehicles.library.dynamics.specializations.cars.ReedsSheepCar.__init__()=vehicles.library.dynamics.specializations.cars.ReedsSheepCar-class.html#__init__,Method vehicles.library.dynamics.specializations.cars.ReedsSheepCarWithWheels.__init__()=vehicles.library.dynamics.specializations.cars.ReedsSheepCarWithWheels-class.html#__init__,Method vehicles.library.dynamics.specializations.cars.SimpleCar.__init__()=vehicles.library.dynamics.specializations.cars.SimpleCar-class.html#__init__,Method vehicles.library.dynamics.specializations.circle.CircleForce.__init__()=vehicles.library.dynamics.specializations.circle.CircleForce-class.html#__init__,Method vehicles.library.dynamics.specializations.circle.CircleVel.__init__()=vehicles.library.dynamics.specializations.circle.CircleVel-class.html#__init__,Method vehicles.library.dynamics.specializations.differential_drive.DifferentialDrive.__init__()=vehicles.library.dynamics.specializations.differential_drive.DifferentialDrive-class.html#__init__,Method vehicles.library.dynamics.specializations.euclidean.EuclideanForce.__init__()=vehicles.library.dynamics.specializations.euclidean.EuclideanForce-class.html#__init__,Method vehicles.library.dynamics.specializations.euclidean.EuclideanVel.__init__()=vehicles.library.dynamics.specializations.euclidean.EuclideanVel-class.html#__init__,Method vehicles.library.dynamics.specializations.se2.SE2Dynamics.__init__()=vehicles.library.dynamics.specializations.se2.SE2Dynamics-class.html#__init__,Method vehicles.library.dynamics.specializations.se2forward.SE2Forward.__init__()=vehicles.library.dynamics.specializations.se2forward.SE2Forward-class.html#__init__,Method vehicles.library.dynamics.specializations.so3.SO3Force.__init__()=vehicles.library.dynamics.specializations.so3.SO3Force-class.html#__init__,Method vehicles.library.dynamics.specializations.so3.SO3Vel.__init__()=vehicles.library.dynamics.specializations.so3.SO3Vel-class.html#__init__,Method vehicles.library.noises.additive_gaussian.AdditiveGaussian.__init__()=vehicles.library.noises.additive_gaussian.AdditiveGaussian-class.html#__init__,Method vehicles.library.sensors.fields.field_sampler.FieldSampler.__init__()=vehicles.library.sensors.fields.field_sampler.FieldSampler-class.html#__init__,Method vehicles.library.sensors.fields.field_sampler_rand_circle.FieldSamplerRandCircle.__init__()=vehicles.library.sensors.fields.field_sampler_rand_circle.FieldSamplerRandCircle-class.html#__init__,Method vehicles.library.sensors.fields.field_sampler_uniform.FieldSamplerUniform.__init__()=vehicles.library.sensors.fields.field_sampler_uniform.FieldSamplerUniform-class.html#__init__,Method vehicles.library.sensors.random_sensor.RandomSensor.__init__()=vehicles.library.sensors.random_sensor.RandomSensor-class.html#__init__,Method vehicles.library.textures.checkerboard.BWCheckerboard.__init__()=vehicles.library.textures.checkerboard.BWCheckerboard-class.html#__init__,Method vehicles.library.textures.checkerboard.RandomCheckerboard.__init__()=vehicles.library.textures.checkerboard.RandomCheckerboard-class.html#__init__,Method vehicles.library.textures.constant.ConstantTexture.__init__()=vehicles.library.textures.constant.ConstantTexture-class.html#__init__,Method vehicles.library.textures.sampled.SampledTexture.__init__()=vehicles.library.textures.sampled.SampledTexture-class.html#__init__,Method vehicles.library.textures.smooth.Smoothed.__init__()=vehicles.library.textures.smooth.Smoothed-class.html#__init__,Method vehicles.library.textures.textures.SinTexture.__init__()=vehicles.library.textures.textures.SinTexture-class.html#__init__,Method vehicles.library.worlds.bigmama.BigMamarama.__init__()=vehicles.library.worlds.bigmama.BigMamarama-class.html#__init__,Method vehicles.library.worlds.boxes.Box.__init__()=vehicles.library.worlds.boxes.Box-class.html#__init__,Method vehicles.library.worlds.dynamic.DynamicTest.__init__()=vehicles.library.worlds.dynamic.DynamicTest-class.html#__init__,Method vehicles.library.worlds.empty_fixed.EmptyFixed.__init__()=vehicles.library.worlds.empty_fixed.EmptyFixed-class.html#__init__,Method vehicles.library.worlds.light_box.LightBox.__init__()=vehicles.library.worlds.light_box.LightBox-class.html#__init__,Method vehicles.library.worlds.stochastic_box.StochasticBox.__init__()=vehicles.library.worlds.stochastic_box.StochasticBox-class.html#__init__,Method vehicles.library.worlds.stochastic_box2.KernelExponential.__init__()=vehicles.library.worlds.stochastic_box2.KernelExponential-class.html#__init__,Method vehicles.library.worlds.stochastic_box2.KernelInverse.__init__()=vehicles.library.worlds.stochastic_box2.KernelInverse-class.html#__init__,Method vehicles.library.worlds.stochastic_box2.StochasticBox2.__init__()=vehicles.library.worlds.stochastic_box2.StochasticBox2-class.html#__init__,Method vehicles.library.worlds.stochastic_box3.StochasticBox3.__init__()=vehicles.library.worlds.stochastic_box3.StochasticBox3-class.html#__init__,Method vehicles.library.worlds.stochastic_sources.StochasticSources.__init__()=vehicles.library.worlds.stochastic_sources.StochasticSources-class.html#__init__,Method vehicles.library.worlds.utils.Counter.__init__()=vehicles.library.worlds.utils.Counter-class.html#__init__,Method vehicles.simulation.vehicle.Attached.__init__()=vehicles.simulation.vehicle.Attached-class.html#__init__,Method vehicles.simulation.vehicle.Vehicle.__init__()=vehicles.simulation.vehicle.Vehicle-class.html#__init__,Method vehicles.simulation.vsimulation.VehicleSimulation.__init__()=vehicles.simulation.vsimulation.VehicleSimulation-class.html#__init__,Method vehicles_boot.vehicles_simulation.BOVehicleSimulation.__init__()=vehicles_boot.vehicles_simulation.BOVehicleSimulation-class.html#__init__,Method vehicles_cairo.skins.brai.__init__()=vehicles_cairo.skins.brai-class.html#__init__,Method vehicles_cairo.skins.car.__init__()=vehicles_cairo.skins.car-class.html#__init__,Method vehicles_cairo.skins.circular.__init__()=vehicles_cairo.skins.circular-class.html#__init__,Method vehicles_cairo.skins.complex_skin.ComplexSkin.__init__()=vehicles_cairo.skins.complex_skin.ComplexSkin-class.html#__init__,Method vehicles_cairo.skins.ddrive.__init__()=vehicles_cairo.skins.ddrive-class.html#__init__,Method vehicles_cairo.skins.eye.__init__()=vehicles_cairo.skins.eye-class.html#__init__,Method vehicles_cairo.skins.fly1.__init__()=vehicles_cairo.skins.fly1-class.html#__init__,Method vehicles_cairo.skins.omni.__init__()=vehicles_cairo.skins.omni-class.html#__init__,Method vehicles_cairo.skins.rectangle.__init__()=vehicles_cairo.skins.rectangle-class.html#__init__,Method vehicles_cairo.skins.roundedrec.__init__()=vehicles_cairo.skins.roundedrec-class.html#__init__,Method vehicles_cairo.skins.sick.__init__()=vehicles_cairo.skins.sick-class.html#__init__,Method vehicles_cairo.skins.tracks.__init__()=vehicles_cairo.skins.tracks-class.html#__init__,Method vehicles_cairo.skins.transparent.__init__()=vehicles_cairo.skins.transparent-class.html#__init__,Method vehicles_cairo.skins.wheel.__init__()=vehicles_cairo.skins.wheel-class.html#__init__"><a title="vehicles.configuration.master.VehiclesConfigMaster.__init__
+vehicles.interfaces.dynamics.Dynamics.__init__
+vehicles.interfaces.primitives.Circle.__init__
+vehicles.interfaces.primitives.GeometricShape.__init__
+vehicles.interfaces.primitives.PolyLine.__init__
+vehicles.interfaces.primitives.Primitive.__init__
+vehicles.interfaces.primitives.Source.__init__
+vehicles.interfaces.vehicle_sensor.VehicleSensor.__init__
+vehicles.interfaces.world.World.__init__
+vehicles.library.dynamics.artic.basetop.BaseTop.__init__
+vehicles.library.dynamics.artic.basetop.BaseTopDynamics.__init__
+vehicles.library.dynamics.artic.basetop.Turret.__init__
+vehicles.library.dynamics.exceptions.DynamicsException.__init__
+vehicles.library.dynamics.exceptions.InvalidCommands.__init__
+vehicles.library.dynamics.exceptions.InvalidState.__init__
+vehicles.library.dynamics.lie_dynamics.SimpleDynamics.__init__
+vehicles.library.dynamics.lie_kinematics.SimpleKinematics.__init__
+vehicles.library.dynamics.specializations.cars.CarWithWheels.__init__
+vehicles.library.dynamics.specializations.cars.DubinsCar.__init__
+vehicles.library.dynamics.specializations.cars.DubinsCarWithWheels.__init__
+vehicles.library.dynamics.specializations.cars.ReedsSheepCar.__init__
+vehicles.library.dynamics.specializations.cars.ReedsSheepCarWithWheels.__init__
+vehicles.library.dynamics.specializations.cars.SimpleCar.__init__
+vehicles.library.dynamics.specializations.circle.CircleForce.__init__
+vehicles.library.dynamics.specializations.circle.CircleVel.__init__
+vehicles.library.dynamics.specializations.differential_drive.DifferentialDrive.__init__
+vehicles.library.dynamics.specializations.euclidean.EuclideanForce.__init__
+vehicles.library.dynamics.specializations.euclidean.EuclideanVel.__init__
+vehicles.library.dynamics.specializations.se2.SE2Dynamics.__init__
+vehicles.library.dynamics.specializations.se2forward.SE2Forward.__init__
+vehicles.library.dynamics.specializations.so3.SO3Force.__init__
+vehicles.library.dynamics.specializations.so3.SO3Vel.__init__
+vehicles.library.noises.additive_gaussian.AdditiveGaussian.__init__
+vehicles.library.sensors.fields.field_sampler.FieldSampler.__init__
+vehicles.library.sensors.fields.field_sampler_rand_circle.FieldSamplerRandCircle.__init__
+vehicles.library.sensors.fields.field_sampler_uniform.FieldSamplerUniform.__init__
+vehicles.library.sensors.random_sensor.RandomSensor.__init__
+vehicles.library.textures.checkerboard.BWCheckerboard.__init__
+vehicles.library.textures.checkerboard.RandomCheckerboard.__init__
+vehicles.library.textures.constant.ConstantTexture.__init__
+vehicles.library.textures.sampled.SampledTexture.__init__
+vehicles.library.textures.smooth.Smoothed.__init__
+vehicles.library.textures.textures.SinTexture.__init__
+vehicles.library.worlds.bigmama.BigMamarama.__init__
+vehicles.library.worlds.boxes.Box.__init__
+vehicles.library.worlds.dynamic.DynamicTest.__init__
+vehicles.library.worlds.empty_fixed.EmptyFixed.__init__
+vehicles.library.worlds.light_box.LightBox.__init__
+vehicles.library.worlds.stochastic_box.StochasticBox.__init__
+vehicles.library.worlds.stochastic_box2.KernelExponential.__init__
+vehicles.library.worlds.stochastic_box2.KernelInverse.__init__
+vehicles.library.worlds.stochastic_box2.StochasticBox2.__init__
+vehicles.library.worlds.stochastic_box3.StochasticBox3.__init__
+vehicles.library.worlds.stochastic_sources.StochasticSources.__init__
+vehicles.library.worlds.utils.Counter.__init__
+vehicles.simulation.vehicle.Attached.__init__
+vehicles.simulation.vehicle.Vehicle.__init__
+vehicles.simulation.vsimulation.VehicleSimulation.__init__
+vehicles_boot.vehicles_simulation.BOVehicleSimulation.__init__
+vehicles_cairo.skins.brai.__init__
+vehicles_cairo.skins.car.__init__
+vehicles_cairo.skins.circular.__init__
+vehicles_cairo.skins.complex_skin.ComplexSkin.__init__
+vehicles_cairo.skins.ddrive.__init__
+vehicles_cairo.skins.eye.__init__
+vehicles_cairo.skins.fly1.__init__
+vehicles_cairo.skins.omni.__init__
+vehicles_cairo.skins.rectangle.__init__
+vehicles_cairo.skins.roundedrec.__init__
+vehicles_cairo.skins.sick.__init__
+vehicles_cairo.skins.tracks.__init__
+vehicles_cairo.skins.transparent.__init__
+vehicles_cairo.skins.wheel.__init__" class="py-name" href="#" onclick="return doclink('link-12', '__init__', 'link-12');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">                              <tt id="link-13" class="py-name"><a title="cairo_utils.shape" class="py-name" href="#" onclick="return doclink('link-13', 'shape', 'link-1');">shape</a></tt><tt class="py-op">=</tt><tt id="link-14" class="py-name"><a title="cairo_utils.shape" class="py-name" href="#" onclick="return doclink('link-14', 'shape', 'link-1');">shape</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">                              <tt class="py-name">positions</tt><tt class="py-op">=</tt><tt class="py-name">positions</tt><tt class="py-op">,</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">                              <tt class="py-name">min_value</tt><tt class="py-op">=</tt><tt class="py-name">min_value</tt><tt class="py-op">,</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">                              <tt class="py-name">max_value</tt><tt class="py-op">=</tt><tt class="py-name">max_value</tt><tt class="py-op">,</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">                              <tt class="py-name">normalize</tt><tt class="py-op">=</tt><tt class="py-name">normalize</tt><tt class="py-op">,</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">                              <tt class="py-name">noise</tt><tt class="py-op">=</tt><tt class="py-name">noise</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">pose</tt><tt class="py-op">=</tt><tt class="py-string">'SE3'</tt><tt class="py-op">)</tt> </tt>
+<a name="FieldSamplerUniform._compute_observations"></a><div id="FieldSamplerUniform._compute_observations-def"><a name="L43"></a><tt class="py-lineno">43</tt> <a class="py-toggle" href="#" id="FieldSamplerUniform._compute_observations-toggle" onclick="return toggle('FieldSamplerUniform._compute_observations');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.library.sensors.fields.field_sampler_uniform.FieldSamplerUniform-class.html#_compute_observations">_compute_observations</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">pose</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FieldSamplerUniform._compute_observations-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="FieldSamplerUniform._compute_observations-expanded"><a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">        <tt class="py-comment"># FIXME: this will not be drawn correctly</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">        <tt class="py-name">sensels</tt> <tt class="py-op">=</tt> <tt id="link-15" class="py-name"><a title="vehicles.library.sensors.fields.field_sampler.FieldSampler" class="py-name" href="#" onclick="return doclink('link-15', 'FieldSampler', 'link-0');">FieldSampler</a></tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Method vehicles.interfaces.vehicle_sensor.VehicleSensor._compute_observations()=vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html#_compute_observations,Method vehicles.library.sensors.fields.field_sampler.FieldSampler._compute_observations()=vehicles.library.sensors.fields.field_sampler.FieldSampler-class.html#_compute_observations,Method vehicles.library.sensors.fields.field_sampler_uniform.FieldSamplerUniform._compute_observations()=vehicles.library.sensors.fields.field_sampler_uniform.FieldSamplerUniform-class.html#_compute_observations,Method vehicles.library.sensors.random_sensor.RandomSensor._compute_observations()=vehicles.library.sensors.random_sensor.RandomSensor-class.html#_compute_observations"><a title="vehicles.interfaces.vehicle_sensor.VehicleSensor._compute_observations
+vehicles.library.sensors.fields.field_sampler.FieldSampler._compute_observations
+vehicles.library.sensors.fields.field_sampler_uniform.FieldSamplerUniform._compute_observations
+vehicles.library.sensors.random_sensor.RandomSensor._compute_observations" class="py-name" href="#" onclick="return doclink('link-16', '_compute_observations', 'link-16');">_compute_observations</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">pose</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-string">'sensels'</tt><tt class="py-op">]</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">        <tt class="py-name">sensels</tt> <tt class="py-op">=</tt> <tt class="py-name">sensels</tt><tt class="py-op">[</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cell2index</tt><tt class="py-op">]</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-name">sensels</tt><tt class="py-op">=</tt><tt class="py-name">sensels</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line"> </tt>
+<a name="FieldSamplerUniform.to_yaml"></a><div id="FieldSamplerUniform.to_yaml-def"><a name="L49"></a><tt class="py-lineno">49</tt> <a class="py-toggle" href="#" id="FieldSamplerUniform.to_yaml-toggle" onclick="return toggle('FieldSamplerUniform.to_yaml');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="vehicles.library.sensors.fields.field_sampler_uniform.FieldSamplerUniform-class.html#to_yaml">to_yaml</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FieldSamplerUniform.to_yaml-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="FieldSamplerUniform.to_yaml-expanded"><a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">        <tt class="py-name">s</tt> <tt class="py-op">=</tt> <tt id="link-17" class="py-name"><a title="vehicles.library.sensors.fields.field_sampler.FieldSampler" class="py-name" href="#" onclick="return doclink('link-17', 'FieldSampler', 'link-0');">FieldSampler</a></tt><tt class="py-op">.</tt><tt id="link-18" class="py-name" targets="Method vehicles.interfaces.primitives.Circle.to_yaml()=vehicles.interfaces.primitives.Circle-class.html#to_yaml,Method vehicles.interfaces.primitives.PolyLine.to_yaml()=vehicles.interfaces.primitives.PolyLine-class.html#to_yaml,Method vehicles.interfaces.primitives.Source.to_yaml()=vehicles.interfaces.primitives.Source-class.html#to_yaml,Method vehicles.interfaces.vehicle_sensor.VehicleSensor.to_yaml()=vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html#to_yaml,Method vehicles.interfaces.world.World.to_yaml()=vehicles.interfaces.world.World-class.html#to_yaml,Method vehicles.library.sensors.fields.field_sampler.FieldSampler.to_yaml()=vehicles.library.sensors.fields.field_sampler.FieldSampler-class.html#to_yaml,Method vehicles.library.sensors.fields.field_sampler_rand_circle.FieldSamplerRandCircle.to_yaml()=vehicles.library.sensors.fields.field_sampler_rand_circle.FieldSamplerRandCircle-class.html#to_yaml,Method vehicles.library.sensors.fields.field_sampler_uniform.FieldSamplerUniform.to_yaml()=vehicles.library.sensors.fields.field_sampler_uniform.FieldSamplerUniform-class.html#to_yaml,Method vehicles.library.sensors.random_sensor.RandomSensor.to_yaml()=vehicles.library.sensors.random_sensor.RandomSensor-class.html#to_yaml,Method vehicles.simulation.vehicle.Attached.to_yaml()=vehicles.simulation.vehicle.Attached-class.html#to_yaml,Method vehicles.simulation.vehicle.Vehicle.to_yaml()=vehicles.simulation.vehicle.Vehicle-class.html#to_yaml,Method vehicles.simulation.vsimulation.VehicleSimulation.to_yaml()=vehicles.simulation.vsimulation.VehicleSimulation-class.html#to_yaml"><a title="vehicles.interfaces.primitives.Circle.to_yaml
+vehicles.interfaces.primitives.PolyLine.to_yaml
+vehicles.interfaces.primitives.Source.to_yaml
+vehicles.interfaces.vehicle_sensor.VehicleSensor.to_yaml
+vehicles.interfaces.world.World.to_yaml
+vehicles.library.sensors.fields.field_sampler.FieldSampler.to_yaml
+vehicles.library.sensors.fields.field_sampler_rand_circle.FieldSamplerRandCircle.to_yaml
+vehicles.library.sensors.fields.field_sampler_uniform.FieldSamplerUniform.to_yaml
+vehicles.library.sensors.random_sensor.RandomSensor.to_yaml
+vehicles.simulation.vehicle.Attached.to_yaml
+vehicles.simulation.vehicle.Vehicle.to_yaml
+vehicles.simulation.vsimulation.VehicleSimulation.to_yaml" class="py-name" href="#" onclick="return doclink('link-18', 'to_yaml', 'link-18');">to_yaml</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">        <tt class="py-name">s</tt><tt class="py-op">[</tt><tt class="py-string">'shape'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="cairo_utils.shape" class="py-name" href="#" onclick="return doclink('link-19', 'shape', 'link-1');">shape</a></tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">        <tt class="py-name">s</tt><tt class="py-op">[</tt><tt class="py-string">'sides'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">sides</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">        <tt class="py-name">s</tt><tt class="py-op">[</tt><tt class="py-string">'cell2index'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cell2index</tt><tt class="py-op">.</tt><tt class="py-name">tolist</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">s</tt> </tt>
+</div></div><a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://github.com/AndreaCensi/vehicles">Vehicles</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Wed Feb 29 11:48:43 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

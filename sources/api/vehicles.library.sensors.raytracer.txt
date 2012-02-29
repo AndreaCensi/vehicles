@@ -1,0 +1,51 @@
+raytracer Package
+=================
+
+:mod:`raytracer` Package
+------------------------
+
+.. automodule:: vehicles.library.sensors.raytracer
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`myraytracer` Module
+-------------------------
+
+.. automodule:: vehicles.library.sensors.raytracer.myraytracer
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`photoreceptors` Module
+----------------------------
+
+.. automodule:: vehicles.library.sensors.raytracer.photoreceptors
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`photoreceptors_smooth` Module
+-----------------------------------
+
+.. automodule:: vehicles.library.sensors.raytracer.photoreceptors_smooth
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`range_finder` Module
+--------------------------
+
+.. automodule:: vehicles.library.sensors.raytracer.range_finder
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`textured_raytracer` Module
+--------------------------------
+
+.. automodule:: vehicles.library.sensors.raytracer.textured_raytracer
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

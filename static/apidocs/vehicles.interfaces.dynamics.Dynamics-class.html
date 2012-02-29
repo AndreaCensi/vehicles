@@ -62,19 +62,39 @@
 <h1 class="epydoc">Class Dynamics</h1><p class="nomargin-top"><span class="codelink"><a href="vehicles.interfaces.dynamics-pysrc.html#Dynamics">source&nbsp;code</a></span></p>
 <center>
 <center>  <map id="uml_class_diagram_for_vehicles_2" name="uml_class_diagram_for_vehicles_2">
-<area shape="rect" href="vehicles.interfaces.dynamics.Dynamics-class.html#__abstractmethods__" title="vehicles.interfaces.dynamics.Dynamics.__abstractmethods__" alt="" coords="17,28,281,47"/>
-<area shape="rect" href="abc.ABCMeta-class.html" title="Metaclass for defining Abstract Base Classes (ABCs)." alt="" coords="17,47,281,65"/>
-<area shape="rect" href="vehicles.interfaces.dynamics.Dynamics-class.html#__init__" title="x.__init__(...) initializes x; see help(type(x)) for signature" alt="" coords="17,68,281,87"/>
-<area shape="rect" href="vehicles.interfaces.dynamics.Dynamics-class.html#__str__" title="str(x)" alt="" coords="17,87,281,105"/>
-<area shape="rect" href="vehicles.interfaces.dynamics.Dynamics-class.html#check_commands" title="Raises an exception (InvalidCommands) if the commands are not valid." alt="" coords="17,105,281,124"/>
-<area shape="rect" href="vehicles.interfaces.dynamics.Dynamics-class.html#get_commands_spec" title="Returns the commands specification." alt="" coords="17,124,281,143"/>
-<area shape="rect" href="vehicles.interfaces.dynamics.Dynamics-class.html#get_state_space" title="Returns a DifferentiableManifold instance describing the state space." alt="" coords="17,143,281,161"/>
-<area shape="rect" href="vehicles.interfaces.dynamics.Dynamics-class.html#integrate" title="vehicles.interfaces.dynamics.Dynamics.integrate" alt="" coords="17,161,281,180"/>
-<area shape="rect" href="vehicles.interfaces.dynamics.Dynamics-class.html#joint_state" title="vehicles.interfaces.dynamics.Dynamics.joint_state" alt="" coords="17,180,281,199"/>
-<area shape="rect" href="vehicles.interfaces.dynamics.Dynamics-class.html#num_joints" title="Returns the number of joints." alt="" coords="17,199,281,217"/>
-<area shape="rect" href="vehicles.interfaces.dynamics.Dynamics-class.html#pose2state" title="Returns the state that best approximates the given pose (in SE3)." alt="" coords="17,217,281,236"/>
-<area shape="rect" href="vehicles.interfaces.dynamics.Dynamics-class.html#state_to_yaml" title="Converts the state to a YAML representation." alt="" coords="17,236,281,255"/>
-<area shape="rect" href="vehicles.interfaces.dynamics.Dynamics-class.html" title="This is the interface for the various dynamics implemented." alt="" coords="16,11,283,256"/>
+<area shape="rect" href="vehicles.library.dynamics.lie_kinematics.SimpleKinematics-class.html" title="A subclass for dynamics which have only a kinematic component." alt="" coords="1461,285,1765,312"/>
+<area shape="rect" href="vehicles.library.dynamics.specializations.se2forward.SE2Forward-class.html" title="vehicles.library.dynamics.specializations.se2forward.SE2Forward" alt="" coords="16,341,355,368"/>
+<area shape="rect" href="vehicles.library.dynamics.lie_dynamics.SimpleDynamics-class.html" title="vehicles.library.dynamics.lie_dynamics.SimpleDynamics" alt="" coords="405,341,696,368"/>
+<area shape="rect" href="vehicles.library.dynamics.specializations.se2.SE2Dynamics-class.html" title="vehicles.library.dynamics.specializations.se2.SE2Dynamics" alt="" coords="747,341,1056,368"/>
+<area shape="rect" href="vehicles.library.dynamics.specializations.circle.CircleVel-class.html" title="Particle on SO(2) controlled in velocity." alt="" coords="1107,341,1395,368"/>
+<area shape="rect" href="vehicles.library.dynamics.specializations.euclidean.EuclideanVel-class.html" title="Particle in Euclidean space controlled in velocity." alt="" coords="1445,341,1781,368"/>
+<area shape="rect" href="vehicles.library.dynamics.specializations.cars.SimpleCar-class.html" title="vehicles.library.dynamics.specializations.cars.SimpleCar" alt="" coords="1832,341,2123,368"/>
+<area shape="rect" href="vehicles.library.dynamics.specializations.differential_drive.DifferentialDrive-class.html" title="vehicles.library.dynamics.specializations.differential_drive.DifferentialDrive" alt="" coords="2173,341,2557,368"/>
+<area shape="rect" href="vehicles.library.dynamics.specializations.so3.SO3Vel-class.html" title="vehicles.library.dynamics.specializations.so3.SO3Vel" alt="" coords="2608,341,2880,368"/>
+<area shape="rect" href="vehicles.library.dynamics.specializations.cars.CarWithWheels-class.html" title="vehicles.library.dynamics.specializations.cars.CarWithWheels" alt="" coords="3165,285,3488,312"/>
+<area shape="rect" href="vehicles.library.dynamics.specializations.cars.DubinsCarWithWheels-class.html" title="vehicles.library.dynamics.specializations.cars.DubinsCarWithWheels" alt="" coords="2931,341,3293,368"/>
+<area shape="rect" href="vehicles.library.dynamics.specializations.cars.ReedsSheepCarWithWheels-class.html" title="vehicles.library.dynamics.specializations.cars.ReedsSheepCarWithWheels" alt="" coords="3344,341,3741,368"/>
+<area shape="rect" href="vehicles.library.dynamics.specializations.circle.CircleForce-class.html" title="Particle on SO(2) controlled in force." alt="" coords="20,397,324,424"/>
+<area shape="rect" href="vehicles.library.dynamics.specializations.euclidean.EuclideanForce-class.html" title="Particle in Euclidean space controlled in force." alt="" coords="375,397,727,424"/>
+<area shape="rect" href="vehicles.library.dynamics.specializations.so3.SO3Force-class.html" title="vehicles.library.dynamics.specializations.so3.SO3Force" alt="" coords="777,397,1063,424"/>
+<area shape="rect" href="vehicles.library.dynamics.specializations.cars.DubinsCar-class.html" title="vehicles.library.dynamics.specializations.cars.DubinsCar" alt="" coords="1652,397,1943,424"/>
+<area shape="rect" href="vehicles.library.dynamics.artic.basetop.BaseTopDynamics-class.html" title="vehicles.library.dynamics.artic.basetop.BaseTopDynamics" alt="" coords="3755,285,4053,312"/>
+<area shape="rect" href="vehicles.library.dynamics.artic.basetop.Turret-class.html" title="vehicles.library.dynamics.artic.basetop.Turret" alt="" coords="3792,341,4016,368"/>
+<area shape="rect" href="vehicles.library.dynamics.artic.basetop.BaseTop-class.html" title="vehicles.library.dynamics.artic.basetop.BaseTop" alt="" coords="4067,341,4307,368"/>
+<area shape="rect" href="vehicles.library.dynamics.specializations.cars.ReedsSheepCar-class.html" title="vehicles.library.dynamics.specializations.cars.ReedsSheepCar" alt="" coords="1993,397,2319,424"/>
+<area shape="rect" href="vehicles.interfaces.dynamics.Dynamics-class.html#__abstractmethods__" title="vehicles.interfaces.dynamics.Dynamics.__abstractmethods__" alt="" coords="3195,28,3459,47"/>
+<area shape="rect" href="abc.ABCMeta-class.html" title="Metaclass for defining Abstract Base Classes (ABCs)." alt="" coords="3195,47,3459,65"/>
+<area shape="rect" href="vehicles.interfaces.dynamics.Dynamics-class.html#__init__" title="x.__init__(...) initializes x; see help(type(x)) for signature" alt="" coords="3195,68,3459,87"/>
+<area shape="rect" href="vehicles.interfaces.dynamics.Dynamics-class.html#__str__" title="str(x)" alt="" coords="3195,87,3459,105"/>
+<area shape="rect" href="vehicles.interfaces.dynamics.Dynamics-class.html#check_commands" title="Raises an exception (InvalidCommands) if the commands are not valid." alt="" coords="3195,105,3459,124"/>
+<area shape="rect" href="vehicles.interfaces.dynamics.Dynamics-class.html#get_commands_spec" title="Returns the commands specification." alt="" coords="3195,124,3459,143"/>
+<area shape="rect" href="vehicles.interfaces.dynamics.Dynamics-class.html#get_state_space" title="Returns a DifferentiableManifold instance describing the state space." alt="" coords="3195,143,3459,161"/>
+<area shape="rect" href="vehicles.interfaces.dynamics.Dynamics-class.html#integrate" title="vehicles.interfaces.dynamics.Dynamics.integrate" alt="" coords="3195,161,3459,180"/>
+<area shape="rect" href="vehicles.interfaces.dynamics.Dynamics-class.html#joint_state" title="vehicles.interfaces.dynamics.Dynamics.joint_state" alt="" coords="3195,180,3459,199"/>
+<area shape="rect" href="vehicles.interfaces.dynamics.Dynamics-class.html#num_joints" title="Returns the number of joints." alt="" coords="3195,199,3459,217"/>
+<area shape="rect" href="vehicles.interfaces.dynamics.Dynamics-class.html#pose2state" title="Returns the state that best approximates the given pose (in SE3)." alt="" coords="3195,217,3459,236"/>
+<area shape="rect" href="vehicles.interfaces.dynamics.Dynamics-class.html#state_to_yaml" title="Converts the state to a YAML representation." alt="" coords="3195,236,3459,255"/>
+<area shape="rect" href="vehicles.interfaces.dynamics.Dynamics-class.html" title="This is the interface for the various dynamics implemented." alt="" coords="3193,11,3460,256"/>
 </map>
   <img src="uml_class_diagram_for_vehicles_2.gif" alt='' usemap="#uml_class_diagram_for_vehicles_2" ismap="ismap" class="graph-without-title" />
 </center>
@@ -399,14 +419,14 @@ pose (in SE3).</td>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="_abc_cache"></a><span class="summary-name">_abc_cache</span> = <code title="&lt;_weakrefset.WeakSet object at 0x1b1dd10&gt;">&lt;_weakrefset.WeakSet object at 0x1b1dd10&gt;</code>
+        <a name="_abc_cache"></a><span class="summary-name">_abc_cache</span> = <code title="&lt;_weakrefset.WeakSet object at 0x213cbd0&gt;">&lt;_weakrefset.WeakSet object at 0x213cbd0&gt;</code>
     </td>
   </tr>
 <tr class="private">
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="_abc_negative_cache"></a><span class="summary-name">_abc_negative_cache</span> = <code title="&lt;_weakrefset.WeakSet object at 0x1b1d690&gt;">&lt;_weakrefset.WeakSet object at 0x1b1d690&gt;</code>
+        <a name="_abc_negative_cache"></a><span class="summary-name">_abc_negative_cache</span> = <code title="&lt;_weakrefset.WeakSet object at 0x213cf50&gt;">&lt;_weakrefset.WeakSet object at 0x213cf50&gt;</code>
     </td>
   </tr>
 <tr class="private">
@@ -420,7 +440,7 @@ pose (in SE3).</td>
     <td width="15%" align="right" valign="top" class="summary">
       <span class="summary-type">&nbsp;</span>
     </td><td class="summary">
-        <a name="_abc_registry"></a><span class="summary-name">_abc_registry</span> = <code title="&lt;_weakrefset.WeakSet object at 0x1b1d090&gt;">&lt;_weakrefset.WeakSet object at 0x1b1d090&gt;</code>
+        <a name="_abc_registry"></a><span class="summary-name">_abc_registry</span> = <code title="&lt;_weakrefset.WeakSet object at 0x213cb90&gt;">&lt;_weakrefset.WeakSet object at 0x213cb90&gt;</code>
     </td>
   </tr>
 </table>
@@ -688,7 +708,7 @@ pose (in SE3).</blockquote>
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Sun Feb 26 11:44:31 2012
+    Generated by Epydoc 3.0.1 on Wed Feb 29 11:48:39 2012
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

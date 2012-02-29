@@ -26,9 +26,7 @@ Subpackages
     vehicles.interfaces
     vehicles.library
     vehicles.programs
-    vehicles.sensors
     vehicles.simulation
     vehicles.unittests
     vehicles.utils
-    vehicles.worlds
 

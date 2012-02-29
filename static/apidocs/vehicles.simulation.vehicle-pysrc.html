@@ -60,32 +60,35 @@
 <h1 class="epydoc">Source Code for <a href="vehicles.simulation.vehicle-module.html" onclick="show_private();">Module vehicles.simulation.vehicle</a></h1>
 <pre class="py-src">
 <a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-op">.</tt> <tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Function vehicles.simulation.collision.collides_with()=vehicles.simulation.collision-module.html#collides_with"><a title="vehicles.simulation.collision.collides_with" class="py-name" href="#" onclick="return doclink('link-0', 'collides_with', 'link-0');">collides_with</a></tt><tt class="py-op">,</tt> <tt class="py-name">np</tt><tt class="py-op">,</tt> <tt id="link-1" class="py-name" targets="Function vehicles.simulation.collision.compute_collision()=vehicles.simulation.collision-module.html#compute_collision"><a title="vehicles.simulation.collision.compute_collision" class="py-name" href="#" onclick="return doclink('link-1', 'compute_collision', 'link-1');">compute_collision</a></tt><tt class="py-op">,</tt> <tt class="py-name">contract</tt> </tt>
-<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">geometry</tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Variable procgraph_vehicles.SE3=procgraph_vehicles-module.html#SE3,Variable procgraph_vehicles.cairo_map_display.SE3=procgraph_vehicles.cairo_map_display-module.html#SE3,Variable vehicles.library.dynamics.SE3=vehicles.library.dynamics-module.html#SE3,Variable vehicles.simulation.vehicle.SE3=vehicles.simulation.vehicle-module.html#SE3,Variable vehicles.simulation.vsimulation.SE3=vehicles.simulation.vsimulation-module.html#SE3,Variable vehicles_cairo.SE3=vehicles_cairo-module.html#SE3,Variable vehicles_cairo.display_all.SE3=vehicles_cairo.display_all-module.html#SE3,Variable vehicles_cairo.sensor_data.SE3=vehicles_cairo.sensor_data-module.html#SE3"><a title="procgraph_vehicles.SE3
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">geometry</tt> <tt class="py-keyword">import</tt> <tt id="link-2" class="py-name" targets="Variable procgraph_vehicles.SE3=procgraph_vehicles-module.html#SE3,Variable procgraph_vehicles.cairo_map_display.SE3=procgraph_vehicles.cairo_map_display-module.html#SE3,Variable vehicles.library.dynamics.SE3=vehicles.library.dynamics-module.html#SE3,Variable vehicles.library.dynamics.artic.SE3=vehicles.library.dynamics.artic-module.html#SE3,Variable vehicles.library.dynamics.artic.basetop.SE3=vehicles.library.dynamics.artic.basetop-module.html#SE3,Variable vehicles.library.dynamics.lie_kinematics.SE3=vehicles.library.dynamics.lie_kinematics-module.html#SE3,Variable vehicles.library.dynamics.specializations.SE3=vehicles.library.dynamics.specializations-module.html#SE3,Variable vehicles.library.dynamics.specializations.cars.SE3=vehicles.library.dynamics.specializations.cars-module.html#SE3,Variable vehicles.simulation.vehicle.SE3=vehicles.simulation.vehicle-module.html#SE3,Variable vehicles.simulation.vsimulation.SE3=vehicles.simulation.vsimulation-module.html#SE3,Variable vehicles_cairo.SE3=vehicles_cairo-module.html#SE3,Variable vehicles_cairo.display_all.SE3=vehicles_cairo.display_all-module.html#SE3,Variable vehicles_cairo.sensor_data.SE3=vehicles_cairo.sensor_data-module.html#SE3"><a title="procgraph_vehicles.SE3
 procgraph_vehicles.cairo_map_display.SE3
 vehicles.library.dynamics.SE3
+vehicles.library.dynamics.artic.SE3
+vehicles.library.dynamics.artic.basetop.SE3
+vehicles.library.dynamics.lie_kinematics.SE3
+vehicles.library.dynamics.specializations.SE3
+vehicles.library.dynamics.specializations.cars.SE3
 vehicles.simulation.vehicle.SE3
 vehicles.simulation.vsimulation.SE3
 vehicles_cairo.SE3
 vehicles_cairo.display_all.SE3
 vehicles_cairo.sensor_data.SE3" class="py-name" href="#" onclick="return doclink('link-2', 'SE3', 'link-2');">SE3</a></tt><tt class="py-op">,</tt> <tt class="py-name">translation_from_SE2</tt><tt class="py-op">,</tt> <tt class="py-name">SE2_project_from_SE3</tt> </tt>
-<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">geometry</tt><tt class="py-op">.</tt><tt class="py-name">yaml</tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Method vehicles.interfaces.primitives.Circle.to_yaml()=vehicles.interfaces.primitives.Circle-class.html#to_yaml,Method vehicles.interfaces.primitives.PolyLine.to_yaml()=vehicles.interfaces.primitives.PolyLine-class.html#to_yaml,Method vehicles.interfaces.primitives.Source.to_yaml()=vehicles.interfaces.primitives.Source-class.html#to_yaml,Method vehicles.interfaces.vehicle_sensor.VehicleSensor.to_yaml()=vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html#to_yaml,Method vehicles.interfaces.world.World.to_yaml()=vehicles.interfaces.world.World-class.html#to_yaml,Method vehicles.sensors.field_sampler.FieldSampler.to_yaml()=vehicles.sensors.field_sampler.FieldSampler-class.html#to_yaml,Method vehicles.sensors.field_sampler_rand_circle.FieldSamplerRandCircle.to_yaml()=vehicles.sensors.field_sampler_rand_circle.FieldSamplerRandCircle-class.html#to_yaml,Method vehicles.sensors.field_sampler_uniform.FieldSamplerUniform.to_yaml()=vehicles.sensors.field_sampler_uniform.FieldSamplerUniform-class.html#to_yaml,Method vehicles.sensors.photoreceptors.Photoreceptors.to_yaml()=vehicles.sensors.photoreceptors.Photoreceptors-class.html#to_yaml,Method vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth.to_yaml()=vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth-class.html#to_yaml,Method vehicles.sensors.random_sensor.RandomSensor.to_yaml()=vehicles.sensors.random_sensor.RandomSensor-class.html#to_yaml,Method vehicles.sensors.range_finder.Rangefinder.to_yaml()=vehicles.sensors.range_finder.Rangefinder-class.html#to_yaml,Method vehicles.simulation.vehicle.Attached.to_yaml()=vehicles.simulation.vehicle.Attached-class.html#to_yaml,Method vehicles.simulation.vehicle.Vehicle.to_yaml()=vehicles.simulation.vehicle.Vehicle-class.html#to_yaml,Method vehicles.simulation.vsimulation.VehicleSimulation.to_yaml()=vehicles.simulation.vsimulation.VehicleSimulation-class.html#to_yaml"><a title="vehicles.interfaces.primitives.Circle.to_yaml
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">geometry</tt><tt class="py-op">.</tt><tt class="py-name">yaml</tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Method vehicles.interfaces.primitives.Circle.to_yaml()=vehicles.interfaces.primitives.Circle-class.html#to_yaml,Method vehicles.interfaces.primitives.PolyLine.to_yaml()=vehicles.interfaces.primitives.PolyLine-class.html#to_yaml,Method vehicles.interfaces.primitives.Source.to_yaml()=vehicles.interfaces.primitives.Source-class.html#to_yaml,Method vehicles.interfaces.vehicle_sensor.VehicleSensor.to_yaml()=vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html#to_yaml,Method vehicles.interfaces.world.World.to_yaml()=vehicles.interfaces.world.World-class.html#to_yaml,Method vehicles.library.sensors.fields.field_sampler.FieldSampler.to_yaml()=vehicles.library.sensors.fields.field_sampler.FieldSampler-class.html#to_yaml,Method vehicles.library.sensors.fields.field_sampler_rand_circle.FieldSamplerRandCircle.to_yaml()=vehicles.library.sensors.fields.field_sampler_rand_circle.FieldSamplerRandCircle-class.html#to_yaml,Method vehicles.library.sensors.fields.field_sampler_uniform.FieldSamplerUniform.to_yaml()=vehicles.library.sensors.fields.field_sampler_uniform.FieldSamplerUniform-class.html#to_yaml,Method vehicles.library.sensors.random_sensor.RandomSensor.to_yaml()=vehicles.library.sensors.random_sensor.RandomSensor-class.html#to_yaml,Method vehicles.simulation.vehicle.Attached.to_yaml()=vehicles.simulation.vehicle.Attached-class.html#to_yaml,Method vehicles.simulation.vehicle.Vehicle.to_yaml()=vehicles.simulation.vehicle.Vehicle-class.html#to_yaml,Method vehicles.simulation.vsimulation.VehicleSimulation.to_yaml()=vehicles.simulation.vsimulation.VehicleSimulation-class.html#to_yaml"><a title="vehicles.interfaces.primitives.Circle.to_yaml
 vehicles.interfaces.primitives.PolyLine.to_yaml
 vehicles.interfaces.primitives.Source.to_yaml
 vehicles.interfaces.vehicle_sensor.VehicleSensor.to_yaml
 vehicles.interfaces.world.World.to_yaml
-vehicles.sensors.field_sampler.FieldSampler.to_yaml
-vehicles.sensors.field_sampler_rand_circle.FieldSamplerRandCircle.to_yaml
-vehicles.sensors.field_sampler_uniform.FieldSamplerUniform.to_yaml
-vehicles.sensors.photoreceptors.Photoreceptors.to_yaml
-vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth.to_yaml
-vehicles.sensors.random_sensor.RandomSensor.to_yaml
-vehicles.sensors.range_finder.Rangefinder.to_yaml
+vehicles.library.sensors.fields.field_sampler.FieldSampler.to_yaml
+vehicles.library.sensors.fields.field_sampler_rand_circle.FieldSamplerRandCircle.to_yaml
+vehicles.library.sensors.fields.field_sampler_uniform.FieldSamplerUniform.to_yaml
+vehicles.library.sensors.random_sensor.RandomSensor.to_yaml
 vehicles.simulation.vehicle.Attached.to_yaml
 vehicles.simulation.vehicle.Vehicle.to_yaml
 vehicles.simulation.vsimulation.VehicleSimulation.to_yaml" class="py-name" href="#" onclick="return doclink('link-3', 'to_yaml', 'link-3');">to_yaml</a></tt> </tt>
 <a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-4" class="py-name" targets="Package vehicles=vehicles-module.html,Module vehicles.configuration.vehicles=vehicles.configuration.vehicles-module.html"><a title="vehicles
-vehicles.configuration.vehicles" class="py-name" href="#" onclick="return doclink('link-4', 'vehicles', 'link-4');">vehicles</a></tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Package vehicles.utils=vehicles.utils-module.html,Module vehicles.worlds.utils=vehicles.worlds.utils-module.html,Module vehicles_cairo.utils=vehicles_cairo.utils-module.html"><a title="vehicles.utils
-vehicles.worlds.utils
+vehicles.configuration.vehicles" class="py-name" href="#" onclick="return doclink('link-4', 'vehicles', 'link-4');">vehicles</a></tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Module vehicles.library.sensors.utils=vehicles.library.sensors.utils-module.html,Module vehicles.library.worlds.utils=vehicles.library.worlds.utils-module.html,Package vehicles.utils=vehicles.utils-module.html,Module vehicles_cairo.utils=vehicles_cairo.utils-module.html"><a title="vehicles.library.sensors.utils
+vehicles.library.worlds.utils
+vehicles.utils
 vehicles_cairo.utils" class="py-name" href="#" onclick="return doclink('link-5', 'utils', 'link-5');">utils</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Function vehicles.utils.check_yaml_friendly'.check_yaml_friendly()=vehicles.utils.check_yaml_friendly%27-module.html#check_yaml_friendly"><a title="vehicles.utils.check_yaml_friendly'.check_yaml_friendly" class="py-name" href="#" onclick="return doclink('link-6', 'check_yaml_friendly', 'link-6');">check_yaml_friendly</a></tt> <tt class="py-keyword">import</tt> <tt id="link-7" class="py-name"><a title="vehicles.utils.check_yaml_friendly'.check_yaml_friendly" class="py-name" href="#" onclick="return doclink('link-7', 'check_yaml_friendly', 'link-6');">check_yaml_friendly</a></tt> </tt>
 <a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"> </tt>
 <a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-name">__all__</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">'Attached'</tt><tt class="py-op">,</tt> <tt class="py-string">'Vehicle'</tt><tt class="py-op">]</tt> </tt>
@@ -116,19 +119,21 @@ vehicles.interfaces.primitives.PolyLine.to_yaml
 vehicles.interfaces.primitives.Source.to_yaml
 vehicles.interfaces.vehicle_sensor.VehicleSensor.to_yaml
 vehicles.interfaces.world.World.to_yaml
-vehicles.sensors.field_sampler.FieldSampler.to_yaml
-vehicles.sensors.field_sampler_rand_circle.FieldSamplerRandCircle.to_yaml
-vehicles.sensors.field_sampler_uniform.FieldSamplerUniform.to_yaml
-vehicles.sensors.photoreceptors.Photoreceptors.to_yaml
-vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth.to_yaml
-vehicles.sensors.random_sensor.RandomSensor.to_yaml
-vehicles.sensors.range_finder.Rangefinder.to_yaml
+vehicles.library.sensors.fields.field_sampler.FieldSampler.to_yaml
+vehicles.library.sensors.fields.field_sampler_rand_circle.FieldSamplerRandCircle.to_yaml
+vehicles.library.sensors.fields.field_sampler_uniform.FieldSamplerUniform.to_yaml
+vehicles.library.sensors.random_sensor.RandomSensor.to_yaml
 vehicles.simulation.vehicle.Attached.to_yaml
 vehicles.simulation.vehicle.Vehicle.to_yaml
 vehicles.simulation.vsimulation.VehicleSimulation.to_yaml" class="py-name" href="#" onclick="return doclink('link-8', 'to_yaml', 'link-3');">to_yaml</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
 <a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">            <tt class="py-string">'pose'</tt><tt class="py-op">:</tt> <tt id="link-9" class="py-name"><a title="procgraph_vehicles.SE3
 procgraph_vehicles.cairo_map_display.SE3
 vehicles.library.dynamics.SE3
+vehicles.library.dynamics.artic.SE3
+vehicles.library.dynamics.artic.basetop.SE3
+vehicles.library.dynamics.lie_kinematics.SE3
+vehicles.library.dynamics.specializations.SE3
+vehicles.library.dynamics.specializations.cars.SE3
 vehicles.simulation.vehicle.SE3
 vehicles.simulation.vsimulation.SE3
 vehicles_cairo.SE3
@@ -138,13 +143,10 @@ vehicles.interfaces.primitives.PolyLine.to_yaml
 vehicles.interfaces.primitives.Source.to_yaml
 vehicles.interfaces.vehicle_sensor.VehicleSensor.to_yaml
 vehicles.interfaces.world.World.to_yaml
-vehicles.sensors.field_sampler.FieldSampler.to_yaml
-vehicles.sensors.field_sampler_rand_circle.FieldSamplerRandCircle.to_yaml
-vehicles.sensors.field_sampler_uniform.FieldSamplerUniform.to_yaml
-vehicles.sensors.photoreceptors.Photoreceptors.to_yaml
-vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth.to_yaml
-vehicles.sensors.random_sensor.RandomSensor.to_yaml
-vehicles.sensors.range_finder.Rangefinder.to_yaml
+vehicles.library.sensors.fields.field_sampler.FieldSampler.to_yaml
+vehicles.library.sensors.fields.field_sampler_rand_circle.FieldSamplerRandCircle.to_yaml
+vehicles.library.sensors.fields.field_sampler_uniform.FieldSamplerUniform.to_yaml
+vehicles.library.sensors.random_sensor.RandomSensor.to_yaml
 vehicles.simulation.vehicle.Attached.to_yaml
 vehicles.simulation.vehicle.Vehicle.to_yaml
 vehicles.simulation.vsimulation.VehicleSimulation.to_yaml" class="py-name" href="#" onclick="return doclink('link-10', 'to_yaml', 'link-3');">to_yaml</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">pose</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
@@ -155,6 +157,11 @@ vehicles.simulation.vsimulation.VehicleSimulation.to_yaml" class="py-name" href=
 <a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">            <tt class="py-string">'current_pose'</tt><tt class="py-op">:</tt> <tt id="link-12" class="py-name"><a title="procgraph_vehicles.SE3
 procgraph_vehicles.cairo_map_display.SE3
 vehicles.library.dynamics.SE3
+vehicles.library.dynamics.artic.SE3
+vehicles.library.dynamics.artic.basetop.SE3
+vehicles.library.dynamics.lie_kinematics.SE3
+vehicles.library.dynamics.specializations.SE3
+vehicles.library.dynamics.specializations.cars.SE3
 vehicles.simulation.vehicle.SE3
 vehicles.simulation.vsimulation.SE3
 vehicles_cairo.SE3
@@ -164,13 +171,10 @@ vehicles.interfaces.primitives.PolyLine.to_yaml
 vehicles.interfaces.primitives.Source.to_yaml
 vehicles.interfaces.vehicle_sensor.VehicleSensor.to_yaml
 vehicles.interfaces.world.World.to_yaml
-vehicles.sensors.field_sampler.FieldSampler.to_yaml
-vehicles.sensors.field_sampler_rand_circle.FieldSamplerRandCircle.to_yaml
-vehicles.sensors.field_sampler_uniform.FieldSamplerUniform.to_yaml
-vehicles.sensors.photoreceptors.Photoreceptors.to_yaml
-vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth.to_yaml
-vehicles.sensors.random_sensor.RandomSensor.to_yaml
-vehicles.sensors.range_finder.Rangefinder.to_yaml
+vehicles.library.sensors.fields.field_sampler.FieldSampler.to_yaml
+vehicles.library.sensors.fields.field_sampler_rand_circle.FieldSamplerRandCircle.to_yaml
+vehicles.library.sensors.fields.field_sampler_uniform.FieldSamplerUniform.to_yaml
+vehicles.library.sensors.random_sensor.RandomSensor.to_yaml
 vehicles.simulation.vehicle.Attached.to_yaml
 vehicles.simulation.vehicle.Vehicle.to_yaml
 vehicles.simulation.vsimulation.VehicleSimulation.to_yaml" class="py-name" href="#" onclick="return doclink('link-13', 'to_yaml', 'link-3');">to_yaml</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">current_pose</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
@@ -187,9 +191,8 @@ vehicles.simulation.vsimulation.VehicleSimulation.to_yaml" class="py-name" href=
 <a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt class="py-docstring">            :param extra: extra information (extra['skin'] id of the skin)</tt> </tt>
 <a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
 <a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">radius</tt> <tt class="py-op">=</tt> <tt class="py-name">radius</tt> </tt>
-<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name" targets="Module vehicles.configuration.sensors=vehicles.configuration.sensors-module.html,Package vehicles.library.sensors=vehicles.library.sensors-module.html,Package vehicles.sensors=vehicles.sensors-module.html,Module vehicles_cairo.skins.sensors=vehicles_cairo.skins.sensors-module.html"><a title="vehicles.configuration.sensors
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name" targets="Module vehicles.configuration.sensors=vehicles.configuration.sensors-module.html,Package vehicles.library.sensors=vehicles.library.sensors-module.html,Module vehicles_cairo.skins.sensors=vehicles_cairo.skins.sensors-module.html"><a title="vehicles.configuration.sensors
 vehicles.library.sensors
-vehicles.sensors
 vehicles_cairo.skins.sensors" class="py-name" href="#" onclick="return doclink('link-14', 'sensors', 'link-14');">sensors</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt>  <tt class="py-comment"># array of Attached</tt> </tt>
 <a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">id_sensors</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
 <a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">id_dynamics</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt>  <tt class="py-comment"># XXX</tt> </tt>
@@ -207,28 +210,33 @@ vehicles.library.dynamics" class="py-name" href="#" onclick="return doclink('lin
 </div><div id="Vehicle.to_yaml-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Vehicle.to_yaml-expanded"><a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">        <tt class="py-comment"># pose, velocity</tt> </tt>
 <a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">        <tt id="link-17" class="py-name" targets="Package vehicles.configuration=vehicles.configuration-module.html"><a title="vehicles.configuration" class="py-name" href="#" onclick="return doclink('link-17', 'configuration', 'link-17');">configuration</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="vehicles.configuration.dynamics
 vehicles.interfaces.dynamics
-vehicles.library.dynamics" class="py-name" href="#" onclick="return doclink('link-18', 'dynamics', 'link-15');">dynamics</a></tt><tt class="py-op">.</tt><tt id="link-19" class="py-name" targets="Method vehicles.interfaces.dynamics.Dynamics.joint_state()=vehicles.interfaces.dynamics.Dynamics-class.html#joint_state"><a title="vehicles.interfaces.dynamics.Dynamics.joint_state" class="py-name" href="#" onclick="return doclink('link-19', 'joint_state', 'link-19');">joint_state</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name" targets="Method vehicles.simulation.vehicle.Vehicle._get_state()=vehicles.simulation.vehicle.Vehicle-class.html#_get_state"><a title="vehicles.simulation.vehicle.Vehicle._get_state" class="py-name" href="#" onclick="return doclink('link-20', '_get_state', 'link-20');">_get_state</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+vehicles.library.dynamics" class="py-name" href="#" onclick="return doclink('link-18', 'dynamics', 'link-15');">dynamics</a></tt><tt class="py-op">.</tt><tt id="link-19" class="py-name" targets="Method vehicles.interfaces.dynamics.Dynamics.joint_state()=vehicles.interfaces.dynamics.Dynamics-class.html#joint_state,Method vehicles.library.dynamics.artic.basetop.BaseTopDynamics.joint_state()=vehicles.library.dynamics.artic.basetop.BaseTopDynamics-class.html#joint_state,Method vehicles.library.dynamics.lie_kinematics.SimpleKinematics.joint_state()=vehicles.library.dynamics.lie_kinematics.SimpleKinematics-class.html#joint_state,Method vehicles.library.dynamics.specializations.cars.CarWithWheels.joint_state()=vehicles.library.dynamics.specializations.cars.CarWithWheels-class.html#joint_state"><a title="vehicles.interfaces.dynamics.Dynamics.joint_state
+vehicles.library.dynamics.artic.basetop.BaseTopDynamics.joint_state
+vehicles.library.dynamics.lie_kinematics.SimpleKinematics.joint_state
+vehicles.library.dynamics.specializations.cars.CarWithWheels.joint_state" class="py-name" href="#" onclick="return doclink('link-19', 'joint_state', 'link-19');">joint_state</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name" targets="Method vehicles.simulation.vehicle.Vehicle._get_state()=vehicles.simulation.vehicle.Vehicle-class.html#_get_state"><a title="vehicles.simulation.vehicle.Vehicle._get_state" class="py-name" href="#" onclick="return doclink('link-20', '_get_state', 'link-20');">_get_state</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
 <a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">        <tt class="py-name">pose</tt> <tt class="py-op">=</tt> <tt id="link-21" class="py-name"><a title="vehicles.configuration" class="py-name" href="#" onclick="return doclink('link-21', 'configuration', 'link-17');">configuration</a></tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
 <a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"> </tt>
 <a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">        <tt class="py-name">joints</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
 <a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="vehicles.configuration.dynamics
 vehicles.interfaces.dynamics
-vehicles.library.dynamics" class="py-name" href="#" onclick="return doclink('link-22', 'dynamics', 'link-15');">dynamics</a></tt><tt class="py-op">.</tt><tt id="link-23" class="py-name" targets="Method vehicles.interfaces.dynamics.Dynamics.num_joints()=vehicles.interfaces.dynamics.Dynamics-class.html#num_joints"><a title="vehicles.interfaces.dynamics.Dynamics.num_joints" class="py-name" href="#" onclick="return doclink('link-23', 'num_joints', 'link-23');">num_joints</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+vehicles.library.dynamics" class="py-name" href="#" onclick="return doclink('link-22', 'dynamics', 'link-15');">dynamics</a></tt><tt class="py-op">.</tt><tt id="link-23" class="py-name" targets="Method vehicles.interfaces.dynamics.Dynamics.num_joints()=vehicles.interfaces.dynamics.Dynamics-class.html#num_joints,Method vehicles.library.dynamics.artic.basetop.BaseTopDynamics.num_joints()=vehicles.library.dynamics.artic.basetop.BaseTopDynamics-class.html#num_joints,Method vehicles.library.dynamics.specializations.cars.CarWithWheels.num_joints()=vehicles.library.dynamics.specializations.cars.CarWithWheels-class.html#num_joints"><a title="vehicles.interfaces.dynamics.Dynamics.num_joints
+vehicles.library.dynamics.artic.basetop.BaseTopDynamics.num_joints
+vehicles.library.dynamics.specializations.cars.CarWithWheels.num_joints" class="py-name" href="#" onclick="return doclink('link-23', 'num_joints', 'link-23');">num_joints</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
 <a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">            <tt class="py-name">jc</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="vehicles.configuration.dynamics
 vehicles.interfaces.dynamics
-vehicles.library.dynamics" class="py-name" href="#" onclick="return doclink('link-24', 'dynamics', 'link-15');">dynamics</a></tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="vehicles.interfaces.dynamics.Dynamics.joint_state" class="py-name" href="#" onclick="return doclink('link-25', 'joint_state', 'link-19');">joint_state</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="vehicles.simulation.vehicle.Vehicle._get_state" class="py-name" href="#" onclick="return doclink('link-26', '_get_state', 'link-20');">_get_state</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">i</tt><tt class="py-op">)</tt> </tt>
+vehicles.library.dynamics" class="py-name" href="#" onclick="return doclink('link-24', 'dynamics', 'link-15');">dynamics</a></tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="vehicles.interfaces.dynamics.Dynamics.joint_state
+vehicles.library.dynamics.artic.basetop.BaseTopDynamics.joint_state
+vehicles.library.dynamics.lie_kinematics.SimpleKinematics.joint_state
+vehicles.library.dynamics.specializations.cars.CarWithWheels.joint_state" class="py-name" href="#" onclick="return doclink('link-25', 'joint_state', 'link-19');">joint_state</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="vehicles.simulation.vehicle.Vehicle._get_state" class="py-name" href="#" onclick="return doclink('link-26', '_get_state', 'link-20');">_get_state</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">i</tt><tt class="py-op">)</tt> </tt>
 <a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">            <tt class="py-name">joints</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt id="link-27" class="py-name"><a title="vehicles.interfaces.primitives.Circle.to_yaml
 vehicles.interfaces.primitives.PolyLine.to_yaml
 vehicles.interfaces.primitives.Source.to_yaml
 vehicles.interfaces.vehicle_sensor.VehicleSensor.to_yaml
 vehicles.interfaces.world.World.to_yaml
-vehicles.sensors.field_sampler.FieldSampler.to_yaml
-vehicles.sensors.field_sampler_rand_circle.FieldSamplerRandCircle.to_yaml
-vehicles.sensors.field_sampler_uniform.FieldSamplerUniform.to_yaml
-vehicles.sensors.photoreceptors.Photoreceptors.to_yaml
-vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth.to_yaml
-vehicles.sensors.random_sensor.RandomSensor.to_yaml
-vehicles.sensors.range_finder.Rangefinder.to_yaml
+vehicles.library.sensors.fields.field_sampler.FieldSampler.to_yaml
+vehicles.library.sensors.fields.field_sampler_rand_circle.FieldSamplerRandCircle.to_yaml
+vehicles.library.sensors.fields.field_sampler_uniform.FieldSamplerUniform.to_yaml
+vehicles.library.sensors.random_sensor.RandomSensor.to_yaml
 vehicles.simulation.vehicle.Attached.to_yaml
 vehicles.simulation.vehicle.Vehicle.to_yaml
 vehicles.simulation.vsimulation.VehicleSimulation.to_yaml" class="py-name" href="#" onclick="return doclink('link-27', 'to_yaml', 'link-3');">to_yaml</a></tt><tt class="py-op">(</tt><tt class="py-string">"TSE3"</tt><tt class="py-op">,</tt> <tt class="py-name">jc</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
@@ -240,6 +248,11 @@ vehicles.simulation.vsimulation.VehicleSimulation.to_yaml" class="py-name" href=
 <a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">            <tt class="py-string">'pose'</tt><tt class="py-op">:</tt> <tt id="link-28" class="py-name"><a title="procgraph_vehicles.SE3
 procgraph_vehicles.cairo_map_display.SE3
 vehicles.library.dynamics.SE3
+vehicles.library.dynamics.artic.SE3
+vehicles.library.dynamics.artic.basetop.SE3
+vehicles.library.dynamics.lie_kinematics.SE3
+vehicles.library.dynamics.specializations.SE3
+vehicles.library.dynamics.specializations.cars.SE3
 vehicles.simulation.vehicle.SE3
 vehicles.simulation.vsimulation.SE3
 vehicles_cairo.SE3
@@ -249,13 +262,10 @@ vehicles.interfaces.primitives.PolyLine.to_yaml
 vehicles.interfaces.primitives.Source.to_yaml
 vehicles.interfaces.vehicle_sensor.VehicleSensor.to_yaml
 vehicles.interfaces.world.World.to_yaml
-vehicles.sensors.field_sampler.FieldSampler.to_yaml
-vehicles.sensors.field_sampler_rand_circle.FieldSamplerRandCircle.to_yaml
-vehicles.sensors.field_sampler_uniform.FieldSamplerUniform.to_yaml
-vehicles.sensors.photoreceptors.Photoreceptors.to_yaml
-vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth.to_yaml
-vehicles.sensors.random_sensor.RandomSensor.to_yaml
-vehicles.sensors.range_finder.Rangefinder.to_yaml
+vehicles.library.sensors.fields.field_sampler.FieldSampler.to_yaml
+vehicles.library.sensors.fields.field_sampler_rand_circle.FieldSamplerRandCircle.to_yaml
+vehicles.library.sensors.fields.field_sampler_uniform.FieldSamplerUniform.to_yaml
+vehicles.library.sensors.random_sensor.RandomSensor.to_yaml
 vehicles.simulation.vehicle.Attached.to_yaml
 vehicles.simulation.vehicle.Vehicle.to_yaml
 vehicles.simulation.vsimulation.VehicleSimulation.to_yaml" class="py-name" href="#" onclick="return doclink('link-29', 'to_yaml', 'link-3');">to_yaml</a></tt><tt class="py-op">(</tt><tt class="py-name">pose</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
@@ -264,37 +274,33 @@ vehicles.interfaces.primitives.PolyLine.to_yaml
 vehicles.interfaces.primitives.Source.to_yaml
 vehicles.interfaces.vehicle_sensor.VehicleSensor.to_yaml
 vehicles.interfaces.world.World.to_yaml
-vehicles.sensors.field_sampler.FieldSampler.to_yaml
-vehicles.sensors.field_sampler_rand_circle.FieldSamplerRandCircle.to_yaml
-vehicles.sensors.field_sampler_uniform.FieldSamplerUniform.to_yaml
-vehicles.sensors.photoreceptors.Photoreceptors.to_yaml
-vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth.to_yaml
-vehicles.sensors.random_sensor.RandomSensor.to_yaml
-vehicles.sensors.range_finder.Rangefinder.to_yaml
+vehicles.library.sensors.fields.field_sampler.FieldSampler.to_yaml
+vehicles.library.sensors.fields.field_sampler_rand_circle.FieldSamplerRandCircle.to_yaml
+vehicles.library.sensors.fields.field_sampler_uniform.FieldSamplerUniform.to_yaml
+vehicles.library.sensors.random_sensor.RandomSensor.to_yaml
 vehicles.simulation.vehicle.Attached.to_yaml
 vehicles.simulation.vehicle.Vehicle.to_yaml
 vehicles.simulation.vsimulation.VehicleSimulation.to_yaml" class="py-name" href="#" onclick="return doclink('link-30', 'to_yaml', 'link-3');">to_yaml</a></tt><tt class="py-op">(</tt><tt class="py-string">'TSE3'</tt><tt class="py-op">,</tt> <tt id="link-31" class="py-name"><a title="vehicles.configuration" class="py-name" href="#" onclick="return doclink('link-31', 'configuration', 'link-17');">configuration</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
 <a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">            <tt class="py-string">'state'</tt><tt class="py-op">:</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-32" class="py-name"><a title="vehicles.configuration.dynamics
 vehicles.interfaces.dynamics
-vehicles.library.dynamics" class="py-name" href="#" onclick="return doclink('link-32', 'dynamics', 'link-15');">dynamics</a></tt><tt class="py-op">.</tt><tt id="link-33" class="py-name" targets="Method vehicles.interfaces.dynamics.Dynamics.state_to_yaml()=vehicles.interfaces.dynamics.Dynamics-class.html#state_to_yaml"><a title="vehicles.interfaces.dynamics.Dynamics.state_to_yaml" class="py-name" href="#" onclick="return doclink('link-33', 'state_to_yaml', 'link-33');">state_to_yaml</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-34" class="py-name"><a title="vehicles.simulation.vehicle.Vehicle._get_state" class="py-name" href="#" onclick="return doclink('link-34', '_get_state', 'link-20');">_get_state</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+vehicles.library.dynamics" class="py-name" href="#" onclick="return doclink('link-32', 'dynamics', 'link-15');">dynamics</a></tt><tt class="py-op">.</tt><tt id="link-33" class="py-name" targets="Method vehicles.interfaces.dynamics.Dynamics.state_to_yaml()=vehicles.interfaces.dynamics.Dynamics-class.html#state_to_yaml,Method vehicles.library.dynamics.artic.basetop.BaseTopDynamics.state_to_yaml()=vehicles.library.dynamics.artic.basetop.BaseTopDynamics-class.html#state_to_yaml,Method vehicles.library.dynamics.lie_kinematics.SimpleKinematics.state_to_yaml()=vehicles.library.dynamics.lie_kinematics.SimpleKinematics-class.html#state_to_yaml,Method vehicles.library.dynamics.specializations.cars.CarWithWheels.state_to_yaml()=vehicles.library.dynamics.specializations.cars.CarWithWheels-class.html#state_to_yaml"><a title="vehicles.interfaces.dynamics.Dynamics.state_to_yaml
+vehicles.library.dynamics.artic.basetop.BaseTopDynamics.state_to_yaml
+vehicles.library.dynamics.lie_kinematics.SimpleKinematics.state_to_yaml
+vehicles.library.dynamics.specializations.cars.CarWithWheels.state_to_yaml" class="py-name" href="#" onclick="return doclink('link-33', 'state_to_yaml', 'link-33');">state_to_yaml</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-34" class="py-name"><a title="vehicles.simulation.vehicle.Vehicle._get_state" class="py-name" href="#" onclick="return doclink('link-34', '_get_state', 'link-20');">_get_state</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
 <a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">            <tt class="py-string">'joints'</tt><tt class="py-op">:</tt> <tt class="py-name">joints</tt><tt class="py-op">,</tt> </tt>
 <a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">            <tt class="py-string">'sensors'</tt><tt class="py-op">:</tt> <tt class="py-op">[</tt><tt class="py-name">s</tt><tt class="py-op">.</tt><tt id="link-35" class="py-name"><a title="vehicles.interfaces.primitives.Circle.to_yaml
 vehicles.interfaces.primitives.PolyLine.to_yaml
 vehicles.interfaces.primitives.Source.to_yaml
 vehicles.interfaces.vehicle_sensor.VehicleSensor.to_yaml
 vehicles.interfaces.world.World.to_yaml
-vehicles.sensors.field_sampler.FieldSampler.to_yaml
-vehicles.sensors.field_sampler_rand_circle.FieldSamplerRandCircle.to_yaml
-vehicles.sensors.field_sampler_uniform.FieldSamplerUniform.to_yaml
-vehicles.sensors.photoreceptors.Photoreceptors.to_yaml
-vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth.to_yaml
-vehicles.sensors.random_sensor.RandomSensor.to_yaml
-vehicles.sensors.range_finder.Rangefinder.to_yaml
+vehicles.library.sensors.fields.field_sampler.FieldSampler.to_yaml
+vehicles.library.sensors.fields.field_sampler_rand_circle.FieldSamplerRandCircle.to_yaml
+vehicles.library.sensors.fields.field_sampler_uniform.FieldSamplerUniform.to_yaml
+vehicles.library.sensors.random_sensor.RandomSensor.to_yaml
 vehicles.simulation.vehicle.Attached.to_yaml
 vehicles.simulation.vehicle.Vehicle.to_yaml
 vehicles.simulation.vsimulation.VehicleSimulation.to_yaml" class="py-name" href="#" onclick="return doclink('link-35', 'to_yaml', 'link-3');">to_yaml</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">s</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-36" class="py-name"><a title="vehicles.configuration.sensors
 vehicles.library.sensors
-vehicles.sensors
 vehicles_cairo.skins.sensors" class="py-name" href="#" onclick="return doclink('link-36', 'sensors', 'link-14');">sensors</a></tt><tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
 <a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">            <tt class="py-string">'extra'</tt><tt class="py-op">:</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">extra</tt> </tt>
 <a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">        <tt class="py-op">}</tt> </tt>
@@ -321,7 +327,6 @@ vehicles.library.dynamics" class="py-name" href="#" onclick="return doclink('lin
 <a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">                                    <tt class="py-name">joint</tt><tt class="py-op">=</tt><tt class="py-name">joint</tt><tt class="py-op">,</tt> <tt class="py-name">extra</tt><tt class="py-op">=</tt><tt class="py-name">extra</tt><tt class="py-op">)</tt> </tt>
 <a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-42" class="py-name"><a title="vehicles.configuration.sensors
 vehicles.library.sensors
-vehicles.sensors
 vehicles_cairo.skins.sensors" class="py-name" href="#" onclick="return doclink('link-42', 'sensors', 'link-14');">sensors</a></tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">attached</tt><tt class="py-op">)</tt> </tt>
 <a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">id_sensors</tt><tt class="py-op">:</tt> </tt>
 <a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">id_sensors</tt> <tt class="py-op">=</tt> <tt class="py-name">id_sensor</tt> </tt>
@@ -336,16 +341,10 @@ procgraph_vehicles.vehiclelog_utils.use_simulation_time.update
 procgraph_vehicles.yaml_log_reader.YAMLLogReader.update" class="py-name" href="#" onclick="return doclink('link-44', 'update', 'link-44');">update</a></tt><tt class="py-op">(</tt><tt id="link-45" class="py-name"><a title="vehicles.interfaces.primitives" class="py-name" href="#" onclick="return doclink('link-45', 'primitives', 'link-16');">primitives</a></tt><tt class="py-op">)</tt> </tt>
 <a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">attached</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-46" class="py-name"><a title="vehicles.configuration.sensors
 vehicles.library.sensors
-vehicles.sensors
 vehicles_cairo.skins.sensors" class="py-name" href="#" onclick="return doclink('link-46', 'sensors', 'link-14');">sensors</a></tt><tt class="py-op">:</tt> </tt>
-<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">            <tt class="py-name">attached</tt><tt class="py-op">.</tt><tt class="py-name">sensor</tt><tt class="py-op">.</tt><tt id="link-47" class="py-name" targets="Method vehicles.interfaces.vehicle_sensor.VehicleSensor.set_world_primitives()=vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html#set_world_primitives,Method vehicles.sensors.field_sampler.FieldSampler.set_world_primitives()=vehicles.sensors.field_sampler.FieldSampler-class.html#set_world_primitives,Method vehicles.sensors.photoreceptors.Photoreceptors.set_world_primitives()=vehicles.sensors.photoreceptors.Photoreceptors-class.html#set_world_primitives,Method vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth.set_world_primitives()=vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth-class.html#set_world_primitives,Method vehicles.sensors.random_sensor.RandomSensor.set_world_primitives()=vehicles.sensors.random_sensor.RandomSensor-class.html#set_world_primitives,Method vehicles.sensors.range_finder.Rangefinder.set_world_primitives()=vehicles.sensors.range_finder.Rangefinder-class.html#set_world_primitives,Method vehicles.sensors.raytracer.textured_raytracer.Raytracer.set_world_primitives()=vehicles.sensors.raytracer.textured_raytracer.Raytracer-class.html#set_world_primitives,Method vehicles.sensors.raytracer.textured_raytracer.TexturedRaytracer.set_world_primitives()=vehicles.sensors.raytracer.textured_raytracer.TexturedRaytracer-class.html#set_world_primitives,Method vehicles.simulation.vehicle.Vehicle.set_world_primitives()=vehicles.simulation.vehicle.Vehicle-class.html#set_world_primitives"><a title="vehicles.interfaces.vehicle_sensor.VehicleSensor.set_world_primitives
-vehicles.sensors.field_sampler.FieldSampler.set_world_primitives
-vehicles.sensors.photoreceptors.Photoreceptors.set_world_primitives
-vehicles.sensors.photoreceptors_smooth.PhotoreceptorsSmooth.set_world_primitives
-vehicles.sensors.random_sensor.RandomSensor.set_world_primitives
-vehicles.sensors.range_finder.Rangefinder.set_world_primitives
-vehicles.sensors.raytracer.textured_raytracer.Raytracer.set_world_primitives
-vehicles.sensors.raytracer.textured_raytracer.TexturedRaytracer.set_world_primitives
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">            <tt class="py-name">attached</tt><tt class="py-op">.</tt><tt class="py-name">sensor</tt><tt class="py-op">.</tt><tt id="link-47" class="py-name" targets="Method vehicles.interfaces.vehicle_sensor.VehicleSensor.set_world_primitives()=vehicles.interfaces.vehicle_sensor.VehicleSensor-class.html#set_world_primitives,Method vehicles.library.sensors.fields.field_sampler.FieldSampler.set_world_primitives()=vehicles.library.sensors.fields.field_sampler.FieldSampler-class.html#set_world_primitives,Method vehicles.library.sensors.random_sensor.RandomSensor.set_world_primitives()=vehicles.library.sensors.random_sensor.RandomSensor-class.html#set_world_primitives,Method vehicles.simulation.vehicle.Vehicle.set_world_primitives()=vehicles.simulation.vehicle.Vehicle-class.html#set_world_primitives"><a title="vehicles.interfaces.vehicle_sensor.VehicleSensor.set_world_primitives
+vehicles.library.sensors.fields.field_sampler.FieldSampler.set_world_primitives
+vehicles.library.sensors.random_sensor.RandomSensor.set_world_primitives
 vehicles.simulation.vehicle.Vehicle.set_world_primitives" class="py-name" href="#" onclick="return doclink('link-47', 'set_world_primitives', 'link-47');">set_world_primitives</a></tt><tt class="py-op">(</tt><tt id="link-48" class="py-name"><a title="vehicles.interfaces.primitives" class="py-name" href="#" onclick="return doclink('link-48', 'primitives', 'link-16');">primitives</a></tt><tt class="py-op">)</tt> </tt>
 </div><a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"> </tt>
 <a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">contract</tt><tt class="py-op">(</tt><tt class="py-name">returns</tt><tt class="py-op">=</tt><tt class="py-string">'SE3'</tt><tt class="py-op">)</tt> </tt>
@@ -359,7 +358,10 @@ vehicles.simulation.vehicle.Vehicle.set_world_primitives" class="py-name" href="
 <a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
 <a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">        <tt class="py-name">pose</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-49" class="py-name"><a title="vehicles.configuration.dynamics
 vehicles.interfaces.dynamics
-vehicles.library.dynamics" class="py-name" href="#" onclick="return doclink('link-49', 'dynamics', 'link-15');">dynamics</a></tt><tt class="py-op">.</tt><tt id="link-50" class="py-name"><a title="vehicles.interfaces.dynamics.Dynamics.joint_state" class="py-name" href="#" onclick="return doclink('link-50', 'joint_state', 'link-19');">joint_state</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-51" class="py-name"><a title="vehicles.simulation.vehicle.Vehicle._get_state" class="py-name" href="#" onclick="return doclink('link-51', '_get_state', 'link-20');">_get_state</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+vehicles.library.dynamics" class="py-name" href="#" onclick="return doclink('link-49', 'dynamics', 'link-15');">dynamics</a></tt><tt class="py-op">.</tt><tt id="link-50" class="py-name"><a title="vehicles.interfaces.dynamics.Dynamics.joint_state
+vehicles.library.dynamics.artic.basetop.BaseTopDynamics.joint_state
+vehicles.library.dynamics.lie_kinematics.SimpleKinematics.joint_state
+vehicles.library.dynamics.specializations.cars.CarWithWheels.joint_state" class="py-name" href="#" onclick="return doclink('link-50', 'joint_state', 'link-19');">joint_state</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-51" class="py-name"><a title="vehicles.simulation.vehicle.Vehicle._get_state" class="py-name" href="#" onclick="return doclink('link-51', '_get_state', 'link-20');">_get_state</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
 <a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">        <tt class="py-name">j_pose</tt><tt class="py-op">,</tt> <tt class="py-name">j_vel</tt> <tt class="py-op">=</tt> <tt class="py-name">pose</tt>  <tt class="py-comment"># @UnusedVariable</tt> </tt>
 <a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">j_pose</tt> </tt>
 </div><a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line"> </tt>
@@ -373,7 +375,10 @@ vehicles_boot.ros_visualization.msg" class="py-name" href="#" onclick="return do
 <a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">        <tt class="py-comment"># TODO: check compatibility</tt> </tt>
 <a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">        <tt class="py-name">state</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-55" class="py-name"><a title="vehicles.configuration.dynamics
 vehicles.interfaces.dynamics
-vehicles.library.dynamics" class="py-name" href="#" onclick="return doclink('link-55', 'dynamics', 'link-15');">dynamics</a></tt><tt class="py-op">.</tt><tt id="link-56" class="py-name" targets="Method vehicles.interfaces.dynamics.Dynamics.pose2state()=vehicles.interfaces.dynamics.Dynamics-class.html#pose2state"><a title="vehicles.interfaces.dynamics.Dynamics.pose2state" class="py-name" href="#" onclick="return doclink('link-56', 'pose2state', 'link-56');">pose2state</a></tt><tt class="py-op">(</tt><tt class="py-name">pose</tt><tt class="py-op">)</tt> </tt>
+vehicles.library.dynamics" class="py-name" href="#" onclick="return doclink('link-55', 'dynamics', 'link-15');">dynamics</a></tt><tt class="py-op">.</tt><tt id="link-56" class="py-name" targets="Method vehicles.interfaces.dynamics.Dynamics.pose2state()=vehicles.interfaces.dynamics.Dynamics-class.html#pose2state,Method vehicles.library.dynamics.artic.basetop.BaseTopDynamics.pose2state()=vehicles.library.dynamics.artic.basetop.BaseTopDynamics-class.html#pose2state,Method vehicles.library.dynamics.lie_kinematics.SimpleKinematics.pose2state()=vehicles.library.dynamics.lie_kinematics.SimpleKinematics-class.html#pose2state,Method vehicles.library.dynamics.specializations.cars.CarWithWheels.pose2state()=vehicles.library.dynamics.specializations.cars.CarWithWheels-class.html#pose2state"><a title="vehicles.interfaces.dynamics.Dynamics.pose2state
+vehicles.library.dynamics.artic.basetop.BaseTopDynamics.pose2state
+vehicles.library.dynamics.lie_kinematics.SimpleKinematics.pose2state
+vehicles.library.dynamics.specializations.cars.CarWithWheels.pose2state" class="py-name" href="#" onclick="return doclink('link-56', 'pose2state', 'link-56');">pose2state</a></tt><tt class="py-op">(</tt><tt class="py-name">pose</tt><tt class="py-op">)</tt> </tt>
 <a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"> </tt>
 <a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">        <tt id="link-57" class="py-name" targets="Module vehicles.simulation.collision=vehicles.simulation.collision-module.html"><a title="vehicles.simulation.collision" class="py-name" href="#" onclick="return doclink('link-57', 'collision', 'link-57');">collision</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-58" class="py-name" targets="Method vehicles.simulation.vehicle.Vehicle.colliding_pose()=vehicles.simulation.vehicle.Vehicle-class.html#colliding_pose"><a title="vehicles.simulation.vehicle.Vehicle.colliding_pose" class="py-name" href="#" onclick="return doclink('link-58', 'colliding_pose', 'link-58');">colliding_pose</a></tt><tt class="py-op">(</tt><tt class="py-name">pose</tt><tt class="py-op">)</tt>  <tt class="py-comment"># XXX</tt> </tt>
 <a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-59" class="py-name"><a title="vehicles.simulation.collision" class="py-name" href="#" onclick="return doclink('link-59', 'collision', 'link-57');">collision</a></tt><tt class="py-op">.</tt><tt id="link-60" class="py-name" targets="Variable vehicles.simulation.collision.CollisionInfo.collided=vehicles.simulation.collision.CollisionInfo-class.html#collided"><a title="vehicles.simulation.collision.CollisionInfo.collided" class="py-name" href="#" onclick="return doclink('link-60', 'collided', 'link-60');">collided</a></tt><tt class="py-op">:</tt> </tt>
@@ -392,7 +397,10 @@ vehicles.library.dynamics" class="py-name" href="#" onclick="return doclink('lin
 <a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">            <tt class="py-comment"># compute center of robot</tt> </tt>
 <a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">            <tt class="py-name">j_pose</tt><tt class="py-op">,</tt> <tt class="py-name">_</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-64" class="py-name"><a title="vehicles.configuration.dynamics
 vehicles.interfaces.dynamics
-vehicles.library.dynamics" class="py-name" href="#" onclick="return doclink('link-64', 'dynamics', 'link-15');">dynamics</a></tt><tt class="py-op">.</tt><tt id="link-65" class="py-name"><a title="vehicles.interfaces.dynamics.Dynamics.joint_state" class="py-name" href="#" onclick="return doclink('link-65', 'joint_state', 'link-19');">joint_state</a></tt><tt class="py-op">(</tt><tt class="py-name">state</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+vehicles.library.dynamics" class="py-name" href="#" onclick="return doclink('link-64', 'dynamics', 'link-15');">dynamics</a></tt><tt class="py-op">.</tt><tt id="link-65" class="py-name"><a title="vehicles.interfaces.dynamics.Dynamics.joint_state
+vehicles.library.dynamics.artic.basetop.BaseTopDynamics.joint_state
+vehicles.library.dynamics.lie_kinematics.SimpleKinematics.joint_state
+vehicles.library.dynamics.specializations.cars.CarWithWheels.joint_state" class="py-name" href="#" onclick="return doclink('link-65', 'joint_state', 'link-19');">joint_state</a></tt><tt class="py-op">(</tt><tt class="py-name">state</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
 <a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">            <tt class="py-name">center</tt> <tt class="py-op">=</tt> <tt class="py-name">translation_from_SE2</tt><tt class="py-op">(</tt><tt class="py-name">SE2_project_from_SE3</tt><tt class="py-op">(</tt><tt class="py-name">j_pose</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
 <a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">            <tt class="py-comment">#print('t=%f, center=%s' % (t, center))</tt> </tt>
 <a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">center</tt> </tt>
@@ -421,15 +429,22 @@ vehicles.library.dynamics" class="py-name" href="#" onclick="return doclink('lin
 <a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line">        <tt class="py-name">sensel_values</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
 <a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">attached</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-82" class="py-name"><a title="vehicles.configuration.sensors
 vehicles.library.sensors
-vehicles.sensors
 vehicles_cairo.skins.sensors" class="py-name" href="#" onclick="return doclink('link-82', 'sensors', 'link-14');">sensors</a></tt><tt class="py-op">:</tt> </tt>
 <a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">            <tt class="py-name">pose</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-83" class="py-name"><a title="vehicles.configuration.dynamics
 vehicles.interfaces.dynamics
-vehicles.library.dynamics" class="py-name" href="#" onclick="return doclink('link-83', 'dynamics', 'link-15');">dynamics</a></tt><tt class="py-op">.</tt><tt id="link-84" class="py-name"><a title="vehicles.interfaces.dynamics.Dynamics.joint_state" class="py-name" href="#" onclick="return doclink('link-84', 'joint_state', 'link-19');">joint_state</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-85" class="py-name"><a title="vehicles.simulation.vehicle.Vehicle._get_state" class="py-name" href="#" onclick="return doclink('link-85', '_get_state', 'link-20');">_get_state</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">attached</tt><tt class="py-op">.</tt><tt class="py-name">joint</tt><tt class="py-op">)</tt> </tt>
+vehicles.library.dynamics" class="py-name" href="#" onclick="return doclink('link-83', 'dynamics', 'link-15');">dynamics</a></tt><tt class="py-op">.</tt><tt id="link-84" class="py-name"><a title="vehicles.interfaces.dynamics.Dynamics.joint_state
+vehicles.library.dynamics.artic.basetop.BaseTopDynamics.joint_state
+vehicles.library.dynamics.lie_kinematics.SimpleKinematics.joint_state
+vehicles.library.dynamics.specializations.cars.CarWithWheels.joint_state" class="py-name" href="#" onclick="return doclink('link-84', 'joint_state', 'link-19');">joint_state</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-85" class="py-name"><a title="vehicles.simulation.vehicle.Vehicle._get_state" class="py-name" href="#" onclick="return doclink('link-85', '_get_state', 'link-20');">_get_state</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">attached</tt><tt class="py-op">.</tt><tt class="py-name">joint</tt><tt class="py-op">)</tt> </tt>
 <a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">            <tt class="py-name">j_pose</tt><tt class="py-op">,</tt> <tt class="py-name">_</tt> <tt class="py-op">=</tt> <tt class="py-name">pose</tt> </tt>
 <a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">            <tt class="py-name">attached</tt><tt class="py-op">.</tt><tt class="py-name">current_pose</tt> <tt class="py-op">=</tt> <tt id="link-86" class="py-name"><a title="procgraph_vehicles.SE3
 procgraph_vehicles.cairo_map_display.SE3
 vehicles.library.dynamics.SE3
+vehicles.library.dynamics.artic.SE3
+vehicles.library.dynamics.artic.basetop.SE3
+vehicles.library.dynamics.lie_kinematics.SE3
+vehicles.library.dynamics.specializations.SE3
+vehicles.library.dynamics.specializations.cars.SE3
 vehicles.simulation.vehicle.SE3
 vehicles.simulation.vsimulation.SE3
 vehicles_cairo.SE3
@@ -453,10 +468,16 @@ vehicles.simulation.vsimulation.VehicleSimulation.compute_observations" class="p
 <a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line"><tt class="py-docstring">        '''</tt> </tt>
 <a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line">        <tt class="py-name">state</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-88" class="py-name"><a title="vehicles.configuration.dynamics
 vehicles.interfaces.dynamics
-vehicles.library.dynamics" class="py-name" href="#" onclick="return doclink('link-88', 'dynamics', 'link-15');">dynamics</a></tt><tt class="py-op">.</tt><tt id="link-89" class="py-name"><a title="vehicles.interfaces.dynamics.Dynamics.pose2state" class="py-name" href="#" onclick="return doclink('link-89', 'pose2state', 'link-56');">pose2state</a></tt><tt class="py-op">(</tt><tt class="py-name">pose</tt><tt class="py-op">)</tt> </tt>
+vehicles.library.dynamics" class="py-name" href="#" onclick="return doclink('link-88', 'dynamics', 'link-15');">dynamics</a></tt><tt class="py-op">.</tt><tt id="link-89" class="py-name"><a title="vehicles.interfaces.dynamics.Dynamics.pose2state
+vehicles.library.dynamics.artic.basetop.BaseTopDynamics.pose2state
+vehicles.library.dynamics.lie_kinematics.SimpleKinematics.pose2state
+vehicles.library.dynamics.specializations.cars.CarWithWheels.pose2state" class="py-name" href="#" onclick="return doclink('link-89', 'pose2state', 'link-56');">pose2state</a></tt><tt class="py-op">(</tt><tt class="py-name">pose</tt><tt class="py-op">)</tt> </tt>
 <a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line">        <tt class="py-name">j_pose</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-90" class="py-name"><a title="vehicles.configuration.dynamics
 vehicles.interfaces.dynamics
-vehicles.library.dynamics" class="py-name" href="#" onclick="return doclink('link-90', 'dynamics', 'link-15');">dynamics</a></tt><tt class="py-op">.</tt><tt id="link-91" class="py-name"><a title="vehicles.interfaces.dynamics.Dynamics.joint_state" class="py-name" href="#" onclick="return doclink('link-91', 'joint_state', 'link-19');">joint_state</a></tt><tt class="py-op">(</tt><tt class="py-name">state</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+vehicles.library.dynamics" class="py-name" href="#" onclick="return doclink('link-90', 'dynamics', 'link-15');">dynamics</a></tt><tt class="py-op">.</tt><tt id="link-91" class="py-name"><a title="vehicles.interfaces.dynamics.Dynamics.joint_state
+vehicles.library.dynamics.artic.basetop.BaseTopDynamics.joint_state
+vehicles.library.dynamics.lie_kinematics.SimpleKinematics.joint_state
+vehicles.library.dynamics.specializations.cars.CarWithWheels.joint_state" class="py-name" href="#" onclick="return doclink('link-91', 'joint_state', 'link-19');">joint_state</a></tt><tt class="py-op">(</tt><tt class="py-name">state</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
 <a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line">        <tt class="py-name">center</tt> <tt class="py-op">=</tt> <tt class="py-name">translation_from_SE2</tt><tt class="py-op">(</tt><tt class="py-name">SE2_project_from_SE3</tt><tt class="py-op">(</tt><tt class="py-name">j_pose</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
 <a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line"> </tt>
 <a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line">        <tt id="link-92" class="py-name"><a title="vehicles.simulation.collision" class="py-name" href="#" onclick="return doclink('link-92', 'collision', 'link-57');">collision</a></tt> <tt class="py-op">=</tt> <tt id="link-93" class="py-name"><a title="vehicles.simulation.collision.collides_with" class="py-name" href="#" onclick="return doclink('link-93', 'collides_with', 'link-0');">collides_with</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-94" class="py-name"><a title="vehicles.interfaces.primitives" class="py-name" href="#" onclick="return doclink('link-94', 'primitives', 'link-16');">primitives</a></tt><tt class="py-op">,</tt> </tt>
@@ -522,7 +543,7 @@ expandto(location.href);
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Sun Feb 26 11:44:38 2012
+    Generated by Epydoc 3.0.1 on Wed Feb 29 11:48:42 2012
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

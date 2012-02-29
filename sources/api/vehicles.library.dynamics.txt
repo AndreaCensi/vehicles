@@ -9,3 +9,35 @@ dynamics Package
     :undoc-members:
     :show-inheritance:
 
+:mod:`exceptions` Module
+------------------------
+
+.. automodule:: vehicles.library.dynamics.exceptions
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`lie_dynamics` Module
+--------------------------
+
+.. automodule:: vehicles.library.dynamics.lie_dynamics
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`lie_kinematics` Module
+----------------------------
+
+.. automodule:: vehicles.library.dynamics.lie_kinematics
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    vehicles.library.dynamics.artic
+    vehicles.library.dynamics.specializations
+

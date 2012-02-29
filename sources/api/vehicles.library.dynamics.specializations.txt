@@ -1,0 +1,75 @@
+specializations Package
+=======================
+
+:mod:`specializations` Package
+------------------------------
+
+.. automodule:: vehicles.library.dynamics.specializations
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`cars` Module
+------------------
+
+.. automodule:: vehicles.library.dynamics.specializations.cars
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`circle` Module
+--------------------
+
+.. automodule:: vehicles.library.dynamics.specializations.circle
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`differential_drive` Module
+--------------------------------
+
+.. automodule:: vehicles.library.dynamics.specializations.differential_drive
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`euclidean` Module
+-----------------------
+
+.. automodule:: vehicles.library.dynamics.specializations.euclidean
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`se2` Module
+-----------------
+
+.. automodule:: vehicles.library.dynamics.specializations.se2
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`se2forward` Module
+------------------------
+
+.. automodule:: vehicles.library.dynamics.specializations.se2forward
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`se3` Module
+-----------------
+
+.. automodule:: vehicles.library.dynamics.specializations.se3
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`so3` Module
+-----------------
+
+.. automodule:: vehicles.library.dynamics.specializations.so3
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

@@ -1,0 +1,198 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>fields Package &mdash; Vehicles 1.2 documentation</title>
+    
+    <link rel="stylesheet" href="../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <link rel="top" title="Vehicles 1.2 documentation" href="../index.html" />
+	 
+
+
+   <style type="text/css">
+        span.brand { color: #a00;}
+   </style> 
+   
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Vehicles 1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="fields-package">
+<h1>fields Package<a class="headerlink" href="#fields-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">fields</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-vehicles.library.sensors.fields"></span></div>
+<div class="section" id="module-vehicles.library.sensors.fields.field_sampler">
+<span id="field-sampler-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">field_sampler</span></tt> Module<a class="headerlink" href="#module-vehicles.library.sensors.fields.field_sampler" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="vehicles.library.sensors.fields.field_sampler.FieldSampler">
+<em class="property">class </em><tt class="descclassname">vehicles.library.sensors.fields.field_sampler.</tt><tt class="descname">FieldSampler</tt><big>(</big><em>positions</em>, <em>min_value=0</em>, <em>max_value=1</em>, <em>normalize=False</em>, <em>noise=None</em>, <em>shape=None</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/sensors/fields/field_sampler.html#FieldSampler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.sensors.fields.field_sampler.FieldSampler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vehicles.interfaces.html#vehicles.interfaces.vehicle_sensor.VehicleSensor" title="vehicles.interfaces.vehicle_sensor.VehicleSensor"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.vehicle_sensor.VehicleSensor</span></tt></a></p>
+<p>A sensor that samples an intensity field.</p>
+<dl class="method">
+<dt id="vehicles.library.sensors.fields.field_sampler.FieldSampler.set_world_primitives">
+<tt class="descname">set_world_primitives</tt><big>(</big><em>primitives</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/sensors/fields/field_sampler.html#FieldSampler.set_world_primitives"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.sensors.fields.field_sampler.FieldSampler.set_world_primitives" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.library.sensors.fields.field_sampler.FieldSampler.to_yaml">
+<tt class="descname">to_yaml</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/library/sensors/fields/field_sampler.html#FieldSampler.to_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.sensors.fields.field_sampler.FieldSampler.to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="vehicles.library.sensors.fields.field_sampler.get_field_values">
+<tt class="descclassname">vehicles.library.sensors.fields.field_sampler.</tt><tt class="descname">get_field_values</tt><big>(</big><em>primitives</em>, <em>X</em>, <em>Y</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/sensors/fields/field_sampler.html#get_field_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.sensors.fields.field_sampler.get_field_values" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="vehicles.library.sensors.fields.field_sampler.get_field_value">
+<tt class="descclassname">vehicles.library.sensors.fields.field_sampler.</tt><tt class="descname">get_field_value</tt><big>(</big><em>primitives</em>, <em>point</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/sensors/fields/field_sampler.html#get_field_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.sensors.fields.field_sampler.get_field_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-vehicles.library.sensors.fields.field_sampler_rand_circle">
+<span id="field-sampler-rand-circle-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">field_sampler_rand_circle</span></tt> Module<a class="headerlink" href="#module-vehicles.library.sensors.fields.field_sampler_rand_circle" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="vehicles.library.sensors.fields.field_sampler_rand_circle.FieldSamplerRandCircle">
+<em class="property">class </em><tt class="descclassname">vehicles.library.sensors.fields.field_sampler_rand_circle.</tt><tt class="descname">FieldSamplerRandCircle</tt><big>(</big><em>n</em>, <em>radius</em>, <em>normalize=False</em>, <em>min_value=0</em>, <em>max_value=1</em>, <em>noise=None</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/sensors/fields/field_sampler_rand_circle.html#FieldSamplerRandCircle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.sensors.fields.field_sampler_rand_circle.FieldSamplerRandCircle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.library.sensors.fields.field_sampler.FieldSampler" title="vehicles.library.sensors.fields.field_sampler.FieldSampler"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.sensors.fields.field_sampler.FieldSampler</span></tt></a></p>
+<p>A field sampler with sensels randomly 
+distributed in a certain radius.</p>
+<dl class="method">
+<dt id="vehicles.library.sensors.fields.field_sampler_rand_circle.FieldSamplerRandCircle.to_yaml">
+<tt class="descname">to_yaml</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/library/sensors/fields/field_sampler_rand_circle.html#FieldSamplerRandCircle.to_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.sensors.fields.field_sampler_rand_circle.FieldSamplerRandCircle.to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-vehicles.library.sensors.fields.field_sampler_uniform">
+<span id="field-sampler-uniform-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">field_sampler_uniform</span></tt> Module<a class="headerlink" href="#module-vehicles.library.sensors.fields.field_sampler_uniform" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="vehicles.library.sensors.fields.field_sampler_uniform.FieldSamplerUniform">
+<em class="property">class </em><tt class="descclassname">vehicles.library.sensors.fields.field_sampler_uniform.</tt><tt class="descname">FieldSamplerUniform</tt><big>(</big><em>shape</em>, <em>sides</em>, <em>normalize=False</em>, <em>min_value=0</em>, <em>max_value=1</em>, <em>noise=None</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/sensors/fields/field_sampler_uniform.html#FieldSamplerUniform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.sensors.fields.field_sampler_uniform.FieldSamplerUniform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.library.sensors.fields.field_sampler.FieldSampler" title="vehicles.library.sensors.fields.field_sampler.FieldSampler"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.sensors.fields.field_sampler.FieldSampler</span></tt></a></p>
+<p>A field sampler with uniform disposition of sensels.</p>
+<dl class="method">
+<dt id="vehicles.library.sensors.fields.field_sampler_uniform.FieldSamplerUniform.to_yaml">
+<tt class="descname">to_yaml</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/library/sensors/fields/field_sampler_uniform.html#FieldSamplerUniform.to_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.sensors.fields.field_sampler_uniform.FieldSamplerUniform.to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">fields Package</a><ul>
+<li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">fields</span></tt> Package</a></li>
+<li><a class="reference internal" href="#module-vehicles.library.sensors.fields.field_sampler"><tt class="docutils literal"><span class="pre">field_sampler</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vehicles.library.sensors.fields.field_sampler_rand_circle"><tt class="docutils literal"><span class="pre">field_sampler_rand_circle</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-vehicles.library.sensors.fields.field_sampler_uniform"><tt class="docutils literal"><span class="pre">field_sampler_uniform</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../sources/api/vehicles.library.sensors.fields.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">Vehicles 1.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+	
+    <div class="footer">
+        &copy; Copyright 2010, Andrea Censi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+	
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-155626-14']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+
+  </body>
+</html>
