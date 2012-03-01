@@ -1,7 +1,7 @@
-from . import contract, np
+from . import Texture, contract, np
 
 
-class SampledTexture:
+class SampledTexture(Texture):
 
     @contract(values='array', cell_width='>0')
     def __init__(self, values, cell_width):

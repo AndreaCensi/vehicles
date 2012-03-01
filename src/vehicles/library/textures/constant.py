@@ -1,8 +1,12 @@
+from . import Texture
+
+
+# TODO: remove this
 def constant_texture(color):
     return ['vehicles.library.textures.ConstantTexture', dict(value=color)]
 
 
-class ConstantTexture:
+class ConstantTexture(Texture):
     def __init__(self, value):
         self.value = value
 
