@@ -41,7 +41,7 @@ def all_worlds():
 
 
 def all_vehicles():
-    ''' Returns a list of all test world IDs. '''
+    ''' Returns a list of all test vehicle IDs. '''
     make_sure_vehicles_config_loaded()
     vehicles = list(VehiclesConfig.vehicles.keys())
     if not vehicles:
@@ -49,9 +49,23 @@ def all_vehicles():
     return vehicles
 
 
+def all_skins():
+    ''' Returns a list of all test skin IDs. '''
+    make_sure_vehicles_config_loaded()
+    skins = list(VehiclesConfig.specs['skins'].keys())
+    if not skins:
+        raise Exception('No skins defined in this configuration.')
+    return skins
+
+
 def get_dynamics(id_dynamics):
     make_sure_vehicles_config_loaded()
     return VehiclesConfig.dynamics.instance(id_dynamics)  # @UndefinedVariable
+
+
+def get_skin(id_skin):
+    make_sure_vehicles_config_loaded()
+    return VehiclesConfig.specs['skins'].instance(id_skin)
 
 
 def get_world(id_world):

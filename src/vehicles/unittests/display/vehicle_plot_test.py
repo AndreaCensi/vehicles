@@ -1,4 +1,4 @@
-from .. import for_all_vehicles, get_world
+from .. import for_all_vehicles, get_world, for_all_skins
 from ...simulation import VehicleSimulation
 from vehicles_cairo import vehicles_has_cairo
 import tempfile
@@ -36,5 +36,8 @@ if vehicles_has_cairo:
                                    **plot_params)
 
 
+@for_all_skins
+def plot_skin(id_skin, skin):
+    # TODO
+    pass
 
-# TODO: add skins tests
