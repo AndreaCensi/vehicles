@@ -22,51 +22,51 @@ Interfaces
    VehicleSkin              
 
 
-Geometric primitives
----------------------
-
-.. autosummary::  
-   :toctree: api
-   
-    Circle                   
-    Field                   
-    GeometricShape          
-    PolyLine                
-    Primitive                
-    Source                   
-           
-
-Library: worlds
----------------------
-
-.. py:currentmodule:: vehicles.library.worlds
-
-.. automodule::  vehicles.library.worlds
-   :members:
-   :undoc-members:
-   
 
 Library: sensors
 ---------------------
 
-.. automodule:: vehicles.library.sensors
-   :members:
-   :undoc-members:
-   
+.. include:: api/sensors.rst.inc
 
 
 Library: dynamics
 ---------------------
 
-.. automodule:: vehicles.library.dynamics
-   :members:
-   :undoc-members:
+.. include:: api/dynamics.rst.inc
    
 
+
+Library: worlds
+---------------------
+
+.. include:: api/worlds.rst.inc
+   
+   
+
+Geometric primitives
+---------------------
+
+:py:class:`Primitive` is ...
+
+:py:class:`GeometricShape`  is ...
+
+
+.. include:: api/primitives.rst.inc
+         
+           
 Library: textures
 ---------------------
 
-.. automodule:: vehicles.library.textures
-   :members:
-   :undoc-members:
-   
+.. include:: api/textures.rst.inc
+
+           
+Library: skins
+---------------------
+
+.. include:: api/skins.rst.inc
+
+..
+  Library: noises
+  ---------------------
+
+  .. include:: api/noises.rst.inc

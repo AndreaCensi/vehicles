@@ -10,12 +10,12 @@
 <filter id="colorAdd"><feComposite in="SourceGraphic" in2="BackgroundImage" operator="arithmetic" k2="1" k3="1"/></filter>
 <g id="figure1">
 <g id="patch1">
-<path style="fill: #ffffff; stroke: #ffffff; stroke-width: 1.000000; stroke-linejoin: round; stroke-linecap: square;  opacity: 1.000000"  d="M0.000000 72.118125L587.869688 72.118125L587.869688 0.000000
+<path style="fill: none; opacity: 0.000000"  d="M0.000000 72.118125L587.869688 72.118125L587.869688 0.000000
 L0.000000 0.000000z"/>
 </g>
 <g id="axes1">
 <g id="patch2">
-<path style="fill: #ffffff; opacity: 1.000000"  d="M22.345000 58.320000L580.345000 58.320000L580.345000 0.720000
+<path style="fill: none; opacity: 0.000000"  d="M22.345000 58.320000L580.345000 58.320000L580.345000 0.720000
 L22.345000 0.720000z"/>
 </g>
 <g id="line2d1">
@@ -23,8 +23,10 @@ L22.345000 0.720000z"/>
   <clipPath id="p0a66d6e9cd1be84026cf3e313cb0fe17">
 <rect x="22.345000" y="0.720000" width="558.000000" height="57.600000"/>
   </clipPath>
-</defs><path style="fill: none; stroke: #0000ff; stroke-width: 1.000000; stroke-linejoin: round; stroke-linecap: square;  opacity: 1.000000" clip-path="url(#p0a66d6e9cd1be84026cf3e313cb0fe17)" d="M22.345000 33.939308L50.226212 33.939308L50.354894 42.704903
-L65.196278 42.704903L65.196278 42.704903"/>
+</defs><path style="fill: none; stroke: #0000ff; stroke-width: 1.000000; stroke-linejoin: round; stroke-linecap: square;  opacity: 1.000000" clip-path="url(#p0a66d6e9cd1be84026cf3e313cb0fe17)" d="M22.345000 44.976392L50.180316 44.976392L50.294865 25.572950
+L78.130181 25.572950L78.244730 6.018339L105.965497 6.018339
+L106.194594 6.145988L133.915362 6.145988L134.029911 47.569810
+L136.779078 47.569810L136.779078 47.569810"/>
 </g>
 <g id="matplotlib.axis1">
 <g id="xtick1">

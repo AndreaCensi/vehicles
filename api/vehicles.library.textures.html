@@ -58,59 +58,62 @@
 <h1>textures Package<a class="headerlink" href="#textures-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
 <h2><tt class="xref py py-mod docutils literal"><span class="pre">textures</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="module-vehicles.library.textures"></span></div>
-<div class="section" id="module-vehicles.library.textures.checkerboard">
-<span id="checkerboard-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">checkerboard</span></tt> Module<a class="headerlink" href="#module-vehicles.library.textures.checkerboard" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="vehicles.library.textures.checkerboard.BWCheckerboard">
-<em class="property">class </em><tt class="descclassname">vehicles.library.textures.checkerboard.</tt><tt class="descname">BWCheckerboard</tt><big>(</big><em>cell_width=1</em>, <em>num=100</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/textures/checkerboard.html#BWCheckerboard"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.textures.checkerboard.BWCheckerboard" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#vehicles.library.textures.sampled.SampledTexture" title="vehicles.library.textures.sampled.SampledTexture"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.textures.sampled.SampledTexture</span></tt></a></p>
+<span class="target" id="module-vehicles.library.textures"></span><dl class="class">
+<dt id="vehicles.library.textures.BWCheckerboard">
+<em class="property">class </em><tt class="descclassname">vehicles.library.textures.</tt><tt class="descname">BWCheckerboard</tt><big>(</big><em>cell_width=1</em>, <em>num=100</em><big>)</big><a class="headerlink" href="#vehicles.library.textures.BWCheckerboard" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.library.textures.SampledTexture" title="vehicles.library.textures.SampledTexture"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.textures.SampledTexture</span></tt></a></p>
 </dd></dl>
 
 <dl class="class">
-<dt id="vehicles.library.textures.checkerboard.RandomCheckerboard">
-<em class="property">class </em><tt class="descclassname">vehicles.library.textures.checkerboard.</tt><tt class="descname">RandomCheckerboard</tt><big>(</big><em>cell_width=1</em>, <em>num=100</em>, <em>seed=0</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/textures/checkerboard.html#RandomCheckerboard"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.textures.checkerboard.RandomCheckerboard" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#vehicles.library.textures.sampled.SampledTexture" title="vehicles.library.textures.sampled.SampledTexture"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.textures.sampled.SampledTexture</span></tt></a></p>
+<dt id="vehicles.library.textures.ConstantTexture">
+<em class="property">class </em><tt class="descclassname">vehicles.library.textures.</tt><tt class="descname">ConstantTexture</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#vehicles.library.textures.ConstantTexture" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vehicles.interfaces.html#vehicles.interfaces.texture.Texture" title="vehicles.interfaces.texture.Texture"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.texture.Texture</span></tt></a></p>
 </dd></dl>
 
-</div>
-<div class="section" id="module-vehicles.library.textures.constant">
-<span id="constant-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">constant</span></tt> Module<a class="headerlink" href="#module-vehicles.library.textures.constant" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="vehicles.library.textures.constant.ConstantTexture">
-<em class="property">class </em><tt class="descclassname">vehicles.library.textures.constant.</tt><tt class="descname">ConstantTexture</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/textures/constant.html#ConstantTexture"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.textures.constant.ConstantTexture" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dt id="vehicles.library.textures.RandomCheckerboard">
+<em class="property">class </em><tt class="descclassname">vehicles.library.textures.</tt><tt class="descname">RandomCheckerboard</tt><big>(</big><em>cell_width=1</em>, <em>num=100</em>, <em>seed=0</em><big>)</big><a class="headerlink" href="#vehicles.library.textures.RandomCheckerboard" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.library.textures.SampledTexture" title="vehicles.library.textures.SampledTexture"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.textures.SampledTexture</span></tt></a></p>
+</dd></dl>
 
-<dl class="function">
-<dt id="vehicles.library.textures.constant.constant_texture">
-<tt class="descclassname">vehicles.library.textures.constant.</tt><tt class="descname">constant_texture</tt><big>(</big><em>color</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/textures/constant.html#constant_texture"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.textures.constant.constant_texture" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</div>
-<div class="section" id="module-vehicles.library.textures.sampled">
-<span id="sampled-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">sampled</span></tt> Module<a class="headerlink" href="#module-vehicles.library.textures.sampled" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="vehicles.library.textures.sampled.SampledTexture">
-<em class="property">class </em><tt class="descclassname">vehicles.library.textures.sampled.</tt><tt class="descname">SampledTexture</tt><big>(</big><em>values</em>, <em>cell_width</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/textures/sampled.html#SampledTexture"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.textures.sampled.SampledTexture" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dt id="vehicles.library.textures.SampledTexture">
+<em class="property">class </em><tt class="descclassname">vehicles.library.textures.</tt><tt class="descname">SampledTexture</tt><big>(</big><em>values</em>, <em>cell_width</em><big>)</big><a class="headerlink" href="#vehicles.library.textures.SampledTexture" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vehicles.interfaces.html#vehicles.interfaces.texture.Texture" title="vehicles.interfaces.texture.Texture"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.texture.Texture</span></tt></a></p>
+</dd></dl>
 
-</div>
-<div class="section" id="module-vehicles.library.textures.smooth">
-<span id="smooth-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">smooth</span></tt> Module<a class="headerlink" href="#module-vehicles.library.textures.smooth" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="vehicles.library.textures.smooth.Smoothed">
-<em class="property">class </em><tt class="descclassname">vehicles.library.textures.smooth.</tt><tt class="descname">Smoothed</tt><big>(</big><em>sigma</em>, <em>texture</em>, <em>resolution=None</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/textures/smooth.html#Smoothed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.textures.smooth.Smoothed" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#vehicles.library.textures.sampled.SampledTexture" title="vehicles.library.textures.sampled.SampledTexture"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.textures.sampled.SampledTexture</span></tt></a></p>
+<dt id="vehicles.library.textures.Smoothed">
+<em class="property">class </em><tt class="descclassname">vehicles.library.textures.</tt><tt class="descname">Smoothed</tt><big>(</big><em>sigma</em>, <em>texture</em>, <em>resolution=None</em><big>)</big><a class="headerlink" href="#vehicles.library.textures.Smoothed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.library.textures.SampledTexture" title="vehicles.library.textures.SampledTexture"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.textures.SampledTexture</span></tt></a></p>
 <p>Smooths another texture.</p>
 </dd></dl>
 
+<dl class="function">
+<dt id="vehicles.library.textures.constant_texture">
+<tt class="descclassname">vehicles.library.textures.</tt><tt class="descname">constant_texture</tt><big>(</big><em>color</em><big>)</big><a class="headerlink" href="#vehicles.library.textures.constant_texture" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-vehicles.library.textures.checkerboard">
+<span id="checkerboard-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">checkerboard</span></tt> Module<a class="headerlink" href="#module-vehicles.library.textures.checkerboard" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-vehicles.library.textures.constant">
+<span id="constant-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">constant</span></tt> Module<a class="headerlink" href="#module-vehicles.library.textures.constant" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-vehicles.library.textures.sampled">
+<span id="sampled-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">sampled</span></tt> Module<a class="headerlink" href="#module-vehicles.library.textures.sampled" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-vehicles.library.textures.smooth">
+<span id="smooth-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">smooth</span></tt> Module<a class="headerlink" href="#module-vehicles.library.textures.smooth" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="module-vehicles.library.textures.textures">
 <span id="textures-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">textures</span></tt> Module<a class="headerlink" href="#module-vehicles.library.textures.textures" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="vehicles.library.textures.textures.SinTexture">
 <em class="property">class </em><tt class="descclassname">vehicles.library.textures.textures.</tt><tt class="descname">SinTexture</tt><big>(</big><em>omega</em>, <em>c=0.5</em>, <em>A=0.5</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/textures/textures.html#SinTexture"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.textures.textures.SinTexture" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Bases: <a class="reference internal" href="vehicles.interfaces.html#vehicles.interfaces.texture.Texture" title="vehicles.interfaces.texture.Texture"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.texture.Texture</span></tt></a></p>
+</dd></dl>
 
 </div>
 </div>

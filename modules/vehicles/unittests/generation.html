@@ -59,149 +59,12 @@
             
   <h1>Source code for vehicles.unittests.generation</h1><div class="highlight"><pre>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="p">(</span><span class="n">all_dynamics</span><span class="p">,</span> <span class="n">get_dynamics</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="n">get_sensor</span><span class="p">,</span> <span class="n">all_sensors</span><span class="p">,</span>
-    <span class="n">all_worlds</span><span class="p">,</span> <span class="n">get_vehicle</span><span class="p">,</span> <span class="n">all_vehicles</span><span class="p">,</span> <span class="n">get_world</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">nose.tools</span> <span class="kn">import</span> <span class="n">istest</span>
-<span class="kn">import</span> <span class="nn">sys</span>
+    <span class="n">all_worlds</span><span class="p">,</span> <span class="n">get_vehicle</span><span class="p">,</span> <span class="n">all_vehicles</span><span class="p">,</span> <span class="n">get_world</span><span class="p">,</span> <span class="n">get_skin</span><span class="p">,</span> <span class="n">all_skins</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">fancy_test_decorator</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
 
 
-<div class="viewcode-block" id="add_to_module"><a class="viewcode-back" href="../../../api/vehicles.unittests.html#vehicles.unittests.generation.add_to_module">[docs]</a><span class="k">def</span> <span class="nf">add_to_module</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">module_name</span><span class="p">):</span>
-    <span class="n">module</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">module_name</span><span class="p">]</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="n">function</span><span class="o">.</span><span class="n">__name__</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="s">&#39;test&#39;</span> <span class="ow">in</span> <span class="n">name</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&#39;No &quot;test&quot; in function name </span><span class="si">%r</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="s">&#39;test&#39;</span> <span class="ow">in</span> <span class="n">module_name</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&#39;While adding </span><span class="si">%r</span><span class="s"> in </span><span class="si">%r</span><span class="s">: module does not have&#39;</span>
-                        <span class="s">&#39;&quot;test&quot; in it, so nose will not find the test.&#39;</span> <span class="o">%</span>
-                        <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">module_name</span><span class="p">))</span>
-
-    <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">module</span><span class="o">.</span><span class="n">__dict__</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&#39;Already created test </span><span class="si">%r</span><span class="s">.&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
-
-    <span class="n">module</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">function</span>
-
-
-<span class="c">#</span>
-<span class="c">#def add_to_module(function, module_name):</span>
-<span class="c">#    module = sys.modules[module_name]</span>
-<span class="c">#    if not &#39;test&#39; in module_name:</span>
-<span class="c">#        logger.error(&#39;Warning: Nose will not find tests in %r.&#39; % module_name)</span>
-<span class="c">#    </span>
-<span class="c">#</span>
-<span class="c">#    </span>
-<span class="c">#    if name in module.__dict__:</span>
-<span class="c">#        raise Exception(&#39;Already created test %r.&#39; % name)</span>
-<span class="c">#    module.__dict__[name] = function</span>
-<span class="c">#</span>
-<span class="c">#    if not &#39;test&#39; in module_name:</span>
-<span class="c">#        raise Exception(&#39;While adding %r in %r: module does not have &quot;test&quot;&#39;</span>
-<span class="c">#                        &#39; in it, so nose will not find the test.&#39; %</span>
-<span class="c">#                        (name, module_name))</span>
-<span class="c">#</span>
-<span class="c">#    #print(&#39;Add %s: %s&#39; % (module_name, name))</span>
-
-</div>
-<div class="viewcode-block" id="add_dynamics_f"><a class="viewcode-back" href="../../../api/vehicles.unittests.html#vehicles.unittests.generation.add_dynamics_f">[docs]</a><span class="k">def</span> <span class="nf">add_dynamics_f</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">id_dynamics</span><span class="p">):</span>
-    <span class="nd">@istest</span>
-    <span class="k">def</span> <span class="nf">test_caller</span><span class="p">():</span>
-        <span class="n">dynamics</span> <span class="o">=</span> <span class="n">get_dynamics</span><span class="p">(</span><span class="n">id_dynamics</span><span class="p">)</span>
-        <span class="n">wrap_with_desc</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="n">id_dynamics</span><span class="p">,</span> <span class="n">dynamics</span><span class="p">),</span> <span class="n">dynamics</span><span class="o">=</span><span class="n">dynamics</span><span class="p">)</span>
-    <span class="n">test_caller</span><span class="o">.</span><span class="n">dynamics</span> <span class="o">=</span> <span class="n">id_dynamics</span>
-    <span class="n">test_caller</span><span class="o">.</span><span class="n">__name__</span> <span class="o">=</span> <span class="s">&#39;test_</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">id_dynamics</span><span class="p">)</span>
-    <span class="n">add_to_module</span><span class="p">(</span><span class="n">test_caller</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">__module__</span><span class="p">)</span>
-
-</div>
-<div class="viewcode-block" id="add_pair_f"><a class="viewcode-back" href="../../../api/vehicles.unittests.html#vehicles.unittests.generation.add_pair_f">[docs]</a><span class="k">def</span> <span class="nf">add_pair_f</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">id_dynamics</span><span class="p">,</span> <span class="n">id_sensor</span><span class="p">):</span>
-    <span class="nd">@istest</span>
-    <span class="k">def</span> <span class="nf">test_caller</span><span class="p">():</span>
-        <span class="n">dynamics</span> <span class="o">=</span> <span class="n">get_dynamics</span><span class="p">(</span><span class="n">id_dynamics</span><span class="p">)</span>
-        <span class="n">sensor</span> <span class="o">=</span> <span class="n">get_sensor</span><span class="p">(</span><span class="n">id_sensor</span><span class="p">)</span>
-        <span class="n">wrap_with_desc</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="n">id_dynamics</span><span class="p">,</span> <span class="n">dynamics</span><span class="p">,</span> <span class="n">id_sensor</span><span class="p">,</span> <span class="n">sensor</span><span class="p">),</span>
-                       <span class="n">dynamics</span><span class="o">=</span><span class="n">dynamics</span><span class="p">,</span> <span class="n">sensor</span><span class="o">=</span><span class="n">sensor</span><span class="p">)</span>
-    <span class="n">test_caller</span><span class="o">.</span><span class="n">__name__</span> <span class="o">=</span> <span class="s">&#39;test_</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span>
-                                              <span class="n">id_dynamics</span><span class="p">,</span> <span class="n">id_sensor</span><span class="p">)</span>
-    <span class="n">test_caller</span><span class="o">.</span><span class="n">dynamics</span> <span class="o">=</span> <span class="n">id_dynamics</span>
-    <span class="n">test_caller</span><span class="o">.</span><span class="n">sensor</span> <span class="o">=</span> <span class="n">id_sensor</span>
-    <span class="n">add_to_module</span><span class="p">(</span><span class="n">test_caller</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">__module__</span><span class="p">)</span>
-
-</div>
-<div class="viewcode-block" id="add_world_vehicle_f"><a class="viewcode-back" href="../../../api/vehicles.unittests.html#vehicles.unittests.generation.add_world_vehicle_f">[docs]</a><span class="k">def</span> <span class="nf">add_world_vehicle_f</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">id_world</span><span class="p">,</span> <span class="n">id_vehicle</span><span class="p">):</span>
-    <span class="nd">@istest</span>
-    <span class="k">def</span> <span class="nf">test_caller</span><span class="p">():</span>
-        <span class="n">world</span> <span class="o">=</span> <span class="n">get_world</span><span class="p">(</span><span class="n">id_world</span><span class="p">)</span>
-        <span class="n">vehicle</span> <span class="o">=</span> <span class="n">get_vehicle</span><span class="p">(</span><span class="n">id_vehicle</span><span class="p">)</span>
-        <span class="n">wrap_with_desc</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="n">id_world</span><span class="p">,</span> <span class="n">world</span><span class="p">,</span> <span class="n">id_vehicle</span><span class="p">,</span> <span class="n">vehicle</span><span class="p">),</span>
-                            <span class="n">world</span><span class="o">=</span><span class="n">world</span><span class="p">,</span> <span class="n">vehicle</span><span class="o">=</span><span class="n">vehicle</span><span class="p">)</span>
-    <span class="n">test_caller</span><span class="o">.</span><span class="n">__name__</span> <span class="o">=</span> <span class="s">&#39;test_</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">id_world</span><span class="p">,</span> <span class="n">id_vehicle</span><span class="p">)</span>
-    <span class="n">test_caller</span><span class="o">.</span><span class="n">world</span> <span class="o">=</span> <span class="n">id_world</span>
-    <span class="n">test_caller</span><span class="o">.</span><span class="n">vehicle</span> <span class="o">=</span> <span class="n">id_vehicle</span>
-    <span class="n">add_to_module</span><span class="p">(</span><span class="n">test_caller</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">__module__</span><span class="p">)</span>
-
-</div>
-<div class="viewcode-block" id="add_world_f"><a class="viewcode-back" href="../../../api/vehicles.unittests.html#vehicles.unittests.generation.add_world_f">[docs]</a><span class="k">def</span> <span class="nf">add_world_f</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">id_world</span><span class="p">):</span>
-    <span class="nd">@istest</span>
-    <span class="k">def</span> <span class="nf">test_caller</span><span class="p">():</span>
-        <span class="n">world</span> <span class="o">=</span> <span class="n">get_world</span><span class="p">(</span><span class="n">id_world</span><span class="p">)</span>
-        <span class="n">wrap_with_desc</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="n">id_world</span><span class="p">,</span> <span class="n">world</span><span class="p">),</span> <span class="n">world</span><span class="o">=</span><span class="n">world</span><span class="p">)</span>
-    <span class="n">test_caller</span><span class="o">.</span><span class="n">world</span> <span class="o">=</span> <span class="n">id_world</span>
-    <span class="n">test_caller</span><span class="o">.</span><span class="n">__name__</span> <span class="o">=</span> <span class="s">&#39;test_</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">id_world</span><span class="p">)</span>
-    <span class="n">add_to_module</span><span class="p">(</span><span class="n">test_caller</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">__module__</span><span class="p">)</span>
-
-</div>
-<div class="viewcode-block" id="add_sensor_f"><a class="viewcode-back" href="../../../api/vehicles.unittests.html#vehicles.unittests.generation.add_sensor_f">[docs]</a><span class="k">def</span> <span class="nf">add_sensor_f</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">id_sensor</span><span class="p">):</span>
-    <span class="nd">@istest</span>
-    <span class="k">def</span> <span class="nf">test_caller</span><span class="p">():</span>
-        <span class="n">sensor</span> <span class="o">=</span> <span class="n">get_sensor</span><span class="p">(</span><span class="n">id_sensor</span><span class="p">)</span>
-        <span class="n">wrap_with_desc</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="n">id_sensor</span><span class="p">,</span> <span class="n">sensor</span><span class="p">),</span> <span class="n">sensor</span><span class="o">=</span><span class="n">sensor</span><span class="p">)</span>
-    <span class="n">test_caller</span><span class="o">.</span><span class="n">sensor</span> <span class="o">=</span> <span class="n">id_sensor</span>
-    <span class="n">test_caller</span><span class="o">.</span><span class="n">__name__</span> <span class="o">=</span> <span class="s">&#39;test_</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">id_sensor</span><span class="p">)</span>
-    <span class="n">add_to_module</span><span class="p">(</span><span class="n">test_caller</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">__module__</span><span class="p">)</span>
-
-</div>
-<div class="viewcode-block" id="add_vehicle_f"><a class="viewcode-back" href="../../../api/vehicles.unittests.html#vehicles.unittests.generation.add_vehicle_f">[docs]</a><span class="k">def</span> <span class="nf">add_vehicle_f</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">id_vehicle</span><span class="p">):</span>
-    <span class="nd">@istest</span>
-    <span class="k">def</span> <span class="nf">test_caller</span><span class="p">():</span>
-        <span class="n">vehicle</span> <span class="o">=</span> <span class="n">get_vehicle</span><span class="p">(</span><span class="n">id_vehicle</span><span class="p">)</span>
-        <span class="n">wrap_with_desc</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="n">id_vehicle</span><span class="p">,</span> <span class="n">vehicle</span><span class="p">),</span> <span class="n">vehicle</span><span class="o">=</span><span class="n">vehicle</span><span class="p">)</span>
-    <span class="n">test_caller</span><span class="o">.</span><span class="n">vehicle</span> <span class="o">=</span> <span class="n">id_vehicle</span>
-    <span class="n">test_caller</span><span class="o">.</span><span class="n">__name__</span> <span class="o">=</span> <span class="s">&#39;test_</span><span class="si">%s</span><span class="s">_</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">id_vehicle</span><span class="p">)</span>
-    <span class="n">add_to_module</span><span class="p">(</span><span class="n">test_caller</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">__module__</span><span class="p">)</span>
-
-</div>
-<div class="viewcode-block" id="for_all_dynamics"><a class="viewcode-back" href="../../../api/vehicles.unittests.html#vehicles.unittests.generation.for_all_dynamics">[docs]</a><span class="k">def</span> <span class="nf">for_all_dynamics</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39; Decorator for dynamics tests. &#39;&#39;&#39;</span>
-    <span class="k">for</span> <span class="n">id_dynamics</span> <span class="ow">in</span> <span class="n">all_dynamics</span><span class="p">():</span>
-        <span class="n">add_dynamics_f</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">id_dynamics</span><span class="p">)</span>
-
-</div>
-<div class="viewcode-block" id="for_all_worlds"><a class="viewcode-back" href="../../../api/vehicles.unittests.html#vehicles.unittests.generation.for_all_worlds">[docs]</a><span class="k">def</span> <span class="nf">for_all_worlds</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">id_world</span> <span class="ow">in</span> <span class="n">all_worlds</span><span class="p">():</span>
-        <span class="n">add_world_f</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">id_world</span><span class="p">)</span>
-
-</div>
-<div class="viewcode-block" id="for_all_sensors"><a class="viewcode-back" href="../../../api/vehicles.unittests.html#vehicles.unittests.generation.for_all_sensors">[docs]</a><span class="k">def</span> <span class="nf">for_all_sensors</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">id_sensor</span> <span class="ow">in</span> <span class="n">all_sensors</span><span class="p">():</span>
-        <span class="n">add_sensor_f</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">id_sensor</span><span class="p">)</span>
-
-</div>
-<div class="viewcode-block" id="for_all_vehicles"><a class="viewcode-back" href="../../../api/vehicles.unittests.html#vehicles.unittests.generation.for_all_vehicles">[docs]</a><span class="k">def</span> <span class="nf">for_all_vehicles</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">id_vehicle</span> <span class="ow">in</span> <span class="n">all_vehicles</span><span class="p">():</span>
-        <span class="n">add_vehicle_f</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">id_vehicle</span><span class="p">)</span>
-
-</div>
-<div class="viewcode-block" id="for_all_world_vehicle_pairs"><a class="viewcode-back" href="../../../api/vehicles.unittests.html#vehicles.unittests.generation.for_all_world_vehicle_pairs">[docs]</a><span class="k">def</span> <span class="nf">for_all_world_vehicle_pairs</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">id_world</span> <span class="ow">in</span> <span class="n">all_worlds</span><span class="p">():</span>
-        <span class="k">for</span> <span class="n">id_vehicle</span> <span class="ow">in</span> <span class="n">all_vehicles</span><span class="p">():</span>
-            <span class="n">add_world_vehicle_f</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">id_world</span><span class="p">,</span> <span class="n">id_vehicle</span><span class="p">)</span>
-
-</div>
-<div class="viewcode-block" id="for_all_dynamics_sensor_pairs"><a class="viewcode-back" href="../../../api/vehicles.unittests.html#vehicles.unittests.generation.for_all_dynamics_sensor_pairs">[docs]</a><span class="k">def</span> <span class="nf">for_all_dynamics_sensor_pairs</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">id_dynamics</span> <span class="ow">in</span> <span class="n">all_dynamics</span><span class="p">():</span>
-        <span class="k">for</span> <span class="n">id_sensor</span> <span class="ow">in</span> <span class="n">all_sensors</span><span class="p">():</span>
-            <span class="n">add_pair_f</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">id_dynamics</span><span class="p">,</span> <span class="n">id_sensor</span><span class="p">)</span>
-
-</div>
+<span class="c"># TODO: reintroduce this</span>
 <div class="viewcode-block" id="wrap_with_desc"><a class="viewcode-back" href="../../../api/vehicles.unittests.html#vehicles.unittests.generation.wrap_with_desc">[docs]</a><span class="k">def</span> <span class="nf">wrap_with_desc</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">arguments</span><span class="p">,</span> <span class="n">dynamics</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">world</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
                    <span class="n">sensor</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">vehicle</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39; Calls function with arguments, and writes debug information</span>
@@ -216,7 +79,34 @@
             <span class="n">msg</span> <span class="o">+=</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">dynamics: </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">dynamics</span>
         <span class="c"># TODO: write other info</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-        <span class="k">raise</span></div>
+        <span class="k">raise</span>
+
+</div>
+<span class="n">for_all_dynamics</span> <span class="o">=</span> <span class="n">fancy_test_decorator</span><span class="p">(</span><span class="n">lister</span><span class="o">=</span><span class="n">all_dynamics</span><span class="p">,</span>
+            <span class="n">arguments</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">get_dynamics</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span>
+            <span class="n">attributes</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">dynamics</span><span class="o">=</span><span class="n">x</span><span class="p">))</span>
+
+<span class="n">for_all_worlds</span> <span class="o">=</span> <span class="n">fancy_test_decorator</span><span class="p">(</span><span class="n">lister</span><span class="o">=</span><span class="n">all_worlds</span><span class="p">,</span>
+            <span class="n">arguments</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">get_world</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span>
+            <span class="n">attributes</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">world</span><span class="o">=</span><span class="n">x</span><span class="p">))</span>
+
+<span class="n">for_all_vehicles</span> <span class="o">=</span> <span class="n">fancy_test_decorator</span><span class="p">(</span><span class="n">lister</span><span class="o">=</span><span class="n">all_vehicles</span><span class="p">,</span>
+            <span class="n">arguments</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">get_vehicle</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span>
+            <span class="n">attributes</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">vehicle</span><span class="o">=</span><span class="n">x</span><span class="p">))</span>
+
+<span class="n">for_all_sensors</span> <span class="o">=</span> <span class="n">fancy_test_decorator</span><span class="p">(</span><span class="n">lister</span><span class="o">=</span><span class="n">all_sensors</span><span class="p">,</span>
+            <span class="n">arguments</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">get_sensor</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span>
+            <span class="n">attributes</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">sensor</span><span class="o">=</span><span class="n">x</span><span class="p">))</span>
+
+<span class="n">for_all_skins</span> <span class="o">=</span> <span class="n">fancy_test_decorator</span><span class="p">(</span><span class="n">lister</span><span class="o">=</span><span class="n">all_skins</span><span class="p">,</span>
+            <span class="n">arguments</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">get_skin</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span>
+            <span class="n">attributes</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">skin</span><span class="o">=</span><span class="n">x</span><span class="p">))</span>
+
+<span class="n">for_all_world_vehicle_pairs</span> <span class="o">=</span> <span class="n">fancy_test_decorator</span><span class="p">(</span>
+            <span class="n">lister</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">all_worlds</span><span class="p">(),</span> <span class="n">all_vehicles</span><span class="p">()),</span>
+            <span class="n">arguments</span><span class="o">=</span><span class="k">lambda</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">get_world</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="p">,</span> <span class="n">get_vehicle</span><span class="p">(</span><span class="n">y</span><span class="p">)),</span>
+            <span class="n">attributes</span><span class="o">=</span><span class="k">lambda</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span> <span class="nb">dict</span><span class="p">(</span><span class="n">world</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">vehicle</span><span class="o">=</span><span class="n">y</span><span class="p">),</span>
+                <span class="n">naming</span><span class="o">=</span><span class="k">lambda</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">-</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
 </pre></div>
 
           </div>

@@ -1,0 +1,19 @@
+utils Package
+=============
+
+:mod:`utils` Package
+--------------------
+
+.. automodule:: vehicles.unittests.utils
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`generation` Module
+------------------------
+
+.. automodule:: vehicles.unittests.utils.generation
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

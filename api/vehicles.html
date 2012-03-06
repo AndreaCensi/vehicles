@@ -57,7 +57,7 @@
   <div class="section" id="vehicles-package">
 <h1>vehicles Package<a class="headerlink" href="#vehicles-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
-<h2><a class="reference internal" href="#module-vehicles" title="vehicles"><tt class="xref py py-mod docutils literal"><span class="pre">vehicles</span></tt></a> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2><a class="reference internal" href="../api_reference.html#module-vehicles" title="vehicles"><tt class="xref py py-mod docutils literal"><span class="pre">vehicles</span></tt></a> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <span class="target" id="module-vehicles"></span><p>PyVehicles main package: play with your vehicles zoo!</p>
 <dl class="class">
 <dt id="vehicles.VehicleSensor">
@@ -460,7 +460,7 @@ samples a random pose for the robot.</p>
 
 <dl class="attribute">
 <dt id="vehicles.Primitive.type2class">
-<tt class="descname">type2class</tt><em class="property"> = {'Source': &lt;class vehicles.interfaces.primitives.Source at 0x224f530&gt;, 'Circle': &lt;class vehicles.interfaces.primitives.Circle at 0x224f258&gt;, 'PolyLine': &lt;class vehicles.interfaces.primitives.PolyLine at 0x224f188&gt;}</em><a class="headerlink" href="#vehicles.Primitive.type2class" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">type2class</tt><em class="property"> = {'Source': &lt;class vehicles.interfaces.primitives.Source at 0x2c554c8&gt;, 'Circle': &lt;class vehicles.interfaces.primitives.Circle at 0x2c551f0&gt;, 'PolyLine': &lt;class vehicles.interfaces.primitives.PolyLine at 0x2c55120&gt;}</em><a class="headerlink" href="#vehicles.Primitive.type2class" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -529,16 +529,16 @@ samples a random pose for the robot.</p>
 <tt class="descname">draw</tt><big>(</big><em>cr</em>, <em>joints=None</em>, <em>timestamp=None</em><big>)</big><a class="headerlink" href="#vehicles.VehicleSkin.draw" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draws the vehicle to the given context.</p>
 <blockquote>
-<div><p>:param:cr: Cairo context
-:param:joints: list of joints configuration, relative to robot</p>
-<blockquote>
 <div>coordinates (joints[0] == Identity)</div></blockquote>
-</div></blockquote>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>joints</strong> (<tt class="docutils literal"><span class="pre">list</span></tt>) &#8211; </td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>cr</strong> &#8211; Cairo context</li>
+<li><strong>joints</strong> (<tt class="docutils literal"><span class="pre">list</span></tt>) &#8211; list of joints configuration, relative to robot</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
@@ -764,6 +764,7 @@ of a joint for the given state.</p>
 <li class="toctree-l2"><a class="reference internal" href="vehicles.interfaces.html#module-vehicles.interfaces.dynamics"><tt class="docutils literal"><span class="pre">dynamics</span></tt> Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vehicles.interfaces.html#module-vehicles.interfaces.primitives"><tt class="docutils literal"><span class="pre">primitives</span></tt> Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vehicles.interfaces.html#module-vehicles.interfaces.skins"><tt class="docutils literal"><span class="pre">skins</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vehicles.interfaces.html#module-vehicles.interfaces.texture"><tt class="docutils literal"><span class="pre">texture</span></tt> Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vehicles.interfaces.html#module-vehicles.interfaces.vehicle_sensor"><tt class="docutils literal"><span class="pre">vehicle_sensor</span></tt> Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vehicles.interfaces.html#module-vehicles.interfaces.world"><tt class="docutils literal"><span class="pre">world</span></tt> Module</a></li>
 </ul>
@@ -923,6 +924,7 @@ of a joint for the given state.</p>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="vehicles.utils.html">utils Package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="vehicles.utils.html#id1"><tt class="docutils literal"><span class="pre">utils</span></tt> Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vehicles.utils.html#module-vehicles.utils.change_module"><tt class="docutils literal"><span class="pre">change_module</span></tt> Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vehicles.utils.html#module-vehicles.utils.check_yaml_friendly"><tt class="docutils literal"><span class="pre">check_yaml_friendly</span></tt> Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vehicles.utils.html#module-vehicles.utils.timestamps"><tt class="docutils literal"><span class="pre">timestamps</span></tt> Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="vehicles.utils.html#module-vehicles.utils.wildcards"><tt class="docutils literal"><span class="pre">wildcards</span></tt> Module</a></li>

@@ -61,37 +61,13 @@
 <span class="target" id="module-vehicles.library.sensors.raytracer"></span></div>
 <div class="section" id="module-vehicles.library.sensors.raytracer.myraytracer">
 <span id="myraytracer-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">myraytracer</span></tt> Module<a class="headerlink" href="#module-vehicles.library.sensors.raytracer.myraytracer" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="vehicles.library.sensors.raytracer.myraytracer.MyRaytracer">
-<em class="property">class </em><tt class="descclassname">vehicles.library.sensors.raytracer.myraytracer.</tt><tt class="descname">MyRaytracer</tt><big>(</big><em>directions=None</em>, <em>raytracer='raytracer2'</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/sensors/raytracer/myraytracer.html#MyRaytracer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.sensors.raytracer.myraytracer.MyRaytracer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="raytracer.html#raytracer.raytracer.Raytracer" title="raytracer.raytracer.Raytracer"><tt class="xref py py-class docutils literal"><span class="pre">raytracer.raytracer.Raytracer</span></tt></a></p>
-<dl class="method">
-<dt id="vehicles.library.sensors.raytracer.myraytracer.MyRaytracer.raytracing">
-<tt class="descname">raytracing</tt><big>(</big><em>pose</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/sensors/raytracer/myraytracer.html#MyRaytracer.raytracing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.sensors.raytracer.myraytracer.MyRaytracer.raytracing" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pose</strong> (<tt class="docutils literal"><span class="pre">SE2</span></tt>) &#8211; </td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="vehicles.library.sensors.raytracer.myraytracer.MyRaytracer.set_world_primitives">
-<tt class="descname">set_world_primitives</tt><big>(</big><em>primitives</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/sensors/raytracer/myraytracer.html#MyRaytracer.set_world_primitives"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.sensors.raytracer.myraytracer.MyRaytracer.set_world_primitives" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="module-vehicles.library.sensors.raytracer.photoreceptors">
 <span id="photoreceptors-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">photoreceptors</span></tt> Module<a class="headerlink" href="#module-vehicles.library.sensors.raytracer.photoreceptors" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="vehicles.library.sensors.raytracer.photoreceptors.Photoreceptors">
 <em class="property">class </em><tt class="descclassname">vehicles.library.sensors.raytracer.photoreceptors.</tt><tt class="descname">Photoreceptors</tt><big>(</big><em>directions</em>, <em>noise=None</em>, <em>invalid=0.5</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/sensors/raytracer/photoreceptors.html#Photoreceptors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.sensors.raytracer.photoreceptors.Photoreceptors" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="vehicles.interfaces.html#vehicles.interfaces.vehicle_sensor.VehicleSensor" title="vehicles.interfaces.vehicle_sensor.VehicleSensor"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.vehicle_sensor.VehicleSensor</span></tt></a>, <a class="reference internal" href="#vehicles.library.sensors.raytracer.textured_raytracer.TexturedRaytracer" title="vehicles.library.sensors.raytracer.textured_raytracer.TexturedRaytracer"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.sensors.raytracer.textured_raytracer.TexturedRaytracer</span></tt></a></p>
+<dd><p>Bases: <a class="reference internal" href="vehicles.interfaces.html#vehicles.interfaces.vehicle_sensor.VehicleSensor" title="vehicles.interfaces.vehicle_sensor.VehicleSensor"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.vehicle_sensor.VehicleSensor</span></tt></a>, <a class="reference internal" href="vehicles.library.sensors.html#vehicles.library.sensors.TexturedRaytracer" title="vehicles.library.sensors.TexturedRaytracer"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.sensors.TexturedRaytracer</span></tt></a></p>
 <p>This is a very shallow wrap around ImageRangeSensor</p>
 <dl class="method">
 <dt id="vehicles.library.sensors.raytracer.photoreceptors.Photoreceptors.set_world_primitives">
@@ -108,7 +84,7 @@
 <dl class="class">
 <dt id="vehicles.library.sensors.raytracer.photoreceptors.PhotoreceptorsUniform">
 <em class="property">class </em><tt class="descclassname">vehicles.library.sensors.raytracer.photoreceptors.</tt><tt class="descname">PhotoreceptorsUniform</tt><big>(</big><em>fov_deg</em>, <em>num_sensels</em>, <em>noise=None</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/sensors/raytracer/photoreceptors.html#PhotoreceptorsUniform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.sensors.raytracer.photoreceptors.PhotoreceptorsUniform" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#vehicles.library.sensors.raytracer.photoreceptors.Photoreceptors" title="vehicles.library.sensors.raytracer.photoreceptors.Photoreceptors"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.sensors.raytracer.photoreceptors.Photoreceptors</span></tt></a></p>
+<dd><p>Bases: <a class="reference internal" href="vehicles.library.sensors.html#vehicles.library.sensors.Photoreceptors" title="vehicles.library.sensors.Photoreceptors"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.sensors.Photoreceptors</span></tt></a></p>
 </dd></dl>
 
 </div>
@@ -117,7 +93,7 @@
 <dl class="class">
 <dt id="vehicles.library.sensors.raytracer.photoreceptors_smooth.PhotoreceptorsSmooth">
 <em class="property">class </em><tt class="descclassname">vehicles.library.sensors.raytracer.photoreceptors_smooth.</tt><tt class="descname">PhotoreceptorsSmooth</tt><big>(</big><em>directions</em>, <em>spatial_sigma_deg</em>, <em>upsample=10</em>, <em>noise=None</em>, <em>invalid=0.5</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/sensors/raytracer/photoreceptors_smooth.html#PhotoreceptorsSmooth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.sensors.raytracer.photoreceptors_smooth.PhotoreceptorsSmooth" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="vehicles.interfaces.html#vehicles.interfaces.vehicle_sensor.VehicleSensor" title="vehicles.interfaces.vehicle_sensor.VehicleSensor"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.vehicle_sensor.VehicleSensor</span></tt></a>, <a class="reference internal" href="#vehicles.library.sensors.raytracer.textured_raytracer.TexturedRaytracer" title="vehicles.library.sensors.raytracer.textured_raytracer.TexturedRaytracer"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.sensors.raytracer.textured_raytracer.TexturedRaytracer</span></tt></a></p>
+<dd><p>Bases: <a class="reference internal" href="vehicles.interfaces.html#vehicles.interfaces.vehicle_sensor.VehicleSensor" title="vehicles.interfaces.vehicle_sensor.VehicleSensor"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.vehicle_sensor.VehicleSensor</span></tt></a>, <a class="reference internal" href="vehicles.library.sensors.html#vehicles.library.sensors.TexturedRaytracer" title="vehicles.library.sensors.TexturedRaytracer"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.sensors.TexturedRaytracer</span></tt></a></p>
 <p>Implements</p>
 <dl class="method">
 <dt id="vehicles.library.sensors.raytracer.photoreceptors_smooth.PhotoreceptorsSmooth.set_world_primitives">
@@ -134,7 +110,7 @@
 <dl class="class">
 <dt id="vehicles.library.sensors.raytracer.photoreceptors_smooth.PhotoreceptorsSmoothUniform">
 <em class="property">class </em><tt class="descclassname">vehicles.library.sensors.raytracer.photoreceptors_smooth.</tt><tt class="descname">PhotoreceptorsSmoothUniform</tt><big>(</big><em>fov_deg</em>, <em>num_sensels</em>, <em>spatial_sigma_deg=10</em>, <em>upsample=5</em>, <em>noise=None</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/sensors/raytracer/photoreceptors_smooth.html#PhotoreceptorsSmoothUniform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.sensors.raytracer.photoreceptors_smooth.PhotoreceptorsSmoothUniform" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#vehicles.library.sensors.raytracer.photoreceptors_smooth.PhotoreceptorsSmooth" title="vehicles.library.sensors.raytracer.photoreceptors_smooth.PhotoreceptorsSmooth"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.sensors.raytracer.photoreceptors_smooth.PhotoreceptorsSmooth</span></tt></a></p>
+<dd><p>Bases: <a class="reference internal" href="vehicles.library.sensors.html#vehicles.library.sensors.PhotoreceptorsSmooth" title="vehicles.library.sensors.PhotoreceptorsSmooth"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.sensors.PhotoreceptorsSmooth</span></tt></a></p>
 </dd></dl>
 
 </div>
@@ -143,7 +119,7 @@
 <dl class="class">
 <dt id="vehicles.library.sensors.raytracer.range_finder.Rangefinder">
 <em class="property">class </em><tt class="descclassname">vehicles.library.sensors.raytracer.range_finder.</tt><tt class="descname">Rangefinder</tt><big>(</big><em>directions</em>, <em>invalid=10</em>, <em>min_range=0.2</em>, <em>max_range=10</em>, <em>noise=None</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/sensors/raytracer/range_finder.html#Rangefinder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.sensors.raytracer.range_finder.Rangefinder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="vehicles.interfaces.html#vehicles.interfaces.vehicle_sensor.VehicleSensor" title="vehicles.interfaces.vehicle_sensor.VehicleSensor"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.vehicle_sensor.VehicleSensor</span></tt></a>, <a class="reference internal" href="#vehicles.library.sensors.raytracer.myraytracer.MyRaytracer" title="vehicles.library.sensors.raytracer.myraytracer.MyRaytracer"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.sensors.raytracer.myraytracer.MyRaytracer</span></tt></a></p>
+<dd><p>Bases: <a class="reference internal" href="vehicles.interfaces.html#vehicles.interfaces.vehicle_sensor.VehicleSensor" title="vehicles.interfaces.vehicle_sensor.VehicleSensor"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.vehicle_sensor.VehicleSensor</span></tt></a>, <a class="reference internal" href="vehicles.library.sensors.html#vehicles.library.sensors.MyRaytracer" title="vehicles.library.sensors.MyRaytracer"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.sensors.MyRaytracer</span></tt></a></p>
 <dl class="method">
 <dt id="vehicles.library.sensors.raytracer.range_finder.Rangefinder.set_world_primitives">
 <tt class="descname">set_world_primitives</tt><big>(</big><em>primitives</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/sensors/raytracer/range_finder.html#Rangefinder.set_world_primitives"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.sensors.raytracer.range_finder.Rangefinder.set_world_primitives" title="Permalink to this definition">¶</a></dt>
@@ -159,36 +135,12 @@
 <dl class="class">
 <dt id="vehicles.library.sensors.raytracer.range_finder.RangefinderUniform">
 <em class="property">class </em><tt class="descclassname">vehicles.library.sensors.raytracer.range_finder.</tt><tt class="descname">RangefinderUniform</tt><big>(</big><em>fov_deg</em>, <em>num_sensels</em>, <em>noise=None</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/sensors/raytracer/range_finder.html#RangefinderUniform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.sensors.raytracer.range_finder.RangefinderUniform" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#vehicles.library.sensors.raytracer.range_finder.Rangefinder" title="vehicles.library.sensors.raytracer.range_finder.Rangefinder"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.sensors.raytracer.range_finder.Rangefinder</span></tt></a></p>
+<dd><p>Bases: <a class="reference internal" href="vehicles.library.sensors.html#vehicles.library.sensors.Rangefinder" title="vehicles.library.sensors.Rangefinder"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.sensors.Rangefinder</span></tt></a></p>
 </dd></dl>
 
 </div>
 <div class="section" id="module-vehicles.library.sensors.raytracer.textured_raytracer">
 <span id="textured-raytracer-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">textured_raytracer</span></tt> Module<a class="headerlink" href="#module-vehicles.library.sensors.raytracer.textured_raytracer" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="vehicles.library.sensors.raytracer.textured_raytracer.TexturedRaytracer">
-<em class="property">class </em><tt class="descclassname">vehicles.library.sensors.raytracer.textured_raytracer.</tt><tt class="descname">TexturedRaytracer</tt><big>(</big><em>directions</em>, <em>raytracer='raytracer2'</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/sensors/raytracer/textured_raytracer.html#TexturedRaytracer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.sensors.raytracer.textured_raytracer.TexturedRaytracer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#vehicles.library.sensors.raytracer.myraytracer.MyRaytracer" title="vehicles.library.sensors.raytracer.myraytracer.MyRaytracer"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.sensors.raytracer.myraytracer.MyRaytracer</span></tt></a></p>
-<dl class="method">
-<dt id="vehicles.library.sensors.raytracer.textured_raytracer.TexturedRaytracer.raytracing">
-<tt class="descname">raytracing</tt><big>(</big><em>pose</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/sensors/raytracer/textured_raytracer.html#TexturedRaytracer.raytracing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.sensors.raytracer.textured_raytracer.TexturedRaytracer.raytracing" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pose</strong> (<tt class="docutils literal"><span class="pre">SE2</span></tt>) &#8211; </td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="vehicles.library.sensors.raytracer.textured_raytracer.TexturedRaytracer.set_world_primitives">
-<tt class="descname">set_world_primitives</tt><big>(</big><em>primitives</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/sensors/raytracer/textured_raytracer.html#TexturedRaytracer.set_world_primitives"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.sensors.raytracer.textured_raytracer.TexturedRaytracer.set_world_primitives" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
 </div>
 </div>
 

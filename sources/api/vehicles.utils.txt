@@ -9,6 +9,14 @@ utils Package
     :undoc-members:
     :show-inheritance:
 
+:mod:`change_module` Module
+---------------------------
+
+.. automodule:: vehicles.utils.change_module
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 :mod:`check_yaml_friendly` Module
 ---------------------------------
 

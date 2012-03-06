@@ -33,6 +33,14 @@ interfaces Package
     :undoc-members:
     :show-inheritance:
 
+:mod:`texture` Module
+---------------------
+
+.. automodule:: vehicles.interfaces.texture
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 :mod:`vehicle_sensor` Module
 ----------------------------
 

@@ -58,52 +58,319 @@
 <h1>dynamics Package<a class="headerlink" href="#dynamics-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
 <h2><tt class="xref py py-mod docutils literal"><span class="pre">dynamics</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="module-vehicles.library.dynamics"></span></div>
-<div class="section" id="module-vehicles.library.dynamics.exceptions">
-<span id="exceptions-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">exceptions</span></tt> Module<a class="headerlink" href="#module-vehicles.library.dynamics.exceptions" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-vehicles.library.dynamics"></span><dl class="class">
+<dt id="vehicles.library.dynamics.BaseTop">
+<em class="property">class </em><tt class="descclassname">vehicles.library.dynamics.</tt><tt class="descname">BaseTop</tt><big>(</big><em>id_base</em>, <em>id_top</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.BaseTop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.library.dynamics.BaseTopDynamics" title="vehicles.library.dynamics.BaseTopDynamics"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.dynamics.BaseTopDynamics</span></tt></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.library.dynamics.BaseTopDynamics">
+<em class="property">class </em><tt class="descclassname">vehicles.library.dynamics.</tt><tt class="descname">BaseTopDynamics</tt><big>(</big><em>base</em>, <em>top</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.BaseTopDynamics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vehicles.interfaces.html#vehicles.interfaces.dynamics.Dynamics" title="vehicles.interfaces.dynamics.Dynamics"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.dynamics.Dynamics</span></tt></a></p>
+<dl class="method">
+<dt id="vehicles.library.dynamics.BaseTopDynamics.base_state_from_big_state">
+<tt class="descname">base_state_from_big_state</tt><big>(</big><em>state</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.BaseTopDynamics.base_state_from_big_state" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.library.dynamics.BaseTopDynamics.compose_state">
+<tt class="descname">compose_state</tt><big>(</big><em>base</em>, <em>top</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.BaseTopDynamics.compose_state" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.library.dynamics.BaseTopDynamics.joint_state">
+<tt class="descname">joint_state</tt><big>(</big><em>state</em>, <em>joint=0</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.BaseTopDynamics.joint_state" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">tuple(SE3,se3)</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="vehicles.library.dynamics.BaseTopDynamics.last_turret_angle">
+<tt class="descname">last_turret_angle</tt><em class="property"> = 0.0</em><a class="headerlink" href="#vehicles.library.dynamics.BaseTopDynamics.last_turret_angle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.library.dynamics.BaseTopDynamics.num_joints">
+<tt class="descname">num_joints</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.BaseTopDynamics.num_joints" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.library.dynamics.BaseTopDynamics.pose2state">
+<tt class="descname">pose2state</tt><big>(</big><em>pose</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.BaseTopDynamics.pose2state" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Returns the state that best approximates </dt>
+<dd>the given pose (in SE3).</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pose</strong> (<tt class="docutils literal"><span class="pre">SE3</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.library.dynamics.BaseTopDynamics.state_to_yaml">
+<tt class="descname">state_to_yaml</tt><big>(</big><em>state</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.BaseTopDynamics.state_to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the state to a YAML representation.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.library.dynamics.BaseTopDynamics.top_state_from_big_state">
+<tt class="descname">top_state_from_big_state</tt><big>(</big><em>state</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.BaseTopDynamics.top_state_from_big_state" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.library.dynamics.CarWithWheels">
+<em class="property">class </em><tt class="descclassname">vehicles.library.dynamics.</tt><tt class="descname">CarWithWheels</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.CarWithWheels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vehicles.interfaces.html#vehicles.interfaces.dynamics.Dynamics" title="vehicles.interfaces.dynamics.Dynamics"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.dynamics.Dynamics</span></tt></a></p>
+<dl class="method">
+<dt id="vehicles.library.dynamics.CarWithWheels.car_state_from_big_state">
+<tt class="descname">car_state_from_big_state</tt><big>(</big><em>state</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.CarWithWheels.car_state_from_big_state" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.library.dynamics.CarWithWheels.compose_state">
+<tt class="descname">compose_state</tt><big>(</big><em>car_state</em>, <em>steering</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.CarWithWheels.compose_state" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.library.dynamics.CarWithWheels.joint_state">
+<tt class="descname">joint_state</tt><big>(</big><em>state</em>, <em>joint=0</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.CarWithWheels.joint_state" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><tt class="docutils literal"><span class="pre">tuple(SE3,se3)</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.library.dynamics.CarWithWheels.num_joints">
+<tt class="descname">num_joints</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.CarWithWheels.num_joints" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.library.dynamics.CarWithWheels.pose2state">
+<tt class="descname">pose2state</tt><big>(</big><em>pose</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.CarWithWheels.pose2state" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.library.dynamics.CarWithWheels.state_to_yaml">
+<tt class="descname">state_to_yaml</tt><big>(</big><em>state</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.CarWithWheels.state_to_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.library.dynamics.CarWithWheels.steering_from_big_state">
+<tt class="descname">steering_from_big_state</tt><big>(</big><em>state</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.CarWithWheels.steering_from_big_state" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.library.dynamics.CircleForce">
+<em class="property">class </em><tt class="descclassname">vehicles.library.dynamics.</tt><tt class="descname">CircleForce</tt><big>(</big><em>max_force</em>, <em>mass</em>, <em>damping</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.CircleForce" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.library.dynamics.SimpleDynamics" title="vehicles.library.dynamics.SimpleDynamics"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.dynamics.SimpleDynamics</span></tt></a></p>
+<p>Particle on SO(2) controlled in force.</p>
+<dl class="method">
+<dt id="vehicles.library.dynamics.CircleForce.compute_forces">
+<tt class="descname">compute_forces</tt><big>(</big><em>commands</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.CircleForce.compute_forces" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>commands</strong> (<tt class="docutils literal"><span class="pre">array[1]</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.library.dynamics.CircleVel">
+<em class="property">class </em><tt class="descclassname">vehicles.library.dynamics.</tt><tt class="descname">CircleVel</tt><big>(</big><em>max_velocity</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.CircleVel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.library.dynamics.SimpleKinematics" title="vehicles.library.dynamics.SimpleKinematics"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.dynamics.SimpleKinematics</span></tt></a></p>
+<p>Particle on SO(2) controlled in velocity.</p>
+<dl class="method">
+<dt id="vehicles.library.dynamics.CircleVel.compute_velocities">
+<tt class="descname">compute_velocities</tt><big>(</big><em>commands</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.CircleVel.compute_velocities" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>commands</strong> (<tt class="docutils literal"><span class="pre">array[1]</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.library.dynamics.DifferentialDrive">
+<em class="property">class </em><tt class="descclassname">vehicles.library.dynamics.</tt><tt class="descname">DifferentialDrive</tt><big>(</big><em>max_linear_velocity</em>, <em>max_angular_velocity</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.DifferentialDrive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.library.dynamics.SimpleKinematics" title="vehicles.library.dynamics.SimpleKinematics"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.dynamics.SimpleKinematics</span></tt></a></p>
+<dl class="method">
+<dt id="vehicles.library.dynamics.DifferentialDrive.compute_velocities">
+<tt class="descname">compute_velocities</tt><big>(</big><em>commands</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.DifferentialDrive.compute_velocities" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.library.dynamics.DubinsCar">
+<em class="property">class </em><tt class="descclassname">vehicles.library.dynamics.</tt><tt class="descname">DubinsCar</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.DubinsCar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.library.dynamics.SimpleCar" title="vehicles.library.dynamics.SimpleCar"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.dynamics.SimpleCar</span></tt></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.library.dynamics.DubinsCarWithWheels">
+<em class="property">class </em><tt class="descclassname">vehicles.library.dynamics.</tt><tt class="descname">DubinsCarWithWheels</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.DubinsCarWithWheels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.library.dynamics.CarWithWheels" title="vehicles.library.dynamics.CarWithWheels"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.dynamics.CarWithWheels</span></tt></a></p>
+</dd></dl>
+
 <dl class="exception">
-<dt id="vehicles.library.dynamics.exceptions.DynamicsException">
-<em class="property">exception </em><tt class="descclassname">vehicles.library.dynamics.exceptions.</tt><tt class="descname">DynamicsException</tt><big>(</big><em>dynamics</em>, <em>msg</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/dynamics/exceptions.html#DynamicsException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.dynamics.exceptions.DynamicsException" title="Permalink to this definition">¶</a></dt>
+<dt id="vehicles.library.dynamics.DynamicsException">
+<em class="property">exception </em><tt class="descclassname">vehicles.library.dynamics.</tt><tt class="descname">DynamicsException</tt><big>(</big><em>dynamics</em>, <em>msg</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.DynamicsException" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></p>
 </dd></dl>
 
-<dl class="exception">
-<dt id="vehicles.library.dynamics.exceptions.InvalidCommands">
-<em class="property">exception </em><tt class="descclassname">vehicles.library.dynamics.exceptions.</tt><tt class="descname">InvalidCommands</tt><big>(</big><em>dynamics</em>, <em>commands</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/dynamics/exceptions.html#InvalidCommands"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.dynamics.exceptions.InvalidCommands" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#vehicles.library.dynamics.exceptions.DynamicsException" title="vehicles.library.dynamics.exceptions.DynamicsException"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.dynamics.exceptions.DynamicsException</span></tt></a></p>
-</dd></dl>
-
-<dl class="exception">
-<dt id="vehicles.library.dynamics.exceptions.InvalidState">
-<em class="property">exception </em><tt class="descclassname">vehicles.library.dynamics.exceptions.</tt><tt class="descname">InvalidState</tt><big>(</big><em>dynamics</em>, <em>state</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/dynamics/exceptions.html#InvalidState"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.dynamics.exceptions.InvalidState" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#vehicles.library.dynamics.exceptions.DynamicsException" title="vehicles.library.dynamics.exceptions.DynamicsException"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.dynamics.exceptions.DynamicsException</span></tt></a></p>
-</dd></dl>
-
-</div>
-<div class="section" id="module-vehicles.library.dynamics.lie_dynamics">
-<span id="lie-dynamics-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">lie_dynamics</span></tt> Module<a class="headerlink" href="#module-vehicles.library.dynamics.lie_dynamics" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="vehicles.library.dynamics.lie_dynamics.SimpleDynamics">
-<em class="property">class </em><tt class="descclassname">vehicles.library.dynamics.lie_dynamics.</tt><tt class="descname">SimpleDynamics</tt><big>(</big><em>pose_space</em>, <em>commands_spec</em>, <em>mass</em>, <em>damping</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/dynamics/lie_dynamics.html#SimpleDynamics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.dynamics.lie_dynamics.SimpleDynamics" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#vehicles.library.dynamics.lie_kinematics.SimpleKinematics" title="vehicles.library.dynamics.lie_kinematics.SimpleKinematics"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.dynamics.lie_kinematics.SimpleKinematics</span></tt></a></p>
+<dt id="vehicles.library.dynamics.EuclideanForce">
+<em class="property">class </em><tt class="descclassname">vehicles.library.dynamics.</tt><tt class="descname">EuclideanForce</tt><big>(</big><em>ndim</em>, <em>max_force</em>, <em>mass</em>, <em>damping</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.EuclideanForce" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.library.dynamics.SimpleDynamics" title="vehicles.library.dynamics.SimpleDynamics"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.dynamics.SimpleDynamics</span></tt></a></p>
+<p>Particle in Euclidean space controlled in force.</p>
 <dl class="method">
-<dt id="vehicles.library.dynamics.lie_dynamics.SimpleDynamics.compute_forces">
-<tt class="descname">compute_forces</tt><big>(</big><em>commands</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/dynamics/lie_dynamics.html#SimpleDynamics.compute_forces"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.dynamics.lie_dynamics.SimpleDynamics.compute_forces" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="vehicles.library.dynamics.lie_dynamics.SimpleDynamics.compute_velocities">
-<tt class="descname">compute_velocities</tt><big>(</big><em>commands</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/dynamics/lie_dynamics.html#SimpleDynamics.compute_velocities"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.dynamics.lie_dynamics.SimpleDynamics.compute_velocities" title="Permalink to this definition">¶</a></dt>
+<dt id="vehicles.library.dynamics.EuclideanForce.compute_forces">
+<tt class="descname">compute_forces</tt><big>(</big><em>commands</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.EuclideanForce.compute_forces" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-vehicles.library.dynamics.lie_kinematics">
-<span id="lie-kinematics-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">lie_kinematics</span></tt> Module<a class="headerlink" href="#module-vehicles.library.dynamics.lie_kinematics" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="vehicles.library.dynamics.lie_kinematics.SimpleKinematics">
-<em class="property">class </em><tt class="descclassname">vehicles.library.dynamics.lie_kinematics.</tt><tt class="descname">SimpleKinematics</tt><big>(</big><em>pose_space</em>, <em>commands_spec</em>, <em>noise_drift=None</em>, <em>noise_mult=None</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/dynamics/lie_kinematics.html#SimpleKinematics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.dynamics.lie_kinematics.SimpleKinematics" title="Permalink to this definition">¶</a></dt>
+<dt id="vehicles.library.dynamics.EuclideanVel">
+<em class="property">class </em><tt class="descclassname">vehicles.library.dynamics.</tt><tt class="descname">EuclideanVel</tt><big>(</big><em>ndim</em>, <em>max_velocity</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.EuclideanVel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.library.dynamics.SimpleKinematics" title="vehicles.library.dynamics.SimpleKinematics"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.dynamics.SimpleKinematics</span></tt></a></p>
+<p>Particle in Euclidean space controlled in velocity.</p>
+<dl class="method">
+<dt id="vehicles.library.dynamics.EuclideanVel.compute_velocities">
+<tt class="descname">compute_velocities</tt><big>(</big><em>commands</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.EuclideanVel.compute_velocities" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="vehicles.library.dynamics.InvalidCommands">
+<em class="property">exception </em><tt class="descclassname">vehicles.library.dynamics.</tt><tt class="descname">InvalidCommands</tt><big>(</big><em>dynamics</em>, <em>commands</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.InvalidCommands" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.library.dynamics.DynamicsException" title="vehicles.library.dynamics.DynamicsException"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.dynamics.DynamicsException</span></tt></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="vehicles.library.dynamics.InvalidState">
+<em class="property">exception </em><tt class="descclassname">vehicles.library.dynamics.</tt><tt class="descname">InvalidState</tt><big>(</big><em>dynamics</em>, <em>state</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.InvalidState" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.library.dynamics.DynamicsException" title="vehicles.library.dynamics.DynamicsException"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.dynamics.DynamicsException</span></tt></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.library.dynamics.ReedsSheepCar">
+<em class="property">class </em><tt class="descclassname">vehicles.library.dynamics.</tt><tt class="descname">ReedsSheepCar</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.ReedsSheepCar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.library.dynamics.SimpleCar" title="vehicles.library.dynamics.SimpleCar"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.dynamics.SimpleCar</span></tt></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.library.dynamics.ReedsSheepCarWithWheels">
+<em class="property">class </em><tt class="descclassname">vehicles.library.dynamics.</tt><tt class="descname">ReedsSheepCarWithWheels</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.ReedsSheepCarWithWheels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.library.dynamics.CarWithWheels" title="vehicles.library.dynamics.CarWithWheels"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.dynamics.CarWithWheels</span></tt></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.library.dynamics.SE2Dynamics">
+<em class="property">class </em><tt class="descclassname">vehicles.library.dynamics.</tt><tt class="descname">SE2Dynamics</tt><big>(</big><em>max_linear_velocity</em>, <em>max_angular_velocity</em>, <em>noise_drift=None</em>, <em>noise_mult=None</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.SE2Dynamics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.library.dynamics.SimpleKinematics" title="vehicles.library.dynamics.SimpleKinematics"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.dynamics.SimpleKinematics</span></tt></a></p>
+<dl class="method">
+<dt id="vehicles.library.dynamics.SE2Dynamics.compute_velocities">
+<tt class="descname">compute_velocities</tt><big>(</big><em>commands</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.SE2Dynamics.compute_velocities" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.library.dynamics.SE2Forward">
+<em class="property">class </em><tt class="descclassname">vehicles.library.dynamics.</tt><tt class="descname">SE2Forward</tt><big>(</big><em>linear_velocity</em>, <em>max_angular_velocity</em>, <em>noise_mult=None</em>, <em>noise_drift=None</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.SE2Forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.library.dynamics.SimpleKinematics" title="vehicles.library.dynamics.SimpleKinematics"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.dynamics.SimpleKinematics</span></tt></a></p>
+<dl class="method">
+<dt id="vehicles.library.dynamics.SE2Forward.compute_velocities">
+<tt class="descname">compute_velocities</tt><big>(</big><em>commands</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.SE2Forward.compute_velocities" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.library.dynamics.SO3Force">
+<em class="property">class </em><tt class="descclassname">vehicles.library.dynamics.</tt><tt class="descname">SO3Force</tt><big>(</big><em>max_force</em>, <em>mass</em>, <em>damping</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.SO3Force" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.library.dynamics.SimpleDynamics" title="vehicles.library.dynamics.SimpleDynamics"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.dynamics.SimpleDynamics</span></tt></a></p>
+<dl class="method">
+<dt id="vehicles.library.dynamics.SO3Force.compute_forces">
+<tt class="descname">compute_forces</tt><big>(</big><em>commands</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.SO3Force.compute_forces" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.library.dynamics.SO3Vel">
+<em class="property">class </em><tt class="descclassname">vehicles.library.dynamics.</tt><tt class="descname">SO3Vel</tt><big>(</big><em>max_angular_velocity</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.SO3Vel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.library.dynamics.SimpleKinematics" title="vehicles.library.dynamics.SimpleKinematics"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.dynamics.SimpleKinematics</span></tt></a></p>
+<dl class="method">
+<dt id="vehicles.library.dynamics.SO3Vel.compute_velocities">
+<tt class="descname">compute_velocities</tt><big>(</big><em>commands</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.SO3Vel.compute_velocities" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.library.dynamics.SimpleCar">
+<em class="property">class </em><tt class="descclassname">vehicles.library.dynamics.</tt><tt class="descname">SimpleCar</tt><big>(</big><em>max_linear_velocity, max_steering_angle, L, axis_dist, commands_format=['C', 'C'], commands_range=[[-1, 1], [-1, 1]], desc='Simple car dynamics'</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.SimpleCar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.library.dynamics.SimpleKinematics" title="vehicles.library.dynamics.SimpleKinematics"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.dynamics.SimpleKinematics</span></tt></a></p>
+<dl class="method">
+<dt id="vehicles.library.dynamics.SimpleCar.compute_velocities">
+<tt class="descname">compute_velocities</tt><big>(</big><em>commands</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.SimpleCar.compute_velocities" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.library.dynamics.SimpleDynamics">
+<em class="property">class </em><tt class="descclassname">vehicles.library.dynamics.</tt><tt class="descname">SimpleDynamics</tt><big>(</big><em>pose_space</em>, <em>commands_spec</em>, <em>mass</em>, <em>damping</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.SimpleDynamics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.library.dynamics.SimpleKinematics" title="vehicles.library.dynamics.SimpleKinematics"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.dynamics.SimpleKinematics</span></tt></a></p>
+<dl class="method">
+<dt id="vehicles.library.dynamics.SimpleDynamics.compute_forces">
+<tt class="descname">compute_forces</tt><big>(</big><em>commands</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.SimpleDynamics.compute_forces" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.library.dynamics.SimpleDynamics.compute_velocities">
+<tt class="descname">compute_velocities</tt><big>(</big><em>commands</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.SimpleDynamics.compute_velocities" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.library.dynamics.SimpleKinematics">
+<em class="property">class </em><tt class="descclassname">vehicles.library.dynamics.</tt><tt class="descname">SimpleKinematics</tt><big>(</big><em>pose_space</em>, <em>commands_spec</em>, <em>noise_drift=None</em>, <em>noise_mult=None</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.SimpleKinematics" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="vehicles.interfaces.html#vehicles.interfaces.dynamics.Dynamics" title="vehicles.interfaces.dynamics.Dynamics"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.dynamics.Dynamics</span></tt></a></p>
 <p>A subclass for dynamics which have only a kinematic component.
 Here pose_space is assumed to be a subgroup of SE3,
@@ -123,15 +390,15 @@ v = vector2algebra(w)</pre>
 They are called, respectively, noise_drift and noise_mult below.</p>
 <p>configuration = (pose, vel)</p>
 <dl class="method">
-<dt id="vehicles.library.dynamics.lie_kinematics.SimpleKinematics.compute_velocities">
-<tt class="descname">compute_velocities</tt><big>(</big><em>commands</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/dynamics/lie_kinematics.html#SimpleKinematics.compute_velocities"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.dynamics.lie_kinematics.SimpleKinematics.compute_velocities" title="Permalink to this definition">¶</a></dt>
+<dt id="vehicles.library.dynamics.SimpleKinematics.compute_velocities">
+<tt class="descname">compute_velocities</tt><big>(</big><em>commands</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.SimpleKinematics.compute_velocities" title="Permalink to this definition">¶</a></dt>
 <dd><p>Subclasses should implement this and return an element 
 of the algebra.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="vehicles.library.dynamics.lie_kinematics.SimpleKinematics.joint_state">
-<tt class="descname">joint_state</tt><big>(</big><em>state</em>, <em>joint=0</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/dynamics/lie_kinematics.html#SimpleKinematics.joint_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.dynamics.lie_kinematics.SimpleKinematics.joint_state" title="Permalink to this definition">¶</a></dt>
+<dt id="vehicles.library.dynamics.SimpleKinematics.joint_state">
+<tt class="descname">joint_state</tt><big>(</big><em>state</em>, <em>joint=0</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.SimpleKinematics.joint_state" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -145,8 +412,8 @@ of the algebra.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="vehicles.library.dynamics.lie_kinematics.SimpleKinematics.pose2state">
-<tt class="descname">pose2state</tt><big>(</big><em>pose</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/dynamics/lie_kinematics.html#SimpleKinematics.pose2state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.dynamics.lie_kinematics.SimpleKinematics.pose2state" title="Permalink to this definition">¶</a></dt>
+<dt id="vehicles.library.dynamics.SimpleKinematics.pose2state">
+<tt class="descname">pose2state</tt><big>(</big><em>pose</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.SimpleKinematics.pose2state" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt>Projects the pose to our subgroup, and sets the </dt>
 <dd>velocity to zero.</dd>
@@ -162,12 +429,27 @@ of the algebra.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="vehicles.library.dynamics.lie_kinematics.SimpleKinematics.state_to_yaml">
-<tt class="descname">state_to_yaml</tt><big>(</big><em>state</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/dynamics/lie_kinematics.html#SimpleKinematics.state_to_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.dynamics.lie_kinematics.SimpleKinematics.state_to_yaml" title="Permalink to this definition">¶</a></dt>
+<dt id="vehicles.library.dynamics.SimpleKinematics.state_to_yaml">
+<tt class="descname">state_to_yaml</tt><big>(</big><em>state</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.SimpleKinematics.state_to_yaml" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
+<dl class="class">
+<dt id="vehicles.library.dynamics.Turret">
+<em class="property">class </em><tt class="descclassname">vehicles.library.dynamics.</tt><tt class="descname">Turret</tt><big>(</big><em>max_linear_velocity</em>, <em>max_angular_velocity</em>, <em>max_turret_velocity</em><big>)</big><a class="headerlink" href="#vehicles.library.dynamics.Turret" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#vehicles.library.dynamics.BaseTopDynamics" title="vehicles.library.dynamics.BaseTopDynamics"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.library.dynamics.BaseTopDynamics</span></tt></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-vehicles.library.dynamics.exceptions">
+<span id="exceptions-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">exceptions</span></tt> Module<a class="headerlink" href="#module-vehicles.library.dynamics.exceptions" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-vehicles.library.dynamics.lie_dynamics">
+<span id="lie-dynamics-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">lie_dynamics</span></tt> Module<a class="headerlink" href="#module-vehicles.library.dynamics.lie_dynamics" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-vehicles.library.dynamics.lie_kinematics">
+<span id="lie-kinematics-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">lie_kinematics</span></tt> Module<a class="headerlink" href="#module-vehicles.library.dynamics.lie_kinematics" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="subpackages">
 <h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>

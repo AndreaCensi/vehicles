@@ -26,7 +26,7 @@
     <script type="text/javascript" src="../../../../static/underscore.js"></script>
     <script type="text/javascript" src="../../../../static/doctools.js"></script>
     <link rel="top" title="Vehicles 2.0 documentation" href="../../../../index.html" />
-    <link rel="up" title="vehicles" href="../../../vehicles.html" />
+    <link rel="up" title="vehicles.library.textures" href="../textures.html" />
 	 
 
 
@@ -48,7 +48,8 @@
              >modules</a> |</li>
         <li><a href="../../../../index.html">Vehicles 2.0 documentation</a> &raquo;</li>
           <li><a href="../../../index.html" >Module code</a> &raquo;</li>
-          <li><a href="../../../vehicles.html" accesskey="U">vehicles</a> &raquo;</li> 
+          <li><a href="../../../vehicles.html" >vehicles</a> &raquo;</li>
+          <li><a href="../textures.html" accesskey="U">vehicles.library.textures</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -58,12 +59,12 @@
           <div class="body">
             
   <h1>Source code for vehicles.library.textures.textures</h1><div class="highlight"><pre>
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">np</span><span class="p">,</span> <span class="n">contract</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">np</span><span class="p">,</span> <span class="n">contract</span><span class="p">,</span> <span class="n">Texture</span>
 
 <span class="c"># In all of these, t can be either a scalar or a numpy array.</span>
 
 
-<div class="viewcode-block" id="SinTexture"><a class="viewcode-back" href="../../../../api/vehicles.library.textures.html#vehicles.library.textures.textures.SinTexture">[docs]</a><span class="k">class</span> <span class="nc">SinTexture</span><span class="p">:</span>
+<div class="viewcode-block" id="SinTexture"><a class="viewcode-back" href="../../../../api/vehicles.library.textures.html#vehicles.library.textures.textures.SinTexture">[docs]</a><span class="k">class</span> <span class="nc">SinTexture</span><span class="p">(</span><span class="n">Texture</span><span class="p">):</span>
 
     <span class="nd">@contract</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="s">&#39;number&#39;</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="s">&#39;number&#39;</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="s">&#39;number&#39;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">omega</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
@@ -108,7 +109,8 @@
              >modules</a> |</li>
         <li><a href="../../../../index.html">Vehicles 2.0 documentation</a> &raquo;</li>
           <li><a href="../../../index.html" >Module code</a> &raquo;</li>
-          <li><a href="../../../vehicles.html" >vehicles</a> &raquo;</li> 
+          <li><a href="../../../vehicles.html" >vehicles</a> &raquo;</li>
+          <li><a href="../textures.html" >vehicles.library.textures</a> &raquo;</li> 
       </ul>
     </div>
 	

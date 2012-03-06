@@ -58,7 +58,288 @@
 <h1>worlds Package<a class="headerlink" href="#worlds-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
 <h2><tt class="xref py py-mod docutils literal"><span class="pre">worlds</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="module-vehicles.library.worlds"></span></div>
+<span class="target" id="module-vehicles.library.worlds"></span><dl class="class">
+<dt id="vehicles.library.worlds.BigMamarama">
+<em class="property">class </em><tt class="descclassname">vehicles.library.worlds.</tt><tt class="descname">BigMamarama</tt><big>(</big><em>radius=10</em>, <em>scale=1</em><big>)</big><a class="headerlink" href="#vehicles.library.worlds.BigMamarama" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vehicles.interfaces.html#vehicles.interfaces.world.World" title="vehicles.interfaces.world.World"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.world.World</span></tt></a></p>
+<dl class="method">
+<dt id="vehicles.library.worlds.BigMamarama.get_primitives">
+<tt class="descname">get_primitives</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.library.worlds.BigMamarama.get_primitives" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.library.worlds.BigMamarama.simulate">
+<tt class="descname">simulate</tt><big>(</big><em>dt</em>, <em>vehicle_pose</em><big>)</big><a class="headerlink" href="#vehicles.library.worlds.BigMamarama.simulate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.library.worlds.Box">
+<em class="property">class </em><tt class="descclassname">vehicles.library.worlds.</tt><tt class="descname">Box</tt><big>(</big><em>width=10</em>, <em>length=10</em><big>)</big><a class="headerlink" href="#vehicles.library.worlds.Box" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vehicles.interfaces.html#vehicles.interfaces.world.World" title="vehicles.interfaces.world.World"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.world.World</span></tt></a></p>
+<p>A simple box.</p>
+<dl class="method">
+<dt id="vehicles.library.worlds.Box.get_primitives">
+<tt class="descname">get_primitives</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.library.worlds.Box.get_primitives" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.library.worlds.Box.simulate">
+<tt class="descname">simulate</tt><big>(</big><em>dt</em>, <em>vehicle_pose</em><big>)</big><a class="headerlink" href="#vehicles.library.worlds.Box.simulate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.library.worlds.Counter">
+<em class="property">class </em><tt class="descclassname">vehicles.library.worlds.</tt><tt class="descname">Counter</tt><a class="headerlink" href="#vehicles.library.worlds.Counter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="vehicles.library.worlds.DynamicTest">
+<em class="property">class </em><tt class="descclassname">vehicles.library.worlds.</tt><tt class="descname">DynamicTest</tt><big>(</big><em>width=10</em>, <em>length=10</em><big>)</big><a class="headerlink" href="#vehicles.library.worlds.DynamicTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vehicles.interfaces.html#vehicles.interfaces.world.World" title="vehicles.interfaces.world.World"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.world.World</span></tt></a></p>
+<p>A simple example of a dynamic world.</p>
+<dl class="method">
+<dt id="vehicles.library.worlds.DynamicTest.get_primitives">
+<tt class="descname">get_primitives</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.library.worlds.DynamicTest.get_primitives" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.library.worlds.DynamicTest.simulate">
+<tt class="descname">simulate</tt><big>(</big><em>dt</em>, <em>vehicle_pose</em><big>)</big><a class="headerlink" href="#vehicles.library.worlds.DynamicTest.simulate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.library.worlds.Empty">
+<em class="property">class </em><tt class="descclassname">vehicles.library.worlds.</tt><tt class="descname">Empty</tt><big>(</big><em>bounds</em>, <em>start_poses=None</em><big>)</big><a class="headerlink" href="#vehicles.library.worlds.Empty" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vehicles.interfaces.html#vehicles.interfaces.world.World" title="vehicles.interfaces.world.World"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.world.World</span></tt></a></p>
+<dl class="method">
+<dt id="vehicles.library.worlds.Empty.get_primitives">
+<tt class="descname">get_primitives</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.library.worlds.Empty.get_primitives" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.library.worlds.Empty.simulate">
+<tt class="descname">simulate</tt><big>(</big><em>dt</em>, <em>vehicle_pose</em><big>)</big><a class="headerlink" href="#vehicles.library.worlds.Empty.simulate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.library.worlds.EmptyFixed">
+<em class="property">class </em><tt class="descclassname">vehicles.library.worlds.</tt><tt class="descname">EmptyFixed</tt><big>(</big><em>bounds, start_pose=[0, 0, 0]</em><big>)</big><a class="headerlink" href="#vehicles.library.worlds.EmptyFixed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vehicles.interfaces.html#vehicles.interfaces.world.World" title="vehicles.interfaces.world.World"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.world.World</span></tt></a></p>
+<p>Empty world; vehicle starts always at the same pose.</p>
+<dl class="method">
+<dt id="vehicles.library.worlds.EmptyFixed.get_primitives">
+<tt class="descname">get_primitives</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.library.worlds.EmptyFixed.get_primitives" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.library.worlds.EmptyFixed.new_episode">
+<tt class="descname">new_episode</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.library.worlds.EmptyFixed.new_episode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an episode tuple. By default it just
+samples a random pose for the robot.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vehicles.library.worlds.EmptyFixed.simulate">
+<tt class="descname">simulate</tt><big>(</big><em>dt</em>, <em>vehicle_pose</em><big>)</big><a class="headerlink" href="#vehicles.library.worlds.EmptyFixed.simulate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.library.worlds.KernelExponential">
+<em class="property">class </em><tt class="descclassname">vehicles.library.worlds.</tt><tt class="descname">KernelExponential</tt><big>(</big><em>L</em><big>)</big><a class="headerlink" href="#vehicles.library.worlds.KernelExponential" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="staticmethod">
+<dt id="vehicles.library.worlds.KernelExponential.spec">
+<em class="property">static </em><tt class="descname">spec</tt><big>(</big><em>L</em><big>)</big><a class="headerlink" href="#vehicles.library.worlds.KernelExponential.spec" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.library.worlds.KernelInverse">
+<em class="property">class </em><tt class="descclassname">vehicles.library.worlds.</tt><tt class="descname">KernelInverse</tt><big>(</big><em>scale</em>, <em>var</em><big>)</big><a class="headerlink" href="#vehicles.library.worlds.KernelInverse" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="staticmethod">
+<dt id="vehicles.library.worlds.KernelInverse.spec">
+<em class="property">static </em><tt class="descname">spec</tt><big>(</big><em>scale</em>, <em>var</em><big>)</big><a class="headerlink" href="#vehicles.library.worlds.KernelInverse.spec" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.library.worlds.LightBox">
+<em class="property">class </em><tt class="descclassname">vehicles.library.worlds.</tt><tt class="descname">LightBox</tt><big>(</big><em>bounds</em>, <em>start_poses=None</em>, <em>primitives=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#vehicles.library.worlds.LightBox" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vehicles.interfaces.html#vehicles.interfaces.world.World" title="vehicles.interfaces.world.World"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.world.World</span></tt></a></p>
+<p>Parametric world</p>
+<dl class="method">
+<dt id="vehicles.library.worlds.LightBox.get_primitives">
+<tt class="descname">get_primitives</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.library.worlds.LightBox.get_primitives" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.library.worlds.LightBox.simulate">
+<tt class="descname">simulate</tt><big>(</big><em>dt</em>, <em>vehicle_pose</em><big>)</big><a class="headerlink" href="#vehicles.library.worlds.LightBox.simulate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.library.worlds.StochasticBox">
+<em class="property">class </em><tt class="descclassname">vehicles.library.worlds.</tt><tt class="descname">StochasticBox</tt><big>(</big><em>width=10, length=10, num_circles=15, circles_size=[1, 3]</em><big>)</big><a class="headerlink" href="#vehicles.library.worlds.StochasticBox" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vehicles.interfaces.html#vehicles.interfaces.world.World" title="vehicles.interfaces.world.World"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.world.World</span></tt></a></p>
+<dl class="method">
+<dt id="vehicles.library.worlds.StochasticBox.get_primitives">
+<tt class="descname">get_primitives</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.library.worlds.StochasticBox.get_primitives" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.library.worlds.StochasticBox.new_episode">
+<tt class="descname">new_episode</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.library.worlds.StochasticBox.new_episode" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.library.worlds.StochasticBox.refresh">
+<tt class="descname">refresh</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.library.worlds.StochasticBox.refresh" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.library.worlds.StochasticBox.simulate">
+<tt class="descname">simulate</tt><big>(</big><em>dt</em>, <em>vehicle_pose</em><big>)</big><a class="headerlink" href="#vehicles.library.worlds.StochasticBox.simulate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.library.worlds.StochasticBox2">
+<em class="property">class </em><tt class="descclassname">vehicles.library.worlds.</tt><tt class="descname">StochasticBox2</tt><big>(</big><em>width=10, length=10, num_circles=15, circles_size=[1, 3], num_sources=10, source_width=3</em><big>)</big><a class="headerlink" href="#vehicles.library.worlds.StochasticBox2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vehicles.interfaces.html#vehicles.interfaces.world.World" title="vehicles.interfaces.world.World"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.world.World</span></tt></a></p>
+<p>This also includes point sources.</p>
+<dl class="method">
+<dt id="vehicles.library.worlds.StochasticBox2.get_primitives">
+<tt class="descname">get_primitives</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.library.worlds.StochasticBox2.get_primitives" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.library.worlds.StochasticBox2.new_episode">
+<tt class="descname">new_episode</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.library.worlds.StochasticBox2.new_episode" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.library.worlds.StochasticBox2.refresh">
+<tt class="descname">refresh</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.library.worlds.StochasticBox2.refresh" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.library.worlds.StochasticBox2.simulate">
+<tt class="descname">simulate</tt><big>(</big><em>dt</em>, <em>vehicle_pose</em><big>)</big><a class="headerlink" href="#vehicles.library.worlds.StochasticBox2.simulate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.library.worlds.StochasticBox3">
+<em class="property">class </em><tt class="descclassname">vehicles.library.worlds.</tt><tt class="descname">StochasticBox3</tt><big>(</big><em>width=10, length=10, num_circles=15, circles_size=[1, 3], scale=1, sigma=1</em><big>)</big><a class="headerlink" href="#vehicles.library.worlds.StochasticBox3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vehicles.interfaces.html#vehicles.interfaces.world.World" title="vehicles.interfaces.world.World"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.world.World</span></tt></a></p>
+<dl class="method">
+<dt id="vehicles.library.worlds.StochasticBox3.get_primitives">
+<tt class="descname">get_primitives</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.library.worlds.StochasticBox3.get_primitives" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.library.worlds.StochasticBox3.new_episode">
+<tt class="descname">new_episode</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.library.worlds.StochasticBox3.new_episode" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.library.worlds.StochasticBox3.refresh">
+<tt class="descname">refresh</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.library.worlds.StochasticBox3.refresh" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.library.worlds.StochasticBox3.simulate">
+<tt class="descname">simulate</tt><big>(</big><em>dt</em>, <em>vehicle_pose</em><big>)</big><a class="headerlink" href="#vehicles.library.worlds.StochasticBox3.simulate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="vehicles.library.worlds.StochasticSources">
+<em class="property">class </em><tt class="descclassname">vehicles.library.worlds.</tt><tt class="descname">StochasticSources</tt><big>(</big><em>width=10</em>, <em>length=10</em>, <em>num_sources=20</em>, <em>scale=2</em><big>)</big><a class="headerlink" href="#vehicles.library.worlds.StochasticSources" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vehicles.interfaces.html#vehicles.interfaces.world.World" title="vehicles.interfaces.world.World"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.world.World</span></tt></a></p>
+<p>This also includes point sources.</p>
+<dl class="method">
+<dt id="vehicles.library.worlds.StochasticSources.get_primitives">
+<tt class="descname">get_primitives</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.library.worlds.StochasticSources.get_primitives" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.library.worlds.StochasticSources.new_episode">
+<tt class="descname">new_episode</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.library.worlds.StochasticSources.new_episode" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.library.worlds.StochasticSources.refresh">
+<tt class="descname">refresh</tt><big>(</big><big>)</big><a class="headerlink" href="#vehicles.library.worlds.StochasticSources.refresh" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="vehicles.library.worlds.StochasticSources.simulate">
+<tt class="descname">simulate</tt><big>(</big><em>dt</em>, <em>vehicle_pose</em><big>)</big><a class="headerlink" href="#vehicles.library.worlds.StochasticSources.simulate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="vehicles.library.worlds.blackwhite_checkerboard">
+<tt class="descclassname">vehicles.library.worlds.</tt><tt class="descname">blackwhite_checkerboard</tt><big>(</big><em>cell_width</em><big>)</big><a class="headerlink" href="#vehicles.library.worlds.blackwhite_checkerboard" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="vehicles.library.worlds.box">
+<tt class="descclassname">vehicles.library.worlds.</tt><tt class="descname">box</tt><big>(</big><em>id_object</em>, <em>texture</em>, <em>width</em>, <em>length</em><big>)</big><a class="headerlink" href="#vehicles.library.worlds.box" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a box.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="vehicles.library.worlds.random_checkerboard">
+<tt class="descclassname">vehicles.library.worlds.</tt><tt class="descname">random_checkerboard</tt><big>(</big><em>cell_width</em><big>)</big><a class="headerlink" href="#vehicles.library.worlds.random_checkerboard" title="Permalink to this definition">¶</a></dt>
+<dd><p>Utility function to obtain a random checker board.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cell_width</strong> (<tt class="docutils literal"><span class="pre">&gt;0</span></tt>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="vehicles.library.worlds.random_checkerboard_smooth">
+<tt class="descclassname">vehicles.library.worlds.</tt><tt class="descname">random_checkerboard_smooth</tt><big>(</big><em>cell_width</em>, <em>sigma</em><big>)</big><a class="headerlink" href="#vehicles.library.worlds.random_checkerboard_smooth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Utility function to obtain a smoothed random checker board.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>cell_width</strong> (<tt class="docutils literal"><span class="pre">&gt;0</span></tt>) &#8211; </li>
+<li><strong>sigma</strong> (<tt class="docutils literal"><span class="pre">&gt;0</span></tt>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
 <div class="section" id="module-vehicles.library.worlds.bigmama">
 <span id="bigmama-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">bigmama</span></tt> Module<a class="headerlink" href="#module-vehicles.library.worlds.bigmama" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
@@ -80,23 +361,6 @@
 </div>
 <div class="section" id="module-vehicles.library.worlds.boxes">
 <span id="boxes-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">boxes</span></tt> Module<a class="headerlink" href="#module-vehicles.library.worlds.boxes" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="vehicles.library.worlds.boxes.Box">
-<em class="property">class </em><tt class="descclassname">vehicles.library.worlds.boxes.</tt><tt class="descname">Box</tt><big>(</big><em>width=10</em>, <em>length=10</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/worlds/boxes.html#Box"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.worlds.boxes.Box" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="vehicles.interfaces.html#vehicles.interfaces.world.World" title="vehicles.interfaces.world.World"><tt class="xref py py-class docutils literal"><span class="pre">vehicles.interfaces.world.World</span></tt></a></p>
-<p>A simple box.</p>
-<dl class="method">
-<dt id="vehicles.library.worlds.boxes.Box.get_primitives">
-<tt class="descname">get_primitives</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/vehicles/library/worlds/boxes.html#Box.get_primitives"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.worlds.boxes.Box.get_primitives" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="vehicles.library.worlds.boxes.Box.simulate">
-<tt class="descname">simulate</tt><big>(</big><em>dt</em>, <em>vehicle_pose</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/worlds/boxes.html#Box.simulate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.worlds.boxes.Box.simulate" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="module-vehicles.library.worlds.dynamic">
 <span id="dynamic-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">dynamic</span></tt> Module<a class="headerlink" href="#module-vehicles.library.worlds.dynamic" title="Permalink to this headline">¶</a></h2>
@@ -324,54 +588,6 @@ samples a random pose for the robot.</p>
 </div>
 <div class="section" id="module-vehicles.library.worlds.utils">
 <span id="utils-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">utils</span></tt> Module<a class="headerlink" href="#module-vehicles.library.worlds.utils" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="vehicles.library.worlds.utils.Counter">
-<em class="property">class </em><tt class="descclassname">vehicles.library.worlds.utils.</tt><tt class="descname">Counter</tt><a class="reference internal" href="../modules/vehicles/library/worlds/utils.html#Counter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.worlds.utils.Counter" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="vehicles.library.worlds.utils.blackwhite_checkerboard">
-<tt class="descclassname">vehicles.library.worlds.utils.</tt><tt class="descname">blackwhite_checkerboard</tt><big>(</big><em>cell_width</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/worlds/utils.html#blackwhite_checkerboard"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.worlds.utils.blackwhite_checkerboard" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="vehicles.library.worlds.utils.box">
-<tt class="descclassname">vehicles.library.worlds.utils.</tt><tt class="descname">box</tt><big>(</big><em>id_object</em>, <em>texture</em>, <em>width</em>, <em>length</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/worlds/utils.html#box"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.worlds.utils.box" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a box.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="vehicles.library.worlds.utils.random_checkerboard">
-<tt class="descclassname">vehicles.library.worlds.utils.</tt><tt class="descname">random_checkerboard</tt><big>(</big><em>cell_width</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/worlds/utils.html#random_checkerboard"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.worlds.utils.random_checkerboard" title="Permalink to this definition">¶</a></dt>
-<dd><p>Utility function to obtain a random checker board.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cell_width</strong> (<tt class="docutils literal"><span class="pre">&gt;0</span></tt>) &#8211; </td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="vehicles.library.worlds.utils.random_checkerboard_smooth">
-<tt class="descclassname">vehicles.library.worlds.utils.</tt><tt class="descname">random_checkerboard_smooth</tt><big>(</big><em>cell_width</em>, <em>sigma</em><big>)</big><a class="reference internal" href="../modules/vehicles/library/worlds/utils.html#random_checkerboard_smooth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#vehicles.library.worlds.utils.random_checkerboard_smooth" title="Permalink to this definition">¶</a></dt>
-<dd><p>Utility function to obtain a smoothed random checker board.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>cell_width</strong> (<tt class="docutils literal"><span class="pre">&gt;0</span></tt>) &#8211; </li>
-<li><strong>sigma</strong> (<tt class="docutils literal"><span class="pre">&gt;0</span></tt>) &#8211; </li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 </div>
 <div class="section" id="subpackages">
 <h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>

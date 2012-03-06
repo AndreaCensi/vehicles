@@ -62,6 +62,12 @@
 
 
 <span class="nd">@simple_block</span>
+<div class="viewcode-block" id="extract_from_extra"><a class="viewcode-back" href="../../api/procgraph_vehicles.html#procgraph_vehicles.vehiclelog_utils.extract_from_extra">[docs]</a><span class="k">def</span> <span class="nf">extract_from_extra</span><span class="p">(</span><span class="n">observations</span><span class="p">,</span> <span class="n">fieldname</span><span class="o">=</span><span class="n">COMPULSORY</span><span class="p">):</span>
+    <span class="n">extra</span> <span class="o">=</span> <span class="n">observations</span><span class="p">[</span><span class="s">&#39;extra&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">extra</span><span class="p">[</span><span class="n">fieldname</span><span class="p">]</span>
+
+</div>
+<span class="nd">@simple_block</span>
 <div class="viewcode-block" id="extract_sensels"><a class="viewcode-back" href="../../api/procgraph_vehicles.html#procgraph_vehicles.vehiclelog_utils.extract_sensels">[docs]</a><span class="k">def</span> <span class="nf">extract_sensels</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s">&#39;observations&#39;</span><span class="p">])</span>
 
