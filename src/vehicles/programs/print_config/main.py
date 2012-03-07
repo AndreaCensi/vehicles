@@ -76,7 +76,8 @@ def create_generic_table(r, nid, name2entry, cols, caption=None):
             row = []
             for col in cols:
                 if col in c:
-                    if not col in found_cols: found_cols.append(col)
+                    if not col in found_cols:
+                        found_cols.append(col)
                     row.append(c[col])
             table.append(row)
         r.table(nid, table,

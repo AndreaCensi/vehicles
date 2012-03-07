@@ -72,7 +72,7 @@ def collides_with(primitives, center, radius):
                              normal=None, primitive=None,
                              penetration=None)
     else:
-        collisions.sort(key=lambda x:-x[1].penetration)
+        collisions.sort(key=lambda x: (-x[1].penetration))
         primitive = collisions[0][0]
         normal = collisions[0][1].normal
         penetration = collisions[0][1].penetration

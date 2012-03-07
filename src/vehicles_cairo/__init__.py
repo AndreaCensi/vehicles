@@ -1,7 +1,7 @@
 ''' 
     Plotting Vehicles using the Cairo library. 
     
-    Use this pattern: ..
+    Use this pattern: ::
     
         # Check for Cairo support
         from vehicles_cairo import vehicles_has_cairo

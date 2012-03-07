@@ -1,7 +1,7 @@
 from . import collides_with, np, compute_collision, contract
+from ..utils import check_yaml_friendly
 from geometry import SE3, translation_from_SE2, SE2_project_from_SE3
 from geometry.yaml import to_yaml
-from vehicles.utils.check_yaml_friendly import check_yaml_friendly
 
 __all__ = ['Attached', 'Vehicle']
 
