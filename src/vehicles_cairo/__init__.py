@@ -13,8 +13,6 @@
 
 '''
 
-# TODO: plot textures only if there is a camera
-
 from vehicles import __version__, logger
 import numpy as np
 from contracts import contract
@@ -27,7 +25,8 @@ try:
 except ImportError as e:
     cairo_error = e
     vehicles_has_cairo = False
-
+    logger.warning('Could not import PyCairo; visualization not available.')
+    
 else:
     from .constants import *
     from .utils import *
