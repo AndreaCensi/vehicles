@@ -36,8 +36,8 @@ if vehicles_has_cairo:
                                    **plot_params)
 
 
-@for_all_skins
-def plot_skin(id_skin, skin):
-    # TODO
-    pass
+    @for_all_skins
+    def plot_skin(id_skin, skin):
+        # TODO
+        pass
 

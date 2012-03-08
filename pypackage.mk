@@ -4,7 +4,8 @@
 	
 all: develop
 
-develop:
+
+develop: 
 	python setup.py develop
 
 docs: 

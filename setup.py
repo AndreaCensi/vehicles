@@ -32,7 +32,7 @@ setup(name='PyVehicles',
         'PyYAML',
         'python-cjson'
       ],
-      tests_require=['nose'],
+      tests_require=['nose>=1.1.2,<2'],
       extras_require={ # TODO: reprep?
         'procgraph':  ["procgraph>=1.0,<2"],
         'boot':  ["BootOlympics>=1.0,<2"],
