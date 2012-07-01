@@ -1,0 +1,16 @@
+--- model live_bridge_sensels
+#config id_agent 
+#config id_robot 
+config basename
+#config extra_param
+
+input agent
+input robot
+input obs
+
+
+|input name=obs| -> |extract_sensels| -> |plot| -> rgb
+
+    
+
+    rgb -> |mencoder file="${basename}.mp4"|

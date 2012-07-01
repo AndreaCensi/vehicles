@@ -35,7 +35,6 @@ if vehicles_has_cairo:
         vehicles_cairo_display_svg(filename=f.name, sim_state=sim_state,
                                    **plot_params)
 
-
     @for_all_skins
     def plot_skin(id_skin, skin):
         # TODO
