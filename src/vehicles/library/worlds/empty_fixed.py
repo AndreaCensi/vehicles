@@ -16,7 +16,7 @@ class EmptyFixed(World):
     def get_primitives(self):
         return []
 
-    def simulate(self, dt, vehicle_pose):
+    def simulate(self, dt, vehicle_pose): #@UnusedVariable
         return []
 
     def new_episode(self):

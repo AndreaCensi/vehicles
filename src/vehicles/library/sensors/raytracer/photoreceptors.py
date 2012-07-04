@@ -8,7 +8,7 @@ __all__ = ['Photoreceptors', 'PhotoreceptorsUniform']
 
 
 class Photoreceptors(VehicleSensor, TexturedRaytracer):
-    """ This is a very shallow wrap around ImageRangeSensor """
+    """ This is a very shallow wrapper around ImageRangeSensor """
 
     @contract(directions='seq[>0](number)')
     def __init__(self, directions, noise=None, invalid=0.5):

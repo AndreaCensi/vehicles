@@ -19,6 +19,7 @@ class SimpleDynamics(SimpleKinematics):
 
     @abstractmethod
     def compute_forces(self, commands):
+        """ Must return an element of the algebra """
         pass
 
     def _integrate(self, state, commands, dt):

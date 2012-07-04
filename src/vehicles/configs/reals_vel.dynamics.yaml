@@ -65,10 +65,15 @@
 
 # Now things on SE2
 - id: d_SE2_rb_v
-  desc: 'Planar robot on SE2'
+  desc: 'Planar robot on SE2 controlled in velocity'
   code: [vehicles.library.dynamics.SE2Dynamics, 
             {max_linear_velocity: [*MAX_LINEAR_VEL,*MAX_LINEAR_VEL], 
              max_angular_velocity: *MA} ]
+
+- id: d_SE2_rb_f
+  desc: 'Planar robot on SE2 controlled in force'
+  code: [vehicles.library.dynamics.SE2Dynamics, 
+            { max_force: [*MF,*MF,*MF], mass: *MASS,  damping: *DAMPING} ]
 
 # - id: d_SE2_fwd_f
 #   desc: 'Planar vehicle with fixed forward velocity, controlled in angular velocity.'

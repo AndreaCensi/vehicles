@@ -3,8 +3,10 @@ from .. import  get_uniform_directions
 from vehicles import VehicleSensor, VehiclesConstants
 from conf_tools import instantiate_spec
 from geometry import SE2_project_from_SE3
+from vehicles.library.sensors.utils import get_random_directions
 
-__all__ = ['PhotoreceptorsSmooth', 'PhotoreceptorsSmoothUniform']
+__all__ = ['PhotoreceptorsSmooth', 'PhotoreceptorsSmoothUniform',
+           'PhotoreceptorsSmoothRandom']
 
 
 class PhotoreceptorsSmooth(VehicleSensor, TexturedRaytracer):
@@ -123,6 +125,18 @@ class PhotoreceptorsSmoothUniform(PhotoreceptorsSmooth):
     def __init__(self, fov_deg, num_sensels, spatial_sigma_deg=10,
                  upsample=5, noise=None):
         directions = get_uniform_directions(fov_deg, num_sensels)
+        PhotoreceptorsSmooth.__init__(self, directions=directions,
+                                      spatial_sigma_deg=spatial_sigma_deg,
+                                      upsample=upsample,
+                                        noise=noise)
+
+
+class PhotoreceptorsSmoothRandom(PhotoreceptorsSmooth):
+    """ Photoreceptors with random disposition of sensels. """
+    @contract(fov_deg='>0,<=360', num_sensels='int,>0')
+    def __init__(self, fov_deg, num_sensels, spatial_sigma_deg=10,
+                 upsample=5, noise=None):
+        directions = get_random_directions(fov_deg, num_sensels)
         PhotoreceptorsSmooth.__init__(self, directions=directions,
                                       spatial_sigma_deg=spatial_sigma_deg,
                                       upsample=upsample,

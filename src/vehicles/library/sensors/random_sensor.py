@@ -20,7 +20,7 @@ class RandomSensor(VehicleSensor):
         return {'type': 'RandomSensor',
                 'num_sensels': self.num_sensels}
 
-    def _compute_observations(self, pose):
+    def _compute_observations(self, pose): #@UnusedVariable
         values = np.random.rand(self.num_sensels)
         data = {}
         data[VehicleSensor.SENSELS] = values

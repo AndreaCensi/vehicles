@@ -1,8 +1,19 @@
-from . import np
+from . import np, contract
 from geometry import assert_allclose
 
+__all__ = ['get_random_directions', 'get_uniform_directions']
 
+
+@contract(fov_deg='>0', num_sensels='N,>1', returns='array[N](>=-pi,<=pi)')
+def get_random_directions(fov_deg, num_sensels):
+    """ Returns a random disposition of the sensels. """
+    f = np.deg2rad(fov_deg) / 2
+    return np.random.uniform(-f, +f, num_sensels)
+
+
+@contract(fov_deg='>0', num_sensels='N,>1', returns='array[N](>=-pi,<=pi)')
 def get_uniform_directions(fov_deg, num_sensels):
+    """ Returns a set of directions uniform in space """
     if fov_deg == 360:
         ray_dist = 2 * np.pi / (num_sensels)
         directions = np.linspace(-np.pi + ray_dist / 2,
