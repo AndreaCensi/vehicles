@@ -53,5 +53,5 @@ class StochasticBox3(World):
         self.refresh()
         return World.new_episode(self)
 
-    def simulate(self, dt, vehicle_pose):
+    def simulate(self, dt, vehicle_pose): #@UnusedVariable
         return []

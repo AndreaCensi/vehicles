@@ -10,11 +10,6 @@ class FieldSamplerRandCircle(FieldSampler):
     @contract(radius='>0', n='int,>0')
     def __init__(self, n, radius, normalize=False, min_value=0, max_value=1,
                  noise=None):
-        ''' 
-            :param sides: sides of the rectangle comprising the sensels
-            :param shape: 2D shape of the sensels 
-            :param noise_spec: code spec for the noise added 
-        '''
         self.radius = radius
 
         positions = []

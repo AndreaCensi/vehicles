@@ -35,8 +35,8 @@ def box(id_object, texture, width, length):
 
 class Counter:
 
-    def __init__(self):
-        self.k = -1
+    def __init__(self, start=0):
+        self.k = start - 1
 
     def __call__(self):
         self.k += 1

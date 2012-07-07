@@ -12,3 +12,4 @@ from .empty_fixed import *
 from .bigmama import *
 from .stochastic_sources import *
 from .light_box import *
+from .join import *

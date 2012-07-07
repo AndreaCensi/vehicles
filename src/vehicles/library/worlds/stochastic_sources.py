@@ -16,7 +16,7 @@ class StochasticSources(World):
                   [0, 5]]
         World.__init__(self, bounds)
 
-        id_object = Counter()
+        id_object = Counter(1000)
 
         self.sources = []
 
@@ -39,6 +39,6 @@ class StochasticSources(World):
         self.refresh()
         return World.new_episode(self)
 
-    def simulate(self, dt, vehicle_pose):
+    def simulate(self, dt, vehicle_pose): #@UnusedVariable
         return []  # no changes
 

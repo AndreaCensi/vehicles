@@ -1,8 +1,8 @@
 from . import np, contract
+from ..utils import unique_timestamp_string
 from abc import abstractmethod, ABCMeta
 from collections import namedtuple
 from geometry import SE2_from_xytheta, SE3_from_SE2
-from ..utils import unique_timestamp_string
 
 
 class World:
@@ -19,7 +19,7 @@ class World:
 
     def to_yaml(self):
         return {
-            'bounds': self.bounds,
+            'bounds': np.array(self.bounds).tolist(),
             'primitives': [x.to_yaml() for x in self.get_primitives()]
         }
 

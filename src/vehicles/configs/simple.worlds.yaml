@@ -25,6 +25,16 @@
       - width: 10
         length: 10
         
+
+- id: join0
+  desc: "Example of joining worlds"
+  code: 
+      - vehicles.library.worlds.Join
+      - id_worlds: 
+        - SBox2_10a
+        - BigMamarama_r10_s1
+
+
 - id: stochastic_box_10
   desc: A box with stochastic content
   code: 
