@@ -15,8 +15,9 @@ class FieldSamplerCircle(FieldSampler):
         self.radius = radius
         self.fov_deg = fov_deg
 
-        p = radius * get_uniform_directions(fov_deg, n)
-        positions = map(lambda theta: [np.cos(theta), np.sin(theta)], p)
+        p = get_uniform_directions(fov_deg, n)
+        positions = map(lambda theta: [radius * np.cos(theta),
+                                       radius * np.sin(theta)], p)
         FieldSampler.__init__(self, positions=positions, **params)
 
     def to_yaml(self):

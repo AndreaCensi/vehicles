@@ -22,5 +22,5 @@ class Box(World):
     def get_primitives(self):
         return [self.box]
 
-    def simulate(self, dt, vehicle_pose):
+    def simulate(self, dt, vehicle_pose): #@UnusedVariable
         return []

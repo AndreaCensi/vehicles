@@ -28,20 +28,21 @@ class BOVehicleSimulation(RobotInterface, VehicleSimulation):
         # TODO: user shortcuts
         if vehicle is not None:
             id_vehicle = vehicle['id']
+            vehicle_spec = vehicle
             # TODO: check well formed
             vehicle = vehicles.instance_spec(vehicle)
         else:
+            vehicle_spec = vehicles[id_vehicle]
             vehicle = vehicles.instance(id_vehicle)
 
         if world is not None:
             id_world = world['id']
             # TODO: check well formed
+            world_spec = world
             world = worlds.instance_spec(world)
         else:
+            world_spec = worlds[id_world]
             world = worlds.instance(id_world)
-
-        self.id_world = id_world
-        self.id_vehicle = id_vehicle
 
         VehicleSimulation.__init__(self, vehicle, world, **kwargs)
 
@@ -61,6 +62,12 @@ class BOVehicleSimulation(RobotInterface, VehicleSimulation):
 
         self.boot_episode_started = False
 
+        # Save for later
+        self.id_world = id_world
+        self.id_vehicle = id_vehicle
+        self.world_spec = world_spec
+        self.vehicle_spec = vehicle_spec
+        
     def __repr__(self):
         return 'BOVehicleSim(%s,%s)' % (self.id_vehicle, self.id_world)
 

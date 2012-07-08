@@ -27,5 +27,5 @@ class BigMamarama(World):
     def get_primitives(self):
         return [self.circle]
 
-    def simulate(self, dt, vehicle_pose):
+    def simulate(self, dt, vehicle_pose): #@UnusedVariable
         return []

@@ -29,7 +29,7 @@ def box(id_object, texture, width, length):
     points = [[-1, -1], [-1, 1], [1, 1], [1, -1], [-1, -1]]
     points = [(np.array(p) * np.array([width, length])).tolist()
               for p in points]
-    return PolyLine(id_object=0, tags=[],
+    return PolyLine(id_object=id_object, tags=[],
                     texture=texture, points=points)
 
 

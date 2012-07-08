@@ -32,7 +32,7 @@ class StochasticBox2(World):
             c = Circle(id_object=id_object(), tags=[],
                      texture=random_checkerboard(0.5),
                      center=[0, 0],
-                     radius=1,
+                     radius=source_width,
                      solid=True)
             self.circles.append(c)
 
@@ -60,7 +60,7 @@ class StochasticBox2(World):
         self.refresh()
         return World.new_episode(self)
 
-    def simulate(self, dt, vehicle_pose):
+    def simulate(self, dt, vehicle_pose): #@UnusedVariable
         return []  # no changes
 
 

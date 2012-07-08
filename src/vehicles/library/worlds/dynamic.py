@@ -33,7 +33,7 @@ class DynamicTest(World):
     def get_primitives(self):
         return [self.box, self.c1, self.c2]
 
-    def simulate(self, dt, vehicle_pose):
+    def simulate(self, dt, vehicle_pose): #@UnusedVariable
         self.time += 1
         t = self.time
         omega = 0.1

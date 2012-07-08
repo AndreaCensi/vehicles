@@ -408,10 +408,7 @@ def create_sidebar(cr, width, height, sim_state, id_vehicle, id_episode,
                 cr.stroke()
             cr.translate(0, line)
 
-
-# extra['servoing_poses'] = dict(goal=pose_to_yaml(pose0),
-#                                       current=pose_to_yaml(current_pose))
-
+ 
 def plot_servoing_poses(cr, servoing_poses):
     # TODO
     goal = SE3.from_yaml(servoing_poses['goal'])
