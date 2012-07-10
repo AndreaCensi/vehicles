@@ -23,6 +23,9 @@ class Raytracer:
         except OSError as e:
             msg = ('Could not open connection to raytracer %r: %s.' %
                    (raytracer, e.strerror))
+            msg += "\nCheck that:\n"
+            msg += "1) You installed the executable raytracer2 from vehicles/src/raytracer.\n"
+            msg += "2) It is installed in one of the directories in PATH (try 'raytracer2' from shell).\n"
             raise Exception(msg)
 
         if self.directions is not None:
