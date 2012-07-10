@@ -27,8 +27,11 @@ class Join(World):
 
     def get_primitives(self):
         prims = []
-        for w in self.worlds:
-            prims.extend(w.get_primitives())
+        for i, w in enumerate(self.worlds):
+            wp = w.get_primitives()
+            for p in wp:
+                p.id_object += i * 1000
+            prims.extend(wp)
         return prims
     
     def new_episode(self):

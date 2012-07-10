@@ -72,7 +72,7 @@
 
 - id: d_SE2_rb_f
   desc: 'Planar robot on SE2 controlled in force'
-  code: [vehicles.library.dynamics.SE2Dynamics, 
+  code: [vehicles.library.dynamics.SE2Force, 
             { max_force: [*MF,*MF,*MF], mass: *MASS,  damping: *DAMPING} ]
 
 # - id: d_SE2_fwd_f

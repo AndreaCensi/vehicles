@@ -1,7 +1,15 @@
+if False:
+    import contracts
+    contracts.disable_all()
+
 from collections import namedtuple
 from vehicles import VehiclesConfig, VehicleSimulation
 from vehicles.unittests.simulation_tests import random_commands
 import time
+
+import numpy as np
+
+import sys
 
 
 def check_simulation(sim, num_instants, dt):
@@ -12,14 +20,22 @@ def check_simulation(sim, num_instants, dt):
 
     for i in range(num_instants):  # @UnusedVariable
         cmds = random_commands(commands_spec)
+        cmds = np.array([0, 0, 0])
         sim.simulate(cmds, dt)
         sim.compute_observations()
         count += 1
-#        if count % 10 == 0:
-#            sys.stderr.write('.')
+        if count % 10 == 0:
+            t1 = time.clock()
+            fps = count / (t1 - t0)
+            s = ('%s: %.1ffps  (%d %d/%d)%s\r' % 
+                             (sim, fps, count, i, num_instants, ' ' * 10))
+            sys.stderr.write(s)
+
+        if count % 100 == 0:
+            count = 0
+            t0 = time.clock()
+    print(s)
 #    sys.stderr.write('\n')
-    t1 = time.clock()
-    fps = count / (t1 - t0)
     #print('%s  fps: %4d  (%d frames)' % (sim.vehicle, fps, count))
     return fps
 
@@ -31,6 +47,7 @@ def main():
     VehiclesConfig.load()
 
     id_world = 'box10'
+    id_world = 'StocSources_w10_n20_s1'
     world = VehiclesConfig.worlds.instance(id_world)  # @UndefinedVariable
     stats = []
     Stat = namedtuple('Stat', 'id_vehicle id_world fps')
@@ -41,13 +58,16 @@ def main():
     vehicles = list(VehiclesConfig.vehicles.keys())
     print vehicles
     vehicles = ['d_SE2_rb_v-rf180', 'd_SE2_rb_v-cam180']
-#    vehicles = ['d_SE2_rb_v-rf180']
+    vehicles = ['d_SE2_rb_v-rf180']
+    vehicles += ['d_SE2_rb_v-cam180']
+    vehicles += ['d_SE2_rb_v-fs_05_12x12']
     T = 200
+#    T = 100000
     dt = 0.05
     for id_vehicle in vehicles:
         instance = VehiclesConfig.vehicles.instance  # @UndefinedVariable
         vehicle = instance(id_vehicle)
-        print('vehicle: %s' % vehicle)
+        print('vehicle: %s' % id_vehicle)
         sim = VehicleSimulation(vehicle, world)
         fps = check_simulation(sim, num_instants=T, dt=dt)
         stats.append(Stat(id_vehicle=id_vehicle, id_world=id_world, fps=fps))

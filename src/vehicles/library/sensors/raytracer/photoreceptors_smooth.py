@@ -1,9 +1,8 @@
 from . import TexturedRaytracer, contract, np
-from .. import  get_uniform_directions
-from vehicles import VehicleSensor, VehiclesConstants
+from .. import get_random_directions, get_uniform_directions
 from conf_tools import instantiate_spec
 from geometry import SE2_project_from_SE3
-from vehicles.library.sensors.utils import get_random_directions
+from vehicles import VehicleSensor, VehiclesConstants
 
 __all__ = ['PhotoreceptorsSmooth', 'PhotoreceptorsSmoothUniform',
            'PhotoreceptorsSmoothRandom']

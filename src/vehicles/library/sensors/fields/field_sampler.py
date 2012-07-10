@@ -60,11 +60,14 @@ class FieldSampler(VehicleSensor):
             raise ValueError('Primitives not set yet.')
         pose = SE2_project_from_SE3(pose)
         sensels = np.zeros(self.num_sensels)
+        
+        # TODO: optimize this part using vectorization
         for i in range(self.num_sensels):
             upoint = np.hstack((self.positions[i], 1))
             world_point = np.dot(pose, upoint)[:2]  # XXX
             sensels[i] = get_field_value(self.primitives, world_point)
 
+        # TODO: I think this can be removed safely
         if self.normalize:
             sensels -= np.min(sensels)
             if np.max(sensels) > 0:
@@ -102,6 +105,7 @@ def get_field_value(primitives, point):
         return np.mean(values)
 
 
+@contract(X='shape(x)', Y='shape(x)', returns='array,shape(x)')
 def get_field_values(primitives, X, Y):
     values = []
     for p in primitives:
