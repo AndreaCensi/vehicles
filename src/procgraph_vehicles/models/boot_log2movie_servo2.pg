@@ -14,7 +14,10 @@ config fps = 20
     import procgraph_vehicles
 
     """ Load BootOlympics log. """
-    |boot_log_reader logdir=$logdir id_robot=$id_robot id_agent=$id_agent id_episode=$id_episode| -> observations 
+    |boot_log_reader logdir=$logdir id_robot=$id_robot id_agent=$id_agent id_episode=$id_episode| -> obs
+
+    """ Skip the first couple of moments. (because random command at beginning) """
+    obs --> |wait n=1| --> observations 
 
     observations -> |servo:servo_info bgcolor=$bgcolor|-> servo_rgb
     observations -> |plotter:vehicles_cairo_display format=png| --> |my_border| --> map_rgb

@@ -26,6 +26,7 @@ output rgb "rgb stream"
     plot_cmp.title="" 
     plot_cmp.y_min=0 
     plot_cmp.y_max=1 
+    plot_cmp.fancy_styles = [noyticks, turn_off_right, turn_off_top, spines_outward]
 
     """ Plot history of L2 error """ 
     sensels, goal --> |sync| --> |-| --> |norm ord=2| -> L2_error 
@@ -39,6 +40,7 @@ output rgb "rgb stream"
     plot_err.width=$width
     plot_err.height=$plots_height 
     plot_err.y_min=0
+    plot_err.fancy_styles = [turn_off_right, turn_off_top, spines_outward]
   
     commands -> |historyt interval=100| --> commands_history
     commands_history -> |plot_cmd:plot| ->  |my_label bgcolor=$bgcolor title="Commands"| -->  |border color=$bgcolor top=$vspace| --> cmd_rgb
@@ -46,8 +48,10 @@ output rgb "rgb stream"
     # plot_cmd.format = '-'
     # plot_cmd.y_min=+1.1
     # plot_cmd.y_max=-1.1
+    plot_cmd.symmetric = True
     plot_cmd.width=$width
     plot_cmd.height=$plots_height 
+    plot_cmd.fancy_styles = [turn_off_right, turn_off_top, spines_outward]
  
 # TODO: commands
     """ Compose diagrams. """
@@ -55,14 +59,23 @@ output rgb "rgb stream"
  
  
 --- model my_label
-input rgb
+""" Puts a border and a label around an image """
 config title
-config bgcolor
-output rgb2
+input rgb 
+output out "Image with border and label"
+config bgcolor = [1,0.7,0.5]
+config size = 22
+config font = 'Candara'
+config color = black
+config bg =   white
 
-|input name=rgb| --> |veh_image_label| --> |output name=rgb2|
+|input name=rgb| --> |border| --> |text| --> |output name=out|
 
-veh_image_label.bgcolor = $bgcolor
-veh_image_label.title =  $title
-veh_image_label.font = 'Mono'
-veh_image_label.size = 16
+border.left = 2
+border.right = 2
+#border.top = 34
+border.top = 20
+border.bottom = 2
+border.color  = $bgcolor
+
+text.texts = [{string:$title, valign: top, halign: center, font: $font, size: $size, color: $color, bg: $bg, position: [middle,5]} ]
