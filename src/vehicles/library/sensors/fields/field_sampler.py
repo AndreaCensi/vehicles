@@ -17,6 +17,9 @@ class FieldSampler(VehicleSensor):
             :param positions: 2D positions of the sensels 
         '''
 
+        if normalize:
+            logger.warning('normalize=True is deprecated')
+            
         if shape is None:
             shape = [len(positions)]
 
@@ -59,13 +62,18 @@ class FieldSampler(VehicleSensor):
         if self.primitives is None:
             raise ValueError('Primitives not set yet.')
         pose = SE2_project_from_SE3(pose)
-        sensels = np.zeros(self.num_sensels)
         
-        # TODO: optimize this part using vectorization
+        # x,y coordinates of the field
+        X = np.zeros(self.num_sensels)
+        Y = np.zeros(self.num_sensels)
         for i in range(self.num_sensels):
+            # Translate and rotate
             upoint = np.hstack((self.positions[i], 1))
             world_point = np.dot(pose, upoint)[:2]  # XXX
-            sensels[i] = get_field_value(self.primitives, world_point)
+            X[i] = world_point[0]
+            Y[i] = world_point[1]
+
+        sensels = get_field_values(self.primitives, X, Y)
 
         # TODO: I think this can be removed safely
         if self.normalize:
@@ -76,8 +84,7 @@ class FieldSampler(VehicleSensor):
         if self.noise is not None:
             sensels = self.noise.filter(sensels)
 
-        sensels = np.minimum(self.max_value, sensels) # TODO: clip
-        sensels = np.maximum(self.min_value, sensels)
+        sensels = np.clip(sensels, self.min_value, self.max_value)
 
         data = dict(sensels=sensels)
         return data
@@ -102,7 +109,7 @@ def get_field_value(primitives, point):
     if len(values) == 0:
         return 0
     else:
-        return np.mean(values)
+        return np.mean(values) # XXX: why?
 
 
 @contract(X='shape(x)', Y='shape(x)', returns='array,shape(x)')
@@ -115,6 +122,6 @@ def get_field_values(primitives, X, Y):
     if len(values) == 0:
         return 0
     else:
-        return np.mean(values, axis=0)
+        return np.mean(values, axis=0) # XXX: why?
 
 

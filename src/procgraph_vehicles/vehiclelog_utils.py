@@ -19,13 +19,17 @@ def extract_commands(state):
 
 
 @simple_block
-def extract_field(dictionary, field=COMPULSORY):
-    if not field in dictionary:
-        msg = ('Could not find field %r; I know %s.'
-               % (field, dictionary.keys()))
+def extract_field(ob, field=COMPULSORY):
+    try: 
+        return ob[field]
+    except Exception as e:
+        msg = 'Could not find field %r: %s.' % (field, e)
+        if isinstance(ob, dict):
+            msg += ('I know %s.' % ob.keys())
+        if isinstance(ob, np.ndarray):
+            msg += 'Available: %s' % ob.dtype
         raise ValueError(msg)
-
-    return dictionary[field]
+    
 
 
 @simple_block
