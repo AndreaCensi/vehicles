@@ -257,7 +257,7 @@ class VehiclesCairoDisplay(Block):
         self.info("Completed %r." % self.filename)
 
 
-def create_sidebar(cr, width, height, sim_state, id_vehicle, id_episode,
+def create_sidebar(cr, width, height, sim_state, id_vehicle, id_episode, #@UnusedVariable
                    timestamp, observations_values,
                    commands_values, commands_source,
                    bg_color=None,
