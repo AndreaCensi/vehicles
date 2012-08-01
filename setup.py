@@ -30,7 +30,8 @@ setup(name='PyVehicles',
         'ConfTools>=1.0,<2',
         'PyContracts>=1.2,<2',
         'PyYAML',
-        'python-cjson'
+        'python-cjson',
+        'PyGeometry'
       ],
       tests_require=['nose>=1.1.2,<2'],
       extras_require={ # TODO: reprep?
