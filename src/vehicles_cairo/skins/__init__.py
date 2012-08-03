@@ -15,7 +15,7 @@ def make_skin(f, name):
         def __init__(self, **kwargs):
             self.kwargs = kwargs
 
-        def draw(self, cr, joints=None, timestamp=None):
+        def draw(self, cr, joints=None, timestamp=None): #@UnusedVariable
             f(cr, **self.kwargs)
 
     module = sys.modules['vehicles_cairo.skins']
