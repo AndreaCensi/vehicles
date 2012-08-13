@@ -2,6 +2,8 @@ from . import Dynamics, contract, np
 from abc import abstractmethod
 from geometry import SE3, se3
 from geometry.yaml import to_yaml
+from vehicles import DO_EXTRA_CHECKS
+
 
 
 class SimpleKinematics(Dynamics):
@@ -73,8 +75,9 @@ class SimpleKinematics(Dynamics):
 
     def state_to_yaml(self, state):
         my_pose, my_vel = state
-        self.pose_space.belongs(my_pose)
-        self.pose_space.algebra.belongs(my_vel)
+        if DO_EXTRA_CHECKS:
+            self.pose_space.belongs(my_pose)
+            self.pose_space.algebra.belongs(my_vel)
         pose = self.pose_space.embed_in(SE3, my_pose)
         vel = self.pose_space.algebra.embed_in(se3, my_vel)
         return to_yaml('TSE3', (pose, vel))
@@ -96,8 +99,9 @@ class SimpleKinematics(Dynamics):
         if joint != 0:
             raise ValueError('Must be implemented by subclasses.')
         my_pose, my_vel = state
-        self.pose_space.belongs(my_pose)
-        self.pose_space.algebra.belongs(my_vel)
+        if DO_EXTRA_CHECKS:
+            self.pose_space.belongs(my_pose)
+            self.pose_space.algebra.belongs(my_vel)
         pose = self.pose_space.embed_in(SE3, my_pose)
         vel = self.pose_space.algebra.embed_in(se3, my_vel)
         configuration = (pose, vel)

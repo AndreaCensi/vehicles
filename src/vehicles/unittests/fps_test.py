@@ -1,4 +1,5 @@
-if False:
+from optparse import OptionParser
+if True:
     import contracts
     contracts.disable_all()
 
@@ -40,14 +41,36 @@ def check_simulation(sim, num_instants, dt):
     return fps
 
 
-def main():
+def fps_test_main():
     import contracts
     contracts.disable_all()
 
-    VehiclesConfig.load()
-
+    usage = """
+    #    vehicles = ['d_SE2_rb_v-rf180', 'd_SE2_rb_v-cam180']
+#    vehicles = ['d_SE2_rb_v-rf180']
+#    vehicles += ['d_SE2_rb_v-cam180']
+#    vehicles += ['d_SE2_rb_v-fs_05_12x12']
     id_world = 'box10'
     id_world = 'StocSources_w10_n20_s1'
+    
+    d_SE2_rb_v-cam_f360_n180_s
+     """
+    parser = OptionParser(usage=usage)
+
+    parser.add_option("-w", "--world",
+                      default='StocSources_w10_n20_s1',
+                      help="World")
+
+    parser.add_option("-v", "--vehicle",
+                      default=['d_SE2_rb_v-fs_05_12x12'],
+                      action='append',
+                      help="Vehicles to simulate")
+ 
+    (options, args) = parser.parse_args()
+    
+    VehiclesConfig.load()
+
+    id_world = options.world
     world = VehiclesConfig.worlds.instance(id_world)  # @UndefinedVariable
     stats = []
     Stat = namedtuple('Stat', 'id_vehicle id_world fps')
@@ -55,12 +78,11 @@ def main():
     def stat2str(s):
         return "v: %-25s w: %-25s %5dfps" % (s.id_vehicle, s.id_world, s.fps)
 
-    vehicles = list(VehiclesConfig.vehicles.keys())
-    print vehicles
-    vehicles = ['d_SE2_rb_v-rf180', 'd_SE2_rb_v-cam180']
-    vehicles = ['d_SE2_rb_v-rf180']
-    vehicles += ['d_SE2_rb_v-cam180']
-    vehicles += ['d_SE2_rb_v-fs_05_12x12']
+#    vehicles = list(VehiclesConfig.vehicles.keys())
+#    print vehicles
+    
+    vehicles = options.vehicle
+
     T = 200
 #    T = 100000
     dt = 0.05
@@ -78,17 +100,21 @@ def main():
     for s in stats:
         print(stat2str(s))
 
-    pass
-
-if __name__ == '__main__':
+def main():
     profile = True
-#    profile = False
+    #  profile = False
     if not profile:
-        main()
+        fps_test_main()
     else:
         import cProfile
-        cProfile.run('main()', 'fps_prof')
+        cProfile.runctx('fps_test_main()', globals(), locals(), 'fps_prof')
         import pstats
         p = pstats.Stats('fps_prof')
-        p.sort_stats('cumulative').print_stats(10)
-        p.sort_stats('time').print_stats(10)
+        p.sort_stats('cumulative').print_stats(30)
+#        p.print_callers(.5, 'init')
+        p.print_callers(.5, 'belongs')
+        p.sort_stats('time').print_stats(30)
+        
+
+if __name__ == '__main__':
+    main()

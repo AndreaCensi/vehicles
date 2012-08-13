@@ -25,6 +25,8 @@ def get_uniform_directions(fov_deg, num_sensels):
         t = np.rad2deg(directions)
         a = t[1:] - t[:-1]
         b = t[0] - t[-1] + 360
+        
+        
         assert_allclose(a[0], b)
 
     else:

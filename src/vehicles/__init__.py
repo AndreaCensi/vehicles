@@ -8,6 +8,12 @@ __all__ = ['VehicleSensor', 'Field', 'PolyLine', 'Vehicle', 'Circle',
              'Attached', 'Primitive', 'Source', 'VehicleSkin', 'Dynamics',
              'library']
 
+# Does extra checks to make sure states, etc. belong to their manifolds.
+# These are now redundant, but it was useful while debugging.
+# Reactivate if some strange bug is suspected.
+DO_EXTRA_CHECKS = False
+
+
 from contracts import contract
 import geometry  # loads all geometry contracts
 import numpy as np

@@ -51,7 +51,9 @@ setup(name='PyVehicles',
            'vehicles_inspect_textures = '
                 'vehicles.programs.inspect_textures:main',
             'vehicles_create_olympics_configs = '
-                'vehicles_boot.create_olympics_configs:main'
+                'vehicles_boot.create_olympics_configs:main',
+           'vehicles_fps = '
+                'vehicles.unittests.fps_test:main',
         ]
       }
 )

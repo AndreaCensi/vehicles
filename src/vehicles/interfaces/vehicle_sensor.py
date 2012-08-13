@@ -2,6 +2,7 @@ from . import np, logger
 from ..utils import check_yaml_friendly
 from abc import abstractmethod, ABCMeta
 from pprint import pformat
+from vehicles import DO_EXTRA_CHECKS
 
 
 class VehicleSensor:
@@ -43,30 +44,33 @@ class VehicleSensor:
                             (VehicleSensor.SENSELS, observations.keys()))
         sensels = observations[VehicleSensor.SENSELS]
         sensels = np.array(sensels)
-        # todo: check spec
-        #check("array[K]", sensels,
-        #      desc='I expect a unidimenional array/list for sensels.')
-        try:
-            notfinite = not np.isfinite(sensels).all()
-        except  Exception as e:
-            logger.error('Error is: %s' % e) # XXX: print
-            logger.error('Data is: %s' % sensels.dtype)
-            logger.error((observations))
-            notfinite = False
+        
+        if DO_EXTRA_CHECKS:
+            # todo: check spec
+            #check("array[K]", sensels,
+            #      desc='I expect a unidimenional array/list for sensels.')
+            try:
+                notfinite = not np.isfinite(sensels).all()
+            except  Exception as e:
+                logger.error('Error is: %s' % e) # XXX: print
+                logger.error('Data is: %s' % sensels.dtype)
+                logger.error((observations))
+                notfinite = False
+    
+            if notfinite:
+                msg = ('Not all are valid:\n%s\n%s' % 
+                       (sensels, pformat(observations)))
+                logger.error(msg)
+                logger.error('pose: %s' % pose) # XXX
+                # XXX: - we will solve this later.
+                sensels[np.logical_not(np.isfinite(sensels))] = 0.5
+                raise ValueError(msg)
 
-        if notfinite:
-            msg = ('Not all are valid:\n%s\n%s' %
-                   (sensels, pformat(observations)))
-            logger.error(msg)
-            logger.error('pose: %s' % pose) # XXX
-            # XXX: - we will solve this later.
-            sensels[np.logical_not(np.isfinite(sensels))] = 0.5
-            raise ValueError(msg)
+                    # XXX: maybe somewhere else?
+            #        if sensels.size != self.num_sensels:
+            #            raise ValueError('I was expecting %d sensels, not %s.' % 
+            #                             (self.num_sensels, sensels.size))
 
-        # XXX: maybe somewhere else?
-#        if sensels.size != self.num_sensels:
-#            raise ValueError('I was expecting %d sensels, not %s.' % 
-#                             (self.num_sensels, sensels.size))
         observations[VehicleSensor.SENSELS] = sensels
         return observations
 
