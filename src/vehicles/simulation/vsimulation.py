@@ -57,6 +57,9 @@ class VehicleSimulation():
 
         self.last_commands = commands
 
+    def get_timestamp(self):
+        return self.timestamp
+    
     def compute_observations(self):
         if not self.episode_started:
             # XXX better exception?

@@ -2,25 +2,21 @@
 """ Creates a movie from a Vehicles YAML log file."""
 config file """ .yaml file"""
 config output 
-config zoom=0
-config show_sensor_data = True
 config skip=1
-
-import procgraph_ros
+config width=600
 import procgraph_yaml
 
 
 |yaml_log_reader file=$file| --> |sieve n=$skip| --> state
 
+    #state -> |extract_timeinfo| -> info
+
+    state -> |w:vehicles_cairo_display_all| -> map_rgb
+    w.format = png
+    w.width = $width
+    
     # state -> |extract_sensels| -> sensels
     # state -> |extract_commands| -> commands
-    state -> |extract_timeinfo| -> info
-
-    state -> |w:world_display| -> map_rgb
-    
-    w.width = 600
-    w.zoom = $zoom
-    w.show_sensor_data = $show_sensor_data
     
 #    sensels -> |reshape2d| --> |scale max_value=1 min_value=0| --> |resize width=200| --> \
 #            |veh_image_label title="Sensels"| --> sensels_rgb

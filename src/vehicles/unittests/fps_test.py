@@ -1,7 +1,4 @@
 from optparse import OptionParser
-if True:
-    import contracts
-    contracts.disable_all()
 
 from collections import namedtuple
 from vehicles import VehiclesConfig, VehicleSimulation
@@ -41,9 +38,13 @@ def check_simulation(sim, num_instants, dt):
     return fps
 
 
-def fps_test_main():
-    import contracts
-    contracts.disable_all()
+def fps_main():
+    if True:
+        import contracts
+        contracts.disable_all()
+
+    #import contracts
+    #contracts.disable_all()
 
     usage = """
     #    vehicles = ['d_SE2_rb_v-rf180', 'd_SE2_rb_v-cam180']
@@ -66,7 +67,7 @@ def fps_test_main():
                       action='append',
                       help="Vehicles to simulate")
  
-    (options, args) = parser.parse_args()
+    (options, _) = parser.parse_args()
     
     VehiclesConfig.load()
 
@@ -104,7 +105,7 @@ def main():
     profile = True
     #  profile = False
     if not profile:
-        fps_test_main()
+        fps_main()
     else:
         import cProfile
         cProfile.runctx('fps_test_main()', globals(), locals(), 'fps_prof')

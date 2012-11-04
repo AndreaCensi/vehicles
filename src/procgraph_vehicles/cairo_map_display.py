@@ -21,18 +21,13 @@ class VehiclesCairoDisplay(Block):
     Block.config('transparent', 'Outputs RGB with transparent bg',
                  default=False)
 
-#    Block.config('width', 'Image width in points.', default=768)
-#    Block.config('height', 'Image height in points.', default=768)
-#    Block.config('sidebar_width', default=1024 - 768)
     Block.config('width', 'Image width in points.', default=600)
     Block.config('height', 'Image height in points.', default=600)
     Block.config('sidebar_width', default=200)
 
     # Sidebar options
     Block.config('display_sidebar', default=True)
-
     Block.config('trace', 'Trace the path', default=False)
-
     Block.config('plotting_params',
                  'Configuration to pass to vehicles_cairo_display_all()',
                  default={})
@@ -44,13 +39,19 @@ class VehiclesCairoDisplay(Block):
 
     Block.input('boot_obs', '')
 
+    def get_shape(self):
+        w = self.config.width
+        if self.config.display_sidebar:
+            w += self.config.sidebar_width
+        h = self.config.height
+        
+        return (w, h) 
+
     def init(self):
         self.format = self.config.format
-
-        self.total_width = self.config.width
-        if self.config.display_sidebar:
-            self.total_width += self.config.sidebar_width
-        self.total_height = self.config.height
+        (w, h) = self.get_shape()
+        self.total_width = w
+        self.total_height = h
         self.frame = 0
 
         if self.format == 'pdf':
@@ -71,7 +72,7 @@ class VehiclesCairoDisplay(Block):
         make_sure_dir_exists(self.filename)
         self.info("Creating file %r." % self.filename)
         import cairo
-        self.surf = cairo.PDFSurface(self.tmp_filename, #@UndefinedVariable
+        self.surf = cairo.PDFSurface(self.tmp_filename,  # @UndefinedVariable
                                      self.total_width,
                                      self.total_height)
 
@@ -82,9 +83,9 @@ class VehiclesCairoDisplay(Block):
         self.argb_data = np.empty((h, w, 4), dtype=np.uint8)
         self.argb_data.fill(255)
 
-        self.surf = cairo.ImageSurface.create_for_data(#@UndefinedVariable
+        self.surf = cairo.ImageSurface.create_for_data(# @UndefinedVariable
                         self.argb_data,
-                        cairo.FORMAT_ARGB32, #@UndefinedVariable
+                        cairo.FORMAT_ARGB32,  # @UndefinedVariable
                          w, h, w * 4)
 
     def update(self):
@@ -106,12 +107,8 @@ class VehiclesCairoDisplay(Block):
 
     def update_png(self):
         import cairo
-        # If I don't recreate it, it will crash
-#        if self.tmp_cr is None:
-#            self.tmp_cr = cairo.Context(self.surf) #@UndefinedVariable
-#        cr = self.tmp_cr
 
-        cr = cairo.Context(self.surf) #@UndefinedVariable
+        cr = cairo.Context(self.surf)  # @UndefinedVariable
 
         self.draw_everything(cr)
         self.surf.flush()
@@ -134,12 +131,7 @@ class VehiclesCairoDisplay(Block):
     def update_pdf(self):
         import cairo
         # If I don't recreate it, it will crash
-        cr = cairo.Context(self.surf) #@UndefinedVariable
-        self.draw_everything(cr)
-        self.surf.flush()
-        self.surf.show_page() # Free memory self.cr?
-
-    def draw_everything(self, cr):
+        cr = cairo.Context(self.surf)  # @UndefinedVariable
         if not self.config.transparent:
             # Set white background
             bg_color = [1, 1, 1]
@@ -151,12 +143,25 @@ class VehiclesCairoDisplay(Block):
             cr.rectangle(0, 0, self.total_width, self.total_height)
             cr.set_source_rgba(0, 1, 0, 0)
             cr.fill()
+        self.draw_everything(cr)
+        self.surf.flush()
+        self.surf.show_page()  # Free memory self.cr?
+
+    def draw_everything(self, cr):
 
         boot_obs = self.input.boot_obs
 
-        id_episode = boot_obs['id_episode'].item()
+        if 'id_episode' in boot_obs:
+            id_episode = boot_obs['id_episode'].item()
+        else:
+            id_episode = ''
+            
         id_vehicle = boot_obs['id_robot'].item()
-        extra = boot_obs['extra'].item()
+        
+        if 'extra' in boot_obs:
+            extra = boot_obs['extra'].item()
+        else:
+            extra = {}
 
         def extra_draw_world(cr):
             if 'servonav' in extra:
@@ -241,9 +246,9 @@ class VehiclesCairoDisplay(Block):
                 swf = '%s.swf' % basename
                 try:
                     command = ['pdf2swf',
-                                           #"-b", # --defaultviewer
-                                           #"-l", # --defaultloader
-                                           '-G', # flatten
+                                           # "-b", # --defaultviewer
+                                           # "-l", # --defaultloader
+                                           '-G',  # flatten
                                            '-s', 'framerate=%d' % self.fps,
                                             self.filename,
                                             '-o', swf]
@@ -257,7 +262,52 @@ class VehiclesCairoDisplay(Block):
         self.info("Completed %r." % self.filename)
 
 
-def create_sidebar(cr, width, height, sim_state, id_vehicle, id_episode, #@UnusedVariable
+class VehiclesDisplay(VehiclesCairoDisplay):
+    ''' Produces a top-down plot of a circular arena. '''
+
+    Block.alias('vehicles_cairo_display_all')
+
+    Block.config('format', 'pdf|png', default='pdf')
+    Block.config('file', 'Output file (pdf)', default=None)
+    Block.output('rgb', 'RGB data (png)')
+    Block.config('transparent', 'Outputs RGB with transparent bg',
+                 default=False)
+
+    Block.config('width', 'Image width in points.', default=600)
+    Block.config('height', 'Image height in points.', default=600)
+    Block.config('trace', 'Trace the path', default=False)
+    Block.config('plotting_params',
+                 'Configuration to pass to vehicles_cairo_display_all()',
+                 default={})
+    Block.config('swf', 'Converts PDF to SWF using pdf2swf', default=True)
+
+    Block.input('boot_obs')
+    
+    def get_shape(self):
+        w = self.config.width
+        h = self.config.height
+        return (w, h)
+
+    def draw_everything(self, cr):
+        sim_state = self.input.boot_obs
+        map_width = self.config.width
+        map_height = self.config.height
+        plotting_params = self.config.plotting_params
+        with cairo_save(cr):
+            cr.rectangle(0, 0, map_width, map_height)
+            cr.clip()
+
+            # TODO: implement trace
+
+            vehicles_cairo_display_all(cr,
+                                   map_width,
+                                   map_height,
+                                   sim_state,
+                                   **plotting_params)
+
+
+
+def create_sidebar(cr, width, height, sim_state, id_vehicle, id_episode,  # @UnusedVariable
                    timestamp, observations_values,
                    commands_values, commands_source,
                    bg_color=None,
@@ -269,7 +319,7 @@ def create_sidebar(cr, width, height, sim_state, id_vehicle, id_episode, #@Unuse
         commands_values = np.array([commands_values.tolist()])
 
     commands_rgb = posneg(commands_values,
-                          max_value=(+1), # not sure +1 
+                          max_value=(+1),  # not sure +1 
                           nan_color=[1, 1, 1])
 
     observations_rgb = scale(reshape2d(observations_values), min_value=0,
@@ -281,12 +331,12 @@ def create_sidebar(cr, width, height, sim_state, id_vehicle, id_episode, #@Unuse
         cr.set_source_rgb(bg_color[0], bg_color[1], bg_color[2])
         cr.fill()
 
-    fo = cairo.FontOptions() #@UndefinedVariable
-    fo.set_hint_style(cairo.HINT_STYLE_FULL) #@UndefinedVariable
-    fo.set_antialias(cairo.ANTIALIAS_GRAY) #@UndefinedVariable
+    fo = cairo.FontOptions()  # @UndefinedVariable
+    fo.set_hint_style(cairo.HINT_STYLE_FULL)  # @UndefinedVariable
+    fo.set_antialias(cairo.ANTIALIAS_GRAY)  # @UndefinedVariable
     cr.set_font_options(fo)
 
-    #M = width / 20.0
+    # M = width / 20.0
     M = width / 15.0
 
     legend_font_size = M * 0.75

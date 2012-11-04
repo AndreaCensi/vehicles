@@ -31,13 +31,12 @@ def extract_field(ob, field=COMPULSORY):
         raise ValueError(msg)
     
 
-
 @simple_block
 def extract_timeinfo(state):
     timestamp = state['timestamp']
-    id_episode = state['id_episode']
-    return "Episode %20s %6.2fs" % (id_episode, timestamp)
-
+#    id_episode = state['id_episode']
+#    return "Episode %20s %6.2fs" % (id_episode, timestamp)
+    return "%6.2fs" % (timestamp)
 
 class use_simulation_time(Block):
     Block.input('state')
