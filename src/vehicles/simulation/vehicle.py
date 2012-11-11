@@ -57,9 +57,15 @@ class Vehicle:
         # Needs to be initialized before calling certain functions
         self._state = None
 
+
+    # @contract(returns='TSE3')
+    def get_configuration(self):
+        """ Returns pose/velocity of the platform """
+        return self.dynamics.joint_state(self._get_state(), 0)
+    
     def to_yaml(self):
         # pose, velocity
-        configuration = self.dynamics.joint_state(self._get_state(), 0)
+        configuration = self.get_configuration()
         pose = configuration[0]
 
         joints = []

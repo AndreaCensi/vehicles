@@ -122,6 +122,12 @@ class VehicleSimulation():
         }
         return data
 
+    def get_vehicle(self):
+        return self.vehicle
+
+    def get_world(self):
+        return self.world
+
 
 def check_primitives(primitives):
     ids = [p.id_object for p in primitives]
