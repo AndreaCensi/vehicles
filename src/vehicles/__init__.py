@@ -1,6 +1,6 @@
 ''' PyVehicles main package: play with your vehicles zoo! '''
 
-__version__ = '2.0'
+__version__ = '2.1'
 
 __all__ = ['VehicleSensor', 'Field', 'PolyLine', 'Vehicle', 'Circle',
            'GeometricShape', 'VehiclesConstants', 'VehicleSimulation',
