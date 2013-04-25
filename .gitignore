@@ -13,3 +13,4 @@ out
 skins_demo*
 display_demo
 src/raytracer/install
+dist
