@@ -22,7 +22,7 @@ def ROS_quaternion_from_my_quaternion(q):
     q = ROS_quaternion_order(q)
     return Quaternion(q[0], q[1], q[2], q[3])
 
-#def test_same_convention():
+# def test_same_convention():
 #    """ Make sure that ROS and I agree on the conventions for rotations. """
 #    import tf #@UnresolvedImport
 #    import rospy #@UnresolvedImport
@@ -36,8 +36,8 @@ def ROS_quaternion_from_my_quaternion(q):
 
 # found somewhere
 def numpy_to_imgmsg(image, stamp=None):
-    import sensor_msgs  # @UnresolvedImport
-    rosimage = sensor_msgs.msg.Image()
+    from sensor_msgs.msg import Image 
+    rosimage = Image()
     rosimage.height = image.shape[0]
     rosimage.width = image.shape[1]
     if image.dtype == np.uint8:

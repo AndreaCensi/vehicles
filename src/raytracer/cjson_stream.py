@@ -17,11 +17,11 @@ class CJSONStream(object):
             deltat = time.time() - t0
             deltac = time.clock() - c0
             if debug_speed:
-                print('Read line[%s] in %d ms, %d clock' %
+                print('Read line[%s] in %d ms, %d clock' % 
                       (len(line), deltat * 1000, deltac * 1000))
             if line == '':
                 return None
             line = line.strip()
             if line:
-                return cjson.decode(line)
+                return cjson.decode(line)  # @UndefinedVariable
 

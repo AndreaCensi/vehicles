@@ -47,9 +47,9 @@ def main():
     for id_skin in skins:
         skin = VehiclesConfig.specs['skins'].instance(id_skin)
         with f.data_file(id_skin, MIME_PNG) as filename:
-            surf = cairo.ImageSurface(cairo.FORMAT_ARGB32, #@UndefinedVariable 
+            surf = cairo.ImageSurface(cairo.FORMAT_ARGB32,  # @UndefinedVariable 
                                       width, height)
-            cr = cairo.Context(surf) #@UndefinedVariable
+            cr = cairo.Context(surf)  # @UndefinedVariable
             cairo_plot_rectangle(cr, 0, 0, width, height, fill_color=[1, 1, 1])
 
             cairo_set_axis(cr, width, height, [-2, +2, -2, +2])
@@ -69,7 +69,7 @@ def main():
                 logger.error('Error for skin %r' % id_skin)
                 raise
 
-            surf.write_to_png(filename) # Output to PNG
+            surf.write_to_png(filename)  # Output to PNG
 
     filename = os.path.join(options.outdir, 'index.html')
     logger.info('Writing to %r.' % filename)

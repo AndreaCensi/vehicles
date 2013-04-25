@@ -21,7 +21,7 @@ class Raytracer:
             self.p = Popen(raytracer, stdout=PIPE, stdin=PIPE)
             self.child_stream = CJSONStream(self.p.stdout)
         except OSError as e:
-            msg = ('Could not open connection to raytracer %r: %s.' %
+            msg = ('Could not open connection to raytracer %r: %s.' % 
                    (raytracer, e.strerror))
             msg += "\nCheck that:\n"
             msg += "1) You installed the executable raytracer2 from vehicles/src/raytracer.\n"
@@ -38,7 +38,7 @@ class Raytracer:
     def write_to_connection(self, ob):
         if self.p is None:
             self.init_connection(self.raytracer)
-        self.p.stdin.write(cjson.encode(ob))
+        self.p.stdin.write(cjson.encode(ob))  # @UndefinedVariable
         self.p.stdin.write('\n')
         self.p.stdin.flush()
 
@@ -64,7 +64,7 @@ class Raytracer:
         self.p.stdin.close()
         try:
             self.p.terminate()
-            #print "Closing pipe %s, %s" % (self.p.stdin, self.p.stdout)
+            # print "Closing pipe %s, %s" % (self.p.stdin, self.p.stdout)
             self.p.wait()
         except (OSError, AttributeError):
             # Exception AttributeError: AttributeError("'NoneType' object 
@@ -73,7 +73,7 @@ class Raytracer:
             # of RangefinderUniform> ignored
             # http://stackoverflow.com/questions/2572172/
             pass
-        #print " Closed pipe %s, %s" % (self.p.stdin,self.p.stdout)
+        # print " Closed pipe %s, %s" % (self.p.stdin,self.p.stdout)
 
     @contract(surface_id='int', center='seq[2](number)', radius='>0',
               solid='bool')
