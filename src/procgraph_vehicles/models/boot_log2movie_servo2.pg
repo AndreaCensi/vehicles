@@ -1,6 +1,8 @@
 --- model boot_log2movie_servo2
-''' Visualizes the servoing experiments. It sets the fps fixed at 20,
-    unless specified. '''
+''' 
+    Visualizes the servoing experiments. It sets the fps fixed at 20,
+    unless specified. 
+'''
 
 config logdir 'Base log dir'
 config id_robot 'Robot ID'

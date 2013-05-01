@@ -1,21 +1,7 @@
 from procgraph import Block, simple_block, COMPULSORY
 import numpy as np
 
-
-@simple_block
-def extract_from_extra(observations, fieldname=COMPULSORY):
-    extra = observations['extra'].item()
-    return extra[fieldname]
-
-
-@simple_block
-def extract_sensels(state):
-    return np.array(state['observations'])
-
-
-@simple_block
-def extract_commands(state):
-    return np.array(state['commands'])
+import procgraph_boot  # some things moved here @UnusedImport
 
 
 @simple_block
