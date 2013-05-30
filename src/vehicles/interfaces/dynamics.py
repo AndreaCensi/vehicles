@@ -1,12 +1,13 @@
-from . import logger
+from vehicles import logger
 from abc import ABCMeta, abstractmethod
 from contracts import contract, new_contract
 import traceback
-import geometry # For its contracts @UnusedImport
+import geometry  # For its contracts @UnusedImport
 new_contract('interval', 'tuple((number,x),(number,>x))')
 
+__all__ = ['Dynamics']
 
-class Dynamics:
+class Dynamics(object):
     '''
         This is the interface for the various dynamics implemented.
         
@@ -77,7 +78,7 @@ class Dynamics:
 
     @contract(dt='>=0')
     def integrate(self, state, commands, dt):
-        #self._state_space.belongs(state)    
+        # self._state_space.belongs(state)    
         self.check_commands(commands)
 
         try:
@@ -86,14 +87,14 @@ class Dynamics:
             msg = 'Error while integrating.'
             try:
                 msg += '\n   state: %s' % self._state_space.friendly(state)
-            except: # XXX
+            except:  # XXX
                 msg += '\n   state: %s' % state.__repr__()
             msg += '\ncommands: %s' % commands.__repr__()
             msg += '\n%s' % traceback.format_exc()
             logger.error(msg)
             raise
 
-        #self._state_space.belongs(new_state)
+        # self._state_space.belongs(new_state)
         return new_state
 
     def __str__(self):

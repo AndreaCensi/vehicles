@@ -1,5 +1,8 @@
-from . import contract, np, SimpleKinematics
+from . import   SimpleKinematics
 from abc import abstractmethod
+
+from contracts import contract
+import numpy as np
 
 
 class SimpleDynamics(SimpleKinematics):
@@ -23,12 +26,12 @@ class SimpleDynamics(SimpleKinematics):
         pass
 
     def _integrate(self, state, commands, dt):
-        pose1, vel1 = state #@UnusedVariable
+        pose1, vel1 = state  # @UnusedVariable
         forces = self.compute_forces(commands)
-        #self.pose_space.algebra.belongs(forces)
+        # self.pose_space.algebra.belongs(forces)
         # TODO: this is not in closed form
         # TODO: make smaller step
-        acc = (forces - vel1 * self.damping) / self.mass # XXX: like this?
+        acc = (forces - vel1 * self.damping) / self.mass  # XXX: like this?
         vel2 = vel1 + dt * acc
         midvel = 0.5 * (vel1 + vel2)
         step = self.pose_space.group_from_algebra(midvel * dt)

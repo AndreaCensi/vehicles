@@ -1,6 +1,6 @@
 
 
-class VehiclesConstants:
+class VehiclesConstants(object):
     TEST_ADDITIONAL_CONFIG_DIR_ENV = 'VEHICLES_TEST_CONFIG'
     DEFAULT_SIMULATION_DT = 0.1
 

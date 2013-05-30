@@ -1,10 +1,11 @@
-from . import CJSONStream, np
+from . import CJSONStream
 from contracts import contract
 from subprocess import Popen, PIPE
 import cjson
+import numpy as np
 
 
-class Raytracer:
+class Raytracer(object):
 
     @contract(directions='None|seq(number)')
     def __init__(self, directions=None, raytracer='raytracer2'):

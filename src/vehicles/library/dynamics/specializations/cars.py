@@ -1,8 +1,10 @@
-from . import np, contract, SimpleKinematics
+from . import  SimpleKinematics
 from geometry import (R1, ProductManifold, SE2, se2_from_linear_angular,
     SE2_from_translation_angle, SE3_from_SE2, SE3)
 from vehicles.interfaces.dynamics import Dynamics
 
+from contracts import contract
+import numpy as np
 
 class SimpleCar(SimpleKinematics):
 
@@ -99,7 +101,7 @@ class CarWithWheels(Dynamics):
         pose, vel = car_position
         rel_pose = SE3_from_SE2(SE2_from_translation_angle(p, steering))
         wpose = SE3.multiply(pose, rel_pose)
-        return wpose, vel # XXX: vel
+        return wpose, vel  # XXX: vel
 
     def num_joints(self):
         return 3

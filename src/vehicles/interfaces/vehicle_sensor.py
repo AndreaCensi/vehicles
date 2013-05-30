@@ -1,9 +1,11 @@
-from . import np, logger
+import numpy as np
+from vehicles import logger
 from ..utils import check_yaml_friendly
 from abc import abstractmethod, ABCMeta
 from pprint import pformat
 from vehicles import DO_EXTRA_CHECKS
 
+__all__ = ['VehicleSensor']
 
 class VehicleSensor:
     __metaclass__ = ABCMeta
@@ -20,7 +22,7 @@ class VehicleSensor:
     def to_yaml(self, primitives):
         pass
 
-    SENSELS = 'sensels' # TODO: move away
+    SENSELS = 'sensels'  # TODO: move away
 
     def compute_observations(self, pose):
         """ Computes the observations for this vehicle         
@@ -40,19 +42,19 @@ class VehicleSensor:
         if not isinstance(observations, dict):
             raise ValueError('This should return a dict()')
         if not VehicleSensor.SENSELS in observations:
-            raise ValueError('No field %r in %r' %
+            raise ValueError('No field %r in %r' % 
                             (VehicleSensor.SENSELS, observations.keys()))
         sensels = observations[VehicleSensor.SENSELS]
         sensels = np.array(sensels)
         
         if DO_EXTRA_CHECKS:
             # todo: check spec
-            #check("array[K]", sensels,
+            # check("array[K]", sensels,
             #      desc='I expect a unidimenional array/list for sensels.')
             try:
                 notfinite = not np.isfinite(sensels).all()
             except  Exception as e:
-                logger.error('Error is: %s' % e) # XXX: print
+                logger.error('Error is: %s' % e)  # XXX: print
                 logger.error('Data is: %s' % sensels.dtype)
                 logger.error((observations))
                 notfinite = False
@@ -61,7 +63,7 @@ class VehicleSensor:
                 msg = ('Not all are valid:\n%s\n%s' % 
                        (sensels, pformat(observations)))
                 logger.error(msg)
-                logger.error('pose: %s' % pose) # XXX
+                logger.error('pose: %s' % pose)  # XXX
                 # XXX: - we will solve this later.
                 sensels[np.logical_not(np.isfinite(sensels))] = 0.5
                 raise ValueError(msg)

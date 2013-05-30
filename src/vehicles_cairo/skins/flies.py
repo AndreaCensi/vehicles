@@ -1,11 +1,12 @@
-from . import np
-from .. import BLACK, WHITE
+import numpy as np
+from vehicles_cairo import BLACK, WHITE
 from cairo_utils import cairo_plot_circle2, cairo_save, cairo_transform
 
+__all__ = ['cairo_skin_fly1']
 
 def cairo_skin_fly1(cr):
 
-    r = 1.0 # will be scaled by robot radius
+    r = 1.0  # will be scaled by robot radius
 
     with cairo_save(cr):
         cr.scale(0.32, 0.32)

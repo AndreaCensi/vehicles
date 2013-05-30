@@ -1,9 +1,6 @@
-from .. import contract, np
 
 try:
-    from ros import visualization_msgs
-    from ros import sensor_msgs
-    from ros import geometry_msgs
+    from ros import visualization_msgs, sensor_msgs, geometry_msgs
 
     from std_msgs.msg import ColorRGBA, String
     from visualization_msgs.msg import Marker  # @UnresolvedImport

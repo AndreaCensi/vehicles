@@ -1,4 +1,4 @@
-from ... import logger
+from vehicles import logger
 from optparse import OptionParser
 from reprep import MIME_PNG, Report
 from vehicles import VehiclesConfig

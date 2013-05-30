@@ -1,0 +1,14 @@
+
+- id: "S${id_environment}V${vehicle}"
+  desc: ""
+  code:
+     - vehicles_boot.BOVehicleSimulation
+     - dt: 0.033
+       id_vehicle: "${vehicle}"
+       id_world: "${id_environment}"
+
+- id: Sbox10Vd_SE2_rb_v-cam180-stereo
+
+- id: Sbox10Vd_SE2_rb_v-rf180
+
+- id: Sbox10Vd_SE2_rb_v-fs_05_rand144

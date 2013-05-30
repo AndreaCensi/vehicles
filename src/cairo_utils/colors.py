@@ -1,4 +1,5 @@
-from . import contract
+
+from contracts import contract
 
 
 @contract(col='seq[3]|seq[4]')

@@ -4,8 +4,9 @@ BLACK = [0, 0, 0]
 WHITE = [1, 1, 1]
 YELLOW = [1, 1, 0]
 
+__all__ = ['CairoConstants', 'BLACK', 'WHITE', 'YELLOW']
 
-class CairoConstants:
+class CairoConstants(object):
     obstacle_border_width = 0.01
     obstacle_border_color = [0, 0, 0]
     obstacle_fill_color = [0.7, 0.7, 0.8]
@@ -35,8 +36,8 @@ class CairoConstants:
     robot_wheel_border_width = 0.04
     robot_wheel_border_color = BLACK
 
-    texture_resolution = 0.05 # meters
-    texture_width = 0.2 # meters
+    texture_resolution = 0.05  # meters
+    texture_width = 0.2  # meters
 
     sensor_data_plot_compact = True
 

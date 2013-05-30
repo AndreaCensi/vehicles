@@ -7,6 +7,7 @@ __all__ = ['BOVehicleSimulation']
 
 class BOVehicleSimulation(RobotInterface, VehicleSimulation):
     """ Gives a RobotInterface to the VehicleSimulation. """
+    
     def __init__(self,
                  world=None,
                  id_world=None,

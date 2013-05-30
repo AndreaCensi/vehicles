@@ -1,8 +1,10 @@
-#from . import contract, np
-#from vehicles import VehicleSensor
+
+# from contracts import contract
+# import numpy as np
+# from vehicles import VehicleSensor
 
 #
-#class Filter(VehicleSensor):
+# class Filter(VehicleSensor):
 #
 #    def __init__(self, id_sensor, ):
 #        spec = {

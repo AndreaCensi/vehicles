@@ -1,11 +1,14 @@
-from . import np, contract
 from ..utils import unique_timestamp_string
 from abc import abstractmethod, ABCMeta
 from collections import namedtuple
+from contracts import contract
 from geometry import SE2_from_xytheta, SE3_from_SE2
+import numpy as np
 
 
-class World:
+__all__ = ['World']
+
+class World(object):
     __metaclass__ = ABCMeta
 
     @contract(bounds='seq[3](seq[2](number))',

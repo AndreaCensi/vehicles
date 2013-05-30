@@ -1,16 +1,56 @@
+
 from . import (check_valid_vehicle_config, check_valid_world_config, logger,
     check_valid_dynamics_config, check_valid_sensor_config, check_valid_skin_config,
-     instance_vehicle_spec)
-from .. import VehiclesConstants
+    instance_vehicle_spec)
 from ..interfaces import VehicleSensor, World, VehicleSkin, Dynamics
-from conf_tools import ConfigMaster, GenericInstance
+from .. import VehiclesConstants
+from conf_tools import ConfigMaster, GenericInstance, ObjectSpec
+from contracts import contract
 import os
 
+__all__ = [
+   'VehiclesConfig',
+   'get_conftools_dynamics',
+   'get_conftools_sensors',
+   'get_conftools_skins',
+   'get_conftools_vehicles',
+   'get_conftools_worlds',
+   'get_vehicles_config',
+]
+
+
+@contract(returns=ObjectSpec)
+def get_conftools_vehicles():
+    """ Returns the object responsible for instancing DiffeoActionDistance. """
+    return get_vehicles_config().vehicles
+
+@contract(returns=ObjectSpec)
+def get_conftools_worlds():
+    """ Returns the object responsible for instancing DiffeoActionDistance. """
+    return get_vehicles_config().worlds
+
+@contract(returns=ObjectSpec)
+def get_conftools_dynamics():
+    """ Returns the object responsible for instancing DiffeoActionDistance. """
+    return get_vehicles_config().dynamics
+
+@contract(returns=ObjectSpec)
+def get_conftools_sensors():
+    """ Returns the object responsible for instancing DiffeoActionDistance. """
+    return get_vehicles_config().sensors
+
+@contract(returns=ObjectSpec)
+def get_conftools_skins():
+    """ Returns the object responsible for instancing DiffeoActionDistance. """
+    return get_vehicles_config().skins
 
 class VehiclesConfigMaster(ConfigMaster):
 
     def __init__(self):
         ConfigMaster.__init__(self, 'Vehicles')
+        
+        
+
 
         self.add_class('vehicles', '*.vehicles.yaml',
                         check_valid_vehicle_config, instance_vehicle_spec)
@@ -46,7 +86,7 @@ class VehiclesConfigMaster(ConfigMaster):
                     self.load(dirname)
 
         else:
-            #logger.info('Use env var %s to add more config dirs.' % v)
+            # logger.info('Use env var %s to add more config dirs.' % v)
             pass
 
     def get_default_dir(self):
@@ -54,4 +94,7 @@ class VehiclesConfigMaster(ConfigMaster):
         directory = resource_filename("vehicles", "configs")
         return directory
 
-VehiclesConfig = VehiclesConfigMaster()
+
+get_vehicles_config = VehiclesConfigMaster.get_singleton
+
+VehiclesConfig = get_vehicles_config()

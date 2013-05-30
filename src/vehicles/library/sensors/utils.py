@@ -1,4 +1,6 @@
-from . import np, contract
+
+from contracts import contract
+import numpy as np
 from geometry import assert_allclose
 
 __all__ = ['get_random_directions', 'get_uniform_directions']

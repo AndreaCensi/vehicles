@@ -1,5 +1,4 @@
-
-from . import np
+import numpy as np
 from cairo_utils import (cairo_save, cairo_set_color, cairo_transform,
     cairo_plot_rectangle, cairo_plot_circle2)
 
@@ -31,7 +30,7 @@ def cairo_skin_eye(cr, size=1.0):
                            border_width=0.05)
 
         # Brown
-        #BROWN1 = [.4, .2, 0]
+        # BROWN1 = [.4, .2, 0]
         BROWN2 = [.6, .3, 0]
         cairo_plot_circle2(cr, 0.5, 0, 0.5,
                            fill_color=BROWN2,
@@ -39,7 +38,7 @@ def cairo_skin_eye(cr, size=1.0):
                            border_width=None)
 
         # Black
-        cairo_plot_circle2(cr, 0.6, 0, 0.22, #0.25,
+        cairo_plot_circle2(cr, 0.6, 0, 0.22,  # 0.25,
                            fill_color=BLACK,
                            border_color=None,
                            border_width=None)

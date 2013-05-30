@@ -1,11 +1,10 @@
 from . import publish_vehicle, numpy_to_imgmsg
-from .. import BOVehicleSimulation
 from contracts import contract
 import contracts
 import numpy as np
-import rospy # @UnresolvedImport
 import yaml
 from vehicles_boot.ros_visualization.ros_plot_world import publish_world
+from vehicles_boot.vehicles_simulation import BOVehicleSimulation
 
 
 class VizLevel:
@@ -21,6 +20,7 @@ class VizLevel:
 class ROSVehicleSimulation(BOVehicleSimulation):
 
     def __init__(self, **params):
+        import rospy
         contracts.disable_all()  # XXX
 
         self.viz_level = params.get('viz_level', VizLevel.Everything)
@@ -39,10 +39,11 @@ class ROSVehicleSimulation(BOVehicleSimulation):
         BOVehicleSimulation.__init__(self, **params)
 
     def info(self, s):
+        import rospy
         rospy.loginfo(s)
 
-    def set_commands(self, commands):
-        BOVehicleSimulation.set_commands(self, commands)
+    def set_commands(self, commands, commands_source):
+        BOVehicleSimulation.set_commands(self, commands, commands_source)
 
         if self.viz_level >= VizLevel.Sensels:
             self.publish_ros_commands(commands)
@@ -50,6 +51,7 @@ class ROSVehicleSimulation(BOVehicleSimulation):
             self.publish_ros_markers()
 
         if self.vehicle_collided:  # FIXME:
+            import rospy
             rospy.loginfo('Restarting new episode due to collision.')
             self.new_episode()
 
@@ -68,6 +70,7 @@ class ROSVehicleSimulation(BOVehicleSimulation):
         return timestamp, observations
 
     def publish_ros_markers(self):
+        import rospy
         plot_params = dict(
             points_width=0.03,
             z_sensor=0.75,
@@ -85,7 +88,7 @@ class ROSVehicleSimulation(BOVehicleSimulation):
 
     def publish_ros_commands(self, commands):
         from reprep import posneg
-        #commands = commands.reshape((1, commands.size))
+        # commands = commands.reshape((1, commands.size))
         z = 4
         commands = np.kron(commands, np.ones((z, z)))
         commands_image = posneg(commands)
@@ -117,7 +120,7 @@ def reshape_smart(x, width=None):
 
     height = np.ceil(n * 1.0 / width)
 
-    #print("sha: %s  n: %d  with: %d  height: %d" % (x.shape,n,width,height))
+    # print("sha: %s  n: %d  with: %d  height: %d" % (x.shape,n,width,height))
 
     y = np.zeros(shape=(height, width), dtype=x.dtype)
     y.flat[0:n] = x

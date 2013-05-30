@@ -1,8 +1,11 @@
-from . import (CairoConstants as CC, cairo_plot_circle, cairo_rototranslate,
-               np, logger, contract)
-from cairo_utils import cairo_plot_circle2, cairo_set_color
+from .constants import CairoConstants as CC
+from .utils import cairo_rototranslate
+from cairo_utils import cairo_plot_circle2, cairo_set_color, cairo_plot_circle
+from contracts import contract
 from geometry import SE2_from_SE3, translation_angle_from_SE2, SE3
 from vehicles import VehiclesConfig, VehiclesConstants
+from vehicles_cairo import logger
+import numpy as np
 
 
 def cairo_plot_sensor_skins(cr, vehicle_state, scale=1.0):
@@ -107,7 +110,7 @@ def plot_fieldsampler(cr, pose, positions, sensels, radius=None):
         value = 1 - value
         facecolor = [value, value, value]
         pw = SE2_act_R2(pose, positions[i, :])
-        #alpha=0.6
+        # alpha=0.6
         cairo_plot_circle(cr, center=pw, radius=radius, facecolor=facecolor,
                     edgecolor=None)
 
@@ -120,7 +123,7 @@ def find_radius(positions):
 
     radius *= 2  # overlap
 
-    radius = 0.05 # XXX
+    radius = 0.05  # XXX
     return radius
 
 RANDOM_PERM = np.random.permutation(1000)
@@ -178,7 +181,7 @@ def plot_ranges(cr, pose, directions, valid, readings,
         plot_ray(cr, sensor_t, sensor_theta + theta_i,
                  rho1=rho_min,
                  rho2=max(rho_i, rho_min),
-                 color=(1, 1, 0)) # XXX
+                 color=(1, 1, 0))  # XXX
 
 
 @contract(pose='SE2', directions='array[N]', valid='array[N]',
@@ -290,7 +293,7 @@ def plot_ray(cr, origin, direction, rho1, rho2, color=[0, 0, 0]):
          origin[1] + np.sin(direction) * rho2]
     cr.move_to(x[0], y[0])
     cr.line_to(x[1], y[1])
-    cr.set_line_width(0.01) # XXX
+    cr.set_line_width(0.01)  # XXX
     cr.set_source_rgb(*color)
     cr.stroke()
 

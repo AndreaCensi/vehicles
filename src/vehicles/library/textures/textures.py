@@ -1,4 +1,8 @@
-from . import np, contract, Texture
+from . import Texture
+
+
+from contracts import contract
+import numpy as np
 
 # In all of these, t can be either a scalar or a numpy array.
 

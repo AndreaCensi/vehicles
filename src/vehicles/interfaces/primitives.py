@@ -5,7 +5,10 @@
 
 # TODO: remove "tags"
 
-from . import contract, np
+import numpy as np
+from vehicles import logger
+from contracts import contract
+
 from .. import VehiclesConstants
 from abc import abstractmethod
 from conf_tools import instantiate_spec
@@ -25,7 +28,7 @@ class Primitive:
     def from_yaml(s):
         t = s['type']
         if not t in Primitive.type2class:
-            msg = ('Could not find type %r (I know %s).' %
+            msg = ('Could not find type %r (I know %s).' % 
                    (t, Primitive.type2class.keys()))
             raise ValueError(msg)
         return Primitive.type2class[t].from_yaml(s)
@@ -72,7 +75,7 @@ class PolyLine(Primitive, GeometricShape):
         assert s['type'] == VehiclesConstants.PRIMITIVE_POLYLINE
         return PolyLine(id_object=s.get('surface', None),
                         tags=s.get('tags', []),
-                        texture=s.get('texture', None), # XXX
+                        texture=s.get('texture', None),  # XXX
                         points=s.get('points'))
 
 
@@ -111,7 +114,7 @@ class Circle(Primitive, GeometricShape):
         assert s['type'] == VehiclesConstants.PRIMITIVE_CIRCLE
         return Circle(id_object=s.get('surface', None),
                         tags=s.get('tags', []),
-                        texture=s.get('texture', None), # XXX
+                        texture=s.get('texture', None),  # XXX
                         center=s.get('center'),
                         radius=s.get('radius'),
                         solid=s.get('solid', False))

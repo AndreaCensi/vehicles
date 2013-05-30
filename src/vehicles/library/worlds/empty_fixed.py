@@ -1,6 +1,11 @@
-from . import contract, np, World
+from . import  World
 from geometry import SE2_from_xytheta, SE3_from_SE2
 from vehicles.utils import unique_timestamp_string
+
+
+from contracts import contract
+import numpy as np
+
 
 __all__ = ['EmptyFixed']
 
@@ -16,7 +21,7 @@ class EmptyFixed(World):
     def get_primitives(self):
         return []
 
-    def simulate(self, dt, vehicle_pose): #@UnusedVariable
+    def simulate(self, dt, vehicle_pose):  # @UnusedVariable
         return []
 
     def new_episode(self):

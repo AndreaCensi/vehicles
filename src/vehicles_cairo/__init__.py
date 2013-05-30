@@ -14,12 +14,10 @@
 '''
 
 from vehicles import __version__, logger
-import numpy as np
-from contracts import contract
 
 
 try:
-    import cairo #@UnresolvedImport
+    import cairo  # @UnresolvedImport
     vehicles_has_cairo = True
 
 except ImportError as e:
@@ -27,12 +25,12 @@ except ImportError as e:
     vehicles_has_cairo = False
     logger.warning('Could not import PyCairo; visualization not available.')
     
-else:
-    from .constants import *
-    from .utils import *
-    from .skins import *
-    from .world_geometry import *
-    from .sensor_data import *
-    from .display_all import *
-    from .write_to_file import *
+
+from .constants import *
+from .utils import *
+from .skins import *
+from .world_geometry import *
+from .sensor_data import *
+from .display_all import *
+from .write_to_file import *
 

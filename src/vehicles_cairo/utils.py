@@ -3,6 +3,7 @@ from contracts import contract
 import geometry
 from cairo_utils import cairo_transform
 
+__all__ = ['cairo_set_axis']
 
 @contract(a='seq[4](number)')
 def cairo_set_axis(cr, width, height, a):

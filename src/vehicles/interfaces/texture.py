@@ -1,7 +1,8 @@
 from abc import abstractmethod, ABCMeta
 
+__all__ = ['Texture']
 
-class Texture:
+class Texture(object):
     ''' 
         A texture is simply a function from R to R.
         

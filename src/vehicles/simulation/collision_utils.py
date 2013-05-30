@@ -5,7 +5,10 @@
     The penetration is a float, >=0 (=0 if touching).
      
 '''
-from . import contract, np
+
+from contracts import contract
+import numpy as np
+
 from contracts import new_contract
 from collections import namedtuple
 
@@ -75,7 +78,7 @@ def circle_polyline_intersection(c1, r1, points):
         p2 = points[i + 1]
         collision = circle_segment_intersection(c1, r1, p1, p2)
         if (collision is not None) and (closest is None
-                                         or collision.penetration >
+                                         or collision.penetration > 
                                           closest.penetration):
             closest = collision
     return closest

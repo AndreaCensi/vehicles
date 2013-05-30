@@ -1,4 +1,6 @@
-from . import np
+from contracts import contract
+import numpy as np
+
 from geometry import SE2_from_SE3, translation_from_SE2, SE3
 from nose.plugins.attrib import attr
 from vehicles import  VehiclesConfig
@@ -28,7 +30,7 @@ def test_collisions():
         vehicle.simulate(commands, dt)
         pose = SE2_from_SE3(vehicle.get_pose())
         translation = translation_from_SE2(pose)
-        #print('t=%.3f %s' % (time, SE2.friendly(pose)))
+        # print('t=%.3f %s' % (time, SE2.friendly(pose)))
         time += dt
         assert translation[0] <= 9.5
     assert translation[0] >= 9.4

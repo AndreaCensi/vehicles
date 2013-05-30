@@ -1,7 +1,9 @@
-from .. import BLACK, CairoConstants, np
 from cairo_utils import (cairo_plot_rectangle, cairo_plot_circle2,
     cairo_plot_with_style, cairo_stroke_with_style, roundedrec, cairo_save,
     cairo_set_color, cairo_transform)
+from vehicles_cairo import CairoConstants, BLACK
+import numpy as np
+
 
 
 def cairo_robot_skin_circular(cr):
@@ -69,7 +71,7 @@ def cairo_robot_skin_ddrive(cr):
         with cairo_transform(cr, [0, -.8], 0):
             wheel(cr)
 
-        cr.scale(0.7, 0.7) # make it stay in < 1
+        cr.scale(0.7, 0.7)  # make it stay in < 1
         cairo_robot_skin_circular(cr)
 
 
@@ -81,7 +83,7 @@ def cairo_robot_skin_omni(cr):
                 with cairo_transform(cr, [0, +.8], np.pi / 2):
                     omni_wheel(cr)
 
-        cr.scale(0.7, 0.7) # make it stay in < 1
+        cr.scale(0.7, 0.7)  # make it stay in < 1
         cairo_robot_skin_circular(cr)
 
 
@@ -94,7 +96,7 @@ def cairo_robot_skin_brai(cr, w=1.3, h=0.8, sensors=False):
 
         def body():
             roundedrec(cr, x0, -h / 2, w, h, r=min(w, h) / 8.0)
-            #cr.rectangle(x0, -h / 2, w, h)
+            # cr.rectangle(x0, -h / 2, w, h)
 
         cr.move_to(0, M)
         cr.line_to(0, -M)

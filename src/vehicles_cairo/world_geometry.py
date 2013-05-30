@@ -1,10 +1,11 @@
-from . import cairo, CairoConstants, np, contract
-from cairo_utils import (cairo_transform, cairo_plot_circle,
-                         cairo_plot_polyline, cairo_save, cairo_set_color)
+from .constants import CairoConstants, CairoConstants as CC
+from cairo_utils import (cairo_transform, cairo_plot_circle, cairo_plot_polyline,
+    cairo_save, cairo_set_color)
 from conf_tools import instantiate_spec
+from contracts import contract
 from vehicles import Source, VehiclesConstants
 from vehicles.library.sensors import get_field_values
-
+import numpy as np
 
 def cairo_plot_sources(cr, world_state):
     bounds = world_state['bounds']
@@ -31,7 +32,7 @@ def cairo_plot_texture_circle(cr, radius, center, texture, resolution,
 
     resolution_angle = np.pi * 2 / npoints
 
-    theta1 = theta - resolution_angle / 1.9 # 10% overlap
+    theta1 = theta - resolution_angle / 1.9  # 10% overlap
     theta2 = theta + resolution_angle / 1.9
 
     r0 = radius - width_inside
@@ -58,7 +59,7 @@ def cairo_plot_texture_circle(cr, radius, center, texture, resolution,
             cr.fill()
 
 
-CC = CairoConstants
+
 
 
 @contract(center='seq[2](float)', radius='>0', solid='bool', numpass='int')
@@ -153,7 +154,7 @@ def cairo_plot_textured_segment(cr, texture, length, resolution, offset,
         x0 = i * cell_size
         x1 = (i + 1) * cell_size
         if i > 0:
-            x0 -= cell_size * 0.05 # overlap
+            x0 -= cell_size * 0.05  # overlap
         y0 = -width_inside
         y1 = +width_outside
 
@@ -209,7 +210,7 @@ def cairo_show_world_geometry(cr, world_state,
                                           width=0.01)
                     # TODO: parametrize
                 else:
-                    pass # XXX 
+                    pass  # XXX 
 
 
 def cairo_plot_sources_field(cr, sources, bounds,
@@ -236,8 +237,8 @@ def cairo_plot_sources_field(cr, sources, bounds,
 
     data[:, :, 2] = Cscal
 
-    image = cairo.ImageSurface.create_for_data(#@UndefinedVariable
-                        data, cairo.FORMAT_ARGB32, #@UndefinedVariable
+    image = cairo.ImageSurface.create_for_data(# @UndefinedVariable
+                        data, cairo.FORMAT_ARGB32,  # @UndefinedVariable
                          disc[0], disc[1], disc[1] * 4)
 
     with cairo_save(cr):

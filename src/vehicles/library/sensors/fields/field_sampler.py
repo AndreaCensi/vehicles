@@ -1,7 +1,9 @@
-from . import np, contract, logger
-from vehicles import Field, VehicleSensor, Source, VehiclesConstants
 from conf_tools import instantiate_spec
+from contracts import contract
 from geometry import SE2_project_from_SE3
+from vehicles import Field, VehicleSensor, Source, VehiclesConstants, logger
+import numpy as np
+
 
 __all__ = ['FieldSampler', 'get_field_values', 'get_field_value']
 
@@ -109,7 +111,7 @@ def get_field_value(primitives, point):
     if len(values) == 0:
         return 0
     else:
-        return np.mean(values) # XXX: why?
+        return np.mean(values)  # XXX: why?
 
 
 @contract(X='shape(x)', Y='shape(x)', returns='array,shape(x)')
@@ -122,6 +124,6 @@ def get_field_values(primitives, X, Y):
     if len(values) == 0:
         return 0
     else:
-        return np.mean(values, axis=0) # XXX: why?
+        return np.mean(values, axis=0)  # XXX: why?
 
 

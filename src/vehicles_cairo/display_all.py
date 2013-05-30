@@ -1,10 +1,11 @@
 from . import (cairo_plot_sensor_data, cairo_plot_sources, cairo_save,
-    cairo_show_world_geometry, CairoConstants, cairo_set_axis, np,
-    cairo_rototranslate, cairo_plot_sensor_skins)
+    cairo_show_world_geometry, CairoConstants, cairo_set_axis, cairo_rototranslate,
+    cairo_plot_sensor_skins)
 from cairo_utils import cairo_set_color
 from contracts import contract
 from geometry import angle_from_SE2, translation_from_SE2, SE2_from_SE3, SE3
 from vehicles import VehiclesConfig, VehiclesConstants
+import numpy as np
 
 
 def vehicles_cairo_display_all(cr, width, height,
@@ -16,7 +17,7 @@ def vehicles_cairo_display_all(cr, width, height,
                             extra_draw_world=None,
                             first_person=True,
                             show_world=True,
-                            #show_features='relevant',
+                            # show_features='relevant',
                             show_sensor_data=True,
                             show_sensor_data_compact=False,
                             show_robot_body=True,
@@ -47,7 +48,7 @@ def vehicles_cairo_display_all(cr, width, height,
         if zoom_scale_radius and zoom != 0:
             zoom = zoom * robot_radius
 
-        world_bounds_pad = 0 # CairoConstants.texture_width
+        world_bounds_pad = 0  # CairoConstants.texture_width
         vehicles_cairo_set_coordinates(cr, width, height,
                                        bounds, robot_pose,
                                        zoom=zoom,
@@ -91,7 +92,7 @@ def vehicles_cairo_display_all(cr, width, height,
             joints = get_joints_as_TSE3(vehicle_state)
             extra = vehicle_state.get('extra', {})
             id_skin = extra.get('skin', 'default_skin')
-            skin = VehiclesConfig.skins.instance(id_skin) #@UndefinedVariable
+            skin = VehiclesConfig.skins.instance(id_skin)  # @UndefinedVariable
 
             with cairo_rototranslate(cr, robot_pose):
                 cr.scale(robot_radius, robot_radius)
@@ -139,7 +140,7 @@ def vehicles_cairo_set_coordinates(cr, width, height, world_bounds,
             t[1] = np.maximum(t[1], by[0] + zoom)
             t[1] = np.minimum(t[1], by[1] - zoom)
 
-        m = 0 # extra space
+        m = 0  # extra space
         extents = [t[0] - zoom - m,
                    t[0] + zoom + m,
                    t[1] - zoom - m,
@@ -152,7 +153,7 @@ def vehicles_cairo_set_coordinates(cr, width, height, world_bounds,
         t = translation_from_SE2(robot_pose)
         cr.translate(t[0], t[1])
         cr.rotate(-angle)
-        cr.rotate(+np.pi / 2) # make the robot point "up"
+        cr.rotate(+np.pi / 2)  # make the robot point "up"
         cr.translate(-t[0], -t[1])
 
 
@@ -168,7 +169,7 @@ def show_grid(cr, bx, by, spacing=1, margin=0):
         cr.stroke()
 
     S = spacing
-    #M = margin  # margin (cells)
+    # M = margin  # margin (cells)
     M = 0
     xmin = (np.floor(bx[0] / S) - M) * S
     xmax = (np.ceil(bx[1] / S) + M) * S
