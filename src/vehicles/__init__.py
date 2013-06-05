@@ -14,14 +14,15 @@ __all__ = ['VehicleSensor', 'Field', 'PolyLine', 'Vehicle', 'Circle',
 DO_EXTRA_CHECKS = False
 
 
-from contracts import contract
-import geometry  # loads all geometry contracts
-import numpy as np
-
 import logging
 logging.basicConfig()
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
+
+from contracts import contract
+import geometry  # loads all geometry contracts
+import numpy as np
+
 
 from .constants import *
 from .configuration import *
@@ -36,5 +37,6 @@ __docformat__ = 'restructuredtext'  # For Epydoc
 def get_comptests():
     from . import unittests
     from comptests import get_comptests_app
+    get_vehicles_config().load('default')
     app = get_comptests_app(get_vehicles_config())
     return [app]

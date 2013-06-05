@@ -20,6 +20,9 @@ if vehicles_has_boot_olympics:
         from pkg_resources import resource_filename  # @UnresolvedImport
         dirname = resource_filename("vehicles_boot", "configs")
         
+        from vehicles import get_vehicles_config
+        get_vehicles_config().load('default')
+        
         # load into bootstrapping_olympics
         from comptests import get_comptests_app
         from bootstrapping_olympics import get_boot_config

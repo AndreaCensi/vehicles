@@ -1,7 +1,8 @@
-from .. import for_all_vehicles, get_world, for_all_skins
+from .. import for_all_vehicles, for_all_skins
 from ...simulation import VehicleSimulation
 from vehicles_cairo import vehicles_has_cairo
 import tempfile
+from vehicles import get_conftools_worlds
 
 
 if vehicles_has_cairo:
@@ -12,7 +13,7 @@ if vehicles_has_cairo:
     @for_all_vehicles
     def plotting(id_vehicle, vehicle):
         id_world = 'SBox2_10a'
-        world = get_world(id_world)
+        world = get_conftools_worlds().instance(id_world)
         simulation = VehicleSimulation(vehicle, world)
         simulation.new_episode()
         simulation.compute_observations()

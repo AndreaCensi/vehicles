@@ -1,4 +1,4 @@
-from ... import Vehicle, VehicleSimulation
+from vehicles import Vehicle, VehicleSimulation
 from ..fps_test import check_simulation
 from vehicles.library.worlds import Empty
 

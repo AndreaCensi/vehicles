@@ -1,9 +1,10 @@
-from .. import VehicleSimulation, logger
-from . import for_all_world_vehicle_pairs, np
-
+from . import for_all_world_vehicle_pairs
+from vehicles import logger, VehicleSimulation
+import numpy as np
 
 def random_commands(commands_spec):
-    """ Gets random commands for the given spec. Note that it works
+    """ 
+        Gets random commands for the given spec. Note that it works
         only for simple specs, but it is enough to not depend on boot_olympics
         proper routines (see StreamSpec). 
     """
@@ -42,8 +43,8 @@ def check_simulation(sim, num_episodes, num_instants, dt):
             sim.simulate(cmds, dt)
             sim.compute_observations()
 #
-#@attr('simulation')
-#def test_simulation():
+# @attr('simulation')
+# def test_simulation():
 #    VehiclesConfig.load()
 #        
 #    worlds = VehiclesConfig.worlds
@@ -59,7 +60,7 @@ def check_simulation(sim, num_episodes, num_instants, dt):
 #        dt = 0.1
 #        yield check_simulation, simulation, num_episodes, num_instants, dt
 #
-#def check_simulation_one_step(sim, dt):
+# def check_simulation_one_step(sim, dt):
 #    ''' Tries to run one step of the simulation. '''
 #    sim.new_episode()    
 #    cmds = random_commands(sim.vehicle.commands_spec)

@@ -111,7 +111,7 @@ def get_field_value(primitives, point):
     if len(values) == 0:
         return 0
     else:
-        return np.mean(values)  # XXX: why?
+        return np.mean(values)  # XXX: why, instead of sum?
 
 
 @contract(X='shape(x)', Y='shape(x)', returns='array,shape(x)')
@@ -122,8 +122,8 @@ def get_field_values(primitives, X, Y):
             intensity = p.get_intensity_values(X, Y)
             values.append(intensity)
     if len(values) == 0:
-        return 0
+        return np.zeros(shape=X.shape, dtype='float32')
     else:
-        return np.mean(values, axis=0)  # XXX: why?
+        return np.mean(values, axis=0)  # XXX: why, instead of sum?
 
 

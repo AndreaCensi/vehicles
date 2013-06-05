@@ -1,7 +1,8 @@
-from . import for_all_dynamics, np
+from vehicles.unittests import for_all_dynamics
 from StringIO import StringIO
 from geometry import DifferentiableManifold, SE3_from_R3
 import yaml
+import numpy as np
 
 
 @for_all_dynamics

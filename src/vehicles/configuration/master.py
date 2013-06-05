@@ -1,12 +1,9 @@
-
-from . import (check_valid_vehicle_config, check_valid_world_config, logger,
+from . import (check_valid_vehicle_config, check_valid_world_config,
     check_valid_dynamics_config, check_valid_sensor_config, check_valid_skin_config,
     instance_vehicle_spec)
 from ..interfaces import VehicleSensor, World, VehicleSkin, Dynamics
-from .. import VehiclesConstants
 from conf_tools import ConfigMaster, GenericInstance, ObjectSpec
 from contracts import contract
-import os
 
 __all__ = [
    'VehiclesConfig',
@@ -48,9 +45,6 @@ class VehiclesConfigMaster(ConfigMaster):
 
     def __init__(self):
         ConfigMaster.__init__(self, 'Vehicles')
-        
-        
-
 
         self.add_class('vehicles', '*.vehicles.yaml',
                         check_valid_vehicle_config, instance_vehicle_spec)
@@ -74,20 +68,20 @@ class VehiclesConfigMaster(ConfigMaster):
         self.dynamics = self.specs['dynamics']
         self.sensors = self.specs['sensors']
         self.skins = self.specs['skins']
-
-        v = VehiclesConstants.TEST_ADDITIONAL_CONFIG_DIR_ENV
-        if v in os.environ:
-            for dirname in os.environ[v].split(':'):
-                if dirname == 'default':
-                    logger.info('Using default config dir.')
-                    self.load()
-                else:
-                    logger.info('Using additional dir %r.' % dirname)
-                    self.load(dirname)
-
-        else:
-            # logger.info('Use env var %s to add more config dirs.' % v)
-            pass
+# 
+#         v = VehiclesConstants.TEST_ADDITIONAL_CONFIG_DIR_ENV
+#         if v in os.environ:
+#             for dirname in os.environ[v].split(':'):
+#                 if dirname == 'default':
+#                     logger.info('Using default config dir.')
+#                     self.load()
+#                 else:
+#                     logger.info('Using additional dir %r.' % dirname)
+#                     self.load(dirname)
+# 
+#         else:
+#             # logger.info('Use env var %s to add more config dirs.' % v)
+#             pass
 
     def get_default_dir(self):
         from pkg_resources import resource_filename  # @UnresolvedImport

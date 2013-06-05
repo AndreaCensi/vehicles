@@ -1,4 +1,4 @@
-from . import logger
+from vehicles_boot import logger
 from optparse import OptionParser
 from vehicles import VehiclesConfig
 from bootstrapping_olympics.utils import wrap_script_entry_point
@@ -50,7 +50,7 @@ def create_olympics_config(pargs):
                    'vehicles_boot.BOVehicleSimulation',
                    {'id_vehicle': id_vehicle,
                     'id_world': id_world,
-                    'dt': 0.1 # XXX
+                    'dt': 0.1  # XXX
                    }]
         }
         configs.append(config)

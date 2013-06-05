@@ -1,11 +1,13 @@
-from . import (check_valid_dynamics_config, np,
-               check_valid_sensor_config, logger)
 from conf_tools import (BadConfig, check_necessary, check_has_exactly_one,
     wrap_check)
 from contracts import describe_type
 from copy import deepcopy
 from geometry import SE3_from_SE2, SE2_from_translation_angle
 from pprint import pformat
+from vehicles import logger
+import numpy as np
+from vehicles.configuration.dynamics import check_valid_dynamics_config
+from vehicles.configuration.sensors import check_valid_sensor_config
 
 
 def check_valid_vehicle_config(x):
@@ -30,7 +32,7 @@ def check_valid_vehicle_config(x):
 
 def check_vehicle_sensor_entry(s):
     if not isinstance(s, dict):
-        raise BadConfig(s, 'I expect this to be a dictionary, not %s' %
+        raise BadConfig(s, 'I expect this to be a dictionary, not %s' % 
                         describe_type(s))
     if 'pose' in s:
         check_valid_pose_spec(s['pose'])
