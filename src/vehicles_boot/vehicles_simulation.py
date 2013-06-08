@@ -1,6 +1,7 @@
 from bootstrapping_olympics import (EpisodeDesc, RobotInterface, StreamSpec,
     BootSpec, RobotObservations, BootOlympicsConstants)
-from vehicles import VehicleSimulation, VehiclesConfig, VehiclesConstants
+from vehicles import (get_conftools_vehicles, get_conftools_worlds,
+    VehicleSimulation, VehiclesConstants)
 
 __all__ = ['BOVehicleSimulation']
 
@@ -23,8 +24,8 @@ class BOVehicleSimulation(RobotInterface, VehicleSimulation):
             raise ValueError('Specify exactly one of "vehicle" '
                              'and "id_vehicle".')
 
-        vehicles = VehiclesConfig.specs['vehicles']
-        worlds = VehiclesConfig.specs['worlds']
+        vehicles = get_conftools_vehicles()
+        worlds = get_conftools_worlds()
 
         # TODO: user shortcuts
         if vehicle is not None:
