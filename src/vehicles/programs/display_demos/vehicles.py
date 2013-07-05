@@ -1,8 +1,8 @@
-from ... import VehicleSimulation, VehiclesConfig, logger
 from optparse import OptionParser
 from reprep import MIME_PNG, MIME_SVG
+from vehicles import VehicleSimulation, logger
+from vehicles.utils import expand_string
 import os
-from ...utils import expand_string
 
 usage = """
 
@@ -44,7 +44,7 @@ def main():
 
     (options, args) = parser.parse_args()
     if args:
-        raise Exception() # XXX
+        raise Exception()  # XXX
 
     id_world = options.world
 

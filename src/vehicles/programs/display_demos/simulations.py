@@ -1,4 +1,4 @@
-from ... import VehicleSimulation, VehiclesConfig, logger
+from ... import VehicleSimulation, logger
 from optparse import OptionParser
 from reprep import MIME_PNG, MIME_SVG
 import numpy as np
@@ -56,11 +56,11 @@ def main():
         options.seed = np.random.randint(1000000)
 
     np.random.seed(seed=options.seed)
-    logger.info('Using seed %s (your lucky number is %s)' %
+    logger.info('Using seed %s (your lucky number is %s)' % 
                 (options.seed, np.random.randint(1000)))
 
-    vehicle = VehiclesConfig.vehicles.instance(id_vehicle) #@UndefinedVariable
-    world = VehiclesConfig.worlds.instance(id_world) #@UndefinedVariable
+    vehicle = VehiclesConfig.vehicles.instance(id_vehicle)  # @UndefinedVariable
+    world = VehiclesConfig.worlds.instance(id_world)  # @UndefinedVariable
 
     simulation = VehicleSimulation(vehicle, world)
 

@@ -6,7 +6,6 @@ from conf_tools import ConfigMaster, GenericInstance, ObjectSpec
 from contracts import contract
 
 __all__ = [
-   'VehiclesConfig',
    'get_conftools_dynamics',
    'get_conftools_sensors',
    'get_conftools_skins',
@@ -52,8 +51,7 @@ class VehiclesConfigMaster(ConfigMaster):
         self.add_class('worlds', '*.worlds.yaml', check_valid_world_config,
                        GenericInstance(World))
 
-        self.add_class('dynamics', '*.dynamics.yaml',
-                       check_valid_dynamics_config,
+        self.add_class('dynamics', '*.dynamics.yaml', check_valid_dynamics_config,
                        GenericInstance(Dynamics))
 
         self.add_class('sensors', '*.sensors.yaml', check_valid_sensor_config,
@@ -68,20 +66,7 @@ class VehiclesConfigMaster(ConfigMaster):
         self.dynamics = self.specs['dynamics']
         self.sensors = self.specs['sensors']
         self.skins = self.specs['skins']
-# 
-#         v = VehiclesConstants.TEST_ADDITIONAL_CONFIG_DIR_ENV
-#         if v in os.environ:
-#             for dirname in os.environ[v].split(':'):
-#                 if dirname == 'default':
-#                     logger.info('Using default config dir.')
-#                     self.load()
-#                 else:
-#                     logger.info('Using additional dir %r.' % dirname)
-#                     self.load(dirname)
-# 
-#         else:
-#             # logger.info('Use env var %s to add more config dirs.' % v)
-#             pass
+
 
     def get_default_dir(self):
         from pkg_resources import resource_filename  # @UnresolvedImport
@@ -91,4 +76,3 @@ class VehiclesConfigMaster(ConfigMaster):
 
 get_vehicles_config = VehiclesConfigMaster.get_singleton
 
-VehiclesConfig = get_vehicles_config()

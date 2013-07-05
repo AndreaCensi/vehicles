@@ -1,5 +1,7 @@
-from . import World, np, contract
-from vehicles.configuration.master import VehiclesConfig
+
+from contracts import contract
+from vehicles import World, get_conftools_worlds
+import numpy as np
 
 __all__ = ['Join']
 
@@ -9,9 +11,8 @@ class Join(World):
     
     @contract(id_worlds='list(str)')
     def __init__(self, id_worlds):
-        config = VehiclesConfig
         self.id_worlds = id_worlds
-        self.worlds = [config.worlds.instance(id_world) 
+        self.worlds = [get_conftools_worlds().instance(id_world) 
                        for id_world in id_worlds] 
 
         wb = [w.bounds for w in self.worlds]
@@ -36,7 +37,7 @@ class Join(World):
     
     def new_episode(self):
         episodes = [w.new_episode() for w in self.worlds]
-        return episodes[0] # XXX: should I join?
+        return episodes[0]  # XXX: should I join?
             
     def simulate(self, dt, vehicle_pose):
         prims = []

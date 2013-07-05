@@ -1,13 +1,14 @@
 from optparse import OptionParser
 
 from collections import namedtuple
-from vehicles import VehiclesConfig, VehicleSimulation
+from vehicles import VehicleSimulation
 from vehicles.unittests.simulation_tests import random_commands
 import time
 
 import numpy as np
 
 import sys
+from vehicles.configuration.master import get_vehicles_config
 
 
 def check_simulation(sim, num_instants, dt):
@@ -34,7 +35,7 @@ def check_simulation(sim, num_instants, dt):
             t0 = time.clock()
     print(s)
 #    sys.stderr.write('\n')
-    #print('%s  fps: %4d  (%d frames)' % (sim.vehicle, fps, count))
+    # print('%s  fps: %4d  (%d frames)' % (sim.vehicle, fps, count))
     return fps
 
 
@@ -43,8 +44,8 @@ def fps_main():
         import contracts
         contracts.disable_all()
 
-    #import contracts
-    #contracts.disable_all()
+    # import contracts
+    # contracts.disable_all()
 
     usage = """
     #    vehicles = ['d_SE2_rb_v-rf180', 'd_SE2_rb_v-cam180']
@@ -69,7 +70,7 @@ def fps_main():
  
     (options, _) = parser.parse_args()
     
-    VehiclesConfig.load()
+    get_vehicles_config().load()
 
     id_world = options.world
     world = VehiclesConfig.worlds.instance(id_world)  # @UndefinedVariable

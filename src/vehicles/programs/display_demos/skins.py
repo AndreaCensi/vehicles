@@ -1,7 +1,6 @@
-from vehicles import logger
 from optparse import OptionParser
 from reprep import MIME_PNG, Report
-from vehicles import VehiclesConfig
+from vehicles import get_conftools_skins, logger
 from vehicles_cairo import vehicles_has_cairo
 import os
 
@@ -42,10 +41,10 @@ def main():
 
     VehiclesConfig.make_sure_loaded()
 
-    skins = VehiclesConfig.specs['skins'].keys()
+    skins = get_conftools_skins().keys()
     logger.info('Skins: %s' % skins)
     for id_skin in skins:
-        skin = VehiclesConfig.specs['skins'].instance(id_skin)
+        skin = get_conftools_skins().instance(id_skin)
         with f.data_file(id_skin, MIME_PNG) as filename:
             surf = cairo.ImageSurface(cairo.FORMAT_ARGB32,  # @UndefinedVariable 
                                       width, height)

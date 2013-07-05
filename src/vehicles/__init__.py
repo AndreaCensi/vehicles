@@ -4,7 +4,7 @@ __version__ = '2.1'
 
 __all__ = ['VehicleSensor', 'Field', 'PolyLine', 'Vehicle', 'Circle',
            'GeometricShape', 'VehiclesConstants', 'VehicleSimulation',
-            'VehiclesConfig', 'World',
+             'World',
              'Attached', 'Primitive', 'Source', 'VehicleSkin', 'Dynamics',
              'library']
 

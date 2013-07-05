@@ -1,10 +1,9 @@
-from ... import logger
 from conf_tools import instantiate_spec
 from optparse import OptionParser
-from vehicles import GeometricShape, VehiclesConfig
+from pprint import pformat
+from vehicles import GeometricShape, logger
 import numpy as np
 import os
-from pprint import pformat
 
 usage = """
     
@@ -31,13 +30,13 @@ def inspect_textures():
 
     (options, args) = parser.parse_args()
     if args:
-        raise Exception() # XXX
+        raise Exception()  # XXX
 
     id_world = options.world
 
     logger.info('  id_world: %s' % id_world)
 
-    world = VehiclesConfig.worlds.instance(id_world) #@UndefinedVariable
+    world = VehiclesConfig.worlds.instance(id_world)  # @UndefinedVariable
 
     from reprep import Report
     basename = 'inspect_textures-%s' % (id_world)

@@ -1,6 +1,5 @@
 from vehicles_boot import logger
 from optparse import OptionParser
-from vehicles import VehiclesConfig
 from bootstrapping_olympics.utils import wrap_script_entry_point
 import os
 import yaml

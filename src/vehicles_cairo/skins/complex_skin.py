@@ -1,9 +1,11 @@
 from contracts import contract
 from geometry import SE2, SE2_from_SE3
-from vehicles import VehicleSkin, VehiclesConfig
+from vehicles import VehicleSkin, get_conftools_skins
 from vehicles_cairo.utils import cairo_rototranslate
 
+
 __all__ = ['ComplexSkin']
+
 
 class ComplexSkin(VehicleSkin):
     def __init__(self, skins):
@@ -32,7 +34,7 @@ class ComplexSkin(VehicleSkin):
             skin = js.get('skin')
             pose = js.get('pose', [0, 0, 0])  # TODO: honor this
 
-            skin_impl = VehiclesConfig.specs['skins'].instance(skin)
+            skin_impl = get_conftools_skins().instance(skin)
 
             robot_pose = SE2_from_SE3(joints[0][0])
             joint_pose = SE2_from_SE3(joints[jointnum][0])

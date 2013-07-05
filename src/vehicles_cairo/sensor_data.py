@@ -3,9 +3,10 @@ from .utils import cairo_rototranslate
 from cairo_utils import cairo_plot_circle2, cairo_set_color, cairo_plot_circle
 from contracts import contract
 from geometry import SE2_from_SE3, translation_angle_from_SE2, SE3
-from vehicles import VehiclesConfig, VehiclesConstants
+from vehicles import  VehiclesConstants
 from vehicles_cairo import logger
 import numpy as np
+from vehicles import get_conftools_skins
 
 
 def cairo_plot_sensor_skins(cr, vehicle_state, scale=1.0):
@@ -19,10 +20,11 @@ def cairo_plot_sensor_skins(cr, vehicle_state, scale=1.0):
         if sensor_skin is None:
             sensor_skin = sensor['type']
 
-        if not sensor_skin in VehiclesConfig.skins:
+        skins_library = get_conftools_skins()
+        if not sensor_skin in skins_library:
             logger.warning('Could not find skin %r' % sensor_skin)
         else:
-            skin = VehiclesConfig.specs['skins'].instance(sensor_skin)
+            skin = skins_library.instance(sensor_skin)
 
             with cairo_rototranslate(cr, sensor_pose):
                 cr.scale(scale, scale)

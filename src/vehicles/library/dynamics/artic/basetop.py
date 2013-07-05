@@ -2,8 +2,8 @@ from .. import CircleVel, Dynamics, SE2Dynamics
 from contracts import contract
 from geometry import (SE3, se3, SE3_from_SE2, angle_from_SE2,
     SE2_from_translation_angle, SE2_from_SE3, ProductManifold)
-from vehicles import VehiclesConfig
 import numpy as np
+from vehicles.configuration.master import get_conftools_dynamics
 
 
 class BaseTopDynamics(Dynamics):
@@ -122,8 +122,8 @@ class Turret(BaseTopDynamics):
 class BaseTop(BaseTopDynamics):
 
     def __init__(self, id_base, id_top):
-        base = VehiclesConfig.specs['dynamics'].instance(id_base)
-        top = VehiclesConfig.specs['dynamics'].instance(id_top)
+        base = get_conftools_dynamics().instance(id_base)
+        top = get_conftools_dynamics().instance(id_top)
         BaseTopDynamics.__init__(self, base=base, top=top)
 
 

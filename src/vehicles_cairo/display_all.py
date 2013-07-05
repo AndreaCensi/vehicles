@@ -4,7 +4,7 @@ from . import (cairo_plot_sensor_data, cairo_plot_sources, cairo_save,
 from cairo_utils import cairo_set_color
 from contracts import contract
 from geometry import angle_from_SE2, translation_from_SE2, SE2_from_SE3, SE3
-from vehicles import VehiclesConfig, VehiclesConstants
+from vehicles import VehiclesConstants
 import numpy as np
 
 
@@ -92,7 +92,7 @@ def vehicles_cairo_display_all(cr, width, height,
             joints = get_joints_as_TSE3(vehicle_state)
             extra = vehicle_state.get('extra', {})
             id_skin = extra.get('skin', 'default_skin')
-            skin = VehiclesConfig.skins.instance(id_skin)  # @UndefinedVariable
+            skin = get_conftools_skins().instance(id_skin)  # @UndefinedVariable
 
             with cairo_rototranslate(cr, robot_pose):
                 cr.scale(robot_radius, robot_radius)

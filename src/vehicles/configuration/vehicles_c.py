@@ -6,8 +6,8 @@ from geometry import SE3_from_SE2, SE2_from_translation_angle
 from pprint import pformat
 from vehicles import logger
 import numpy as np
-from vehicles.configuration.dynamics import check_valid_dynamics_config
-from vehicles.configuration.sensors import check_valid_sensor_config
+from .dynamics import check_valid_dynamics_config
+from .sensors import check_valid_sensor_config
 
 
 def check_valid_vehicle_config(x):
@@ -46,12 +46,15 @@ def check_vehicle_sensor_entry(s):
 
 def instance_vehicle_spec(entry):
     from ..simulation import Vehicle
-    from . import VehiclesConfig
     from ..interfaces import VehicleSensor, Dynamics
+
+    from vehicles.configuration.master import get_conftools_dynamics, \
+        get_conftools_sensors
+
 
     check_valid_vehicle_config(entry)
     try:
-        master = VehiclesConfig.specs['dynamics']
+        master = get_conftools_dynamics()
         if 'id_dynamics' in entry:
             id_dynamics = entry['id_dynamics']
             dynamics = master.instance(id_dynamics)
@@ -66,7 +69,7 @@ def instance_vehicle_spec(entry):
         extra = entry.get('extra', {})
         vehicle = Vehicle(radius=radius, extra=extra)
         vehicle.add_dynamics(id_dynamics, dynamics)
-        master = VehiclesConfig.specs['sensors']
+        master = get_conftools_sensors()
 
         for sensor in sensors:
             if 'id_sensor' in sensor:
@@ -96,16 +99,18 @@ def instance_vehicle_spec(entry):
 
 
 def dereference_vehicle_spec(x):
-    from . import VehiclesConfig
     ''' substitutes all references; modifies x. '''
+    from vehicles.configuration.master import get_conftools_dynamics, \
+        get_conftools_sensors
+
     check_valid_vehicle_config(x)
     if 'id_dynamics' in x:
         id_dynamics = x.pop('id_dynamics')
-        x['dynamics'] = deepcopy(VehiclesConfig.dynamics[id_dynamics])
+        x['dynamics'] = deepcopy(get_conftools_dynamics()[id_dynamics])
     for s in x['sensors']:
         if 'id_sensor' in s:
             id_sensor = s.pop('id_sensor')
-            s['sensor'] = deepcopy(VehiclesConfig.sensors[id_sensor])
+            s['sensor'] = deepcopy(get_conftools_sensors()[id_sensor])
     check_valid_vehicle_config(x)
 
 

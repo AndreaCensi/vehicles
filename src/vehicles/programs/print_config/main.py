@@ -1,8 +1,10 @@
-from ... import VehiclesConfig
 from .natsort import natsorted
 from optparse import OptionParser
 import logging
 import os
+from vehicles.configuration.master import get_vehicles_config, \
+    get_conftools_worlds, get_conftools_dynamics, get_conftools_sensors, \
+    get_conftools_vehicles
 
 logging.basicConfig()
 logger = logging.getLogger("print_config")
@@ -36,7 +38,7 @@ def main():
 def print_config(directory, outdir):
     from reprep import Report
 
-    VehiclesConfig.load(directory)
+    get_vehicles_config().load(directory)
 
     def write_report(r):
         out = os.path.join(outdir, '%s.html' % r.nid)
@@ -44,22 +46,22 @@ def print_config(directory, outdir):
         logger.info('Writing to %r' % out)
         r.to_html(out, resources_dir=rd)
 
-    worlds = VehiclesConfig.worlds
+    worlds = get_conftools_worlds()
     r = Report('worlds')
     create_generic_table(r, 'VehiclesConfig', worlds, ['desc', 'code'])
     write_report(r)
 
-    dynamics = VehiclesConfig.dynamics
+    dynamics = get_conftools_dynamics()
     r = Report('dynamics')
     create_generic_table(r, 'VehiclesConfig', dynamics, ['desc', 'code'])
     write_report(r)
 
-    sensors = VehiclesConfig.sensors
+    sensors = get_conftools_sensors()
     r = Report('sensors')
     create_generic_table(r, 'VehiclesConfig', sensors, ['desc', 'code'])
     write_report(r)
 
-    vehicles = VehiclesConfig.vehicles
+    vehicles = get_conftools_vehicles()
     r = Report('vehicles')
     create_generic_table(r, 'VehiclesConfig', vehicles,
                           ['desc', 'dynamics', 'id_dynamics', 'sensors'])
