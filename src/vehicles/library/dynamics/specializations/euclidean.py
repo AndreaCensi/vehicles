@@ -1,5 +1,9 @@
-from . import SimpleDynamics, SimpleKinematics, np, contract
+from contracts import contract
 from geometry import Tran2, Tran3, Tran1
+from vehicles.library.dynamics import SimpleDynamics, SimpleKinematics
+import numpy as np
+
+__all__ = ['EuclideanForce', 'EuclideanVel']
 
 
 class EuclideanVel(SimpleKinematics):

@@ -1,4 +1,4 @@
-from .. import SimpleKinematics, SimpleDynamics, np, contract
+from .. import SimpleKinematics, SimpleDynamics
 from .cars import *
 from .euclidean import *
 from .circle import *

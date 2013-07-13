@@ -1,12 +1,13 @@
-from . import Vehicle, logger, np
-from ..interfaces import World
 from geometry import SE3
 import time
+from vehicles import logger, World
+import numpy as np
+from vehicles.simulation.vehicle import Vehicle
 
 __all__ = ['VehicleSimulation']
 
 
-class VehicleSimulation():
+class VehicleSimulation(object):
 
     def __init__(self, vehicle, world, safety_margin=3):
         assert isinstance(vehicle, Vehicle)
@@ -45,14 +46,14 @@ class VehicleSimulation():
 
         self.vehicle.set_world_primitives(updated)
         if self.vehicle.colliding_pose(self.vehicle.get_pose()).collided:
-            self.info('Collision due to dynamic world at time %.2f.' %
+            self.info('Collision due to dynamic world at time %.2f.' % 
                        self.timestamp)
             self.vehicle_collided = True
         else:
             self.vehicle.simulate(commands, dt)
             self.vehicle_collided = self.vehicle.collision.collided
             if self.vehicle_collided:
-                self.info('Collision with object at time %.2f.' %
+                self.info('Collision with object at time %.2f.' % 
                           (self.timestamp - self.timestamp0))
 
         self.last_commands = commands
@@ -91,7 +92,7 @@ class VehicleSimulation():
             if not collision.collided:
                 self.vehicle.set_pose(pose)
                 return episode
-            #print('Bad random: collision  %s' % str(collision))
+            # print('Bad random: collision  %s' % str(collision))
         else:
             msg = ('Cannot find a non-colliding state after %d tries.'
                     % max_tries)
@@ -108,7 +109,7 @@ class VehicleSimulation():
             self.compute_observations()
 
         if self.timestamp != self.last_vehicle_observations_timestamp:
-            logger.debug('Warning: state is at time %s, observations at %s.' %
+            logger.debug('Warning: state is at time %s, observations at %s.' % 
                          (self.timestamp,
                           self.last_vehicle_observations_timestamp))
 

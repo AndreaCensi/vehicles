@@ -1,11 +1,8 @@
 from . import (PrimitiveIntersection, circle_circle_intersection,
     circle_segment_intersection)
 from geometry import assert_allclose
-import unittest
-
-
-from contracts import contract
 import numpy as np
+import unittest
 
 
 # shortcuts

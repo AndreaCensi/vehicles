@@ -1,12 +1,15 @@
-from . import collides_with, np, compute_collision, contract
+from . import collides_with, compute_collision
 from ..utils import check_yaml_friendly
+from contracts import contract
 from geometry import SE3, translation_from_SE2, SE2_project_from_SE3
 from geometry.yaml import to_yaml
+import numpy as np
 
 __all__ = ['Attached', 'Vehicle']
 
 
-class Attached:
+class Attached(object):
+    
     @contract(pose='SE3', joint='int,>=0', extra='dict')
     def __init__(self, sensor, pose, joint, extra):
         '''
@@ -36,7 +39,7 @@ class Attached:
         }
 
 
-class Vehicle:
+class Vehicle(object):
 
     def __init__(self, radius=0.5, extra={}):
         """ 
@@ -147,7 +150,7 @@ class Vehicle:
             # compute center of robot
             j_pose, _ = self.dynamics.joint_state(state, 0)
             center = translation_from_SE2(SE2_project_from_SE3(j_pose))
-            #print('t=%f, center=%s' % (t, center))
+            # print('t=%f, center=%s' % (t, center))
             return center
 
         collision = compute_collision(dynamics_function=dynamics_function,
@@ -155,7 +158,7 @@ class Vehicle:
                                       primitives=self.primitives,
                                       radius=self.radius)
         if collision.collided:
-            #print('Collision at time %s' % collision.time)
+            # print('Collision at time %s' % collision.time)
             next_state = self.dynamics.integrate(self._get_state(), commands,
                                                  collision.time)
         else:

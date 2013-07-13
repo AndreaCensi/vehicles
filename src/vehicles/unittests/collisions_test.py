@@ -1,9 +1,9 @@
-import numpy as np
-
 from geometry import SE2_from_SE3, translation_from_SE2, SE3
 from nose.plugins.attrib import attr
+from vehicles import get_conftools_vehicles, get_vehicles_config
 from vehicles.library.worlds import Box
-from vehicles import get_conftools_vehicles
+import numpy as np
+
 
 
 @attr('simulation')
@@ -13,7 +13,9 @@ def test_collisions():
 #    id_vehicle = 'd_SE2_rb_v-rf360'
     id_vehicle = 'd_SE2_rb_v-random_5'
 
+    get_vehicles_config().load('default')
     vehicles = get_conftools_vehicles()
+    # vehicles.load('default')
     vehicle = vehicles.instance(id_vehicle)  # @UndefinedVariable
     vehicle.set_world_primitives(world.get_primitives())
     vehicle.set_pose(SE3.identity())

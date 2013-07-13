@@ -1,9 +1,10 @@
-from . import   SimpleKinematics
+from .lie_kinematics import SimpleKinematics
 from abc import abstractmethod
-
 from contracts import contract
 import numpy as np
 
+
+__all__ = ['SimpleDynamics']
 
 class SimpleDynamics(SimpleKinematics):
     # TODO: add noise

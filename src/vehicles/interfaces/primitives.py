@@ -5,16 +5,15 @@
 
 # TODO: remove "tags"
 
-import numpy as np
-from vehicles import logger
-from contracts import contract
-
-from .. import VehiclesConstants
 from abc import abstractmethod
 from conf_tools import instantiate_spec
+from contracts import contract, ContractsMeta
+from vehicles import VehiclesConstants
+import numpy as np
 
 
-class Primitive:
+
+class Primitive(object):
     def __init__(self, id_object, tags):
         self.id_object = id_object
         self.tags = tags
@@ -34,7 +33,7 @@ class Primitive:
         return Primitive.type2class[t].from_yaml(s)
 
 
-class GeometricShape:
+class GeometricShape(object):
 
     def __init__(self, texture):
         ''' The texture is a code spec. '''
@@ -120,13 +119,18 @@ class Circle(Primitive, GeometricShape):
                         solid=s.get('solid', False))
 
 
-class Field:
-
+class Field(object):
+    
+    __metaclass__ = ContractsMeta
+    
     @abstractmethod
+    @contract(point='seq[2](number)')
     def get_intensity_value(self, point):
         ''' Returns the intensity at the given point. '''
 
-    @contract(X='array[HxW]', Y='array[HxW]', returns='array[HxW]')
+    @abstractmethod
+    # TODO:
+    # @contract(X='array[HxW]', Y='array[HxW]', returns='array[HxW]')
     def get_intensity_values(self, X, Y):
         ''' Returns the intensity values at a series of points. '''
 
@@ -153,12 +157,10 @@ class Source(Primitive, Field):
     def set_center(self, center):
         self.center = np.array(center)
 
-    @contract(point='seq[2](number)')
     def get_intensity_value(self, point):
         distance = np.linalg.norm(np.array(point) - self.center)
         return self.kernel(distance)
 
-    @contract(X='array[HxW]', Y='array[HxW]', returns='array[HxW]')
     def get_intensity_values(self, X, Y):
         xc = X - self.center[0]
         yc = Y - self.center[1]

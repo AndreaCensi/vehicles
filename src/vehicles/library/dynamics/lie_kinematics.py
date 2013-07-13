@@ -1,9 +1,12 @@
-from . import Dynamics, contract, np
 from abc import abstractmethod
+from contracts import contract
 from geometry import SE3, se3
 from geometry.yaml import to_yaml
-from vehicles import DO_EXTRA_CHECKS
+from vehicles import DO_EXTRA_CHECKS, Dynamics
+import numpy as np
 
+
+__all__ = ['SimpleKinematics']
 
 
 class SimpleKinematics(Dynamics):
@@ -115,7 +118,7 @@ class SimpleKinematics(Dynamics):
         '''
 
     def _integrate(self, state, commands, dt):
-        pose1, unused_vel1 = state #@UnusedVariable
+        pose1, unused_vel1 = state  # @UnusedVariable
         # This is the noiseless part of the dynamics
         noiseless_vel = self.compute_velocities(commands)
         # Convert them to the vector representation

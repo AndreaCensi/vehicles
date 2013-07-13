@@ -1,7 +1,11 @@
-from . import SimpleDynamics, contract, SimpleKinematics
+from . import SimpleDynamics, SimpleKinematics
+from contracts import contract
 from geometry import SO2, hat_map_2d
 
-    
+
+__all__ = ['CircleVel', 'CircleForce']
+
+
 class CircleVel(SimpleKinematics):
     ''' Particle on SO(2) controlled in velocity. '''
     

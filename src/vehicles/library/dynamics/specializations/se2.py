@@ -1,6 +1,6 @@
-from . import SimpleKinematics, contract
-from geometry import (SE2, se2_from_linear_angular)
-from vehicles.library.dynamics.lie_dynamics import SimpleDynamics
+from contracts import contract
+from geometry import SE2, se2_from_linear_angular
+from vehicles.library.dynamics import SimpleDynamics, SimpleKinematics
 
 __all__ = ['SE2Dynamics', 'SE2Force']
 

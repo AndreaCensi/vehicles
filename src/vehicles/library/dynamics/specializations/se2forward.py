@@ -1,5 +1,8 @@
-from . import SimpleKinematics, contract
 from geometry import (SE2, se2_from_linear_angular)
+from contracts import contract
+from vehicles.library.dynamics import SimpleKinematics
+
+__all__ = ['SE2Forward']
 
 
 class SE2Forward(SimpleKinematics):

@@ -1,6 +1,9 @@
-from . import SimpleKinematics, contract
-from geometry import (SE2, se2_from_linear_angular)
+from contracts import contract
+from geometry import SE2, se2_from_linear_angular
+from vehicles.library.dynamics import SimpleKinematics
 import numpy as np
+
+__all__ = ['DifferentialDrive']
 
 
 class DifferentialDrive(SimpleKinematics):

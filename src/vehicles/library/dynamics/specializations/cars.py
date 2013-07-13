@@ -1,10 +1,13 @@
-from . import  SimpleKinematics
+from contracts import contract
 from geometry import (R1, ProductManifold, SE2, se2_from_linear_angular,
     SE2_from_translation_angle, SE3_from_SE2, SE3)
-from vehicles.interfaces.dynamics import Dynamics
-
-from contracts import contract
+from vehicles import Dynamics
+from vehicles.library.dynamics import SimpleKinematics
 import numpy as np
+
+
+__all__ = ['SimpleCar', 'ReedsSheepCar', 'DubinsCar', 'ReedsSheepCarWithWheels', 'DubinsCarWithWheels']
+
 
 class SimpleCar(SimpleKinematics):
 

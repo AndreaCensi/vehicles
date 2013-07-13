@@ -1,5 +1,10 @@
-from . import SimpleKinematics, contract, np, SimpleDynamics
-from geometry import (SO3, hat_map)
+from contracts import contract
+from geometry import SO3, hat_map
+from vehicles.library.dynamics import SimpleDynamics, SimpleKinematics
+import numpy as np
+
+
+__all__ = ['SO3Vel', 'SO3Force']
 
 
 class SO3Vel(SimpleKinematics):

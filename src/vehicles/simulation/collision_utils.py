@@ -6,11 +6,10 @@
      
 '''
 
-from contracts import contract
+from collections import namedtuple
+from contracts import contract, new_contract
 import numpy as np
 
-from contracts import new_contract
-from collections import namedtuple
 
 
 PrimitiveIntersection = namedtuple('PrimitiveIntersection',
