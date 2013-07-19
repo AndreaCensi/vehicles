@@ -11,7 +11,7 @@ if vehicles_has_cairo:
                                 vehicles_cairo_display_png)
 
     @for_all_vehicles
-    def plotting(id_vehicle, vehicle):
+    def plotting(id_vehicle, vehicle):  # @UnusedVariable
         id_world = 'SBox2_10a'
         world = get_conftools_worlds().instance(id_world)
         simulation = VehicleSimulation(vehicle, world)

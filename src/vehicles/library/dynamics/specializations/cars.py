@@ -6,7 +6,8 @@ from vehicles.library.dynamics import SimpleKinematics
 import numpy as np
 
 
-__all__ = ['SimpleCar', 'ReedsSheepCar', 'DubinsCar', 'ReedsSheepCarWithWheels', 'DubinsCarWithWheels']
+__all__ = ['SimpleCar', 'ReedsSheepCar', 'DubinsCar', 'CarWithWheels',
+           'ReedsSheepCarWithWheels', 'DubinsCarWithWheels']
 
 
 class SimpleCar(SimpleKinematics):
@@ -38,9 +39,7 @@ class SimpleCar(SimpleKinematics):
                       'pose_space': 'SE2'}
         }
 
-        SimpleKinematics.__init__(self,
-                          pose_space=SE2,
-                          commands_spec=spec)
+        SimpleKinematics.__init__(self, pose_space=SE2, commands_spec=spec)
 
     def compute_velocities(self, commands):
         steering_angle = commands[1] * self.max_steering_angle
