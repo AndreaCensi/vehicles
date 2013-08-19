@@ -1,4 +1,6 @@
-from . import PolyLine, contract, np
+from contracts import contract
+from vehicles import PolyLine
+import numpy as np
 
 
 @contract(cell_width='>0')
@@ -33,7 +35,8 @@ def box(id_object, texture, width, length):
                     texture=texture, points=points)
 
 
-class Counter:
+
+class Counter(object):
 
     def __init__(self, start=0):
         self.k = start - 1

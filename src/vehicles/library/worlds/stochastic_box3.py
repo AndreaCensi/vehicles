@@ -1,6 +1,8 @@
-from . import box, np, contract, Counter
-from . import Circle, World
-from .utils import random_checkerboard_smooth
+from .utils import Counter, box, random_checkerboard_smooth
+from contracts import contract
+from vehicles import Circle, World
+import numpy as np
+
 
 __all__ = ['StochasticBox3']
 
@@ -53,5 +55,5 @@ class StochasticBox3(World):
         self.refresh()
         return World.new_episode(self)
 
-    def simulate(self, dt, vehicle_pose): #@UnusedVariable
+    def simulate(self, dt, vehicle_pose):  # @UnusedVariable
         return []
