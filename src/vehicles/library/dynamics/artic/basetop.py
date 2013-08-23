@@ -4,6 +4,7 @@ from geometry import (SE3, se3, SE3_from_SE2, angle_from_SE2,
 from vehicles import Dynamics, get_conftools_dynamics
 from vehicles.library.dynamics.specializations import CircleVel, SE2Dynamics
 import numpy as np
+from bootstrapping_olympics.interfaces.streamels.stream_spec import StreamSpec
 
 __all__ = ['BaseTopDynamics', 'Turret', 'BaseTop']
 

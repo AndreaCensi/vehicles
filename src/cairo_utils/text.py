@@ -1,4 +1,7 @@
-from . import cairo_transform
+from .transformations import cairo_transform
+
+
+__all__ = ['cairo_text_align']
 
 
 def cairo_text_align(cr, text, halign='left', valign='bottom'):
