@@ -1,0 +1,168 @@
+
+<html>
+<head>  
+    <script type="text/javascript" 
+        src="images/static/jquery/jquery.js"></script>
+    
+    <!-- Use imagezoom plugin --> 
+    <script type="text/javascript" 
+        src="images/static/jquery/jquery.imageZoom.js"></script>
+    <link rel="stylesheet" 
+          href="images/static/jquery/jquery.imageZoom.css"/>
+    <script type="text/javascript"> 
+        $(document).ready( function () {
+            $('.zoomable').imageZoom();
+        });       
+    </script>
+    
+    <!-- Use tablesorter plugin -->
+    <script type="text/javascript" 
+            src="images/static/jquery/tablesorter/jquery.tablesorter.js"></script> 
+    <link rel="stylesheet" 
+          href="images/static/jquery/tablesorter/themes/blue/style.css"/>
+    <script type="text/javascript">
+    $(document).ready(function() { 
+        $(".tablesorter").tablesorter(); 
+    } 
+    ); 
+    </script>
+    
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { 
+            equationNumbers: { autoNumber: "AMS" },
+            extensions: ["AMSmath.js", "AMSsymbols.js"] 
+        },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/SVG"], //" "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$']],
+          displayMath: [ ['$$','$$'] ], 
+          processEscapes: true
+        },
+        "HTML-CSS": { availableFonts: ["TeX"] }
+      });
+      //MathJax.Ajax.loadComplete("/media/tex/symbols.js");
+    </script>
+    
+    <script type='text/javascript' 
+            src='http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+
+
+
+    
+    <style type="text/css">
+    /* Extra CSS passed by user. */
+        
+    </style>
+
+    <link rel="stylesheet" 
+          href="images/static/reprep/default_style.css"/>
+
+    <title> worlds </title>
+<body>
+
+<p id="reprep-head"> 
+    Report created on 2013-12-19-18:28:09
+    by <a href="http://purl.org/censi/2010/RepRep">RepRep</a>.
+    Show:
+    <input type="submit" name="datanode_toggle" 
+           value="data nodes" id="datanode_toggle" /> 
+</p>
+
+
+
+<script type="text/javascript">
+ $(document).ready(function() {
+   $('.datanode').hide();
+   $('#datanode_toggle').click(function(){
+     $('.datanode').toggle();
+   });
+ });
+</script>
+
+
+
+    <div class='report-node' id="worlds">
+    <h><a href="#worlds">worlds</a></h><section> 
+<div class="report-nongui-nodes">
+<table class="report-table tablesorter">
+<caption>VehiclesConfig</caption>
+<thead>
+<tr>
+<th></th>	<th>desc</th>
+	<th>code</th>
+</tr>
+</thead>
+<tbody>
+<tr class="even">
+<th>BigMama_r10s1_orig</th>
+	<td  style="text-align: '.'">A circular box, starting from the origing</td>
+	<td  style="text-align: '.'">['vehicles.library.worlds.LightBox', {'start_poses': [[0, 0, 90]], 'primitives': [{'solid': False, 'radius': 10, 'type': 'Circle', 'center': [0, 0], 'texture': ['vehicles.library.textures.BWCheckerboard', {'cell_width': 1}]}], 'bounds': [[-1, 2.5], [-2.5, 0.3], [0, 5]]}]</td>
+</tr>
+<tr class="odd">
+<th>BigMamarama_r10_s1</th>
+	<td  style="text-align: '.'">A circular box</td>
+	<td  style="text-align: '.'">['vehicles.library.worlds.BigMamarama', {'scale': 3, 'radius': 10}]</td>
+</tr>
+<tr class="even">
+<th>SBox2_10a</th>
+	<td  style="text-align: '.'">A box with stochastic content</td>
+	<td  style="text-align: '.'">['vehicles.library.worlds.StochasticBox2', {'num_sources': 10, 'width': 10, 'length': 10, 'source_width': 3}]</td>
+</tr>
+<tr class="odd">
+<th>SBox3_10scale1</th>
+	<td  style="text-align: '.'">A box with stochastic content, smoothed textures, scale=1m</td>
+	<td  style="text-align: '.'">['vehicles.library.worlds.StochasticBox3', {'width': 10, 'length': 10, 'scale': 1, 'sigma': 0.5}]</td>
+</tr>
+<tr class="even">
+<th>SBox3_10scale05</th>
+	<td  style="text-align: '.'">A box with stochastic content, smoothed textures, scale=0.5m</td>
+	<td  style="text-align: '.'">['vehicles.library.worlds.StochasticBox3', {'width': 10, 'length': 10, 'scale': 0.5, 'sigma': 0.25}]</td>
+</tr>
+<tr class="odd">
+<th>StocSources_w10_n20_s1</th>
+	<td  style="text-align: '.'">Random disposition of stochastic sources</td>
+	<td  style="text-align: '.'">['vehicles.library.worlds.StochasticSources', {'num_sources': 20, 'width': 10, 'length': 10, 'scale': 1}]</td>
+</tr>
+<tr class="even">
+<th>box10</th>
+	<td  style="text-align: '.'">A 10m by 10m empty box.</td>
+	<td  style="text-align: '.'">['vehicles.library.worlds.Box', {'width': 10, 'length': 10}]</td>
+</tr>
+<tr class="odd">
+<th>empty</th>
+	<td  style="text-align: '.'">An empty world (no obstacles at all)</td>
+	<td  style="text-align: '.'">['vehicles.library.worlds.Empty', {'bounds': [[-10, 10], [-10, 10], [-10, 10]]}]</td>
+</tr>
+<tr class="even">
+<th>empty_fixed</th>
+	<td  style="text-align: '.'">An empty world (no obstacles at all); robot starts from pose.</td>
+	<td  style="text-align: '.'">['vehicles.library.worlds.EmptyFixed', {'bounds': [[-10, 10], [-10, 10], [-10, 10]]}]</td>
+</tr>
+<tr class="odd">
+<th>join0</th>
+	<td  style="text-align: '.'">Example of joining worlds</td>
+	<td  style="text-align: '.'">['vehicles.library.worlds.Join', {'id_worlds': ['SBox2_10a', 'BigMamarama_r10_s1']}]</td>
+</tr>
+<tr class="even">
+<th>stochastic_box_10</th>
+	<td  style="text-align: '.'">A box with stochastic content</td>
+	<td  style="text-align: '.'">['vehicles.library.worlds.StochasticBox', {'width': 10, 'length': 10}]</td>
+</tr>
+<tr class="odd">
+<th>test_dynamic</th>
+	<td  style="text-align: '.'">A test of a world with moving objects.</td>
+	<td  style="text-align: '.'">['vehicles.library.worlds.DynamicTest', {'width': 10, 'length': 10}]</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section> 
+</div> 
+
+ 
+
+</body>
+</html>

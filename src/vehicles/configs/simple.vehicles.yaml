@@ -63,9 +63,15 @@
   radius: 0.5
   extra:
     skin: omni 
+
+- id: "d_SE2_dd_v-fs_05_rand144"
     
 - id: "d_SE2_dd_v-cam_f180_n90_s"
-  
+- id: "d_SE2_dd_v-fs_05_12x12"
+- id: "d_SE2_dd_v-rf180"
+- id: "d_SE2_car_v-cam_f180_n90_s"
+- id: "d_SE2_car_v-fs_05_12x12"
+- id: "d_SE2_car_v-rf180"
  
 - id: example_custom_vehicle
   desc: Specifies everything explicitly

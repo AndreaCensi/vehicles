@@ -41,13 +41,23 @@ class CairoConstants(object):
 
     sensor_data_plot_compact = True
 
-    laser_compact_bg = [1, 0.6, 0.6, 0.3]
-    laser_compact_fg = [1, 0, 0, 0.8]
+    # red bg
+    # laser_compact_bg = [1, 0.6, 0.6, 0.3]
+    # laser_compact_fg = [1, 0, 0, 0.8]
+    # yellow?
+#     laser_compact_bg = [1, 1, 0.6, 0.3]
+#     laser_compact_fg = [1, 1, 0, 0.8]
+    # yellowish
+    laser_compact_bg = [1, 0.85, 0.6, 0.3]
+    laser_compact_fg = [1, 0.85, 0, 0.8]
     laser_compact_r = 0.4
     laser_compact_r_width = 0.25
 
     photoreceptors_compact_r = 0.4
     photoreceptors_compact_r_width = 0.15
+    
+    field_sampler_color0 = [178 / 255.0, 215 / 255.0, 140 / 255.0, 0.3]
+    field_sampler_color1 = [188 / 255.0, 225 / 255.0, 150 / 255.0, 1]
 
     plot_ranges_rho_min = 0.5
 

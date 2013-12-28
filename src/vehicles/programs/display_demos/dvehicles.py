@@ -1,8 +1,10 @@
 from optparse import OptionParser
-from reprep import MIME_PNG, MIME_SVG
-from vehicles import VehicleSimulation, logger
-from vehicles.utils import expand_string
 import os
+
+from conf_tools.utils import expand_string
+from reprep import MIME_PNG, MIME_SVG
+from vehicles import VehicleSimulation, logger, get_vehicles_config
+
 
 usage = """
 
@@ -12,6 +14,7 @@ usage = """
 
 
 def main():
+    
     from vehicles_cairo import vehicles_has_cairo
     if not vehicles_has_cairo:
         logger.error('This program cannot be run if Cairo is not installed.')
@@ -42,6 +45,8 @@ def main():
     parser.add_option("--scale", default=False, action='store_true',
                     help="If given, displays the scale with a red circle")
 
+    logger.info('Use -g 0 for no grid')
+    
     (options, args) = parser.parse_args()
     if args:
         raise Exception()  # XXX
@@ -53,12 +58,14 @@ def main():
     from reprep import Report, MIME_PDF
     basename = 'vehicles_demo'
     r = Report(basename)
+    
+    vconfig = get_vehicles_config() 
 
     logger.info('Loading configuration from %s' % options.config)
-    VehiclesConfig.load(options.config)
+    vconfig.load(options.config)
 
     # TODO: selection
-    all_vehicles = VehiclesConfig.vehicles.keys()
+    all_vehicles = vconfig.vehicles.keys()
     if options.vehicles is None:
         vehicles = all_vehicles
     else:
@@ -73,8 +80,8 @@ def main():
         sec = r.node(id_vehicle)
         f = sec.figure(cols=6)
 
-        world = VehiclesConfig.specs['worlds'].instance(id_world)
-        vehicle = VehiclesConfig.specs['vehicles'].instance(id_vehicle)
+        world = vconfig.worlds.instance(id_world)
+        vehicle = vconfig.vehicles.instance(id_vehicle)
         simulation = VehicleSimulation(vehicle, world)
         simulation.new_episode()
         simulation.compute_observations()
@@ -101,9 +108,21 @@ def main():
 
         f0_data.sub(f.last(), caption=id_vehicle)
 
+        with f.data_file('svg_with', MIME_SVG) as filename:
+            vehicles_cairo_display_svg(filename,
+                        sim_state=sim_state, **plot_params)
+
         plot_params['show_sensor_data'] = False
         with f.data_file('png_without', MIME_PNG) as filename:
             vehicles_cairo_display_png(filename,
+                        sim_state=sim_state, **plot_params)
+
+        with f.data_file('svg_without', MIME_SVG) as filename:
+            vehicles_cairo_display_svg(filename,
+                        sim_state=sim_state, **plot_params)
+
+        with f.data_file('pdf_without', MIME_PDF) as filename:
+            vehicles_cairo_display_pdf(filename,
                         sim_state=sim_state, **plot_params)
 
         f0.sub(f.last(), caption=id_vehicle)
@@ -122,6 +141,9 @@ def main():
         plot_params['show_robot_sensors'] = False
         with f.data_file('png_only_body', MIME_PNG) as filename:
             vehicles_cairo_display_png(filename,
+                        sim_state=sim_state, **plot_params)
+        with f.data_file('pdf_only_body', MIME_PDF) as filename:
+            vehicles_cairo_display_pdf(filename,
                         sim_state=sim_state, **plot_params)
 
     filename = os.path.join(options.outdir, 'index.html')

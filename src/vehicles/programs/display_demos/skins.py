@@ -1,8 +1,9 @@
 from optparse import OptionParser
-from reprep import MIME_PNG, Report
-from vehicles import get_conftools_skins, logger
-from vehicles_cairo import vehicles_has_cairo
 import os
+
+from reprep import MIME_PNG, Report
+from vehicles import get_conftools_skins, logger, get_vehicles_config
+from vehicles_cairo import vehicles_has_cairo
 
 
 usage = """
@@ -37,9 +38,11 @@ def main():
     r = Report('skins_demo')
     f = r.figure(cols=3)
 
-    import cairo
+    import cairo  # @UnresolvedImport
 
-    VehiclesConfig.make_sure_loaded()
+    vconfig = get_vehicles_config()
+    vconfig.load()  # Default
+#     get_conftools_vehicles().make_sure_loaded()
 
     skins = get_conftools_skins().keys()
     logger.info('Skins: %s' % skins)

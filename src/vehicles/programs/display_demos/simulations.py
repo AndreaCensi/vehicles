@@ -1,11 +1,12 @@
 from optparse import OptionParser
-from reprep import MIME_PNG, MIME_SVG
-from vehicles import (get_conftools_worlds, get_conftools_vehicles, logger,
-    VehicleSimulation)
-from vehicles_cairo import vehicles_has_cairo
-import numpy as np
 import os
+
 from conf_tools import GlobalConfig
+import numpy as np
+from reprep import MIME_PNG, MIME_SVG
+from vehicles_cairo import vehicles_has_cairo
+from vehicles.simulation.vsimulation import VehicleSimulation
+
 
 usage = """
 
@@ -15,6 +16,8 @@ usage = """
 
 
 def main():
+    from vehicles import (get_conftools_worlds, get_conftools_vehicles, logger)
+
     if not vehicles_has_cairo:
         logger.error('This program cannot be run if Cairo is not installed.')
         return
