@@ -1,13 +1,15 @@
+import os
+import subprocess
+
 from cairo_utils import cairo_pixels, cairo_text_align
+from conf_tools.utils import raise_x_not_found
 from geometry import SE2_from_SE3, SE3
+import numpy as np
 from procgraph import BadConfig, Block
 from procgraph.block_utils import make_sure_dir_exists
 from procgraph_images import posneg, scale, reshape2d
 from vehicles_cairo import (cairo_save, cairo_transform,
     vehicles_cairo_display_all, cairo_rototranslate, cairo_ref_frame)
-import numpy as np
-import os
-import subprocess
 
 
 class VehiclesCairoDisplay(Block):
@@ -158,10 +160,12 @@ class VehiclesCairoDisplay(Block):
             
         id_vehicle = boot_obs['id_robot'].item()
         
-        if 'extra' in boot_obs:
-            extra = boot_obs['extra'].item()
-        else:
-            extra = {}
+        extra = boot_obs['extra'].item()
+        # todo: check
+        key = 'robot_state'
+        if not key in extra:
+            raise_x_not_found('key', key, extra)
+
 
         def extra_draw_world(cr):
             if 'servonav' in extra:
@@ -176,8 +180,8 @@ class VehiclesCairoDisplay(Block):
 
         sidebar_params = self.config.sidebar_params
 
-        # todo: check
-        sim_state = extra['robot_state']
+
+        sim_state = extra[key]
 
         observations_values = boot_obs['observations']
 
