@@ -1,4 +1,5 @@
 from contracts import contract
+
 from geometry import quaternion_from_rotation, rotation_translation_from_pose
 import numpy as np
 
