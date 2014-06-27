@@ -1,7 +1,8 @@
-from conf_tools import instantiate_spec
+from conf_tools import GlobalConfig, instantiate_spec
 from optparse import OptionParser
 from pprint import pformat
-from vehicles import GeometricShape, logger
+from reprep import scale
+from vehicles import GeometricShape, logger, get_conftools_worlds
 import numpy as np
 import os
 
@@ -16,6 +17,9 @@ def inspect_textures():
     parser = OptionParser(usage=usage)
     parser.disable_interspersed_args()
 
+    parser.add_option("-c", "--config", default='default',
+                      help="Config dirs.")
+
     parser.add_option("-w", "--world", default='stochastic_box_10',
                        help="ID world [%default].")
 
@@ -25,18 +29,20 @@ def inspect_textures():
                     help="output directory [%default]")
     parser.add_option("--figsize", default=1, type='float',
                     help="figsize (inches) [%default]")
-    parser.add_option("-z", "--zoom", default=0, type='float',
-                    help="zoom in meters; 0 for full view [%default]")
+#     parser.add_option("-z", "--zoom", default=0, type='float',
+#                     help="zoom in meters; 0 for full view [%default]")
 
     (options, args) = parser.parse_args()
     if args:
         raise Exception()  # XXX
 
+    GlobalConfig.global_load_dir(options.config)
+
     id_world = options.world
 
     logger.info('  id_world: %s' % id_world)
 
-    world = VehiclesConfig.worlds.instance(id_world)  # @UndefinedVariable
+    world = get_conftools_worlds().instance(id_world)
 
     from reprep import Report
     basename = 'inspect_textures-%s' % (id_world)
@@ -57,6 +63,11 @@ def inspect_textures():
             perimeter = p.get_perimeter()
             texture = instantiate_spec(p.texture)
 
+
+            xall = np.linspace(0, perimeter, 1024)
+            lumall = np.tile(texture(xall), (10, 1))
+            f.data_rgb('luminance', scale(lumall))
+
             chunk_size = 10
             nchunks = np.ceil(perimeter * 1.0 / chunk_size)
 
@@ -73,16 +84,7 @@ def inspect_textures():
                                       options.figsize)) as pylab:
                     pylab.plot(x, lum)
                     pylab.axis((xfrom, xfrom + chunk_size, -0.1, 1.1))
-
-#
-#        if False:
-#            with f.data_pylab('pdf', mime=MIME_PDF,
-#                              figsize=(options.figsize,
-#                                      options.figsize)) as pylab:
-#                    display_all(pylab, sim_state, grid=1, zoom=0, 
-# show_sensor_data = True)
-#            f.last().add_to(f)
-
+ 
     filename = os.path.join(options.outdir, 'index.html')
     logger.info('Writing to %r.' % filename)
     r.to_html(filename)

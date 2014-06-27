@@ -1,5 +1,7 @@
-
 from contracts import contract
+
+
+__all__ = ['cairo_set_color']
 
 
 @contract(col='seq[3]|seq[4]')

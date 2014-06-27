@@ -1,8 +1,11 @@
-from geometry import SE3
 import time
-from vehicles import logger, World
+
+from geometry import SE3
 import numpy as np
-from vehicles.simulation.vehicle import Vehicle
+from vehicles import logger, World
+
+from .vehicle import Vehicle
+
 
 __all__ = ['VehicleSimulation']
 

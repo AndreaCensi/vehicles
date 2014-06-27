@@ -1,6 +1,8 @@
-from . import Counter, contract
-from . import World, Source
-from vehicles.library.worlds.stochastic_box2 import KernelInverse
+from .stochastic_box2 import KernelInverse
+from .utils import Counter
+from contracts import contract
+from vehicles import Source, World
+
 
 __all__ = ['StochasticSources']
 
@@ -39,6 +41,6 @@ class StochasticSources(World):
         self.refresh()
         return World.new_episode(self)
 
-    def simulate(self, dt, vehicle_pose): #@UnusedVariable
+    def simulate(self, dt, vehicle_pose):  # @UnusedVariable
         return []  # no changes
 

@@ -5,7 +5,7 @@ version = "2.1"
 
 description = """"""  # TODO
 
-long_description = description    # TODO
+long_description = description  # TODO
 
 setup(name='PyVehicles',
       url='',
@@ -34,7 +34,7 @@ setup(name='PyVehicles',
         'PyGeometry'
       ],
       tests_require=['nose>=1.1.2,<2'],
-      extras_require={ # TODO: reprep?
+      extras_require={  # TODO: reprep?
         'procgraph':  ["procgraph>=1.0,<2"],
         'boot':  ["BootOlympics>=1.0,<2"],
       },
@@ -47,7 +47,7 @@ setup(name='PyVehicles',
            'vehicles_display_demo_skins = '
                 'vehicles.programs.display_demos.skins:main',
            'vehicles_display_demo_vehicles = '
-                'vehicles.programs.display_demos.vehicles:main',
+                'vehicles.programs.display_demos.dvehicles:main',
            'vehicles_inspect_textures = '
                 'vehicles.programs.inspect_textures:main',
             'vehicles_create_olympics_configs = '

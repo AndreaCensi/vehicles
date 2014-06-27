@@ -1,0 +1,203 @@
+
+<html>
+<head>  
+    <script type="text/javascript" 
+        src="images/static/jquery/jquery.js"></script>
+    
+    <!-- Use imagezoom plugin --> 
+    <script type="text/javascript" 
+        src="images/static/jquery/jquery.imageZoom.js"></script>
+    <link rel="stylesheet" 
+          href="images/static/jquery/jquery.imageZoom.css"/>
+    <script type="text/javascript"> 
+        $(document).ready( function () {
+            $('.zoomable').imageZoom();
+        });       
+    </script>
+    
+    <!-- Use tablesorter plugin -->
+    <script type="text/javascript" 
+            src="images/static/jquery/tablesorter/jquery.tablesorter.js"></script> 
+    <link rel="stylesheet" 
+          href="images/static/jquery/tablesorter/themes/blue/style.css"/>
+    <script type="text/javascript">
+    $(document).ready(function() { 
+        $(".tablesorter").tablesorter(); 
+    } 
+    ); 
+    </script>
+    
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { 
+            equationNumbers: { autoNumber: "AMS" },
+            extensions: ["AMSmath.js", "AMSsymbols.js"] 
+        },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/SVG"], //" "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$']],
+          displayMath: [ ['$$','$$'] ], 
+          processEscapes: true
+        },
+        "HTML-CSS": { availableFonts: ["TeX"] }
+      });
+      //MathJax.Ajax.loadComplete("/media/tex/symbols.js");
+    </script>
+    
+    <script type='text/javascript' 
+            src='http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+
+
+
+    
+    <style type="text/css">
+    /* Extra CSS passed by user. */
+        
+    </style>
+
+    <link rel="stylesheet" 
+          href="images/static/reprep/default_style.css"/>
+
+    <title> sensors </title>
+<body>
+
+<p id="reprep-head"> 
+    Report created on 2013-12-19-18:28:09
+    by <a href="http://purl.org/censi/2010/RepRep">RepRep</a>.
+    Show:
+    <input type="submit" name="datanode_toggle" 
+           value="data nodes" id="datanode_toggle" /> 
+</p>
+
+
+
+<script type="text/javascript">
+ $(document).ready(function() {
+   $('.datanode').hide();
+   $('#datanode_toggle').click(function(){
+     $('.datanode').toggle();
+   });
+ });
+</script>
+
+
+
+    <div class='report-node' id="sensors">
+    <h><a href="#sensors">sensors</a></h><section> 
+<div class="report-nongui-nodes">
+<table class="report-table tablesorter">
+<caption>VehiclesConfig</caption>
+<thead>
+<tr>
+<th></th>	<th>desc</th>
+	<th>code</th>
+</tr>
+</thead>
+<tbody>
+<tr class="even">
+<th>cam180</th>
+	<td  style="text-align: '.'">A camera with 180fov, 90 sensels, smooth (default)</td>
+	<td  style="text-align: '.'">['vehicles.library.sensors.PhotoreceptorsSmoothUniform', {'spatial_sigma_deg': 4, 'fov_deg': 180, 'noise': ['vehicles.library.noises.AdditiveGaussian', {'std_dev': 0.05}], 'num_sensels': 90}]</td>
+</tr>
+<tr class="odd">
+<th>cam360</th>
+	<td  style="text-align: '.'">An omnidirectional camera with 180 sensels (smooth).</td>
+	<td  style="text-align: '.'">['vehicles.library.sensors.PhotoreceptorsSmoothUniform', {'spatial_sigma_deg': 4, 'fov_deg': 360, 'noise': ['vehicles.library.noises.AdditiveGaussian', {'std_dev': 0.05}], 'upsample': 15, 'num_sensels': 180}]</td>
+</tr>
+<tr class="even">
+<th>cam_f60_n45</th>
+	<td  style="text-align: '.'">A camera with 60deg fov, 45 sensels.</td>
+	<td  style="text-align: '.'">['vehicles.library.sensors.PhotoreceptorsUniform', {'fov_deg': 60, 'noise': ['vehicles.library.noises.AdditiveGaussian', {'std_dev': 0.05}], 'num_sensels': 45}]</td>
+</tr>
+<tr class="odd">
+<th>cam_f60_n45_s</th>
+	<td  style="text-align: '.'">A camera with 60deg fov, 45 sensels.</td>
+	<td  style="text-align: '.'">['vehicles.library.sensors.PhotoreceptorsSmoothUniform', {'spatial_sigma_deg': 2.7, 'fov_deg': 60, 'noise': ['vehicles.library.noises.AdditiveGaussian', {'std_dev': 0.05}], 'num_sensels': 45}]</td>
+</tr>
+<tr class="even">
+<th>cam_f90_n45</th>
+	<td  style="text-align: '.'">A camera with 90deg fov, 45 sensels.</td>
+	<td  style="text-align: '.'">['vehicles.library.sensors.PhotoreceptorsUniform', {'fov_deg': 90, 'noise': ['vehicles.library.noises.AdditiveGaussian', {'std_dev': 0.05}], 'num_sensels': 45}]</td>
+</tr>
+<tr class="odd">
+<th>cam_f90_n45_s</th>
+	<td  style="text-align: '.'">A camera with 90deg fov, 45 sensels.</td>
+	<td  style="text-align: '.'">['vehicles.library.sensors.PhotoreceptorsSmoothUniform', {'spatial_sigma_deg': 4, 'fov_deg': 90, 'noise': ['vehicles.library.noises.AdditiveGaussian', {'std_dev': 0.05}], 'num_sensels': 45}]</td>
+</tr>
+<tr class="even">
+<th>cam_f180_n90</th>
+	<td  style="text-align: '.'">A camera with 180fov, 90 sensels.</td>
+	<td  style="text-align: '.'">['vehicles.library.sensors.PhotoreceptorsUniform', {'fov_deg': 180, 'noise': ['vehicles.library.noises.AdditiveGaussian', {'std_dev': 0.05}], 'num_sensels': 90}]</td>
+</tr>
+<tr class="odd">
+<th>cam_f180_n90_s</th>
+	<td  style="text-align: '.'">A camera with 180fov, 90 sensels, smooth (default)</td>
+	<td  style="text-align: '.'">['vehicles.library.sensors.PhotoreceptorsSmoothUniform', {'spatial_sigma_deg': 4, 'fov_deg': 180, 'noise': ['vehicles.library.noises.AdditiveGaussian', {'std_dev': 0.05}], 'num_sensels': 90}]</td>
+</tr>
+<tr class="even">
+<th>cam_f180_n180</th>
+	<td  style="text-align: '.'">A camera with 180fov, 180sensels.</td>
+	<td  style="text-align: '.'">['vehicles.library.sensors.PhotoreceptorsUniform', {'fov_deg': 180, 'noise': ['vehicles.library.noises.AdditiveGaussian', {'std_dev': 0.05}], 'num_sensels': 180}]</td>
+</tr>
+<tr class="odd">
+<th>cam_f180_n180_s</th>
+	<td  style="text-align: '.'">A camera with 180fov, 180sensels.</td>
+	<td  style="text-align: '.'">['vehicles.library.sensors.PhotoreceptorsSmoothUniform', {'spatial_sigma_deg': 2, 'fov_deg': 180, 'noise': ['vehicles.library.noises.AdditiveGaussian', {'std_dev': 0.05}], 'num_sensels': 180}]</td>
+</tr>
+<tr class="even">
+<th>cam_f360_n180</th>
+	<td  style="text-align: '.'">An omnidirectional camera with 180 sensels.</td>
+	<td  style="text-align: '.'">['vehicles.library.sensors.PhotoreceptorsUniform', {'fov_deg': 360, 'noise': ['vehicles.library.noises.AdditiveGaussian', {'std_dev': 0.05}], 'num_sensels': 180}]</td>
+</tr>
+<tr class="odd">
+<th>cam_f360_n180_s</th>
+	<td  style="text-align: '.'">An omnidirectional camera with 180 sensels (smooth).</td>
+	<td  style="text-align: '.'">['vehicles.library.sensors.PhotoreceptorsSmoothUniform', {'spatial_sigma_deg': 4, 'fov_deg': 360, 'noise': ['vehicles.library.noises.AdditiveGaussian', {'std_dev': 0.05}], 'upsample': 15, 'num_sensels': 180}]</td>
+</tr>
+<tr class="even">
+<th>fs_05_12x12</th>
+	<td  style="text-align: '.'">A field sampler with a 12x12 display.</td>
+	<td  style="text-align: '.'">['vehicles.library.sensors.FieldSamplerUniform', {'normalize': False, 'shape': [12, 12], 'noise': ['vehicles.library.noises.AdditiveGaussian', {'std_dev': 0.015}], 'sides': [0.22, 0.22]}]</td>
+</tr>
+<tr class="odd">
+<th>fs_05_rand144</th>
+	<td  style="text-align: '.'">A field sampler with a 12x12 display.</td>
+	<td  style="text-align: '.'">['vehicles.library.sensors.FieldSamplerRandCircle', {'normalize': False, 'noise': ['vehicles.library.noises.AdditiveGaussian', {'std_dev': 0.015}], 'radius': 0.25, 'n': 144}]</td>
+</tr>
+<tr class="even">
+<th>photo_f360_n180</th>
+	<td  style="text-align: '.'">180 photoreceptors distributed on 360deg</td>
+	<td  style="text-align: '.'">['vehicles.library.sensors.PhotoreceptorsSmoothUniform', {'spatial_sigma_deg': 5, 'fov_deg': 360, 'noise': ['vehicles.library.noises.AdditiveGaussian', {'std_dev': 0.05}], 'upsample': 15, 'num_sensels': 180}]</td>
+</tr>
+<tr class="odd">
+<th>random_5</th>
+	<td  style="text-align: '.'">A random sensor with 5 sensels.</td>
+	<td  style="text-align: '.'">['vehicles.library.sensors.RandomSensor', {'num_sensels': 5}]</td>
+</tr>
+<tr class="even">
+<th>rf180</th>
+	<td  style="text-align: '.'">A range finder with 180fov.</td>
+	<td  style="text-align: '.'">['vehicles.library.sensors.RangefinderUniform', {'fov_deg': 180, 'noise': ['vehicles.library.noises.AdditiveGaussian', {'std_dev': 0.01}], 'num_sensels': 180}]</td>
+</tr>
+<tr class="odd">
+<th>rf360</th>
+	<td  style="text-align: '.'">An omnidirectional range-finder.</td>
+	<td  style="text-align: '.'">['vehicles.library.sensors.RangefinderUniform', {'fov_deg': 360, 'noise': ['vehicles.library.noises.AdditiveGaussian', {'std_dev': 0.01}], 'num_sensels': 180}]</td>
+</tr>
+<tr class="even">
+<th>rf_f270_n180</th>
+	<td  style="text-align: '.'">A range finder with 270deg fov, 180 sensels.</td>
+	<td  style="text-align: '.'">['vehicles.library.sensors.RangefinderUniform', {'fov_deg': 270, 'noise': ['vehicles.library.noises.AdditiveGaussian', {'std_dev': 0.01}], 'num_sensels': 180}]</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section> 
+</div> 
+
+ 
+
+</body>
+</html>

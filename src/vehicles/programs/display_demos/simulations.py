@@ -1,9 +1,12 @@
-from ... import VehicleSimulation, logger
 from optparse import OptionParser
-from reprep import MIME_PNG, MIME_SVG
-import numpy as np
 import os
+
+from conf_tools import GlobalConfig
+import numpy as np
+from reprep import MIME_PNG, MIME_SVG
 from vehicles_cairo import vehicles_has_cairo
+from vehicles.simulation.vsimulation import VehicleSimulation
+
 
 usage = """
 
@@ -13,6 +16,8 @@ usage = """
 
 
 def main():
+    from vehicles import (get_conftools_worlds, get_conftools_vehicles, logger)
+
     if not vehicles_has_cairo:
         logger.error('This program cannot be run if Cairo is not installed.')
         return
@@ -22,6 +27,11 @@ def main():
 
     parser = OptionParser(usage=usage)
     parser.disable_interspersed_args()
+
+
+    parser.add_option("-c", "--config", default='default',
+                      help="Config dirs.")
+
 
     parser.add_option("--vehicle", default='d_SE2_rb_v-rf360',
                       help="ID vehicle [%default].")
@@ -46,12 +56,16 @@ def main():
     if args:
         raise Exception()
 
+    GlobalConfig.global_load_dir(options.config)
+
+
     id_vehicle = options.vehicle
     id_world = options.world
 
     logger.info('id_vehicle: %s' % id_vehicle)
     logger.info('  id_world: %s' % id_world)
 
+    
     if options.seed is None:
         options.seed = np.random.randint(1000000)
 
@@ -59,8 +73,8 @@ def main():
     logger.info('Using seed %s (your lucky number is %s)' % 
                 (options.seed, np.random.randint(1000)))
 
-    vehicle = VehiclesConfig.vehicles.instance(id_vehicle)  # @UndefinedVariable
-    world = VehiclesConfig.worlds.instance(id_world)  # @UndefinedVariable
+    vehicle = get_conftools_vehicles().instance(id_vehicle)  
+    world = get_conftools_worlds().instance(id_world) 
 
     simulation = VehicleSimulation(vehicle, world)
 

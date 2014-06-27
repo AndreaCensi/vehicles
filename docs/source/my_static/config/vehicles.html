@@ -1,0 +1,146 @@
+
+<html>
+<head>  
+    <script type="text/javascript" 
+        src="images/static/jquery/jquery.js"></script>
+    
+    <!-- Use imagezoom plugin --> 
+    <script type="text/javascript" 
+        src="images/static/jquery/jquery.imageZoom.js"></script>
+    <link rel="stylesheet" 
+          href="images/static/jquery/jquery.imageZoom.css"/>
+    <script type="text/javascript"> 
+        $(document).ready( function () {
+            $('.zoomable').imageZoom();
+        });       
+    </script>
+    
+    <!-- Use tablesorter plugin -->
+    <script type="text/javascript" 
+            src="images/static/jquery/tablesorter/jquery.tablesorter.js"></script> 
+    <link rel="stylesheet" 
+          href="images/static/jquery/tablesorter/themes/blue/style.css"/>
+    <script type="text/javascript">
+    $(document).ready(function() { 
+        $(".tablesorter").tablesorter(); 
+    } 
+    ); 
+    </script>
+    
+    
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        TeX: { 
+            equationNumbers: { autoNumber: "AMS" },
+            extensions: ["AMSmath.js", "AMSsymbols.js"] 
+        },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX", "output/SVG"], //" "output/HTML-CSS"],
+        tex2jax: {
+          inlineMath: [ ['$','$']],
+          displayMath: [ ['$$','$$'] ], 
+          processEscapes: true
+        },
+        "HTML-CSS": { availableFonts: ["TeX"] }
+      });
+      //MathJax.Ajax.loadComplete("/media/tex/symbols.js");
+    </script>
+    
+    <script type='text/javascript' 
+            src='http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+
+
+
+    
+    <style type="text/css">
+    /* Extra CSS passed by user. */
+        
+    </style>
+
+    <link rel="stylesheet" 
+          href="images/static/reprep/default_style.css"/>
+
+    <title> vehicles </title>
+<body>
+
+<p id="reprep-head"> 
+    Report created on 2013-12-19-18:28:09
+    by <a href="http://purl.org/censi/2010/RepRep">RepRep</a>.
+    Show:
+    <input type="submit" name="datanode_toggle" 
+           value="data nodes" id="datanode_toggle" /> 
+</p>
+
+
+
+<script type="text/javascript">
+ $(document).ready(function() {
+   $('.datanode').hide();
+   $('#datanode_toggle').click(function(){
+     $('.datanode').toggle();
+   });
+ });
+</script>
+
+
+
+    <div class='report-node' id="vehicles">
+    <h><a href="#vehicles">vehicles</a></h><section> 
+<div class="report-nongui-nodes">
+<table class="report-table tablesorter">
+<caption>VehiclesConfig</caption>
+<thead>
+<tr>
+<th></th>	<th>desc</th>
+	<th>dynamics</th>
+	<th>id_dynamics</th>
+	<th>sensors</th>
+</tr>
+</thead>
+<tbody>
+<tr class="even">
+<th>d_SE2_dd_v-cam_f180_n90_s</th>
+	<td  style="text-align: '.'">Differential drive robot</td>
+	<td  style="text-align: '.'">d_SE2_dd_v</td>
+	<td  style="text-align: '.'">[{'id_sensor': 'cam_f180_n90_s'}]</td>
+</tr>
+<tr class="odd">
+<th>d_SE2_rb_v-cam180-stereo</th>
+	<td  style="text-align: '.'">An omnidirectional robot with two 180deg camera.</td>
+	<td  style="text-align: '.'">d_SE2_rb_v</td>
+	<td  style="text-align: '.'">[{'id_sensor': 'cam_f180_n90_s', 'pose': [0, 0.2, 0]}, {'id_sensor': 'cam_f180_n90_s', 'pose': [0, -0.2, 0]}]</td>
+</tr>
+<tr class="even">
+<th>example_custom_vehicle</th>
+	<td  style="text-align: '.'">Specifies everything explicitly</td>
+	<td  style="text-align: '.'">{'code': ['vehicles.library.dynamics.CircleForce', {'max_force': 1, 'mass': 1, 'damping': 2}], 'id': 'example_custom_dynamics', 'desc': 'Particle on S1 controlled in force.'}</td>
+	<td  style="text-align: '.'">[{'pose': [0, 0, 0], 'sensor': {'code': ['vehicles.library.sensors.PhotoreceptorsUniform', {'fov_deg': 180, 'num_sensels': 180}], 'id': 'my_cam', 'desc': 'A camera with 180fov.'}}]</td>
+</tr>
+<tr class="odd">
+<th>landroid-4cam</th>
+	<td  style="text-align: '.'">Model for the landroid; only cam</td>
+	<td  style="text-align: '.'">d_SE2_car_v</td>
+	<td  style="text-align: '.'">[{'id_sensor': 'cam_f60_n45', 'pose': [0.15, 0, 0]}, {'id_sensor': 'cam_f60_n45', 'pose': [-0.05, 0.075, 90]}, {'id_sensor': 'cam_f60_n45', 'pose': [-0.05, -0.075, -90]}, {'id_sensor': 'cam_f60_n45', 'pose': [-0.15, 0, 180]}]</td>
+</tr>
+<tr class="even">
+<th>landroid-hokuyo</th>
+	<td  style="text-align: '.'">Model for the landroid; only Hokuyo.</td>
+	<td  style="text-align: '.'">d_SE2_car_v</td>
+	<td  style="text-align: '.'">[{'id_sensor': 'rf_f270_n180', 'pose': [0.03, 0, 0]}]</td>
+</tr>
+<tr class="odd">
+<th>landroid-hokuyo-4cam</th>
+	<td  style="text-align: '.'">Model for the landroid; Hokuyo + cams</td>
+	<td  style="text-align: '.'">d_SE2_car_v</td>
+	<td  style="text-align: '.'">[{'id_sensor': 'rf_f270_n180', 'pose': [0.03, 0, 0]}, {'id_sensor': 'cam_f60_n45', 'pose': [0.15, 0, 0]}, {'id_sensor': 'cam_f60_n45', 'pose': [-0.05, 0.075, 90]}, {'id_sensor': 'cam_f60_n45', 'pose': [-0.05, -0.075, -90]}, {'id_sensor': 'cam_f60_n45', 'pose': [-0.15, 0, 180]}]</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section> 
+</div> 
+
+ 
+
+</body>
+</html>

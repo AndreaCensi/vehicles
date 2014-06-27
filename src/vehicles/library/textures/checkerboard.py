@@ -1,4 +1,9 @@
-from . import SampledTexture, np, contract
+from .sampled import SampledTexture
+from contracts import contract
+import numpy as np
+
+
+__all__ = ['RandomCheckerboard', 'BWCheckerboard']
 
 
 class RandomCheckerboard(SampledTexture):

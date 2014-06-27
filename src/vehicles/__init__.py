@@ -1,11 +1,10 @@
 ''' PyVehicles main package: play with your vehicles zoo! '''
 
 __version__ = '2.1'
-
+ 
 __all__ = ['VehicleSensor', 'Field', 'PolyLine', 'Vehicle', 'Circle',
            'GeometricShape', 'VehiclesConstants', 'VehicleSimulation',
-             'World',
-             'Attached', 'Primitive', 'Source', 'VehicleSkin', 'Dynamics',
+             'World', 'Attached', 'Primitive', 'Source', 'VehicleSkin', 'Dynamics',
              'library']
 
 # Does extra checks to make sure states, etc. belong to their manifolds.

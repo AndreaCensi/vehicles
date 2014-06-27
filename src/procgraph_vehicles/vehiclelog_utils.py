@@ -1,6 +1,5 @@
-from procgraph import Block, simple_block, COMPULSORY
 import numpy as np
-
+from procgraph import Block, simple_block, COMPULSORY
 import procgraph_boot  # some things moved here @UnusedImport
 
 

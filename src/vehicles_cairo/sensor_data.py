@@ -110,7 +110,9 @@ def plot_fieldsampler(cr, pose, positions, sensels, radius=None):
 
     for i, value in enumerate(sensels.flat):
         value = 1 - value
-        facecolor = [value, value, value]
+        # this is grey
+        # facecolor = [value, value, value]
+        facecolor = [value, 1, value]
         pw = SE2_act_R2(pose, positions[i, :])
         # alpha=0.6
         cairo_plot_circle(cr, center=pw, radius=radius, facecolor=facecolor,
@@ -159,8 +161,16 @@ def plot_fieldsampler_fancy(cr, positions, sensels, radius=None,
         value = sensels.flat[i]
         p = positions[i, :]
 
-        uvalue = value
-        facecolor = [uvalue, uvalue, uvalue, value]
+#         uvalue = value
+        # grey
+        # facecolor = [uvalue, uvalue, uvalue, value]
+        # green to white
+        # facecolor = [uvalue, 1, uvalue, value]
+#         green to gray
+        facecolor = np.array(CC.field_sampler_color0) * (1 - value) + \
+                np.array(CC.field_sampler_color1) * (value) 
+
+#         facecolor = [0, 0.7, 0, value]
         border_color = [0, 0, 0, 0.3 + 0.5 * value]
 
         radius_i = (alpha + (1 - alpha) * value) * radius
