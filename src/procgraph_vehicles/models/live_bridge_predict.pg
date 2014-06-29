@@ -16,13 +16,10 @@ input predict
 
 obs -> |extract_field field=commands| -> commands
 
-
 predict -> |extract_field field=y_dot| -> y_dot
 predict -> |extract_field field=y_dot_pred| -> y_dot_pred
  
-
 commands -> |historyt interval=100| --> |plot width=$width height=200| -> commands_rgb
-
 
 y_dot, y_dot_pred -> |sync| -> \
     |plot width=$width height=$height y_min=-2 y_max=+2|-> diff_rgb
@@ -31,7 +28,5 @@ y_dot, y_dot_pred -> |sync| -> |make_tuple| ->  \
     x_min=-2 x_max=+2 format='.'|-> cmp_rgb
 
 diff_rgb, cmp_rgb, commands_rgb -> |sync| -> |grid cols=2| -> rgb
-
-     
 
     rgb -> |mencoder file="${basename}.mp4"|

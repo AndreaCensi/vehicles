@@ -22,7 +22,6 @@ from contracts import contract
 import geometry  # loads all geometry contracts
 import numpy as np
 
-
 from .constants import *
 from .configuration import *
 from .interfaces import *
