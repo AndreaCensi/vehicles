@@ -1,4 +1,9 @@
-from . import FieldSampler, contract, np
+from contracts import contract
+
+import numpy as np
+
+from .field_sampler import FieldSampler
+
 
 __all__ = ['FieldSamplerRandCircle']
 
@@ -36,8 +41,6 @@ def random_in_circle(radius):
         p = np.random.uniform(-1, +1, 2)
         if np.linalg.norm(p) <= 1:
             return p * radius
-
-
 
 
 

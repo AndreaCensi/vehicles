@@ -1,8 +1,9 @@
-from conf_tools import instantiate_spec
 from contracts import contract
+
+from conf_tools import instantiate_spec
 from geometry import SE2_project_from_SE3
-from vehicles import Field, VehicleSensor, Source, VehiclesConstants, logger
 import numpy as np
+from vehicles import Field, VehicleSensor, Source, VehiclesConstants, logger
 
 
 __all__ = ['FieldSampler', 'get_field_values', 'get_field_value']

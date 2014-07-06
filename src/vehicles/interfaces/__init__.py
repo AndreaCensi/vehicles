@@ -1,5 +1,3 @@
-from .. import contract, np, logger
-
 __all__ = ['Circle', 'Dynamics', 'Field', 'GeometricShape',
            'PolyLine', 'Primitive', 'Source', 'VehicleSensor',
            'VehicleSkin', 'World', 'Texture']

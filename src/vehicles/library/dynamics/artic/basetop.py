@@ -1,10 +1,12 @@
 from contracts import contract
+
 from geometry import (SE3, se3, SE3_from_SE2, angle_from_SE2,
     SE2_from_translation_angle, SE2_from_SE3, ProductManifold)
+import numpy as np
+from streamels import StreamSpec
 from vehicles import Dynamics, get_conftools_dynamics
 from vehicles.library.dynamics.specializations import CircleVel, SE2Dynamics
-import numpy as np
-from bootstrapping_olympics.interfaces.streamels.stream_spec import StreamSpec
+
 
 __all__ = ['BaseTopDynamics', 'Turret', 'BaseTop']
 

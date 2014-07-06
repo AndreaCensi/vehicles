@@ -1,7 +1,10 @@
-from . import SampledTexture, np, contract
+from contracts import contract
+
+import numpy as np
+
 from conf_tools import instantiate_spec
 from geometry import assert_allclose
-from  scipy.signal import gaussian, convolve #@UnresolvedImport
+from .sampled import SampledTexture
 # TODO: add if/else
 
 
@@ -27,6 +30,9 @@ class Smoothed(SampledTexture):
         #print('sigma: %s' % sigma)
         #print('kernel_size: %s' % kernel_size)
         #print kernel
+
+        from  scipy.signal import gaussian, convolve  # @UnresolvedImport
+
 
         kernel = gaussian(kernel_size, sigma / resolution)
         kernel = kernel / kernel.sum()

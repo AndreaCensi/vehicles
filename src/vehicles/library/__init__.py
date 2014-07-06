@@ -1,5 +1,3 @@
-from .. import np, contract, logger
-
 __all__ = ['noises', 'sensors', 'dynamics', 'textures', 'worlds']
 
 from . import noises

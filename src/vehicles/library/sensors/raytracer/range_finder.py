@@ -1,9 +1,12 @@
-from . import MyRaytracer, contract, np
-from .. import get_uniform_directions
-from vehicles import VehicleSensor, VehiclesConstants
+from contracts import contract
+
 from conf_tools import instantiate_spec
 from geometry import SE2_project_from_SE3
-from vehicles.library.sensors.utils import get_random_directions
+import numpy as np
+from vehicles import VehicleSensor, VehiclesConstants
+
+from .myraytracer import MyRaytracer
+
 
 __all__ = ['Rangefinder', 'RangefinderUniform']
 
@@ -76,6 +79,7 @@ class RangefinderUniform(Rangefinder):
     """ A range finder with uniform disposition of sensels. """
     @contract(fov_deg='>0,<=360', num_sensels='int,>0')
     def __init__(self, fov_deg, num_sensels, noise=None):
+        from vehicles.library.sensors.utils import get_uniform_directions
         directions = get_uniform_directions(fov_deg, num_sensels)
         Rangefinder.__init__(self, directions=directions, noise=noise)
 
@@ -84,6 +88,7 @@ class RangefinderRandomDisp(Rangefinder):
     """ A range finder with random disposition of sensels. """
     @contract(fov_deg='>0,<=360', num_sensels='int,>0')
     def __init__(self, fov_deg, num_sensels, noise=None):
+        from vehicles.library.sensors.utils import get_random_directions
         directions = get_random_directions(fov_deg, num_sensels)
         Rangefinder.__init__(self, directions=directions, noise=noise)
 

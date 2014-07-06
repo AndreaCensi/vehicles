@@ -1,8 +1,12 @@
-from . import MyRaytracer, np
-from vehicles import PolyLine, Circle
-from conf_tools import instantiate_spec
-from contracts import contract
 import warnings
+
+from contracts import contract
+
+from conf_tools import instantiate_spec
+import numpy as np
+from vehicles import PolyLine, Circle
+
+from .myraytracer import MyRaytracer
 
 
 class TexturedRaytracer(MyRaytracer):

@@ -1,4 +1,11 @@
-from . import Texture, contract, np
+
+from contracts import contract
+
+import numpy as np
+from vehicles import Texture
+
+
+__all__ = ['SampledTexture']
 
 
 class SampledTexture(Texture):

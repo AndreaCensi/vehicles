@@ -1,14 +1,16 @@
-from .. import for_all_vehicles, for_all_skins
-from ...simulation import VehicleSimulation
-from vehicles_cairo import vehicles_has_cairo
 import tempfile
+
+from vehicles import VehicleSimulation
 from vehicles import get_conftools_worlds
+from vehicles.unittests.generation import for_all_vehicles, for_all_skins
+from vehicles_cairo import vehicles_has_cairo
 
 
 if vehicles_has_cairo:
     from vehicles_cairo import (vehicles_cairo_display_svg,
                                 vehicles_cairo_display_pdf,
                                 vehicles_cairo_display_png)
+
 
     @for_all_vehicles
     def plotting(id_vehicle, vehicle):  # @UnusedVariable

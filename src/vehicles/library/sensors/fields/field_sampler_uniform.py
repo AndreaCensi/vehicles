@@ -1,5 +1,11 @@
-from . import FieldSampler, contract, np
 import itertools
+
+from contracts import contract
+
+import numpy as np
+
+from .field_sampler import FieldSampler
+
 
 __all__ = ['FieldSamplerUniform']
 

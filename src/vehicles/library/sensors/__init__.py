@@ -1,5 +1,3 @@
-from .. import contract, np, logger
-
 from .utils import *
 
 from .raytracer import *

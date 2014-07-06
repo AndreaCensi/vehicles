@@ -1,4 +1,3 @@
-from .. import np, contract, logger
 from ...interfaces import Circle, World, Primitive, PolyLine, Source
 
 from .utils import *

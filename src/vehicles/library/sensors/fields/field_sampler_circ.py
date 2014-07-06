@@ -1,5 +1,10 @@
-from . import FieldSampler, contract, np
+from contracts import contract
+
+import numpy as np
 from vehicles.library.sensors.utils import get_uniform_directions
+
+from .field_sampler import FieldSampler
+
 
 __all__ = ['FieldSamplerCircle']
 
