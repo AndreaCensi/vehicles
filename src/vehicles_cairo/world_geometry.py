@@ -1,11 +1,12 @@
 from .constants import CairoConstants, CairoConstants as CC
-from cairo_utils import (cairo_transform, cairo_plot_circle, cairo_plot_polyline,
-    cairo_save, cairo_set_color)
+from cairo_utils import (cairo_plot_circle, cairo_plot_polyline, cairo_save, 
+    cairo_set_color, cairo_transform)
 from conf_tools import instantiate_spec
 from contracts import contract
 from vehicles import Source, VehiclesConstants
 from vehicles.library.sensors import get_field_values
 import numpy as np
+
 
 def cairo_plot_sources(cr, world_state):
     bounds = world_state['bounds']
@@ -237,8 +238,9 @@ def cairo_plot_sources_field(cr, sources, bounds,
 
     data[:, :, 2] = Cscal
 
-    image = cairo.ImageSurface.create_for_data(# @UndefinedVariable
-                        data, cairo.FORMAT_ARGB32,  # @UndefinedVariable
+    import cairo
+    image = cairo.ImageSurface.create_for_data(
+                        data, cairo.FORMAT_ARGB32, 
                          disc[0], disc[1], disc[1] * 4)
 
     with cairo_save(cr):
