@@ -36,25 +36,3 @@ for_all_world_vehicle_pairs = comptests_for_all_pairs(get_conftools_worlds(),
 #             arguments=lambda x: (x, get_dynamics(x)),
 #             attributes=lambda x: dict(dynamics=x))
 # 
-# for_all_worlds = fancy_test_decorator(lister=all_worlds,
-#             arguments=lambda x: (x, get_world(x)),
-#             attributes=lambda x: dict(world=x))
-# 
-# for_all_vehicles = fancy_test_decorator(lister=all_vehicles,
-#             arguments=lambda x: (x, get_vehicle(x)),
-#             attributes=lambda x: dict(vehicle=x))
-# 
-# for_all_sensors = fancy_test_decorator(lister=all_sensors,
-#             arguments=lambda x: (x, get_sensor(x)),
-#             attributes=lambda x: dict(sensor=x))
-# 
-# for_all_skins = fancy_test_decorator(lister=all_skins,
-#             arguments=lambda x: (x, get_skin(x)),
-#             attributes=lambda x: dict(skin=x))
-# 
-# for_all_world_vehicle_pairs = fancy_test_decorator(
-#             lister=lambda: itertools.product(all_worlds(), all_vehicles()),
-#             arguments=lambda (x, y): (x, get_world(x), y, get_vehicle(y)),
-#             attributes=lambda (x, y): dict(world=x, vehicle=y),
-#                 naming=lambda (a, b): '%s-%s' % (a, b))
-
