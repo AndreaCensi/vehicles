@@ -11,11 +11,9 @@ config width = 400
 config height = 200
 
 import procgraph_vehicles
-    |boot_log_reader logdir=$logdir id_robot=$id_robot id_agent=$id_agent id_episode=$id_episode| -> observations 
+    |boot_log_reader logdir=$logdir id_robot=$id_robot id_agent=$id_agent id_episode=$id_episode| -> observations, commands
 
-     observations --> |extract_sensels| -> sensels
-     
-    sensels -> |plot width=$width height=$height| --> rgb
+    observations -> |plot width=$width height=$height| --> rgb
     
     # TODO: normalize everything in [0,1]
     plot.format = 'k.'

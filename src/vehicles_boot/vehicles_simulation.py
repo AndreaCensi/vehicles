@@ -1,12 +1,18 @@
-from bootstrapping_olympics import (EpisodeDesc, RobotInterface, StreamSpec,
-    BootSpec, RobotObservations, BootOlympicsConstants)
-from vehicles import (get_conftools_vehicles, get_conftools_worlds,
-    VehicleSimulation, VehiclesConstants)
+from blocks import SimpleBlackBoxTN, check_timed_named
+from blocks.library import WithQueue
+from bootstrapping_olympics import (
+    BootOlympicsConstants, BootSpec, EpisodeDesc, ExplorableRobot, 
+    RobotInterface, StreamSpec)
+from contracts import contract
+from vehicles import (VehicleSimulation, VehiclesConstants, 
+    get_conftools_vehicles, get_conftools_worlds)
 
 __all__ = ['BOVehicleSimulation']
 
 
-class BOVehicleSimulation(RobotInterface, VehicleSimulation):
+class BOVehicleSimulation(RobotInterface, 
+                          ExplorableRobot, 
+                          VehicleSimulation):
     """ Gives a RobotInterface to the VehicleSimulation. """
     
     def __init__(self,
@@ -78,29 +84,84 @@ class BOVehicleSimulation(RobotInterface, VehicleSimulation):
     def get_spec(self):
         return self._boot_spec
 
-    def set_commands(self, commands, commands_source):
-        if not self.boot_episode_started:
-            raise Exception('set_commands() called before new_episode().')
+#     def set_commands(self, commands, commands_source):
+#         if not self.boot_episode_started:
+#             raise Exception('set_commands() called before new_episode().')
+# 
+# #         self.commands_source = commands_source
+        
 
-        self.commands_source = commands_source
-        VehicleSimulation.simulate(self, commands, self.dt)
+#     def get_observations(self):
+#         if not self.boot_episode_started:
+#             raise Exception('get_observations() called before new_episode().')
+# 
+#         observations = VehicleSimulation.compute_observations(self)
+#         episode_end = True if self.vehicle_collided else False
+#         if episode_end:
+#             self.info("Ending boot episode due to collision.")
+#             self.boot_episode_started = False
+# 
+#         return RobotObservations(timestamp=self.timestamp,
+#                          observations=observations,
+#                          commands=self.last_commands,
+#                          commands_source=self.commands_source,
+#                          robot_pose=self.vehicle.get_pose(),
+#                          episode_end=episode_end)
+        
+    def get_active_stream(self):
+        ''' 
+            Returns the stream for the interaction.
+            It casts the signals:
+            
+                observations
+                robot_pose
+                robot_state
+        '''
+    
+        class VSimRobotStream(WithQueue, SimpleBlackBoxTN):
+            def __init__(self, vsim):
+                WithQueue.__init__(self)
+                self.vsim = vsim
+                
+            def reset(self):
+                WithQueue.reset(self)
+                self.episode = self.vsim.new_episode()
+                self.ended = False
+                self._enqueue()
+                assert not self.ended
+                
+            def _enqueue(self):
+                observations = self.vsim.compute_observations()
+                episode_end = True if self.vsim.vehicle_collided else False
 
-    def get_observations(self):
-        if not self.boot_episode_started:
-            raise Exception('get_observations() called before new_episode().')
+                if episode_end:
+                    self.ended = True
+                    self._finished = True
+                    #raise Finished()
 
-        observations = VehicleSimulation.compute_observations(self)
-        episode_end = True if self.vehicle_collided else False
-        if episode_end:
-            self.info("Ending boot episode due to collision.")
-            self.boot_episode_started = False
+                x = (self.vsim.timestamp, ('observations', observations))
+                self.append(x)
+                                     
+            @contract(value='tuple(float,*)')
+            def put_noblock(self, value):
+                if self.ended:
+                    msg = 'put() called when already ended.'
+                    self.error(msg)
+                    raise ValueError(msg)
+                
+                check_timed_named(value, self)
+                
+                (_, (sname, x)) = value
+                if not sname in ['commands']:
+                    msg = 'Unexpected signal %r.' % sname
+                    raise ValueError(msg)
+                
+                commands = x
+                VehicleSimulation.simulate(self.vsim, commands, self.vsim.dt)
 
-        return RobotObservations(timestamp=self.timestamp,
-                         observations=observations,
-                         commands=self.last_commands,
-                         commands_source=self.commands_source,
-                         robot_pose=self.vehicle.get_pose(),
-                         episode_end=episode_end)
+                self._enqueue()                
+                
+        return VSimRobotStream(self)
 
     def new_episode(self):
         self.boot_episode_started = True

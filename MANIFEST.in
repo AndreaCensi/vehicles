@@ -1,1 +1,1 @@
-recursive-include src/simple_vehicles/configs *
+recursive-include src/vehicles/configs *

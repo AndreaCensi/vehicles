@@ -18,7 +18,7 @@ __all__ = [
 class PhotoreceptorsSmooth(VehicleSensor, TexturedRaytracer):
     """ Implements  """
 
-    @contract(directions='seq[>0](number)', spatial_sigma_deg='>0')
+    @contract(directions='seq[>0](number)', spatial_sigma_deg='>=0')
     def __init__(self, directions, spatial_sigma_deg, upsample=10,
                  noise=None, invalid=0.5):
         self.invalid = invalid
