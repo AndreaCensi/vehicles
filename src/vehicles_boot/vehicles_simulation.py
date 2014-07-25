@@ -82,32 +82,8 @@ class BOVehicleSimulation(RobotInterface,
     # RobotInterface methods
 
     def get_spec(self):
-        return self._boot_spec
-
-#     def set_commands(self, commands, commands_source):
-#         if not self.boot_episode_started:
-#             raise Exception('set_commands() called before new_episode().')
-# 
-# #         self.commands_source = commands_source
-        
-
-#     def get_observations(self):
-#         if not self.boot_episode_started:
-#             raise Exception('get_observations() called before new_episode().')
-# 
-#         observations = VehicleSimulation.compute_observations(self)
-#         episode_end = True if self.vehicle_collided else False
-#         if episode_end:
-#             self.info("Ending boot episode due to collision.")
-#             self.boot_episode_started = False
-# 
-#         return RobotObservations(timestamp=self.timestamp,
-#                          observations=observations,
-#                          commands=self.last_commands,
-#                          commands_source=self.commands_source,
-#                          robot_pose=self.vehicle.get_pose(),
-#                          episode_end=episode_end)
-        
+        return self._boot_spec 
+    
     def get_active_stream(self):
         ''' 
             Returns the stream for the interaction.
@@ -147,7 +123,8 @@ class BOVehicleSimulation(RobotInterface,
                 if self.ended:
                     msg = 'put() called when already ended.'
                     self.error(msg)
-                    raise ValueError(msg)
+                    self.error('Ignoring.')
+                    return
                 
                 check_timed_named(value, self)
                 

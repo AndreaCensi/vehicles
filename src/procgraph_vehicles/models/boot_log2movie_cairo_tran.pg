@@ -9,10 +9,10 @@ config output 'output basename (without extension)'
 
 import procgraph_vehicles
 
-|boot_log_reader logdir=$logdir id_robot=$id_robot id_agent=$id_agent id_episode=$id_episode| -> observations, commands
+|boot_log_reader logdir=$logdir id_robot=$id_robot id_agent=$id_agent id_episode=$id_episode| -> observations, commands, extra
 
     # FIXME: old convention
-     observations[boot_obs] -> |plotter:vehicles_cairo_display format=png| --> rgb
+     observations, commands, extra -> |plotter:vehicles_cairo_display format=png| --> rgb
      
      rgb --> |mencoder file="${output}.avi" fps=20  timestamps=0|
      # rgb --> |mencoder file="${output}.mp4" fps=20 quiet=1 timestamps=0|

@@ -16,14 +16,14 @@ config fps = 20
     import procgraph_vehicles
 
     """ Load BootOlympics log. """
-    |boot_log_reader logdir=$logdir id_robot=$id_robot id_agent=$id_agent id_episode=$id_episode| -> observations, commands
+    |boot_log_reader logdir=$logdir id_robot=$id_robot id_agent=$id_agent id_episode=$id_episode| -> observations, commands, extra
 
     """ Skip the first couple of moments. (because random command at beginning) """
-    obs --> |wait n=1| --> observations 
+    observations --> |wait n=1| --> observations1
 
     # FIXME: old convention
-    observations -> |servo:servo_info bgcolor=$bgcolor|-> servo_rgb
-    observations -> |plotter:vehicles_cairo_display format=png| --> |my_border| --> map_rgb
+    observations1[observations], commands[commands], extra[extra] -> |servo:servo_info bgcolor=$bgcolor|-> servo_rgb
+    observations1[observations], commands[commands], extra[extra] -> |plotter:vehicles_cairo_display format=png| --> |my_border| --> map_rgb
     
     """ Composes the map and the servo info. """
     map_rgb, servo_rgb  --> |sync| -> |grid bgcolor=$bgcolor cols=2| --> out

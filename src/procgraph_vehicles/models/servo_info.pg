@@ -4,18 +4,18 @@ config width = 500
 config plots_height = 150
 config bgcolor = [1,1,1]
 config vspace = 30
-input observations "boot observation structures"
+input observations "sensels array"
+input commands "commands array"
+input extra "extra"
 output rgb "rgb stream"
     
     """ Get the extra servoing info """
-    |input name=observations| --> obs
-    
-    obs -> |extract_from_extra fieldname='servoing_base'| -> extra_servoing
+    |input name=extra| -> |extract_from_extra fieldname='servoing_base'| -> extra_servoing
+    |input name=observations| -> sensels
+    |input name=commands| -> commands
     
     """ Extract goal, sensels, and commands. """
     extra_servoing -> |extract_field field='goal'| -> |array|-> goal
-    obs -> |extract_sensels| -> |array| -> sensels
-    obs -> |extract_commands| -> |array| -> commands
 
     """ Plot comparison of current vs. goal. """
     goal, sensels --> |sync|--> |plot_cmp:plot| -->  |my_label bgcolor=$bgcolor title="Current observations and goal"| -->  |border color=$bgcolor top=$vspace| -->  cmp_rgb

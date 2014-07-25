@@ -10,6 +10,7 @@ from procgraph.block_utils import make_sure_dir_exists
 from procgraph_images import posneg, scale, reshape2d
 from vehicles_cairo import (cairo_save, cairo_transform,
     vehicles_cairo_display_all, cairo_rototranslate, cairo_ref_frame)
+import warnings
 
 
 class VehiclesCairoDisplay(Block):
@@ -39,7 +40,9 @@ class VehiclesCairoDisplay(Block):
 
     Block.config('swf', 'Converts PDF to SWF using pdf2swf', default=True)
 
-    Block.input('boot_obs', '')
+    Block.input('observations', '')
+    Block.input('commands', '')
+    Block.input('extra', '')
 
     def get_shape(self):
         w = self.config.width
@@ -91,6 +94,10 @@ class VehiclesCairoDisplay(Block):
                          w, h, w * 4)
 
     def update(self):
+        if not self.all_input_signals_ready():
+            self.info('Not all signals ready')
+            return
+        
         # Estimate fps
         if self.count == 0:
             self.t0 = self.get_input_timestamp(0)
@@ -151,16 +158,19 @@ class VehiclesCairoDisplay(Block):
 
     def draw_everything(self, cr):
 
-        boot_obs = self.input.boot_obs
-
-        if 'id_episode' in boot_obs:
-            id_episode = boot_obs['id_episode'].item()
-        else:
-            id_episode = ''
-            
-        id_vehicle = boot_obs['id_robot'].item()
+#         boot_obs = self.input.boot_obs
+# 
+#         if 'id_episode' in boot_obs:
+#             id_episode = boot_obs['id_episode'].item()
+#         else:
+#             id_episode = ''
+#             
+#         id_vehicle = boot_obs['id_robot'].item()
+#         
+#         extra = boot_obs['extra'].item()
+#         
+        extra  = self.input.extra
         
-        extra = boot_obs['extra'].item()
         # todo: check
         key = 'robot_state'
         if not key in extra:
@@ -183,12 +193,21 @@ class VehiclesCairoDisplay(Block):
 
         sim_state = extra[key]
 
-        observations_values = boot_obs['observations']
-
-        commands = boot_obs['commands']
-
-        commands_source = boot_obs['commands_source'].item()
-        timestamp = boot_obs['time_from_episode_start'].item()
+        observations_values = self.input.observations
+        commands = self.input.commands
+#         
+#         observations_values = boot_obs['observations']
+# 
+#         commands = boot_obs['commands']
+# 
+#         commands_source = boot_obs['commands_source'].item()
+#         timestamp = boot_obs['time_from_episode_start'].item()
+        
+        warnings.warn('Need to fill in these strings.')
+        id_episode = ''
+        id_vehicle = ''
+        commands_source = ''
+        timestamp = self.get_input_timestamp('observations')
 
         with cairo_save(cr):
             if self.config.display_sidebar:
