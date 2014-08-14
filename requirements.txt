@@ -1,4 +1,4 @@
-ConfTools
--e git+https://github.com/AndreaCensi/contracts.git@env_fault#egg=PyContracts
 python-cjson
-PyGeometry
+-e git+https://github.com/AndreaCensi/conf_tools.git@env_fault#egg=ConfTools
+-e git+https://github.com/AndreaCensi/contracts.git@env_fault#egg=PyContracts
+-e git+https://github.com/AndreaCensi/geometry.git@env_fault#egg=pygeometry
