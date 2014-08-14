@@ -3,12 +3,15 @@ from contracts import contract
 from geometry import (SE3, se3, SE3_from_SE2, angle_from_SE2,
     SE2_from_translation_angle, SE2_from_SE3, ProductManifold)
 import numpy as np
-from streamels import StreamSpec
 from vehicles import Dynamics, get_conftools_dynamics
 from vehicles.library.dynamics.specializations import CircleVel, SE2Dynamics
 
 
-__all__ = ['BaseTopDynamics', 'Turret', 'BaseTop']
+__all__ = [
+    'BaseTopDynamics', 
+    'Turret', 
+    'BaseTop',
+]
 
 
 class BaseTopDynamics(Dynamics):
@@ -19,12 +22,15 @@ class BaseTopDynamics(Dynamics):
     def __init__(self, base, top):
         self.base = base
         self.top = top
-
+        
+        # FIXME
+        from streamels import StreamSpec
         # from bootstrapping_olympics import StreamSpec
         cmd1 = StreamSpec.from_yaml(self.base.get_commands_spec())
         cmd2 = StreamSpec.from_yaml(self.top.get_commands_spec())
-
         cmd_spec = StreamSpec.join(cmd1, cmd2).to_yaml()
+        
+        print('cmd_spec is %s ' % str(cmd_spec))
 
         components = [self.base.get_state_space(),
                       self.top.get_state_space()]
