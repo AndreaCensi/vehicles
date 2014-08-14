@@ -1,11 +1,14 @@
-from . import collides_with, compute_collision
 from ..utils import check_yaml_friendly
+from .collision import collides_with, compute_collision
 from contracts import contract
-from geometry import SE3, translation_from_SE2, SE2_project_from_SE3
+from geometry import SE2_project_from_SE3, SE3, translation_from_SE2
 from geometry.yaml import to_yaml
 import numpy as np
 
-__all__ = ['Attached', 'Vehicle']
+__all__ = [
+    'Attached', 
+    'Vehicle',
+]
 
 
 class Attached(object):
@@ -59,7 +62,6 @@ class Vehicle(object):
 
         # Needs to be initialized before calling certain functions
         self._state = None
-
 
     # @contract(returns='TSE3')
     def get_configuration(self):

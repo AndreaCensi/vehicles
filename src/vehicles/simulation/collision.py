@@ -1,5 +1,6 @@
-from . import circle_polyline_intersection, circle_circle_intersection
 from ..interfaces import Circle, PolyLine
+from .collision_utils import (circle_circle_intersection, 
+    circle_polyline_intersection)
 from collections import namedtuple
 
 CollisionInfo = namedtuple('CollisionInfo',

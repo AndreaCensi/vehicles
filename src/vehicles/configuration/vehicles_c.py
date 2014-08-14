@@ -1,13 +1,11 @@
-from conf_tools import (BadConfig, check_necessary, check_has_exactly_one,
+from conf_tools import (BadConfig, check_has_exactly_one, check_necessary, 
     wrap_check)
 from contracts import describe_type
 from copy import deepcopy
-from geometry import SE3_from_SE2, SE2_from_translation_angle
+from geometry import SE2_from_translation_angle, SE3_from_SE2
 from pprint import pformat
 from vehicles import logger
 import numpy as np
-from .dynamics import check_valid_dynamics_config
-from .sensors import check_valid_sensor_config
 
 
 def check_valid_vehicle_config(x):
@@ -22,8 +20,9 @@ def check_valid_vehicle_config(x):
     check_has_exactly_one(x, dynamics_alt)
 
     if 'dynamics' in x:
-        wrap_check(x, 'checking "dynamics" field',
-                   check_valid_dynamics_config, x['dynamics'])
+        pass
+#         wrap_check(x, 'checking "dynamics" field',
+#                    check_valid_dynamics_config, x['dynamics'])
 
     for i, s in enumerate(x['sensors']):
         wrap_check(x, 'checking #%d sensors entry' % i,
@@ -40,17 +39,15 @@ def check_vehicle_sensor_entry(s):
     alternatives = [('sensor', dict), ('id_sensor', str)]
     check_has_exactly_one(s, alternatives)
     if 'sensor' in s:
-        wrap_check(s, 'checking "sensor" entry',
-                   check_valid_sensor_config, s['sensor'])
+        pass
+#         wrap_check(s, 'checking "sensor" entry',
+#                    check_valid_sensor_config, s['sensor'])
 
 
 def instance_vehicle_spec(entry):
-    from ..simulation import Vehicle
-    from ..interfaces import VehicleSensor, Dynamics
-
-    from vehicles.configuration.master import get_conftools_dynamics, \
-        get_conftools_sensors
-
+    from vehicles import Vehicle
+    from vehicles import VehicleSensor, Dynamics
+    from vehicles import get_conftools_dynamics, get_conftools_sensors
 
     check_valid_vehicle_config(entry)
     try:

@@ -1,8 +1,5 @@
-from . import (check_valid_vehicle_config, check_valid_world_config,
-    check_valid_dynamics_config, check_valid_sensor_config, check_valid_skin_config,
-    instance_vehicle_spec)
-from ..interfaces import VehicleSensor, World, VehicleSkin, Dynamics
-from conf_tools import ConfigMaster, GenericInstance, ObjectSpec
+from .vehicles_c import check_valid_vehicle_config, instance_vehicle_spec
+from conf_tools import ConfigMaster, ObjectSpec
 from contracts import contract
 
 __all__ = [
@@ -13,7 +10,6 @@ __all__ = [
    'get_conftools_worlds',
    'get_vehicles_config',
 ]
-
 
 @contract(returns=ObjectSpec)
 def get_conftools_vehicles():
@@ -44,34 +40,18 @@ class VehiclesConfigMaster(ConfigMaster):
 
     def __init__(self):
         ConfigMaster.__init__(self, 'Vehicles')
+        from vehicles import Dynamics, VehicleSensor,  VehicleSkin, World
+        self.add_class('vehicles', '*.vehicles.yaml', 
+            check_valid_vehicle_config, instance_vehicle_spec)
 
-        self.add_class('vehicles', '*.vehicles.yaml',
-                        check_valid_vehicle_config, instance_vehicle_spec)
-
-        self.add_class('worlds', '*.worlds.yaml', check_valid_world_config,
-                       GenericInstance(World))
-
-        self.add_class('dynamics', '*.dynamics.yaml', check_valid_dynamics_config,
-                       GenericInstance(Dynamics))
-
-        self.add_class('sensors', '*.sensors.yaml', check_valid_sensor_config,
-                       GenericInstance(VehicleSensor))
-
-        self.add_class('skins', '*.skins.yaml',
-                       check_valid_skin_config,
-                       GenericInstance(VehicleSkin))
-
-        self.vehicles = self.specs['vehicles']
-        self.worlds = self.specs['worlds']
-        self.dynamics = self.specs['dynamics']
-        self.sensors = self.specs['sensors']
-        self.skins = self.specs['skins']
-
-
+        acg = self.add_class_generic 
+        acg('worlds', '*.worlds.yaml', World)
+        acg('dynamics', '*.dynamics.yaml', Dynamics)
+        acg('sensors', '*.sensors.yaml', VehicleSensor)
+        acg('skins', '*.skins.yaml', VehicleSkin)
+ 
     def get_default_dir(self):
-        from pkg_resources import resource_filename  # @UnresolvedImport
-        directory = resource_filename("vehicles", "configs")
-        return directory
+        return "vehicles.configs"
 
 
 get_vehicles_config = VehiclesConfigMaster.get_singleton

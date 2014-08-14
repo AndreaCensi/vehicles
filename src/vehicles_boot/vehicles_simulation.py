@@ -1,5 +1,4 @@
-from blocks import SimpleBlackBoxTN, check_timed_named
-from blocks.library import WithQueue
+from blocks import SimpleBlackBoxTN, WithQueue, check_timed_named
 from bootstrapping_olympics import (
     BootOlympicsConstants, BootSpec, EpisodeDesc, ExplorableRobot, 
     RobotInterface, StreamSpec)
@@ -87,7 +86,7 @@ class BOVehicleSimulation(RobotInterface,
     def get_active_stream(self):
         ''' 
             Returns the stream for the interaction.
-            It casts the signals:
+            It outputs the signals:
             
                 observations
                 robot_pose
