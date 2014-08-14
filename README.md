@@ -1,5 +1,18 @@
 
 
+Installation
+------------
+
+Install the python package:
+
+    python setup.py develop
+
+Install the raytracer executable:
+
+    cd src/raytracer
+    ./install.sh
+
+
 Installation notes for py2cairo + EPD 7.3 + OS X
 -------------------------------------------------
 
