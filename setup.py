@@ -29,9 +29,8 @@ setup(name='PyVehicles',
       install_requires=[
         'ConfTools>=1.0,<2',
         'PyContracts>=1.2,<2',
-        'PyYAML',
         'python-cjson',
-        'PyGeometry'
+        'PyGeometry',
       ],
       tests_require=['nose>=1.1.2,<2'],
       extras_require={  # TODO: reprep?

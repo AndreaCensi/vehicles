@@ -5,6 +5,7 @@ from bootstrapping_olympics import (
 from contracts import contract
 from vehicles import (VehicleSimulation, VehiclesConstants, 
     get_conftools_vehicles, get_conftools_worlds)
+from blocks.exceptions import Exhausted
 
 __all__ = ['BOVehicleSimulation']
 
@@ -123,7 +124,7 @@ class BOVehicleSimulation(RobotInterface,
                     msg = 'put() called when already ended.'
                     self.error(msg)
                     self.error('Ignoring.')
-                    return
+                    raise Exhausted(msg)
                 
                 check_timed_named(value, self)
                 
