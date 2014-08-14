@@ -19,7 +19,3 @@ branches:
 
 script:
   - nosetests vehicles
-
-notifications:
-  email:
-   - censi@mit.edug
