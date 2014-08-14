@@ -1,1 +1,7 @@
+include *.rst
+include *.md
+include *.txt
+include *.cfg
+include *.mk
+
 recursive-include src/vehicles/configs *
