@@ -9,6 +9,7 @@ Install the python package:
 
 Install the raytracer executable:
 
+    sudo apt-get install cmake
     cd src/raytracer
     ./install.sh
 
