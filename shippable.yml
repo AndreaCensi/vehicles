@@ -1,7 +1,6 @@
 language: python
 reset_minion: true
 
-
 python:
   - 2.7
   # - 3.2
@@ -10,13 +9,9 @@ python:
   # - pypy
   
 install:
+  - sudo apt-get install cmake
   - pip install -r requirements.txt
   - "cd src/raytracer && ./install.sh"
-  
-branches:
-  only:
-    - master
-    - env_fault
 
 script:
   - nosetests vehicles
