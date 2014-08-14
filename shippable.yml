@@ -11,7 +11,8 @@ python:
   
 install:
   - pip install -r requirements.txt
-
+  - "cd src/raytracer && ./install.sh"
+  
 branches:
   only:
     - master
