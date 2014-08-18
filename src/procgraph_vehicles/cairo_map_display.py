@@ -96,6 +96,9 @@ class VehiclesCairoDisplay(Block):
     def update(self):
         if not self.all_input_signals_ready():
             self.info('Not all signals ready')
+            self.info('observations: %s' % self.input_signal_ready('observations'))
+            self.info('commands: %s'  % self.input_signal_ready('commands'))
+            self.info('extra: %s' % self.input_signal_ready('extra'))
             return
         
         # Estimate fps
@@ -338,6 +341,7 @@ def create_sidebar(cr, width, height, sim_state, id_vehicle, id_episode,  # @Unu
                    show_commands=True,
                    show_annotations=True):
 
+    print('commands: %.5f %s %s' % (timestamp, commands_values.dtype, commands_values.shape))
     if len(commands_values.shape) == 1:
         commands_values = np.array([commands_values.tolist()])
 
