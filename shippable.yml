@@ -11,8 +11,9 @@ python:
 install:
   - sudo apt-get install cmake
   - sudo apt-get install python-numpy python-scipy libblas-dev liblapack-dev gfortran
-  - pip install scipy 
   - pip install -r requirements.txt
+  - pip install numpy
+  - pip install scipy 
   - python setup.py develop
   - "cd src/raytracer && ./install.sh"
 
