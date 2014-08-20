@@ -12,13 +12,13 @@
 #ifndef _DEBUG_H_
 #define _DEBUG_H_
 
-extern void mc_set_debug(int debug);
-extern int mc_get_debug(void);
+void mc_set_debug(int debug);
+int mc_get_debug(void);
 
-extern void mc_set_syslog(int syslog);
-extern void mc_abort(const char *msg, ...);
-extern void mc_debug(const char *msg, ...);
-extern void mc_error(const char *msg, ...);
-extern void mc_info(const char *msg, ...);
+void mc_set_syslog(int syslog);
+void mc_abort(const char *msg, ...);
+void mc_debug(const char *msg, ...);
+void mc_error(const char *msg, ...);
+void mc_info(const char *msg, ...);
 
 #endif
