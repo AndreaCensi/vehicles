@@ -1,55 +1,55 @@
 - id: box10
   desc: A 10m by 10m empty box.
   code: 
-      - vehicles.library.worlds.Box
-      - width: 10
-        length: 10
+  - vehicles.library.worlds.Box
+  - width: 10
+    length: 10
 
 - id: empty
   desc: An empty world (no obstacles at all)
   code: 
-      - vehicles.library.worlds.Empty
-      - bounds: [[-10,10],[-10,10],[-10,10]]
+  - vehicles.library.worlds.Empty
+  - bounds: [[-10,10],[-10,10],[-10,10]]
 
 - id: empty_fixed
   desc: An empty world (no obstacles at all); robot starts from pose.
   code: 
-      - vehicles.library.worlds.EmptyFixed
-      - bounds: [[-10,10],[-10,10],[-10,10]]
+  - vehicles.library.worlds.EmptyFixed
+  - bounds: [[-10,10],[-10,10],[-10,10]]
       
       
 - id: test_dynamic
   desc: A test of a world with moving objects.
   code: 
-      - vehicles.library.worlds.DynamicTest
-      - width: 10
-        length: 10
+  - vehicles.library.worlds.DynamicTest
+  - width: 10
+    length: 10
         
 
 - id: join0
   desc: "Example of joining worlds"
   code: 
-      - vehicles.library.worlds.Join
-      - id_worlds: 
-        - SBox2_10a
-        - BigMamarama_r10_s1
+  - vehicles.library.worlds.Join
+  - id_worlds: 
+    - SBox2_10a
+    - BigMamarama_r10_s1
 
 
 - id: stochastic_box_10
   desc: A box with stochastic content
   code: 
-      - vehicles.library.worlds.StochasticBox
-      - width: 10
-        length: 10
+  - vehicles.library.worlds.StochasticBox
+  - width: 10
+    length: 10
 
 - id: SBox2_10a
   desc: A box with stochastic content
   code: 
-      - vehicles.library.worlds.StochasticBox2
-      - width: 10
-        length: 10
-        num_sources: 10
-        source_width: 3
+  - vehicles.library.worlds.StochasticBox2
+  - width: 10
+    length: 10
+    num_sources: 10
+    source_width: 3
 
 - id: SBox3_10scale1
   desc: "A box with stochastic content, smoothed textures, scale=1m"
@@ -69,12 +69,6 @@
         scale: 0.5
         sigma: 0.25
 
-- id: BigMamarama_r10_s1
-  desc: "A circular box"
-  code: 
-      - vehicles.library.worlds.BigMamarama
-      - radius: 10
-        scale: 3
         
 - id: StocSources_w10_n20_s1
   desc: "Random disposition of stochastic sources"
@@ -88,19 +82,25 @@
 - id: BigMama_r10s1_orig
   desc: "A circular box, starting from the origing"
   code: 
-    - vehicles.library.worlds.LightBox
-    - start_poses: 
-        - [0,0,90] 
-      bounds: [[-1,+2.5],[-2.5,+0.3],[0,+5]]
-      primitives:
-      - type: Circle
-        center: [0,0]
-        radius: 10
-        solid: false
-        texture:
-            - 'vehicles.library.textures.BWCheckerboard'
-            - cell_width: 1
+  - vehicles.library.worlds.LightBox
+  - start_poses: 
+    - [0,0,90] 
+    bounds: [[-11,+11],[-11,+11],[0,+5]]
+    primitives:
+    - type: Circle
+      center: [0,0]
+      radius: 10
+      solid: false
+      texture:
+      - 'vehicles.library.textures.BWCheckerboard'
+      - cell_width: 1
             
 
+- id: BigMamarama_r10_s1
+  desc: "A circular box"
+  code: 
+  - vehicles.library.worlds.BigMamarama
+  - radius: 10
+    scale: 3
 
 

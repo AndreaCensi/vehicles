@@ -7,6 +7,7 @@ for_all_dynamics = comptests_for_all(get_conftools_dynamics())
 for_all_vehicles = comptests_for_all(get_conftools_vehicles())
 for_all_vehicles_context = comptests_for_all_dynamic(get_conftools_vehicles())
 for_all_worlds = comptests_for_all(get_conftools_worlds())
+for_all_worlds_context = comptests_for_all_dynamic(get_conftools_worlds())
 for_all_sensors = comptests_for_all(get_conftools_sensors())
 for_all_skins = comptests_for_all(get_conftools_skins())
 for_all_world_vehicle_pairs = comptests_for_all_pairs(get_conftools_worlds(),

@@ -1,11 +1,7 @@
-import time
-
 from geometry import SE3
+from vehicles import get_conftools_vehicles, get_conftools_worlds, logger
 import numpy as np
-from vehicles import logger, World
-
-from .vehicle import Vehicle
-
+import time
 
 __all__ = ['VehicleSimulation']
 
@@ -13,11 +9,9 @@ __all__ = ['VehicleSimulation']
 class VehicleSimulation(object):
 
     def __init__(self, vehicle, world, safety_margin=3):
-        assert isinstance(vehicle, Vehicle)
-        assert isinstance(world, World)
-
-        self.vehicle = vehicle
-        self.world = world
+        _, self.vehicle = get_conftools_vehicles().instance_smarter(vehicle)
+        _, self.world = get_conftools_worlds().instance_smarter(world)
+         
         self.timestamp = time.time()
 
         self.last_vehicle_observations = None  # used for to_yaml()

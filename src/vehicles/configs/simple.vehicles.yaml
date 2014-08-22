@@ -1,68 +1,82 @@
 - id: "d_fixed-${sensor}"
   desc: "A fixed robot with one sensor (${sensor})."
-  id_dynamics: d_fixed
-  sensors:
-      - id_sensor: "${sensor}"
-  radius: 0.5
-  extra:
-    skin: transparent
+  code:
+  - vehicles.Vehicle
+  - dynamics: d_fixed
+    sensors:
+    - sensor: "${sensor}"
+    radius: 0.5
+    extra:
+      skin: transparent
 
 - id: "d_SE2_dd_v-${sensor}"
   desc: Differential drive robot
-  id_dynamics: d_SE2_dd_v
-  sensors:
-      - id_sensor: "${sensor}"
-  radius: 0.5
-  extra:
-    skin: ddrive
+  code:
+  - vehicles.Vehicle
+  - dynamics: d_SE2_dd_v
+    sensors:
+    - sensor: "${sensor}"
+    radius: 0.5
+    extra:
+      skin: ddrive
 
 - id: "d_SE2_dd_v2-${sensor}"
   desc: "Differential drive (faster) + ${sensor}"
-  id_dynamics: d_SE2_dd_v2
-  sensors:
-      - id_sensor: "${sensor}"
-  radius: 0.5
-  extra:
-    skin: ddrive
+  code:
+  - vehicles.Vehicle
+  - dynamics: d_SE2_dd_v2
+    sensors:
+    - sensor: "${sensor}"
+    radius: 0.5
+    extra:
+      skin: ddrive
 
 - id: "d_SE2_rb_v-${sensor}"
   desc: "An omnidirectional robot + ${sensor}"
-  id_dynamics: d_SE2_rb_v
-  sensors:
-      - id_sensor: "${sensor}"
-  radius: 0.5
-  extra:
-    skin: omni
+  code:
+  - vehicles.Vehicle
+  - dynamics: d_SE2_rb_v
+    sensors:
+    - sensor: "${sensor}"
+    radius: 0.5
+    extra:
+      skin: omni
 
 - id: "d_S1_rb_v-${sensor}"
   desc: "An orb controlled in velocity + ${sensor}"
-  id_dynamics: d_S1_rb_v
-  sensors:
-      - id_sensor: "${sensor}"
-  radius: 0.5 
-  extra:
-    skin: S1
+  code:
+  - vehicles.Vehicle
+  - dynamics: d_S1_rb_v
+    sensors:
+    - sensor: "${sensor}"
+    radius: 0.5 
+    extra:
+      skin: S1
 
 - id: "d_SE2_car_v-${sensor}"
   desc: "A car-like with a sensor"
-  id_dynamics: d_SE2_car_v_w
-  sensors:
-      - id_sensor: "${sensor}"
-  radius: 0.5
-  extra:
+  code: 
+  - vehicles.Vehicle
+  - dynamics: d_SE2_car_v_w
+    sensors:
+    - sensor: "${sensor}"
+    radius: 0.5
+    extra:
       skin: car_with_wheels
 
 - id: d_SE2_rb_v-cam180-stereo
   desc: An omnidirectional robot with two 180deg camera.
-  id_dynamics: d_SE2_rb_v
-  sensors:
-      - id_sensor: cam_f180_n90_s
-        pose: [0,+0.2,0]
-      - id_sensor: cam_f180_n90_s
-        pose: [0,-0.2,0]
-  radius: 0.5
-  extra:
-    skin: omni 
+  code: 
+  - vehicles.Vehicle
+  - dynamics: d_SE2_rb_v
+    sensors:
+    - sensor: cam_f180_n90_s
+      pose: [0,+0.2,0]
+    - sensor: cam_f180_n90_s
+      pose: [0,-0.2,0]
+    radius: 0.5
+    extra:
+      skin: omni 
 
 - id: "d_SE2_dd_v-fs_05_rand144"
     
@@ -75,17 +89,18 @@
  
 - id: example_custom_vehicle
   desc: Specifies everything explicitly
-  dynamics: 
-      id: example_custom_dynamics
-      desc: 'Particle on S1 controlled in force.'
-      code: [vehicles.library.dynamics.CircleForce, {max_force: 1, mass: 1, damping: 2} ]
-  sensors:
-      - pose: [0,0,0]
-        sensor:         
-            id: my_cam
-            desc: A camera with 180fov.
-            code: 
-              - vehicles.library.sensors.PhotoreceptorsUniform
-              - num_sensels: 180
-                fov_deg:     180
-  radius: 0.5
+  code:
+  - vehicles.Vehicle
+  - dynamics: 
+    # 'Particle on S1 controlled in force.'
+    - vehicles.library.dynamics.CircleForce
+    - {max_force: 1, mass: 1, damping: 2} 
+    sensors:
+    - pose: [0,0,0]
+      sensor:         
+          # desc: A camera with 180fov.
+      - vehicles.library.sensors.PhotoreceptorsUniform
+      - num_sensels: 180
+        fov_deg:     180
+    radius: 0.5
+    

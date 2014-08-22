@@ -1,10 +1,39 @@
 
+
+- id: v_so2_k_cam360
+  desc: ""
+  code:
+  - vehicles.Vehicle
+  - radius: 0.01
+    dynamics: 
+    - vehicles.library.dynamics.CircleVel
+    - max_velocity: 1.0
+    sensors:
+    - sensor: photo_f360_n180
+      extra: 
+        skin: transparent
+
+- id: v_so2_d_cam360
+  desc: ""
+  code:
+  - vehicles.Vehicle
+  - dynamics: 
+    - vehicles.library.dynamics.CircleForce
+    - max_force: 1.0
+      damping: 1.0
+      mass: 1.0
+    sensors:
+    - sensor: photo_f360_n180
+    extra: 
+      skin: transparent
+    radius: 0.01
+
 # Disabled because noise like this is not supported.
 # - id: v_se2_k_fwd_cam360
 #   desc: "Kinematic Fly, controlled in velocity, fixed linear vel, 360 photoreceptors"
-#   id_dynamics:  d_SE2_fwd_v_n1
+#   dynamics:  d_SE2_fwd_v_n1
 #   sensors:
-#       - id_sensor: photo_f360_n180 
+#       - sensor: photo_f360_n180 
 #         extra:
 #             skin: transparent
 #   radius: 0.005
@@ -13,9 +42,9 @@
 
 # - id: v_se2_k_cam360
 #   desc: "Kinematic Fly, controlled in velocity, 3DOF, 360 photoreceptors"
-#   id_dynamics: d_SE2_rb_v_n1
+#   dynamics: d_SE2_rb_v_n1
 #   sensors:
-#       - id_sensor: photo_f360_n180 
+#       - sensor: photo_f360_n180 
 #         extra:
 #             skin: transparent
 #   radius: 0.005

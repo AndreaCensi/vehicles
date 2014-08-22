@@ -16,7 +16,8 @@ class World(object):
     def __init__(self, bounds, start_poses=None):
         self.bounds = bounds
         self.start_poses = start_poses
-
+        self.cur_pose = None
+    
     def __repr__(self):
         return '%s' % self.__class__.__name__
 

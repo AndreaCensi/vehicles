@@ -1,9 +1,13 @@
-from . import SimpleDynamics, SimpleKinematics
+from ..lie_dynamics import SimpleDynamics
+from ..lie_kinematics import SimpleKinematics
 from contracts import contract
 from geometry import SO2, hat_map_2d
 
 
-__all__ = ['CircleVel', 'CircleForce']
+__all__ = [
+    'CircleVel', 
+    'CircleForce',
+]
 
 
 class CircleVel(SimpleKinematics):

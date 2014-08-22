@@ -4,7 +4,9 @@ from contracts import contract
 import numpy as np
 
 
-__all__ = ['SimpleDynamics']
+__all__ = [
+    'SimpleDynamics',
+]
 
 class SimpleDynamics(SimpleKinematics):
     # TODO: add noise

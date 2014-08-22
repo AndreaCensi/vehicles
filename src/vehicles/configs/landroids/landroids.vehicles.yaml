@@ -1,48 +1,53 @@
 - id: landroid-hokuyo
   desc: "Model for the landroid; only Hokuyo."
-  id_dynamics: d_SE2_car_v
-  sensors:
-      - id_sensor: rf_f270_n180
-        pose: [0.03,0,0]
-        # extra:
-        #   skin: landroid-rf
-        
-  radius: 0.2
-  extra:
-    skin: landroid
+  code: 
+  - vehicles.Vehicle
+  - dynamics: d_SE2_car_v
+    sensors:
+    - sensor: rf_f270_n180
+      pose: [0.03,0,0]
+      # extra:
+      #   skin: landroid-rf  
+    radius: 0.2
+    extra:
+      skin: landroid
   
 - id: landroid-hokuyo-4cam
   desc: "Model for the landroid; Hokuyo + cams"
-  id_dynamics: d_SE2_car_v
-  sensors:
-    - id_sensor: rf_f270_n180
+  code:
+  - vehicles.Vehicle
+  - dynamics: d_SE2_car_v
+    sensors:
+    - sensor: rf_f270_n180
       pose: [0.03,0,0]
-    - id_sensor: cam_f60_n45
+    - sensor: cam_f60_n45
       pose: [0.15,0,0] 
-    - id_sensor: cam_f60_n45
+    - sensor: cam_f60_n45
       pose: [-0.05,+0.075,+90] 
-    - id_sensor: cam_f60_n45
+    - sensor: cam_f60_n45
       pose: [-0.05,-0.075,-90] 
-    - id_sensor: cam_f60_n45
+    - sensor: cam_f60_n45
       pose: [-0.15,0,180] 
   
-  radius: 0.2
-  extra:
-    skin: landroid
+    radius: 0.2
+    extra:
+      skin: landroid
 
   
 - id: landroid-4cam
   desc: "Model for the landroid; only cam"
-  id_dynamics: d_SE2_car_v
-  sensors:
-      - id_sensor: cam_f60_n45
-        pose: [0.15,0,0] 
-      - id_sensor: cam_f60_n45
-        pose: [-0.05,+0.075,+90] 
-      - id_sensor: cam_f60_n45
-        pose: [-0.05,-0.075,-90] 
-      - id_sensor: cam_f60_n45
-        pose: [-0.15,0,180] 
-  radius: 0.2
-  extra:
-    skin: landroid
+  code:
+  - vehicles.Vehicle
+  - dynamics: d_SE2_car_v
+    sensors:
+    - sensor: cam_f60_n45
+      pose: [0.15,0,0] 
+    - sensor: cam_f60_n45
+      pose: [-0.05,+0.075,+90] 
+    - sensor: cam_f60_n45
+      pose: [-0.05,-0.075,-90] 
+    - sensor: cam_f60_n45
+      pose: [-0.15,0,180] 
+    radius: 0.2
+    extra:
+      skin: landroid

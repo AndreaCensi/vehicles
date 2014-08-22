@@ -1,8 +1,10 @@
 from ..utils import check_yaml_friendly
 from .collision import collides_with, compute_collision
 from contracts import contract
-from geometry import SE2_project_from_SE3, SE3, translation_from_SE2
+from geometry import (SE2_from_translation_angle, SE2_project_from_SE3, SE3, 
+    SE3_from_SE2, translation_from_SE2)
 from geometry.yaml import to_yaml
+from vehicles import get_conftools_dynamics, get_conftools_sensors
 import numpy as np
 
 __all__ = [
@@ -44,7 +46,11 @@ class Attached(object):
 
 class Vehicle(object):
 
-    def __init__(self, radius=0.5, extra={}):
+    @contract(radius='>0', 
+              dynamics='str|code_spec|isinstance(Dynamics)',
+              sensors='list(dict)',
+              extra='dict')
+    def __init__(self, radius, dynamics, sensors, extra={}):
         """ 
             Initializes an empty vehicle.
             
@@ -53,12 +59,29 @@ class Vehicle(object):
         """
         self.radius = radius
         self.sensors = []  # array of Attached
-        self.id_sensors = None
-        self.id_dynamics = None  # XXX
-        self.dynamics = None
+    
+        _, self.dynamics = get_conftools_dynamics().instance_smarter(dynamics)
         self.extra = extra
 
         self.primitives = set()
+
+        for sensor in sensors:
+            if not 'sensor' in sensor:
+                msg = 'Expected field "sensor": %s' % sensors
+                raise ValueError(msg)
+            config = get_conftools_sensors()
+            _, sensor_instance = config.instance_smarter(sensor['sensor'])
+
+            # TODO: document this
+            x, y, theta_deg = sensor.get('pose', [0, 0, 0])
+            theta = np.radians(theta_deg)
+            pose = SE2_from_translation_angle([x, y], theta)
+            pose = SE3_from_SE2(pose)
+            joint = sensor.get('joint', 0)
+            extra = sensor.get('extra', {})
+            self.add_sensor(sensor=sensor_instance,
+                            pose=pose, joint=joint,
+                            extra=extra)
 
         # Needs to be initialized before calling certain functions
         self._state = None
@@ -80,8 +103,6 @@ class Vehicle(object):
 
         data = {
             'radius': self.radius,
-            'id_sensors': self.id_sensors,
-            'id_dynamics': self.id_dynamics,
             'pose': SE3.to_yaml(pose),
             'conf': to_yaml('TSE3', configuration),
             'state': self.dynamics.state_to_yaml(self._get_state()),
@@ -93,22 +114,13 @@ class Vehicle(object):
         return data
 
     def __repr__(self):
-        return 'V(%s;%s)' % (self.id_dynamics, self.id_sensors)
+        return 'Vehicle()' 
 
-    def add_dynamics(self, id_dynamics, dynamics):
-        assert self.dynamics is None, 'not sure if this will be implemented'
-        self.dynamics = dynamics
-        self.id_dynamics = id_dynamics
-
-    @contract(id_sensor='str', pose='SE3', joint='int,>=0')
-    def add_sensor(self, id_sensor, sensor, pose, joint, extra):
+    @contract( pose='SE3', joint='int,>=0')
+    def add_sensor(self, sensor, pose, joint, extra):
         attached = Attached(sensor=sensor, pose=pose,
-                                    joint=joint, extra=extra)
+                            joint=joint, extra=extra)
         self.sensors.append(attached)
-        if not self.id_sensors:
-            self.id_sensors = id_sensor
-        else:
-            self.id_sensors += '+%s' % id_sensor
 
     def set_world_primitives(self, primitives):
         # These are used for collision checking
