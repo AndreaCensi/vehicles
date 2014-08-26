@@ -196,7 +196,7 @@ def plot_ranges(cr, pose, directions, valid, readings,
                  color=(1, 1, 0))  # XXX
 
 
-@contract(pose='SE2', directions='array[N]', valid='array[N]',
+@contract(pose='SE2', directions='array[N]', valid='array[N](bool)',
           readings='array[N]', luminance='array[N]')
 def plot_photoreceptors(cr, pose, directions, valid, readings, luminance,
                         rho_min=CC.plot_ranges_rho_min):

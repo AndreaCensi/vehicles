@@ -5,10 +5,13 @@ from conf_tools import instantiate_spec
 from geometry import SE2_project_from_SE3
 import numpy as np
 from vehicles import VehicleSensor, VehiclesConstants
-from vehicles.library.sensors.raytracer.textured_raytracer import TexturedRaytracer
+from .textured_raytracer import TexturedRaytracer
 
 
-__all__ = ['Photoreceptors', 'PhotoreceptorsUniform']
+__all__ = [
+    'Photoreceptors', 
+    'PhotoreceptorsUniform',
+]
 
 
 class Photoreceptors(VehicleSensor, TexturedRaytracer):

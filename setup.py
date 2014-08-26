@@ -31,6 +31,8 @@ setup(name='PyVehicles',
         'PyContracts>=1.2,<2',
         'python-cjson',
         'PyGeometry',
+        'compmake',
+        'comptests',
       ],
       tests_require=['nose>=1.1.2,<2'],
       extras_require={  # TODO: reprep?

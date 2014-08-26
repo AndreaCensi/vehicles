@@ -3,6 +3,7 @@ from vehicles import VehicleSimulation, get_conftools_worlds
 from vehicles.unittests.generation import (for_all_skins, 
     for_all_vehicles_context, for_all_worlds_context)
 from vehicles_cairo import vehicles_has_cairo
+from pprint import pformat
 
 
 if vehicles_has_cairo:
@@ -12,8 +13,9 @@ if vehicles_has_cairo:
 
     @for_all_worlds_context
     def plotting_world(context, id_world, world):  # @UnusedVariable
-        # note: need one with field sampler
+        # XXX: need one with field sampler
         vehicle = 'd_SE2_dd_v-fs_05_12x12'
+        vehicle = 'example_custom_vehicle'
         simulation = VehicleSimulation(vehicle, world)
         simulation.new_episode()
         simulation.compute_observations()
@@ -22,7 +24,7 @@ if vehicles_has_cairo:
         plot_params = dict(grid=2,
                            zoom=0,
                            width=400, height=400,
-                           show_sensor_data=False)
+                           show_sensor_data=True)
 
         c = context
         c.add_report(c.comp_config(report_plot1, sim_state, plot_params), 
@@ -61,6 +63,7 @@ if vehicles_has_cairo:
         with f.data_file('plot1', MIME_PNG) as filename:
             vehicles_cairo_display_png(filename, sim_state=sim_state,
                                    **plot_params)
+        #r.text('state', pformat(sim_state))
         return r
     
     def report_plot2(sim_state, plot_params):
@@ -69,6 +72,7 @@ if vehicles_has_cairo:
         with f.data_file('plot2',  MIME_PDF) as filename:
             vehicles_cairo_display_pdf(filename, sim_state=sim_state,
                                    **plot_params)
+        #r.text('state', pformat(sim_state))
         return r
 
     def report_plot3(sim_state, plot_params):
@@ -77,6 +81,7 @@ if vehicles_has_cairo:
         with f.data_file('plot3',  MIME_SVG) as filename:
             vehicles_cairo_display_svg(filename, sim_state=sim_state,
                                    **plot_params)
+        #r.text('state', pformat(sim_state))
         return r
 
     @for_all_skins
