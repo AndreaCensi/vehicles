@@ -9,11 +9,11 @@ __all__ = ['Join']
 class Join(World):
     """ Creates a world by joining others. """
     
-    @contract(id_worlds='list(str)')
-    def __init__(self, id_worlds):
-        self.id_worlds = id_worlds
+    @contract(worlds='list')
+    def __init__(self, worlds):
+        self.id_worlds = worlds
         self.worlds = [get_conftools_worlds().instance(id_world) 
-                       for id_world in id_worlds] 
+                       for id_world in worlds] 
 
         wb = [w.bounds for w in self.worlds]
 

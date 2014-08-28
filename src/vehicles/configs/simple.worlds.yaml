@@ -30,7 +30,7 @@
   desc: "Example of joining worlds"
   code: 
   - vehicles.library.worlds.Join
-  - id_worlds: 
+  - worlds: 
     - SBox2_10a
     - BigMamarama_r10_s1
 
