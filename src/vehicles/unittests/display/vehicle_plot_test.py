@@ -3,7 +3,6 @@ from vehicles import VehicleSimulation, get_conftools_worlds
 from vehicles.unittests.generation import (for_all_skins, 
     for_all_vehicles_context, for_all_worlds_context)
 from vehicles_cairo import vehicles_has_cairo
-from pprint import pformat
 
 
 if vehicles_has_cairo:
@@ -13,8 +12,8 @@ if vehicles_has_cairo:
 
     @for_all_worlds_context
     def plotting_world(context, id_world, world):  # @UnusedVariable
-        # XXX: need one with field sampler
-        vehicle = 'd_SE2_dd_v-fs_05_12x12'
+#         XXX: need one with field sampler
+#         vehicle = 'd_SE2_dd_v-fs_05_12x12'
         vehicle = 'example_custom_vehicle'
         simulation = VehicleSimulation(vehicle, world)
         simulation.new_episode()

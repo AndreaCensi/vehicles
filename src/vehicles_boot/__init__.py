@@ -17,22 +17,19 @@ if vehicles_has_boot_olympics:
     def jobs_comptests(context):
         from comptests import jobs_registrar
 
-        from vehicles import get_vehicles_config
-        get_vehicles_config().load('default')
-
-        # get testing configuration directory 
-        from pkg_resources import resource_filename  # @UnresolvedImport
-        dirname = resource_filename("vehicles_boot", "configs")
-        
+        config_dirs = [
+            'vehicles.configs',
+            'vehicles_boot.configs',
+            'bootstrapping_olympics.configs',
+        ]
         from conf_tools import GlobalConfig
-        GlobalConfig.global_load_dir(dirname)
+        GlobalConfig.global_load_dirs(config_dirs)
         
         # load into bootstrapping_olympics
         from bootstrapping_olympics import get_boot_config
         boot_config = get_boot_config()
-#         boot_config.load(dirname)
         
         # Our tests are its tests with our configuration
         from bootstrapping_olympics import unittests
-        j1 = jobs_registrar(context, boot_config)
-        return j1
+        jobs_registrar(context, boot_config)
+        

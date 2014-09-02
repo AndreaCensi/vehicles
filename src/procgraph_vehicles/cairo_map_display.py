@@ -259,8 +259,6 @@ class VehiclesCairoDisplay(Block):
 
     def finish_pdf(self):
         self.surf.finish()
-        if os.path.exists(self.filename):
-            os.unlink(self.filename)
         if os.path.exists(self.tmp_filename):
             os.rename(self.tmp_filename, self.filename)
 
