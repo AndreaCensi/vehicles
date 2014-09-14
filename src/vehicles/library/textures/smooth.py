@@ -1,11 +1,10 @@
+from .sampled import SampledTexture
+from conf_tools import instantiate_spec
 from contracts import contract
-
+from geometry import assert_allclose
 import numpy as np
 
-from conf_tools import instantiate_spec
-from geometry import assert_allclose
-from .sampled import SampledTexture
-# TODO: add if/else
+__all__ = ['Smoothed']
 
 
 class Smoothed(SampledTexture):

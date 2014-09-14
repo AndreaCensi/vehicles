@@ -1,9 +1,6 @@
-
 from contracts import contract
-
-import numpy as np
 from vehicles import Texture
-
+import numpy as np
 
 __all__ = ['SampledTexture']
 

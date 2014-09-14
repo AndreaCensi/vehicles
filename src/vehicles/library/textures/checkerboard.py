@@ -32,28 +32,21 @@ class BWCheckerboard(SampledTexture):
 
 class OneEdge(SampledTexture):
     def __init__(self, v0=0.001, v1=1.000, where=10, hardness=1.0):
-        self.v0 = v0
-        self.v1 = v1
-        self.hardness = hardness
-        self.where = where
+        self.v0 = float(v0)
+        self.v1 = float(v1)
+        self.hardness = float(hardness)
+        self.where = float(where)
         
     def __call__(self, t):
-        t = t.copy()
+        t = t.copy() # important
         radius = 10.0
         t[t > radius * np.pi] -= 2 * np.pi * radius
-        
-#         y = np.clip(t, -1.0, +1.0)
-#         return y
-#         
+         
         x = t - self.where
         x = x * self.hardness
         y = sigmoid(x)
         return y
-        
-#         over = 1.0 * np.array(t > self.where)
-#         
-#         return over * self.v1 + (1-over) * self.v0
-
+         
 def sigmoid(x):                                        
-    return 1 / (1 + np.exp(-x))
+    return 1.0 / (1.0 + np.exp(-x))
 

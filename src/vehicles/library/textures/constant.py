@@ -1,5 +1,6 @@
-from . import Texture
+from vehicles import Texture
 
+__all__ = ['ConstantTexture', 'constant_texture']
 
 # TODO: remove this
 def constant_texture(color):

@@ -6,6 +6,7 @@ import numpy as np
 from vehicles import VehicleSensor, VehiclesConstants
 
 from .textured_raytracer import TexturedRaytracer
+from .smoother import Smoother2
 
 
 __all__ = [
@@ -14,49 +15,7 @@ __all__ = [
     'PhotoreceptorsSmoothRandom',
 ]
 
-class Smoother():
-    def __init__(self, directions, spatial_sigma_deg, upsample):
-        self.directions = directions
-        spatial_sigma_rad = np.deg2rad(spatial_sigma_deg)
-        
-        self.delta_norm =np.linspace(-2, 2, upsample) 
-        self.delta = self.delta_norm  * spatial_sigma_rad
-        
-        def kernel(x):
-            return np.exp(-(x ** 2)/2) / np.sqrt(2*np.pi)
-
-        self.coeff = kernel(self.delta_norm)
-        self.coeff = self.coeff / np.sum(self.coeff)
-        
-        assert len(self.coeff) == upsample
-        assert len(self.delta) == len(self.coeff)
-        self.M = np.zeros((len(directions), upsample * len(directions)))
-        
-        i = 0
-        self.directions2 = []
-        for k, d in enumerate(directions):
-            for r, s in enumerate(self.delta):
-                self.directions2.append(d + s)
-                self.coeff[r]
-                self.M[k, i] = self.coeff[r]
-                i += 1
- 
- 
-    def get_new_directions(self):
-        return self.directions2
     
-    def smooth(self, sampled):
-        assert np.all(np.isfinite(sampled))
-        sampled = np.array(sampled)
-        
-        if not len(sampled) == len(self.directions2):
-            msg = 'invalid shape: %s vs %s' % (sampled.shape, len(self.directions2))
-            raise ValueError(msg)
-
-        return np.dot(self.M, sampled)
-    
- 
-
 class PhotoreceptorsSmooth(VehicleSensor, TexturedRaytracer):
     """ Implements  """
 
@@ -75,7 +34,7 @@ class PhotoreceptorsSmooth(VehicleSensor, TexturedRaytracer):
 
         #d = np.array(directions)
         #print d[:-1] - d[1:]
-        self.smoother = Smoother(directions=directions, 
+        self.smoother = Smoother2(directions=directions, 
                                  spatial_sigma_deg=spatial_sigma_deg, 
                                  upsample=upsample)
                                  

@@ -1,10 +1,8 @@
-from . import Texture
-
-
 from contracts import contract
+from vehicles import Texture
 import numpy as np
 
-# In all of these, t can be either a scalar or a numpy array.
+__all__ = ['SinTexture']
 
 
 class SinTexture(Texture):

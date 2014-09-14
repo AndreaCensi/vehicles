@@ -32,7 +32,7 @@ def get_uniform_directions(fov_deg, num_sensels):
         assert_allclose(a[0], b)
 
     else:
-        fov_rad = np.radians(fov_deg)
+        fov_rad = np.deg2rad(fov_deg)
         directions = np.linspace(-fov_rad / 2, +fov_rad / 2, num_sensels)
 
         assert_allclose(directions[-1] - directions[0], fov_rad)

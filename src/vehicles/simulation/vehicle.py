@@ -182,6 +182,7 @@ class Vehicle(object):
         self._state = next_state
         self.collision = collision
 
+    @contract(returns='array')
     def compute_observations(self):
         # TODO: add dynamics observations
         sensel_values = []
