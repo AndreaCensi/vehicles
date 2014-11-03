@@ -13,6 +13,7 @@ __all__ = [
     'PhotoreceptorsSmooth',
     'PhotoreceptorsSmoothUniform',
     'PhotoreceptorsSmoothRandom',
+    'PhotoreceptorsPerturb',
 ]
 
     
@@ -21,7 +22,7 @@ class PhotoreceptorsSmooth(VehicleSensor, TexturedRaytracer):
 
     @contract(directions='seq[>0](number)', spatial_sigma_deg='>=0')
     def __init__(self, directions, spatial_sigma_deg, upsample=7,
-                 noise=None, invalid=0.5):
+                 noise=None, invalid=0.5, d2=None):
         if upsample< 5:
             print('warning: upsample %d is small' % upsample)
         
@@ -36,7 +37,7 @@ class PhotoreceptorsSmooth(VehicleSensor, TexturedRaytracer):
         #print d[:-1] - d[1:]
         self.smoother = Smoother2(directions=directions, 
                                  spatial_sigma_deg=spatial_sigma_deg, 
-                                 upsample=upsample)
+                                 upsample=upsample, d2=d2)
                                  
         self.directions_o = np.array(directions)
         self.directions2 = self.smoother.get_new_directions()
@@ -115,10 +116,16 @@ class PhotoreceptorsSmooth(VehicleSensor, TexturedRaytracer):
         valid2 = np.array([True] * len(luminance2))
 
         data = {'luminance': luminance2,
+                 
                 'readings': readings2,
                 'directions': self.directions_o.tolist(),
                 'valid': valid2.tolist(),
-                VehicleSensor.SENSELS: luminance2.copy()}
+                VehicleSensor.SENSELS: luminance2.copy(),
+                
+                # sampled extra rays
+                'directions_raw': self.directions,
+                'luminance_raw': luminance,
+                }
 
         return data
 
@@ -148,3 +155,29 @@ class PhotoreceptorsSmoothRandom(PhotoreceptorsSmooth):
                                       spatial_sigma_deg=spatial_sigma_deg,
                                       upsample=upsample,
                                         noise=noise)
+
+class PhotoreceptorsPerturb(PhotoreceptorsSmooth):
+    """ Photoreceptors with random disposition of sensels. """
+    @contract(fov_deg='>0,<=360', num_sensels='int,>0')
+    def __init__(self, fov_deg, num_sensels, spatial_sigma_deg,
+                 upsample, perturb_deg):
+    
+        from vehicles.library.sensors.utils import get_uniform_directions
+        directions = get_uniform_directions(fov_deg, num_sensels)
+#         perturb = np.deg2rad(perturb_deg)
+#         directions_n = np.random.randn(len(directions)) * perturb
+#         directions = directions + directions_n
+        
+        directions2 = get_uniform_directions(fov_deg, num_sensels * upsample)
+        perturb = np.deg2rad(perturb_deg)
+        directions2_n = np.random.randn(len(directions2)) * perturb
+        
+        directions2 = directions2 + directions2_n
+        
+        PhotoreceptorsSmooth.__init__(self, directions=directions,
+                                      spatial_sigma_deg=spatial_sigma_deg,
+                                      upsample=upsample,
+                                      d2=directions2,
+                                      noise=None)
+
+

@@ -196,6 +196,23 @@ class Vehicle(object):
             sensel_values.extend(sensels.tolist())
         return np.array(sensel_values, dtype='float32')
 
+    @contract(returns='dict')
+    def compute_observations_sensor(self, index):
+        '''
+        Computes the observations for the sensor. Returns a dictionary
+        with many fields; one of them is 'sensel'.
+        
+        :param index: Index of the sensor attached to the vehicle.
+        '''
+        attached = self.sensors[index]
+        pose = self.dynamics.joint_state(self._get_state(), attached.joint)
+        j_pose, _ = pose
+        attached.current_pose = SE3.multiply(j_pose, attached.pose)
+        attached.current_observations = \
+            attached.sensor.compute_observations(attached.current_pose)
+        return attached.current_observations
+
+
     @contract(pose='SE3')
     def colliding_pose(self, pose, safety_margin=1):
         ''' 

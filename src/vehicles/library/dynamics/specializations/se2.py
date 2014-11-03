@@ -11,7 +11,9 @@ class SE2Dynamics(SimpleKinematics):
               max_angular_velocity='>=0',)
     def __init__(self, max_linear_velocity, max_angular_velocity,
                  noise_drift=None, noise_mult=None):
-        self.max_linear_velocity = max_linear_velocity
+        self.max_linear_velocity = [max_linear_velocity[0], 
+                                    max_linear_velocity[1]]
+        
         self.max_angular_velocity = max_angular_velocity
         spec = {
             'desc': 'Particle in SE2 controlled in velocity',

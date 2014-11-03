@@ -57,6 +57,7 @@ class Photoreceptors(VehicleSensor, TexturedRaytracer):
             luminance = np.minimum(1, luminance)
         luminance[invalid] = self.invalid
         data[VehicleSensor.SENSELS] = luminance
+        data['directions'] = self.directions.tolist()
         return data
 
     def set_world_primitives(self, primitives):

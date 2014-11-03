@@ -5,3 +5,4 @@ from .sampled import *
 from .checkerboard import *
 from .constant import *
 from .smooth import *
+from .sin import *
