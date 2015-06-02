@@ -6,6 +6,8 @@ from geometry import (SE2_from_translation_angle, SE2_project_from_SE3, SE3,
 from geometry.yaml import to_yaml
 from vehicles import get_conftools_dynamics, get_conftools_sensors
 import numpy as np
+from geometry.manifolds import SE2
+from geometry.poses import SE2_from_SE3
 
 __all__ = [
     'Attached', 
@@ -151,7 +153,10 @@ class Vehicle(object):
 
         collision = self.colliding_pose(pose)  # XXX
         if collision.collided:
-            raise ValueError('Cannot put the robot in a colliding state.')
+            msg = 'Cannot put the robot in a colliding state.'
+            msg +='\n collision: %s ' % str(collision)
+            msg +='\n pose: %s ' % SE2.friendly(SE2_from_SE3(pose))
+            raise ValueError(msg)
 
         self._state = state
 

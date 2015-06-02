@@ -42,8 +42,7 @@ def compute_collision(dynamics_function, max_dt, primitives, radius):
                          normal=c.normal, primitive=c.primitive,
                          penetration=c.penetration)
 
-    assert False
-
+ 
 
 def binary_search(f, lower, upper, precision):
     assert f(lower) == False
@@ -85,9 +84,12 @@ def collides_with(primitives, center, radius):
 
 def collides_with_primitive(primitive, center, radius):
     if isinstance(primitive, Circle):
+        if primitive.solid == False:
+            return None
         return circle_circle_intersection(center, radius, primitive.center,
                                           primitive.radius, primitive.solid)
     if isinstance(primitive, PolyLine):
+#         if primitive.solid == False: # XXX
+#             return None
         return circle_polyline_intersection(center, radius, primitive.points)
 
-    # XXX: warn?

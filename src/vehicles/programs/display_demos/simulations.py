@@ -56,7 +56,8 @@ def main():
     if args:
         raise Exception()
 
-    GlobalConfig.global_load_dir(options.config)
+    dirs = options.config.split(':')
+    GlobalConfig.global_load_dirs(dirs)
 
 
     id_vehicle = options.vehicle

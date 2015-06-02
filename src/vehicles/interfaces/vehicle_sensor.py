@@ -7,7 +7,7 @@ from vehicles import DO_EXTRA_CHECKS
 
 __all__ = ['VehicleSensor']
 
-class VehicleSensor:
+class VehicleSensor():
     __metaclass__ = ABCMeta
 
     def __init__(self, observations_spec):
